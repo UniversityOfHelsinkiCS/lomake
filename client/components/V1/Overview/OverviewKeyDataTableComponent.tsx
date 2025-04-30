@@ -13,7 +13,7 @@ import { RootState } from '@/client/util/store'
 
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
-import { Table, TableHead, TableBody, TableRow, TableCell, TableConfig } from '../Generic/TableComponent'
+import { Table, TableHead, TableBody, TableRow, TableCell } from '../Generic/TableComponent'
 import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
 import { getReport } from '@/client/util/redux/reportsSlicer'
 import Modal from '../Generic/ModalTemplateComponent'
@@ -219,16 +219,6 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     return <CircularProgress />
   }
 
-  const tableConfig: TableConfig = {
-    columns: ['2fr', 'repeat(7, 1fr)'],
-    body: {
-      firstColumnStyle: {
-        width: '2fr',
-        boxed: true,
-      },
-    },
-  }
-
   return (
     <div style={{ width: '100%' }}>
       {/* Search input */}
@@ -239,7 +229,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
       {/* Key Figure Data Table */}
       <div style={{ width: '100%', overflowX: 'auto', padding: '1rem' }}>
         <div style={{ minWidth: 1750 }}>
-          <Table config={tableConfig}>
+          <Table variant="overview">
             {/* Table Header */}
             <TableHead>
               <TableRow>
