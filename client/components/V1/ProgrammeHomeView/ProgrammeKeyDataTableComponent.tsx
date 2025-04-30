@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Table, TableRow, TableHead, TableBody, TableCell } from '../Generic/TableComponent'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -21,6 +21,7 @@ import { TrafficLight } from '../Generic/TrafficLightComponent'
 import Modal from '../Generic/ModalTemplateComponent'
 import { TextFieldCard } from '../Generic/TextFieldComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
+import KeyDataModal, { type selectedKeyFigureData } from '../Overview/KeyDataModalComponent'
 
 const programmeKeyDataTableComponent = ({
   programmeData,
@@ -31,20 +32,37 @@ const programmeKeyDataTableComponent = ({
 }) => {
   const { t } = useTranslation()
 
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
+
   const TrafficLightCell = ({
     metadata,
     programmeData,
     groupKey,
+    handleModalOpen,
   }: {
     metadata: KeyDataMetadata[]
     programmeData: KeyDataProgramme
     groupKey: GroupKey
+    handleModalOpen: (programme: KeyDataProgramme, type: GroupKey) => void
   }) => {
+    const { renderTrafficLightBadge } = useNotificationBadge()
+    const { t } = useTranslation()
     const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
     const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
+    const shouldRenderBadge = groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color)
     return (
-      <TableCell data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}`}>
+      <TableCell
+        onClick={() => handleModalOpen(programmeData, groupKey)}
+        data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}`}
+      >
         <TrafficLight color={color} variant="medium" />
+        {shouldRenderBadge && (
+          <NotificationBadge
+            data-cy={`lightCellBadge-${programmeData.koulutusohjelmakoodi}-${groupKey}`}
+            tooltip={t('keyData:missingComment')}
+          />
+        )}
       </TableCell>
     )
   }
@@ -61,6 +79,7 @@ const programmeKeyDataTableComponent = ({
     const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
     const year = useSelector((state: RootState) => state.filters.keyDataYear)
     const [open, setOpen] = useState(false)
+
     const dispatch: AppDispatch = useDispatch()
 
     const actionsBadgeData = renderActionsBadge(programmeData, metadata, true)
@@ -94,6 +113,21 @@ const programmeKeyDataTableComponent = ({
       </TableCell>
     )
   }
+
+  const handleModalOpen = (programme: KeyDataProgramme, type: GroupKey) => {
+    setModalOpen(true)
+    setSelecteKeyFigureData({
+      programme,
+      metadata,
+      type,
+    })
+  }
+
+  useEffect(() => {
+    if (!modalOpen) {
+      setSelecteKeyFigureData(null)
+    }
+  }, [modalOpen])
 
   return (
     <div style={{ minWidth: 1200 }}>
@@ -136,17 +170,29 @@ const programmeKeyDataTableComponent = ({
                   metadata={metadata}
                   programmeData={programmeData}
                   groupKey={GroupKey.VETOVOIMAISUUS}
+                  handleModalOpen={handleModalOpen}
                 />
 
-                <TrafficLightCell metadata={metadata} programmeData={programmeData} groupKey={GroupKey.LAPIVIRTAUS} />
+                <TrafficLightCell
+                  metadata={metadata}
+                  programmeData={programmeData}
+                  groupKey={GroupKey.LAPIVIRTAUS}
+                  handleModalOpen={handleModalOpen}
+                />
 
                 <TrafficLightCell
                   metadata={metadata}
                   programmeData={programmeData}
                   groupKey={GroupKey.OPISKELIJAPALAUTE}
+                  handleModalOpen={handleModalOpen}
                 />
 
-                <TrafficLightCell metadata={metadata} programmeData={programmeData} groupKey={GroupKey.RESURSSIT} />
+                <TrafficLightCell
+                  metadata={metadata}
+                  programmeData={programmeData}
+                  groupKey={GroupKey.RESURSSIT}
+                  handleModalOpen={handleModalOpen}
+                />
 
                 <ActionsCell programmeData={programmeData} metadata={metadata} />
               </TableRow>
@@ -160,6 +206,8 @@ const programmeKeyDataTableComponent = ({
           )}
         </TableBody>
       </Table>
+
+      <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
     </div>
   )
 }
