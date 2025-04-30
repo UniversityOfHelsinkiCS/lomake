@@ -1,13 +1,26 @@
+import { useState } from 'react'
 import { Table, TableRow, TableHead, TableBody, TableCell } from '../Generic/TableComponent'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { Typography } from '@mui/material'
+import { Typography, Button } from '@mui/material'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 
-import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { calculateKeyDataColor } from '../Utils/util'
+import { useDispatch, useSelector } from 'react-redux'
+import { setViewOnly } from '@/client/util/redux/formReducer'
+import { getReport } from '@/client/util/redux/reportsSlicer'
+
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
+
+import { RootState, AppDispatch } from '@/client/util/store'
+import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
+
+import { TrafficLight } from '../Generic/TrafficLightComponent'
+import Modal from '../Generic/ModalTemplateComponent'
+import { TextFieldCard } from '../Generic/TextFieldComponent'
+import NotificationBadge from '../Generic/NotificationBadge'
 
 const programmeKeyDataTableComponent = ({
   programmeData,
@@ -32,6 +45,52 @@ const programmeKeyDataTableComponent = ({
     return (
       <TableCell data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}`}>
         <TrafficLight color={color} variant="medium" />
+      </TableCell>
+    )
+  }
+
+  const ActionsCell = ({
+    programmeData,
+    metadata,
+  }: {
+    programmeData: KeyDataProgramme
+    metadata: KeyDataMetadata[]
+  }) => {
+    const { renderActionsBadge } = useNotificationBadge()
+    const { t } = useTranslation()
+    const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
+    const year = useSelector((state: RootState) => state.filters.keyDataYear)
+    const [open, setOpen] = useState(false)
+    const dispatch: AppDispatch = useDispatch()
+
+    const actionsBadgeData = renderActionsBadge(programmeData, metadata, true)
+
+    const handleOpen = () => {
+      dispatch(setViewOnly(true))
+      dispatch(getReport({ studyprogrammeKey: programmeData.koulutusohjelmakoodi, year }))
+      return setOpen(true)
+    }
+
+    return (
+      <TableCell>
+        {actionsBadgeData.showBadge && (
+          <NotificationBadge
+            data-cy={`actionsCellBadge-${programmeData.koulutusohjelmakoodi}`}
+            variant="medium"
+            tooltip={t('keyData:missingMeasure')}
+          />
+        )}
+        {actionsBadgeData.showIcon && (
+          <Button onClick={handleOpen}>
+            <ChatBubbleOutlineIcon sx={{ fontSize: '28px' }} color="secondary" />
+          </Button>
+        )}
+        <Modal open={open} setOpen={setOpen}>
+          <Typography variant="h3">
+            {programmeData.koulutusohjelma[lang]} {year}
+          </Typography>
+          <TextFieldCard id={'Toimenpiteet'} t={t} type={'Measure'}></TextFieldCard>
+        </Modal>
       </TableCell>
     )
   }
@@ -64,7 +123,15 @@ const programmeKeyDataTableComponent = ({
           {programmeData.length > 0 ? (
             programmeData.map((programmeData: KeyDataProgramme, index) => (
               <TableRow key={programmeData.koulutusohjelmakoodi + index}>
-                <TableCell>{programmeData.year}</TableCell>
+                <TableCell>
+                  <Link
+                    to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${programmeData.year}`}
+                    style={{ width: '100%' }}
+                  >
+                    <Typography variant="regular">{programmeData.year}</Typography>
+                  </Link>
+                </TableCell>
+
                 <TrafficLightCell
                   metadata={metadata}
                   programmeData={programmeData}
@@ -81,9 +148,7 @@ const programmeKeyDataTableComponent = ({
 
                 <TrafficLightCell metadata={metadata} programmeData={programmeData} groupKey={GroupKey.RESURSSIT} />
 
-                {/* TODO: implement this when getReports is ready */}
-                {/* <ActionsCell programmeData={programmeData} metadata={metadata} /> */}
-                <TableCell></TableCell>
+                <ActionsCell programmeData={programmeData} metadata={metadata} />
               </TableRow>
             ))
           ) : (
