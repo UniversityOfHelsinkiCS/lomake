@@ -229,7 +229,6 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
       <div style={{ width: '100%', overflowX: 'auto', padding: '1rem' }}>
         <div style={{ minWidth: 1750 }}>
           <Table variant="overview">
-            {/* Table Header */}
             <TableHead>
               <TableRow>
                 <TableCell>
@@ -280,7 +279,6 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
             </TableHead>
 
             <TableBody>
-              {/* Table Body */}
               {keyFigureData.length > 0 ? (
                 keyFigureData.map((programmeData: KeyDataProgramme) => (
                   <TableRow key={programmeData.koulutusohjelmakoodi}>
@@ -328,7 +326,6 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
             </TableBody>
           </Table>
 
-          {/* Key Figure Data Modal */}
           <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
         </div>
       </div>
