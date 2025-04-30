@@ -320,10 +320,10 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                   </TableRow>
                 ))
               ) : (
-                <TableRow>
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5rem' }}>
+                <TableRow variant="single-cell">
+                  <TableCell>
                     <Typography variant="light">{t('common:noData')}</Typography>
-                  </div>
+                  </TableCell>
                 </TableRow>
               )}
             </TableBody>
