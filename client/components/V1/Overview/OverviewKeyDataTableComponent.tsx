@@ -9,7 +9,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
-import { RootState } from '@/client/util/store'
+import { RootState, AppDispatch } from '@/client/util/store'
 
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
@@ -34,11 +34,10 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
   const color = additionalInfo.fi === 'Lakkautettu ohjelma' ? 'secondary' : ''
-  const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
 
   return (
     <TableCell itemAlign="left" hoverEffect data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}>
-      <Link to={`/v1/programmes/10/${koulutusohjelmakoodi}/${selectedYear}`} style={{ width: '100%' }}>
+      <Link to={`/v1/programmes/10/${koulutusohjelmakoodi}`} style={{ width: '100%' }}>
         <Tooltip title={additionalInfo[lang]} placement="top" arrow>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
             <Typography variant="regular" color={color}>
@@ -60,7 +59,7 @@ const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgra
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
   const [open, setOpen] = useState(false)
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   const actionsBadgeData = renderActionsBadge(programmeData, metadata, true)
 
