@@ -1,19 +1,9 @@
 import React, { useState } from 'react'
 
-export interface TableConfig {
-  columns: string[] // Array of widths for each column. Width can be specified with CSS grid units (e.g. '100px', '50%', '1fr')
-  body?: {
-    firstColumnStyle?: {
-      width?: string // Width of the first column. Width can be specified with CSS grid units (e.g. '100px', '50%', '1fr')a
-      boxed?: boolean // Whether to apply a boxed style to the first column
-    }
-  }
-}
-
-export const Table = ({ children, config }: { children: React.ReactNode; config: TableConfig }) => {
+export const Table = ({ children, variant }: { children: React.ReactNode; variant: 'overview' | 'programme' }) => {
   const childrenWithConfig = React.Children.map(children, child => {
-    if (React.isValidElement<{ config?: TableConfig }>(child)) {
-      return React.cloneElement(child, { config })
+    if (React.isValidElement<{ variant: string }>(child)) {
+      return React.cloneElement(child, { variant })
     }
     return child
   })
@@ -32,12 +22,12 @@ export const Table = ({ children, config }: { children: React.ReactNode; config:
   )
 }
 
-export const TableHead = ({ children, config }: { children: React.ReactNode; config?: TableConfig }) => {
+export const TableHead = ({ children, variant }: { children: React.ReactNode; variant?: 'overview' | 'programme' }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {React.Children.map(children, child => {
-        if (React.isValidElement<{ config?: TableConfig; isHeader?: boolean }>(child)) {
-          return React.cloneElement(child, { config, isHeader: true })
+        if (React.isValidElement<{ isHeader: boolean; variant: string }>(child)) {
+          return React.cloneElement(child, { isHeader: true, variant })
         }
         return child
       })}
@@ -45,12 +35,12 @@ export const TableHead = ({ children, config }: { children: React.ReactNode; con
   )
 }
 
-export const TableBody = ({ children, config }: { children: React.ReactNode; config?: TableConfig }) => {
+export const TableBody = ({ children, variant }: { children: React.ReactNode; variant?: 'overview' | 'programme' }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {React.Children.map(children, child => {
-        if (React.isValidElement<{ config?: TableConfig; isHeader?: boolean }>(child)) {
-          return React.cloneElement(child, { config, isHeader: false })
+        if (React.isValidElement<{ isHeader: boolean; variant: string }>(child)) {
+          return React.cloneElement(child, { isHeader: false, variant })
         }
         return child
       })}
@@ -60,49 +50,67 @@ export const TableBody = ({ children, config }: { children: React.ReactNode; con
 
 export const TableRow = ({
   children,
-  config,
   isHeader,
+  variant,
 }: {
   children: React.ReactNode
-  config?: TableConfig
   isHeader?: boolean
+  variant?: 'overview' | 'programme'
 }) => {
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateRows: '1fr',
-        gridTemplateColumns: config?.columns?.join(' ') || 'repeat(auto-fill, 1fr)',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'stretch',
       }}
     >
       {React.Children.map(children, (child, index) => {
-        if (isHeader) {
-          return <div>{child}</div>
+        let frac
+        let boxed
+        let rowLength = React.Children.count(children)
+        let borderRadius = '0 0 0 0'
+
+        switch (variant) {
+          case 'overview':
+            frac = index === 0 ? 2 : 1
+            boxed = !isHeader
+
+            if (index === 0) {
+              borderRadius = '0.5rem 0 0 0.5rem'
+            } else if (index === rowLength - 1) {
+              borderRadius = '0 0.5rem 0.5rem 0'
+            }
+            break
+
+          case 'programme':
+            frac = index === 0 ? 0.5 : 1
+            boxed = !isHeader && index !== 0
+
+            if (index === 1) {
+              borderRadius = '0.5rem 0 0 0.5rem'
+            } else if (index === rowLength - 1) {
+              borderRadius = '0 0.5rem 0.5rem 0'
+            }
+            break
+
+          default:
+            break
         }
 
-        let cellStyle = {
-          backgroundColor: 'white',
-          borderRight: index < React.Children.count(children) - 1 ? '1px solid rgba(0,0,0,0.1)' : 'none',
-          boxShadow: '0px 1px 3px rgba(0,0,0,0.3)',
-          borderRadius: '0px',
-          overflow: 'hidden',
-        }
-
-        const firstColBoxed = config?.body?.firstColumnStyle?.boxed
-
-        if (!firstColBoxed && index === 0) {
-          cellStyle = null
-        } else if (!firstColBoxed && index === 1) {
-          cellStyle['borderRadius'] = '0.5rem 0px 0px 0.5rem'
-        } else if (!firstColBoxed && index === React.Children.count(children) - 1) {
-          cellStyle['borderRadius'] = '0px 0.5rem 0.5rem 0px'
-        } else if (index === 0) {
-          cellStyle['borderRadius'] = '0.5rem 0px 0px 0.5rem'
-        } else if (index === React.Children.count(children) - 1) {
-          cellStyle['borderRadius'] = '0px 0.5rem 0.5rem 0px'
-        }
-
-        return <div style={cellStyle}>{child}</div>
+        return (
+          <div
+            style={{
+              flex: `${frac} 0 0%`,
+              boxShadow: boxed && '0px 1px 3px rgba(0,0,0,0.3)',
+              borderRight: index < rowLength - 1 && boxed ? '1px solid rgba(0,0,0,0.2)' : 'none',
+              borderRadius: borderRadius,
+              backgroundColor: 'white',
+            }}
+          >
+            {child}
+          </div>
+        )
       })}
     </div>
   )
@@ -135,12 +143,12 @@ export const TableCell = ({
       style={{
         opacity: disabled ? '0.5' : '1',
         display: 'flex',
+        width: '100%',
+        height: '100%',
         justifyContent: itemAlign,
         alignItems: 'center',
         textAlign: itemAlign,
         padding: '1.5rem',
-        width: '100%',
-        height: '100%',
         cursor: hoverEffect || onClick ? 'pointer' : 'default',
         transition: 'background-color 0.2s',
         backgroundColor:
