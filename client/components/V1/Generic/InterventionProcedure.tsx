@@ -1,16 +1,20 @@
+import { useParams } from "react-router"
 import { useTranslation } from "react-i18next"
-import { Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 
-const InterventionProcedure = ({lang, programme}: {lang: 'fi' | 'se' | 'en', programme: string}) => {
+const InterventionProcedure = () => {
   const { t } = useTranslation()
-  
- 
+
+  const handleClick = () => {
+
+  }
+
   return (
-    <div>
-      <Typography variant="h1">{t('interventionProcedure')} </Typography>
-      <p>{lang}-{programme}</p>
-    </div>
+    <Box sx={{ alignContent: 'left', mt: '4rem' }}>
+      <Typography variant="h1">INTERVENTION DOCUMENT</Typography>
+    </Box>
   )
 }
 
 export default InterventionProcedure
+

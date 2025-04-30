@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { Alert, Box, CircularProgress, IconButton, Button, Link, Tabs, Tab, Typography } from '@mui/material'
+import { Add, ArrowBack } from '@mui/icons-material'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
@@ -17,7 +17,7 @@ const ProgrammeHomeView = () => {
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const keyData = useFetchSingleKeyData(programmeKey)
-  // const form = 10
+  const form = 10
   // const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
 
   if (!keyData) {
@@ -30,7 +30,7 @@ const ProgrammeHomeView = () => {
     <Box sx={{ width: '75%' }}>
       <div style={{ display: 'flex', alignItems: 'center', marginTop: '4rem' }}>
         <IconButton component={Link} href={`${basePath}v1/overview`} sx={{ marginRight: 2 }}>
-          <ArrowBackIcon />
+          <ArrowBack />
         </IconButton>
 
         <Typography variant="h2">{programme.koulutusohjelma[lang]}</Typography>
@@ -48,7 +48,18 @@ const ProgrammeHomeView = () => {
         <ProgrammeKeyDataTable />
       </Box>
 
-      {/* <InterventionProcedure lang={lang} programme={programmeKey} /> */}
+      <Box sx={{ alignContent: 'left', mt: '4rem' }}>
+        <Typography variant="h1">{t('interventionProcedure')} </Typography>
+        <Box sx={{ mt: '2rem', mb: '2rem' }}>
+          <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
+        </Box>
+        <Box>
+          <Button component={Link} href={`${basePath}v1/programme/${form}/${programmeKey}/doc`} variant="outlined">
+            <Add />
+            {t('newDocument')}
+          </Button>
+        </Box>
+      </Box>
     </Box>
   )
 }

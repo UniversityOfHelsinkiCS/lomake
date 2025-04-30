@@ -85,7 +85,7 @@ describe('Overview page test', () => {
       it('Displays correct year options', () => {
         cy.get('[data-cy="year-filter"]').click()
 
-        const years = ['2025']
+        const years = ['2024', '2025']
 
         cy.get('[data-cy="year-filter-option"]')
           .should('have.length', years.length)

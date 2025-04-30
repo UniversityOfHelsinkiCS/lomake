@@ -5,6 +5,7 @@ import { setKeyDataYear, clearLevelSpecificFilters } from '../../../util/redux/f
 import { MenuItem, FormControl } from '@mui/material'
 
 import Select, { SelectChangeEvent } from '@mui/material/Select'
+import { inProduction } from '@/config/common'
 
 const YearFilterComponent = () => {
   const dispatch = useDispatch()
@@ -13,7 +14,8 @@ const YearFilterComponent = () => {
   // TODO: figure out a policy how allowed years are determined
 
   // If an invalid year is selected, the user will see the year as an greyed out option and state will not be updated.
-  const allowedYears = ['2025']
+  // allow 2024 when running tests
+  const allowedYears = !inProduction ? ['2024', '2025'] : ['2025']
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     dispatch(clearLevelSpecificFilters())

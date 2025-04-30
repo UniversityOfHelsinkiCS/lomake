@@ -48,7 +48,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Adding comments or actions should reflect in overview page badges', () => {
-      cy.visit(`/v1/programmes/10/${redProgramme}`)
+      cy.visit(`/v1/programmes/10/${redProgramme}/${defaultYears[0]}`)
 
       cy.typeInTextField('Vetovoimaisuus-Comment', 'Test comment')
       cy.get(`[data-cy=save-Vetovoimaisuus-Comment]`).click()
@@ -74,7 +74,7 @@ describe('Notification badge tests', () => {
 
   describe('Testing badges in programme view page', () => {
     it('Light and actions badges should display on red lights', () => {
-      cy.visit(`/v1/programmes/10/${redProgramme}`)
+      cy.visit(`/v1/programmes/10/${redProgramme}/${defaultYears[0]}`)
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('exist')
       cy.get(`[data-cy="tabBadge-actions"]`).should('exist')
@@ -85,7 +85,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Light or action badges should not display on green or gray lights', () => {
-      cy.visit(`/v1/programmes/10/${greenProgramme}`)
+      cy.visit(`/v1/programmes/10/${greenProgramme}/${defaultYears[0]}`)
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('not.exist')
       cy.get(`[data-cy="tabBadge-actions"]`).should('not.exist')
@@ -96,7 +96,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Light badges should but action badges shouldnt display on yellow lights', () => {
-      cy.visit(`/v1/programmes/10/${yellowProgramme}`)
+      cy.visit(`/v1/programmes/10/${yellowProgramme}/${defaultYears[0]}`)
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('exist')
       cy.get(`[data-cy="tabBadge-actions"]`).should('not.exist')
@@ -107,7 +107,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Any badges shouldnt display on a discontinued programme', () => {
-      cy.visit(`/v1/programmes/10/${discontinuedProgramme}`)
+      cy.visit(`/v1/programmes/10/${discontinuedProgramme}/${defaultYears[0]}`)
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('not.exist')
       cy.get(`[data-cy="tabBadge-actions"]`).should('not.exist')
@@ -118,7 +118,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Opinion of programme tab + text field badge should appear and disappear when opinion of the programme is added', () => {
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}`)
+      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('exist')
       cy.get(`[data-cy=textfieldBadge-Vetovoimaisuus]`).should('exist')
@@ -131,7 +131,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Actions tab + text field badge should appear and disappear when actions are added', () => {
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}`)
+      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
 
       cy.get(`[data-cy="tabBadge-actions"]`).should('exist')
       cy.get('[data-cy="actionsTab"]').click()

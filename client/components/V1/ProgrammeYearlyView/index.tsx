@@ -24,14 +24,15 @@ import { calculateKeyDataColor, getKeyDataPoints } from '../Utils/util'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
+import Page404 from '../../Generic/Page404'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const dispatch: AppDispatch = useDispatch()
   const { t } = useTranslation()
-  const { programme: programmeKey } = useParams<{ programme: string }>()
-  const [activeTab, setActiveTab] = useState(0)
+  const { programme: programmeKey, year } = useParams<{ programme: string, year: string }>()
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
+  const [activeTab, setActiveTab] = useState(0)
   const keyData = useFetchSingleKeyData(programmeKey)
   const form = 10
 
@@ -69,6 +70,7 @@ const ProgrammeView = () => {
     }
   }, [])
 
+  if (year !== selectedYear && inProduction) return <Page404 />
   if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 
   if (!keyData) {
