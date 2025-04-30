@@ -133,6 +133,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
     </Tooltip>
   )
 }
+
 const KeyDataCard = (props: KeyDataCardProps) => {
   const color = calculateKeyDataColor(props.metadata, props.programme, props.groupKey, props.level)
   return (
