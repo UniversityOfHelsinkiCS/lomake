@@ -30,7 +30,7 @@ const ProgrammeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const dispatch = useDispatch<AppDispatch>()
   const { t } = useTranslation()
-  const { programme: programmeKey, year } = useParams<{ programme: string, year: string }>()
+  const { programme: programmeKey, year } = useParams<{ programme: string; year: string }>()
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
   const [activeTab, setActiveTab] = useState(0)
   const keyData = useFetchSingleKeyData(programmeKey)
@@ -155,12 +155,16 @@ const ProgrammeView = () => {
 
   return (
     <Box sx={{ width: '75%' }}>
-      <div style={{ display: 'flex', alignItems: 'baseline' }}>
-        <IconButton component={Link} href={`${basePath}v1/overview`} sx={{ marginRight: 2 }}>
+      <div style={{ display: 'flex', marginTop: '4rem', alignItems: 'center' }}>
+        <IconButton
+          component={Link}
+          href={`${basePath}v1/programmes/${form}/${programme.koulutusohjelmakoodi}`}
+          sx={{ marginRight: 2 }}
+        >
           <ArrowBackIcon />
         </IconButton>
 
-        <Typography variant="h2" style={{ paddingTop: '2rem' }}>
+        <Typography variant="h2">
           {programme.koulutusohjelma[lang]} {selectedYear}
         </Typography>
       </div>
