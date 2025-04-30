@@ -135,7 +135,6 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 }
 
 const KeyDataCard = (props: KeyDataCardProps) => {
-  console.log(props)
   const color = calculateKeyDataColor(props.metadata, props.programme, props.groupKey, props.level)
   return (
     <Box sx={{ padding: '2rem 0' }}>

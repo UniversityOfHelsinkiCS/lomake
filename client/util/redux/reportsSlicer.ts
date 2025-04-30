@@ -43,9 +43,9 @@ export const updateReportHttp = createAsyncThunk<ReportData, Record<string, any>
   },
 )
 
-export const getReport = createAsyncThunk<ReportData, Record<string, any>>(
+export const getReport = createAsyncThunk<ReportData, { studyprogrammeKey: string, year: string }>(
   'reports/getReport',
-  async (payload: Record<string, any>, { rejectWithValue }) => {
+  async (payload: { studyprogrammeKey: string, year: string }, { rejectWithValue }) => {
     const { studyprogrammeKey, year } = payload
     try {
       const response = await axios.get(`${basePath}api/reports/${studyprogrammeKey}/${year}`, {

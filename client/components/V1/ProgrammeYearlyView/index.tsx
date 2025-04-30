@@ -28,7 +28,7 @@ import Page404 from '../../Generic/Page404'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
-  const dispatch: AppDispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const { t } = useTranslation()
   const { programme: programmeKey, year } = useParams<{ programme: string, year: string }>()
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
