@@ -45,7 +45,7 @@ const ProgrammeHomeView = () => {
       </Typography>
 
       <Box sx={{ mt: '4rem' }}>
-        <ProgrammeKeyDataTable />
+        <ProgrammeKeyDataTable programme={programme} metadata={metadata} />
       </Box>
 
       {/* <InterventionProcedure lang={lang} programme={programmeKey} /> */}

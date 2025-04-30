@@ -27,7 +27,9 @@ export const TableHead = ({ children, variant }: { children: React.ReactNode; va
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {React.Children.map(children, child => {
         if (React.isValidElement<{ isHeader: boolean; variant: string }>(child)) {
-          return React.cloneElement(child, { isHeader: true, variant })
+          const existingProps = child.props as any
+
+          return React.cloneElement(child, { isHeader: true, variant: existingProps.variant || variant })
         }
         return child
       })}
@@ -40,7 +42,9 @@ export const TableBody = ({ children, variant }: { children: React.ReactNode; va
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {React.Children.map(children, child => {
         if (React.isValidElement<{ isHeader: boolean; variant: string }>(child)) {
-          return React.cloneElement(child, { isHeader: false, variant })
+          const existingProps = child.props as any
+
+          return React.cloneElement(child, { isHeader: false, variant: existingProps.variant || variant })
         }
         return child
       })}
@@ -55,7 +59,7 @@ export const TableRow = ({
 }: {
   children: React.ReactNode
   isHeader?: boolean
-  variant?: 'overview' | 'programme'
+  variant?: 'overview' | 'programme' | 'single-cell'
 }) => {
   return (
     <div
@@ -92,6 +96,12 @@ export const TableRow = ({
             } else if (index === rowLength - 1) {
               borderRadius = '0 0.5rem 0.5rem 0'
             }
+            break
+
+          case 'single-cell':
+            frac = 1
+            boxed = !isHeader
+            borderRadius = '0.5rem'
             break
 
           default:
