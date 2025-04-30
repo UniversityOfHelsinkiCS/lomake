@@ -4,7 +4,8 @@ import { Box, IconButton, Typography, Link, Alert } from "@mui/material"
 import { useFetchSingleKeyData } from "@/client/hooks/useFetchKeyData"
 import { useSelector } from "react-redux"
 import { RootState } from "@/client/util/store"
-import { SingleKeyData } from "@/shared/lib/types"
+import type { SingleKeyData } from "@/shared/lib/types"
+import { GroupKey, ProgrammeLevel } from "@/client/lib/enums"
 import { ArrowBack } from "@mui/icons-material"
 import { basePath } from "@/config/common"
 import KeyDataCard from "./KeyDataCardComponent"
@@ -15,7 +16,19 @@ const InterventionProcedure = () => {
   const keyData: SingleKeyData = useFetchSingleKeyData(programmeKey)
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
 
+  const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+
   if (!keyData) return null
+
+  const { programme, metadata } = keyData
+
+  const props = {
+    title: 'Vetovoimaisuus',
+    groupKey: 'VETOVOIMA' as GroupKey,
+    description: '',
+    color: 'punainen',
+    textField: true,
+  }
 
   return (
     <Box sx={{ width: '75%' }}>
@@ -27,8 +40,9 @@ const InterventionProcedure = () => {
       </Box>
       <Alert severity="info">Alert Here</Alert>
       <Typography variant="h4">{t('Esitiedot')}</Typography>
-      {/*@ts-expect-error*/}
-      <KeyDataCard props={null} />
+      <Box sx={{ p: '2.5rem 0' }}>
+        <KeyDataCard level={level} metadata={metadata} programme={programme} {...props} />
+      </Box>
     </Box>
   )
 }

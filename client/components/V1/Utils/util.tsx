@@ -2,7 +2,6 @@ import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
 import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
-import { useEffect } from 'react'
 
 export const calculateColor = (value: number, threshold: string, liikennevalo: boolean, unit?: string) => {
   if (!liikennevalo) {

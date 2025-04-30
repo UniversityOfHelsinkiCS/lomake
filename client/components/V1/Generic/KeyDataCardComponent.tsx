@@ -7,7 +7,7 @@ import { TrafficLight } from './TrafficLightComponent'
 import ColorMeterComponent from './ColorMeterComponent'
 import ColorHistoryComponent from './ColorHistoryComponent'
 
-import { GroupKey, ProgrammeLevel, LightColors } from '@/client/lib/enums'
+import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
 import { RootState } from '@/client/util/store'
