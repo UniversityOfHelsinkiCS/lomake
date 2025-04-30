@@ -26,7 +26,6 @@ const InterventionProcedure = () => {
     title: 'Vetovoimaisuus',
     groupKey: 'VETOVOIMA' as GroupKey,
     description: '',
-    color: 'punainen',
     textField: true,
   }
 

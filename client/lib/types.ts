@@ -4,7 +4,6 @@ export interface KeyDataCardData {
   title: string
   groupKey: GroupKey
   description: string
-  color: string
   textField: boolean
 }
 

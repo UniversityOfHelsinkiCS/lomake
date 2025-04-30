@@ -79,7 +79,7 @@ const ProgrammeView = () => {
 
   const { programme, metadata } = keyData
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue)
   }
 
@@ -151,7 +151,7 @@ const ProgrammeView = () => {
     )
   }
 
-  const KeyDataPoints = getKeyDataPoints(t, programme)
+  const KeyDataPoints = getKeyDataPoints(t)
 
   return (
     <Box sx={{ width: '75%' }}>

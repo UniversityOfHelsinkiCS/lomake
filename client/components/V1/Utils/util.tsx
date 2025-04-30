@@ -135,7 +135,7 @@ export const calculateValue = (value: number, unit?: string) => {
   }
 }
 
-export const getKeyDataPoints = (t: TFunction, programme: KeyDataProgramme) => {
+export const getKeyDataPoints = (t: TFunction) => {
   const KeyDataPoints = Object.keys(GroupKey)
     .map((key: string) => {
       const lowerKey = key.toLowerCase()
@@ -146,7 +146,6 @@ export const getKeyDataPoints = (t: TFunction, programme: KeyDataProgramme) => {
           title: t(`keyData:${lowerKey}`),
           groupKey: GroupKey[key as keyof typeof GroupKey],
           description: t(`keyData:${lowerKey}Info`),
-          color: programme[lowerKey as keyof typeof programme],
           textField: lowerKey !== 'resurssit', // resurssit section not active in 2025 pilot, this should be removed later
         },
       ]

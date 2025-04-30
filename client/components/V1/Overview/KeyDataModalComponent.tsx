@@ -59,7 +59,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
 
     const { programme, metadata } = data
 
-    const KeyDataPoints = getKeyDataPoints(t, programme)
+    const KeyDataPoints = getKeyDataPoints(t)
 
     dispatch(getReport({ studyprogrammeKey: programme.koulutusohjelmakoodi, year: year }))
     setProgramme(programme)
