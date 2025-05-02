@@ -1,7 +1,6 @@
 import logger from '../util/logger.js'
 import db from '../models/index.js'
 import Document from '../models/document.js'
-import { Op } from 'sequelize'
 
 import type { Request, Response } from 'express'
 
@@ -11,8 +10,8 @@ interface ValidateOperationResponse {
   success: boolean
   error: string
   status: number
-  document: Document | null
-  studyprogrammeId: number | null
+  documents: Document[] | null
+  studyprogrammeKey: string | null
   data: DocumentData
 }
 
@@ -24,15 +23,17 @@ interface DocumentResponse {
 }
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
-  const { studyprogrammeKey, year } = req.params
+  const { studyprogrammeKey } = req.params
   const data = req.body
+
+  console.log(data)
 
   const resultObject: ValidateOperationResponse = {
     success: false,
     error: '',
     status: 0,
-    document: null,
-    studyprogrammeId: null,
+    documents: [],
+    studyprogrammeKey: null,
     data: {},
   }
 
@@ -42,28 +43,30 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     return resultObject
   }
 
-  // @ts-ignore
+  // @ts-expect-error
   // ignore db type error for now since it has not been typed
   const studyprogramme = await db.studyprogramme.findOne({
     where: {
       key: studyprogrammeKey,
     },
   })
+
   if (!studyprogramme) {
     resultObject.error = 'Studyprogramme not found'
     resultObject.status = 404
     return resultObject
   }
 
-  const document: Document = await Document.findAll({
+  const documents: Document[] = await Document.findAll({
     where: {
-      studyprogrammeId: studyprogramme.id,
+      studyprogrammeKey: studyprogramme.key,
     },
   })
 
-  if (!document) {
-    resultObject.error = 'No report for that year was found'
+  if (documents.length === 0) {
+    resultObject.error = 'No documents found for studyprogramme'
     resultObject.status = 404
+    resultObject.studyprogrammeKey = studyprogramme.key
     return resultObject
   }
 
@@ -76,21 +79,36 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   //TODO: validate keys here
 
   resultObject.success = true
-  resultObject.document = document
-  resultObject.studyprogrammeId = parseInt(studyprogramme.id)
+  resultObject.documents = documents
+  resultObject.studyprogrammeKey = studyprogramme.key
   resultObject.status = 200
   resultObject.data = data
 
   return resultObject
 }
 
-const getDocuments = async (req: Request, res: Response) => {
+const getDocuments = async (req: Request, res: Response): Promise<DocumentResponse> => {
   try {
-    return res.status(200).json({})
+    const result = await validateOperation(req)
+    if (!result.success) return res.status(result.status).json({ error: result.error })
+    return res.status(200).json(result)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
   }
 }
 
-export default { getDocuments }
+const createDocument = async (req: Request, res: Response): Promise<DocumentResponse> => {
+  try {
+    const { studyprogrammeKey, status, error } = await validateOperation(req)
+    if (!studyprogrammeKey) return res.status(status).json({ error: error })
+
+    console.log(studyprogrammeKey)
+    res.status(201).json({})
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+export default { getDocuments, createDocument }

@@ -57,7 +57,7 @@ const DocumentForm = () => {
   }
 
   return (
-    <Box sx={{  }}>
+    <Box sx={{}}>
       <Typography variant="h3">Toimenpidelomake</Typography>
       <form onSubmit={handleSubmit}>
         <Typography variant="h5">Yleiset tiedot</Typography>

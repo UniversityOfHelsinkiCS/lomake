@@ -86,5 +86,6 @@ router.delete('/keydata/:id', checkAdmin, keyData.deleteKeyData)
 router.put('/keydata/:id', checkAdmin, keyData.updateKeyData)
 
 router.get('/documents/:studyprogrammeKey', documents.getDocuments)
+router.post('/documents/:studyprogrammeKey', documents.createDocument)
 
 export default router
