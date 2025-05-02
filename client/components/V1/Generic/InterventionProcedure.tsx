@@ -1,4 +1,5 @@
 import { useParams } from "react-router"
+import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import {
   Box,
@@ -10,7 +11,6 @@ import {
   AccordionSummary,
   AccordionDetails,
   Button,
-  TextField,
 } from "@mui/material"
 import { useFetchSingleKeyData } from "@/client/hooks/useFetchKeyData"
 import { useDispatch, useSelector } from "react-redux"
@@ -24,8 +24,7 @@ import { calculateKeyDataColor, getKeyDataPoints } from "../Utils/util"
 import { TFunction } from "i18next"
 import { TextFieldCard } from "./TextFieldComponent"
 import { getReport } from "@/client/util/redux/reportsSlicer"
-import { useEffect, useState } from "react"
-import { z } from 'zod'
+import DocumentForm from "./DocumentForm"
 
 const calculateIntervetionAreas = ({ metadata, programme, level, t }: { metadata: Record<string, any>[], programme: Record<string, any>, level: ProgrammeLevel, t: TFunction }) => {
   let res: string[] = []
@@ -44,8 +43,6 @@ const InterventionProcedure = () => {
   const keyData: SingleKeyData = useFetchSingleKeyData(programmeKey)
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
-  const [formData, setFormData] = useState({ title: '', date: '', participants: '', matters: '', schedule: '', followupDate: '' })
-  const [errors, setErrors] = useState({ title: '', date: '', participants: '', matters: '', schedule: '', followupDate: '' })
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
 
@@ -53,21 +50,13 @@ const InterventionProcedure = () => {
     if (keyData) {
       dispatch(getReport({ studyprogrammeKey: programme.koulutusohjelmakoodi, year: year }))
     }
-  }, [keyData, year, dispatch])
+  }, [dispatch, keyData, year])
 
   if (!keyData) return null
 
   const { programme, metadata } = keyData
 
   const areas = calculateIntervetionAreas({ metadata, programme, level, t })
-
-  const handleSubmit = () => {
-
-  }
-
-  const handleChange = () => {
-
-  }
 
   return (
     <Box sx={{ width: '75%' }}>
@@ -109,23 +98,7 @@ const InterventionProcedure = () => {
           </AccordionDetails>
         </Accordion>
       )}
-      <Box sx={{ justifyContent: 'left' }}>
-        <Typography variant="h3">Toimenpidelomake</Typography>
-        <form onSubmit={handleSubmit}>
-          <Typography variant="h5">Yleiset tiedot</Typography>
-          <TextField
-            name={t('title')}
-            label={t('title')}
-            variant="outlined"
-            margin="normal"
-            value={formData.title}
-            onChange={handleChange}
-            error={!!errors.title}
-            helperText={errors.title}
-          />
-          <Button type="submit" variant="contained" color="primary">Submit</Button>
-        </form>
-      </Box>
+      <DocumentForm />
     </Box>
   )
 }

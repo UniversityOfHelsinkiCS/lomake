@@ -7,6 +7,7 @@ import { updateWSAndClearEditors } from '../websocket.js'
 
 import type { Request, Response } from 'express'
 import type { ReportData } from '@/shared/lib/types.js'
+
 interface ValidateOperationResponse {
   success: boolean
   error: string
@@ -16,6 +17,7 @@ interface ValidateOperationResponse {
   year: number | null
   data: ReportData
 }
+
 interface ReportResponse {
   error?: string
   data?: ReportData
