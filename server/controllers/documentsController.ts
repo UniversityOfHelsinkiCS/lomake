@@ -76,12 +76,6 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     return resultObject
   }
 
-  if (!data) {
-    resultObject.error = 'Data is required'
-    resultObject.status = 400
-    return resultObject
-  }
-
   resultObject.success = true
   resultObject.documents = documents
   resultObject.studyprogrammeKey = studyprogramme.key
@@ -104,11 +98,15 @@ const getDocuments = async (req: Request, res: Response): Promise<DocumentRespon
 
 const createDocument = async (req: Request, res: Response): Promise<DocumentResponse> => {
   try {
-    const { studyprogrammeKey, status, error } = await validateOperation(req)
+    const { studyprogrammeKey, status, error, data } = await validateOperation(req)
     if (!studyprogrammeKey) return res.status(status).json({ error: error })
 
-    console.log(studyprogrammeKey)
-    res.status(201).json({})
+    const document = await Document.create({
+      data,
+      studyprogrammeKey
+    })
+
+    res.status(201).json(document)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
