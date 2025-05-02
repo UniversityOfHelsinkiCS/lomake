@@ -157,7 +157,7 @@ const programmeKeyDataTableComponent = ({
           {programmeData.length > 0 ? (
             programmeData.map((programmeData: KeyDataProgramme, index) => (
               <TableRow key={programmeData.koulutusohjelmakoodi + index}>
-                <TableCell>
+                <TableCell hoverEffect style={{ borderRadius: '0.5rem 0 0 0.5rem' }}>
                   <Link
                     to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${programmeData.year}`}
                     style={{ width: '100%' }}
