@@ -19,6 +19,7 @@ const ProgrammeHomeView = () => {
 
   const dispatch: AppDispatch = useDispatch()
   const form = 10
+  const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 
   const keyData = useFetchKeyData()
 
@@ -36,8 +37,10 @@ const ProgrammeHomeView = () => {
 
   const keyFigureData = useMemo(() => {
     const filteredData = programmeData.filter(
-      (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey,
+      (programmeData: KeyDataProgramme) =>
+        programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear,
     )
+
     return filteredData
   }, [programmeData])
 
