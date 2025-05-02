@@ -23,14 +23,23 @@ import { Table, TableRow, TableHead, TableBody, TableCell } from './TableCompone
 </Table>
 
 Table component:
-  @params: variant: 'overview' | 'programme'
+  required param: variant: 'overview' | 'programme'
+
+TableHead component:
+  optional param: variant: 'overview' | 'programme'
+
+TableBody component:
+  optional param: variant: 'overview' | 'programme'
+
+TableRow component:
+  optional param: variant: 'overview' | 'programme' | 'single-cell'
 
 TableCell component:
-  @params: itemAlign: 'left' | 'center' | 'right'
-  @params: disabled: boolean
-  @params: onClick: () => void
-  @params: hoverEffect: boolean
-  @params: style: React.CSSProperties
+  optional param: itemAlign: 'left' | 'center' | 'right'
+  optional param: disabled: boolean
+  optional param: onClick: () => void
+  optional param: hoverEffect: boolean
+  optional param: style: React.CSSProperties
 */
 
 export const Table = ({ children, variant }: { children: React.ReactNode; variant: 'overview' | 'programme' }) => {
