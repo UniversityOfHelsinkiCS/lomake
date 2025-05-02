@@ -47,6 +47,7 @@ export const createDocument = createAsyncThunk<any, Record<string, any>>(
             ...getHeaders(),
           },
         })
+      return response.data
     } catch (err) {
       alertSentry(err, `${basePath}api/documents/${studyprogrammeKey}`, 'POST', {})
       return rejectWithValue((err as any).response.data)

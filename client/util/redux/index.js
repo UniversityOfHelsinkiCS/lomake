@@ -41,5 +41,5 @@ export default combineReducers({
   monitoring,
   keyData,
   reports,
-  documents
+  documents,
 })
