@@ -69,9 +69,9 @@ const ProgrammeKeyDataTableComponent = ({
           </TableRow>
         </TableHead>
 
-        <TableBody>
-          {programmeData.length > 0 ? (
-            programmeData.map((programmeData: KeyDataProgramme, index) => (
+        {programmeData.length > 0 ? (
+          <TableBody>
+            {programmeData.map((programmeData: KeyDataProgramme, index) => (
               <TableRow key={programmeData.koulutusohjelmakoodi + index}>
                 <TableCell hoverEffect style={{ borderRadius: '0.5rem 0 0 0.5rem' }}>
                   <Link
@@ -112,15 +112,29 @@ const ProgrammeKeyDataTableComponent = ({
 
                 <ActionsCell programmeData={programmeData} metadata={metadata} />
               </TableRow>
-            ))
-          ) : (
+            ))}
+            <TableRow>
+              <TableCell>
+                <Typography variant="h5" color="secondary">
+                  2026
+                </Typography>
+              </TableCell>
+              <TableCell disabled />
+              <TableCell disabled />
+              <TableCell disabled />
+              <TableCell disabled />
+              <TableCell disabled />
+            </TableRow>
+          </TableBody>
+        ) : (
+          <TableBody>
             <TableRow variant="single-cell">
               <TableCell>
-                <Typography variant="light">No Data</Typography>
+                <Typography variant="light">{t('common:noData')}</Typography>
               </TableCell>
             </TableRow>
-          )}
-        </TableBody>
+          </TableBody>
+        )}
       </Table>
 
       <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
