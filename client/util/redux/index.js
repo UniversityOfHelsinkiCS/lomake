@@ -19,6 +19,7 @@ import reformAnswers from './reformAnswerReducer'
 import monitoring from './facultyMonitoringReducer'
 import keyData from './keyDataReducer'
 import reports from './reportsSlicer'
+import documents from './documentsSlicer'
 
 export default combineReducers({
   form,
@@ -40,4 +41,5 @@ export default combineReducers({
   monitoring,
   keyData,
   reports,
+  documents
 })
