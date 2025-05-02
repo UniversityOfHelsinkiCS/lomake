@@ -37,6 +37,14 @@ const ProgrammeKeyDataTableComponent = ({
     }
   }, [modalOpen])
 
+  const annualFollowUpYear = (programmeDataYear: number) => {
+    /*
+      Simple solution for syncing data to the follow-up year.
+      Data is always collected from the previous year relative to the annual follow-up year.
+    */
+    return programmeDataYear + 1
+  }
+
   return (
     <div style={{ minWidth: 1200 }}>
       <Table variant="programme">
@@ -67,10 +75,10 @@ const ProgrammeKeyDataTableComponent = ({
               <TableRow key={programmeData.koulutusohjelmakoodi + index}>
                 <TableCell hoverEffect style={{ borderRadius: '0.5rem 0 0 0.5rem' }}>
                   <Link
-                    to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${programmeData.year}`}
+                    to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${annualFollowUpYear(programmeData.year)}`}
                     style={{ width: '100%' }}
                   >
-                    <Typography variant="h5">{programmeData.year}</Typography>
+                    <Typography variant="h5">{annualFollowUpYear(programmeData.year)}</Typography>
                   </Link>
                 </TableCell>
 
