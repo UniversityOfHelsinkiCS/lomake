@@ -39,9 +39,9 @@ export const getDocuments = createAsyncThunk<any, Record<string, any>>(
 export const createDocument = createAsyncThunk<any, Record<string, any>>(
   'documents/createDocument',
   async (payload, { rejectWithValue }) => {
-    const { studyprogrammeKey } = payload
+    const { studyprogrammeKey, data } = payload
     try {
-      const response = await axios.post(`${basePath}api/documents/${studyprogrammeKey}`, { payload },
+      const response = await axios.post(`${basePath}api/documents/${studyprogrammeKey}`, { data },
         {
           headers: {
             ...getHeaders(),

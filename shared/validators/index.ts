@@ -1,5 +1,4 @@
-import { z, ZodError } from 'zod'
-import logger from '../../server/util/logger'
+import { z } from 'zod'
 
 const LiikennevalotEnum = z.enum(['Ei arviota', 'Punainen', 'Keltainen', 'Vaaleanvihreä', 'Tummanvihreä'])
 
@@ -134,42 +133,11 @@ export const MetadataRawSchema = z
   })
   .strict() // to disallow extra keys
 
-export const logZodError = (error: ZodError) => {
-  let parsedErrors: any[] = []
-  let typesOfErrors: { [key: string]: number } = {}
-
-  error.errors.forEach(e => {
-    parsedErrors.push(e)
-
-    if (e.code in typesOfErrors) {
-      typesOfErrors[e.code]++
-    } else {
-      typesOfErrors[e.code] = 1
-    }
-  })
-
-  // Pretty formatted log message
-  logger.error(`
-      ❌ Validation Error Report ❌
-      --------------------------------
-      🔹 Total Errors: ${error.errors.length}
-      
-      🔹 Types of Errors:
-      ${Object.entries(typesOfErrors)
-        .map(([type, count]) => `    - ${type}: ${count}`)
-        .join('\n')}
-  
-      ${parsedErrors
-        .map(
-          (e, index) => `
-      ${index + 1}. 🔻 Path: ${e.path.join('.') || 'N/A'}
-          🔹 Error Type: ${e.code}
-          🔹 Expected: ${JSON.stringify(e.expected, null, 2)}
-          🔹 Received: ${JSON.stringify(e.received, null, 2)}
-          🔹 Error message: ${e.message}`,
-        )
-        .join('\n')}
-    
-      --------------------------------
-      `)
-}
+export const DocumentFormSchema = z.object({
+  title: z.string().min(1, 'Name is required'),
+  date: z.string().date('Invalid date'),
+  participants: z.string().min(3, 'Invalid set of participants'),
+  matters: z.string().min(100, 'Matters should be at least 100 chars long'),
+  schedule: z.string().min(3, 'Invalid description of schedule'),
+  followupDate: z.string().date('Invalid date'),
+})

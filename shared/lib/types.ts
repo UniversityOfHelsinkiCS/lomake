@@ -5,7 +5,7 @@ import {
   KeyDataProgrammeSchema,
   MetadataRawSchema,
   MetadataSchema,
-} from './validations'
+} from '../validators'
 
 export type KeyDataProgramme = z.infer<typeof KeyDataProgrammeSchema>
 export type KandiohjelmatValues = z.infer<typeof KandiohjelmatValuesSchema>

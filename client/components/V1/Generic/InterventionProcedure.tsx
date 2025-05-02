@@ -98,7 +98,7 @@ const InterventionProcedure = () => {
           </AccordionDetails>
         </Accordion>
       )}
-      <DocumentForm />
+      <DocumentForm programmeKey={programme.koulutusohjelmakoodi} />
     </Box>
   )
 }

@@ -3,6 +3,7 @@ import db from '../models/index.js'
 import Document from '../models/document.js'
 
 import type { Request, Response } from 'express'
+import { DocumentFormSchema } from '../../shared/validators/index.js'
 
 type DocumentData = any
 
@@ -24,9 +25,7 @@ interface DocumentResponse {
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
   const { studyprogrammeKey } = req.params
-  const data = req.body
-
-  console.log(data)
+  const { data } = req.body
 
   const resultObject: ValidateOperationResponse = {
     success: false,
@@ -57,6 +56,13 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     return resultObject
   }
 
+  const validationResult = DocumentFormSchema.safeParse(data)
+  if (!validationResult.success) {
+    resultObject.error = validationResult.error.errors.map(e => e.message).join(', ')
+    resultObject.status = 400
+    return resultObject
+  }
+
   const documents: Document[] = await Document.findAll({
     where: {
       studyprogrammeKey: studyprogramme.key,
@@ -75,8 +81,6 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     resultObject.status = 400
     return resultObject
   }
-
-  //TODO: validate keys here
 
   resultObject.success = true
   resultObject.documents = documents
