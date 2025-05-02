@@ -2,7 +2,7 @@ import { useLocation, useHistory } from 'react-router'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { RootState } from '../../../util/store'
+import { AppDispatch, RootState } from '../../../util/store'
 import { setFaculty, setKeyDataYear, setLevel } from '../../../util/redux/filterReducer'
 import { useVisibleOverviewProgrammes } from '../../../util/overview'
 
@@ -24,7 +24,7 @@ const OverviewPage = () => {
   const history = useHistory()
   const searchParams = new URLSearchParams(location.search)
 
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
   const selectedLevel = useSelector((state: RootState) => state.filters.level)
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
