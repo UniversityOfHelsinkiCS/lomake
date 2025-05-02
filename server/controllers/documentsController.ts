@@ -93,5 +93,4 @@ const getDocuments = async (req: Request, res: Response) => {
   }
 }
 
-export { getDocuments }
-
+export default { getDocuments }
