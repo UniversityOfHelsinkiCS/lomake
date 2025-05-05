@@ -633,4 +633,33 @@ export default {
     feedbackFormButton: 'Go to feedback form',
     doctoralTooltip: 'Doctoral programmes are not included in the pilot phase 2025',
   },
+  document: {
+    title: 'Document Title',
+    date: 'Date',
+    participants: 'Participants',
+    matters: 'Agreed Matters',
+    schedule: 'Plan Schedule',
+    followupDate: 'Follow-up Date',
+    header: 'Intevention procedure form',
+    generalHeader: 'General Information',
+    generalDescription: 'Jakkakakakakakaakakakakaakak',
+    mattersHeader: 'Agreed Matters',
+    mattersDescription: 'Lorem korem dorem forem sorem worem work dem',
+    scheduleHeader: 'Schedule',
+    scheduleDescription: 'Jaakopin paini ja joosuan vääntö',
+    submit: 'Save Document',
+    backgroundInfoHeader: 'Background information',
+    backgroundInfoDescription: 'Liipalaapa',
+    infobox: 'Infot täältä näin',
+    keyFigureDescription: 'The study programme is below the minimum threshold in the following evaluation areas',
+    keyFigure: 'Evaluation areas',
+  },
+
+error: {
+  title: 'The title must be at least 3 characters long',
+  date: 'The date is in the wrong format',
+  participants: 'The Participants field must contain more than 3 characters',
+  matters: 'The Agreed Matters field must contain a minimum of 100 characters',
+  schedule: 'The Schedule field must be at least 3 characters long',
+}
 }

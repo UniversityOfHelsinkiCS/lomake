@@ -1,24 +1,39 @@
-import { useState } from 'react'
+import { useEffect, useState, Fragment } from 'react'
+import dayjs from 'dayjs'
 import { Box, Typography, TextField, Button } from '@mui/material'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { fiFI, svSE, enUS } from '@mui/x-date-pickers/locales'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useTranslation } from 'react-i18next'
-import { ProgrammeLevel } from '@/client/lib/enums'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '@/client/util/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/client/util/store'
 import { DocumentFormSchema } from '@/shared/validators'
 import { createDocument } from '@/client/util/redux/documentsSlicer'
+import { TFunction } from 'i18next'
 
 const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followupDate']
 
-const initForm = () => {
-  return fields.reduce((acc, field) => { acc[field] = ''; return acc }, {} as Record<string, string>)
+const initForm = (t: TFunction, error: boolean) => {
+  return fields.reduce((acc, field) => {
+    if (field === 'title' && !error) acc[field] = `${t('document:header')}-${new Date().toLocaleDateString()}`
+    else acc[field] = ''; return acc
+  }, {} as Record<string, string>)
 }
 
 const DocumentForm = ({ programmeKey }: { programmeKey: any }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
+  const lang = useSelector((state: RootState) => state.language)
 
-  const [formData, setFormData] = useState(initForm())
-  const [errors, setErrors] = useState(initForm())
+  const [formData, setFormData] = useState(initForm(t, false))
+  const [errors, setErrors] = useState(initForm(t, true))
+  const [localeComponent, setLocaleComponent] = useState(enUS)
+
+  useEffect(() => {
+    if (lang === 'fi') setLocaleComponent(fiFI)
+    else if (lang === 'se') setLocaleComponent(svSE)
+    else setLocaleComponent(enUS)
+  }, [lang])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -28,6 +43,19 @@ const DocumentForm = ({ programmeKey }: { programmeKey: any }) => {
     }))
   }
 
+  const handleDateChange = (field: string, value: any) => {
+    const date = dayjs(value)
+    const year = date.year()
+    const month = String(date.month() + 1).padStart(2, '0') // Ensure month is two digits
+    const day = String(date.date()).padStart(2, '0')
+    const final = `${year}-${month}-${day}`
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: final,
+    }));
+  }
+
   const validateForm = () => {
     const res = DocumentFormSchema.safeParse(formData)
     if (!res.success) {
@@ -35,7 +63,7 @@ const DocumentForm = ({ programmeKey }: { programmeKey: any }) => {
       setErrors(
         fields.reduce((acc, field) => {
           // @ts-expect-error
-          acc[field] = fieldErrors[field]?._errors?.[0] || '';
+          acc[field] = t(`error:${fieldErrors[field]?._errors?.[0]}`) || '';
           return acc;
         }, {} as Record<string, string>)
       )
@@ -47,32 +75,97 @@ const DocumentForm = ({ programmeKey }: { programmeKey: any }) => {
     e.preventDefault()
     if (validateForm()) {
       dispatch(createDocument({ studyprogrammeKey: programmeKey, data: formData }))
-      setFormData(initForm())
-      setErrors(initForm())
+      setFormData(initForm(t, false))
+      setErrors(initForm(t, true))
     }
   }
 
   return (
-    <Box sx={{}}>
-      <Typography variant="h3">Toimenpidelomake</Typography>
+    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Typography variant="h3" sx={{ mb: '2rem' }}>{t('document:header')}</Typography>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h5">Yleiset tiedot</Typography>
-        {fields.map(field => (
-          <TextField
-            key={field}
-            name={field}
-            label={t(`${field}`)}
-            variant="outlined"
-            margin="normal"
-            value={formData[field]}
-            onChange={handleChange}
-            error={!!errors[field]}
-            helperText={errors[field]}
-          />
-        ))}
-        <Button type="submit" variant="contained" color="primary">Submit</Button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <Typography variant="h5">{t('document:generalHeader')}</Typography>
+          <Typography>{t('document:generalDescription')}</Typography>
+          {fields.map((field, index) => {
+            if (index === 1 || index === 5) {
+              return (
+                <LocalizationProvider key={field} dateAdapter={AdapterDayjs} localeText={localeComponent.components.MuiLocalizationProvider.defaultProps.localeText}>
+                  <DatePicker
+                    label={t(`document:${field}`)}
+                    value={formData[field] ? dayjs(formData[field]) : null}
+                    onChange={(value) => handleDateChange(field, value)}
+                    sx={{ width: '50%' }}
+                    format='DD/MM/YYYY'
+                    slotProps={{
+                      textField: {
+                        error: !!errors[field],
+                        helperText: errors[field]
+                      },
+                      calendarHeader: { format: 'MM/YYYY' }
+                    }}
+                  />
+                </LocalizationProvider>
+              )
+            } else if (index === 3) {
+              return (
+                <Fragment key={field}>
+                  <Typography variant="h5">{t('document:mattersHeader')}</Typography>
+                  <Typography>{t('document:mattersDescription')}</Typography>
+                  <TextField
+                    name={field}
+                    label={t(`document:${field}`)}
+                    variant="outlined"
+                    margin="normal"
+                    value={formData[field]}
+                    onChange={handleChange}
+                    error={!!errors[field]}
+                    helperText={errors[field]}
+                    minRows={3}
+                    multiline
+                  />
+                </Fragment>
+              )
+            } else if (index === 4) {
+              return (
+                <Fragment key={field}>
+                  <Typography variant="h5">{t('document:scheduleHeader')}</Typography>
+                  <Typography>{t('document:scheduleDescription')}</Typography>
+                  <TextField
+                    key={field}
+                    name={field}
+                    label={t(`document:${field}`)}
+                    variant="outlined"
+                    margin="normal"
+                    value={formData[field]}
+                    onChange={handleChange}
+                    error={!!errors[field]}
+                    helperText={errors[field]}
+                    multiline
+                  />
+                </Fragment>
+              )
+            }
+            return (
+              <TextField
+                key={field}
+                name={field}
+                label={t(`document:${field}`)}
+                variant="outlined"
+                margin="normal"
+                value={formData[field]}
+                onChange={handleChange}
+                error={!!errors[field]}
+                helperText={errors[field]}
+                sx={{ width: '50%' }}
+              />
+            )
+          })}
+          <Button key="submit" sx={{ alignSelf: 'flex-end' }} type="submit" variant="contained" color="primary">{t('document:submit')}</Button>
+        </div>
       </form>
-    </Box>)
+    </Box>
+  )
 }
 
 export default DocumentForm

@@ -59,18 +59,19 @@ const InterventionProcedure = () => {
   const areas = calculateIntervetionAreas({ metadata, programme, level, t })
 
   return (
-    <Box sx={{ width: '75%' }}>
+    <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '2rem' }}>
         <IconButton component={Link} href={`${basePath}v1/programmes/10/${programmeKey}`} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
-        <Typography variant="h2">{keyData.programme.koulutusohjelma[lang]} - {new Date().toDateString()}</Typography>
+        <Typography variant="h2">{keyData.programme.koulutusohjelma[lang]} - {`${t('document:header')}-${new Date().toLocaleDateString()}`}</Typography>
       </Box>
-      <Alert severity="info">Alert Here</Alert>
-      <Typography variant="h4">{t('Esitiedot')}</Typography>
+      <Alert severity="info">{t('document:infobox')}</Alert>
+      <Typography variant="h4">{t('document:backgroundInfoHeader')}</Typography>
+      <Typography>{t('document:backgroundInfoDescription')}</Typography>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography variant="h5">Arviointialueet</Typography>
+          <Typography variant="h5">{t('document:keyFigure')}</Typography>
         </AccordionSummary>
         {areas.map((groupKey) => {
           const props = {
@@ -81,6 +82,7 @@ const InterventionProcedure = () => {
           }
           return (
             <AccordionDetails key={groupKey}>
+              <Typography>{t('document:keyFigureDescription')}</Typography>
               <KeyDataCard level={level} metadata={metadata} programme={programme} {...props} />
               <TextFieldCard id={groupKey} t={t} type="Comment" />
             </AccordionDetails>
@@ -90,11 +92,11 @@ const InterventionProcedure = () => {
       {areas.length > 0 && (
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography variant="h5">Kehittämissuunnitelma</Typography>
+            <Typography variant="h5">{t('keyData:actions')}</Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ display: 'flex', flexDirection: 'column' }}>
             <TextFieldCard id="Toimenpiteet" t={t} type="Measure" />
-            <Button variant="outlined" component={Link} href={`${basePath}v1/programmes/10/${programmeKey}/${year}/`}>Siirry muokkaamaan kehittämissuunnitelmaa</Button>
+            <Button sx={{ alignSelf: 'flex-end', mt: '1rem' }} variant="outlined" component={Link} href={`${basePath}v1/programmes/10/${programmeKey}/${year}/`}>Siirry muokkaamaan kehittämissuunnitelmaa</Button>
           </AccordionDetails>
         </Accordion>
       )}

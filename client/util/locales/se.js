@@ -669,4 +669,33 @@ export default {
     feedbackFormButton: 'Gå till feedbackformuläret',
     doctoralTooltip: 'Doktorandprogram som inte ingår i pilotfasen 2025',
   },
+  document: {
+    title: 'Dokumentets titel',
+    date: 'Datum',
+    participants: 'Deltagare',
+    matters: 'Överenskomna ärenden',
+    schedule: 'Planens tidsschema',
+    followupDate: 'Datum för nästa möte',
+    header: 'Interventionsprocedurformulär',
+    generalHeader: 'Allmän information',
+    generalDescription: 'Jakkakakakakakaakakakakaakak',
+    mattersHeader: 'Överenskomna ärenden',
+    mattersDescription: 'Lorem korem dorem forem sorem worem work dem',
+    scheduleHeader: 'Tidsschema',
+    scheduleDescription: 'Jaakopin paini ja joosuan vääntö',
+    submit: 'Spara dokument',
+    backgroundInfoHeader: 'Bakgrundsinformation',
+    backgroundInfoDescription: 'Liipalaapa',
+    infobox: 'Infot täältä näin',
+
+    keyFigureDescription: 'Utbildningsprogrammet är under den lägsta gränsvärdet på följande utvärderingsområden',
+    keyFigure: 'Utvärderingsområden',
+  },
+  error: {
+    title: 'Titeln måste vara minst 3 tecken lång',
+    date: 'Datumet är i fel format',
+    participants: 'Antalet tecken i fältet Deltagare måste vara mer än 3 tecken',
+    matters: 'Fältet Överenskomna ärenden måste innehålla minst 100 tecken',
+    schedule: 'Fältet Tidsschema måste vara minst 3 tecken långt',
+  }
 }

@@ -134,10 +134,10 @@ export const MetadataRawSchema = z
   .strict() // to disallow extra keys
 
 export const DocumentFormSchema = z.object({
-  title: z.string().min(1, 'Name is required'),
-  date: z.string().date('Invalid date'),
-  participants: z.string().min(3, 'Invalid set of participants'),
-  matters: z.string().min(100, 'Matters should be at least 100 chars long'),
-  schedule: z.string().min(3, 'Invalid description of schedule'),
-  followupDate: z.string().date('Invalid date'),
+  title: z.string().min(3,'title'),
+  date: z.string().date('date'),
+  participants: z.string().min(3, 'participants'),
+  matters: z.string().min(100, 'matters'),
+  schedule: z.string().min(3, 'schedule'),
+  followupDate: z.string().date('date'),
 })
