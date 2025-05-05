@@ -7,6 +7,7 @@ import AdminPage from './UsersPage'
 import OverviewPage from './OverviewPage'
 import ReportPage from './ReportPage'
 import ComparisonPage from './ComparisonPage'
+import Page404 from './Generic/Page404'
 
 import ProgrammeLevelOverview from './EvaluationView/ProgrammeLevelOverview'
 import EvaluationFormView from './EvaluationView/EvaluationFormView'
@@ -43,7 +44,7 @@ export default () => (
         <Route exact path="/yearly" component={OverviewPage} />
         <Route exact path="/admin" component={AdminPage} />
         <Route exact path="/report" component={ReportPage} />
-        <Route exact path="/comparison" component={ComparisonPage} />
+        <Route exact path="/comparison" component={ComparisonPage}/>
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/yearly/form/:form/:room" render={props => <FormView room={props.match.params.room} />} />
 
@@ -110,6 +111,12 @@ export default () => (
         <Route exact path="/v1/programmes/:form/:programme" component={ProgrammeHomeView} />
         <Route exact path="/V1/programmes/:form/:programme/new" component={InterventionProcedure} />
         <Route exact path="/v1/programmes/:form/:programme/:year" component={ProgrammeYearlyView} />
+
+        {/* Route for programmatic redirects */}
+        <Route exact path="/404" component={Page404} />
+
+        {/* Catch-all route for undefined paths */}
+        <Route component={Page404} />
       </Switch>
     </ErrorBoundary>
   </div>
