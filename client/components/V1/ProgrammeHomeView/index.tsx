@@ -11,6 +11,7 @@ import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { RootState, AppDispatch } from '@/client/util/store'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import InterventionProcedure from '../Generic/InterventionProcedure'
+import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
@@ -50,6 +51,15 @@ const ProgrammeHomeView = () => {
 
   return (
     <Box sx={{ width: '75%' }}>
+      <div style={{ marginTop: '4rem' }}>
+        <BreadcrumbComponent
+          links={[
+            { label: t('keyData:overview'), href: `${basePath}v1/overview` },
+            { label: t('keyData:programmeHome'), href: `${basePath}v1/programmes/${form}/${programmeKey}` },
+          ]}
+        />
+      </div>
+
       <div style={{ display: 'flex', marginTop: '4rem', alignItems: 'center' }}>
         <IconButton component={Link} href={`${basePath}v1/overview`} sx={{ marginRight: 2 }}>
           <ArrowBack />

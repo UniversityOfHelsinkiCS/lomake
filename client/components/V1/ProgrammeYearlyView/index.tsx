@@ -25,6 +25,7 @@ import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import Page404 from '../../Generic/Page404'
+import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
@@ -155,6 +156,16 @@ const ProgrammeView = () => {
 
   return (
     <Box sx={{ width: '75%' }}>
+      <div style={{ marginTop: '4rem' }}>
+        <BreadcrumbComponent
+          links={[
+            { label: t('keyData:overview'), href: `${basePath}v1/overview` },
+            { label: t('keyData:programmeHome'), href: `${basePath}v1/programmes/${form}/${programmeKey}` },
+            { label: `${t('keyData:year')} ${year}`, href: `${basePath}v1/programmes/${form}/${programmeKey}/${year}` },
+          ]}
+        />
+      </div>
+
       <div style={{ display: 'flex', marginTop: '4rem', alignItems: 'center' }}>
         <IconButton
           component={Link}

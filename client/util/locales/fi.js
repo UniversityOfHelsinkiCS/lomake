@@ -632,6 +632,8 @@ export default {
     feedbackForm: 'Anna palautetta vuosiseurannan kehittämiseksi',
     feedbackFormButton: 'Siirry palautelomakkeeseen',
     doctoralTooltip: 'Tohtoriohjelmat eivät ole mukana pilotointivaiheessa 2025',
+    overview: 'Vuosiseurannan yleisnäkymä',
+    programmeHome: 'Ohjelman kotisivu',
   },
   document: {
     title: 'Dokumentin otsikko',
