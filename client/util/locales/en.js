@@ -655,6 +655,7 @@ export default {
     infobox: 'Infot täältä näin',
     keyFigureDescription: 'The study programme is below the minimum threshold in the following evaluation areas',
     keyFigure: 'Evaluation areas',
+    newDocument: 'Create new document',
   },
 
   error: {

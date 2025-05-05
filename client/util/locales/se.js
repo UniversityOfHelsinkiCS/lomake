@@ -692,6 +692,8 @@ export default {
 
     keyFigureDescription: 'Utbildningsprogrammet är under den lägsta gränsvärdet på följande utvärderingsområden',
     keyFigure: 'Utvärderingsområden',
+
+    newDocument: 'Luo uusi dokumentti',
   },
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',

@@ -26,11 +26,11 @@ import { TextFieldCard } from "./TextFieldComponent"
 import { getReport } from "@/client/util/redux/reportsSlicer"
 import DocumentForm from "./DocumentForm"
 
-const calculateIntervetionAreas = ({ metadata, programme, level, t }: { metadata: Record<string, any>[], programme: Record<string, any>, level: ProgrammeLevel, t: TFunction }) => {
+export const calculateIntervetionAreas = ({ metadata, programme, t }: { metadata: Record<string, any>[], programme: Record<string, any>, t: TFunction }) => {
   let res: string[] = []
   const keyDataPoints = getKeyDataPoints(t)
   Object.values(keyDataPoints).map((point: any) => {
-    const color = calculateKeyDataColor(metadata, programme, point.groupKey, level)
+    const color = calculateKeyDataColor(metadata, programme, point.groupKey, programme.level as ProgrammeLevel)
     if (color === 'Punainen') res.push(point.groupKey)
   })
   return res
@@ -44,8 +44,6 @@ const InterventionProcedure = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
 
-  const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
-
   useEffect(() => {
     if (keyData) {
       dispatch(getReport({ studyprogrammeKey: programme.koulutusohjelmakoodi, year: year }))
@@ -56,7 +54,7 @@ const InterventionProcedure = () => {
 
   const { programme, metadata } = keyData
 
-  const areas = calculateIntervetionAreas({ metadata, programme, level, t })
+  const areas = calculateIntervetionAreas({ metadata, programme, t })
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -83,7 +81,7 @@ const InterventionProcedure = () => {
           return (
             <AccordionDetails key={groupKey}>
               <Typography>{t('document:keyFigureDescription')}</Typography>
-              <KeyDataCard level={level} metadata={metadata} programme={programme} {...props} />
+              <KeyDataCard level={programme.level as ProgrammeLevel} metadata={metadata} programme={programme} {...props} />
               <TextFieldCard id={groupKey} t={t} type="Comment" />
             </AccordionDetails>
           )

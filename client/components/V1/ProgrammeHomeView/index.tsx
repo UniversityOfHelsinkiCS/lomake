@@ -81,14 +81,14 @@ const ProgrammeHomeView = () => {
       </Box>
 
       <Box sx={{ mt: '8rem' }}>
-        <Typography variant="h1">{t('interventionProcedure')} </Typography>
+        <Typography variant="h1">{t('keyData:interventionProcedure')} </Typography>
         <Box sx={{ mt: '2rem', mb: '2rem' }}>
           <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
         </Box>
         <Box>
-          <Button component={Link} href={`${basePath}v1/programmes/${form}/${programmeKey}/doc`} variant="outlined">
+          <Button component={Link} href={`${basePath}v1/programmes/${form}/${programmeKey}/new`} variant="outlined">
             <Add />
-            {t('newDocument')}
+            {t('document:newDocument')}
           </Button>
         </Box>
       </Box>
