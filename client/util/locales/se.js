@@ -697,5 +697,5 @@ export default {
     participants: 'Antalet tecken i fältet Deltagare måste vara mer än 3 tecken',
     matters: 'Fältet Överenskomna ärenden måste innehålla minst 100 tecken',
     schedule: 'Fältet Tidsschema måste vara minst 3 tecken långt',
-  }
+  },
 }

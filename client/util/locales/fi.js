@@ -646,10 +646,12 @@ export default {
     mattersHeader: 'Sovitut asiat',
     mattersDescription: 'Lorem korem dorem forem sorem worem work dem',
     scheduleHeader: 'Aikataulu',
-    scheduleDescription: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. ',
+    scheduleDescription:
+      'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. ',
     submit: 'Tallenna dokumentti',
     backgroundInfoHeader: 'Esitiedot',
-    backgroundInfoDescription: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. ',
+    backgroundInfoDescription:
+      'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. ',
     infobox: 'Infot täältä näin',
     keyFigureDescription: 'Koulutusohjelma on alle alimman raja-arvon seuraavilla arviointialueilla',
     keyFigure: 'Arviointialueet',
@@ -660,5 +662,5 @@ export default {
     participants: 'Osallistujat -kentän merkkien määrä täytyy olla yli 3 merkkiä',
     matters: 'Sovitut asiat -kentän minimi merkkimäärä on 100 merkkiä',
     schedule: 'Aikataulu -kentän minimi pituus on 3 merkkiä',
-  }
+  },
 }
