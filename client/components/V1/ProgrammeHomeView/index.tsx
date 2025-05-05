@@ -69,7 +69,7 @@ const ProgrammeHomeView = () => {
       </div>
 
       <Typography variant="h1" style={{ marginTop: '4rem' }}>
-        AVAINLUVUT JA KEHITTÄMISSUUNNITELMA
+        {t('keyData:keyFigure')}
       </Typography>
       <Typography style={{ marginTop: '2rem' }}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -86,7 +86,7 @@ const ProgrammeHomeView = () => {
           <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
         </Box>
         <Box>
-          <Button component={Link} href={`${basePath}v1/programme/${form}/${programmeKey}/doc`} variant="outlined">
+          <Button component={Link} href={`${basePath}v1/programmes/${form}/${programmeKey}/doc`} variant="outlined">
             <Add />
             {t('newDocument')}
           </Button>
