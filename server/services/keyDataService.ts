@@ -1,16 +1,7 @@
-import type {
-  KandiohjelmatValues,
-  MaisteriohjelmatValues,
-  KeyDataMetadataRaw,
-  KeyDataProgramme,
-  KeyDataMetadata,
-} from '@/shared/lib/types'
+import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } from '@/shared/lib/types'
 
 export const formatKeyData = (data: any, programmeData: any) => {
   const { Kandiohjelmat, Maisteriohjelmat, metadata } = data
-  let kandiohjelmat: KeyDataProgramme[] = []
-  let maisteriohjelmat: KeyDataProgramme[] = []
-  let latestDataYear = 0
 
   const programmes = programmeData.map((programme: any) => ({
     key: programme.key,
@@ -20,14 +11,12 @@ export const formatKeyData = (data: any, programmeData: any) => {
     international: programme.international,
   }))
 
-  Kandiohjelmat.forEach((kandiohjelma: KandiohjelmatValues) => {
+  const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: KandiohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim(),
     )
 
-    latestDataYear = Math.max(latestDataYear, kandiohjelma['Vuosi'])
-
-    kandiohjelmat.push({
+    return {
       koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: matchedProgramme && matchedProgramme.name,
       values: kandiohjelma,
@@ -39,17 +28,15 @@ export const formatKeyData = (data: any, programmeData: any) => {
         se: kandiohjelma[`Lisätietoja_se`],
         en: kandiohjelma[`Lisätietoja_en`],
       },
-    })
+    }
   })
 
-  Maisteriohjelmat.forEach((maisteriohjelma: MaisteriohjelmatValues) => {
+  const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: MaisteriohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
     )
 
-    latestDataYear = Math.max(latestDataYear, maisteriohjelma['Vuosi'])
-
-    maisteriohjelmat.push({
+    return {
       koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: matchedProgramme && matchedProgramme.name,
       values: maisteriohjelma,
@@ -61,10 +48,10 @@ export const formatKeyData = (data: any, programmeData: any) => {
         se: maisteriohjelma[`Lisätietoja_se`],
         en: maisteriohjelma[`Lisätietoja_en`],
       },
-    })
+    }
   })
 
-  const meta: KeyDataMetadata[] = metadata.map((m: KeyDataMetadataRaw) => ({
+  const meta = metadata.map((m: KeyDataMetadataRaw) => ({
     yksikko: m['Yksikkö'],
     kynnysarvot: m['Kynnysarvot'],
     ohjelmanTaso: m['Ohjelman taso'],
@@ -84,5 +71,5 @@ export const formatKeyData = (data: any, programmeData: any) => {
     avainluvunArvo: m['Avainluvun nimi_fi'],
   }))
 
-  return { kandiohjelmat, maisteriohjelmat, metadata: meta, latestDataYear }
+  return { kandiohjelmat, maisteriohjelmat, metadata: meta }
 }
