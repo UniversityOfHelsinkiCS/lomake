@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Table, TableRow, TableHead, TableBody, TableCell } from '../Generic/TableComponent'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Typography } from '@mui/material'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
@@ -9,6 +10,8 @@ import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import ActionsCell from '../Generic/ActionsCellComponent'
 import TrafficLightCell from '../Generic/TrafficLightCellComponent'
 import KeyDataModal, { type selectedKeyFigureData } from '../Overview/KeyDataModalComponent'
+import { AppDispatch } from '@/client/util/store'
+import { setKeyDataYear } from '@/client/util/redux/filterReducer'
 
 const ProgrammeKeyDataTableComponent = ({
   programmeData,
@@ -18,7 +21,7 @@ const ProgrammeKeyDataTableComponent = ({
   metadata: KeyDataMetadata[]
 }) => {
   const { t } = useTranslation()
-
+  const dispatch: AppDispatch = useDispatch()
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
 
@@ -42,7 +45,7 @@ const ProgrammeKeyDataTableComponent = ({
       Simple solution for syncing data to the follow-up year.
       Data is always collected from the previous year relative to the annual follow-up year.
     */
-    return programmeDataYear + 1
+    return (programmeDataYear + 1).toString()
   }
 
   const getNextFollowUpYear = () => {
@@ -82,6 +85,7 @@ const ProgrammeKeyDataTableComponent = ({
                   <Link
                     to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${annualFollowUpYear(programmeData.year)}`}
                     style={{ width: '100%' }}
+                    onClick={() => dispatch(setKeyDataYear(annualFollowUpYear(programmeData.year)))}
                   >
                     <Typography variant="h5">{annualFollowUpYear(programmeData.year)}</Typography>
                   </Link>
