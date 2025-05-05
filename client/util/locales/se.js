@@ -668,5 +668,7 @@ export default {
     feedbackForm: 'Ge feedback för att vidareutveckla den årliga uppföljningen',
     feedbackFormButton: 'Gå till feedbackformuläret',
     doctoralTooltip: 'Doktorandprogram som inte ingår i pilotfasen 2025',
+    overview: 'Årlig uppföljningsöversikt',
+    programmeHome: 'Programmens startsida',
   },
 }
