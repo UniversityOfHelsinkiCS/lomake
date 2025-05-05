@@ -45,6 +45,11 @@ const ProgrammeKeyDataTableComponent = ({
     return programmeDataYear + 1
   }
 
+  const getNextFollowUpYear = () => {
+    const years = programmeData.map(data => data.year)
+    return annualFollowUpYear(Math.max(...years)) + 1
+  }
+
   return (
     <div style={{ minWidth: 1200 }}>
       <Table variant="programme">
@@ -116,7 +121,7 @@ const ProgrammeKeyDataTableComponent = ({
             <TableRow>
               <TableCell>
                 <Typography variant="h5" color="secondary">
-                  2026
+                  {getNextFollowUpYear()}
                 </Typography>
               </TableCell>
               <TableCell disabled />
