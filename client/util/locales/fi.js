@@ -634,5 +634,38 @@ export default {
     doctoralTooltip: 'Tohtoriohjelmat eivät ole mukana pilotointivaiheessa 2025',
     overview: 'Vuosiseurannan yleisnäkymä',
     programmeHome: 'Ohjelman kotisivu',
+
+    interventionProcedure: 'Toimenpidemenettely',
+  },
+  document: {
+    title: 'Dokumentin otsikko',
+    date: 'Ajankohta',
+    participants: 'Osallistujat',
+    matters: 'Sovitut asiat',
+    schedule: 'Suunnitelman aikataulu',
+    followupDate: 'Seuraavan seurannan ajankohta',
+    header: 'Toimenpidelomake',
+    generalHeader: 'Yleiset tiedot',
+    generalDescription: 'Jakkakakakakakaakakakakaakak',
+    mattersHeader: 'Sovitut asiat',
+    mattersDescription: 'Lorem korem dorem forem sorem worem work dem',
+    scheduleHeader: 'Aikataulu',
+    scheduleDescription:
+      'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. ',
+    submit: 'Tallenna dokumentti',
+    backgroundInfoHeader: 'Esitiedot',
+    backgroundInfoDescription:
+      'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. ',
+    infobox: 'Infot täältä näin',
+    keyFigureDescription: 'Koulutusohjelma on alle alimman raja-arvon seuraavilla arviointialueilla',
+    keyFigure: 'Arviointialueet',
+    newDocument: 'Luo uusi dokumentti',
+  },
+  error: {
+    title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',
+    date: 'Päivämäärä on väärässä muodossa',
+    participants: 'Osallistujat -kentän merkkien määrä täytyy olla yli 3 merkkiä',
+    matters: 'Sovitut asiat -kentän minimi merkkimäärä on 100 merkkiä',
+    schedule: 'Aikataulu -kentän minimi pituus on 3 merkkiä',
   },
 }
