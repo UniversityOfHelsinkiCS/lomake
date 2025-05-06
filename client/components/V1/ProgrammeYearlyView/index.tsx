@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
 import { getReport } from '../../../util/redux/reportsSlicer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
 import { setViewOnly } from '../../../util/redux/formReducer'
+import { setKeyDataYear } from '../../../util/redux/filterReducer'
 
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import TextFieldComponent from '../Generic/TextFieldComponent'
@@ -24,15 +25,14 @@ import { calculateKeyDataColor, getKeyDataPoints } from '../Utils/util'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
-import Page404 from '../../Generic/Page404'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const dispatch: AppDispatch = useDispatch()
+  const history = useHistory()
   const { t } = useTranslation()
-  const { programme: programmeKey, year } = useParams<{ programme: string; year: string }>()
-  const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
+  const { programme: programmeKey, year: selectedYear } = useParams<{ programme: string; year: string }>()
   const [activeTab, setActiveTab] = useState(0)
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
   const form = 10
@@ -47,13 +47,29 @@ const ProgrammeView = () => {
   const writeAccess = (user.access[programmeKey] && user.access[programmeKey].write) || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
 
-  useEffect(() => {
-    document.title = `${t('form')} - ${programmeKey}`
-    dispatch(getReport({ studyprogrammeKey: programmeKey, year: selectedYear }))
-  }, [lang, programmeKey])
+  const isValidYear = (targetYear: number, keyData: KeyDataByCode) => {
+    const availableYears = keyData.data.programme.map((programmeData: KeyDataProgramme) => programmeData.year)
+
+    if (inProduction) {
+      if (availableYears.includes(targetYear - 1) && targetYear >= 2025) return true
+    } else {
+      if (availableYears.includes(targetYear - 1)) return true
+    }
+
+    return false
+  }
 
   useEffect(() => {
-    if (!programmeKey) return
+    if (!keyData) return
+    if (!isValidYear(parseInt(selectedYear), keyData)) return
+
+    document.title = `${t('form')} - ${programmeKey}`
+    dispatch(setKeyDataYear(selectedYear))
+    dispatch(getReport({ studyprogrammeKey: programmeKey, year: selectedYear }))
+  }, [lang, programmeKey, selectedYear, keyData])
+
+  useEffect(() => {
+    if (!programmeKey || !keyData) return
     if (formDeadline?.form !== form || !writeAccess) {
       dispatch(setViewOnly(true))
       if (currentRoom) {
@@ -71,11 +87,6 @@ const ProgrammeView = () => {
     }
   }, [])
 
-  const isValidYear = (year: string) => {
-    // ADD THE LOGIC TO CHECK IF THE YEAR IS VALID
-    return year !== selectedYear && inProduction
-  }
-
   const metadata = useMemo(() => {
     return keyData?.data ? keyData.data.metadata : []
   }, [keyData])
@@ -84,17 +95,21 @@ const ProgrammeView = () => {
     if (keyData) {
       return keyData.data.programme.find(
         (programmeData: KeyDataProgramme) =>
-          programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year === selectedYear - 1,
+          programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year === parseInt(selectedYear) - 1,
       )
     }
     return {}
   }, [keyData, selectedYear])
 
-  if (!isValidYear) return <Page404 />
-  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
-
   if (!keyData) {
     return <CircularProgress />
+  }
+
+  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
+
+  if (!isValidYear(parseInt(selectedYear), keyData)) {
+    history.push('/404')
+    return
   }
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -178,7 +193,10 @@ const ProgrammeView = () => {
           links={[
             { label: t('keyData:overview'), href: `${basePath}v1/overview` },
             { label: t('keyData:programmeHome'), href: `${basePath}v1/programmes/${form}/${programmeKey}` },
-            { label: `${t('keyData:year')} ${year}`, href: `${basePath}v1/programmes/${form}/${programmeKey}/${year}` },
+            {
+              label: `${t('keyData:year')} ${selectedYear}`,
+              href: `${basePath}v1/programmes/${form}/${programmeKey}/${selectedYear}`,
+            },
           ]}
         />
       </div>
