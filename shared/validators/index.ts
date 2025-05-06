@@ -89,7 +89,7 @@ export const MetadataSchema = z
       .string()
       .regex(/^\d+;\d+;\d+;\d+$/, 'Should be in format number;number;number;number')
       .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
-    ohjelmanTaso: z.enum(['Kandi', 'Maisteri', 'Tohtori']),
+    ohjelmanTaso: z.enum(['bachelor', 'master', 'doctoral']),
     liikennevalo: z.boolean(),
     mittarinRajat: z
       .string()
@@ -134,7 +134,7 @@ export const MetadataRawSchema = z
   .strict() // to disallow extra keys
 
 export const DocumentFormSchema = z.object({
-  title: z.string().min(3,'title'),
+  title: z.string().min(3, 'title'),
   date: z.string().date('date'),
   participants: z.string().min(3, 'participants'),
   matters: z.string().min(100, 'matters'),

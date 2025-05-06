@@ -15,7 +15,7 @@ import {
 import { useFetchSingleKeyData } from "@/client/hooks/useFetchKeyData"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/client/util/store"
-import type { SingleKeyData } from "@/shared/lib/types"
+import type { KeyDataMetadata, SingleKeyData } from "@/shared/lib/types"
 import { GroupKey, ProgrammeLevel } from "@/client/lib/enums"
 import { ArrowBack, ExpandMore } from "@mui/icons-material"
 import { basePath } from "@/config/common"
@@ -26,7 +26,7 @@ import { TextFieldCard } from "./TextFieldComponent"
 import { getReport } from "@/client/util/redux/reportsSlicer"
 import DocumentForm from "./DocumentForm"
 
-export const calculateIntervetionAreas = ({ metadata, programme, t }: { metadata: Record<string, any>[], programme: Record<string, any>, t: TFunction }) => {
+export const calculateIntervetionAreas = ({ metadata, programme, t }: { metadata: KeyDataMetadata[], programme: Record<string, any>, t: TFunction }) => {
   let res: string[] = []
   const keyDataPoints = getKeyDataPoints(t)
   Object.values(keyDataPoints).map((point: any) => {

@@ -4,3 +4,9 @@ export enum GroupKey {
   OPISKELIJAPALAUTE = 'Palaute ja työllistyminen',
   RESURSSIT = 'Resurssien käyttö',
 }
+
+export enum ProgrammeLevel {
+  Bachelor = 'bachelor',
+  Master = 'master',
+  Doctor = 'doctoral',
+}

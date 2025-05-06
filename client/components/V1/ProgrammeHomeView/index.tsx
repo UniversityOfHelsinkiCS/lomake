@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import useFetchKeyData from '@/client/hooks/useFetchKeyData'
+import useFetchKeyData, { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
@@ -10,7 +10,7 @@ import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 
 import { RootState, AppDispatch } from '@/client/util/store'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
-import InterventionProcedure from '../Generic/InterventionProcedure'
+import InterventionProcedure, { calculateIntervetionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 
 const ProgrammeHomeView = () => {
@@ -49,6 +49,8 @@ const ProgrammeHomeView = () => {
     return <CircularProgress />
   }
 
+  const areas = calculateIntervetionAreas({ metadata, programme: keyFigureData[0], t })
+
   return (
     <Box sx={{ width: '75%' }}>
       <div style={{ marginTop: '4rem' }}>
@@ -85,12 +87,14 @@ const ProgrammeHomeView = () => {
         <Box sx={{ mt: '2rem', mb: '2rem' }}>
           <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
         </Box>
-        <Box>
-          <Button component={Link} href={`${basePath}v1/programmes/${form}/${programmeKey}/new`} variant="outlined">
-            <Add />
-            {t('document:newDocument')}
-          </Button>
-        </Box>
+        {areas.length > 0 && (
+          <Box>
+            <Button component={Link} href={`${basePath}v1/programmes/${form}/${programmeKey}/new`} variant="outlined">
+              <Add />
+              {t('document:newDocument')}
+            </Button>
+          </Box>
+        )}
       </Box>
     </Box>
   )

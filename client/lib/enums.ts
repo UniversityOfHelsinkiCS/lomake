@@ -1,10 +1,4 @@
-import { GroupKey } from '@/shared/lib/enums'
-
-export enum ProgrammeLevel {
-  // levels in metadata
-  KANDI = 'Kandi',
-  MAISTERI = 'Maisteri',
-}
+import { GroupKey, ProgrammeLevel } from '@/shared/lib/enums'
 
 export enum StudyLevel {
   // levels in studyProgrammes / keyDataProgrammes
@@ -29,4 +23,4 @@ export enum ColorKey {
   resurssit = 'resurssit',
 }
 
-export { GroupKey }
+export { GroupKey, ProgrammeLevel }

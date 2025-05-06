@@ -37,7 +37,7 @@ const ProgrammeView = () => {
   const keyData = useFetchSingleKeyData(programmeKey)
   const form = 10
 
-  const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+  const level = programmeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
   const { nextDeadline } = useSelector((state: RootState) => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null

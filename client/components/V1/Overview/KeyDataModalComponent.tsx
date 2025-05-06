@@ -68,7 +68,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
   }, [lang, data])
 
   const getLevel = (programmeKey: string) => {
-    return programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+    return programmeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
   }
 
   return (

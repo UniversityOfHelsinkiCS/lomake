@@ -14,6 +14,7 @@ export const useFetchSingleKeyData = (programmeId: string): SingleKeyData => {
   const { kandiohjelmat, maisteriohjelmat, metadata } = keyData.data
   const allProgrammes = [...kandiohjelmat, ...maisteriohjelmat]
 
+  //TODO: refactor this and every component where this is used to get all years, now this returns only one year
   const programme = allProgrammes.find(p => p.koulutusohjelmakoodi.trim() === programmeId.trim())
 
   return { programme, metadata }
