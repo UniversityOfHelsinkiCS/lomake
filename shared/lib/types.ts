@@ -22,10 +22,8 @@ export interface KeyData {
 }
 
 export interface KeyDataByCode {
-  data: {
-    programme: KeyDataProgramme[]
-    metadata: KeyDataMetadata[]
-  }
+  programme: KeyDataProgramme[]
+  metadata: KeyDataMetadata[]
 }
 
 export interface Faculty {

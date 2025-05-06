@@ -16,7 +16,7 @@ export const useFetchSingleKeyData = (programmeId: string): KeyDataByCode => {
 
   const programme: KeyDataProgramme[] = allProgrammes.filter(p => p.koulutusohjelmakoodi.trim() === programmeId.trim())
 
-  return { data: { programme, metadata } }
+  return { programme, metadata }
 }
 
 const useFetchKeyData = () => {

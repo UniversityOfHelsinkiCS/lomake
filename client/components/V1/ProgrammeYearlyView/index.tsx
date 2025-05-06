@@ -48,7 +48,7 @@ const ProgrammeView = () => {
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
 
   const isValidYear = (targetYear: number, keyData: KeyDataByCode) => {
-    const availableYears = keyData.data.programme.map((programmeData: KeyDataProgramme) => programmeData.year)
+    const availableYears = keyData.programme.map((programmeData: KeyDataProgramme) => programmeData.year)
 
     if (inProduction) {
       if (availableYears.includes(targetYear - 1) && targetYear >= 2025) return true
@@ -88,12 +88,12 @@ const ProgrammeView = () => {
   }, [])
 
   const metadata = useMemo(() => {
-    return keyData?.data ? keyData.data.metadata : []
+    return keyData ? keyData.metadata : []
   }, [keyData])
 
   const programmeData = useMemo(() => {
     if (keyData) {
-      return keyData.data.programme.find(
+      return keyData.programme.find(
         (programmeData: KeyDataProgramme) =>
           programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year === parseInt(selectedYear) - 1,
       )
