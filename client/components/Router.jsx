@@ -44,7 +44,7 @@ export default () => (
         <Route exact path="/yearly" component={OverviewPage} />
         <Route exact path="/admin" component={AdminPage} />
         <Route exact path="/report" component={ReportPage} />
-        <Route exact path="/comparison" component={ComparisonPage}/>
+        <Route exact path="/comparison" component={ComparisonPage} />
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/yearly/form/:form/:room" render={props => <FormView room={props.match.params.room} />} />
 
@@ -109,7 +109,7 @@ export default () => (
         <Route exact path="/reform-answers" component={ReformAnswers} />
         <Route exact path="/v1/overview" component={OverviewPageV1} />
         <Route exact path="/v1/programmes/:form/:programme" component={ProgrammeHomeView} />
-        <Route exact path="/V1/programme/:form/:programme/doc" component={InterventionProcedure} />
+        <Route exact path="/V1/programmes/:form/:programme/new" component={InterventionProcedure} />
         <Route exact path="/v1/programmes/:form/:programme/:year" component={ProgrammeYearlyView} />
 
         {/* Route for programmatic redirects */}

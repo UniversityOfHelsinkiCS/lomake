@@ -14,8 +14,7 @@ import {
   MetadataRawSchema,
   KandiohjelmatValuesSchema,
   MaisteriohjelmatValuesSchema,
-  logZodError,
-} from '../../shared/lib/validations.js'
+} from '../../shared/validators/index.js'
 
 const getFakeYearlyAnswers = year => {
   const fields = [
@@ -900,7 +899,7 @@ const initKeyData = async (_req, res) => {
       MaisteriohjelmatValuesSchema.array().parse(initData.Maisteriohjelmat)
       MetadataRawSchema.array().parse(initData.metadata)
     } catch (zodError) {
-      logZodError(zodError)
+      logger.error(zodError)
       throw new Error('Invalid KeyData format')
     }
 

@@ -1,4 +1,5 @@
 import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } from '@/shared/lib/types'
+import { ProgrammeLevel } from '../../shared/lib/enums'
 
 export const formatKeyData = (data: any, programmeData: any) => {
   const { Kandiohjelmat, Maisteriohjelmat, metadata } = data
@@ -51,25 +52,32 @@ export const formatKeyData = (data: any, programmeData: any) => {
     }
   })
 
-  const meta = metadata.map((m: KeyDataMetadataRaw) => ({
-    yksikko: m['Yksikkö'],
-    kynnysarvot: m['Kynnysarvot'],
-    ohjelmanTaso: m['Ohjelman taso'],
-    liikennevalo: m['Liikennevalo'],
-    mittarinRajat: m['Mittarin rajat'],
-    arviointialue: m['Arviointialue_fi'],
-    avainluvunNimi: {
-      fi: m[`Avainluvun nimi_fi`],
-      se: m[`Avainluvun nimi_se`],
-      en: m[`Avainluvun nimi_en`],
-    },
-    maaritelma: {
-      fi: m[`Määritelmä_fi`],
-      se: m[`Määritelmä_se`],
-      en: m[`Määritelmä_en`],
-    },
-    avainluvunArvo: m['Avainluvun nimi_fi'],
-  }))
+  const meta = metadata.map((m: KeyDataMetadataRaw) => {
+    const ohjelmanTasoMapping: { [key: string]: ProgrammeLevel } = {
+      ["Kandi"]: ProgrammeLevel.Bachelor,
+      ["Maisteri"]: ProgrammeLevel.Master,
+      ["Tohtori"]: ProgrammeLevel.Doctor,
+    }
 
+    return {
+      yksikko: m['Yksikkö'],
+      kynnysarvot: m['Kynnysarvot'],
+      ohjelmanTaso: ohjelmanTasoMapping[m['Ohjelman taso']],
+      liikennevalo: m['Liikennevalo'],
+      mittarinRajat: m['Mittarin rajat'],
+      arviointialue: m['Arviointialue_fi'],
+      avainluvunNimi: {
+        fi: m[`Avainluvun nimi_fi`],
+        se: m[`Avainluvun nimi_se`],
+        en: m[`Avainluvun nimi_en`],
+      },
+      maaritelma: {
+        fi: m[`Määritelmä_fi`],
+        se: m[`Määritelmä_se`],
+        en: m[`Määritelmä_en`],
+      },
+      avainluvunArvo: m['Avainluvun nimi_fi'],
+    }
+  })
   return { kandiohjelmat, maisteriohjelmat, metadata: meta }
 }

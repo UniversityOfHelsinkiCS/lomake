@@ -15,7 +15,7 @@ import {
 import { useFetchSingleKeyData } from "@/client/hooks/useFetchKeyData"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/client/util/store"
-import type { KeyDataMetadata } from "@/shared/lib/types"
+import type { KeyDataByCode, KeyDataMetadata } from "@/shared/lib/types"
 import { GroupKey, ProgrammeLevel } from "@/client/lib/enums"
 import { ArrowBack, ExpandMore } from "@mui/icons-material"
 import { basePath } from "@/config/common"
@@ -40,13 +40,13 @@ const InterventionProcedure = () => {
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
-  const keyData = useFetchSingleKeyData(programmeKey)
+  const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
 
   useEffect(() => {
     if (keyData) {
-      dispatch(getReport({ studyprogrammeKey: programme.koulutusohjelmakoodi, year: year }))
+      dispatch(getReport({ studyprogrammeKey: programme[0].koulutusohjelmakoodi, year: year }))
     }
   }, [dispatch, keyData, year])
 
@@ -54,7 +54,7 @@ const InterventionProcedure = () => {
 
   const { programme, metadata } = keyData
 
-  const areas = calculateIntervetionAreas({ metadata, programme, t })
+  const areas = calculateIntervetionAreas({ metadata, programme: programme[0], t })
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -62,7 +62,7 @@ const InterventionProcedure = () => {
         <IconButton component={Link} href={`${basePath}v1/programmes/10/${programmeKey}`} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
-        <Typography variant="h2">{keyData.programme.koulutusohjelma[lang]} - {`${t('document:header')}-${new Date().toLocaleDateString()}`}</Typography>
+        <Typography variant="h2">{programme[0].koulutusohjelma[lang]} - {`${t('document:header')}-${new Date().toLocaleDateString()}`}</Typography>
       </Box>
       <Alert severity="info">{t('document:infobox')}</Alert>
       <Typography variant="h4">{t('document:backgroundInfoHeader')}</Typography>
@@ -81,7 +81,7 @@ const InterventionProcedure = () => {
           return (
             <AccordionDetails key={groupKey}>
               <Typography>{t('document:keyFigureDescription')}</Typography>
-              <KeyDataCard level={programme.level as ProgrammeLevel} metadata={metadata} programme={programme} {...props} />
+              <KeyDataCard level={programme[0].level as ProgrammeLevel} metadata={metadata} programme={programme[0]} {...props} />
               <TextFieldCard id={groupKey} t={t} type="Comment" />
             </AccordionDetails>
           )
@@ -98,7 +98,7 @@ const InterventionProcedure = () => {
           </AccordionDetails>
         </Accordion>
       )}
-      <DocumentForm programmeKey={programme.koulutusohjelmakoodi} />
+      <DocumentForm programmeKey={programme[0].koulutusohjelmakoodi} />
     </Box>
   )
 }

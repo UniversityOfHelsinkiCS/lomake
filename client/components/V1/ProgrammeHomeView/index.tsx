@@ -1,17 +1,19 @@
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { Box, CircularProgress, IconButton, Button, Link, Typography } from '@mui/material'
+import { Box, CircularProgress, IconButton, Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
+import { ExpandMore } from '@mui/icons-material'
 import { Add, ArrowBack } from '@mui/icons-material'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
 import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 
 import { RootState, AppDispatch } from '@/client/util/store'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
-import InterventionProcedure from '../Generic/InterventionProcedure'
+import InterventionProcedure, { calculateIntervetionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
+import { getDocuments } from '@/client/util/redux/documentsSlicer'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
@@ -19,18 +21,23 @@ const ProgrammeHomeView = () => {
   const { programme: programmeKey } = useParams<{ programme: string }>()
 
   const dispatch: AppDispatch = useDispatch()
+  const documents = useSelector((state: RootState) => state.documents.data)
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
 
+  useEffect(() => {
+    dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
+  }, [])
+
   const metadata = useMemo(() => {
-    return keyData?.data ? keyData.data.metadata : []
+    return keyData ? keyData.metadata : []
   }, [keyData])
 
   const programmeData = useMemo(() => {
     if (keyData) {
-      return keyData.data.programme.filter(
+      return keyData.programme.filter(
         (programmeData: KeyDataProgramme) =>
           programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear,
       )
@@ -41,6 +48,10 @@ const ProgrammeHomeView = () => {
   if (!keyData) {
     return <CircularProgress />
   }
+
+  const areas = calculateIntervetionAreas({ metadata, programme: programmeData[0], t })
+
+  console.log(areas)
 
   return (
     <Box sx={{ width: '75%' }}>
@@ -78,12 +89,46 @@ const ProgrammeHomeView = () => {
         <Box sx={{ mt: '2rem', mb: '2rem' }}>
           <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
         </Box>
-        <Box>
-          <Button component={Link} href={`${basePath}v1/programme/${form}/${programmeKey}/doc`} variant="outlined">
-            <Add />
-            {t('newDocument')}
-          </Button>
-        </Box>
+
+        {areas.length > 0 && (
+          <Box>
+            <Button component={Link} href={`${basePath}v1/programmes/${form}/${programmeKey}/new`} variant="outlined">
+              <Add />
+              {t('document:newDocument')}
+            </Button>
+          </Box>
+        )}
+        {documents.map((doc: Record<string, any>) => (
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+              <Typography variant='h4'>{doc.data.title}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div style={{}}>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:date')}:</Typography>
+                  <Typography>{doc.data.date}</Typography>
+                </div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:participants')}:</Typography>
+                  <Typography>{doc.data.participants}</Typography>
+                </div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:matters')}:</Typography>
+                  <Typography>{doc.data.matters}</Typography>
+                </div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:schedule')}:</Typography>
+                  <Typography>{doc.data.schedule}</Typography>
+                </div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:followupDate')}:</Typography>
+                  <Typography>{doc.data.followupDate}</Typography>
+                </div>
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </Box>
     </Box>
   )

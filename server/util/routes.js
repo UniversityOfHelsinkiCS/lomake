@@ -9,6 +9,7 @@ import degreeReform from '../controllers/degreeReformController.js'
 import locks from '../controllers/lockController.js'
 import reports from '../controllers/reportsController.js'
 import keyData from '../controllers/keyDataController.js'
+import documents from '../controllers/documentsController.js'
 
 import {
   checkAdmin,
@@ -83,5 +84,8 @@ router.post('/keydata', checkAdmin, keyData.uploadKeyData)
 router.get('/keydata/meta', checkAdmin, keyData.getKeyDataMeta)
 router.delete('/keydata/:id', checkAdmin, keyData.deleteKeyData)
 router.put('/keydata/:id', checkAdmin, keyData.updateKeyData)
+
+router.get('/documents/:studyprogrammeKey', documents.getDocuments)
+router.post('/documents/:studyprogrammeKey', documents.createDocument)
 
 export default router

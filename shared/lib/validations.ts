@@ -90,7 +90,7 @@ export const MetadataSchema = z
       .string()
       .regex(/^\d+;\d+;\d+;\d+$/, 'Should be in format number;number;number;number')
       .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
-    ohjelmanTaso: z.enum(['Kandi', 'Maisteri', 'Tohtori']),
+    ohjelmanTaso: z.enum(['B', 'Maisteri', 'Tohtori']),
     liikennevalo: z.boolean(),
     mittarinRajat: z
       .string()
