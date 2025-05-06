@@ -184,7 +184,7 @@ const ProgrammeView = () => {
     )
   }
 
-  const KeyDataPoints = getKeyDataPoints(t, programmeData)
+  const KeyDataPoints = getKeyDataPoints(t)
 
   return (
     <Box sx={{ width: '75%' }}>

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Opetushallinnon tilannekuvalomake",
   "type": "module",
+  "workspaces": [
+    "shared/validators"
+  ],
   "scripts": {
     "dev": "docker compose up",
     "build": "vite build",
