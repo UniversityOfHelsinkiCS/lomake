@@ -1,28 +1,33 @@
-import { useMemo } from 'react'
-import useFetchKeyData, { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
+import { useEffect, useMemo } from 'react'
+import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { Box, CircularProgress, IconButton, Button, Link, Typography } from '@mui/material'
-import { Add, ArrowBack } from '@mui/icons-material'
+import { Accordion, Box, CircularProgress, IconButton, Button, Link, Typography, AccordionSummary, AccordionDetails } from '@mui/material'
+import { Add, ArrowBack, ExpandMore } from '@mui/icons-material'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
-import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataProgramme } from '@/shared/lib/types'
 
 import { RootState, AppDispatch } from '@/client/util/store'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
-import InterventionProcedure, { calculateIntervetionAreas } from '../Generic/InterventionProcedure'
+import { calculateIntervetionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
+import { getDocuments } from '@/client/util/redux/documentsSlicer'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
-
-  const dispatch: AppDispatch = useDispatch()
+  const documents = useSelector((state: RootState) => state.documents.data)
+  const dispatch = useDispatch<AppDispatch>()
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 
   const keyData = useFetchKeyData()
+
+  useEffect(() => {
+    dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
+  }, [])
 
   const metadata = useMemo(() => {
     return keyData?.data ? keyData.data.metadata : []
@@ -69,7 +74,6 @@ const ProgrammeHomeView = () => {
 
         <Typography variant="h2">{keyFigureData[0].koulutusohjelma[lang]}</Typography>
       </div>
-
       <Typography variant="h1" style={{ marginTop: '4rem' }}>
         {t('keyData:keyFigure')}
       </Typography>
@@ -95,6 +99,37 @@ const ProgrammeHomeView = () => {
             </Button>
           </Box>
         )}
+        {documents.map((doc: Record<string, any>) => (
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+              <Typography variant='h4'>{doc.data.title}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div style={{}}>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:date')}:</Typography>
+                  <Typography>{doc.data.date}</Typography>
+                </div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:participants')}:</Typography>
+                  <Typography>{doc.data.participants}</Typography>
+                </div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:matters')}:</Typography>
+                  <Typography>{doc.data.matters}</Typography>
+                </div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:schedule')}:</Typography>
+                  <Typography>{doc.data.schedule}</Typography>
+                </div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Typography variant='h5'>{t('document:followupDate')}:</Typography>
+                  <Typography>{doc.data.followupDate}</Typography>
+                </div>
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </Box>
     </Box>
   )

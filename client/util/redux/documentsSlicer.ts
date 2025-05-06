@@ -56,8 +56,7 @@ export const createDocument = createAsyncThunk<any, Record<string, any>>(
 )
 
 const initialState = {
-  data: {},
-  dataForYear: {},
+  data: [] as Record<string, any>[],
   status: 'idle',
 }
 

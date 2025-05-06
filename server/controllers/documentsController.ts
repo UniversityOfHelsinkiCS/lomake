@@ -56,17 +56,20 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     return resultObject
   }
 
-  const validationResult = DocumentFormSchema.safeParse(data)
-  if (!validationResult.success) {
-    resultObject.error = validationResult.error.errors.map(e => e.message).join(', ')
-    resultObject.status = 400
-    return resultObject
+  if (data) {
+    const validationResult = DocumentFormSchema.safeParse(data)
+    if (!validationResult.success) {
+      resultObject.error = validationResult.error.errors.map(e => e.message).join(', ')
+      resultObject.status = 400
+      return resultObject
+    }
   }
 
   const documents: Document[] = await Document.findAll({
     where: {
       studyprogrammeKey: studyprogramme.key,
     },
+    attributes: ['id','data', 'studyprogrammeKey']
   })
 
   if (documents.length === 0) {
@@ -89,7 +92,7 @@ const getDocuments = async (req: Request, res: Response): Promise<DocumentRespon
   try {
     const result = await validateOperation(req)
     if (!result.success) return res.status(result.status).json({ error: result.error })
-    return res.status(200).json(result)
+    return res.status(200).json(result.documents)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

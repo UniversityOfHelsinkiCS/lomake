@@ -634,7 +634,7 @@ export default {
     doctoralTooltip: 'Tohtoriohjelmat eivät ole mukana pilotointivaiheessa 2025',
     overview: 'Vuosiseurannan yleisnäkymä',
     programmeHome: 'Ohjelman kotisivu',
-    interventionProcedure: 'Toimenpide menettely',
+    interventionProcedure: 'Toimenpidemenettely',
   },
   document: {
     title: 'Dokumentin otsikko',
