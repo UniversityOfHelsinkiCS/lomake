@@ -17,7 +17,7 @@ import NoPermissions from '../../Generic/NoPermissions'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { RootState, AppDispatch } from '@/client/util/store'
-import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
 import { calculateKeyDataColor, getKeyDataPoints } from '../Utils/util'
@@ -34,7 +34,7 @@ const ProgrammeView = () => {
   const { programme: programmeKey, year } = useParams<{ programme: string; year: string }>()
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
   const [activeTab, setActiveTab] = useState(0)
-  const keyData = useFetchSingleKeyData(programmeKey)
+  const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
   const form = 10
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
@@ -71,7 +71,26 @@ const ProgrammeView = () => {
     }
   }, [])
 
-  if (year !== selectedYear && inProduction) return <Page404 />
+  const isValidYear = (year: string) => {
+    // ADD THE LOGIC TO CHECK IF THE YEAR IS VALID
+    return year !== selectedYear && inProduction
+  }
+
+  const metadata = useMemo(() => {
+    return keyData?.data ? keyData.data.metadata : []
+  }, [keyData])
+
+  const programmeData = useMemo(() => {
+    if (keyData) {
+      return keyData.data.programme.find(
+        (programmeData: KeyDataProgramme) =>
+          programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year === selectedYear - 1,
+      )
+    }
+    return {}
+  }, [keyData, selectedYear])
+
+  if (!isValidYear) return <Page404 />
   if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 
   if (!keyData) {
@@ -169,27 +188,27 @@ const ProgrammeView = () => {
       <div style={{ display: 'flex', marginTop: '4rem', alignItems: 'center' }}>
         <IconButton
           component={Link}
-          href={`${basePath}v1/programmes/${form}/${programme.koulutusohjelmakoodi}`}
+          href={`${basePath}v1/programmes/${form}/${programmeData.koulutusohjelmakoodi}`}
           sx={{ marginRight: 2 }}
         >
           <ArrowBackIcon />
         </IconButton>
 
         <Typography variant="h2">
-          {programme.koulutusohjelma[lang]} {selectedYear}
+          {programmeData.koulutusohjelma[lang]} {selectedYear}
         </Typography>
       </div>
 
       <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth" sx={{ mt: 4 }}>
         <Tab
           label={t('keyData:keyFigure')}
-          icon={<TabBadge tab="lights" programmeData={programme} metadata={metadata} />}
+          icon={<TabBadge tab="lights" programmeData={programmeData} metadata={metadata} />}
           iconPosition="end"
           data-cy="keyDataTab"
         />
         <Tab
           label={t('keyData:actions')}
-          icon={<TabBadge tab="actions" programmeData={programme} metadata={metadata} />}
+          icon={<TabBadge tab="actions" programmeData={programmeData} metadata={metadata} />}
           iconPosition="end"
           data-cy="actionsTab"
         />
@@ -197,9 +216,9 @@ const ProgrammeView = () => {
 
       {activeTab === 0 && (
         <Box sx={{ mt: 4 }}>
-          {keyData.programme.additionalInfo && keyData.programme.additionalInfo[lang]?.length && (
+          {programmeData.additionalInfo && programmeData.additionalInfo[lang]?.length && (
             <Alert severity="warning" sx={{ mb: 4 }}>
-              <Typography variant="light">{keyData.programme.additionalInfo[lang]}</Typography>
+              <Typography variant="light">{programmeData.additionalInfo[lang]}</Typography>
             </Alert>
           )}
           <Alert severity="info">
@@ -247,12 +266,12 @@ const ProgrammeView = () => {
 
           {Object.values(KeyDataPoints).map((data: KeyDataCardData) => (
             <Box sx={{ p: '2.5rem 0' }} key={data.groupKey}>
-              <KeyDataCard level={level} metadata={metadata} programme={programme} {...data} />
+              <KeyDataCard level={level} metadata={metadata} programme={programmeData} {...data} />
               <Box sx={{ alignItems: 'center' }}>
                 {data.textField && (
                   <TextFieldComponent id={data.groupKey} type="Comment">
                     <TextFieldBadge
-                      programmeData={programme}
+                      programmeData={programmeData}
                       groupKey={data.groupKey}
                       metadata={metadata}
                       level={level}
@@ -287,7 +306,7 @@ const ProgrammeView = () => {
             </Box>
           </Alert>
           <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
-            <ActionsBadge programmeData={programme} metadata={metadata} />{' '}
+            <ActionsBadge programmeData={programmeData} metadata={metadata} />{' '}
           </TextFieldComponent>
         </Box>
       )}

@@ -35,20 +35,13 @@ const ProgrammeHomeView = () => {
 
   const programmeData = useMemo(() => {
     if (keyData) {
-      const { kandiohjelmat, maisteriohjelmat } = keyData.data
-      return [...kandiohjelmat, ...maisteriohjelmat]
+      return keyData.data.programme.filter(
+        (programmeData: KeyDataProgramme) =>
+          programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear,
+      )
     }
     return []
   }, [keyData])
-
-  const keyFigureData = useMemo(() => {
-    const filteredData = programmeData.filter(
-      (programmeData: KeyDataProgramme) =>
-        programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear,
-    )
-
-    return filteredData
-  }, [programmeData])
 
   if (!keyData) {
     return <CircularProgress />
@@ -72,7 +65,7 @@ const ProgrammeHomeView = () => {
           <ArrowBack />
         </IconButton>
 
-        <Typography variant="h2">{keyFigureData[0].koulutusohjelma[lang]}</Typography>
+        <Typography variant="h2">{programmeData[0].koulutusohjelma[lang]}</Typography>
       </div>
       <Typography variant="h1" style={{ marginTop: '4rem' }}>
         {t('keyData:keyFigure')}
@@ -83,7 +76,7 @@ const ProgrammeHomeView = () => {
       </Typography>
 
       <Box sx={{ mt: '4rem' }}>
-        <ProgrammeKeyDataTable programmeData={keyFigureData} metadata={metadata} />
+        <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} />
       </Box>
 
       <Box sx={{ mt: '8rem' }}>
