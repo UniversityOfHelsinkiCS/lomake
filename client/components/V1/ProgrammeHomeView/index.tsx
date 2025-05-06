@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
-import useFetchKeyData from '@/client/hooks/useFetchKeyData'
+import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { Box, CircularProgress, IconButton, Button, Link, Typography } from '@mui/material'
 import { Add, ArrowBack } from '@mui/icons-material'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
-import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 
 import { RootState, AppDispatch } from '@/client/util/store'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
@@ -22,7 +22,7 @@ const ProgrammeHomeView = () => {
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 
-  const keyData = useFetchKeyData()
+  const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
 
   const metadata = useMemo(() => {
     return keyData?.data ? keyData.data.metadata : []
@@ -30,20 +30,13 @@ const ProgrammeHomeView = () => {
 
   const programmeData = useMemo(() => {
     if (keyData) {
-      const { kandiohjelmat, maisteriohjelmat } = keyData.data
-      return [...kandiohjelmat, ...maisteriohjelmat]
+      return keyData.data.programme.filter(
+        (programmeData: KeyDataProgramme) =>
+          programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear,
+      )
     }
     return []
   }, [keyData])
-
-  const keyFigureData = useMemo(() => {
-    const filteredData = programmeData.filter(
-      (programmeData: KeyDataProgramme) =>
-        programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear,
-    )
-
-    return filteredData
-  }, [programmeData])
 
   if (!keyData) {
     return <CircularProgress />
@@ -65,7 +58,7 @@ const ProgrammeHomeView = () => {
           <ArrowBack />
         </IconButton>
 
-        <Typography variant="h2">{keyFigureData[0].koulutusohjelma[lang]}</Typography>
+        <Typography variant="h2">{programmeData[0].koulutusohjelma[lang]}</Typography>
       </div>
 
       <Typography variant="h1" style={{ marginTop: '4rem' }}>
@@ -77,7 +70,7 @@ const ProgrammeHomeView = () => {
       </Typography>
 
       <Box sx={{ mt: '4rem' }}>
-        <ProgrammeKeyDataTable programmeData={keyFigureData} metadata={metadata} />
+        <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} />
       </Box>
 
       <Box sx={{ mt: '8rem' }}>
