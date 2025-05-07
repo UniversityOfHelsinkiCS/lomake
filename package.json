@@ -92,7 +92,8 @@
     "vite-plugin-svgr": "^4.2.0",
     "winston": "^3.3.3",
     "winston-gelf-transporter": "^1.0.2",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
