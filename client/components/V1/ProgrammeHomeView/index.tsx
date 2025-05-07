@@ -51,8 +51,6 @@ const ProgrammeHomeView = () => {
 
   const areas = calculateIntervetionAreas({ metadata, programme: programmeData[0], t })
 
-  console.log(areas)
-
   return (
     <Box sx={{ width: '75%' }}>
       <div style={{ marginTop: '4rem' }}>
@@ -73,7 +71,7 @@ const ProgrammeHomeView = () => {
       </div>
 
       <Typography variant="h1" style={{ marginTop: '4rem' }}>
-        AVAINLUVUT JA KEHITTÄMISSUUNNITELMA
+        {t('keyData:homeHeader').toUpperCase()}
       </Typography>
       <Typography style={{ marginTop: '2rem' }}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -84,8 +82,8 @@ const ProgrammeHomeView = () => {
         <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} />
       </Box>
 
-      <Box sx={{ mt: '8rem' }}>
-        <Typography variant="h1">{t('interventionProcedure')} </Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', mt: '8rem' }}>
+        <Typography variant="h1">{t('keyData:interventionProcedure').toUpperCase()} </Typography>
         <Box sx={{ mt: '2rem', mb: '2rem' }}>
           <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
         </Box>
@@ -98,7 +96,8 @@ const ProgrammeHomeView = () => {
             </Button>
           </Box>
         )}
-        {documents.map((doc: Record<string, any>) => (
+        {documents
+        .map((doc: Record<string, any>) => (
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMore />}>
               <Typography variant='h4'>{doc.data.title}</Typography>

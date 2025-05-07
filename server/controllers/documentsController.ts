@@ -69,7 +69,8 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     where: {
       studyprogrammeKey: studyprogramme.key,
     },
-    attributes: ['id', 'data', 'studyprogrammeKey']
+    attributes: ['id', 'data', 'studyprogrammeKey'],
+    order: [['createdAt', 'DESC']]
   })
 
   if (documents.length === 0) {
