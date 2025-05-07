@@ -3,7 +3,6 @@ import multer from 'multer'
 import xlsx from 'xlsx'
 import KeyData from '../models/keyData.js'
 import db from '../models/index.js'
-import logger from '../util/logger.js'
 import { formatKeyData } from '../services/keyDataService.js'
 
 // Validations
@@ -12,6 +11,8 @@ import {
   KeyDataProgrammeSchema,
   MaisteriohjelmatValuesSchema,
   KandiohjelmatValuesSchema,
+  logZodError,
+  ZodError,
 } from '../../shared/validators/index.js'
 
 const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
@@ -48,7 +49,7 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
         .parse(formattedKeyData.maisteriohjelmat)
       MetadataSchema.array().parse(formattedKeyData.metadata)
     } catch (zodError) {
-      logger.error(zodError)
+      logZodError(zodError as ZodError)
       throw new Error('Invalid KeyData format')
     }
 

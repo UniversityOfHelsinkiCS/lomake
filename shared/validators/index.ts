@@ -1,6 +1,6 @@
-import { z } from 'zod'
+import { z, ZodError } from 'zod'
 
-const LiikennevalotEnum = z.enum(['Ei arviota', 'Punainen', 'Keltainen', 'Vaaleanvihreä', 'Tummanvihreä'])
+// const LiikennevalotEnum = z.enum(['Ei arviota', 'Punainen', 'Keltainen', 'Vaaleanvihreä', 'Tummanvihreä'])
 
 export const KandiohjelmatValuesSchema = z
   .object({
@@ -141,3 +141,45 @@ export const DocumentFormSchema = z.object({
   schedule: z.string().min(3, 'schedule'),
   followupDate: z.string().date('date'),
 })
+
+export const logZodError = (error: ZodError) => {
+  let parsedErrors: any[] = []
+  let typesOfErrors: { [key: string]: number } = {}
+
+  error.errors.forEach(e => {
+    parsedErrors.push(e)
+
+    if (e.code in typesOfErrors) {
+      typesOfErrors[e.code]++
+    } else {
+      typesOfErrors[e.code] = 1
+    }
+  })
+
+  // Pretty formatted log message
+  console.error(`
+      ❌ Validation Error Report ❌
+      --------------------------------
+      🔹 Total Errors: ${error.errors.length}
+      
+      🔹 Types of Errors:
+      ${Object.entries(typesOfErrors)
+      .map(([type, count]) => `    - ${type}: ${count}`)
+      .join('\n')}
+  
+      ${parsedErrors
+      .map(
+        (e, index) => `
+      ${index + 1}. 🔻 Path: ${e.path.join('.') || 'N/A'}
+          🔹 Error Type: ${e.code}
+          🔹 Expected: ${JSON.stringify(e.expected, null, 2)}
+          🔹 Received: ${JSON.stringify(e.received, null, 2)}
+          🔹 Error message: ${e.message}`,
+      )
+      .join('\n')}
+    
+      --------------------------------
+      `)
+}
+
+export { ZodError }
