@@ -29,6 +29,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.0",
     "@mui/material": "^7.0.0",
+    "@mui/x-date-pickers": "^8.2.0",
     "@reduxjs/toolkit": "^2.5.0",
     "@sentry/browser": "8.55.0",
     "@sentry/node": "8.55.0",
