@@ -45,12 +45,12 @@ const ProgrammeKeyDataTableComponent = ({
       Simple solution for syncing data to the follow-up year.
       Data is always collected from the previous year relative to the annual follow-up year.
     */
-    return (programmeDataYear + 1).toString()
+    return (programmeDataYear + 1)
   }
 
   const getNextFollowUpYear = () => {
     const years = programmeData.map(data => data.year)
-    return annualFollowUpYear(Math.max(...years)) + 1
+    return (annualFollowUpYear(Math.max(...years)) + 1).toString()
   }
 
   return (

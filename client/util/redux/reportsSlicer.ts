@@ -55,7 +55,7 @@ export const getReport = createAsyncThunk<ReportData, Record<string, any>>(
       })
       return response.data
     } catch (err) {
-      alertSentry(err, `${basePath}api/report/${studyprogrammeKey}`, 'GET', {})
+      alertSentry(err, `${basePath}api/reports/${studyprogrammeKey}/${year}`, 'GET', {})
       return rejectWithValue((err as any).response.data)
     }
   },

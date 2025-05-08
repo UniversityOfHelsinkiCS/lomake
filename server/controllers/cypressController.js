@@ -795,7 +795,7 @@ const initData = {
       'Opetuksen laatu': 0,
       Palauteaktiivisuus: 0.9,
       // Muut
-      Vuosi: 2024,
+      Vuosi: 2023,
     },
 
     {
@@ -818,7 +818,7 @@ const initData = {
       Palauteaktiivisuus: 0.6,
 
       // Muut
-      Vuosi: 2024,
+      Vuosi: 2023, // testing year cap is 2024 so the keydata year has to be 2024-1
     },
     {
       // Perustiedot
@@ -840,7 +840,7 @@ const initData = {
       Palauteaktiivisuus: undefined,
 
       // Muut
-      Vuosi: 2024,
+      Vuosi: 2023,
     },
   ],
   Maisteriohjelmat: [
@@ -864,7 +864,7 @@ const initData = {
       Työllistyminen: 0,
 
       // Muut
-      Vuosi: 2024,
+      Vuosi: 2023,
       Lisätietoja_fi: 'Lakkautettu ohjelma',
     },
     {
@@ -887,7 +887,7 @@ const initData = {
       Työllistyminen: 0,
 
       // Muut
-      Vuosi: 2024,
+      Vuosi: 2023,
     },
   ],
 }

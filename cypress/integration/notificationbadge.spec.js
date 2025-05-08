@@ -9,6 +9,8 @@ describe('Notification badge tests', () => {
     cy.createDeadline(defaultYears[0], 'Vuosiseuranta - UUSI')
     cy.get('[data-cy=form-10-deadline]').contains('14.')
     cy.visit('/v1/overview')
+    cy.get('[data-cy="year-filter"] > .MuiSelect-select').click()
+    cy.contains('2024').click()
   })
 
   const redProgramme = 'KH50_005' // all red

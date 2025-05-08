@@ -64,6 +64,7 @@ describe('Textfield tests', () => {
         ...possibleUsers[7],
       },
     })
+    cy.visit(`/v1/programmes/10/KH50_005/${defaultYears[0]}`)
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('be.disabled')
     cy.login(user)
     cy.visit(`/v1/programmes/10/KH50_005/${defaultYears[0]}`)

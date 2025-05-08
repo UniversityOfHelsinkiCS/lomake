@@ -7,7 +7,7 @@ export const useNotificationBadge = () => {
   const reports = useSelector((state: { reports: any }) => state.reports.dataForYear)
 
   const renderTabBadge = (programmeData: KeyDataProgramme, metadata: KeyDataMetadata[]) => {
-    const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+    const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
     if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return false
@@ -50,7 +50,7 @@ export const useNotificationBadge = () => {
 
     for (const key of Object.keys(GroupKey)) {
       const groupKey = GroupKey[key as keyof typeof GroupKey]
-      const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+      const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
       const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
       if (color == LightColors.Red) {

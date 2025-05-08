@@ -133,11 +133,11 @@ const DeadlineSetting = () => {
         <DatePicker
           dateFormat="dd.MM.yyyy"
           placeholderText={t('users:selectNewDeadline')}
-          minDate={new Date()}
           selected={newDate}
           onChange={setNewDate}
           disabled={!form}
           locale={lang}
+          showYearDropdown
         />
       </div>
       {warning && (

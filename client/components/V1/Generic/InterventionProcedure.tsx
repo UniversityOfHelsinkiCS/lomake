@@ -1,5 +1,5 @@
 import { useParams } from "react-router"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import {
   Box,
@@ -15,7 +15,7 @@ import {
 import { useFetchSingleKeyData } from "@/client/hooks/useFetchKeyData"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/client/util/store"
-import type { KeyDataByCode, KeyDataMetadata } from "@/shared/lib/types"
+import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from "@/shared/lib/types"
 import { GroupKey, ProgrammeLevel } from "@/client/lib/enums"
 import { ArrowBack, ExpandMore } from "@mui/icons-material"
 import { basePath } from "@/config/common"
@@ -26,7 +26,7 @@ import { TextFieldCard } from "./TextFieldComponent"
 import { getReport } from "@/client/util/redux/reportsSlicer"
 import DocumentForm from "./DocumentForm"
 
-export const calculateIntervetionAreas = ({ metadata, programme, t }: { metadata: KeyDataMetadata[], programme: Record<string, any>, t: TFunction }) => {
+export const calculateIntervetionAreas = ({ metadata, programme, t }: { metadata: KeyDataMetadata[], programme: KeyDataProgramme, t: TFunction }) => {
   let res: string[] = []
   const keyDataPoints = getKeyDataPoints(t)
   Object.values(keyDataPoints).map((point: any) => {
@@ -45,16 +45,29 @@ const InterventionProcedure = () => {
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
 
   useEffect(() => {
+    if (programmeKey)
+      dispatch(getReport({ studyprogrammeKey: programmeKey, year: year }))
+  }, [programmeKey, dispatch])
+
+  const metadata = useMemo(() => {
+    return keyData ? keyData.metadata : []
+  }, [keyData])
+
+  // For this function the year variable is not needed cuz
+  // intervention procedure is independent from years.
+  const programmeData = useMemo(() => {
     if (keyData) {
-      dispatch(getReport({ studyprogrammeKey: programme[0].koulutusohjelmakoodi, year: year }))
+      return keyData.programme.find(
+        (programmeData: KeyDataProgramme) =>
+          programmeData.koulutusohjelmakoodi === programmeKey,
+      )
     }
-  }, [dispatch, keyData, year])
+    return {}
+  }, [keyData, year])
+
+  const areas = calculateIntervetionAreas({ metadata, programme: programmeData, t })
 
   if (!keyData) return null
-
-  const { programme, metadata } = keyData
-
-  const areas = calculateIntervetionAreas({ metadata, programme: programme[0], t })
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -62,7 +75,7 @@ const InterventionProcedure = () => {
         <IconButton component={Link} href={`${basePath}v1/programmes/10/${programmeKey}`} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
-        <Typography variant="h2">{programme[0].koulutusohjelma[lang]} - {`${t('document:header')}-${new Date().toLocaleDateString()}`}</Typography>
+        <Typography variant="h2">{programmeData.koulutusohjelma[lang]} - {`${t('document:header')}-${new Date().toLocaleDateString()}`}</Typography>
       </Box>
       <Alert severity="info">{t('document:infobox')}</Alert>
       <Typography variant="h4">{t('document:backgroundInfoHeader')}</Typography>
@@ -81,7 +94,7 @@ const InterventionProcedure = () => {
           return (
             <AccordionDetails key={groupKey}>
               <Typography>{t('document:keyFigureDescription')}</Typography>
-              <KeyDataCard level={programme[0].level as ProgrammeLevel} metadata={metadata} programme={programme[0]} {...props} />
+              <KeyDataCard level={programmeData.level as ProgrammeLevel} metadata={metadata} programme={programmeData} {...props} />
               <TextFieldCard id={groupKey} t={t} type="Comment" />
             </AccordionDetails>
           )
@@ -98,7 +111,7 @@ const InterventionProcedure = () => {
           </AccordionDetails>
         </Accordion>
       )}
-      <DocumentForm programmeKey={programme[0].koulutusohjelmakoodi} />
+      <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} />
     </Box>
   )
 }

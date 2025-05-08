@@ -5,7 +5,7 @@ import logger from '../util/logger.js'
 
 const initReports = async () => {
   const programmes = await (db as { studyprogramme: any }).studyprogramme.findAll({})
-  const years = [2025]
+  const years = [2024, 2025]
 
   years.forEach(async (currentYear: number) => {
     try {

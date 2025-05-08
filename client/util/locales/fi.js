@@ -636,6 +636,7 @@ export default {
     programmeHome: 'Ohjelman kotisivu',
     homeHeader: 'Avainluvut ja kehittämissuunnitelma',
     interventionProcedure: 'Toimenpidemenettely',
+    documentingHeader: 'Toimenpidemenettelyn dokumentointi',
   },
   document: {
     title: 'Dokumentin otsikko',

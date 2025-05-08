@@ -11,6 +11,7 @@ import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
 import { getReports, updateReportHttp } from '../../../util/redux/reportsSlicer'
+import { useParams } from 'react-router'
 
 type TextFieldComponentProps = {
   id: string
@@ -79,7 +80,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const [gettingLock, setGettingLock] = useState<boolean>(false)
 
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
-  const room = useSelector((state: RootState) => state.room)
+  const { programme: room } = useParams<{ programme: string }>()
   const dataFromRedux = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
   const currentEditors = useSelector(
     ({ currentEditors }: { currentEditors: Record<string, any> }) => currentEditors.data,

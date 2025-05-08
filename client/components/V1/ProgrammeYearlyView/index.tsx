@@ -50,6 +50,10 @@ const ProgrammeView = () => {
   const isValidYear = (targetYear: number, keyData: KeyDataByCode) => {
     const availableYears = keyData.programme.map((programmeData: KeyDataProgramme) => programmeData.year)
 
+    const openYear = new Date(formDeadline.date)
+
+    if (openYear.getFullYear().toString() !== selectedYear) return false
+
     if (inProduction) {
       if (availableYears.includes(targetYear - 1) && targetYear >= 2025) return true
     } else {
@@ -79,7 +83,7 @@ const ProgrammeView = () => {
       dispatch(wsJoinRoom(programmeKey, form))
       dispatch(setViewOnly(false))
     }
-  }, [programmeKey, form])
+  }, [programmeKey, form, keyData])
 
   useEffect(() => {
     return () => {
