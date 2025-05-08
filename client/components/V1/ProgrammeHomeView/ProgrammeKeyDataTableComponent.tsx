@@ -81,10 +81,10 @@ const ProgrammeKeyDataTableComponent = ({
           <TableBody>
             {programmeData.map((programmeData: KeyDataProgramme, index) => (
               <TableRow key={programmeData.koulutusohjelmakoodi + index}>
-                <TableCell hoverEffect style={{ borderRadius: '0.5rem 0 0 0.5rem' }}>
+                <TableCell style={{ borderRadius: '0.5rem 0 0 0.5rem' }}>
                   <Link
                     to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${annualFollowUpYear(programmeData.year)}`}
-                    style={{ width: '100%' }}
+                    style={{ width: '100%', textAlign: 'left' }}
                     onClick={() => dispatch(setKeyDataYear(annualFollowUpYear(programmeData.year)))}
                   >
                     <Typography variant="h5">{annualFollowUpYear(programmeData.year)}</Typography>
@@ -124,9 +124,12 @@ const ProgrammeKeyDataTableComponent = ({
             ))}
             <TableRow>
               <TableCell>
-                <Typography variant="h5" color="secondary">
-                  {getNextFollowUpYear()}
-                </Typography>
+                { /* @ts-expect-error */}
+                <Link style={{ width: '100%', textAlign: 'left' }}>
+                  <Typography variant="h5" color="secondary">
+                    {getNextFollowUpYear()}
+                  </Typography>
+                </Link>
               </TableCell>
               <TableCell disabled />
               <TableCell disabled />
@@ -147,7 +150,7 @@ const ProgrammeKeyDataTableComponent = ({
       </Table>
 
       <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
-    </div>
+    </div >
   )
 }
 
