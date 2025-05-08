@@ -72,7 +72,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('.item').contains('Vuosiseuranta').click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
-    cy.get('.react-datepicker__navigation').click() // Go to next month
+    cy.get('.react-datepicker__navigation--next').click() // Go to next month
     cy.get('.react-datepicker__day--014').click() // Select 14th day
 
     cy.get('[data-cy=updateDeadline]').click()
@@ -107,7 +107,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('.item').contains('Vuosiseuranta').click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
-    cy.get('.react-datepicker__navigation').click() // Go to next month
+    cy.get('.react-datepicker__navigation--next').click() // Go to next month
     cy.get('.react-datepicker__day--014').click() // Select 14th day
 
     cy.get('[data-cy=updateDeadline]').click()
@@ -169,7 +169,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('.item').contains('Vuosiseuranta').click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
-    cy.get('.react-datepicker__navigation').click() // Go to next month
+    cy.get('.react-datepicker__navigation--next').click() // Go to next month
     cy.get('.react-datepicker__day--014').click() // Select 14th day
 
     cy.get('[data-cy=updateDeadline]').click()
@@ -210,9 +210,9 @@ describe('SuperAdmin user tests', () => {
     // Check that forms are open as they should be
     cy.visit('/yearly')
     cy.visit('/yearly/form/1/KH50_004')
-    cy.get('.editor-class')
+    cy.contains(`Answers for the year ${defaultYears[0]} can be modified.`).should('exist')
     cy.visit('/evaluation/form/4/KH50_005')
-    cy.get('.editor-class')
+    cy.contains(`Answers for the year ${defaultYears[0]} can be modified.`).should('exist')
   })
 
   it('Closing one deadline closes only one form', () => {

@@ -3,6 +3,8 @@ describe('Overview page test', () => {
     cy.login('cypressSuperAdminUser')
     cy.request(`/api/cypress/initKeyData`)
     cy.visit('/v1/overview')
+    cy.get('[data-cy="year-filter"] > .MuiSelect-select').click()
+    cy.contains('2024').click()
   })
 
   describe('Testing keyDataTable interactions', () => {
