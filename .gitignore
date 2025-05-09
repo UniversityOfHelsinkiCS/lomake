@@ -16,3 +16,4 @@ backups/*
 .idea/
 data.xlsx
 .~lock* 
+.nvmrc
