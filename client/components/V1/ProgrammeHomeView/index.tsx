@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { Box, CircularProgress, IconButton, Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails, Alert } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import { Add, ArrowBack } from '@mui/icons-material'
-import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
+import { basePath } from '@/config/common'
 import { KeyDataByCode, KeyDataProgramme } from '@/shared/lib/types'
 
 import { RootState, AppDispatch } from '@/client/util/store'

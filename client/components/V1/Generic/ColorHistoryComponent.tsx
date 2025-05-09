@@ -4,9 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { RootState } from '@/client/util/store'
 import { calculateColor, calculateValue } from '../Utils/util'
 import { TrafficLight } from './TrafficLightComponent'
+import { ProgrammeLevel } from '@/shared/lib/enums'
 
 const ColorHistoryComponent = (props: any) => {
   if (!props.programme || props.value == 'Ei dataa') {
+    console.log('here')
     return null
   }
   const { t } = useTranslation()
@@ -20,7 +22,7 @@ const ColorHistoryComponent = (props: any) => {
 
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
 
-  const programList = data[`${props.level.toLowerCase()}ohjelmat`] || []
+  const programList = props.level === ProgrammeLevel.Bachelor ? data[`kandiohjelmat`] : data[`maisteriohjelmat`]
 
   const history = programList
     .filter((programme: any) => {
@@ -34,6 +36,7 @@ const ColorHistoryComponent = (props: any) => {
       year: programme.year,
       value: dataKey ? programme.values[dataKey] : null,
     }))
+
   return (
     <Box sx={{ mt: 4, mb: 2 }}>
       <Typography variant="italic">{t('keyData:yearlyDevelopment')}</Typography>
