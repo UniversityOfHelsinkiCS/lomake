@@ -8,7 +8,7 @@ import { cypressUids, setHeaders, possibleUsers } from '../config/mockHeaders'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '/theme'
 import './assets/custom.scss'
-import './assets/fonts/fonts.css'
+import './assets/fonts/fonts.scss'
 
 import store from './util/store'
 import { basePath } from '../config/common'

@@ -670,6 +670,7 @@ export default {
     doctoralTooltip: 'Doktorandprogram som inte ingår i pilotfasen 2025',
     overview: 'Årlig uppföljningsöversikt',
     programmeHome: 'Programmens startsida',
+    moveToOpinion: 'Redigera vyn över utbildningsprogrammet',
   },
   document: {
     title: 'Dokumentets titel',

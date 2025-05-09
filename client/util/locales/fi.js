@@ -637,6 +637,7 @@ export default {
     homeHeader: 'Avainluvut ja kehittämissuunnitelma',
     interventionProcedure: 'Toimenpidemenettely',
     documentingHeader: 'Toimenpidemenettelyn dokumentointi',
+    moveToOpinion: 'Siirry muokkaamaan näkemystä',
   },
   document: {
     title: 'Dokumentin otsikko',

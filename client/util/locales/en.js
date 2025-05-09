@@ -634,6 +634,7 @@ export default {
     doctoralTooltip: 'Doctoral programmes are not included in the pilot phase 2025',
     overview: 'Annual follow-up overview',
     programmeHome: 'Programmes homepage',
+    moveToOpinion: 'Edit the opinion of the programme',
   },
   document: {
     title: 'Document Title',

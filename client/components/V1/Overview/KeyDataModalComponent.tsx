@@ -11,11 +11,12 @@ import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
 
-import { Box, CircularProgress, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Link, Typography } from '@mui/material'
 import TextFieldCard from '../Generic/TextFieldComponent'
 import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import { getKeyDataPoints } from '@/client/components/V1/Utils/util'
+import { ArrowForward } from '@mui/icons-material'
 
 export interface selectedKeyFigureData {
   programme: KeyDataProgramme
@@ -89,6 +90,11 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
             {...content}
           />
           <TextFieldCard id={content.groupKey} type="Comment" />
+          <Link href={`/v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}`}>
+            <Button variant="outlined" startIcon={<ArrowForward />} sx={{ marginTop: 2, float: 'right' }}>
+              {t('keyData:moveToOpinion')}
+            </Button>
+          </Link>
         </>
       )}
     </ModalTemplate>
