@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { Box, CircularProgress, IconButton, Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails, Alert } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
-import { Add, ArrowBack } from '@mui/icons-material'
+import { Add, ArrowBack, Edit } from '@mui/icons-material'
 import { basePath, isAdmin } from '@/config/common'
 import { KeyDataByCode, KeyDataProgramme } from '@/shared/lib/types'
 
@@ -106,12 +106,12 @@ const ProgrammeHomeView = () => {
         )}
         {Array.isArray(documents) && (documents
           .map((doc: Record<string, any>) => (
-            <Accordion>
+            <Accordion key={doc.id}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography variant='h4'>{doc.data.title}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <div style={{}}>
+                <div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant='h5'>{t('document:date')}:</Typography>
                     <Typography>{doc.data.date}</Typography>
@@ -132,6 +132,13 @@ const ProgrammeHomeView = () => {
                     <Typography variant='h5'>{t('document:followupDate')}:</Typography>
                     <Typography>{doc.data.followupDate}</Typography>
                   </div>
+                </div>
+                <div style={{ marginTop: '1rem' }}>
+                  {hasWriteRights && (
+                    <Button variant='contained' component={Link} href={`${basePath}v1/programmes/10/${programmeKey}/document/${doc.id}`} >
+                      {t('document:edit')} <Edit sx={{ ml: '1rem' }} />
+                    </Button>
+                  )}
                 </div>
               </AccordionDetails>
             </Accordion>

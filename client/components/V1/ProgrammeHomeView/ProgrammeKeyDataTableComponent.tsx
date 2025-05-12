@@ -125,7 +125,7 @@ const ProgrammeKeyDataTableComponent = ({
             <TableRow>
               <TableCell>
                 { /* @ts-expect-error */}
-                <Link style={{ width: '100%', textAlign: 'left' }}>
+                <Link aria-disabled style={{ width: '100%', textAlign: 'left' }}>
                   <Typography variant="h5" color="secondary">
                     {getNextFollowUpYear()}
                   </Typography>

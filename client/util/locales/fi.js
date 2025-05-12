@@ -662,6 +662,7 @@ export default {
     keyFigureDescription: 'Koulutusohjelma on alle alimman raja-arvon seuraavilla arviointialueilla',
     keyFigure: 'Arviointialueet',
     newDocument: 'Luo uusi dokumentti',
+    edit: 'Muokkaa dokumenttia',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',

@@ -693,7 +693,7 @@ export default {
 
     keyFigureDescription: 'Utbildningsprogrammet är under den lägsta gränsvärdet på följande utvärderingsområden',
     keyFigure: 'Utvärderingsområden',
-
+    edit: 'Redigera dokumentet',
     newDocument: 'Luo uusi dokumentti',
   },
   error: {
