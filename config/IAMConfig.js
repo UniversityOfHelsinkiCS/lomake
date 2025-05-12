@@ -10,9 +10,9 @@ const joryMap = {
   'hy-ltdk-psyk-jory': ['300-K001', '300-M004'],
   'hy-ltdk-logo-jory': ['300-K002', '300-M005'],
   'hy-ltdk-spk-jory': '300-K003',
-  'hy-ltdk-ll-jory': '300-M001',
+  'hy-ltdk-ll-jory': ['300-M001', '300-M003'], // ltdk is special
   'hy-ltdk-tmed-jory': '300-M002',
-  'hy-ltdk-hll-jory': '300-M003',
+  'hy-ltdk-hll-jory': ['300-M003', '300-M001'], // same here
   'hy-ltdk-terv-jory': '300-M006',
   'hy-humtdk-filk-jory': '400-K001',
   'hy-humtdk-ttk-jory': '400-K002',
