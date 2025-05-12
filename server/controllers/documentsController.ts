@@ -80,7 +80,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
         studyprogrammeKey: studyprogramme.key,
       },
       attributes: ['id', 'data', 'studyprogrammeKey'],
-      order: [['createdAt', 'DESC']]
+      order: [['createdAt', 'ASC']]
     })
   }
 

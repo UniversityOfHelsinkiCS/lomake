@@ -96,14 +96,6 @@ const ProgrammeHomeView = () => {
         <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
         <Alert severity='warning'><Typography></Typography></Alert>
         <Typography variant='h3'>{t('keyData:documentingHeader')}</Typography>
-        {(areas.length > 0 && hasWriteRights) && (
-          <Box>
-            <Button onClick={handleClick} variant="outlined">
-              <Add />
-              {t('document:newDocument')}
-            </Button>
-          </Box>
-        )}
         {Array.isArray(documents) && (documents
           .map((doc: Record<string, any>) => (
             <Accordion key={doc.id}>
@@ -143,6 +135,14 @@ const ProgrammeHomeView = () => {
               </AccordionDetails>
             </Accordion>
           )))}
+        {(areas.length > 0 && hasWriteRights) && (
+          <Box>
+            <Button onClick={handleClick} variant="outlined">
+              <Add />
+              {t('document:newDocument')}
+            </Button>
+          </Box>
+        )}
       </Box>
     </Box >
   )
