@@ -8,26 +8,29 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/client/util/store'
 import { DocumentFormSchema } from '@/shared/validators'
-import { createDocument } from '@/client/util/redux/documentsSlicer'
+import { updateDocument } from '@/client/util/redux/documentsSlicer'
 import { TFunction } from 'i18next'
+import { useHistory } from 'react-router'
+import { basePath } from '@/config/common'
 
 const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followupDate']
 
 const initForm = (t: TFunction, error: boolean) => {
   return fields.reduce((acc, field) => {
-    if (field === 'title' && !error) acc[field] = `${t('document:header')}-${new Date().toLocaleDateString()}`
+    if (field === 'title' && !error) acc[field] = `${t('document:header')}-${new Date().toLocaleDateString('fi-FI')}`
     else acc[field] = ''; return acc
   }, {} as Record<string, string>)
 }
 
-const DocumentForm = ({ programmeKey }: { programmeKey: any }) => {
+const DocumentForm = ({ programmeKey, id }: { programmeKey: string, id: string }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
   const lang = useSelector((state: RootState) => state.language)
+  const history = useHistory()
 
   const [formData, setFormData] = useState(initForm(t, false))
   const [errors, setErrors] = useState(initForm(t, true))
-  const [localeComponent, setLocaleComponent] = useState(enUS)
+  const [localeComponent, setLocaleComponent] = useState(fiFI)
 
   useEffect(() => {
     if (lang === 'fi') setLocaleComponent(fiFI)
@@ -74,9 +77,10 @@ const DocumentForm = ({ programmeKey }: { programmeKey: any }) => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
     if (validateForm()) {
-      dispatch(createDocument({ studyprogrammeKey: programmeKey, data: formData }))
+      dispatch(updateDocument({ studyprogrammeKey: programmeKey, id: id, data: formData }))
       setFormData(initForm(t, false))
       setErrors(initForm(t, true))
+      history.push(`${basePath}v1/programmes/10/${programmeKey}`)
     }
   }
 

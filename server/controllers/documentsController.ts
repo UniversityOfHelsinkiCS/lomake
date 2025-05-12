@@ -24,7 +24,7 @@ interface DocumentResponse {
 }
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
-  const { studyprogrammeKey } = req.params
+  const { studyprogrammeKey, id } = req.params
   const { data } = req.body
 
   const resultObject: ValidateOperationResponse = {
@@ -65,13 +65,24 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     }
   }
 
-  const documents: Document[] = await Document.findAll({
-    where: {
-      studyprogrammeKey: studyprogramme.key,
-    },
-    attributes: ['id', 'data', 'studyprogrammeKey'],
-    order: [['createdAt', 'DESC']]
-  })
+  let documents: Document[] = []
+
+  if (id) {
+    documents = await Document.findAll({
+      where: {
+        id,
+        studyprogrammeKey: studyprogramme.key,
+      }
+    })
+  } else {
+    documents = await Document.findAll({
+      where: {
+        studyprogrammeKey: studyprogramme.key,
+      },
+      attributes: ['id', 'data', 'studyprogrammeKey'],
+      order: [['createdAt', 'DESC']]
+    })
+  }
 
   if (documents.length === 0) {
     resultObject.error = 'No documents found for studyprogramme'
@@ -102,11 +113,11 @@ const getDocuments = async (req: Request, res: Response): Promise<DocumentRespon
 
 const createDocument = async (req: Request, res: Response): Promise<DocumentResponse> => {
   try {
-    const { studyprogrammeKey, status, error, data } = await validateOperation(req)
+    const { studyprogrammeKey, status, error } = await validateOperation(req)
     if (!studyprogrammeKey) return res.status(status).json({ error: error })
 
     const document = await Document.create({
-      data,
+      data: { title: `${new Date().toLocaleDateString('fi-FI')}` },
       studyprogrammeKey
     })
 
@@ -117,4 +128,21 @@ const createDocument = async (req: Request, res: Response): Promise<DocumentResp
   }
 }
 
-export default { getDocuments, createDocument }
+const updateDocument = async (req: Request, res: Response): Promise<DocumentResponse> => {
+  try {
+    const { documents, data, status, error } = await validateOperation(req)
+    if (documents.length === 0) return res.status(status).json({ error: error })
+
+    const document = documents[0]
+    const updated = await document.update({
+      data
+    })
+
+    return res.status(200).json(updated)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+export default { getDocuments, createDocument, updateDocument }

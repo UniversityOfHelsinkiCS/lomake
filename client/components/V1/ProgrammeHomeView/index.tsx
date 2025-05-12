@@ -1,31 +1,34 @@
 import { useMemo, useEffect } from 'react'
 import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { Box, CircularProgress, IconButton, Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails, Alert } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import { Add, ArrowBack } from '@mui/icons-material'
-import { basePath } from '@/config/common'
+import { basePath, isAdmin } from '@/config/common'
 import { KeyDataByCode, KeyDataProgramme } from '@/shared/lib/types'
 
 import { RootState, AppDispatch } from '@/client/util/store'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateIntervetionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
-import { getDocuments } from '@/client/util/redux/documentsSlicer'
+import { createDocument, getDocuments } from '@/client/util/redux/documentsSlicer'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
-
   const dispatch: AppDispatch = useDispatch()
+  const history = useHistory()
   const documents = useSelector((state: RootState) => state.documents.data)
+  const user = useSelector((state: RootState) => state.currentUser.data)
   const form = 10
   const startYear = 2024  // The base year of data from which annual follow-up tracking begins
 
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
+
+  const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
     dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
@@ -50,6 +53,13 @@ const ProgrammeHomeView = () => {
   }
 
   const areas = calculateIntervetionAreas({ metadata, programme: programmeData[0], t })
+
+  const handleClick = () => {
+    dispatch(createDocument({ studyprogrammeKey: programmeKey, data: null }))
+      .then(({ payload }) => {
+        history.push(`${basePath}v1/programmes/${form}/${programmeKey}/document/${payload.id}`)
+      })
+  }
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
@@ -86,15 +96,15 @@ const ProgrammeHomeView = () => {
         <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
         <Alert severity='warning'><Typography></Typography></Alert>
         <Typography variant='h3'>{t('keyData:documentingHeader')}</Typography>
-        {areas.length > 0 && (
+        {(areas.length > 0 && hasWriteRights) && (
           <Box>
-            <Button component={Link} href={`${basePath}v1/programmes/${form}/${programmeKey}/new`} variant="outlined">
+            <Button onClick={handleClick} variant="outlined">
               <Add />
               {t('document:newDocument')}
             </Button>
           </Box>
         )}
-        {documents
+        {Array.isArray(documents) && (documents
           .map((doc: Record<string, any>) => (
             <Accordion>
               <AccordionSummary expandIcon={<ExpandMore />}>
@@ -125,7 +135,7 @@ const ProgrammeHomeView = () => {
                 </div>
               </AccordionDetails>
             </Accordion>
-          ))}
+          )))}
       </Box>
     </Box >
   )

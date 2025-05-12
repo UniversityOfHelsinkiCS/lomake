@@ -74,11 +74,6 @@ router.get('/reports/:year', reports.getReports)
 router.get('/reports/:studyprogrammeKey/:year', reports.getReport)
 router.put('/reports/:studyprogrammeKey/:year', reports.updateReport)
 
-router.get('/cypress/seed', notInProduction, cypress.seed)
-router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
-router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.createFacultyAnswers)
-router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
-
 router.get('/keydata', keyData.getKeyData)
 router.post('/keydata', checkAdmin, keyData.uploadKeyData)
 router.get('/keydata/meta', checkAdmin, keyData.getKeyDataMeta)
@@ -87,5 +82,11 @@ router.put('/keydata/:id', checkAdmin, keyData.updateKeyData)
 
 router.get('/documents/:studyprogrammeKey', documents.getDocuments)
 router.post('/documents/:studyprogrammeKey', documents.createDocument)
+router.put('/documents/:studyprogrammeKey/:id', documents.updateDocument)
+
+router.get('/cypress/seed', notInProduction, cypress.seed)
+router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
+router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.createFacultyAnswers)
+router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
 
 export default router

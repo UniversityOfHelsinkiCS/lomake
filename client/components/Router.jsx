@@ -109,7 +109,7 @@ export default () => (
         <Route exact path="/reform-answers" component={ReformAnswers} />
         <Route exact path="/v1/overview" component={OverviewPageV1} />
         <Route exact path="/v1/programmes/:form/:programme" component={ProgrammeHomeView} />
-        <Route exact path="/V1/programmes/:form/:programme/new" component={InterventionProcedure} />
+        <Route exact path="/V1/programmes/:form/:programme/document/:id" component={InterventionProcedure} />
         <Route exact path="/v1/programmes/:form/:programme/:year" component={ProgrammeYearlyView} />
 
         {/* Route for programmatic redirects */}

@@ -18,7 +18,7 @@ import { AppDispatch, RootState } from "@/client/util/store"
 import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from "@/shared/lib/types"
 import { GroupKey, ProgrammeLevel } from "@/client/lib/enums"
 import { ArrowBack, ExpandMore } from "@mui/icons-material"
-import { basePath } from "@/config/common"
+import { basePath, isAdmin } from "@/config/common"
 import KeyDataCard from "./KeyDataCardComponent"
 import { calculateKeyDataColor, getKeyDataPoints } from "../Utils/util"
 import { TFunction } from "i18next"
@@ -37,12 +37,15 @@ export const calculateIntervetionAreas = ({ metadata, programme, t }: { metadata
 }
 
 const InterventionProcedure = () => {
-  const { programme: programmeKey } = useParams<{ programme: string }>()
+  const { programme: programmeKey, id } = useParams<{ programme: string, id: string }>()
   const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
+  const user = useSelector((state: RootState) => state.currentUser.data)
+
+  const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
     if (programmeKey)
@@ -67,7 +70,7 @@ const InterventionProcedure = () => {
 
   const areas = calculateIntervetionAreas({ metadata, programme: programmeData, t })
 
-  if (!keyData) return null
+  if (!keyData || !hasWriteRights) return null
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -111,7 +114,7 @@ const InterventionProcedure = () => {
           </AccordionDetails>
         </Accordion>
       )}
-      <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} />
+      <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} id={id} />
     </Box>
   )
 }
