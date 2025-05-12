@@ -24,12 +24,12 @@ describe('Textfield tests', () => {
     cy.get(`[data-cy=save-${id}]`).click()
   })
 
-  it('Should not allow user to write more than 500 characters', () => {
+  it('Should not allow user to write more than 1000 characters', () => {
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
     const id = `Vetovoimaisuus-Comment`
-    cy.typeInTextField(id, 'a'.repeat(501))
+    cy.typeInTextField(id, 'a'.repeat(1001))
     cy.get(`[data-cy=save-${id}]`).click()
-    cy.get(`[data-cy=box-${id}]`).contains('a'.repeat(500))
+    cy.get(`[data-cy=box-${id}]`).contains('a'.repeat(1000))
   })
 
   it('Should alert user if trying to leave without saving', () => {
