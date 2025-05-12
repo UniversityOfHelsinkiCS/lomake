@@ -79,7 +79,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
       where: {
         studyprogrammeKey: studyprogramme.key,
       },
-      attributes: ['id', 'data', 'studyprogrammeKey'],
+      attributes: ['id', 'data', 'studyprogrammeKey', 'active', 'activeYear'],
       order: [['createdAt', 'ASC']]
     })
   }
@@ -113,12 +113,20 @@ const getDocuments = async (req: Request, res: Response): Promise<DocumentRespon
 
 const createDocument = async (req: Request, res: Response): Promise<DocumentResponse> => {
   try {
-    const { studyprogrammeKey, status, error } = await validateOperation(req)
+    const { studyprogrammeKey, status, error, documents } = await validateOperation(req)
     if (!studyprogrammeKey) return res.status(status).json({ error: error })
+
+    const calculateActiveYear = () => {
+      const last = documents.length > 0 ? documents.length - 1 : 0
+      if (documents.length === 0 || documents?.[last].active === false) return new Date().getFullYear()
+      return documents[last].activeYear
+    }
 
     const document = await Document.create({
       data: { title: `${new Date().toLocaleDateString('fi-FI')}` },
-      studyprogrammeKey
+      studyprogrammeKey,
+      active: true,
+      activeYear: calculateActiveYear()
     })
 
     res.status(201).json(document)
