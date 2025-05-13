@@ -842,6 +842,72 @@ const initData = {
       // Muut
       Vuosi: 2023,
     },
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'KH50_005',
+      'Koulutusohjelman nimi': 'Tietojenkäsittelytieteen kandiohjelma',
+
+      // Kandiohjelman avainluvut
+      Hakupaine: 9.0,
+      'Ensisijaiset hakijat': 250,
+      'Aloituspaikkojen täyttö': 0.99,
+      'Opintonsa aloittaneet': 70,
+      Tutkinnot: 10,
+      'Tavoiteajassa valmistuminen': 0.25,
+      'Opintojen eteneminen': 0.25,
+      'Läsnäolevien kasautuminen': 0.25,
+      'Opiskelijoiden hyvinvointi': 0,
+      'Opintojen ohjaus': 0,
+      'Opetuksen laatu': 0,
+      Palauteaktiivisuus: 0.9,
+      // Muut
+      Vuosi: 2024,
+    },
+
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'KH50_006',
+      'Koulutusohjelman nimi': 'Geotieteiden kandiohjelma',
+
+      // Kandiohjelman avainluvut
+      Hakupaine: 0,
+      'Ensisijaiset hakijat': 1,
+      'Aloituspaikkojen täyttö': 0.1,
+      'Opintonsa aloittaneet': 1,
+      Tutkinnot: 100,
+      'Tavoiteajassa valmistuminen': 0.8,
+      'Opintojen eteneminen': 0.8,
+      'Läsnäolevien kasautuminen': 0.1,
+      'Opiskelijoiden hyvinvointi': 0.8,
+      'Opintojen ohjaus': 0.8,
+      'Opetuksen laatu': 0.8,
+      Palauteaktiivisuus: 0.6,
+
+      // Muut
+      Vuosi: 2024, // testing year cap is 2024 so the keydata year has to be 2024-1
+    },
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'KH50_002',
+      'Koulutusohjelman nimi': 'Fysikaalisten tieteiden kandiohjelma',
+
+      // Kandiohjelman avainluvut
+      Hakupaine: 6,
+      'Ensisijaiset hakijat': 200,
+      'Aloituspaikkojen täyttö': 1,
+      'Opintonsa aloittaneet': 80,
+      Tutkinnot: 80,
+      'Tavoiteajassa valmistuminen': 0.6,
+      'Opintojen eteneminen': 0.6,
+      'Läsnäolevien kasautuminen': 0.1,
+      'Opiskelijoiden hyvinvointi': undefined,
+      'Opintojen ohjaus': undefined,
+      'Opetuksen laatu': undefined,
+      Palauteaktiivisuus: undefined,
+
+      // Muut
+      Vuosi: 2024,
+    },
   ],
   Maisteriohjelmat: [
     {
@@ -888,6 +954,51 @@ const initData = {
 
       // Muut
       Vuosi: 2023,
+    },
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'MH50_009',
+      'Koulutusohjelman nimi': 'Tietojenkäsittelytieteen maisteriohjelma',
+
+      // Maisteriohjelman avainluvut
+      Hakijat: 5,
+      Hakupaine: 0.5,
+      Aloituspaikat: 25,
+      'Opintonsa aloittaneet': 10,
+      Tutkinnot: 10,
+      'Tavoiteajassa valmistuminen': 0.1,
+      'Valmistuminen tavoiteajan jälkeen': 0.1,
+      'Läsnäolevien kasautuminen': 0,
+      'Opetuksen linjakkuus': 0.1,
+      'Oppimista edistävä palaute': 0.1,
+      'Opintojen kiinnostavuus': 0.1,
+      Työllistyminen: 0,
+
+      // Muut
+      Vuosi: 2024,
+      Lisätietoja_fi: 'Lakkautettu ohjelma',
+    },
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'MH40_015',
+      'Koulutusohjelman nimi': 'Historian maisteriohjelma',
+
+      // Maisteriohjelman avainluvut
+      Hakijat: 20,
+      Hakupaine: 1.2,
+      Aloituspaikat: 22,
+      'Opintonsa aloittaneet': 22,
+      Tutkinnot: 22,
+      'Tavoiteajassa valmistuminen': 0.22,
+      'Valmistuminen tavoiteajan jälkeen': 0.22,
+      'Läsnäolevien kasautuminen': 0.22,
+      'Opetuksen linjakkuus': 0.22,
+      'Oppimista edistävä palaute': 0.22,
+      'Opintojen kiinnostavuus': 0.44,
+      Työllistyminen: 0,
+
+      // Muut
+      Vuosi: 2024,
     },
   ],
 }
