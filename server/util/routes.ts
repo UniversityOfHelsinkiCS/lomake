@@ -7,7 +7,7 @@ import cypress from '../controllers/cypressController.js'
 import faculty from '../controllers/facultyController.js'
 import degreeReform from '../controllers/degreeReformController.js'
 import locks from '../controllers/lockController.js'
-import reports from '../controllers/reportsController.js'
+import reports, { ReportResponse } from '../controllers/reportsController.js'
 import keyData from '../controllers/keyDataController.js'
 import documents from '../controllers/documentsController.js'
 
@@ -20,6 +20,7 @@ import {
   requireFacultyRead,
   checkAdminOrKatselmusryhma,
   requireUniFormRight,
+  requireDekanaatti,
 } from '../middleware/accessControlMiddleware.js'
 
 const router = Router()
@@ -71,8 +72,8 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 router.get('/faculties', faculty.getAll)
 
 router.get('/reports/:year', reports.getReports)
-router.get('/reports/:studyprogrammeKey/:year', reports.getReport)
-router.put('/reports/:studyprogrammeKey/:year', reports.updateReport)
+router.get<never, any, never>('/reports/:studyprogrammeKey/:year', reports.getReport)
+router.put('/reports/:studyprogrammeKey/:year', requireProgrammeWrite, reports.updateReport)
 
 router.get('/keydata', keyData.getKeyData)
 router.post('/keydata', checkAdmin, keyData.uploadKeyData)
@@ -81,8 +82,9 @@ router.delete('/keydata/:id', checkAdmin, keyData.deleteKeyData)
 router.put('/keydata/:id', checkAdmin, keyData.updateKeyData)
 
 router.get('/documents/:studyprogrammeKey', documents.getDocuments)
-router.post('/documents/:studyprogrammeKey', documents.createDocument)
-router.put('/documents/:studyprogrammeKey/:id', documents.updateDocument)
+router.post('/documents/:studyprogrammeKey', requireProgrammeWrite, documents.createDocument)
+router.put('/documents/:studyprogrammeKey/:id', requireProgrammeWrite, documents.updateDocument)
+router.put('/documents/:studyprogrammeKey/close/all', requireDekanaatti, documents.closeInterventionProcedure)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)

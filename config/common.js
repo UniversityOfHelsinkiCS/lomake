@@ -189,6 +189,21 @@ const internationalAccess = {
   MH55_002: { read: true, year: 2020 },
 }
 
+const dekanaattiIamGroup = [
+  'hy-ttdk-dekanaatti',
+  'hy-ltdk-dekanaatti',
+  'hy-mltdk-dekanaatti',
+  'hy-oiktdk-dekanaatti',
+  'hy-humtdk-dekanaatti',
+  'hy-ftdk-dekanaatti',
+  'hy-bytdk-dekanaatti',
+  'hy-ktdk-dekanaatti',
+  'hy-valttdk-dekanaatti',
+  'hy-mmtdk-dekanaatti',
+  'hy-eltdk-dekanaatti',
+  'hy-varadekaanit-opetus',
+]
+
 const testProgrammeCode = 'KH50_005'
 
 const testProgrammeName = `Bachelor's Programme in Computer Science`
@@ -235,4 +250,5 @@ export {
   requiredDegreeReformIds,
   isKatselmusProjektiOrOhjausryhma,
   isEvaluationUniversityUser,
+  dekanaattiIamGroup,
 }

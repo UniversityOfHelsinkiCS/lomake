@@ -1,5 +1,5 @@
 import { inProduction } from '../util/common.js'
-import { isAdmin, isSuperAdmin, isKatselmusProjektiOrOhjausryhma } from '../../config/common.js'
+import { isAdmin, isSuperAdmin, isKatselmusProjektiOrOhjausryhma, dekanaattiIamGroup } from '../../config/common.js'
 import logger from '../util/logger.js'
 
 const requireProgrammeRead = (req, res, next) => {
@@ -60,6 +60,12 @@ const notInProduction = (req, res, next) => {
   }
 }
 
+const requireDekanaatti = (req, res, next) => {
+  if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
+  else if (res.user.iamGroups.some(group => dekanaattiIamGroup.includes(group))) next()
+  else res.status(401).json({ error: 'Unautorized access.' }).end()
+}
+
 export {
   notInProduction,
   requireFacultyRead,
@@ -69,4 +75,5 @@ export {
   checkAdmin,
   checkAdminOrKatselmusryhma,
   requireUniFormRight,
+  requireDekanaatti,
 }

@@ -6,14 +6,14 @@ import { useTranslation } from 'react-i18next'
 import { Box, CircularProgress, IconButton, Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails, Alert } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import { Add, ArrowBack, Edit } from '@mui/icons-material'
-import { basePath, isAdmin } from '@/config/common'
+import { basePath, dekanaattiIamGroup, isAdmin } from '@/config/common'
 import { KeyDataByCode, KeyDataProgramme } from '@/shared/lib/types'
 
 import { RootState, AppDispatch } from '@/client/util/store'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateIntervetionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
-import { createDocument, getDocuments } from '@/client/util/redux/documentsSlicer'
+import { closeInterventionProcedure, createDocument, getDocuments } from '@/client/util/redux/documentsSlicer'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
@@ -32,7 +32,7 @@ const ProgrammeHomeView = () => {
 
   useEffect(() => {
     dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
-  }, [])
+  }, [documents])
 
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
@@ -59,6 +59,24 @@ const ProgrammeHomeView = () => {
       .then(({ payload }) => {
         history.push(`${basePath}v1/programmes/${form}/${programmeKey}/document/${payload.id}`)
       })
+  }
+
+  const handleCloseProcedure = () => {
+    dispatch(closeInterventionProcedure({ studyprogrammeKey: programmeKey }))
+  }
+
+  const activeProcedure = () => {
+    if (areas.length > 0) {
+      if (documents.length > 0 && !documents.at(-1).active) return false
+      else return true
+    }
+    return false
+  }
+
+  const hasAccessToCloseInterventionProcedure = () => {
+    if (isAdmin(user)) return true
+    else if (user.iamGroups.some((group: string) => dekanaattiIamGroup.includes(group))) return true
+    return false
   }
 
   return (
@@ -135,7 +153,7 @@ const ProgrammeHomeView = () => {
               </AccordionDetails>
             </Accordion>
           )))}
-        {(areas.length > 0 && hasWriteRights) && (
+        {(hasWriteRights && activeProcedure()) && (
           <Box>
             <Button onClick={handleClick} variant="outlined">
               <Add />
@@ -144,6 +162,9 @@ const ProgrammeHomeView = () => {
           </Box>
         )}
       </Box>
+      {(hasAccessToCloseInterventionProcedure && activeProcedure()) && (
+        <Button variant='contained' onClick={handleCloseProcedure}>Close intervention procedure</Button>
+      )}
     </Box >
   )
 }

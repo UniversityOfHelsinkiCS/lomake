@@ -1,11 +1,9 @@
 import logger from '../util/logger.js'
 import db from '../models/index.js'
 import Document from '../models/document.js'
-
 import type { Request, Response } from 'express'
 import { DocumentFormSchema } from '../../shared/validators/index.js'
-
-type DocumentData = any
+import { sequelize } from '../database/connection.js'
 
 interface ValidateOperationResponse {
   success: boolean
@@ -13,12 +11,12 @@ interface ValidateOperationResponse {
   status: number
   documents: Document[] | null
   studyprogrammeKey: string | null
-  data: DocumentData
+  data: typeof DocumentFormSchema | null
 }
 
 interface DocumentResponse {
   error?: string
-  data?: DocumentData
+  data?: null
   success?: boolean
   statusCode?: number
 }
@@ -33,7 +31,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     status: 0,
     documents: [],
     studyprogrammeKey: null,
-    data: {},
+    data: null,
   }
 
   if (!studyprogrammeKey) {
@@ -100,7 +98,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   return resultObject
 }
 
-const getDocuments = async (req: Request, res: Response): Promise<DocumentResponse> => {
+const getDocuments = async (req: Request, res: Response): Promise<any> => {
   try {
     const result = await validateOperation(req)
     if (!result.success) return res.status(result.status).json({ error: result.error })
@@ -111,7 +109,7 @@ const getDocuments = async (req: Request, res: Response): Promise<DocumentRespon
   }
 }
 
-const createDocument = async (req: Request, res: Response): Promise<DocumentResponse> => {
+const createDocument = async (req: Request, res: Response): Promise<any> => {
   try {
     const { studyprogrammeKey, status, error, documents } = await validateOperation(req)
     if (!studyprogrammeKey) return res.status(status).json({ error: error })
@@ -122,7 +120,7 @@ const createDocument = async (req: Request, res: Response): Promise<DocumentResp
       return documents[last].activeYear
     }
 
-    const document = await Document.create({
+    const document: Document = await Document.create({
       data: { title: `${new Date().toLocaleDateString('fi-FI')}` },
       studyprogrammeKey,
       active: true,
@@ -136,21 +134,48 @@ const createDocument = async (req: Request, res: Response): Promise<DocumentResp
   }
 }
 
-const updateDocument = async (req: Request, res: Response): Promise<DocumentResponse> => {
+const updateDocument = async (req: Request, res: Response): Promise<any> => {
   try {
     const { documents, data, status, error } = await validateOperation(req)
     if (documents.length === 0) return res.status(status).json({ error: error })
 
-    const document = documents[0]
-    const updated = await document.update({
+    const document: Document = documents[0]
+    const updated: Document = await document.update({
       data
     })
 
-    return res.status(200).json(updated)
+    return res.status(204).json(updated)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
   }
 }
 
-export default { getDocuments, createDocument, updateDocument }
+const closeInterventionProcedure = async (req: Request, res: Response): Promise<any> => {
+  const transaction = await sequelize.transaction()
+
+  try {
+    const { studyprogrammeKey, documents, status, error } = await validateOperation(req)
+    if (documents.length === 0) return res.status(status).json(error)
+
+    const updates = {
+      active: false
+    }
+
+    const updated = await Document.update(updates, {
+      where: {
+        studyprogrammeKey: studyprogrammeKey,
+      },
+      transaction,
+    })
+
+    await transaction.commit()
+    return res.status(204).json(updated)
+  } catch (error) {
+    await transaction.rollback()
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+export default { getDocuments, createDocument, updateDocument, closeInterventionProcedure }

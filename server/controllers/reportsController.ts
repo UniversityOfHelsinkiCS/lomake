@@ -5,8 +5,9 @@ import Report from '../models/reports.js'
 import { Op } from 'sequelize'
 import { updateWSAndClearEditors } from '../websocket.js'
 
-import type { Request, Response } from 'express'
+import { Request, Response } from 'express'
 import type { ReportData } from '@/shared/lib/types.js'
+
 interface ValidateOperationResponse {
   success: boolean
   error: string
@@ -15,12 +16,6 @@ interface ValidateOperationResponse {
   studyprogrammeId: number | null
   year: number | null
   data: ReportData
-}
-interface ReportResponse {
-  error?: string
-  data?: ReportData
-  success?: boolean
-  statusCode?: number
 }
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
@@ -49,7 +44,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     return resultObject
   }
 
-  // @ts-ignore
+  // @ts-expect-error
   // ignore db type error for now since it has not been typed
   const studyprogramme = await db.studyprogramme.findOne({
     where: {
@@ -105,7 +100,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   return resultObject
 }
 
-const getReport = async (req: Request, res: Response): Promise<ReportResponse> => {
+const getReport = async (req: Request, res: Response): Promise<any> => {
   try {
     const result = await validateOperation(req)
 
@@ -117,7 +112,7 @@ const getReport = async (req: Request, res: Response): Promise<ReportResponse> =
   }
 }
 
-const getReports = async (req: Request, res: Response): Promise<ReportResponse> => {
+const getReports = async (req: Request, res: Response): Promise<any> => {
   try {
     const { year } = req.params
 
@@ -141,7 +136,7 @@ const getReports = async (req: Request, res: Response): Promise<ReportResponse> 
   }
 }
 
-const updateReport = async (req: Request, res: Response): Promise<ReportResponse> => {
+const updateReport = async (req: Request, res: Response): Promise<any> => {
   try {
     const result = await validateOperation(req)
     if (!result.success) return res.status(result.status).json({ error: result.error })
