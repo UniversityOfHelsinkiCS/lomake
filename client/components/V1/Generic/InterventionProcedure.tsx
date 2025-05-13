@@ -1,6 +1,6 @@
-import { useParams } from "react-router"
-import { useEffect, useMemo } from "react"
-import { useTranslation } from "react-i18next"
+import { useParams } from 'react-router'
+import { useEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Box,
   IconButton,
@@ -11,22 +11,30 @@ import {
   AccordionSummary,
   AccordionDetails,
   Button,
-} from "@mui/material"
-import { useFetchSingleKeyData } from "@/client/hooks/useFetchKeyData"
-import { useDispatch, useSelector } from "react-redux"
-import { AppDispatch, RootState } from "@/client/util/store"
-import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from "@/shared/lib/types"
-import { GroupKey, ProgrammeLevel } from "@/client/lib/enums"
-import { ArrowBack, ExpandMore } from "@mui/icons-material"
-import { basePath, isAdmin } from "@/config/common"
-import KeyDataCard from "./KeyDataCardComponent"
-import { calculateKeyDataColor, getKeyDataPoints } from "../Utils/util"
-import { TFunction } from "i18next"
-import { TextFieldCard } from "./TextFieldComponent"
-import { getReport } from "@/client/util/redux/reportsSlicer"
-import DocumentForm from "./DocumentForm"
+} from '@mui/material'
+import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/client/util/store'
+import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { ArrowBack, ExpandMore } from '@mui/icons-material'
+import { basePath, isAdmin } from '@/config/common'
+import KeyDataCard from './KeyDataCardComponent'
+import { calculateKeyDataColor, getKeyDataPoints } from '../Utils/util'
+import { TFunction } from 'i18next'
+import { TextFieldCard } from './TextFieldComponent'
+import { getReport } from '@/client/util/redux/reportsSlicer'
+import DocumentForm from './DocumentForm'
 
-export const calculateIntervetionAreas = ({ metadata, programme, t }: { metadata: KeyDataMetadata[], programme: KeyDataProgramme, t: TFunction }) => {
+export const calculateIntervetionAreas = ({
+  metadata,
+  programme,
+  t,
+}: {
+  metadata: KeyDataMetadata[]
+  programme: KeyDataProgramme
+  t: TFunction
+}) => {
   let res: string[] = []
   const keyDataPoints = getKeyDataPoints(t)
   Object.values(keyDataPoints).map((point: any) => {
@@ -37,7 +45,7 @@ export const calculateIntervetionAreas = ({ metadata, programme, t }: { metadata
 }
 
 const InterventionProcedure = () => {
-  const { programme: programmeKey, id } = useParams<{ programme: string, id: string }>()
+  const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
@@ -48,8 +56,7 @@ const InterventionProcedure = () => {
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
-    if (programmeKey)
-      dispatch(getReport({ studyprogrammeKey: programmeKey, year: year }))
+    if (programmeKey) dispatch(getReport({ studyprogrammeKey: programmeKey, year: year }))
   }, [programmeKey, dispatch])
 
   const metadata = useMemo(() => {
@@ -61,8 +68,7 @@ const InterventionProcedure = () => {
   const programmeData = useMemo(() => {
     if (keyData) {
       return keyData.programme.find(
-        (programmeData: KeyDataProgramme) =>
-          programmeData.koulutusohjelmakoodi === programmeKey,
+        (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey,
       )
     }
     return {}
@@ -78,7 +84,9 @@ const InterventionProcedure = () => {
         <IconButton component={Link} href={`${basePath}v1/programmes/10/${programmeKey}`} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
-        <Typography variant="h2">{programmeData.koulutusohjelma[lang]} - {`${t('document:header')}-${new Date().toLocaleDateString()}`}</Typography>
+        <Typography variant="h2">
+          {programmeData.koulutusohjelma[lang]} - {`${t('document:header')}-${new Date().toLocaleDateString()}`}
+        </Typography>
       </Box>
       <Alert severity="info">{t('document:infobox')}</Alert>
       <Typography variant="h4">{t('document:backgroundInfoHeader')}</Typography>
@@ -87,7 +95,7 @@ const InterventionProcedure = () => {
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Typography variant="h5">{t('document:keyFigure')}</Typography>
         </AccordionSummary>
-        {areas.map((groupKey) => {
+        {areas.map(groupKey => {
           const props = {
             title: groupKey,
             groupKey: groupKey as GroupKey,
@@ -97,7 +105,12 @@ const InterventionProcedure = () => {
           return (
             <AccordionDetails key={groupKey}>
               <Typography>{t('document:keyFigureDescription')}</Typography>
-              <KeyDataCard level={programmeData.level as ProgrammeLevel} metadata={metadata} programme={programmeData} {...props} />
+              <KeyDataCard
+                level={programmeData.level as ProgrammeLevel}
+                metadata={metadata}
+                programme={programmeData}
+                {...props}
+              />
               <TextFieldCard id={groupKey} t={t} type="Comment" />
             </AccordionDetails>
           )
@@ -110,7 +123,14 @@ const InterventionProcedure = () => {
           </AccordionSummary>
           <AccordionDetails sx={{ display: 'flex', flexDirection: 'column' }}>
             <TextFieldCard id="Toimenpiteet" t={t} type="Measure" />
-            <Button sx={{ alignSelf: 'flex-end', mt: '1rem' }} variant="outlined" component={Link} href={`${basePath}v1/programmes/10/${programmeKey}/${year}/`}>Siirry muokkaamaan kehittämissuunnitelmaa</Button>
+            <Button
+              sx={{ alignSelf: 'flex-end', mt: '1rem' }}
+              variant="outlined"
+              component={Link}
+              href={`${basePath}v1/programmes/10/${programmeKey}/${year}?tab=1`}
+            >
+              Siirry muokkaamaan kehittämissuunnitelmaa
+            </Button>
           </AccordionDetails>
         </Accordion>
       )}

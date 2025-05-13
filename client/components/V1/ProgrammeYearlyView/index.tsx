@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import { useHistory, useParams } from 'react-router'
+import { useHistory, useParams, useLocation } from 'react-router'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
@@ -32,6 +32,8 @@ const ProgrammeView = () => {
   const dispatch: AppDispatch = useDispatch()
   const history = useHistory()
   const { t } = useTranslation()
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
   const { programme: programmeKey, year: selectedYear } = useParams<{ programme: string; year: string }>()
   const [activeTab, setActiveTab] = useState(0)
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
@@ -60,6 +62,15 @@ const ProgrammeView = () => {
   }
 
   useEffect(() => {
+    const tabParam = searchParams.get('tab')
+    setActiveTab(parseInt(tabParam) || 0)
+
+    return () => {
+      dispatch(wsLeaveRoom(form))
+    }
+  }, [])
+
+  useEffect(() => {
     if (!keyData) return
     if (!isValidYear(parseInt(selectedYear), keyData)) return
 
@@ -80,12 +91,6 @@ const ProgrammeView = () => {
       dispatch(setViewOnly(false))
     }
   }, [programmeKey, form, keyData])
-
-  useEffect(() => {
-    return () => {
-      dispatch(wsLeaveRoom(form))
-    }
-  }, [])
 
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
@@ -114,6 +119,10 @@ const ProgrammeView = () => {
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue)
+    history.push({
+      pathname: location.pathname,
+      search: `?tab=${newValue}`,
+    })
   }
 
   const ActionsBadge = ({
