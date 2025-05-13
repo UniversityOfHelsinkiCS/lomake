@@ -72,7 +72,7 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 router.get('/faculties', faculty.getAll)
 
 router.get('/reports/:year', reports.getReports)
-router.get<never, any, never>('/reports/:studyprogrammeKey/:year', reports.getReport)
+router.get('/reports/:studyprogrammeKey/:year', reports.getReport)
 router.put('/reports/:studyprogrammeKey/:year', requireProgrammeWrite, reports.updateReport)
 
 router.get('/keydata', keyData.getKeyData)

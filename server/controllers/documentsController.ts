@@ -139,7 +139,7 @@ const updateDocument = async (req: Request, res: Response): Promise<any> => {
     const { documents, data, status, error } = await validateOperation(req)
     if (documents.length === 0) return res.status(status).json({ error: error })
 
-    const document: Document = documents[0]
+    const document: Document = documents.pop()
     const updated: Document = await document.update({
       data
     })
