@@ -7,7 +7,7 @@ export const up = ({ context: queryInterface }) => {
     }),
     queryInterface.addColumn('documents', 'active_year', {
       type: INTEGER,
-    })
+    }),
   ]
 }
 
