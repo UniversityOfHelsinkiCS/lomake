@@ -36,4 +36,6 @@ describe('ProgrammeHomeView page test', () => {
       cy.get('[data-cy="keydata-modal"]').should('be.visible')
     })
   })
+
+  describe('TEST CREATE-DOCUMENT-BUTTON EXISTANCE when possible', () => {})
 })
