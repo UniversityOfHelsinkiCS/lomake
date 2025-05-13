@@ -7,6 +7,7 @@ class Document extends Model<InferAttributes<Document>, InferCreationAttributes<
   declare studyprogrammeKey: string
   declare active: boolean
   declare activeYear: number
+  declare reason: Record<string, any>
   declare createdAt: Date
   declare updatedAt: Date
 }
@@ -33,6 +34,9 @@ Document.init(
     activeYear: {
       type: INTEGER,
       allowNull: false,
+    },
+    reason: {
+      type: JSONB,
     },
     createdAt: DATE,
     updatedAt: DATE,
