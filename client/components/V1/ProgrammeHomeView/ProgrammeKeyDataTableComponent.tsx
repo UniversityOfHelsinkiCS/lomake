@@ -41,10 +41,8 @@ const ProgrammeKeyDataTableComponent = ({
   }, [modalOpen])
 
   const annualFollowUpYear = (programmeDataYear: number) => {
-    /*
-      Simple solution for syncing data to the follow-up year.
-      Data is always collected from the previous year relative to the annual follow-up year.
-    */
+    // this function is defined to communicate to you that the
+    // follow-up year is the next year from the data year
     return programmeDataYear + 1
   }
 
