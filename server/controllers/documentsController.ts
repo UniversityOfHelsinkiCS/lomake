@@ -14,13 +14,6 @@ interface ValidateOperationResponse {
   data: typeof DocumentFormSchema | null
 }
 
-interface DocumentResponse {
-  error?: string
-  data?: null
-  success?: boolean
-  statusCode?: number
-}
-
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
   const { studyprogrammeKey, id } = req.params
   const { data } = req.body
