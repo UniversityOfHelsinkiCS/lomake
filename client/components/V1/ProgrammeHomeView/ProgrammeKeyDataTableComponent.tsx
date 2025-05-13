@@ -45,7 +45,7 @@ const ProgrammeKeyDataTableComponent = ({
       Simple solution for syncing data to the follow-up year.
       Data is always collected from the previous year relative to the annual follow-up year.
     */
-    return (programmeDataYear + 1)
+    return programmeDataYear + 1
   }
 
   const getNextFollowUpYear = () => {
@@ -81,7 +81,10 @@ const ProgrammeKeyDataTableComponent = ({
           <TableBody>
             {programmeData.map((programmeData: KeyDataProgramme, index) => (
               <TableRow key={programmeData.koulutusohjelmakoodi + index}>
-                <TableCell style={{ borderRadius: '0.5rem 0 0 0.5rem' }}>
+                <TableCell
+                  style={{ borderRadius: '0.5rem 0 0 0.5rem' }}
+                  data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
+                >
                   <Link
                     to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${annualFollowUpYear(programmeData.year)}`}
                     style={{ width: '100%', textAlign: 'left' }}
@@ -124,7 +127,7 @@ const ProgrammeKeyDataTableComponent = ({
             ))}
             <TableRow>
               <TableCell>
-                { /* @ts-expect-error */}
+                {/* @ts-expect-error */}
                 <Link aria-disabled style={{ width: '100%', textAlign: 'left' }}>
                   <Typography variant="h5" color="secondary">
                     {getNextFollowUpYear()}
@@ -150,7 +153,7 @@ const ProgrammeKeyDataTableComponent = ({
       </Table>
 
       <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
-    </div >
+    </div>
   )
 }
 
