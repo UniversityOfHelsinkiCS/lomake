@@ -695,6 +695,16 @@ export default {
     keyFigure: 'Utvärderingsområden',
     edit: 'Redigera dokumentet',
     newDocument: 'Luo uusi dokumentti',
+
+    closeInterventionProcedure:
+      'Om processen för interventionsförfarandet för utbildningsprogrammet anses vara avslutad, kan fakulteten besluta att avsluta den genom att välja en grund och klicka på knappen nedan. När processen avslutas kan inga nya formulär skapas för interventionsförfaranden, och processen öppnas igen om någon nyckeltal understiger det tillåtna gränsvärdet.',
+    closeButton: 'Avsluta interventionsförfarande',
+    dropdownReason: 'Grund för avslutande',
+    textfieldReason: 'Anledning',
+    option1: 'Utbildningsprogrammet går bättre',
+    option2: 'Avveckling av utbildningsprogrammet',
+    option3: 'Sammanläggning av utbildningsprogrammet',
+    option4: 'Annan anledning, vilken?',
   },
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',

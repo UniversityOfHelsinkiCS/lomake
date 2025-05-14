@@ -140,7 +140,12 @@ export const DocumentFormSchema = z.object({
   matters: z.string().min(100, 'matters'),
   schedule: z.string().min(3, 'schedule'),
   followupDate: z.string().date('date'),
-})
+}).strict()
+
+export const InterventionProcedureCloseSchema = z.object({
+  reason: z.string(),
+  additionalInfo: z.string(),
+}).strict()
 
 export const logZodError = (error: ZodError) => {
   let parsedErrors: any[] = []

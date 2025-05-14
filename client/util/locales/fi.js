@@ -663,6 +663,15 @@ export default {
     keyFigure: 'Arviointialueet',
     newDocument: 'Luo uusi dokumentti',
     edit: 'Muokkaa dokumenttia',
+    closeInterventionProcedure:
+      'Mikäli koulutusohjelman toimenpidemenettelyn prosessi on katsottu päätettäväksi, voi tiedekunta päättää sen valitsemalla perusteen ja painamalla alla olevasta painikkeesta. Prosessin päättyessä toimenpidemenettelyille ei voi enää luoda uusia lomakkeita, ja prosssi aukeaa uudelleen mikäli jokin avainluvuista alittaa sallitun raja-arvon.',
+    closeButton: 'Päätä toimenpidemenettey',
+    dropdownReason: 'Päättämisen peruste',
+    textfieldReason: 'Syy',
+    option1: 'Koulutusohjelmalla menee paremmin',
+    option2: 'Koulutusohjelman lakkauttaminen',
+    option3: 'Koulutusohjelman yhdistäminen',
+    option4: 'Muu syy, mikä?',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',

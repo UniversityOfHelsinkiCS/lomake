@@ -17,18 +17,20 @@ const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followu
 
 const initForm = (t: TFunction, error: boolean) => {
   return fields.reduce((acc, field) => {
-    if (field === 'title' && !error) acc[field] = `${t('document:header')}-${new Date().toLocaleDateString('fi-FI')}`
+    if (field === 'title' && !error) acc[field] = `${t('document:header')} - ${new Date().toLocaleDateString('fi-FI')}`
     else acc[field] = ''; return acc
   }, {} as Record<string, string>)
 }
 
-const DocumentForm = ({ programmeKey, id }: { programmeKey: string, id: string }) => {
+const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id: string, document: Record<string, any> }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
   const lang = useSelector((state: RootState) => state.language)
   const history = useHistory()
 
-  const [formData, setFormData] = useState(initForm(t, false))
+  const data = document.data.date !== undefined ? document.data : initForm(t, false)
+
+  const [formData, setFormData] = useState(data)
   const [errors, setErrors] = useState(initForm(t, true))
   const [localeComponent, setLocaleComponent] = useState(fiFI)
 
@@ -40,7 +42,7 @@ const DocumentForm = ({ programmeKey, id }: { programmeKey: string, id: string }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData((prevData) => ({
+    setFormData((prevData: Record<string, string>) => ({
       ...prevData,
       [name]: value,
     }))
@@ -53,7 +55,7 @@ const DocumentForm = ({ programmeKey, id }: { programmeKey: string, id: string }
     const day = String(date.date()).padStart(2, '0')
     const final = `${year}-${month}-${day}`
 
-    setFormData((prevData) => ({
+    setFormData((prevData: Record<string, string>) => ({
       ...prevData,
       [field]: final,
     }));

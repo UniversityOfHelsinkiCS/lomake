@@ -1,9 +1,26 @@
-import { useMemo, useEffect } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { Box, CircularProgress, IconButton, Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails, Alert } from '@mui/material'
+import {
+  Box,
+  CircularProgress,
+  IconButton,
+  Button,
+  Link,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Alert,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+  FormControl,
+  InputLabel,
+  TextField
+} from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import { Add, ArrowBack, Edit } from '@mui/icons-material'
 import { basePath, dekanaattiIamGroup, isAdmin } from '@/config/common'
@@ -29,6 +46,9 @@ const ProgrammeHomeView = () => {
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
 
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
+
+  const [reason, setReason] = useState('')
+  const [additionalInfo, setAdditionalInfo] = useState('')
 
   useEffect(() => {
     dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
@@ -62,7 +82,11 @@ const ProgrammeHomeView = () => {
   }
 
   const handleCloseProcedure = () => {
-    dispatch(closeInterventionProcedure({ studyprogrammeKey: programmeKey }))
+    const data = {
+      'reason': reason,
+      'additionalInfo': additionalInfo,
+    }
+    dispatch(closeInterventionProcedure({ studyprogrammeKey: programmeKey, data: data }))
   }
 
   const activeProcedure = () => {
@@ -112,7 +136,7 @@ const ProgrammeHomeView = () => {
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Typography variant="h1">{t('keyData:interventionProcedure').toUpperCase()} </Typography>
         <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
-        <Alert severity='warning'><Typography></Typography></Alert>
+        <Alert severity={areas?.length > 0 ? 'warning' : 'success'}><Typography>{areas?.length > 0 ? t('document:warningText') : t('document:successText')}</Typography></Alert>
         <Typography variant='h3'>{t('keyData:documentingHeader')}</Typography>
         {Array.isArray(documents) && (documents
           .map((doc: Record<string, any>) => (
@@ -124,7 +148,7 @@ const ProgrammeHomeView = () => {
                 <div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant='h5'>{t('document:date')}:</Typography>
-                    <Typography>{doc.data.date}</Typography>
+                    <Typography>{new Date(doc.data.date).toLocaleDateString('fi-FI')}</Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant='h5'>{t('document:participants')}:</Typography>
@@ -140,11 +164,11 @@ const ProgrammeHomeView = () => {
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant='h5'>{t('document:followupDate')}:</Typography>
-                    <Typography>{doc.data.followupDate}</Typography>
+                    <Typography>{new Date(doc.data.followupDate).toLocaleDateString('fi-FI')}</Typography>
                   </div>
                 </div>
                 <div style={{ marginTop: '1rem' }}>
-                  {hasWriteRights && (
+                  {(hasWriteRights && activeProcedure()) && (
                     <Button variant='contained' component={Link} href={`${basePath}v1/programmes/10/${programmeKey}/document/${doc.id}`} >
                       {t('document:edit')} <Edit sx={{ ml: '1rem' }} />
                     </Button>
@@ -163,7 +187,22 @@ const ProgrammeHomeView = () => {
         )}
       </Box>
       {(hasAccessToCloseInterventionProcedure && activeProcedure()) && (
-        <Button variant='contained' onClick={handleCloseProcedure}>Close intervention procedure</Button>
+        <Alert severity='warning' variant='outlined'>
+          <Typography>{t('document:closeInterventionProcedure')}</Typography>
+          <FormControl sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '2rem', mb: '2rem', mt: '2rem' }}>
+            <InputLabel sx={{ width: '40%' }}>{t('document:dropdownReason')}</InputLabel>
+            <Select value={reason} label={t('document:dropdownReason')} onChange={(event) => setReason(event.target.value)} sx={{ width: '20%' }}>
+              <MenuItem value={'1'}>{t('document:option1')}</MenuItem>
+              <MenuItem value={'2'}>{t('document:option2')}</MenuItem>
+              <MenuItem value={'3'}>{t('document:option3')}</MenuItem>
+              <MenuItem value={'4'}>{t('document:option4')}</MenuItem>
+            </Select>
+            {reason === '4' && (<TextField sx={{ width: '75%' }} label={t('document:textfieldReason')} value={additionalInfo} onChange={(event) => setAdditionalInfo(event.target.value)} />)}
+          </FormControl>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+            <Button variant='contained' onClick={handleCloseProcedure} color='error' disabled={!reason}>{t('document:closeButton')}</Button>
+          </div>
+        </Alert>
       )}
     </Box >
   )

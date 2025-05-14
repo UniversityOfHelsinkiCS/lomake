@@ -11,6 +11,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   Button,
+  CircularProgress,
 } from '@mui/material'
 import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,6 +26,7 @@ import { TFunction } from 'i18next'
 import { TextFieldCard } from './TextFieldComponent'
 import { getReport } from '@/client/util/redux/reportsSlicer'
 import DocumentForm from './DocumentForm'
+import { getDocuments } from '@/client/util/redux/documentsSlicer'
 
 export const calculateIntervetionAreas = ({
   metadata,
@@ -52,12 +54,17 @@ const InterventionProcedure = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
   const user = useSelector((state: RootState) => state.currentUser.data)
+  const documents = useSelector((state: RootState) => state.documents.data)
+  const document = documents.length > 0 ? documents.find((doc) => doc.id.toString() === id) : null
 
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
-    if (programmeKey) dispatch(getReport({ studyprogrammeKey: programmeKey, year: year }))
-  }, [programmeKey, dispatch])
+    if (programmeKey) {
+      dispatch(getReport({ studyprogrammeKey: programmeKey, year: year }))
+      dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
+    }
+  }, [programmeKey, year])
 
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
@@ -78,6 +85,8 @@ const InterventionProcedure = () => {
 
   if (!keyData || !hasWriteRights) return null
 
+  if (documents.length === 0) return <CircularProgress />
+
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '2rem' }}>
@@ -85,7 +94,7 @@ const InterventionProcedure = () => {
           <ArrowBack />
         </IconButton>
         <Typography variant="h2">
-          {programmeData.koulutusohjelma[lang]} - {`${t('document:header')}-${new Date().toLocaleDateString()}`}
+          {programmeData.koulutusohjelma[lang]} - {`${document.data.title}`}
         </Typography>
       </Box>
       <Alert severity="info">{t('document:infobox')}</Alert>
@@ -134,7 +143,7 @@ const InterventionProcedure = () => {
           </AccordionDetails>
         </Accordion>
       )}
-      <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} id={id} />
+      <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document} />
     </Box>
   )
 }

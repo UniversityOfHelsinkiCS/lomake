@@ -1,7 +1,12 @@
 import axios from 'axios'
 import callBuilder from '../apiConnection'
 import { inProduction, basePath } from '../common'
-import { getHeaders } from '../../../config/mockHeaders'
+import { getHeaders as mockHeaders } from '../../../config/mockHeaders'
+
+export const getHeaders = () => {
+  return !inProduction ? mockHeaders() : {}
+}
+
 interface State {
   data: any;
   pending?: boolean;
@@ -21,7 +26,6 @@ export const fetchKeyData = () => {
 export const uploadKeyData = (file: any) => {
   return async (dispatch: any) => {
     const route = `${basePath}api/keydata`
-    const defaultHeaders = !inProduction ? getHeaders() : {}
     const prefix = 'POST_KEY_DATA'
     const formData = new FormData()
     formData.append('file', file)
@@ -32,7 +36,7 @@ export const uploadKeyData = (file: any) => {
       await axios.post(route, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          ...defaultHeaders,
+          ...getHeaders(),
         },
       })
       dispatch({ type: `${prefix}_SUCCESS` })
@@ -52,14 +56,13 @@ export const getKeyDataMeta = () => {
 export const deleteKeyData = (id: number) => {
   return async (dispatch: any) => {
     const route = `${basePath}api/keydata/${id}`
-    const defaultHeaders = !inProduction ? getHeaders() : {}
     const prefix = 'DELETE_KEY_DATA'
 
     dispatch({ type: `${prefix}_ATTEMPT` })
 
     try {
       await axios.delete(route, {
-        headers: defaultHeaders,
+        ...getHeaders(),
       })
       dispatch({ type: `${prefix}_SUCCESS` })
     } catch (error) {
@@ -72,14 +75,13 @@ export const deleteKeyData = (id: number) => {
 export const setActiveKeyData = (id: number) => {
   return async (dispatch: any) => {
     const route = `${basePath}api/keydata/${id}`
-    const defaultHeaders = !inProduction ? getHeaders() : {}
     const prefix = 'SET_ACTIVE_KEY_DATA'
 
     dispatch({ type: `${prefix}_ATTEMPT` })
 
     try {
       await axios.put(route, null, {
-        headers: defaultHeaders,
+        ...getHeaders(),
       })
       dispatch({ type: `${prefix}_SUCCESS` })
     } catch (error) {

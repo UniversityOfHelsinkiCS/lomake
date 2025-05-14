@@ -658,6 +658,15 @@ export default {
     keyFigure: 'Evaluation areas',
     newDocument: 'Create new document',
     edit: 'Edit the document',
+    closeInterventionProcedure:
+      'If the intervention procedure process for the study program is considered to be concluded, the faculty can decide to end it by selecting a reason and clicking the button below. Once the process is ended, new forms cannot be created for intervention procedures, and the process will reopen if any key figures fall below the allowed threshold.',
+    closeButton: 'End Intervention Procedure',
+    dropdownReason: 'Reason for Ending',
+    textfieldReason: 'Reason',
+    option1: 'The study program is doing better',
+    option2: 'Discontinuation of the study program',
+    option3: 'Merging of the study program',
+    option4: 'Other reason, what?',
   },
 
   error: {

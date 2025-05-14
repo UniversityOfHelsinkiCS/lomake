@@ -2,7 +2,7 @@ import logger from '../util/logger.js'
 import db from '../models/index.js'
 import Document from '../models/document.js'
 import type { Request, Response } from 'express'
-import { DocumentFormSchema } from '../../shared/validators/index.js'
+import { DocumentFormSchema, InterventionProcedureCloseSchema } from '../../shared/validators/index.js'
 import { sequelize } from '../database/connection.js'
 
 interface ValidateOperationResponse {
@@ -48,11 +48,18 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   }
 
   if (data) {
-    const validationResult = DocumentFormSchema.safeParse(data)
-    if (!validationResult.success) {
-      resultObject.error = validationResult.error.errors.map(e => e.message).join(', ')
-      resultObject.status = 400
-      return resultObject
+    const validationResult1 = DocumentFormSchema.safeParse(data)
+    const validationResult2 = InterventionProcedureCloseSchema.safeParse(data)
+
+    if (!validationResult1.success && !validationResult2.success) {
+      const errors1 = validationResult1.success ? [] : validationResult1.error.errors.map(e => e.message);
+      const errors2 = validationResult2.success ? [] : validationResult2.error.errors.map(e => e.message);
+
+      const allErrors = [...errors1, ...errors2];
+
+      resultObject.error = allErrors.join(', ');
+      resultObject.status = 400;
+      return resultObject;
     }
   }
 
@@ -70,7 +77,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
       where: {
         studyprogrammeKey: studyprogramme.key,
       },
-      attributes: ['id', 'data', 'studyprogrammeKey', 'active', 'activeYear'],
+      attributes: ['id', 'data', 'studyprogrammeKey', 'active', 'activeYear', 'reason'],
       order: [['createdAt', 'ASC']]
     })
   }
@@ -148,11 +155,12 @@ const closeInterventionProcedure = async (req: Request, res: Response): Promise<
   const transaction = await sequelize.transaction()
 
   try {
-    const { studyprogrammeKey, documents, status, error } = await validateOperation(req)
+    const { studyprogrammeKey, documents, status, error, data } = await validateOperation(req)
     if (documents.length === 0) return res.status(status).json(error)
 
     const updates = {
-      active: false
+      active: false,
+      reason: data,
     }
 
     const updated = await Document.update(updates, {

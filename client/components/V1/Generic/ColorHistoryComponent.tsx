@@ -8,7 +8,6 @@ import { ProgrammeLevel } from '@/shared/lib/enums'
 
 const ColorHistoryComponent = (props: any) => {
   if (!props.programme || props.value == 'Ei dataa') {
-    console.log('here')
     return null
   }
   const { t } = useTranslation()

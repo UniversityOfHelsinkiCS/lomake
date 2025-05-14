@@ -1,12 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { basePath, inProduction } from '../common'
-import { getHeaders as mockHeaders } from '../../../config/mockHeaders'
+import { basePath } from '../common'
+import { getHeaders } from './keyDataReducer'
 import { Sentry } from '../sentry'
-
-const getHeaders = () => {
-  return !inProduction ? mockHeaders() : {}
-}
 
 const alertSentry = (err: any, route: string, method: string, data: any) => {
   Sentry.captureException(err, {
@@ -77,9 +73,9 @@ export const updateDocument = createAsyncThunk<any, Record<string, any>>(
 export const closeInterventionProcedure = createAsyncThunk<any, Record<string, any>>(
   'documents/closeInterventionProcedure',
   async (payload, { rejectWithValue }) => {
-    const { studyprogrammeKey } = payload
+    const { studyprogrammeKey, data } = payload
     try {
-      const response = await axios.put(`${basePath}api/documents/${studyprogrammeKey}/close/all`, {},
+      const response = await axios.put(`${basePath}api/documents/${studyprogrammeKey}/close/all`, { data },
         {
           headers: {
             ...getHeaders(),

@@ -1,13 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { basePath, inProduction } from '../common'
-import { getHeaders as mockHeaders } from '../../../config/mockHeaders'
+import { basePath } from '../common'
+import { getHeaders } from './keyDataReducer'
 import { Sentry } from '../sentry'
 import type { ReportData } from '@/shared/lib/types'
-
-const getHeaders = () => {
-  return !inProduction ? mockHeaders() : {}
-}
 
 const alertSentry = (err: any, route: string, method: string, data: any) => {
   Sentry.captureException(err, {
