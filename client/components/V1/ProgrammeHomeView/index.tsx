@@ -32,7 +32,7 @@ const ProgrammeHomeView = () => {
 
   useEffect(() => {
     dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
-  }, [documents])
+  }, [dispatch])
 
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
