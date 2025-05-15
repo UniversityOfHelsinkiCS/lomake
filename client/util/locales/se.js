@@ -671,6 +671,9 @@ export default {
     overview: 'Årlig uppföljningsöversikt',
     programmeHome: 'Programmens startsida',
     moveToOpinion: 'Redigera vyn över utbildningsprogrammet',
+    homeHeader: 'Key Figures and Development plan',
+    interventionProcedure: 'Intervention Procedure',
+    documentingHeader: 'Documentation of the Intervention Procedure',
   },
   document: {
     title: 'Dokumentets titel',
@@ -685,7 +688,7 @@ export default {
     mattersHeader: 'Överenskomna ärenden',
     mattersDescription: 'Lorem korem dorem forem sorem worem work dem',
     scheduleHeader: 'Tidsschema',
-    scheduleDescription: 'Jaakopin paini ja joosuan vääntö',
+    scheduleDescription: '',
     submit: 'Spara dokument',
     backgroundInfoHeader: 'Bakgrundsinformation',
     backgroundInfoDescription: 'Liipalaapa',

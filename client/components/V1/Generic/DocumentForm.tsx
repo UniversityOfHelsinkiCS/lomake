@@ -105,6 +105,9 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
                     format='DD/MM/YYYY'
                     slotProps={{
                       textField: {
+                        inputProps: {
+                          'data-cy': `editor-${field}`,
+                        },
                         error: !!errors[field],
                         helperText: errors[field]
                       },
@@ -119,6 +122,7 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
                   <Typography variant="h5">{t('document:mattersHeader')}</Typography>
                   <Typography>{t('document:mattersDescription')}</Typography>
                   <TextField
+                    data-cy={`editor-${field}`}
                     name={field}
                     label={t(`document:${field}`)}
                     variant="outlined"
@@ -138,6 +142,7 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
                   <Typography variant="h5">{t('document:scheduleHeader')}</Typography>
                   <Typography>{t('document:scheduleDescription')}</Typography>
                   <TextField
+                    data-cy={`editor-${field}`}
                     key={field}
                     name={field}
                     label={t(`document:${field}`)}
@@ -154,6 +159,7 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
             }
             return (
               <TextField
+                data-cy={`editor-${field}`}
                 key={field}
                 name={field}
                 label={t(`document:${field}`)}
@@ -167,7 +173,7 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
               />
             )
           })}
-          <Button key="submit" sx={{ alignSelf: 'flex-end' }} type="submit" variant="contained" color="primary">{t('document:submit')}</Button>
+          <Button data-cy='save-document' key="submit" sx={{ alignSelf: 'flex-end' }} type="submit" variant="contained" color="primary">{t('document:submit')}</Button>
         </div>
       </form>
     </Box>

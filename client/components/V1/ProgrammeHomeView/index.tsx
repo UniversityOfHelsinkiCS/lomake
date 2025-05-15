@@ -30,7 +30,7 @@ import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateIntervetionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { closeInterventionProcedure, createDocument, getDocuments } from '@/client/util/redux/documentsSlicer'
-import studyprogramme from '@/server/models/studyprogramme'
+import { getReport } from '@/client/util/redux/reportsSlicer'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
@@ -123,7 +123,7 @@ const ProgrammeHomeView = () => {
           ]}
         />
         <div style={{ display: 'flex', alignItems: 'center', marginTop: '2rem' }}>
-          <IconButton component={Link} href={`${basePath}v1/overview`} sx={{ marginRight: 2 }}>
+          <IconButton data-cy='navigate-back' component={Link} href={`${basePath}v1/overview`} sx={{ marginRight: 2 }}>
             <ArrowBack />
           </IconButton>
           <Typography variant="h1">{programmeData[0].koulutusohjelma[lang]}</Typography>
@@ -191,7 +191,7 @@ const ProgrammeHomeView = () => {
           )))}
         {(hasWriteRights && activeProcedure()) && (
           <Box>
-            <Button onClick={handleClick} variant="outlined">
+            <Button data-cy='create-new-document' onClick={handleClick} variant="outlined">
               <Add />
               {t('document:newDocument')}
             </Button>

@@ -100,7 +100,7 @@ const InterventionProcedure = () => {
       <Alert severity="info">{t('document:infobox')}</Alert>
       <Typography variant="h4">{t('document:backgroundInfoHeader')}</Typography>
       <Typography>{t('document:backgroundInfoDescription')}</Typography>
-      <Accordion>
+      <Accordion sx={{ padding: '2rem' }}>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Typography variant="h5">{t('document:keyFigure')}</Typography>
         </AccordionSummary>
@@ -126,7 +126,7 @@ const InterventionProcedure = () => {
         })}
       </Accordion>
       {areas.length > 0 && (
-        <Accordion>
+        <Accordion sx={{ padding: '2rem'}}>
           <AccordionSummary expandIcon={<ExpandMore />}>
             <Typography variant="h5">{t('keyData:actions')}</Typography>
           </AccordionSummary>

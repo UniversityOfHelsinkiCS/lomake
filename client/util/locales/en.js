@@ -635,6 +635,9 @@ export default {
     overview: 'Annual follow-up overview',
     programmeHome: 'Programmes homepage',
     moveToOpinion: 'Edit the opinion of the programme',
+    homeHeader: 'Key Figures and Development plan',
+    interventionProcedure: 'Intervention Procedure',
+    documentingHeader: 'Documentation of the Intervention Procedure',
   },
   document: {
     title: 'Document Title',
@@ -649,7 +652,7 @@ export default {
     mattersHeader: 'Agreed Matters',
     mattersDescription: 'Lorem korem dorem forem sorem worem work dem',
     scheduleHeader: 'Schedule',
-    scheduleDescription: 'Jaakopin paini ja joosuan vääntö',
+    scheduleDescription: '',
     submit: 'Save Document',
     backgroundInfoHeader: 'Background information',
     backgroundInfoDescription: 'Liipalaapa',
