@@ -16,7 +16,6 @@ import {
   Alert,
   Select,
   MenuItem,
-  SelectChangeEvent,
   FormControl,
   InputLabel,
   TextField
@@ -52,7 +51,7 @@ const ProgrammeHomeView = () => {
 
   useEffect(() => {
     dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
-  }, [dispatch])
+  }, [dispatch, programmeKey])
 
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
@@ -90,17 +89,26 @@ const ProgrammeHomeView = () => {
   }
 
   const activeProcedure = () => {
-    if (areas.length > 0) {
-      if (documents.length > 0 && !documents.at(-1).active) return false
-      else return true
+    if (areas.length === 0) {
+      return false
     }
-    return false
+
+    if (documents.length === 0) {
+      return true
+    }
+
+    const lastDocument = documents.at(-1)
+
+    if (!lastDocument.active && lastDocument.activeYear !== new Date().getFullYear()) {
+      return true
+    }
+
+    return lastDocument.active
   }
 
   const hasAccessToCloseInterventionProcedure = () => {
-    if (isAdmin(user)) return true
-    else if (user.iamGroups.some((group: string) => dekanaattiIamGroup.includes(group))) return true
-    return false
+    const isUserInDekanaattiGroup = user.iamGroups.some((group: string) => dekanaattiIamGroup.includes(group))
+    return isAdmin(user) || isUserInDekanaattiGroup
   }
 
   return (
@@ -136,7 +144,7 @@ const ProgrammeHomeView = () => {
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Typography variant="h1">{t('keyData:interventionProcedure').toUpperCase()} </Typography>
         <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
-        <Alert severity={areas?.length > 0 ? 'warning' : 'success'}><Typography>{areas?.length > 0 ? t('document:warningText') : t('document:successText')}</Typography></Alert>
+        <Alert severity={activeProcedure() ? 'warning' : 'success'}><Typography>{activeProcedure() ? t('document:warningText') : t('document:successText')}</Typography></Alert>
         <Typography variant='h3'>{t('keyData:documentingHeader')}</Typography>
         {Array.isArray(documents) && (documents
           .map((doc: Record<string, any>) => (
@@ -168,7 +176,7 @@ const ProgrammeHomeView = () => {
                   </div>
                 </div>
                 <div style={{ marginTop: '1rem' }}>
-                  {(hasWriteRights && activeProcedure()) && (
+                  {(hasWriteRights && activeProcedure() && doc.active) && (
                     <Button variant='contained' component={Link} href={`${basePath}v1/programmes/10/${programmeKey}/document/${doc.id}`} >
                       {t('document:edit')} <Edit sx={{ ml: '1rem' }} />
                     </Button>
@@ -191,13 +199,13 @@ const ProgrammeHomeView = () => {
           <Typography>{t('document:closeInterventionProcedure')}</Typography>
           <FormControl sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '2rem', mb: '2rem', mt: '2rem' }}>
             <InputLabel sx={{ width: '40%' }}>{t('document:dropdownReason')}</InputLabel>
-            <Select value={reason} label={t('document:dropdownReason')} onChange={(event) => setReason(event.target.value)} sx={{ width: '20%' }}>
+            <Select value={reason} label={t('document:dropdownReason')} onChange={(event) => setReason(event.target.value)} sx={{ width: '30%' }}>
               <MenuItem value={'1'}>{t('document:option1')}</MenuItem>
               <MenuItem value={'2'}>{t('document:option2')}</MenuItem>
               <MenuItem value={'3'}>{t('document:option3')}</MenuItem>
               <MenuItem value={'4'}>{t('document:option4')}</MenuItem>
             </Select>
-            {reason === '4' && (<TextField sx={{ width: '75%' }} label={t('document:textfieldReason')} value={additionalInfo} onChange={(event) => setAdditionalInfo(event.target.value)} />)}
+            {reason === '4' && (<TextField sx={{ width: '70%' }} label={t('document:textfieldReason')} value={additionalInfo} onChange={(event) => setAdditionalInfo(event.target.value)} />)}
           </FormControl>
           <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
             <Button variant='contained' onClick={handleCloseProcedure} color='error' disabled={!reason}>{t('document:closeButton')}</Button>

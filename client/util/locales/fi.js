@@ -667,6 +667,9 @@ export default {
       'Mikäli koulutusohjelman toimenpidemenettelyn prosessi on katsottu päätettäväksi, voi tiedekunta päättää sen valitsemalla perusteen ja painamalla alla olevasta painikkeesta. Prosessin päättyessä toimenpidemenettelyille ei voi enää luoda uusia lomakkeita, ja prosssi aukeaa uudelleen mikäli jokin avainluvuista alittaa sallitun raja-arvon.',
     closeButton: 'Päätä toimenpidemenettey',
     dropdownReason: 'Päättämisen peruste',
+
+    warningText: 'Koulutusohjelmalle on käynnistetty toimenpidemenettely, sillä se on alle sallitun raja-arvon yhdellä tai useammalla arviointialueella. ... Ohjeistus tähän.',
+    successText: 'Koulutusohjelmalla ei ole aktiivista toimenpidemenettelyä, eikä siltä tarvita toimia. Mikäli koulutusohjelma on aiemmin ollut toimenpidemenettelyssä, sen dokumentaation on listattu alla.',
     textfieldReason: 'Syy',
     option1: 'Koulutusohjelmalla menee paremmin',
     option2: 'Koulutusohjelman lakkauttaminen',

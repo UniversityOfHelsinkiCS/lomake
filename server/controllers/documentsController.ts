@@ -127,7 +127,9 @@ const createDocument = async (req: Request, res: Response): Promise<any> => {
       activeYear: calculateActiveYear()
     })
 
-    res.status(201).json(document)
+    documents.push(document)
+
+    res.status(201).json(documents)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
