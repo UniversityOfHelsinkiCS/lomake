@@ -126,7 +126,7 @@ const InterventionProcedure = () => {
         })}
       </Accordion>
       {areas.length > 0 && (
-        <Accordion sx={{ padding: '2rem'}}>
+        <Accordion sx={{ padding: '2rem' }}>
           <AccordionSummary expandIcon={<ExpandMore />}>
             <Typography variant="h5">{t('keyData:actions')}</Typography>
           </AccordionSummary>

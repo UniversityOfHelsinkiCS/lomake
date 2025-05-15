@@ -51,6 +51,8 @@ const ProgrammeHomeView = () => {
   const [additionalInfo, setAdditionalInfo] = useState('')
 
   useEffect(() => {
+
+    document.title = `${t('form')} - ${programmeKey}`
     dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
   }, [dispatch, programmeKey])
 
