@@ -160,7 +160,7 @@ const ProgrammeHomeView = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant='h5'>{t('document:date')}:</Typography>
-                    <Typography>{new Date(doc.data.date).toLocaleDateString('fi-FI')}</Typography>
+                    <Typography>{doc.data.date && new Date(doc.data.date).toLocaleDateString('fi-FI')}</Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant='h5'>{t('document:participants')}:</Typography>
@@ -176,7 +176,7 @@ const ProgrammeHomeView = () => {
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant='h5'>{t('document:followupDate')}:</Typography>
-                    <Typography>{new Date(doc.data.followupDate).toLocaleDateString('fi-FI')}</Typography>
+                    <Typography>{doc.data.followupDate && new Date(doc.data.followupDate).toLocaleDateString('fi-FI')}</Typography>
                   </div>
                 </div>
                 <div style={{ marginTop: '1rem' }}>
