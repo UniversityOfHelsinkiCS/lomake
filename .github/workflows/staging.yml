@@ -52,6 +52,7 @@ jobs:
             textfield,
             overview,
             notificationbadge,
+            intervention,
           ]
     name: Run tests
     runs-on: ubuntu-latest
