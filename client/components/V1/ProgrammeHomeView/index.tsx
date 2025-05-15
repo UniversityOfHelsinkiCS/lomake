@@ -148,12 +148,12 @@ const ProgrammeHomeView = () => {
         <Typography variant='h3'>{t('keyData:documentingHeader')}</Typography>
         {Array.isArray(documents) && (documents
           .map((doc: Record<string, any>) => (
-            <Accordion key={doc.id}>
+            <Accordion key={doc.id} sx={{ padding: '2rem' }}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography variant='h4'>{doc.data.title}</Typography>
+                <Typography variant='h3'>{doc.data.title}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant='h5'>{t('document:date')}:</Typography>
                     <Typography>{new Date(doc.data.date).toLocaleDateString('fi-FI')}</Typography>
@@ -162,12 +162,12 @@ const ProgrammeHomeView = () => {
                     <Typography variant='h5'>{t('document:participants')}:</Typography>
                     <Typography>{doc.data.participants}</Typography>
                   </div>
-                  <div style={{ display: 'flex', gap: '1rem' }}>
-                    <Typography variant='h5'>{t('document:matters')}:</Typography>
+                  <div style={{ display: 'flex', gap: '1rem', }}>
+                    <Typography variant='h5' sx={{ whiteSpace: 'nowrap' }}>{t('document:matters')}:</Typography>
                     <Typography>{doc.data.matters}</Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
-                    <Typography variant='h5'>{t('document:schedule')}:</Typography>
+                    <Typography variant='h5' sx={{ whiteSpace: 'nowrap' }}>{t('document:schedule')}:</Typography>
                     <Typography>{doc.data.schedule}</Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>

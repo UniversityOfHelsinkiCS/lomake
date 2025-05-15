@@ -668,8 +668,10 @@ export default {
     closeButton: 'Päätä toimenpidemenettey',
     dropdownReason: 'Päättämisen peruste',
 
-    warningText: 'Koulutusohjelmalle on käynnistetty toimenpidemenettely, sillä se on alle sallitun raja-arvon yhdellä tai useammalla arviointialueella. ... Ohjeistus tähän.',
-    successText: 'Koulutusohjelmalla ei ole aktiivista toimenpidemenettelyä, eikä siltä tarvita toimia. Mikäli koulutusohjelma on aiemmin ollut toimenpidemenettelyssä, sen dokumentaation on listattu alla.',
+    warningText:
+      'Koulutusohjelmalle on käynnistetty toimenpidemenettely, sillä se on alle sallitun raja-arvon yhdellä tai useammalla arviointialueella. ... Ohjeistus tähän.',
+    successText:
+      'Koulutusohjelmalla ei ole aktiivista toimenpidemenettelyä, eikä siltä tarvita toimia. Mikäli koulutusohjelma on aiemmin ollut toimenpidemenettelyssä, sen dokumentaation on listattu alla.',
     textfieldReason: 'Syy',
     option1: 'Koulutusohjelmalla menee paremmin',
     option2: 'Koulutusohjelman lakkauttaminen',
