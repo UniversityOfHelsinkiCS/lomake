@@ -871,10 +871,10 @@ const initData = {
       'Koulutusohjelman nimi': 'Fysikaalisten tieteiden kandiohjelma',
 
       // Kandiohjelman avainluvut
-      Hakupaine: 0, //red
-      'Ensisijaiset hakijat': 150, //yellow
-      'Aloituspaikkojen täyttö': 0.97, //lightgreen
-      'Opintonsa aloittaneet': 80, //green
+      Hakupaine: 0, // red
+      'Ensisijaiset hakijat': 150, // yellow
+      'Aloituspaikkojen täyttö': 0.97, // lightgreen
+      'Opintonsa aloittaneet': 80, // green
       Tutkinnot: undefined,
       'Tavoiteajassa valmistuminen': 0,
       'Opintojen eteneminen': undefined,
