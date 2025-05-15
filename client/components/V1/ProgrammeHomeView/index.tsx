@@ -76,7 +76,7 @@ const ProgrammeHomeView = () => {
   const handleClick = () => {
     dispatch(createDocument({ studyprogrammeKey: programmeKey, data: null }))
       .then(({ payload }) => {
-        history.push(`${basePath}v1/programmes/${form}/${programmeKey}/document/${payload.id}`)
+        history.push(`${basePath}v1/programmes/${form}/${programmeKey}/document/${payload.at(-1).id}`)
       })
   }
 
@@ -144,7 +144,9 @@ const ProgrammeHomeView = () => {
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Typography variant="h1">{t('keyData:interventionProcedure').toUpperCase()} </Typography>
         <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
-        <Alert severity={activeProcedure() ? 'warning' : 'success'}><Typography>{activeProcedure() ? t('document:warningText') : t('document:successText')}</Typography></Alert>
+        <Alert severity={activeProcedure() ? 'warning' : 'success'}>
+          <Typography>{activeProcedure() ? t('document:warningText') : t('document:successText')}</Typography>
+        </Alert>
         <Typography variant='h3'>{t('keyData:documentingHeader')}</Typography>
         {Array.isArray(documents) && (documents
           .map((doc: Record<string, any>) => (
