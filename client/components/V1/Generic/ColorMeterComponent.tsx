@@ -141,7 +141,7 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
   if (!display || value == 'Ei dataa')
     return (
       <div style={{ padding: '2.5rem 0', display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="italic" color="textSecondary">
+        <Typography variant="italic" color="textSecondary" data-cy="no-colormeter">
           {t('keyData:colormeterNoDisplay')}
         </Typography>
       </div>

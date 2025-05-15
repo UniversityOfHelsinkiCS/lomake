@@ -200,4 +200,79 @@ describe('Overview page test', () => {
         })
     })
   })
+
+  describe('Color history tests', () => {
+    beforeEach(() => {
+      cy.get('[data-cy="year-filter"] > .MuiSelect-select').click()
+      cy.contains('2025').click()
+    })
+
+    it('Displays correct color history for previous years', () => {
+      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Vetovoimaisuus"]').should('exist').click()
+
+      // Red + lightgreen
+      cy.get('[data-cy="Applications per student place-Vaaleanvihreä"]').should('exist').click()
+
+      cy.get('[data-cy="history-Hakupaine-2022"]').should('exist')
+      cy.get('[data-cy="history-Hakupaine-2022-value"]').should('exist')
+      cy.get('[data-cy="history-Hakupaine-2022-Punainen"]').should('exist')
+      cy.get('[data-cy="history-Hakupaine-2023-Vaaleanvihreä"]').should('exist')
+
+      // Yellow + lightgreen
+      cy.get('[data-cy="Primary applicants-Vaaleanvihreä"]').should('exist').click()
+
+      cy.get('[data-cy="history-Ensisijaiset hakijat-2022"]').should('exist')
+      cy.get('[data-cy="history-Ensisijaiset hakijat-2022-value"]').should('exist')
+
+      cy.get('[data-cy="history-Ensisijaiset hakijat-2022-Keltainen"]').should('exist')
+      cy.get('[data-cy="history-Ensisijaiset hakijat-2023-Vaaleanvihreä"]').should('exist')
+
+      // Lightgreen + darkgreen
+      cy.get('[data-cy="Filling rate of intake-Tummanvihreä"]').should('exist').click()
+
+      cy.get('[data-cy="history-Aloituspaikkojen täyttö-2022"]').should('exist')
+      cy.get('[data-cy="history-Aloituspaikkojen täyttö-2022-value"]').should('exist')
+
+      cy.get('[data-cy="history-Aloituspaikkojen täyttö-2022-Vaaleanvihreä"]').should('exist')
+      cy.get('[data-cy="history-Aloituspaikkojen täyttö-2023-Tummanvihreä"]').should('exist')
+
+      // Darkgreen
+      cy.get('[data-cy="Number of new students-Tummanvihreä"]').should('exist').click()
+
+      cy.get('[data-cy="history-Opintonsa aloittaneet-2022"]').should('exist')
+      cy.get('[data-cy="history-Opintonsa aloittaneet-2022-value"]').should('exist')
+
+      cy.get('[data-cy="history-Opintonsa aloittaneet-2022-Tummanvihreä"]').should('exist')
+      cy.get('[data-cy="history-Opintonsa aloittaneet-2023-Tummanvihreä"]').should('exist')
+    })
+
+    it('Displays color history correctly for missing values', () => {
+      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Opintojen sujuvuus ja valmistuminen"]').should('exist').click()
+
+      // No history
+      cy.get('[data-cy="Degrees-Tummanvihreä"]').should('exist').click()
+      cy.get('[data-cy="no-history"]').should('exist').contains('No previous history')
+
+      // Only 22
+      cy.get('[data-cy="Graduation within target time-Tummanvihreä"]').should('exist').click()
+
+      cy.get('[data-cy="history-Tavoiteajassa valmistuminen-2022-Punainen"]').should('exist')
+      cy.get('[data-cy="history-Tavoiteajassa valmistuminen-2023-Harmaa"]').should('not.exist')
+
+      // Only 23
+      cy.get('[data-cy="Progress of studies-Tummanvihreä"]').should('exist').click()
+      cy.get('[data-cy="history-Opintojen eteneminen-2022-Harmaa"]').should('not.exist')
+      cy.get('[data-cy="history-Opintojen eteneminen-2023-Tummanvihreä"]').should('exist')
+    })
+
+    it('Displays no color history for gray values ', () => {
+      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Palaute ja työllistyminen"]').should('exist').click()
+
+      // No color meter or history
+      cy.get('[data-cy="Guidance-Harmaa"]').should('exist').click()
+      cy.get('[data-cy="no-colormeter"]')
+        .should('exist')
+        .contains('No traffic light estimate is displayed for this key figure.')
+    })
+  })
 })

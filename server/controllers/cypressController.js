@@ -822,28 +822,6 @@ const initData = {
     },
     {
       // Perustiedot
-      'Koulutusohjelman koodi': 'KH50_002',
-      'Koulutusohjelman nimi': 'Fysikaalisten tieteiden kandiohjelma',
-
-      // Kandiohjelman avainluvut
-      Hakupaine: 6,
-      'Ensisijaiset hakijat': 200,
-      'Aloituspaikkojen täyttö': 1,
-      'Opintonsa aloittaneet': 80,
-      Tutkinnot: 80,
-      'Tavoiteajassa valmistuminen': 0.6,
-      'Opintojen eteneminen': 0.6,
-      'Läsnäolevien kasautuminen': 0.1,
-      'Opiskelijoiden hyvinvointi': undefined,
-      'Opintojen ohjaus': undefined,
-      'Opetuksen laatu': undefined,
-      Palauteaktiivisuus: undefined,
-
-      // Muut
-      Vuosi: 2023,
-    },
-    {
-      // Perustiedot
       'Koulutusohjelman koodi': 'KH50_005',
       'Koulutusohjelman nimi': 'Tietojenkäsittelytieteen kandiohjelma',
 
@@ -885,6 +863,51 @@ const initData = {
 
       // Muut
       Vuosi: 2024, // testing year cap is 2024 so the keydata year has to be 2024-1
+    },
+    // KH50_002 is used for color history tests; please don't modify these values or the tests will break
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'KH50_002',
+      'Koulutusohjelman nimi': 'Fysikaalisten tieteiden kandiohjelma',
+
+      // Kandiohjelman avainluvut
+      Hakupaine: 0, //red
+      'Ensisijaiset hakijat': 150, //yellow
+      'Aloituspaikkojen täyttö': 0.97, //lightgreen
+      'Opintonsa aloittaneet': 80, //green
+      Tutkinnot: undefined,
+      'Tavoiteajassa valmistuminen': 0,
+      'Opintojen eteneminen': undefined,
+      'Läsnäolevien kasautuminen': 0.1,
+      'Opiskelijoiden hyvinvointi': 0.1,
+      'Opintojen ohjaus': 0,
+      'Opetuksen laatu': 0,
+      Palauteaktiivisuus: 0,
+
+      // Muut
+      Vuosi: 2022,
+    },
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'KH50_002',
+      'Koulutusohjelman nimi': 'Fysikaalisten tieteiden kandiohjelma',
+
+      // Kandiohjelman avainluvut
+      Hakupaine: 6,
+      'Ensisijaiset hakijat': 200,
+      'Aloituspaikkojen täyttö': 1,
+      'Opintonsa aloittaneet': 80,
+      Tutkinnot: undefined,
+      'Tavoiteajassa valmistuminen': undefined,
+      'Opintojen eteneminen': 0.6,
+      'Läsnäolevien kasautuminen': 0.1,
+      'Opiskelijoiden hyvinvointi': undefined,
+      'Opintojen ohjaus': undefined,
+      'Opetuksen laatu': undefined,
+      Palauteaktiivisuus: undefined,
+
+      // Muut
+      Vuosi: 2023,
     },
     {
       // Perustiedot
