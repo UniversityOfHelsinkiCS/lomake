@@ -165,7 +165,7 @@ const closeInterventionProcedure = async (req: Request, res: Response): Promise<
       reason: data,
     }
 
-    const updated = await Document.update(updates, {
+    await Document.update(updates, {
       where: {
         studyprogrammeKey: studyprogrammeKey,
       },
@@ -173,7 +173,8 @@ const closeInterventionProcedure = async (req: Request, res: Response): Promise<
     })
 
     await transaction.commit()
-    return res.status(204).json(updated)
+
+    return res.status(204).json({})
   } catch (error) {
     await transaction.rollback()
     logger.error(`Database error: ${error}`)

@@ -30,6 +30,7 @@ import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateIntervetionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { closeInterventionProcedure, createDocument, getDocuments } from '@/client/util/redux/documentsSlicer'
+import studyprogramme from '@/server/models/studyprogramme'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
@@ -86,6 +87,7 @@ const ProgrammeHomeView = () => {
       'additionalInfo': additionalInfo,
     }
     dispatch(closeInterventionProcedure({ studyprogrammeKey: programmeKey, data: data }))
+      .then(() => dispatch(getDocuments({ studyprogrammeKey: programmeKey })))
   }
 
   const activeProcedure = () => {

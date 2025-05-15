@@ -137,8 +137,9 @@ const documentsSlicer = createSlice({
       state.status = 'loading'
     })
     builder.addCase(closeInterventionProcedure.fulfilled, (state, action) => {
-      state.status = 'succeeded'
+      console.log('action payload', action.payload)
       state.data = action.payload
+      state.status = 'succeeded'
     })
     builder.addCase(closeInterventionProcedure.rejected, state => {
       state.status = 'failed'
