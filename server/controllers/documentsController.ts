@@ -9,7 +9,7 @@ interface ValidateOperationResponse {
   success: boolean
   error: string
   status: number
-  documents: Document[] | null
+  documents: Document[] | []
   studyprogrammeKey: string | null
   data: typeof DocumentFormSchema | null
 }
@@ -82,13 +82,6 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     })
   }
 
-  if (documents.length === 0) {
-    resultObject.error = 'No documents found for studyprogramme'
-    resultObject.status = 404
-    resultObject.studyprogrammeKey = studyprogramme.key
-    return resultObject
-  }
-
   resultObject.success = true
   resultObject.documents = documents
   resultObject.studyprogrammeKey = studyprogramme.key
@@ -127,6 +120,7 @@ const createDocument = async (req: Request, res: Response): Promise<any> => {
       activeYear: calculateActiveYear()
     })
 
+    // @ts-expect-error
     documents.push(document)
 
     res.status(201).json(documents)
