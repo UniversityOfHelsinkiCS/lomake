@@ -168,6 +168,7 @@ const closeInterventionProcedure = async (req: Request, res: Response): Promise<
     await Document.update(updates, {
       where: {
         studyprogrammeKey: studyprogrammeKey,
+        active: true,
       },
       transaction,
     })
