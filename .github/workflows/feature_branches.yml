@@ -51,6 +51,7 @@ jobs:
             facultymonitoringoverview,
             textfield,
             overview,
+            intervention,
           ]
     name: Run tests
     runs-on: ubuntu-latest
