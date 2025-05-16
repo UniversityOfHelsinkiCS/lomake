@@ -30,7 +30,6 @@ import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateIntervetionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { closeInterventionProcedure, createDocument, getDocuments } from '@/client/util/redux/documentsSlicer'
-import { getReport } from '@/client/util/redux/reportsSlicer'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
@@ -201,11 +200,11 @@ const ProgrammeHomeView = () => {
         )}
       </Box>
       {(hasAccessToCloseInterventionProcedure && activeProcedure()) && (
-        <Alert severity='warning' variant='outlined'>
+        <Alert data-cy='closeInterventionProcedureAlertBox' severity='warning' variant='outlined'>
           <Typography>{t('document:closeInterventionProcedure')}</Typography>
           <FormControl sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '2rem', mb: '2rem', mt: '2rem' }}>
-            <InputLabel sx={{ width: '40%' }}>{t('document:dropdownReason')}</InputLabel>
-            <Select value={reason} label={t('document:dropdownReason')} onChange={(event) => setReason(event.target.value)} sx={{ width: '30%' }}>
+            <InputLabel data-cy='reasonDropdown' sx={{ width: '40%' }}>{t('document:dropdownReason')}</InputLabel>
+            <Select data-cy='reasonDropdown' value={reason} label={t('document:dropdownReason')} onChange={(event) => setReason(event.target.value)} sx={{ width: '30%' }}>
               <MenuItem value={'1'}>{t('document:option1')}</MenuItem>
               <MenuItem value={'2'}>{t('document:option2')}</MenuItem>
               <MenuItem value={'3'}>{t('document:option3')}</MenuItem>
@@ -214,7 +213,7 @@ const ProgrammeHomeView = () => {
             {reason === '4' && (<TextField sx={{ width: '70%' }} label={t('document:textfieldReason')} value={additionalInfo} onChange={(event) => setAdditionalInfo(event.target.value)} />)}
           </FormControl>
           <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant='contained' onClick={handleCloseProcedure} color='error' disabled={!reason}>{t('document:closeButton')}</Button>
+            <Button data-cy='closeInterventionProcedureButton' variant='contained' onClick={handleCloseProcedure} color='error' disabled={!reason}>{t('document:closeButton')}</Button>
           </div>
         </Alert>
       )}

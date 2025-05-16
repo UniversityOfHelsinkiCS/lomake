@@ -62,7 +62,7 @@ const notInProduction = (req, res, next) => {
 
 const requireDekanaatti = (req, res, next) => {
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
-  else if (res.user.iamGroups.some(group => dekanaattiIamGroup.includes(group))) next()
+  else if (req.user.iamGroups.some(group => dekanaattiIamGroup.includes(group))) next()
   else res.status(401).json({ error: 'Unautorized access.' }).end()
 }
 
