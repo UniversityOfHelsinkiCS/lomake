@@ -7,7 +7,7 @@ import cypress from '../controllers/cypressController.js'
 import faculty from '../controllers/facultyController.js'
 import degreeReform from '../controllers/degreeReformController.js'
 import locks from '../controllers/lockController.js'
-import reports, { ReportResponse } from '../controllers/reportsController.js'
+import reports from '../controllers/reportsController.js'
 import keyData from '../controllers/keyDataController.js'
 import documents from '../controllers/documentsController.js'
 

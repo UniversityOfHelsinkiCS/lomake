@@ -158,19 +158,21 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
               )
             }
             return (
-              <TextField
-                data-cy={`editor-${field}`}
-                key={field}
-                name={field}
-                label={t(`document:${field}`)}
-                variant="outlined"
-                margin="normal"
-                value={formData[field]}
-                onChange={handleChange}
-                error={!!errors[field]}
-                helperText={errors[field]}
-                sx={{ width: '50%' }}
-              />
+              <Fragment data-cy={`editor-${field}`}>
+                <TextField
+                  data-cy={`editor-${field}`}
+                  key={field}
+                  name={field}
+                  label={t(`document:${field}`)}
+                  variant="outlined"
+                  margin="normal"
+                  value={formData[field]}
+                  onChange={handleChange}
+                  error={!!errors[field]}
+                  helperText={errors[field]}
+                  sx={{ width: '50%' }}
+                />
+              </Fragment>
             )
           })}
           <Button data-cy='save-document' key="submit" sx={{ alignSelf: 'flex-end' }} type="submit" variant="contained" color="primary">{t('document:submit')}</Button>

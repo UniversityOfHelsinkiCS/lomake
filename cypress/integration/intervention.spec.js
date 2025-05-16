@@ -19,7 +19,7 @@ describe('Textfield tests', () => {
     cy.get(
       '.MuiPaper-root.Mui-expanded > .MuiCollapse-root > .MuiCollapse-wrapper > .MuiCollapse-wrapperInner > .MuiAccordion-region > .MuiAccordionDetails-root > [style="margin-top: 1rem;"] > .MuiTypography-root',
     ).click()
-    cy.get('[data-cy=editor-title]', { timeout: 100 }).click()
+    cy.get('[data-cy=editor-title]').click()
     cy.get('[data-cy=editor-title]', { timeout: 100 }).type('Koira istuu puussa ')
     cy.get(':nth-child(4) > .MuiPickersInputBase-root > .MuiInputAdornment-root > .MuiButtonBase-root').click()
     cy.get('.MuiPickersDay-today').click()
