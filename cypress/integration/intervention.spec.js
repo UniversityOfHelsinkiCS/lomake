@@ -19,6 +19,7 @@ describe('Textfield tests', () => {
     cy.get('[data-testid=ArrowBackIcon]').click()
   })
   it('user can edit the document', () => {
+    // login to klemstro
     cy.login(possibleUsers[1].uid)
     cy.visit(`/v1/programmes/10/KH50_005`)
     cy.get(':nth-child(5) > .MuiAccordion-heading > .MuiButtonBase-root > .MuiAccordionSummary-content').click()
