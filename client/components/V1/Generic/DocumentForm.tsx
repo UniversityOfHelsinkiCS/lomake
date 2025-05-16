@@ -171,6 +171,7 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
                   error={!!errors[field]}
                   helperText={errors[field]}
                   sx={{ width: '50%' }}
+                  multiline
                 />
               </Fragment>
             )
