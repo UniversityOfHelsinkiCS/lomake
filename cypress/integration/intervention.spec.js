@@ -9,7 +9,7 @@ describe('Textfield tests', () => {
     cy.visit(`/v1/programmes/10/KH50_005`)
   })
   it('user can create new document', () => {
-    //login to klemstro
+    // login to klemstro
     cy.login(possibleUsers[1].uid)
     cy.visit(`/v1/programmes/10/KH50_005`)
     cy.get('[data-cy="create-new-document"]').click()
@@ -37,6 +37,7 @@ describe('Textfield tests', () => {
     cy.get('[name=schedule]').type('Koira istuu puussa ja kana linnassa')
     cy.get(':nth-child(12) > .MuiPickersInputBase-root > .MuiPickersSectionList-root').click()
     cy.get(':nth-child(12) > .MuiPickersInputBase-root > .MuiPickersSectionList-root').type('25062026')
+    cy.get('[data-cy=save-document]').click()
   })
   it('dean can close the intervention procedure and it wont display as active any more', () => {
     cy.login('cypressKojoDeanUser')
@@ -64,4 +65,3 @@ describe('Textfield tests', () => {
     cy.get('[data-cy="create-new-document"]').should('not.exist')
   })
 })
-
