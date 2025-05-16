@@ -118,7 +118,7 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
               )
             } else if (index === 3) {
               return (
-                <Fragment key={field}>
+                <Fragment data-cy={`editor-${field}`} key={field}>
                   <Typography variant="h5">{t('document:mattersHeader')}</Typography>
                   <Typography>{t('document:mattersDescription')}</Typography>
                   <TextField
@@ -138,7 +138,7 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
               )
             } else if (index === 4) {
               return (
-                <Fragment key={field}>
+                <Fragment data-cy={`editor-${field}`} key={field}>
                   <Typography variant="h5">{t('document:scheduleHeader')}</Typography>
                   <Typography>{t('document:scheduleDescription')}</Typography>
                   <TextField
