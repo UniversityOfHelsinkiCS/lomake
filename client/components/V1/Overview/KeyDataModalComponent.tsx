@@ -17,6 +17,7 @@ import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import { getKeyDataPoints } from '@/client/components/V1/Utils/util'
 import { ArrowForward } from '@mui/icons-material'
+import { basePath } from '@/config/common'
 
 export interface selectedKeyFigureData {
   programme: KeyDataProgramme
@@ -90,7 +91,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
             {...content}
           />
           <TextFieldCard id={content.groupKey} type="Comment" />
-          <Link href={`/v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}`}>
+          <Link href={`${basePath}v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}`}>
             <Button variant="outlined" startIcon={<ArrowForward />} sx={{ marginTop: 2, float: 'right' }}>
               {t('keyData:moveToOpinion')}
             </Button>

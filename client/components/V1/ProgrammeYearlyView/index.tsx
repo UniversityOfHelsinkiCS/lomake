@@ -213,8 +213,7 @@ const ProgrammeView = () => {
       <div style={{ display: 'flex', marginTop: '2rem', marginBottom: '2rem', alignItems: 'center' }}>
         <IconButton
           component={Link}
-          //href={`${basePath}v1/programmes/${form}/${programmeData.koulutusohjelmakoodi}`}
-          href={`${basePath}v1/overview`}
+          href={`${basePath}v1/programmes/${form}/${programmeData.koulutusohjelmakoodi}`}
           sx={{ marginRight: 2 }}
         >
           <ArrowBackIcon />
