@@ -15,7 +15,7 @@ import {
   ZodError,
 } from '../../shared/validators/index.js'
 
-const getKeyData = async (_req: Request, res: Response): Promise<any> => {
+const getKeyData = async (_req: Request, res: Response) => {
   try {
     const keyData = await KeyData.findAll({
       where: {
@@ -61,7 +61,7 @@ const getKeyData = async (_req: Request, res: Response): Promise<any> => {
 
 const upload = multer({ storage: multer.memoryStorage() }).single('file')
 
-const uploadKeyData = async (req: Request, res: Response): Promise<any> => {
+const uploadKeyData = async (req: Request, res: Response) => {
   return new Promise(resolve => {
     upload(req, res, async (err: any) => {
       if (err) {
@@ -109,7 +109,7 @@ const uploadKeyData = async (req: Request, res: Response): Promise<any> => {
   })
 }
 
-const getKeyDataMeta = async (_req: Request, res: Response): Promise<any> => {
+const getKeyDataMeta = async (_req: Request, res: Response) => {
   try {
     const keyData = await KeyData.findAll({
       attributes: ['id', 'active', 'createdAt'],
@@ -125,7 +125,7 @@ const getKeyDataMeta = async (_req: Request, res: Response): Promise<any> => {
   }
 }
 
-const deleteKeyData = async (req: Request, res: Response): Promise<any> => {
+const deleteKeyData = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
     const keyData = await KeyData.findByPk(id)
@@ -141,7 +141,7 @@ const deleteKeyData = async (req: Request, res: Response): Promise<any> => {
   }
 }
 
-const updateKeyData = async (req: Request, res: Response): Promise<any> => {
+const updateKeyData = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
     const keyData = await KeyData.findByPk(id)

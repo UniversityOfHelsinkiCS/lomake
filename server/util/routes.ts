@@ -1,4 +1,4 @@
-import Router from 'express'
+import { Router } from 'express'
 import users from '../controllers/usersController.js'
 import answers from '../controllers/answersController.js'
 import studyprogrammes from '../controllers/studyprogrammesController.js'
@@ -71,20 +71,20 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 
 router.get('/faculties', faculty.getAll)
 
-router.get('/reports/:year', reports.getReports)
-router.get('/reports/:studyprogrammeKey/:year', reports.getReport)
-router.put('/reports/:studyprogrammeKey/:year', requireProgrammeWrite, reports.updateReport)
+router.get('/reports/:year', async (req, res) => { await reports.getReports(req, res) })
+router.get('/reports/:studyprogrammeKey/:year', async (req, res) => { await reports.getReport(req, res) })
+router.put('/reports/:studyprogrammeKey/:year', requireProgrammeWrite, async (req, res) => { await reports.updateReport(req, res) })
 
-router.get('/keydata', keyData.getKeyData)
-router.post('/keydata', checkAdmin, keyData.uploadKeyData)
-router.get('/keydata/meta', checkAdmin, keyData.getKeyDataMeta)
-router.delete('/keydata/:id', checkAdmin, keyData.deleteKeyData)
-router.put('/keydata/:id', checkAdmin, keyData.updateKeyData)
+router.get('/keydata', async (req, res) => { await keyData.getKeyData(req, res) })
+router.post('/keydata', checkAdmin, async (req, res) => { await keyData.uploadKeyData(req, res) })
+router.get('/keydata/meta', checkAdmin, async (req, res) => { await keyData.getKeyDataMeta(req, res) })
+router.delete('/keydata/:id', checkAdmin, async (req, res) => { await keyData.deleteKeyData(req, res) })
+router.put('/keydata/:id', checkAdmin, async (req, res) => { await keyData.updateKeyData(req, res) })
 
-router.get('/documents/:studyprogrammeKey', documents.getDocuments)
-router.post('/documents/:studyprogrammeKey', requireProgrammeWrite, documents.createDocument)
-router.put('/documents/:studyprogrammeKey/:id', requireProgrammeWrite, documents.updateDocument)
-router.put('/documents/:studyprogrammeKey/close/all', requireDekanaatti, documents.closeInterventionProcedure)
+router.get('/documents/:studyprogrammeKey', async (req, res) => { await documents.getDocuments(req, res) })
+router.post('/documents/:studyprogrammeKey', requireProgrammeWrite, async (req, res) => { await documents.createDocument(req, res) })
+router.put('/documents/:studyprogrammeKey/:id', requireProgrammeWrite, async (req, res) => { documents.updateDocument(req, res) })
+router.put('/documents/:studyprogrammeKey/close/all', requireDekanaatti, async (req, res) => { await documents.closeInterventionProcedure(req, res) })
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)

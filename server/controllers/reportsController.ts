@@ -100,7 +100,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   return resultObject
 }
 
-const getReport = async (req: Request, res: Response): Promise<any> => {
+const getReport = async (req: Request, res: Response) => {
   try {
     const result = await validateOperation(req)
 
@@ -112,7 +112,7 @@ const getReport = async (req: Request, res: Response): Promise<any> => {
   }
 }
 
-const getReports = async (req: Request, res: Response): Promise<any> => {
+const getReports = async (req: Request, res: Response) => {
   try {
     const { year } = req.params
 
@@ -136,7 +136,7 @@ const getReports = async (req: Request, res: Response): Promise<any> => {
   }
 }
 
-const updateReport = async (req: Request, res: Response): Promise<any> => {
+const updateReport = async (req: Request, res: Response) => {
   try {
     const result = await validateOperation(req)
     if (!result.success) return res.status(result.status).json({ error: result.error })
