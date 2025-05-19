@@ -122,81 +122,101 @@ const ProgrammeHomeView = () => {
             { label: t('keyData:programmeHome'), href: `${basePath}v1/programmes/${form}/${programmeKey}` },
           ]}
         />
-        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: '2rem', marginBottom: '1rem' }}>
           <IconButton data-cy="navigate-back" component={Link} href={`${basePath}v1/overview`} sx={{ marginRight: 2 }}>
             <ArrowBack />
           </IconButton>
-          <Typography variant="h1">{programmeData[0].koulutusohjelma[lang]}</Typography>
+          <Typography variant="h2">{programmeData[0].koulutusohjelma[lang]}</Typography>
         </div>
       </div>
-      <div>
-        <Typography variant="h1">{t('keyData:homeHeader').toUpperCase()}</Typography>
-        <Typography style={{ marginTop: '2rem' }}>{t('keyData:homeDescription')}</Typography>
-      </div>
-      <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} />
-      <div>
-        <Typography variant="h1" sx={{ mb: '2rem' }}>
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h3" sx={{ mb: 2 }}>
+          {t('keyData:homeHeader').toUpperCase()}
+        </Typography>
+        <Typography variant="light">{t('keyData:homeDescription')}</Typography>
+        <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} />
+      </Box>
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h3" sx={{ mb: '2rem' }}>
           {t('keyData:qualityControl').toUpperCase()}
         </Typography>
-        <Alert severity="info">
-          <Typography>{t('keyData:notUsed2025')}</Typography>
+        <Alert severity="info" sx={{ gap: 1 }}>
+          <Typography variant="light">{t('keyData:notUsed2025')}</Typography>
         </Alert>
-      </div>
+      </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        <Typography variant="h1">{t('keyData:interventionProcedure').toUpperCase()} </Typography>
+        <Typography variant="h3">{t('keyData:interventionProcedure').toUpperCase()} </Typography>
         <Typography variant="light">{t('document:homeDescription')}</Typography>
-        <Alert severity={activeProcedure() ? 'warning' : 'success'}>
-          <Typography variant="h6">{activeProcedure() ? t('document:warningTextHeader') : null}</Typography>
-          <Typography>
+        <Alert severity={activeProcedure() ? 'warning' : 'success'} sx={{ gap: 1 }}>
+          <Typography variant="h6" sx={{ mb: 2, display: activeProcedure() ? 'block' : 'none' }}>
+            {t('document:warningTextHeader')}
+          </Typography>
+          <Typography variant="light">
             {activeProcedure() ? t('document:warningTextDescription') : t('document:successText')}
           </Typography>
         </Alert>
-        <Typography variant="h3">{t('keyData:documentingHeader')}</Typography>
-        <Typography>{t('document:documentingDescription1')}</Typography>
-        <Typography>{t('document:documentingDescription2')}</Typography>
+        <Typography variant="h4" sx={{ mt: 4 }}>
+          {t('keyData:documentingHeader')}
+        </Typography>
+        <Alert severity="info" sx={{ gap: 1, mb: 2 }}>
+          <Typography variant="light">{t('document:documentingDescription1')}</Typography>
+          <br />
+          <br />
+          <Typography variant="light">{t('document:documentingDescription2')}</Typography>
+        </Alert>
         {Array.isArray(documents) &&
           documents.map((doc: Record<string, any>) => (
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography variant="h3">{doc.data.title}</Typography>
+                <Typography variant="h4">{doc.data.title}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant="h5">{t('document:date')}:</Typography>
-                    <Typography>{doc.data.date && new Date(doc.data.date).toLocaleDateString('fi-FI')}</Typography>
+                    <Typography color={doc.data.date ? 'default' : 'secondary'}>
+                      {(doc.data.date && new Date(doc.data.date).toLocaleDateString('fi-FI')) || t('common:empty')}
+                    </Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant="h5">{t('document:participants')}:</Typography>
-                    <Typography>{doc.data.participants}</Typography>
+                    <Typography color={doc.data.participants ? 'default' : 'secondary'}>
+                      {doc.data.participants || t('common:empty')}
+                    </Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>
                       {t('document:matters')}:
                     </Typography>
-                    <Typography>{doc.data.matters}</Typography>
+                    <Typography color={doc.data.matters ? 'default' : 'secondary'}>
+                      {doc.data.matters || t('common:empty')}
+                    </Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>
                       {t('document:schedule')}:
                     </Typography>
-                    <Typography>{doc.data.schedule}</Typography>
+                    <Typography color={doc.data.schedule ? 'default' : 'secondary'}>
+                      {doc.data.schedule || t('common:empty')}
+                    </Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant="h5">{t('document:followupDate')}:</Typography>
-                    <Typography>
-                      {doc.data.followupDate && new Date(doc.data.followupDate).toLocaleDateString('fi-FI')}
+                    <Typography color={doc.data.followupDate ? 'default' : 'secondary'}>
+                      {(doc.data.followupDate && new Date(doc.data.followupDate).toLocaleDateString('fi-FI')) ||
+                        t('common:empty')}
                     </Typography>
                   </div>
                 </div>
-                <div style={{ marginTop: '1rem' }}>
+                <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right' }}>
                   {hasWriteRights && activeProcedure() && doc.active && (
                     <Button
                       variant="contained"
                       component={Link}
                       href={`${basePath}v1/programmes/10/${programmeKey}/document/${doc.id}`}
+                      startIcon={<Edit />}
                     >
-                      {t('document:edit')} <Edit sx={{ ml: '1rem' }} />
+                      {t('document:edit')}
                     </Button>
                   )}
                 </div>
@@ -212,10 +232,13 @@ const ProgrammeHomeView = () => {
           </Box>
         )}
       </Box>
+      <br />
       {hasAccessToCloseInterventionProcedure && activeProcedure() && (
         <Alert data-cy="closeInterventionProcedureAlertBox" severity="warning" variant="outlined">
-          <Typography variant="h6">{t('document:closeInterventionProcedureHeader')}</Typography>
-          <Typography>{t('document:closeInterventionProcedureDescription')}</Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            {t('document:closeInterventionProcedureHeader')}
+          </Typography>
+          <Typography variant="light">{t('document:closeInterventionProcedureDescription')}</Typography>
           <FormControl
             sx={{
               display: 'flex',

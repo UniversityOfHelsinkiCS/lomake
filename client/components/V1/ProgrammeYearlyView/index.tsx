@@ -210,7 +210,7 @@ const ProgrammeView = () => {
         />
       </div>
 
-      <div style={{ display: 'flex', marginTop: '4rem', alignItems: 'center' }}>
+      <div style={{ display: 'flex', marginTop: '2rem', marginBottom: '2rem', alignItems: 'center' }}>
         <IconButton
           component={Link}
           //href={`${basePath}v1/programmes/${form}/${programmeData.koulutusohjelmakoodi}`}

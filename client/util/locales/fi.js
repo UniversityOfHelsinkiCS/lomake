@@ -679,7 +679,7 @@ export default {
       'Toimenpidemenettely voidaan päättää varadekaanin ja koulutusohjelman johtajan yhteisellä päätöksellä, mikäli koulutusohjelman avainluvut ovat riittävästi parantuneet tai koulutusohjelmalle on käynnistynyt valmistelu, jossa koulutusohjelma liitetään toiseen koulutusohjelmaan tai lakkautetaan. Tilannekuvalomakkeella toimenpidemenettelyn voi lopettaa koulutusohjelmasta vastaavan tiedekunnan varadekaani. ',
     closeButton: 'Lopeta toimenpidemenettey',
     dropdownReason: 'Toimenpidemenettelyn lopettamisen peruste (vaihtoehdot):',
-    warningTextHeader: 'Koulutusohjelmalle on käynnistynyt toimenpidemenettely.',
+    warningTextHeader: 'Koulutusohjelmalle on käynnistynyt toimenpidemenettely',
     warningTextDescription:
       'Tiedekunnan opetusvaradekaani ja koulutusohjelman johtaja yhdessä käynnistävät toimenpidemenettelyn ja kutsuvat neuvotteluun koulutusohjelman avainhenkilöt. Neuvottelussa kartoitetaan koulutusohjelman tilanne ja mahdollinen tarve lisäselvityksille sekä selvitetään, onko koulutusohjelman mahdollista parantaa tilannettaan joillakin käytettävissä olevilla toimenpiteillä. ',
     successText:

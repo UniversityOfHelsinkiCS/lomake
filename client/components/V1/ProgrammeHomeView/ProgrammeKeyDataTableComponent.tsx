@@ -52,7 +52,7 @@ const ProgrammeKeyDataTableComponent = ({
   }
 
   return (
-    <div style={{ minWidth: 1200 }}>
+    <div style={{ minWidth: 1200, marginTop: 20 }}>
       <Table variant="programme">
         <TableHead>
           <TableRow>
