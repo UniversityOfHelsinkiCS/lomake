@@ -636,14 +636,18 @@ export default {
     programmeHome: 'Programmes homepage',
     moveToOpinion: 'Edit the opinion of the programme',
     homeHeader: 'Key Figures and Development plans',
-    homeDescription: 'This view brings together the key figures for the degree programme, the documented views on the key figures and the development plans for the different years. ',
+    homeDescription:
+      'This view brings together the key figures for the degree programme, the documented views on the key figures and the development plans for the different years. ',
     interventionProcedure: 'Intervention Procedure',
     documentingHeader: 'Documentation of the Intervention Procedure',
   },
   document: {
-    homeDescription: 'Based on the key figures, intervention procedure will be launched for some of the degree programmes after the annual follow-up. The aim of the intervention procedure is to improve the performance of the degree programme which has been referred to it. If, in spite of all efforts, the situation of a training programme under intervention procedure cannot be improved sufficiently, the aim is to integrate the content of the degree programme into another degree programme or to discontinue the degree programme and its content. ',
-    documentingDescription1: 'The negotiations and the main issues agreed in the intervention procedure are documented on the Status Report Form. This is done by creating a new document for each meeting and session related to the procedure. The progress of the procedure will be recorded in chronological order on the Status Report Form.',
-    documentingDescription2: 'The intervention procedure may be terminated by a joint decision of the Vice-Dean and the director of the degree programme if the key figures of the training programme have improved sufficiently or if the degree programme is in the process of being merged into another degree programme or is being discontinued. The Vice-Dean responsible for the may terminate the procedure.',
+    homeDescription:
+      'Based on the key figures, intervention procedure will be launched for some of the degree programmes after the annual follow-up. The aim of the intervention procedure is to improve the performance of the degree programme which has been referred to it. If, in spite of all efforts, the situation of a training programme under intervention procedure cannot be improved sufficiently, the aim is to integrate the content of the degree programme into another degree programme or to discontinue the degree programme and its content. ',
+    documentingDescription1:
+      'The negotiations and the main issues agreed in the intervention procedure are documented on the Status Report Form. This is done by creating a new document for each meeting and session related to the procedure. The progress of the procedure will be recorded in chronological order on the Status Report Form.',
+    documentingDescription2:
+      'The intervention procedure may be terminated by a joint decision of the Vice-Dean and the director of the degree programme if the key figures of the training programme have improved sufficiently or if the degree programme is in the process of being merged into another degree programme or is being discontinued. The Vice-Dean responsible for the may terminate the procedure.',
     warningTextHeader: 'Intervention procedure for measures has been initiated for the degree program.',
     warningTextDescription: `The Faculty's Dean of Teaching Resources and the Director of the Degree Program together initiate the procedure for measures and invite key personnel of the degree program to a negotiation. In the negotiation, the situation of the degree program is mapped out, along with the potential need for further clarifications, and it is determined whether the degree program can improve its situation with some available measures.`,
     title: 'Document Title',
@@ -658,17 +662,21 @@ export default {
     mattersHeader: 'Agreed Measures',
     mattersDescription: 'Agreed measures can be entered in free-form. The entries can be modified as necessary.',
     scheduleHeader: 'Schedule',
-    scheduleDescription: 'The agreed timetables for the measures on the intervention procedure are documented and the next date for follow-up is also agreed.',
+    scheduleDescription:
+      'The agreed timetables for the measures on the intervention procedure are documented and the next date for follow-up is also agreed.',
     submit: 'Save Document',
     backgroundInfoHeader: 'Background information',
-    backgroundInfoDescription: 'The background material for the intervention procedure are the views documented in the annual follow-up of the degree programme on evaluation areas that led to the intervention procedure, as well as the development plan.',
-    infobox: 'The intervention procedure form records the meetings of the action procedure and the main issues agreed. The progress of the procedure can be monitored on the basis of the intervention procedure documents. The form also shows a summary of the annual follow-up of the procedure.',
+    backgroundInfoDescription:
+      'The background material for the intervention procedure are the views documented in the annual follow-up of the degree programme on evaluation areas that led to the intervention procedure, as well as the development plan.',
+    infobox:
+      'The intervention procedure form records the meetings of the action procedure and the main issues agreed. The progress of the procedure can be monitored on the basis of the intervention procedure documents. The form also shows a summary of the annual follow-up of the procedure.',
     keyFigureDescription: 'The study programme is below the minimum threshold in the following evaluation areas',
     keyFigure: 'Evaluation areas',
     newDocument: 'Create new document',
     edit: 'Edit the document',
     closeInterventionProcedureHeader: 'Termination of the intervention procedure (only visible to the Vice-Dean)',
-    closeInterventionProcedureDescription: 'The procedure may be terminated by joint decision of the Vice-Dean and the Director of the degree programme if the key ifigures of the degree programme have improved sufficiently or if the programme is in the process of being merged iwith another degree programme or discontinued. A status report form may be used by the Vice-Dean to terminate the procedure.',
+    closeInterventionProcedureDescription:
+      'The procedure may be terminated by joint decision of the Vice-Dean and the Director of the degree programme if the key ifigures of the degree programme have improved sufficiently or if the programme is in the process of being merged iwith another degree programme or discontinued. A status report form may be used by the Vice-Dean to terminate the procedure.',
     closeButton: 'Terminate the intervention procedure',
     dropdownReason: 'Reason(s) for terminating the intervention procedure:',
     textfieldReason: 'Reason',

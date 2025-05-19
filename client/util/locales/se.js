@@ -695,11 +695,13 @@ export default {
     documentingDescription2:
       'Åtgärdsförfarandet kan avslutas genom ett gemensamt beslut av prodekanen och utbildningsprogrammets ledare om utbildningsprogrammets nyckeltal har förbättrats tillräckligt eller om utbildningsprogrammet håller på att slås samman med ett annat utbildningsprogram eller håller på att läggas ned. Status report form kan användas av prodekanen för att avsluta förfarandet. ',
     generalHeader: 'Allmän information',
-    generalDescription: 'Datumet sätts automatiskt utifrån det datum då dokument öppnades. Förutom datumet kan ett namn som beskriver händelsen anges på dokument (valfritt). Deltagarnas namn anges i rutan ”deltagare”. ',
+    generalDescription:
+      'Datumet sätts automatiskt utifrån det datum då dokument öppnades. Förutom datumet kan ett namn som beskriver händelsen anges på dokument (valfritt). Deltagarnas namn anges i rutan ”deltagare”. ',
     mattersHeader: 'Åtgärder',
     mattersDescription: 'Överenskomna åtgärder kan anges i fri form. Uppgifterna kan ändras vid behov.',
     scheduleHeader: 'Tidtabel',
-    scheduleDescription: 'Den överenskomna utvecklingen av åtgärden registreras och nästa datum för uppföljning fastställs. ',
+    scheduleDescription:
+      'Den överenskomna utvecklingen av åtgärden registreras och nästa datum för uppföljning fastställs. ',
     submit: 'Spara dokument',
     keyFigureDescription: 'Utbildningsprogrammet är under den lägsta gränsvärdet på följande utvärderingsområden',
     keyFigure: 'Utvärderingsområden',
