@@ -151,7 +151,8 @@ const ProgrammeHomeView = () => {
           <Typography>{activeProcedure() ? t('document:warningTextDescription') : t('document:successText')}</Typography>
         </Alert>
         <Typography variant='h3'>{t('keyData:documentingHeader')}</Typography>
-        <Typography>{t('document:documentingDescription')}</Typography>
+        <Typography>{t('document:documentingDescription1')}</Typography>
+        <Typography>{t('document:documentingDescription2')}</Typography>
         {Array.isArray(documents) && (documents
           .map((doc: Record<string, any>) => (
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
