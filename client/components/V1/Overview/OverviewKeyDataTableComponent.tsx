@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
-import { CircularProgress, Tooltip, Typography, Button } from '@mui/material'
+import { CircularProgress, Tooltip, Typography } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { GroupKey } from '@/client/lib/enums'
+import { KeyDataProgramme } from '@/shared/lib/types'
 
-import { RootState, AppDispatch } from '@/client/util/store'
+import { RootState } from '@/client/util/store'
 
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 
@@ -29,13 +29,12 @@ interface KeyDataTableProps {
 
 const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
-  const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
   const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
   const color = additionalInfo.fi === 'Lakkautettu ohjelma' ? 'secondary' : ''
 
   return (
     <TableCell itemAlign="left" hoverEffect data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}>
-      <Link to={`/v1/programmes/10/${koulutusohjelmakoodi}/${selectedYear}`} style={{ width: '100%' }}>
+      <Link to={`/v1/programmes/10/${koulutusohjelmakoodi}`} style={{ width: '100%' }}>
         <Tooltip title={additionalInfo[lang]} placement="top" arrow>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
             <Typography variant="regular" color={color}>
