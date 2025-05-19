@@ -73,7 +73,7 @@ router.get('/faculties', faculty.getAll)
 
 router.get('/reports/:year', async (req, res) => { await reports.getReports(req, res) })
 router.get('/reports/:studyprogrammeKey/:year', async (req, res) => { await reports.getReport(req, res) })
-router.put('/reports/:studyprogrammeKey/:year', requireProgrammeWrite, async (req, res) => { await reports.updateReport(req, res) })
+router.put('/reports/:studyprogrammeKey/:year', async (req, res) => { await reports.updateReport(req, res) })
 
 router.get('/keydata', async (req, res) => { await keyData.getKeyData(req, res) })
 router.post('/keydata', checkAdmin, async (req, res) => { await keyData.uploadKeyData(req, res) })
