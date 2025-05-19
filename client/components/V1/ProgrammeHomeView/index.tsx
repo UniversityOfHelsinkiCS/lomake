@@ -206,13 +206,13 @@ const ProgrammeHomeView = () => {
           <Typography variant='h6'>{t('document:closeInterventionProcedureHeader')}</Typography>
           <Typography>{t('document:closeInterventionProcedureDescription')}</Typography>
           <FormControl sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '2rem', mb: '2rem', mt: '2rem' }}>
-            <InputLabel data-cy='reasonDropdown' sx={{ width: '40%' }}>{t('document:dropdownReason')}</InputLabel>
-            <Select data-cy='reasonDropdown' value={reason} label={t('document:dropdownReason')} onChange={(event) => setReason(event.target.value)} sx={{ width: '30%' }}>
+            <InputLabel data-cy='reasonDropdown' sx={{ width: '50%' }}>{t('document:dropdownReason')}</InputLabel>
+            <Select data-cy='reasonDropdown' value={reason} label={t('document:dropdownReason')} onChange={(event) => setReason(event.target.value)} sx={{ width: '50%' }}>
               <MenuItem value={'1'}>{t('document:option1')}</MenuItem>
               <MenuItem value={'2'}>{t('document:option2')}</MenuItem>
               <MenuItem value={'3'}>{t('document:option3')}</MenuItem>
             </Select>
-            {reason === '3' && (<TextField sx={{ width: '70%' }} label={t('document:textfieldReason')} value={additionalInfo} onChange={(event) => setAdditionalInfo(event.target.value)} />)}
+            {reason === '3' && (<TextField sx={{ width: '65%' }} label={t('document:textfieldReason')} value={additionalInfo} onChange={(event) => setAdditionalInfo(event.target.value)} />)}
           </FormControl>
           <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
             <Button data-cy='closeInterventionProcedureButton' variant='contained' onClick={handleCloseProcedure} color='error' disabled={!reason}>{t('document:closeButton')}</Button>
