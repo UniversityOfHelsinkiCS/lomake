@@ -615,7 +615,7 @@ export default {
       'Den förnyade årliga uppföljningen av utbildningsprogram pilottestas våren 2025 i alla kandidat- och magisterprogram. Doktorandprogrammen deltar ännu inte i pilotfasen.',
     pilotInfo2:
       '15.4-30.5.2025 Utbildningsprogrammens ledningsgrupper går igenom sina egna utvärderingsområden och utarbetar sina utvecklingsplaner. De utbildningsprogram som inleder interventionsförfarandet diskuterar ärendet med prodekanen senast den 30 oktober 2025.',
-    notUsed2025: 'Ej använd 2025',
+    notUsed2025: 'Inte tillänglig 2025',
     keyFigure: 'Utvärderingsområden och nyckeltal',
     keyFigureInfo: 'Nyckeltalen för kandidat- och magisterprogrammen är:  ',
 
@@ -670,10 +670,12 @@ export default {
     doctoralTooltip: 'Doktorandprogram som inte ingår i pilotfasen 2025',
     overview: 'Årlig uppföljningsöversikt',
     programmeHome: 'Programmens startsida',
+    homeHeader: 'NYCKELTALEN OCH UTVECKLINGSPLANER',
+    homeDescription:
+      'Denna vy samlar nyckeltalen för utbildningsprogrammet, dokumenterade synpunkterna på nyckeltalen och utvecklingsplanerna för olika åren. ',
     moveToOpinion: 'Redigera vyn över utbildningsprogrammet',
-    homeHeader: 'Key Figures and Development plan',
-    interventionProcedure: 'Intervention Procedure',
-    documentingHeader: 'Documentation of the Intervention Procedure',
+    interventionProcedure: 'INTERVENTIONSFÖRFARANDE ',
+    documentingHeader: 'Dokumentation av interventionsförfarandet',
   },
   document: {
     title: 'Dokumentets titel',
@@ -683,6 +685,15 @@ export default {
     schedule: 'Planens tidsschema',
     followupDate: 'Datum för nästa möte',
     header: 'Interventionsprocedurformulär',
+    homeDescription:
+      'Baserat på nyckeltalen kommer ett interventionsförfarande att inledas för vissa utbildningsprogrammen efter den årliga uppföljningen. Syftet med interventionsförfarandet är att förbättra resultaten för det utbildningsprogram som har hänvisats till det. Om situationen för ett utbildningsprogram som är i ett interventionsförfarande trots alla ansträngningar inte kan förbättras tillräckligt, är målet att integrera innehållet i utbildningsprogrammet i ett annat utbildningsprogram eller att avbryta utbildningsprogrammet och dess innehåll. ',
+    warningTextHeader: 'Ett interventionsförfarande har inletts för ett utbildningsprogram. ',
+    warningTextDescription:
+      'Prodekanen och utbildningsprogrammets ledare tillsammans startar interventiosförfarandet och bjuder in nyckelpersoner som är involverade i utbildningsprogrammet till ett möte. Vid mötet inventeras programmets situation och eventuella behov av ytterligare undersökningar och om programmet kan förbättra sin situation med hjälp av åtgärder som står till buds. ',
+    documentingDescription1:
+      'Förhandlingarna och de viktigaste frågorna som man kommit överens om i interventiosförfarandet dokumenteras i Status Report Form. Detta görs genom att skapa ett nytt dokument för varje möte och session som rör interventiosförfarandet. Förfarandets gång registreras i kronologisk ordning i åtgärdsbladet. ',
+    documentingDescription2:
+      'Åtgärdsförfarandet kan avslutas genom ett gemensamt beslut av prodekanen och utbildningsprogrammets ledare om utbildningsprogrammets nyckeltal har förbättrats tillräckligt eller om utbildningsprogrammet håller på att slås samman med ett annat utbildningsprogram eller håller på att läggas ned. Status report form kan användas av prodekanen för att avsluta förfarandet. ',
     generalHeader: 'Allmän information',
     generalDescription: 'Jakkakakakakakaakakakakaakak',
     mattersHeader: 'Överenskomna ärenden',
@@ -690,24 +701,27 @@ export default {
     scheduleHeader: 'Tidsschema',
     scheduleDescription: '',
     submit: 'Spara dokument',
-    backgroundInfoHeader: 'Bakgrundsinformation',
-    backgroundInfoDescription: 'Liipalaapa',
-    infobox: 'Infot täältä näin',
-
     keyFigureDescription: 'Utbildningsprogrammet är under den lägsta gränsvärdet på följande utvärderingsområden',
     keyFigure: 'Utvärderingsområden',
     edit: 'Redigera dokumentet',
-    newDocument: 'Luo uusi dokumentti',
+    newDocument: 'Skapa ett nytt dokument',
 
-    closeInterventionProcedure:
-      'Om processen för interventionsförfarandet för utbildningsprogrammet anses vara avslutad, kan fakulteten besluta att avsluta den genom att välja en grund och klicka på knappen nedan. När processen avslutas kan inga nya formulär skapas för interventionsförfaranden, och processen öppnas igen om någon nyckeltal understiger det tillåtna gränsvärdet.',
-    closeButton: 'Avsluta interventionsförfarande',
-    dropdownReason: 'Grund för avslutande',
+    closeInterventionProcedureHeader:
+      'Avslutande av interventionsförfarandet (endast synligt för fakultetens prodekan)',
+    closeInterventionProcedureDescription:
+      'Förfarandet kan avslutas genom ett gemensamt beslut av prodekanen och utbildninpsrogrammets ledare om programmets nyckeltalyckeltal har förbättrats tillräckligt eller om utbildningsprogrammet håller på att slås samman med ett annat utbildningsprogram eller läggs ned. Status report form kan användas av prodekanen för att avsluta interventiosförfarandet. ',
+    closeButton: 'Avsluta interventionsförfarandet',
+    dropdownReason: 'Orsak(er) till att interventionsförfarandet avslutas:',
     textfieldReason: 'Anledning',
-    option1: 'Utbildningsprogrammet går bättre',
-    option2: 'Avveckling av utbildningsprogrammet',
-    option3: 'Sammanläggning av utbildningsprogrammet',
-    option4: 'Annan anledning, vilken?',
+    option1: 'Utbildningsprogrammets nyckeltal har förbättrats tillräckligt',
+    option2: 'Utbildningsprogrammet är under avveckling eller sammanslagning med annat utbildningsprogram ',
+    option3: 'Annan orsak (öppen textruta)',
+
+    infobox:
+      'I interventionsförfarandets dokument beskrivs mötena i förfarandet och de viktigaste frågor som man kommit överens om. Förfarandets framsteg kan övervakas på grund av interventionsförfarandets dokument. Formuläret visar också en sammanfattning av den årliga uppföljningen. ',
+    backgroundInfoHeader: 'Backgrundmaterial',
+    backgroundInfoDescription:
+      'Som bakgrundsmaterial för interventionsförfarandet finns det synpunkter som registrerats i den årliga uppföljningen på de utvärderingsområden som ledde till interventionsförfarandet samt utvecklingsplanen. ',
   },
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',
