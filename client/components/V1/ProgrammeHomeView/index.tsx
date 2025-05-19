@@ -215,7 +215,7 @@ const ProgrammeHomeView = () => {
             {reason === '3' && (<TextField sx={{ width: '65%' }} label={t('document:textfieldReason')} value={additionalInfo} onChange={(event) => setAdditionalInfo(event.target.value)} />)}
           </FormControl>
           <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
-            <Button data-cy='closeInterventionProcedureButton' variant='contained' onClick={handleCloseProcedure} color='error' disabled={!reason}>{t('document:closeButton')}</Button>
+            <Button data-cy='closeInterventionProcedureButton' variant='contained' onClick={handleCloseProcedure} color='error' disabled={!(reason && documents.length > 0)}>{t('document:closeButton')}</Button>
           </div>
         </Alert>
       )}
