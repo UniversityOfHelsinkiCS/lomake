@@ -22,7 +22,7 @@ describe('Textfield tests', () => {
     // login to klemstro
     cy.login(possibleUsers[1].uid)
     cy.visit(`/v1/programmes/10/KH50_005`)
-    cy.get(':nth-child(5) > .MuiAccordion-heading > .MuiButtonBase-root > .MuiAccordionSummary-content').click()
+    cy.get(':nth-child(7) > .MuiAccordion-heading > .MuiButtonBase-root > .MuiAccordionSummary-content').click()
     cy.get(
       '.MuiPaper-root.Mui-expanded > .MuiCollapse-root > .MuiCollapse-wrapper > .MuiCollapse-wrapperInner > .MuiAccordion-region > .MuiAccordionDetails-root > [style="margin-top: 1rem;"] > .MuiTypography-root',
     ).click()
