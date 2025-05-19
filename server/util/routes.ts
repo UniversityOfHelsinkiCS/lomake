@@ -1,4 +1,4 @@
-import Router from 'express'
+import { Router } from 'express'
 import users from '../controllers/usersController.js'
 import answers from '../controllers/answersController.js'
 import studyprogrammes from '../controllers/studyprogrammesController.js'
@@ -81,10 +81,10 @@ router.get('/keydata/meta', checkAdmin, keyData.getKeyDataMeta)
 router.delete('/keydata/:id', checkAdmin, keyData.deleteKeyData)
 router.put('/keydata/:id', checkAdmin, keyData.updateKeyData)
 
-router.get('/documents/:studyprogrammeKey', documents.getDocuments)
-router.post('/documents/:studyprogrammeKey', requireProgrammeWrite, documents.createDocument)
-router.put('/documents/:studyprogrammeKey/:id', requireProgrammeWrite, documents.updateDocument)
-router.put('/documents/:studyprogrammeKey/close/all', requireDekanaatti, documents.closeInterventionProcedure)
+router.get('/documents/:studyprogrammeKey', async (req, res) => { await documents.getDocuments(req, res) })
+router.post('/documents/:studyprogrammeKey', requireProgrammeWrite, async (req, res) => { await documents.createDocument(req, res) })
+router.put('/documents/:studyprogrammeKey/:id', requireProgrammeWrite, async (req, res) => { documents.updateDocument(req, res) })
+router.put('/documents/:studyprogrammeKey/close/all', requireDekanaatti, async (req, res) => { await documents.closeInterventionProcedure(req, res) })
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
