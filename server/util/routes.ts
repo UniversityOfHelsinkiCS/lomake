@@ -97,6 +97,10 @@ router.put('/keydata/:id', checkAdmin, async (req, res) => {
   await keyData.updateKeyData(req, res)
 })
 
+router.get('/documents/all/:activeYear', async (req, res) => {
+  await documents.getAllDocuments(req, res)
+})
+
 router.get('/documents/:studyprogrammeKey', async (req, res) => {
   await documents.getDocuments(req, res)
 })
