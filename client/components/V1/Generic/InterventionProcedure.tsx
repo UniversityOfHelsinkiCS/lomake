@@ -103,7 +103,7 @@ const InterventionProcedure = () => {
         </Typography>
       </Alert>
       <Typography variant="h3">{t('document:backgroundInfoHeader')}</Typography>
-      <Typography>{t('document:backgroundInfoDescription')}</Typography>
+      <Typography variant="light">{t('document:backgroundInfoDescription')}</Typography>
       <Accordion sx={{ padding: '2rem' }}>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Typography variant="h4">{t('document:keyFigure')}</Typography>
@@ -147,6 +147,7 @@ const InterventionProcedure = () => {
           </AccordionDetails>
         </Accordion>
       )}
+      <br />
       <br />
       <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document} />
     </Box>
