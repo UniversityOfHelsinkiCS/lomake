@@ -89,7 +89,7 @@ const InterventionProcedure = () => {
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '2rem' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '1rem' }}>
         <IconButton component={Link} href={`${basePath}v1/programmes/10/${programmeKey}`} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
@@ -97,12 +97,16 @@ const InterventionProcedure = () => {
           {programmeData.koulutusohjelma[lang]} - {`${document.data.title}`}
         </Typography>
       </Box>
-      <Alert severity="info">{t('document:infobox')}</Alert>
-      <Typography variant="h4">{t('document:backgroundInfoHeader')}</Typography>
+      <Alert severity="info">
+        <Typography variant="light" style={{ gap: 1 }}>
+          {t('document:infobox')}
+        </Typography>
+      </Alert>
+      <Typography variant="h3">{t('document:backgroundInfoHeader')}</Typography>
       <Typography>{t('document:backgroundInfoDescription')}</Typography>
       <Accordion sx={{ padding: '2rem' }}>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography variant="h5">{t('document:keyFigure')}</Typography>
+          <Typography variant="h4">{t('document:keyFigure')}</Typography>
         </AccordionSummary>
         {areas.map(groupKey => {
           const props = {
@@ -128,7 +132,7 @@ const InterventionProcedure = () => {
       {areas.length > 0 && (
         <Accordion sx={{ padding: '2rem' }}>
           <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography variant="h5">{t('keyData:actions')}</Typography>
+            <Typography variant="h4">{t('keyData:actions')}</Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ display: 'flex', flexDirection: 'column' }}>
             <TextFieldCard id="Toimenpiteet" t={t} type="Measure" />
@@ -143,6 +147,7 @@ const InterventionProcedure = () => {
           </AccordionDetails>
         </Accordion>
       )}
+      <br />
       <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document} />
     </Box>
   )

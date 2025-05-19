@@ -16,13 +16,26 @@ import { basePath } from '@/config/common'
 const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followupDate']
 
 const initForm = (t: TFunction, error: boolean) => {
-  return fields.reduce((acc, field) => {
-    if (field === 'title' && !error) acc[field] = `${t('document:header')} - ${new Date().toLocaleDateString('fi-FI')}`
-    else acc[field] = ''; return acc
-  }, {} as Record<string, string>)
+  return fields.reduce(
+    (acc, field) => {
+      if (field === 'title' && !error)
+        acc[field] = `${t('document:header')} - ${new Date().toLocaleDateString('fi-FI')}`
+      else acc[field] = ''
+      return acc
+    },
+    {} as Record<string, string>,
+  )
 }
 
-const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id: string, document: Record<string, any> }) => {
+const DocumentForm = ({
+  programmeKey,
+  id,
+  document,
+}: {
+  programmeKey: string
+  id: string
+  document: Record<string, any>
+}) => {
   const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
   const lang = useSelector((state: RootState) => state.language)
@@ -58,7 +71,7 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
     setFormData((prevData: Record<string, string>) => ({
       ...prevData,
       [field]: final,
-    }));
+    }))
   }
 
   const validateForm = () => {
@@ -66,11 +79,14 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
     if (!res.success) {
       const fieldErrors = res.error.format()
       setErrors(
-        fields.reduce((acc, field) => {
-          // @ts-expect-error
-          acc[field] = t(`error:${fieldErrors[field]?._errors?.[0]}`) || '';
-          return acc;
-        }, {} as Record<string, string>)
+        fields.reduce(
+          (acc, field) => {
+            // @ts-expect-error
+            acc[field] = t(`error:${fieldErrors[field]?._errors?.[0]}`) || ''
+            return acc
+          },
+          {} as Record<string, string>,
+        ),
       )
     }
     return res.success
@@ -88,30 +104,36 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Typography variant="h3" sx={{ mb: '2rem' }}>{t('document:header')}</Typography>
+      <Typography variant="h3" sx={{ mb: '4rem' }}>
+        {t('document:header')}
+      </Typography>
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-          <Typography variant="h5">{t('document:generalHeader')}</Typography>
-          <Typography>{t('document:generalDescription')}</Typography>
+          <Typography variant="h4">{t('document:generalHeader')}</Typography>
+          <Typography variant="light">{t('document:generalDescription')}</Typography>
           {fields.map((field, index) => {
             if (index === 1 || index === 5) {
               return (
-                <LocalizationProvider key={field} dateAdapter={AdapterDayjs} localeText={localeComponent.components.MuiLocalizationProvider.defaultProps.localeText}>
+                <LocalizationProvider
+                  key={field}
+                  dateAdapter={AdapterDayjs}
+                  localeText={localeComponent.components.MuiLocalizationProvider.defaultProps.localeText}
+                >
                   <DatePicker
                     label={t(`document:${field}`)}
                     value={formData[field] ? dayjs(formData[field]) : null}
-                    onChange={(value) => handleDateChange(field, value)}
+                    onChange={value => handleDateChange(field, value)}
                     sx={{ width: '50%' }}
-                    format='DD/MM/YYYY'
+                    format="DD/MM/YYYY"
                     slotProps={{
                       textField: {
                         inputProps: {
                           'data-cy': `editor-${field}`,
                         },
                         error: !!errors[field],
-                        helperText: errors[field]
+                        helperText: errors[field],
                       },
-                      calendarHeader: { format: 'MM/YYYY' }
+                      calendarHeader: { format: 'MM/YYYY' },
                     }}
                   />
                 </LocalizationProvider>
@@ -119,8 +141,8 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
             } else if (index === 3) {
               return (
                 <Fragment data-cy={`editor-${field}`} key={field}>
-                  <Typography variant="h5">{t('document:mattersHeader')}</Typography>
-                  <Typography>{t('document:mattersDescription')}</Typography>
+                  <Typography variant="h4">{t('document:mattersHeader')}</Typography>
+                  <Typography variant="light">{t('document:mattersDescription')}</Typography>
                   <TextField
                     data-cy={`editor-${field}`}
                     name={field}
@@ -139,8 +161,8 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
             } else if (index === 4) {
               return (
                 <Fragment data-cy={`editor-${field}`} key={field}>
-                  <Typography variant="h5">{t('document:scheduleHeader')}</Typography>
-                  <Typography>{t('document:scheduleDescription')}</Typography>
+                  <Typography variant="h4">{t('document:scheduleHeader')}</Typography>
+                  <Typography variant="light">{t('document:scheduleDescription')}</Typography>
                   <TextField
                     data-cy={`editor-${field}`}
                     key={field}
@@ -176,7 +198,16 @@ const DocumentForm = ({ programmeKey, id, document }: { programmeKey: string, id
               </Fragment>
             )
           })}
-          <Button data-cy='save-document' key="submit" sx={{ alignSelf: 'flex-end' }} type="submit" variant="contained" color="primary">{t('document:submit')}</Button>
+          <Button
+            data-cy="save-document"
+            key="submit"
+            sx={{ alignSelf: 'flex-end' }}
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            {t('document:submit')}
+          </Button>
         </div>
       </form>
     </Box>
