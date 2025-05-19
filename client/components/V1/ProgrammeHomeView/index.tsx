@@ -135,8 +135,7 @@ const ProgrammeHomeView = () => {
           {t('keyData:homeHeader').toUpperCase()}
         </Typography>
         <Typography style={{ marginTop: '2rem' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          {t('keyData:homeDescription')}
         </Typography>
       </div>
       <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} />
@@ -146,11 +145,13 @@ const ProgrammeHomeView = () => {
       </div>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Typography variant="h1">{t('keyData:interventionProcedure').toUpperCase()} </Typography>
-        <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
+        <Typography variant="light">{t('document:homeDescription')}</Typography>
         <Alert severity={activeProcedure() ? 'warning' : 'success'}>
-          <Typography>{activeProcedure() ? t('document:warningText') : t('document:successText')}</Typography>
+          <Typography variant='h6'>{activeProcedure() ? t('document:warningTextHeader') : null}</Typography>
+          <Typography>{activeProcedure() ? t('document:warningTextDescription') : t('document:successText')}</Typography>
         </Alert>
         <Typography variant='h3'>{t('keyData:documentingHeader')}</Typography>
+        <Typography>{t('document:documentingDescription')}</Typography>
         {Array.isArray(documents) && (documents
           .map((doc: Record<string, any>) => (
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
@@ -201,16 +202,16 @@ const ProgrammeHomeView = () => {
       </Box>
       {(hasAccessToCloseInterventionProcedure && activeProcedure()) && (
         <Alert data-cy='closeInterventionProcedureAlertBox' severity='warning' variant='outlined'>
-          <Typography>{t('document:closeInterventionProcedure')}</Typography>
+          <Typography variant='h6'>{t('document:closeInterventionProcedureHeader')}</Typography>
+          <Typography>{t('document:closeInterventionProcedureDescription')}</Typography>
           <FormControl sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '2rem', mb: '2rem', mt: '2rem' }}>
             <InputLabel data-cy='reasonDropdown' sx={{ width: '40%' }}>{t('document:dropdownReason')}</InputLabel>
             <Select data-cy='reasonDropdown' value={reason} label={t('document:dropdownReason')} onChange={(event) => setReason(event.target.value)} sx={{ width: '30%' }}>
               <MenuItem value={'1'}>{t('document:option1')}</MenuItem>
               <MenuItem value={'2'}>{t('document:option2')}</MenuItem>
               <MenuItem value={'3'}>{t('document:option3')}</MenuItem>
-              <MenuItem value={'4'}>{t('document:option4')}</MenuItem>
             </Select>
-            {reason === '4' && (<TextField sx={{ width: '70%' }} label={t('document:textfieldReason')} value={additionalInfo} onChange={(event) => setAdditionalInfo(event.target.value)} />)}
+            {reason === '3' && (<TextField sx={{ width: '70%' }} label={t('document:textfieldReason')} value={additionalInfo} onChange={(event) => setAdditionalInfo(event.target.value)} />)}
           </FormControl>
           <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
             <Button data-cy='closeInterventionProcedureButton' variant='contained' onClick={handleCloseProcedure} color='error' disabled={!reason}>{t('document:closeButton')}</Button>

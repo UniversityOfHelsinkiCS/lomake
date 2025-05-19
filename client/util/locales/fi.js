@@ -638,6 +638,8 @@ export default {
     interventionProcedure: 'Toimenpidemenettely',
     documentingHeader: 'Toimenpidemenettelyn dokumentointi',
     moveToOpinion: 'Siirry muokkaamaan näkemystä',
+    homeDescription:
+      'Tähän näkymään kootaan koulutusohjelman avainluvut, avainlukuihin liittyvät kirjatut näkemykset sekä kehittämissuunnitelmat eri vuosilta. ',
   },
   document: {
     title: 'Dokumentin otsikko',
@@ -647,36 +649,42 @@ export default {
     schedule: 'Suunnitelman aikataulu',
     followupDate: 'Seuraavan seurannan ajankohta',
     header: 'Toimenpidelomake',
+    homeDescription:
+      'Avainlukujen perusteella osalle koulutusohjelmista käynnistyy toimenpidemenettely vuosiseurannan jälkeen. Toimenpidemenettelyn tavoitteena on siihen ohjautuneen koulutusohjelman toiminnan kehittäminen. Mikäli toimenpidemenettelyssä olevan koulutusohjelman tilanteen parantamiseksi ei yrityksistä huolimatta löydy riittäviä keinoja, tavoitteena on koulutusohjelman liittäminen sisältönä toiseen koulutusohjelmaan tai koulutusohjelman lakkauttaminen sisältöineen. ',
+    documentingDescription: `Toimenpidemenettelyn neuvottelut ja niissä sovitut keskeiset asiat dokumentoidaan Tilannekuvalomakkeelle. Dokumentointi tapahtuu luomalla uusi dokumentti kustakin tapaamisesta ja kokouksesta, jotka toimenpidemenettelyyn liittyy. Toimenpidemenettelyn etenemisestä jää Tilannekuvalomakkeelle tiedot aikajärjestyksessä.
+    Toimenpidemenettely voidaan päättää varadekaanin ja koulutusohjelman johtajan yhteisellä päätöksellä, mikäli koulutusohjelman avainluvut ovat riittävästi parantuneet tai koulutusohjelmalle on käynnistynyt valmistelu, jossa koulutusohjelma liitetään toiseen koulutusohjelmaan tai lakkautetaan. Tilannekuvalomakkeella toimenpidemenettelyn voi lopettaa koulutusohjelmasta vastaavan tiedekunnan varadekaani. `,
     generalHeader: 'Yleiset tiedot',
-    generalDescription: 'Jakkakakakakakaakakakakaakak',
-    mattersHeader: 'Sovitut asiat',
-    mattersDescription: 'Lorem korem dorem forem sorem worem work dem',
+    generalDescription: `Ajankohta tulee automaattisesti lomakkeen avauspäivämäärän mukaisesti. Lomakkeelle voidaan kirjoittaa päivämäärän lisäksi tapahtumaa kuvaava nimi (ei pakollinen tieto). Osallistujien nimet kirjoitetaan ”osallistujat” -laatikkoon. `,
+    mattersHeader: 'Sovitut toimenpiteet',
+    mattersDescription:
+      'Sovitut toimenpiteet voidaan kirjata vapaamuotoisesti. Kirjauksia voi muokata tarpeen mukaan. ',
     scheduleHeader: 'Aikataulu',
     scheduleDescription:
-      'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. ',
+      'Toimenpidemenettelyn etenemisestä sovitut asiat kirjataan ja lisäksi sovitaan seurannan seuraavasta päivämäärästä. ',
     submit: 'Tallenna dokumentti',
     backgroundInfoHeader: 'Esitiedot',
     backgroundInfoDescription:
-      'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. ',
-    infobox: 'Infot täältä näin',
+      'Toimenpidemenettelyn taustamateriaalina ovat koulutusohjelman vuosiseurannassa kirjatut näkemykset toimenpidemenettelyyn johtaneista arviointialueista sekä kehittämissuunnitelma. ',
+    infobox: '',
     keyFigureDescription: 'Koulutusohjelma on alle alimman raja-arvon seuraavilla arviointialueilla',
     keyFigure: 'Arviointialueet',
     newDocument: 'Luo uusi dokumentti',
     edit: 'Muokkaa dokumenttia',
-    closeInterventionProcedure:
-      'Mikäli koulutusohjelman toimenpidemenettelyn prosessi on katsottu päätettäväksi, voi tiedekunta päättää sen valitsemalla perusteen ja painamalla alla olevasta painikkeesta. Prosessin päättyessä toimenpidemenettelyille ei voi enää luoda uusia lomakkeita, ja prosssi aukeaa uudelleen mikäli jokin avainluvuista alittaa sallitun raja-arvon.',
-    closeButton: 'Päätä toimenpidemenettey',
+    closeInterventionProcedureHeader: 'Toimenpidemenettelyn päättäminen',
+    closeInterventionProcedureDescription:
+      'Toimenpidemenettely voidaan päättää varadekaanin ja koulutusohjelman johtajan yhteisellä päätöksellä, mikäli koulutusohjelman avainluvut ovat riittävästi parantuneet tai koulutusohjelmalle on käynnistynyt valmistelu, jossa koulutusohjelma liitetään toiseen koulutusohjelmaan tai lakkautetaan. Tilannekuvalomakkeella toimenpidemenettelyn voi lopettaa koulutusohjelmasta vastaavan tiedekunnan varadekaani. ',
+    closeButton: 'Lopeta toimenpidemenettey',
     dropdownReason: 'Päättämisen peruste',
-
-    warningText:
-      'Koulutusohjelmalle on käynnistetty toimenpidemenettely, sillä se on alle sallitun raja-arvon yhdellä tai useammalla arviointialueella. ... Ohjeistus tähän.',
+    warningTextHeader: 'Koulutusohjelmalle on käynnistynyt toimenpidemenettely.',
+    warningTextDescription:
+      'Tiedekunnan opetusvaradekaani ja koulutusohjelman johtaja yhdessä käynnistävät toimenpidemenettelyn ja kutsuvat neuvotteluun koulutusohjelman avainhenkilöt. Neuvottelussa kartoitetaan koulutusohjelman tilanne ja mahdollinen tarve lisäselvityksille sekä selvitetään, onko koulutusohjelman mahdollista parantaa tilannettaan joillakin käytettävissä olevilla toimenpiteillä. ',
     successText:
       'Koulutusohjelmalla ei ole aktiivista toimenpidemenettelyä, eikä siltä tarvita toimia. Mikäli koulutusohjelma on aiemmin ollut toimenpidemenettelyssä, sen dokumentaation on listattu alla.',
     textfieldReason: 'Syy',
-    option1: 'Koulutusohjelmalla menee paremmin',
-    option2: 'Koulutusohjelman lakkauttaminen',
-    option3: 'Koulutusohjelman yhdistäminen',
-    option4: 'Muu syy, mikä?',
+    option1: 'Koulutusohjelman avainluvut ovat riittävästi parantuneet',
+    option2:
+      'Koulutusohjelmalle on käynnistynyt valmistelu sen lakkauttamiseksi tai liittämiseksi toiseen koulutusohjelmaan',
+    option3: 'Muu syy, mikä?',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',
