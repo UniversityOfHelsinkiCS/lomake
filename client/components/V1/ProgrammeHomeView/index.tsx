@@ -226,7 +226,7 @@ const ProgrammeHomeView = () => {
               mt: '2rem',
             }}
           >
-            <InputLabel data-cy="reasonDropdown" sx={{ width: '40%' }}>
+            <InputLabel data-cy="reasonDropdown" sx={{ width: '50%' }}>
               {t('document:dropdownReason')}
             </InputLabel>
             <Select
@@ -234,7 +234,7 @@ const ProgrammeHomeView = () => {
               value={reason}
               label={t('document:dropdownReason')}
               onChange={event => setReason(event.target.value)}
-              sx={{ width: '30%' }}
+              sx={{ width: '50%' }}
             >
               <MenuItem value={'1'}>{t('document:option1')}</MenuItem>
               <MenuItem value={'2'}>{t('document:option2')}</MenuItem>
@@ -242,7 +242,7 @@ const ProgrammeHomeView = () => {
             </Select>
             {reason === '3' && (
               <TextField
-                sx={{ width: '70%' }}
+                sx={{ width: '65%' }}
                 label={t('document:textfieldReason')}
                 value={additionalInfo}
                 onChange={event => setAdditionalInfo(event.target.value)}
@@ -255,7 +255,7 @@ const ProgrammeHomeView = () => {
               variant="contained"
               onClick={handleCloseProcedure}
               color="error"
-              disabled={!reason}
+              disabled={!(reason && documents.length > 0)}
             >
               {t('document:closeButton')}
             </Button>
