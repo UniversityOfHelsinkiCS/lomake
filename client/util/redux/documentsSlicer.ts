@@ -32,23 +32,44 @@ export const getDocuments = createAsyncThunk<any, Record<string, any>>(
   },
 )
 
+export const getAllDocuments = createAsyncThunk<any, Record<string, any>>(
+  'documents/getAllDocuments',
+  async (payload, { rejectWithValue }) => {
+    const { activeYear } = payload
+    try {
+      const response = await axios.get(`${basePath}api/documents/all/${activeYear}`, {
+        headers: {
+          ...getHeaders(),
+        },
+      })
+      return response.data
+    } catch (err) {
+      alertSentry(err, `${basePath}api/documents/all/${activeYear}`, 'GET', {})
+      return rejectWithValue((err as any).response.data)
+    }
+  },
+)
+
 export const createDocument = createAsyncThunk<any, Record<string, any>>(
   'documents/createDocument',
   async (payload, { rejectWithValue }) => {
     const { studyprogrammeKey, data } = payload
     try {
-      const response = await axios.post(`${basePath}api/documents/${studyprogrammeKey}`, { data },
+      const response = await axios.post(
+        `${basePath}api/documents/${studyprogrammeKey}`,
+        { data },
         {
           headers: {
             ...getHeaders(),
           },
-        })
+        },
+      )
       return response.data
     } catch (err) {
       alertSentry(err, `${basePath}api/documents/${studyprogrammeKey}`, 'POST', {})
       return rejectWithValue((err as any).response.data)
     }
-  }
+  },
 )
 
 export const updateDocument = createAsyncThunk<any, Record<string, any>>(
@@ -56,18 +77,21 @@ export const updateDocument = createAsyncThunk<any, Record<string, any>>(
   async (payload, { rejectWithValue }) => {
     const { studyprogrammeKey, id, data } = payload
     try {
-      const response = await axios.put(`${basePath}api/documents/${studyprogrammeKey}/${id}`, { data },
+      const response = await axios.put(
+        `${basePath}api/documents/${studyprogrammeKey}/${id}`,
+        { data },
         {
           headers: {
             ...getHeaders(),
           },
-        })
+        },
+      )
       return response.data
     } catch (err) {
       alertSentry(err, `${basePath}api/documents/${studyprogrammeKey}/${id}`, 'PUT', {})
       return rejectWithValue((err as any).response.data)
     }
-  }
+  },
 )
 
 export const closeInterventionProcedure = createAsyncThunk<any, Record<string, any>>(
@@ -75,18 +99,21 @@ export const closeInterventionProcedure = createAsyncThunk<any, Record<string, a
   async (payload, { rejectWithValue }) => {
     const { studyprogrammeKey, data } = payload
     try {
-      const response = await axios.put(`${basePath}api/documents/${studyprogrammeKey}/close/all`, { data },
+      const response = await axios.put(
+        `${basePath}api/documents/${studyprogrammeKey}/close/all`,
+        { data },
         {
           headers: {
             ...getHeaders(),
           },
-        })
+        },
+      )
       return response.data
     } catch (err) {
       alertSentry(err, `${basePath}api/documents/${studyprogrammeKey}/close/all`, 'PUT', {})
       return rejectWithValue((err as any).response.data)
     }
-  }
+  },
 )
 
 const initialState = {
@@ -111,6 +138,16 @@ const documentsSlicer = createSlice({
       state.status = 'succeeded'
     })
     builder.addCase(getDocuments.rejected, state => {
+      state.status = 'failed'
+    })
+    builder.addCase(getAllDocuments.pending, state => {
+      state.status = 'loading'
+    })
+    builder.addCase(getAllDocuments.fulfilled, (state, action) => {
+      state.data = action.payload
+      state.status = 'succeeded'
+    })
+    builder.addCase(getAllDocuments.rejected, state => {
       state.status = 'failed'
     })
     builder.addCase(createDocument.pending, state => {

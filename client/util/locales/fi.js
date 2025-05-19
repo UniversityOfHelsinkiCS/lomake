@@ -640,6 +640,9 @@ export default {
     moveToOpinion: 'Siirry muokkaamaan näkemystä',
     homeDescription:
       'Tähän näkymään kootaan koulutusohjelman avainluvut, avainlukuihin liittyvät kirjatut näkemykset sekä kehittämissuunnitelmat eri vuosilta. ',
+    interventionOn: 'Käynnissä',
+    interventionOff: 'Ei käynnissä',
+    interventionMissing: 'Toimenpidemenettelyn dokumentointi puuttuu!',
   },
   document: {
     title: 'Dokumentin otsikko',

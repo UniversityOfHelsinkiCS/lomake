@@ -4,6 +4,7 @@ import Document from '../models/document.js'
 import type { Request, Response } from 'express'
 import { DocumentFormSchema, InterventionProcedureCloseSchema } from '../../shared/validators/index.js'
 import { sequelize } from '../database/connection.js'
+import { get } from 'lodash'
 
 interface ValidateOperationResponse {
   success: boolean
@@ -52,14 +53,14 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     const validationResult2 = InterventionProcedureCloseSchema.safeParse(data)
 
     if (!validationResult1.success && !validationResult2.success) {
-      const errors1 = validationResult1.success ? [] : validationResult1.error.errors.map(e => e.message);
-      const errors2 = validationResult2.success ? [] : validationResult2.error.errors.map(e => e.message);
+      const errors1 = validationResult1.success ? [] : validationResult1.error.errors.map(e => e.message)
+      const errors2 = validationResult2.success ? [] : validationResult2.error.errors.map(e => e.message)
 
-      const allErrors = [...errors1, ...errors2];
+      const allErrors = [...errors1, ...errors2]
 
-      resultObject.error = allErrors.join(', ');
-      resultObject.status = 400;
-      return resultObject;
+      resultObject.error = allErrors.join(', ')
+      resultObject.status = 400
+      return resultObject
     }
   }
 
@@ -70,7 +71,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
       where: {
         id,
         studyprogrammeKey: studyprogramme.key,
-      }
+      },
     })
   } else {
     documents = await Document.findAll({
@@ -78,7 +79,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
         studyprogrammeKey: studyprogramme.key,
       },
       attributes: ['id', 'data', 'studyprogrammeKey', 'active', 'activeYear', 'reason'],
-      order: [['createdAt', 'ASC']]
+      order: [['createdAt', 'ASC']],
     })
   }
 
@@ -102,6 +103,25 @@ const getDocuments = async (req: Request, res: Response): Promise<any> => {
   }
 }
 
+const getAllDocuments = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { activeYear } = req.params
+
+    if (!activeYear) {
+      return res.status(400).json({ error: 'Active year param is required' })
+    }
+
+    const documents = await Document.findAll({
+      where: { activeYear },
+    })
+
+    return res.status(200).json(documents)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const createDocument = async (req: Request, res: Response): Promise<any> => {
   try {
     const { studyprogrammeKey, status, error, documents } = await validateOperation(req)
@@ -117,7 +137,7 @@ const createDocument = async (req: Request, res: Response): Promise<any> => {
       data: { title: `${new Date().toLocaleDateString('fi-FI')}` },
       studyprogrammeKey,
       active: true,
-      activeYear: calculateActiveYear()
+      activeYear: calculateActiveYear(),
     })
 
     // @ts-expect-error
@@ -137,7 +157,7 @@ const updateDocument = async (req: Request, res: Response): Promise<any> => {
 
     const document: Document = documents.pop()
     const updated: Document = await document.update({
-      data
+      data,
     })
 
     return res.status(204).json(updated)
@@ -177,4 +197,4 @@ const closeInterventionProcedure = async (req: Request, res: Response): Promise<
   }
 }
 
-export default { getDocuments, createDocument, updateDocument, closeInterventionProcedure }
+export default { getDocuments, createDocument, updateDocument, closeInterventionProcedure, getAllDocuments }

@@ -82,6 +82,7 @@ router.delete('/keydata/:id', checkAdmin, keyData.deleteKeyData)
 router.put('/keydata/:id', checkAdmin, keyData.updateKeyData)
 
 router.get('/documents/:studyprogrammeKey', documents.getDocuments)
+router.get('/documents/all/:activeYear', documents.getAllDocuments)
 router.post('/documents/:studyprogrammeKey', requireProgrammeWrite, documents.createDocument)
 router.put('/documents/:studyprogrammeKey/:id', requireProgrammeWrite, documents.updateDocument)
 router.put('/documents/:studyprogrammeKey/close/all', requireDekanaatti, documents.closeInterventionProcedure)

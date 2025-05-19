@@ -18,8 +18,9 @@ import TrafficLightCell from '../Generic/TrafficLightCellComponent'
 import SearchInput from '../Generic/SearchInputComponent'
 import { Table, TableHead, TableBody, TableRow, TableCell } from '../Generic/TableComponent'
 import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
-
 import { orderBy } from 'lodash'
+import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
+import NotificationBadge from '../Generic/NotificationBadge'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -54,7 +55,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const keyData = useFetchKeyData()
   const { t } = useTranslation()
-
+  const { renderInterventionBadge } = useNotificationBadge()
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
@@ -143,6 +144,35 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     return <CircularProgress />
   }
 
+  const InterventionCell = ({
+    programmeData,
+    selectedYear,
+  }: {
+    programmeData: KeyDataProgramme
+    selectedYear: string
+  }) => {
+    const interventionData = renderInterventionBadge(programmeData, metadata, selectedYear)
+
+    if (!interventionData.interventionStatus || programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+      return (
+        <Typography variant="italic" color="secondary">
+          {t('keyData:interventionOff')}
+        </Typography>
+      )
+    } else if (interventionData.interventionStatus) {
+      return (
+        <>
+          <Typography variant="regularSmall">{t('keyData:interventionOn')}</Typography>
+          {interventionData.showBadge ? (
+            <NotificationBadge variant="small" tooltip={t('keyData:interventionMissing')} />
+          ) : (
+            <></>
+          )}
+        </>
+      )
+    }
+  }
+
   return (
     <div style={{ width: '100%' }}>
       {/* Search input */}
@@ -195,10 +225,8 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                     <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
                   </Tooltip>
                 </TableCell>
-                <TableCell disabled isHeader>
-                  <Tooltip title={t('keyData:openingSoon')} placement="top" arrow>
-                    <Typography variant="regularSmall">{t('keyData:supportProcess')}</Typography>
-                  </Tooltip>
+                <TableCell isHeader>
+                  <Typography variant="regularSmall">{t('keyData:supportProcess')}</Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -238,7 +266,9 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
 
                     <ActionsCell programmeData={programmeData} metadata={metadata} />
                     <TableCell disabled></TableCell>
-                    <TableCell disabled></TableCell>
+                    <TableCell>
+                      <InterventionCell programmeData={programmeData} selectedYear={yearFilter} />
+                    </TableCell>
                   </TableRow>
                 ))
               ) : (

@@ -676,6 +676,9 @@ export default {
     moveToOpinion: 'Redigera vyn över utbildningsprogrammet',
     interventionProcedure: 'INTERVENTIONSFÖRFARANDE ',
     documentingHeader: 'Dokumentation av interventionsförfarandet',
+    interventionOn: 'Aktiv',
+    interventionOff: 'Inaktiv',
+    interventionMissing: 'Dokumentation av interventionsförfarandet saknas!',
   },
   document: {
     title: 'Dokumentets titel',

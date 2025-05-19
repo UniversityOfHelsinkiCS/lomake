@@ -28,7 +28,7 @@ import { getReport } from '@/client/util/redux/reportsSlicer'
 import DocumentForm from './DocumentForm'
 import { getDocuments } from '@/client/util/redux/documentsSlicer'
 
-export const calculateIntervetionAreas = ({
+export const calculateInterventionAreas = ({
   metadata,
   programme,
   t,
@@ -55,7 +55,7 @@ const InterventionProcedure = () => {
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
   const user = useSelector((state: RootState) => state.currentUser.data)
   const documents = useSelector((state: RootState) => state.documents.data)
-  const document = documents.length > 0 ? documents.find((doc) => doc.id.toString() === id) : null
+  const document = documents.length > 0 ? documents.find(doc => doc.id.toString() === id) : null
 
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
@@ -81,7 +81,7 @@ const InterventionProcedure = () => {
     return {}
   }, [keyData, year])
 
-  const areas = calculateIntervetionAreas({ metadata, programme: programmeData, t })
+  const areas = calculateInterventionAreas({ metadata, programme: programmeData, t })
 
   if (!keyData || !hasWriteRights) return null
 

@@ -640,6 +640,9 @@ export default {
       'This view brings together the key figures for the degree programme, the documented views on the key figures and the development plans for the different years. ',
     interventionProcedure: 'Intervention Procedure',
     documentingHeader: 'Documentation of the Intervention Procedure',
+    interventionOn: 'Active',
+    interventionOff: 'Inactive',
+    interventionMissing: 'Intervention procedure documentation missing!',
   },
   document: {
     homeDescription:
