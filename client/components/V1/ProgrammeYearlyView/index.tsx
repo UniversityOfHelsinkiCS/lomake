@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState, useRef, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
@@ -21,7 +21,7 @@ import { RootState, AppDispatch } from '@/client/util/store'
 import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
-import { calculateKeyDataColor, getKeyDataPoints } from '../Utils/util'
+import { calculateKeyDataColor, formatURLFragment, getKeyDataPoints } from '../Utils/util'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
@@ -48,6 +48,8 @@ const ProgrammeView = () => {
 
   const writeAccess = (user.access[programmeKey] && user.access[programmeKey].write) || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
+
+  const anchorItems = useRef<Record<string, HTMLDivElement | null>>({})
 
   const isValidYear = (targetYear: number, keyData: KeyDataByCode) => {
     const availableYears = keyData.programme.map((programmeData: KeyDataProgramme) => programmeData.year)
@@ -105,6 +107,18 @@ const ProgrammeView = () => {
     }
     return {}
   }, [keyData, selectedYear])
+
+  useEffect(() => {
+    if (!keyData || !programmeData) return
+    const anchor = location.hash.substring(1)
+
+    if (anchor && anchorItems.current[anchor]) {
+      anchorItems.current[anchor].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+  }, [programmeData, location.hash])
 
   if (!keyData) {
     return <CircularProgress />
@@ -289,23 +303,35 @@ const ProgrammeView = () => {
             </Box>
           </Alert>
 
-          {Object.values(KeyDataPoints).map((data: KeyDataCardData) => (
-            <Box sx={{ p: '2.5rem 0' }} key={data.groupKey}>
-              <KeyDataCard level={level} metadata={metadata} programme={programmeData} {...data} />
-              <Box sx={{ alignItems: 'center' }}>
-                {data.textField && (
-                  <TextFieldComponent id={data.groupKey} type="Comment">
-                    <TextFieldBadge
-                      programmeData={programmeData}
-                      groupKey={data.groupKey}
-                      metadata={metadata}
-                      level={level}
-                    />
-                  </TextFieldComponent>
-                )}
+          {Object.values(KeyDataPoints).map((data: KeyDataCardData, index: number) => {
+            const anchor = formatURLFragment(data.groupKey)
+            return (
+              <Box
+                sx={{ pt: '2.5rem' }}
+                key={data.groupKey}
+                id={anchor}
+                ref={(el: any | null) => {
+                  anchorItems.current[anchor] = el
+                }}
+              >
+                <KeyDataCard level={level} metadata={metadata} programme={programmeData} {...data} />
+                <Box sx={{ alignItems: 'center' }}>
+                  {data.textField && (
+                    <div style={{ minHeight: 200 }}>
+                      <TextFieldComponent id={data.groupKey} type="Comment">
+                        <TextFieldBadge
+                          programmeData={programmeData}
+                          groupKey={data.groupKey}
+                          metadata={metadata}
+                          level={level}
+                        />
+                      </TextFieldComponent>
+                    </div>
+                  )}
+                </Box>
               </Box>
-            </Box>
-          ))}
+            )
+          })}
 
           <Link
             sx={{ textDecoration: 'none', cursor: 'pointer' }}

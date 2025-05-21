@@ -11,7 +11,6 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
     return LightColors.Grey
   }
 
-
   if (unit) {
     value = Number((value * 100).toFixed(0))
   }
@@ -54,9 +53,7 @@ export const calculateKeyDataColor = (
   groupKey: GroupKey,
   level: ProgrammeLevel,
 ) => {
-  const evaluationArea = metadata.filter(data =>
-    data.arviointialue === groupKey && data.ohjelmanTaso === level
-  )
+  const evaluationArea = metadata.filter(data => data.arviointialue === groupKey && data.ohjelmanTaso === level)
 
   // Return Grey if not enough data points
   if (evaluationArea.length < 2) {
@@ -118,7 +115,7 @@ export const calculateKeyDataColor = (
 
 export const extractKeyDataValue = (programme: KeyDataProgramme, data: KeyDataMetadata) => {
   const key = Object.keys(programme.values).find(
-    key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase()
+    key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase(),
   )
   return key !== undefined ? programme.values[key] : null
 }
@@ -127,7 +124,7 @@ export const calculateValue = (value: number, unit?: string) => {
   if (value === null) {
     return 'Ei dataa'
   } else if (unit) {
-    return `${(value as number * 100).toFixed(0)} ${unit}`
+    return `${((value as number) * 100).toFixed(0)} ${unit}`
   } else {
     if (isInteger(value as number)) {
       return (value as number).toString()
@@ -160,4 +157,8 @@ export const getKeyDataPoints = (t: TFunction) => {
     )
 
   return KeyDataPoints
+}
+
+export const formatURLFragment = (fragment: string) => {
+  return fragment.toLowerCase().replace(/ /g, '-').replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/å/g, 'a')
 }

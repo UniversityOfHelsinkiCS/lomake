@@ -15,7 +15,7 @@ import { Box, Button, CircularProgress, Link, Typography } from '@mui/material'
 import TextFieldCard from '../Generic/TextFieldComponent'
 import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
-import { getKeyDataPoints } from '@/client/components/V1/Utils/util'
+import { getKeyDataPoints, formatURLFragment } from '@/client/components/V1/Utils/util'
 import { ArrowForward } from '@mui/icons-material'
 import { basePath } from '@/config/common'
 
@@ -91,7 +91,9 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
             {...content}
           />
           <TextFieldCard id={content.groupKey} type="Comment" />
-          <Link href={`${basePath}v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}`}>
+          <Link
+            href={`${basePath}v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}/#${formatURLFragment(content.groupKey)}`}
+          >
             <Button variant="outlined" startIcon={<ArrowForward />} sx={{ marginTop: 2, float: 'right' }}>
               {t('keyData:moveToOpinion')}
             </Button>
