@@ -74,10 +74,10 @@ router.get('/faculties', faculty.getAll)
 router.get('/reports/:year', async (req, res) => {
   await reports.getReports(req, res)
 })
-router.get('/reports/:studyprogrammeKey/:year', async (req, res) => {
+router.get('/reports/:programme/:year', async (req, res) => {
   await reports.getReport(req, res)
 })
-router.put('/reports/:studyprogrammeKey/:year', async (req, res) => {
+router.put('/reports/:programme/:year', requireProgrammeWrite, async (req, res) => {
   await reports.updateReport(req, res)
 })
 
@@ -101,16 +101,16 @@ router.get('/documents/all/:activeYear', async (req, res) => {
   await documents.getAllDocuments(req, res)
 })
 
-router.get('/documents/:studyprogrammeKey', async (req, res) => {
+router.get('/documents/:programme', async (req, res) => {
   await documents.getDocuments(req, res)
 })
-router.post('/documents/:studyprogrammeKey', requireProgrammeWrite, async (req, res) => {
+router.post('/documents/:programme', requireProgrammeWrite, async (req, res) => {
   await documents.createDocument(req, res)
 })
-router.put('/documents/:studyprogrammeKey/:id', requireProgrammeWrite, async (req, res) => {
+router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) => {
   documents.updateDocument(req, res)
 })
-router.put('/documents/:studyprogrammeKey/close/all', requireDekanaatti, async (req, res) => {
+router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => {
   await documents.closeInterventionProcedure(req, res)
 })
 

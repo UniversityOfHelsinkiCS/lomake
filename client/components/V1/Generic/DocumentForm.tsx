@@ -140,7 +140,7 @@ const DocumentForm = ({
               )
             } else if (index === 3) {
               return (
-                <Fragment data-cy={`editor-${field}`} key={field}>
+                <Fragment key={field}>
                   <Typography variant="h4">{t('document:mattersHeader')}</Typography>
                   <Typography variant="light">{t('document:mattersDescription')}</Typography>
                   <TextField
@@ -160,7 +160,7 @@ const DocumentForm = ({
               )
             } else if (index === 4) {
               return (
-                <Fragment data-cy={`editor-${field}`} key={field}>
+                <Fragment key={field}>
                   <Typography variant="h4">{t('document:scheduleHeader')}</Typography>
                   <Typography variant="light">{t('document:scheduleDescription')}</Typography>
                   <TextField
@@ -180,7 +180,7 @@ const DocumentForm = ({
               )
             }
             return (
-              <Fragment data-cy={`editor-${field}`}>
+              <Fragment key={field}>
                 <TextField
                   data-cy={`editor-${field}`}
                   key={field}

@@ -19,7 +19,7 @@ interface ValidateOperationResponse {
 }
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
-  const { studyprogrammeKey, year } = req.params
+  const { programme, year } = req.params
   const data = req.body
 
   const resultObject: ValidateOperationResponse = {
@@ -32,7 +32,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     data: {},
   }
 
-  if (!studyprogrammeKey) {
+  if (!programme) {
     resultObject.error = 'StudyprogrammeKey param is required'
     resultObject.status = 400
     return resultObject
@@ -48,7 +48,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   // ignore db type error for now since it has not been typed
   const studyprogramme = await db.studyprogramme.findOne({
     where: {
-      key: studyprogrammeKey,
+      key: programme,
     },
   })
   if (!studyprogramme) {
@@ -156,7 +156,7 @@ const updateReport = async (req: Request, res: Response) => {
     const updatedData = updatedReport[0].data
     const field = Object.keys(data)[0]
 
-    updateWSAndClearEditors({ room: req.params.studyprogrammeKey, data: updatedData, field })
+    updateWSAndClearEditors({ room: req.params.programme, data: updatedData, field })
     return res.status(200).json(updatedData)
   } catch (error) {
     logger.error(`Database error ${error}`)

@@ -11,12 +11,12 @@ interface ValidateOperationResponse {
   error: string
   status: number
   documents: Document[] | []
-  studyprogrammeKey: string | null
+  programme: string | null
   data: typeof DocumentFormSchema | null
 }
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
-  const { studyprogrammeKey, id } = req.params
+  const { programme, id } = req.params
   const { data } = req.body
 
   const resultObject: ValidateOperationResponse = {
@@ -24,11 +24,11 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     error: '',
     status: 0,
     documents: [],
-    studyprogrammeKey: null,
+    programme: null,
     data: null,
   }
 
-  if (!studyprogrammeKey) {
+  if (!programme) {
     resultObject.error = 'StudyprogrammeKey param is required'
     resultObject.status = 400
     return resultObject
@@ -38,7 +38,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   // ignore db type error for now since it has not been typed
   const studyprogramme = await db.studyprogramme.findOne({
     where: {
-      key: studyprogrammeKey,
+      key: programme,
     },
   })
 
@@ -85,7 +85,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
 
   resultObject.success = true
   resultObject.documents = documents
-  resultObject.studyprogrammeKey = studyprogramme.key
+  resultObject.programme = studyprogramme.key
   resultObject.status = 200
   resultObject.data = data
 
@@ -124,8 +124,8 @@ const getAllDocuments = async (req: Request, res: Response) => {
 
 const createDocument = async (req: Request, res: Response) => {
   try {
-    const { studyprogrammeKey, status, error, documents } = await validateOperation(req)
-    if (!studyprogrammeKey) return res.status(status).json({ error: error })
+    const { programme, status, error, documents } = await validateOperation(req)
+    if (!programme) return res.status(status).json({ error: error })
 
     const calculateActiveYear = () => {
       const last = documents.length > 0 ? documents.length - 1 : 0
@@ -135,7 +135,7 @@ const createDocument = async (req: Request, res: Response) => {
 
     const document: Document = await Document.create({
       data: { title: `${new Date().toLocaleDateString('fi-FI')}` },
-      studyprogrammeKey,
+      studyprogrammeKey: programme,
       active: true,
       activeYear: calculateActiveYear(),
     })
@@ -170,7 +170,7 @@ const closeInterventionProcedure = async (req: Request, res: Response) => {
   const transaction = await sequelize.transaction()
 
   try {
-    const { studyprogrammeKey, documents, status, error, data } = await validateOperation(req)
+    const { programme, documents, status, error, data } = await validateOperation(req)
     if (documents.length === 0) return res.status(status).json({ error: error })
 
     const updates = {
@@ -180,7 +180,7 @@ const closeInterventionProcedure = async (req: Request, res: Response) => {
 
     await Document.update(updates, {
       where: {
-        studyprogrammeKey: studyprogrammeKey,
+        studyprogrammeKey: programme,
         active: true,
       },
       transaction,
