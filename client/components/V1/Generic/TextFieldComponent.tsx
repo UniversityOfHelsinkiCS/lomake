@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { useTranslation } from 'react-i18next'
 import { TFunction } from 'i18next'
-import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import CurrentEditor from '../../Generic/CurrentEditor'
 import { getLockHttp } from '../../../util/redux/formReducer'
-import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
 import { getReports, updateReportHttp } from '../../../util/redux/reportsSlicer'
 import { useParams } from 'react-router'
+import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 type TextFieldComponentProps = {
   id: string
@@ -73,13 +73,13 @@ export const TextFieldCard = ({ id, t, type }: { id: string; t: TFunction; type:
 
 const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const [content, setContent] = useState<string>('')
   const [hasLock, setHasLock] = useState<boolean>(false)
   const [gettingLock, setGettingLock] = useState<boolean>(false)
 
-  const year = useSelector((state: RootState) => state.filters.keyDataYear)
+  const year = useAppSelector(state => state.filters.keyDataYear)
   const { programme: room } = useParams<{ programme: string }>()
   const dataFromRedux = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
   const currentEditors = useSelector(

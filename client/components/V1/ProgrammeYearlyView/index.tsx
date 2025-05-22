@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState, useRef, useLayoutEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
@@ -17,7 +16,6 @@ import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { RootState, AppDispatch } from '@/client/util/store'
 import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
@@ -26,10 +24,11 @@ import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
+import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
 
 const ProgrammeView = () => {
-  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
-  const dispatch: AppDispatch = useDispatch()
+  const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
+  const dispatch = useAppDispatch()
   const history = useHistory()
   const { t } = useTranslation()
   const location = useLocation()
@@ -41,10 +40,10 @@ const ProgrammeView = () => {
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
-  const { nextDeadline } = useSelector((state: RootState) => state.deadlines)
+  const { nextDeadline } = useAppSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null
-  const currentRoom = useSelector((state: RootState) => state.room)
-  const user = useSelector((state: RootState) => state.currentUser.data)
+  const currentRoom = useAppSelector(state => state.room)
+  const user = useAppSelector(state => state.currentUser.data)
 
   const writeAccess = (user.access[programmeKey] && user.access[programmeKey].write) || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)

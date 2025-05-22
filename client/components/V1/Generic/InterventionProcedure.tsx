@@ -14,8 +14,6 @@ import {
   CircularProgress,
 } from '@mui/material'
 import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '@/client/util/store'
 import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack, ExpandMore } from '@mui/icons-material'
@@ -27,6 +25,7 @@ import { TextFieldCard } from './TextFieldComponent'
 import { getReport } from '@/client/util/redux/reportsSlicer'
 import DocumentForm from './DocumentForm'
 import { getDocuments } from '@/client/util/redux/documentsSlicer'
+import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -49,12 +48,12 @@ export const calculateInterventionAreas = ({
 const InterventionProcedure = () => {
   const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { t } = useTranslation()
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useAppDispatch()
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
-  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
-  const year = useSelector((state: RootState) => state.filters.keyDataYear)
-  const user = useSelector((state: RootState) => state.currentUser.data)
-  const documents = useSelector((state: RootState) => state.documents.data)
+  const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
+  const year = useAppSelector(state => state.filters.keyDataYear)
+  const user = useAppSelector(state => state.currentUser.data)
+  const documents = useAppSelector(state => state.documents.data)
   const document = documents.length > 0 ? documents.find(doc => doc.id.toString() === id) : null
 
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)

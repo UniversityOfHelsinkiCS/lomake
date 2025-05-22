@@ -5,13 +5,12 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { fiFI, svSE, enUS } from '@mui/x-date-pickers/locales'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '@/client/util/store'
 import { DocumentFormSchema } from '@/shared/validators'
 import { updateDocument } from '@/client/util/redux/documentsSlicer'
 import { TFunction } from 'i18next'
 import { useHistory } from 'react-router'
 import { basePath } from '@/config/common'
+import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followupDate']
 
@@ -37,8 +36,8 @@ const DocumentForm = ({
   document: Record<string, any>
 }) => {
   const { t } = useTranslation()
-  const dispatch = useDispatch<AppDispatch>()
-  const lang = useSelector((state: RootState) => state.language)
+  const dispatch = useAppDispatch()
+  const lang = useAppSelector(state => state.language)
   const history = useHistory()
 
   const data = document.data.date !== undefined ? document.data : initForm(t, false)

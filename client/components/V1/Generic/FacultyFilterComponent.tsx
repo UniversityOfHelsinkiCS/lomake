@@ -1,13 +1,12 @@
 import { useEffect, useMemo } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { RootState } from '@/client/util/store'
 import type { Faculty } from '@/shared/lib/types'
 import { clearLevelSpecificFilters, setFaculty } from '@/client/util/redux/filterReducer'
 
 import { MenuItem, FormControl, Checkbox, ListItemText } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import _ from 'lodash'
+import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
 
 /*
 This is a purpose built component for filtering faculties.
@@ -15,10 +14,10 @@ This is a purpose built component for filtering faculties.
 
 const FacultyFilterComponent = () => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const lang = useSelector((state: RootState) => state.language)
-  const faculties = useSelector((state: RootState) => state.faculties.data)
-  const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
+  const dispatch = useAppDispatch()
+  const lang = useAppSelector(state => state.language)
+  const faculties = useAppSelector(state => state.faculties.data)
+  const selectedFaculties = useAppSelector(state => state.filters.faculty)
   const allowedFaculties = useMemo(() => {
     return faculties ? faculties.filter((f: Faculty) => f.code !== 'HTEST' && f.code !== 'UNI') : []
   }, [faculties])

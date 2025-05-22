@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import { CircularProgress, Tooltip, Typography } from '@mui/material'
@@ -21,6 +20,7 @@ import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponen
 import { orderBy } from 'lodash'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
+import { useAppSelector } from '@/client/util/hooks'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -29,7 +29,7 @@ interface KeyDataTableProps {
 }
 
 const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
-  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
+  const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
   const color = additionalInfo.fi === 'Lakkautettu ohjelma' ? 'secondary' : ''
 
@@ -52,7 +52,7 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
 }
 
 const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
-  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
+  const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const keyData = useFetchKeyData()
   const { t } = useTranslation()
   const { renderInterventionBadge } = useNotificationBadge()

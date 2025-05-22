@@ -1,15 +1,14 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from '../../../util/store'
 import { setKeyDataYear, clearLevelSpecificFilters } from '../../../util/redux/filterReducer'
 
 import { MenuItem, FormControl } from '@mui/material'
 
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { inProduction } from '@/config/common'
+import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 const YearFilterComponent = () => {
-  const dispatch = useDispatch()
-  const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
+  const dispatch = useAppDispatch()
+  const selectedYear = useAppSelector(state => state.filters.keyDataYear)
 
   // TODO: figure out a policy how allowed years are determined
 

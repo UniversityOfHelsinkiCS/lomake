@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { fetchKeyData } from '../util/redux/keyDataReducer'
-import { RootState } from '../util/store'
 import type { KeyDataProgramme, KeyDataByCode } from '@/shared/lib/types'
+import { useAppDispatch, useAppSelector } from '../util/hooks'
 
 export const useFetchSingleKeyData = (programmeId: string): KeyDataByCode => {
   const keyData = useFetchKeyData()
@@ -20,8 +19,8 @@ export const useFetchSingleKeyData = (programmeId: string): KeyDataByCode => {
 }
 
 const useFetchKeyData = () => {
-  const dispatch = useDispatch()
-  const keyData = useSelector((state: RootState) => state.keyData.data)
+  const dispatch = useAppDispatch()
+  const keyData = useAppSelector(state => state.keyData.data)
 
   useEffect(() => {
     dispatch(fetchKeyData())

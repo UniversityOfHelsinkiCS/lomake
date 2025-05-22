@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Box, Card, CardActionArea, Tooltip, Typography } from '@mui/material'
 import { calculateColor, calculateValue, calculateKeyDataColor, extractKeyDataValue } from '../Utils/util'
 
@@ -7,11 +6,11 @@ import { TrafficLight } from './TrafficLightComponent'
 import ColorMeterComponent from './ColorMeterComponent'
 import ColorHistoryComponent from './ColorHistoryComponent'
 
-import { GroupKey, ProgrammeLevel, LightColors } from '@/client/lib/enums'
+import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
-import { RootState } from '@/client/util/store'
 import { useTranslation } from 'react-i18next'
+import { useAppSelector } from '@/client/util/hooks'
 
 interface KeyDataCardProps extends KeyDataCardData {
   level: ProgrammeLevel
@@ -39,7 +38,7 @@ interface CriteriaCardProps {
 }
 
 const CriteriaGroup = (props: CriteriaGroupProps) => {
-  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
+  const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
 
   const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
   return (

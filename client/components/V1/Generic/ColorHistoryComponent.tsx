@@ -1,18 +1,18 @@
 import { Typography, Table, TableBody, TableHead, TableCell, TableRow, Box } from '@mui/material'
-import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { RootState } from '@/client/util/store'
 import { calculateColor, calculateValue } from '../Utils/util'
 import { TrafficLight } from './TrafficLightComponent'
 import { ProgrammeLevel } from '@/shared/lib/enums'
+import { useAppSelector } from '@/client/util/hooks'
 
 const ColorHistoryComponent = (props: any) => {
   if (!props.programme || props.value == 'Ei dataa') {
     return null
   }
   const { t } = useTranslation()
-  const lang = useSelector((state: { language: string }) => state.language)
-  const data = useSelector((state: RootState) => state.keyData.data.data)
+  const lang = useAppSelector(state => state.language)
+  const data = useAppSelector(state => state.keyData.data.data)
 
   const metadataItem = data.metadata.find(
     (item: any) => item.avainluvunNimi[lang] === props.title && item.ohjelmanTaso === props.level,
@@ -20,7 +20,7 @@ const ColorHistoryComponent = (props: any) => {
 
   const dataKey = metadataItem ? metadataItem.avainluvunArvo : null
 
-  const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
+  const selectedYear = useAppSelector(state => state.filters.keyDataYear)
 
   const programList = props.level === ProgrammeLevel.Bachelor ? data[`kandiohjelmat`] : data[`maisteriohjelmat`]
 

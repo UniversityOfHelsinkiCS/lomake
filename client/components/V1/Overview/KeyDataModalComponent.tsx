@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
-import { RootState, AppDispatch } from '@/client/util/store'
 import { getReport } from '@/client/util/redux/reportsSlicer'
 import { wsLeaveRoom } from '@/client/util/redux/websocketReducer.js'
 import { setViewOnly } from '@/client/util/redux/formReducer'
@@ -18,6 +16,7 @@ import KeyDataCard from '../Generic/KeyDataCardComponent'
 import { getKeyDataPoints, formatURLFragment } from '@/client/components/V1/Utils/util'
 import { ArrowForward } from '@mui/icons-material'
 import { basePath } from '@/config/common'
+import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 export interface selectedKeyFigureData {
   programme: KeyDataProgramme
@@ -34,12 +33,12 @@ interface DataModalProps {
 export default function KeyDataModalComponent({ data, open, setOpen }: DataModalProps) {
   const form = 10
   const { t } = useTranslation()
-  const dispatch: AppDispatch = useDispatch()
-  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
+  const dispatch = useAppDispatch()
+  const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
 
   // TODO: When the year is coded into the key data itself, remove this and implement the year from that data
-  const year = useSelector((state: RootState) => state.filters.keyDataYear)
-  const currentRoom = useSelector((state: RootState) => state.room)
+  const year = useAppSelector(state => state.filters.keyDataYear)
+  const currentRoom = useAppSelector(state => state.room)
 
   const [programme, setProgramme] = useState<KeyDataProgramme | null>(null)
   const [metadata, setMetadata] = useState<KeyDataMetadata[] | null>(null)
