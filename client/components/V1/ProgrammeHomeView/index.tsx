@@ -1,6 +1,5 @@
 import { useMemo, useEffect, useState } from 'react'
 import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
-import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import {
@@ -25,20 +24,20 @@ import { Add, ArrowBack, Edit } from '@mui/icons-material'
 import { basePath, dekanaattiIamGroup, isAdmin } from '@/config/common'
 import { KeyDataByCode, KeyDataProgramme } from '@/shared/lib/types'
 
-import { RootState, AppDispatch } from '@/client/util/store'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { closeInterventionProcedure, createDocument, getDocuments } from '@/client/util/redux/documentsSlicer'
+import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 const ProgrammeHomeView = () => {
-  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
+  const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
-  const dispatch: AppDispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const history = useHistory()
-  const documents = useSelector((state: RootState) => state.documents.data)
-  const user = useSelector((state: RootState) => state.currentUser.data)
+  const documents = useAppSelector(state => state.documents.data)
+  const user = useAppSelector(state => state.currentUser.data)
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 

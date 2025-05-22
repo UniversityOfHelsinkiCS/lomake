@@ -1,17 +1,16 @@
-import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { RootState } from '../../../util/store'
 import { setLevel, clearLevelSpecificFilters } from '../../../util/redux/filterReducer'
 
 import { MenuItem, FormControl, Tooltip } from '@mui/material'
 
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 const LevelFilterComponent = () => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const selectedLevel = useSelector((state: RootState) => state.filters.level)
+  const dispatch = useAppDispatch()
+  const selectedLevel = useAppSelector(state => state.filters.level)
 
   // Available levels hardcoded for now
   const allowedLevels = [
