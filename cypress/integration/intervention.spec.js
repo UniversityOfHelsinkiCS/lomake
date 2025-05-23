@@ -22,7 +22,7 @@ describe('Textfield tests', () => {
     // login to klemstro
     cy.login(possibleUsers[1].uid)
     cy.visit(`/v1/programmes/10/KH50_005`)
-    cy.get('[data-cy=accordion-0]').click()
+    cy.get('[data-cy="accordion-0"]').click()
     cy.get('[data-cy="accordion-0-edit-button"]').click()
     cy.get('[name=title]').click()
     cy.get('[name=title]').type('Koira istuu puussa ')
