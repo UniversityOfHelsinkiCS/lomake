@@ -690,6 +690,7 @@ export default {
       'Koulutusohjelmalle on käynnistynyt valmistelu sen lakkauttamiseksi tai liittämiseksi toiseen koulutusohjelmaan',
     option3: 'Muu syy, mikä?',
     confirm: 'Haluatko varmasti sulkea toimenpidemenettelyn?',
+    terminated: 'Edellinen toimenpidemenettely on lopetettu perusteella:',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',

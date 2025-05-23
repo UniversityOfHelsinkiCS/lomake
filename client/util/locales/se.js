@@ -728,6 +728,7 @@ export default {
     backgroundInfoDescription:
       'Som bakgrundsmaterial för interventionsförfarandet finns det synpunkter som registrerats i den årliga uppföljningen på de utvärderingsområden som ledde till interventionsförfarandet samt utvecklingsplanen. ',
     confirm: 'Är du säker på att du vill stänga proceduren?',
+    terminated: 'Det tidigare förfarandet har avslutats med motiveringen:',
   },
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',

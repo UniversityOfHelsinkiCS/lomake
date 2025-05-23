@@ -158,6 +158,10 @@ const ProgrammeHomeView = () => {
             {activeProcedure() ? t('document:warningTextDescription') : t('document:successText')}
           </Typography>
         </Alert>
+        {(documents.length > 0 && documents.at(-1).reason) && (<Alert severity='info'>
+          <Typography variant='h6'>{t('document:terminated')}</Typography>
+          <Typography>{t(`document:option${documents.at(-1).reason.reason}`)}</Typography>
+        </Alert>)}
         <Typography variant="h4" sx={{ mt: 4 }}>
           {t('keyData:documentingHeader')}
         </Typography>
@@ -171,7 +175,7 @@ const ProgrammeHomeView = () => {
           documents.map((doc: Record<string, any>, index) => (
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography data-cy={`accordion-${index}`} variant="h4">{doc.data.title}</Typography>
+                <Typography data-cy={`accordion - ${index}`} variant="h4">{doc.data.title}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -214,10 +218,10 @@ const ProgrammeHomeView = () => {
                 <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right' }}>
                   {hasWriteRights && activeProcedure() && doc.active && (
                     <Button
-                      data-cy={`accordion-${index}-edit-button`}
+                      data-cy={`accordion - ${index} - edit - button`}
                       variant="contained"
                       component={Link}
-                      href={`${basePath}v1/programmes/10/${programmeKey}/document/${doc.id}`}
+                      href={`${basePath}v1 / programmes / 10 / ${programmeKey} / document / ${doc.id}`}
                       startIcon={<Edit />}
                     >
                       {t('document:edit')}
