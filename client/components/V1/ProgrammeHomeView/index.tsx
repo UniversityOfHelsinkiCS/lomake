@@ -80,13 +80,17 @@ const ProgrammeHomeView = () => {
   }
 
   const handleCloseProcedure = () => {
-    const data = {
-      reason: reason,
-      additionalInfo: additionalInfo,
+    const isConfirmed = window.confirm(t('document:confirm'))
+
+    if (isConfirmed) {
+      const data = {
+        reason: reason,
+        additionalInfo: additionalInfo,
+      }
+      dispatch(closeInterventionProcedure({ studyprogrammeKey: programmeKey, data: data })).then(() =>
+        dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
+      )
     }
-    dispatch(closeInterventionProcedure({ studyprogrammeKey: programmeKey, data: data })).then(() =>
-      dispatch(getDocuments({ studyprogrammeKey: programmeKey })),
-    )
   }
 
   const activeProcedure = () => {

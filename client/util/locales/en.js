@@ -686,6 +686,7 @@ export default {
     option1: 'The key figures of the programme have improved sufficiently',
     option2: 'The programme is in the process of being merged with another degree programme or discontinued',
     option3: 'Any other reason (open text box)',
+    confirm: 'Are you sure you want to close the procedure?'
   },
 
   error: {
