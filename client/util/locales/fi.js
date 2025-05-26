@@ -683,7 +683,7 @@ export default {
     warningTextDescription:
       'Tiedekunnan opetusvaradekaani ja koulutusohjelman johtaja yhdessä käynnistävät toimenpidemenettelyn ja kutsuvat neuvotteluun koulutusohjelman avainhenkilöt. Neuvottelussa kartoitetaan koulutusohjelman tilanne ja mahdollinen tarve lisäselvityksille sekä selvitetään, onko koulutusohjelman mahdollista parantaa tilannettaan joillakin käytettävissä olevilla toimenpiteillä. ',
     successText:
-      'Koulutusohjelmalla ei ole aktiivista toimenpidemenettelyä, eikä siltä tarvita toimia. Mikäli koulutusohjelma on aiemmin ollut toimenpidemenettelyssä, sen dokumentaation on listattu alla.',
+      'Koulutusohjelmalla ei ole aktiivista toimenpidemenettelyä, eikä siltä tarvita toimia. Mikäli koulutusohjelma on aiemmin ollut toimenpidemenettelyssä, sen dokumentaatio on listattu alla.',
     textfieldReason: 'Syy',
     option1: 'Koulutusohjelman avainluvut ovat riittävästi parantuneet',
     option2:
@@ -695,8 +695,8 @@ export default {
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',
     date: 'Päivämäärä on väärässä muodossa',
-    participants: 'Osallistujat -kentän merkkien määrä täytyy olla yli 3 merkkiä',
-    matters: 'Sovitut asiat -kentän minimi merkkimäärä on 100 merkkiä',
-    schedule: 'Aikataulu -kentän minimi pituus on 3 merkkiä',
+    participants: 'Osallistujat-kentän merkkien määrä täytyy olla yli 3 merkkiä',
+    matters: 'Sovitut asiat-kentän minimi merkkimäärä on 100 merkkiä',
+    schedule: 'Aikataulu-kentän minimi pituus on 3 merkkiä',
   },
 }

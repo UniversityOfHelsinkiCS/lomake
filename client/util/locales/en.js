@@ -679,7 +679,7 @@ export default {
     edit: 'Edit the document',
     closeInterventionProcedureHeader: 'Termination of the intervention procedure (only visible to the Vice-Dean)',
     closeInterventionProcedureDescription:
-      'The procedure may be terminated by joint decision of the Vice-Dean and the Director of the degree programme if the key ifigures of the degree programme have improved sufficiently or if the programme is in the process of being merged iwith another degree programme or discontinued. A status report form may be used by the Vice-Dean to terminate the procedure.',
+      'The procedure may be terminated by joint decision of the Vice-Dean and the Director of the degree programme if the key figures of the degree programme have improved sufficiently or if the programme is in the process of being merged with another degree programme or discontinued. A status report form may be used by the Vice-Dean to terminate the procedure.',
     closeButton: 'Terminate the intervention procedure',
     dropdownReason: 'Reason(s) for terminating the intervention procedure:',
     textfieldReason: 'Reason',
