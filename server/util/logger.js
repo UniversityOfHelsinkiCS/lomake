@@ -2,6 +2,7 @@ import os from 'os'
 import winston from 'winston'
 import { WinstonGelfTransporter } from 'winston-gelf-transporter'
 import { inProduction } from '../../config/common.js'
+import LokiTransport from 'winston-loki'
 
 const { combine, timestamp, printf, splat } = winston.format
 
@@ -38,6 +39,13 @@ if (inProduction) {
     }),
   )
   transports.push(new winston.transports.Console({ format: prodFormat }))
+
+  transports.push(
+    new LokiTransport({
+      host: 'http://loki-svc.toska-lokki.svc.cluster.local:3100',
+      labels: { app: 'lomake', environment: process.env.NODE_ENV || 'production' },
+    })
+  )
 
   transports.push(
     new WinstonGelfTransporter({
