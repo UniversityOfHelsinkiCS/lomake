@@ -88,7 +88,7 @@ const ProgrammeHomeView = () => {
         additionalInfo: additionalInfo,
       }
       dispatch(closeInterventionProcedure({ studyprogrammeKey: programmeKey, data: data })).then(() =>
-        dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
+        dispatch(getDocuments({ studyprogrammeKey: programmeKey })),
       )
     }
   }
@@ -158,10 +158,12 @@ const ProgrammeHomeView = () => {
             {activeProcedure() ? t('document:warningTextDescription') : t('document:successText')}
           </Typography>
         </Alert>
-        {(documents.length > 0 && documents.at(-1).reason) && (<Alert severity='info'>
-          <Typography variant='h6'>{t('document:terminated')}</Typography>
-          <Typography>{t(`document:option${documents.at(-1).reason.reason}`)}</Typography>
-        </Alert>)}
+        {documents.length > 0 && documents.at(-1).reason && (
+          <Alert severity="info">
+            <Typography variant="h6">{t('document:terminated')}</Typography>
+            <Typography>{t(`document:option${documents.at(-1).reason.reason}`)}</Typography>
+          </Alert>
+        )}
         <Typography variant="h4" sx={{ mt: 4 }}>
           {t('keyData:documentingHeader')}
         </Typography>
@@ -175,7 +177,9 @@ const ProgrammeHomeView = () => {
           documents.map((doc: Record<string, any>, index) => (
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography data-cy={`accordion-${index}`} variant="h4">{doc.data.title}</Typography>
+                <Typography data-cy={`accordion-${index}`} variant="h4">
+                  {doc.data.title}
+                </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -233,8 +237,7 @@ const ProgrammeHomeView = () => {
           ))}
         {hasWriteRights && activeProcedure() && (
           <Box>
-            <Button data-cy="create-new-document" onClick={handleClick} variant="outlined">
-              <Add />
+            <Button data-cy="create-new-document" onClick={handleClick} variant="outlined" startIcon={<Add />}>
               {t('document:newDocument')}
             </Button>
           </Box>

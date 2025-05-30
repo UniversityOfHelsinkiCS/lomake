@@ -148,4 +148,49 @@ describe('Notification badge tests', () => {
       cy.get(`[data-cy="actionsfieldBadge"]`).should('not.exist')
     })
   })
+
+  describe('Testing intervention procedure badges', () => {
+    it('Intervention procedure badges should display correctly on different traffic lights', () => {
+      cy.get(`[data-cy="interventionBadge-${greenProgramme}"]`).should('not.exist')
+      cy.get(`[data-cy*="interventionText-${greenProgramme}"]`).should('not.exist')
+
+      cy.get(`[data-cy="interventionBadge-${yellowProgramme}"]`).should('not.exist')
+      cy.get(`[data-cy*="interventionText-${yellowProgramme}"]`).should('not.exist')
+
+      cy.get(`[data-cy="interventionBadge-${discontinuedProgramme}"]`).should('not.exist')
+      cy.get(`[data-cy*="interventionText-${discontinuedProgramme}"]`).should('not.exist')
+
+      cy.get(`[data-cy="interventionBadge-${redProgramme}"]`).should('exist')
+      cy.get(`[data-cy*="interventionText-${redProgramme}"]`).should('exist')
+
+      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('exist')
+      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('exist')
+    })
+
+    it('Intervention badges disappear on creating new intervention procedure document', () => {
+      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('exist')
+      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('exist')
+
+      cy.visit(`/v1/programmes/10/${oneRedProgramme}`)
+      cy.get('[data-cy="create-new-document"]').click()
+
+      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('not.exist')
+      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('not.exist')
+    })
+
+    it('Intervention badge and text disappears on closing intervention procedure', () => {
+      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('exist')
+      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('exist')
+
+      cy.visit(`/v1/programmes/10/${oneRedProgramme}`)
+      cy.get('.MuiSelect-select').click()
+      cy.get('[data-value="2"]').click()
+      cy.get('[data-cy="closeInterventionProcedureButton"]').click()
+
+      cy.visit('/v1/overview')
+
+      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('not.exist')
+      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('not.exist')
+    })
+  })
 })

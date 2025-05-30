@@ -8,8 +8,6 @@ import SwapVertIcon from '@mui/icons-material/SwapVert'
 import { GroupKey } from '@/client/lib/enums'
 import { KeyDataProgramme } from '@/shared/lib/types'
 
-import { RootState } from '@/client/util/store'
-
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 
 import ActionsCell from '../Generic/ActionsCellComponent'
@@ -162,9 +160,15 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     } else if (interventionData.interventionStatus) {
       return (
         <>
-          <Typography variant="regularSmall">{t('keyData:interventionOn')}</Typography>
+          <Typography data-cy={`interventionText-${programmeData.koulutusohjelmakoodi}`} variant="regularSmall">
+            {t('keyData:interventionOn')}
+          </Typography>
           {interventionData.showBadge ? (
-            <NotificationBadge variant="small" tooltip={t('keyData:interventionMissing')} />
+            <NotificationBadge
+              variant="small"
+              data-cy={`interventionBadge-${programmeData.koulutusohjelmakoodi}`}
+              tooltip={t('keyData:interventionMissing')}
+            />
           ) : (
             <></>
           )}
