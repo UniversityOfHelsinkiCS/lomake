@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useState } from 'react'
 import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
-import { useHistory, useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
