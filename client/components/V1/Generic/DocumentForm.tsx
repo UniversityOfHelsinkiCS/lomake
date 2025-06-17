@@ -97,8 +97,7 @@ const DocumentForm = ({
       dispatch(updateDocument({ studyprogrammeKey: programmeKey, id: id, data: formData }))
       setFormData(initForm(t, false))
       setErrors(initForm(t, true))
-      const url = `${basePath}v1/programmes/10/${programmeKey}`
-      history.push(url)
+      history.push(`/v1/programmes/10/${programmeKey}`)
     }
   }
 

@@ -75,7 +75,7 @@ const ProgrammeHomeView = () => {
 
   const handleClick = () => {
     dispatch(createDocument({ studyprogrammeKey: programmeKey, data: null })).then(({ payload }) => {
-      history.push(`${basePath}v1/programmes/${form}/${programmeKey}/document/${payload.at(-1).id}`)
+      history.push(`/v1/programmes/${form}/${programmeKey}/document/${payload.at(-1).id}`)
     })
   }
 
