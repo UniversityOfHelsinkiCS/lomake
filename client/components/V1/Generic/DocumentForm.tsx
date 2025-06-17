@@ -9,7 +9,7 @@ import { DocumentFormSchema } from '@/shared/validators'
 import { updateDocument } from '@/client/util/redux/documentsSlicer'
 import { TFunction } from 'i18next'
 import { useHistory } from 'react-router'
-import { basePath } from '@/config/common'
+import { basePath, inProduction } from '@/config/common'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followupDate']
@@ -97,7 +97,8 @@ const DocumentForm = ({
       dispatch(updateDocument({ studyprogrammeKey: programmeKey, id: id, data: formData }))
       setFormData(initForm(t, false))
       setErrors(initForm(t, true))
-      history.push(`${basePath}v1/programmes/10/${programmeKey}`)
+      const url = inProduction ? `/${basePath}v1/programmes/10/${programmeKey}` : `${basePath}v1/programmes/10/${programmeKey}`
+      history.push(url)
     }
   }
 
