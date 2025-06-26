@@ -30,6 +30,22 @@ services:
     image: adminer:5.2.1
     ports:
       - 8080:8080 # localhost:8080/?pgsql=db&username=postgres&db=postgres&ns=public
-
+  jami:
+    image: quay.io/toska/jami:production
+    environment:
+      - PORT=3003
+      - NODE_ENV=dev
+      - DATABASE_URL=postgres://postgres:postgres@jami-db:5432/postgres
+  jami-db:
+    image: postgres:15.8
+    environment:
+      - PGDATA=/data
+      - POSTGRES_PASSWORD=postgres
+    container_name: jami-db
+    ports:
+      - 5433:5432
+    volumes:
+      - jami_data:/data
 volumes:
   pg_data:
+  jami_data:
