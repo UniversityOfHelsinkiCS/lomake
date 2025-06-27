@@ -38,7 +38,7 @@ const DATABASE_URL = process.env.DATABASE_URL || ''
 const PORT = process.env.PORT || 8001
 const AUTOMATIC_IAM_PERMISSIONS_ENABLED = process.env.AUTOMATIC_IAM_PERMISSIONS_ENABLED === 'true'
 
-const JAMI_URL = process.env.JAMI_URL
+const { JAMI_URL } = process.env
 const API_TOKEN = process.env.API_TOKEN || ''
 
 const whereDraftYear = async () => {
