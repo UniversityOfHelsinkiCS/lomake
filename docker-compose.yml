@@ -36,6 +36,9 @@ services:
       - PORT=3003
       - NODE_ENV=dev
       - DATABASE_URL=postgres://postgres:postgres@jami-db:5432/postgres
+    ports:
+      - 3003:3003
+    container_name: jami
   jami-db:
     image: postgres:15.8
     environment:
