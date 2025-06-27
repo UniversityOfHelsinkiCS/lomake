@@ -24,6 +24,7 @@ import routes from './util/routes.js'
 import initializeSentry from './util/sentry.js'
 import createWebsocketServer from './websocket.js'
 import { initializeDatabaseConnection } from './database/connection.js'
+import { testJami } from './util/jami.js'
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url)
@@ -84,6 +85,7 @@ initializeDatabaseConnection().then(async () => {
 
   server.listen(PORT, async () => {
     logger.info(`Server started on port ${PORT}`)
+    await testJami()
     startBackupJob()
     startDeadlineWatcher()
   })

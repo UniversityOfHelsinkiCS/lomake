@@ -22,7 +22,7 @@ import { mapToDegreeCode } from './common.js'
  * @param {string} hyGroups
  * @returns {string[]}
  */
-const parseHyGroupsFromHeader = hyGroups => {
+export const parseHyGroupsFromHeader = hyGroups => {
   let parsedHyGroups = []
   if (!(hyGroups === undefined || hyGroups === '' || hyGroups === null)) {
     parsedHyGroups = hyGroups.split(';')
@@ -264,6 +264,7 @@ const getUniversityFormAccess = hyGroups => {
  * based on IAM-groups in IAM header string
  * @param {string} hyGroupsHeader
  */
+
 const getIAMRights = hyGroupsHeader => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
   let access = {}
