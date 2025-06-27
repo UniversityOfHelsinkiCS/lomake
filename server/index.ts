@@ -38,7 +38,6 @@ const app = express()
 const server = new http.Server(app)
 
 createWebsocketServer(server)
-
 initializeSentry()
 
 app.use(express.json({ limit: '50mb' }))
