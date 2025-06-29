@@ -18,7 +18,9 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Re
       iamGroups,
     })
 
-    const { specialGroup, ...access } = iamAccess
+    let { specialGroup, ...access } = iamAccess
+
+    if (iamGroups.includes('hy-ypa-opa-ospa')) specialGroup = { admin: true, ...specialGroup }
 
     return { specialGroup, access: { ...access } }
   } catch (error: any) {

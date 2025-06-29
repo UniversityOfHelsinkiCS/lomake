@@ -1,9 +1,9 @@
 import isEqual from 'lodash/isEqual.js'
 import db from '../models/index.js'
 import { AUTOMATIC_IAM_PERMISSIONS_ENABLED } from '../util/common.js'
-import getIAMRights, { parseHyGroupsFromHeader } from '../util/IAMrights.js'
+import /* getIAMRights,*/ { parseHyGroupsFromHeader } from '../util/IAMrights.js'
 import logger from '../util/logger.js'
-// import { getIamAccess } from '../util/jami.js'
+import { getIamAccess } from '../util/jami.js'
 
 const checkTemporaryAccesses = (access, tempAccess) => {
   if (tempAccess.length === 0) return
@@ -30,11 +30,11 @@ const IAMmiddleware = async (req, _, next) => {
   if (req.path.includes('login') && AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
     const iamGroups = parseHyGroupsFromHeader(headers?.hygroupcn)
 
-    const { access, specialGroup } = getIAMRights(headers?.hygroupcn)
+    // const { access, specialGroup } = getIAMRights(headers?.hygroupcn)
 
-    // const { access, specialGroup } = await getIamAccess(iamGroups)
+    const { access, specialGroup } = await getIamAccess(iamGroups)
 
-    // console.log("access: ", ac, access, "special: ", sp, specialGroup)
+    // console.log('access: ', access, 'special: ', specialGroup)
 
     logger.info({ message: `${user?.uid}: ${headers?.hygroupcn}` })
 
