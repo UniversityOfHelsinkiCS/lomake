@@ -1796,27 +1796,27 @@ const data = [
       },
     ],
   },
-  {
-    code: 'HTEST',
-    name: {
-      fi: 'Testaamisen tiedekunta',
-      en: 'Faculty of testing',
-      se: 'Testaamisen fakulteten',
-    },
-    programmes: [
-      {
-        key: 'T999999',
-        name: {
-          fi: 'Testaamisen tohtoriohjelma',
-          en: 'Doctoral Programme in Testing',
-          se: 'Doktorandprogrammet i testning',
-        },
-        level: 'doctoral',
-        companionFaculties: [],
-        international: false,
-      },
-    ],
-  },
+  // {
+  //   code: 'HTEST',
+  //   name: {
+  //     fi: 'Testaamisen tiedekunta',
+  //     en: 'Faculty of testing',
+  //     se: 'Testaamisen fakulteten',
+  //   },
+  //   programmes: [
+  //     {
+  //       key: 'T999999',
+  //       name: {
+  //         fi: 'Testaamisen tohtoriohjelma',
+  //         en: 'Doctoral Programme in Testing',
+  //         se: 'Doktorandprogrammet i testning',
+  //       },
+  //       level: 'doctoral',
+  //       companionFaculties: [],
+  //       international: false,
+  //     },
+  //   ],
+  // },
 ]
 
 export { forms, formKeys, data, facultyMap, committeeList, facultyList }
