@@ -1,7 +1,7 @@
 import isEqual from 'lodash/isEqual.js'
 import db from '../models/index.js'
 import { AUTOMATIC_IAM_PERMISSIONS_ENABLED } from '../util/common.js'
-import /* getIAMRights, */ { parseHyGroupsFromHeader } from '../util/IAMrights.js'
+import { /* getIAMRights, */ parseHyGroupsFromHeader } from '../util/IAMrights.js'
 import logger from '../util/logger.js'
 import { getIamAccess } from '../util/jami.js'
 
