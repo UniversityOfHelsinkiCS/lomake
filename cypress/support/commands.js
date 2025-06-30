@@ -71,6 +71,7 @@ Cypress.Commands.add('selectYear', year => {
 Cypress.Commands.add('hasAccess', (uid, programCode, access) => {
   cy.login('cypressToskaUser')
   cy.visit('/yearly')
+  cy.visit('/yearly')
   cy.get(`[data-cy=${programCode}-manage]`).click()
   cy.get(`[data-cy=read-${uid}${access.read ? '' : '-false'}]`)
   cy.get(`[data-cy=write-${uid}${access.write ? '' : '-false'}]`)
