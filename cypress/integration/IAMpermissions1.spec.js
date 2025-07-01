@@ -96,7 +96,7 @@ describe('IAM permission tests', () => {
   it('Faculty iam group gives reading rights to all programmes', () => {
     cy.login('cypressTheologyFacultyUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 3) // count of theology faculty programmes but when clicking show all, all programmes are shown
 
     cy.hasSpecialGroups('cypressTheologyFacultyUser', 'All programmes')
   })
