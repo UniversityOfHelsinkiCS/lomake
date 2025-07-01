@@ -26,7 +26,7 @@ export default () => {
   const history = useHistory()
 
   if (!isAdmin(user)) {
-    history.push('/yearly')
+    history.push('/')
   }
 
   if (users.pending || !users.data || !usersProgrammes) return <Loader active inline="centered" />
@@ -70,13 +70,13 @@ export default () => {
   const getCustomHeader = ({ name, width, field, sortable = true }) => {
     const sortHandler = sortable
       ? () => {
-          if (sorter === field) {
-            setReverse(!reverse)
-          } else {
-            setReverse(false)
-            setSorter(field)
-          }
+        if (sorter === field) {
+          setReverse(!reverse)
+        } else {
+          setReverse(false)
+          setSorter(field)
         }
+      }
       : undefined
 
     return (

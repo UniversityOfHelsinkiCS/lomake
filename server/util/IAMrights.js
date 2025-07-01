@@ -265,7 +265,7 @@ const getUniversityFormAccess = hyGroups => {
  * @param {string} hyGroupsHeader
  */
 
-const getIAMRights = hyGroupsHeader => {
+export const getIAMRights = hyGroupsHeader => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
   let access = {}
   let specialGroup = {}
@@ -295,5 +295,3 @@ const getIAMRights = hyGroupsHeader => {
 
   return { access, specialGroup, iamGroups }
 }
-
-export default getIAMRights

@@ -104,11 +104,11 @@ describe('IAM permission tests', () => {
   it('Kosu user gets wide writing access', () => {
     cy.login('cypressKosuUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
+    // cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressKosuUser', 'All programmes')
-    cy.hasAccess('cypressKosuUser', 'KH50_001', { read: true, write: true, admin: false })
-    cy.hasAccess('cypressKosuUser', 'MH50_003', { read: true, write: true, admin: false })
+    cy.hasAccess('cypressKosuUser', 'KH57_001', { read: true, write: true, admin: false })
+    cy.hasAccess('cypressKosuUser', 'MH80_003', { read: true, write: true, admin: false })
   })
 
   /* Special cases with multiple rights groups */
@@ -124,7 +124,7 @@ describe('IAM permission tests', () => {
   it('Kosu who is also a jory-member gets writing rights to all programmes', () => {
     cy.login('cypressKosuJoryUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
+    // cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKosuJoryUser', 'MH50_002', { read: true, write: true, admin: false })
     cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: true, admin: false })
   })

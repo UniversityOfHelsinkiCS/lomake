@@ -123,6 +123,10 @@ const isAdmin = user => {
   return hasSpecialGroup(user, 'admin') || hasSpecialGroup(user, 'superAdmin')
 }
 
+const isKosu = user => {
+  return hasSpecialGroup(user, 'kosu')
+}
+
 const isBasicUser = user => {
   if (!hasSpecialGroup(user, 'superAdmin') && !hasSpecialGroup(user, 'admin')) return true
   return false
@@ -231,6 +235,7 @@ export {
   isSuperAdmin,
   isDevSuperAdminUid,
   isAdmin,
+  isKosu,
   isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
