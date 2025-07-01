@@ -1,10 +1,5 @@
 import { inProduction } from '../util/common.js'
-import {
-  isAdmin,
-  isSuperAdmin,
-  isKatselmusProjektiOrOhjausryhma,
-  dekanaattiIamGroup,
-} from '../../config/common.js'
+import { isAdmin, isSuperAdmin, isKatselmusProjektiOrOhjausryhma, dekanaattiIamGroup } from '../../config/common.js'
 import logger from '../util/logger.js'
 
 const requireProgrammeRead = (req, res, next) => {
