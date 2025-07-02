@@ -1,14 +1,11 @@
 import { z, ZodError } from 'zod'
 
-// const LiikennevalotEnum = z.enum(['Ei arviota', 'Punainen', 'Keltainen', 'Vaaleanvihreä', 'Tummanvihreä'])
-
 export const KandiohjelmatValuesSchema = z
   .object({
     // Perustiedot
     'Koulutusohjelman koodi': z.string(),
     'Koulutusohjelman nimi': z.string(),
 
-    // Kandiohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL, but data.xlsx is still not ready
     Hakupaine: z.number().optional(),
     'Ensisijaiset hakijat': z.number().optional(),
     'Aloituspaikkojen täyttö': z.number().optional(),
@@ -36,7 +33,6 @@ export const MaisteriohjelmatValuesSchema = z
     'Koulutusohjelman koodi': z.string(),
     'Koulutusohjelman nimi': z.string(),
 
-    // Maisteriohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL, but data.xlsx is still not ready
     Hakijat: z.number().optional(),
     Hakupaine: z.number().optional(),
     Aloituspaikat: z.number().optional(),
@@ -88,13 +84,13 @@ export const MetadataSchema = z
     kynnysarvot: z
       .string()
       .regex(/^\d+;\d+;\d+;\d+$/, 'Should be in format number;number;number;number')
-      .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
+      .optional(),
     ohjelmanTaso: z.enum(['bachelor', 'master', 'doctoral']),
     liikennevalo: z.boolean(),
     mittarinRajat: z
       .string()
       .regex(/^\d+;\d+$/, 'Should be in format number;number')
-      .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
+      .optional(),
     arviointialue: z.string(),
     avainluvunNimi: z
       .object({
@@ -106,8 +102,8 @@ export const MetadataSchema = z
     maaritelma: z
       .object({
         fi: z.string(),
-        se: z.string().optional(), // delete optionality when updated
-        en: z.string().optional(), // delete optionality when updated
+        se: z.string().optional(),
+        en: z.string().optional(),
       })
       .strict(),
     avainluvunArvo: z.string(),
@@ -117,16 +113,16 @@ export const MetadataSchema = z
 export const MetadataRawSchema = z
   .object({
     Yksikkö: z.literal('%').optional(),
-    Kynnysarvot: z.string().optional(), // delete optionality when updated
+    Kynnysarvot: z.string().optional(),
     'Ohjelman taso': z.string(),
-    'Mittarin rajat': z.string().optional(), // delete optionality when updated
+    'Mittarin rajat': z.string().optional(),
     Liikennevalo: z.boolean(),
     Arviointialue_fi: z.string(),
     Arviointialue_en: z.string(),
     Arviointialue_se: z.string(),
     Määritelmä_fi: z.string(),
-    Määritelmä_se: z.string().optional(), // delete optionality when updated
-    Määritelmä_en: z.string().optional(), // delete optionality when updated
+    Määritelmä_se: z.string().optional(),
+    Määritelmä_en: z.string().optional(),
     'Avainluvun nimi_en': z.string(),
     'Avainluvun nimi_fi': z.string(),
     'Avainluvun nimi_se': z.string(),
