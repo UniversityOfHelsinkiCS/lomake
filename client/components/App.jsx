@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
 import { Loader } from 'semantic-ui-react'
@@ -18,6 +18,8 @@ import { setYear, setMultipleYears, setKeyDataYear } from '../util/redux/filterR
 import { setLanguage } from '../util/redux/languageReducer'
 import Footer from './Footer'
 import { ARCHIVE_LAST_YEAR } from '../../config/common'
+import { useAppDispatch } from '../util/hooks'
+import { getOrganisationData } from '@/server/util/jami'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -83,7 +85,7 @@ export default () => {
   const isDegreeReformSummary =
     window.location.href.includes('/degree-reform') && window.location.search.startsWith('?faculty=')
   const isNotDegreeReformSummary = !isDegreeReformSummary
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const currentUser = useSelector(state => state.currentUser)
   const studyProgrammes = useSelector(state => state.studyProgrammes)
   const faculties = useSelector(state => state.faculties)
@@ -104,6 +106,7 @@ export default () => {
     // TODO: Define policy for default year
     // Currently sets the default year to the current year
     dispatch(setKeyDataYear(new Date().getFullYear().toString()))
+    dispatch(getOrganisationData())
   }, [])
 
   useEffect(() => {
