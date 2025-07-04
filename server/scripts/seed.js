@@ -3,15 +3,12 @@
 import db from '../models/index.js'
 
 import logger from '../util/logger.js'
-import { facultyMap } from '../../config/data.js'
-import { getOrganisationData } from '../util/jami.js'
+import { data, facultyMap } from '../../config/data.js'
 
 const seedFacultiesAndStudyprogrammes = async () => {
   await db.companionFaculty.destroy({ where: {} })
   await db.studyprogramme.destroy({ where: {} })
   await db.faculty.destroy({ where: {} })
-
-  const data = await getOrganisationData()
 
   /**
    * Create faculties
@@ -32,7 +29,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
     for (const { key, name, level, international } of programmes) {
       await db.studyprogramme.create({
         key,
-        name: { fi: name.fi, se: name.sv, en: name.en },
+        name,
         level,
         international,
         lockedForms: { yearly: false, 'degree-reform': false, evaluation: false, 'evaluation-faculty': false },
