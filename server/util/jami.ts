@@ -35,6 +35,13 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Re
   }
 }
 
+
+export const getOrganisationData = async () => {
+  const { data } = await jamiClient.get('/organisation-data')
+
+  return data
+}
+
 export const testJami = async () => {
   try {
     await jamiClient.get('/ping', { timeout: 4000 })
