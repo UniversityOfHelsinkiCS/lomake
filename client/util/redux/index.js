@@ -20,7 +20,6 @@ import monitoring from './facultyMonitoringReducer'
 import keyData from './keyDataReducer'
 import reports from './reportsSlicer'
 import documents from './documentsSlicer'
-import organisation from './organisationSlicer'
 
 export default combineReducers({
   form,
@@ -43,5 +42,4 @@ export default combineReducers({
   keyData,
   reports,
   documents,
-  organisation,
 })
