@@ -2,17 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { basePath } from '../common'
 import { getHeaders } from './keyDataReducer'
-import { Sentry } from '../sentry'
+import { alertSentry } from '../common'
 
-const alertSentry = (err: any, route: string, method: string, data: any) => {
-  Sentry.captureException(err, {
-    tags: {
-      route,
-      method,
-      data,
-    },
-  })
-}
 
 export const getDocuments = createAsyncThunk<any, Record<string, any>>(
   'documents/getDocuments',

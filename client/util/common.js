@@ -16,6 +16,7 @@ import {
 } from '../questionData'
 
 import { formKeys, facultyList } from '../../config/data'
+import { Sentry } from './sentry'
 
 export const images = {
   toska_color: toscalogoColor,
@@ -842,6 +843,16 @@ export const getLabel = question => {
   return `${index}${question.label}`
 }
 
+
+export const alertSentry = (err, route, method, data) => {
+  Sentry.captureException(err, {
+    tags: {
+      route,
+      method,
+      data,
+    },
+  })
+}
 export const kludge = true
 
 export * from '../../config/common'
