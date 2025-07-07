@@ -10,7 +10,7 @@ describe('IAM permission tests', () => {
   it('Doctoral kosu who is also a regular kosu gets writing rights to all programmes', () => {
     cy.login('cypressDoctoralKosuAndRegularKosuUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 54)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 55)
 
     cy.hasAccess('cypressDoctoralKosuAndRegularKosuUser', 'T920103', { read: true, write: true, admin: false })
     cy.hasAccess('cypressDoctoralKosuAndRegularKosuUser', 'KH50_004', { read: true, write: true, admin: false })
@@ -49,7 +49,7 @@ describe('IAM permission tests', () => {
     cy.visit('/degree-reform')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 25)
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 12)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
 
     cy.hasAccess('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
     cy.hasAccessEvaluation('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
@@ -61,13 +61,13 @@ describe('IAM permission tests', () => {
   it('Jory group who has also writing rights to Faculty Evaluation works', () => {
     cy.login('cypressFacultyKatselmusUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
     cy.visit('/evaluation')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
     cy.visit('/degree-reform')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 12)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
 
     cy.hasAccess('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
     cy.hasAccessEvaluation('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
