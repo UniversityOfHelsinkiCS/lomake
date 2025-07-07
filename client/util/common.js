@@ -843,7 +843,6 @@ export const getLabel = question => {
   return `${index}${question.label}`
 }
 
-
 export const alertSentry = (err, route, method, data) => {
   Sentry.captureException(err, {
     tags: {
