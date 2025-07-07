@@ -22,6 +22,7 @@ import {
   requireUniFormRight,
   requireDekanaatti,
 } from '../middleware/accessControlMiddleware.js'
+import { getOrganisationData } from './jami.js'
 
 const router = Router()
 
@@ -112,6 +113,11 @@ router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) 
 })
 router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => {
   await documents.closeInterventionProcedure(req, res)
+})
+
+router.get('/organisation-data', async (_, res) => {
+  const data = await getOrganisationData()
+  res.status(200).json(data)
 })
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
