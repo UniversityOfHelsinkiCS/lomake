@@ -1,11 +1,9 @@
-import { data } from '../../config/data'
-
 const getTotalProgrammeCount = () => {
-  return data.flatMap(fac => fac.programmes).length
+  return 134
 }
 
 const getDoctoralProgrammeCount = () => {
-  return data.flatMap(fac => fac.programmes).filter(p => p.key.startsWith('T')).length
+  return 33
 }
 
 export default {
