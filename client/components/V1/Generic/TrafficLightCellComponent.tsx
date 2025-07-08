@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 
-import { calculateKeyDataColor } from '../Utils/util'
+import { calculateKeyDataColor } from '@/client/util/v1'
 
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 

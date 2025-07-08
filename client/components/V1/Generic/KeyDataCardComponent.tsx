@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, Card, CardActionArea, Tooltip, Typography } from '@mui/material'
-import { calculateColor, calculateValue, calculateKeyDataColor, extractKeyDataValue } from '../Utils/util'
+import { calculateColor, calculateValue, calculateKeyDataColor, extractKeyDataValue } from '@/client/util/v1'
 
 import { TrafficLight } from './TrafficLightComponent'
 import ColorMeterComponent from './ColorMeterComponent'
