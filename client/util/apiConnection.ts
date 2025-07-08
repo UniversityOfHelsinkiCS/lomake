@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { getHeaders } from '../../config/mockHeaders'
 import { basePath, inProduction } from '../../config/common'
 import { Sentry } from './sentry'
@@ -98,3 +99,33 @@ export const apiConnection = async (
     throw error
   }
 }
+
+export const formatToArray = <T>(param: T | T[]): T[] => {
+  return Array.isArray(param) ? param : [param]
+}
+
+export const RTKApi = createApi({
+  reducerPath: 'api',
+  tagTypes: [
+    'Organisation'
+  ],
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${basePath}api`,
+    prepareHeaders: headers => {
+      //@ts-expect-error
+      Object.entries(getHeaders()).forEach(([key, value]) => headers.set(key, value))
+      return headers
+    },
+    paramsSerializer: params => {
+      const searchParams = new URLSearchParams()
+
+      Object.entries(params).map(([key, val]) => {
+        const subfix = Array.isArray(val) ? '[]' : ''
+        formatToArray(val).forEach(item => searchParams.append(key + subfix, item))
+      })
+      return searchParams.toString()
+    },
+  }),
+
+  endpoints: () => ({}),
+})

@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-syntax */
+import { useGetOrganisationDataQuery } from '@/client/util/redux/organisation'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'
@@ -6,7 +7,7 @@ import { Table } from 'semantic-ui-react'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)
-  const data = useSelector(state => state.organisation.data)
+  const { data } = useGetOrganisationDataQuery()
   // const { t } = useTranslation()
 
   const { id } = question

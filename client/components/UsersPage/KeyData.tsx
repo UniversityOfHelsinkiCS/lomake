@@ -1,11 +1,10 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { uploadKeyData, getKeyDataMeta, deleteKeyData, setActiveKeyData } from '../../util/redux/keyDataSlice'
-import { RootState } from '@/client/util/store'
+import { RootState } from '@/client/util/redux'
 
 export const KeyData = () => {
   const dispatch = useDispatch()
-  // @ts-expect-error
   const meta = useSelector((state: RootState) => state.keyData.meta)
 
   useEffect(() => {
@@ -48,30 +47,30 @@ export const KeyData = () => {
             </thead>
             <tbody>
               {meta
-              .slice()
-              .sort((a: any, b: any) => a.id - b.id)
-              .map((item: { id: number, createdAt: string, active: boolean }) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{new Date(item.createdAt).toLocaleString()}</td>
-                <td>
-                <input 
-                  type="radio" 
-                  name="activeKeyData" 
-                  checked={item.active} 
-                  onChange={() => handleSetActive(item.id)} 
-                />
-                </td>
-                <td>
-                <button 
-                  onClick={() => handleDelete(item.id)}
-                  type="button"
-                >
-                  Delete
-                </button>
-                </td>
-              </tr>
-              ))}
+                .slice()
+                .sort((a: any, b: any) => a.id - b.id)
+                .map((item: { id: number, createdAt: string, active: boolean }) => (
+                  <tr key={item.id}>
+                    <td>{item.id}</td>
+                    <td>{new Date(item.createdAt).toLocaleString()}</td>
+                    <td>
+                      <input
+                        type="radio"
+                        name="activeKeyData"
+                        checked={item.active}
+                        onChange={() => handleSetActive(item.id)}
+                      />
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        type="button"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

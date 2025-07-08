@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { colors, getUserRole } from '../../util/common'
 import './UsersPage.scss'
 import { isSuperAdmin, isBasicUser, isAdmin } from '../../../config/common'
+import { useGetOrganisationDataQuery } from '@/client/util/redux/organisation'
 
 const getSpecialGroup = (user, group, lang, t, data) => {
   const specialGroups = [
@@ -52,7 +53,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const history = useHistory()
-  const data = useSelector((state) => state.organisation.data)
+  const { data } = useGetOrganisationDataQuery()
 
   const logInAs = () => {
     localStorage.setItem('adminLoggedInAs', user.uid)

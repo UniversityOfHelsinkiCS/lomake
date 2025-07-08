@@ -10,7 +10,7 @@ import theme from '/theme'
 import './assets/custom.scss'
 import './assets/fonts/fonts.scss'
 
-import store from './util/store'
+import store from './util/redux'
 import { basePath } from '../config/common'
 
 import './util/i18n'

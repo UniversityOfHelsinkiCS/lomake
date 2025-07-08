@@ -18,7 +18,6 @@ import { setYear, setMultipleYears, setKeyDataYear } from '../util/redux/filterR
 import { setLanguage } from '../util/redux/languageReducer'
 import Footer from './Footer'
 import { ARCHIVE_LAST_YEAR } from '../../config/common'
-import { getOrganisationData } from '../util/redux/organisationSlice'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -124,7 +123,6 @@ export default () => {
       dispatch(getDeadlineAndDraftYear())
       dispatch(getFaculties())
       dispatch(getStudyProgrammes())
-      dispatch(getOrganisationData())
       if (isNotIndividualForm) {
         dispatch(getUsersProgrammes())
         dispatch(getAnswersAction())

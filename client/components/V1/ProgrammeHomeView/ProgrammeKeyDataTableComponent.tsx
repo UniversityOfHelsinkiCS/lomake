@@ -10,7 +10,7 @@ import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import ActionsCell from '../Generic/ActionsCellComponent'
 import TrafficLightCell from '../Generic/TrafficLightCellComponent'
 import KeyDataModal, { type selectedKeyFigureData } from '../Overview/KeyDataModalComponent'
-import { AppDispatch } from '@/client/util/store'
+import { AppDispatch } from '@/client/util/redux'
 import { setKeyDataYear } from '@/client/util/redux/filterReducer'
 
 const ProgrammeKeyDataTableComponent = ({
