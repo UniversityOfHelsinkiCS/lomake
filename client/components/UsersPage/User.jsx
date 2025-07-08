@@ -7,9 +7,19 @@ import { useTranslation } from 'react-i18next'
 
 import { colors, getUserRole } from '../../util/common'
 import './UsersPage.scss'
-import { isSuperAdmin, isBasicUser, isAdmin, specialGroups } from '../../../config/common'
+import { isSuperAdmin, isBasicUser, isAdmin } from '../../../config/common'
 
-const getSpecialGroup = (user, group, lang, t) => {
+const getSpecialGroup = (user, group, lang, t, data) => {
+  const specialGroups = [
+    { group: 'allProgrammes', translationTag: 'accessAllProgrammes' },
+    { group: 'international2020', translationTag: 'accessInternational2020' },
+    { group: 'international', translationTag: 'accessInternational' },
+    { group: 'doctoral', translationTag: 'accessDoctoral' },
+    { group: 'evaluationFaculty', translationTag: 'accessEvaluationFaculty' },
+    { group: 'universityForm', translationTag: 'accessEvaluationUniversity' },
+    ...data.map(f => ({ group: f.code, translationTag: f.name, faculty: true })),
+  ]
+
   const special = specialGroups.find(s => s.group === group)
   if (!special) return null
   return (
@@ -42,6 +52,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const history = useHistory()
+  const data = useSelector((state) => state.organisation.data)
 
   const logInAs = () => {
     localStorage.setItem('adminLoggedInAs', user.uid)
@@ -99,7 +110,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
           )}
         </Table.Cell>
         <Table.Cell data-cy="user-access-groups">
-          {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(user, group, lang, t))}
+          {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(user, group, lang, t, data))}
         </Table.Cell>
         <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
         {isAdmin(currentUser) && (

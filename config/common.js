@@ -1,9 +1,6 @@
 /**
  * Insert application wide common items here
  */
-
-import { data } from './data.js'
-
 const inProduction = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'production'
 
 const inStaging = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'staging'
@@ -42,16 +39,19 @@ const mapToDegreeCode = organisationCode => {
   return code
 }
 
-// admin- and superAdmin-rights are also defined as special groups
-const specialGroups = [
-  { group: 'allProgrammes', translationTag: 'accessAllProgrammes' },
-  { group: 'international2020', translationTag: 'accessInternational2020' },
-  { group: 'international', translationTag: 'accessInternational' },
-  { group: 'doctoral', translationTag: 'accessDoctoral' },
-  { group: 'evaluationFaculty', translationTag: 'accessEvaluationFaculty' },
-  { group: 'universityForm', translationTag: 'accessEvaluationUniversity' },
-  ...data.map(f => ({ group: f.code, translationTag: f.name, faculty: true })),
-]
+const organisationCodeToIam = (code, joryMap) => {
+  const match = (value, code) => {
+    if (Array.isArray(value)) {
+      if (mapToDegreeCode(value[0]).includes(code) || mapToDegreeCode(value[1]).includes(code)) return true
+      return false
+    }
+    const degreeCode = value[0] === 'T' ? value : mapToDegreeCode(value)
+    return degreeCode.includes(code)
+  }
+
+  const found = Object.entries(joryMap).find(pair => match(pair[1], code))
+  return found ? found[0] : ''
+}
 
 // First one is the current year, after that all the years that have answers
 const defaultYears = getYearsArray(LOMAKE_SINCE_YEAR)
@@ -230,7 +230,6 @@ export {
   basePath,
   defaultYears,
   degreeLevels,
-  specialGroups,
   requiredFormIds,
   isSuperAdmin,
   isDevSuperAdminUid,
@@ -239,6 +238,7 @@ export {
   isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
+  organisationCodeToIam,
   isEvaluationFacultyUser,
   hasSomeReadAccess,
   testProgrammeCode,

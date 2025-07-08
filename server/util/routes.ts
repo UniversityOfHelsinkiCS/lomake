@@ -22,7 +22,9 @@ import {
   requireUniFormRight,
   requireDekanaatti,
 } from '../middleware/accessControlMiddleware.js'
-import { getOrganisationData } from './jami.js'
+import { getJoryMapFromJami, getOrganisationData } from './jami.js'
+import { getJoryMap } from '@/client/util/redux/organisationSlicer.js'
+import axios from 'axios'
 
 const router = Router()
 
@@ -117,7 +119,13 @@ router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res
 
 router.get('/organisation-data', async (_, res) => {
   const data = await getOrganisationData()
-  res.status(200).json(data)
+  res.send(data)
+})
+
+router.get('/jory-map', async (_, res) => {
+  const joryMap = await getJoryMapFromJami()
+
+  res.send(joryMap)
 })
 
 router.get('/cypress/seed', notInProduction, cypress.seed)

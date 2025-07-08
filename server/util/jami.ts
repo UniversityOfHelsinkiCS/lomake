@@ -42,6 +42,12 @@ export const getOrganisationData = async () => {
   return data
 }
 
+export const getJoryMapFromJami = async () => {
+  const { data } = await jamiClient.get('/jory-map')
+
+  return data
+}
+
 export const testJami = async () => {
   try {
     await jamiClient.get('/ping', { timeout: 4000 })

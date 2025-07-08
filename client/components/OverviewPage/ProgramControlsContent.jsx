@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getProgrammesUsersAction } from '../../util/redux/programmesUsersReducer'
-import { organisationCodeToIam } from '/config/IAMConfig'
 import ProgramControlsUsers from './ProgramControlsUsers'
 import FormLocker from './FormLocker'
+import { getJoryMap } from '../../util/redux/organisationSlicer'
+import { organisationCodeToIam } from '@/config/common'
 
 const OwnerAccordionContent = ({ programKey, form }) => {
   const dispatch = useDispatch()
   const [dataLoading, setDataLoading] = useState(false)
   const [dataReady, setDataReady] = useState(false)
   const usersPending = useSelector(({ programmesUsers }) => programmesUsers.pending)
-  const programJoryIam = organisationCodeToIam(programKey)
+  const joryMap = useSelector((state) => state.organisation.joryMap)
+  const programJoryIam = organisationCodeToIam(programKey, joryMap)
 
   useEffect(() => {
     setDataLoading(true)
     dispatch(getProgrammesUsersAction(programKey))
+    dispatch(getJoryMap())
   }, [])
 
   useEffect(() => {
