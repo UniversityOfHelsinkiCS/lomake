@@ -47,4 +47,11 @@ const superAdminGroups = ['grp-toska']
 
 const adminGroups = ['hy-ypa-opa-ospa']
 
-export { doctoralIams, doctoralWritingIams, doctoralSchoolMap, isUniversityWideWritingGroups, superAdminGroups, adminGroups }
+export {
+  doctoralIams,
+  doctoralWritingIams,
+  doctoralSchoolMap,
+  isUniversityWideWritingGroups,
+  superAdminGroups,
+  adminGroups,
+}
