@@ -9,6 +9,10 @@ import { Sentry } from './sentry'
 
 const getAxios = axios.create({ baseURL: `${basePath}api` })
 
+
+const api = axios.create({ baseURL: `${basePath}api` })
+
+// @ts-expect-error
 export const callApi = async (url, method = 'get', data) => {
   const defaultHeaders = !inProduction ? getHeaders() : {}
   const headers = { ...defaultHeaders }
@@ -24,6 +28,7 @@ export const callApi = async (url, method = 'get', data) => {
   })
 }
 
+// @ts-expect-error
 export default (route, prefix, method = 'get', data, query) => ({
   type: `${prefix}_ATTEMPT`,
   requestSettings: {
@@ -39,6 +44,7 @@ export default (route, prefix, method = 'get', data, query) => ({
  * This is a redux middleware used for tracking api calls
  */
 
+// @ts-expect-error
 export const handleRequest = store => next => async action => {
   next(action)
   const { requestSettings } = action
@@ -59,5 +65,36 @@ export const handleRequest = store => next => async action => {
       })
       store.dispatch({ type: `${prefix}_FAILURE`, response: err, query })
     }
+  }
+}
+
+export const apiConnection = async (
+  url: string,
+  method: 'get' | 'post' | 'put' | 'delete' = 'get',
+  data?: any,
+  customHeaders?: any
+) => {
+  const headers = !inProduction ? { ...getHeaders(), ...customHeaders } : { ...customHeaders }
+  const isFormData = data instanceof FormData
+  try {
+    return await api({
+      method,
+      url,
+      data,
+      headers: isFormData ? headers : { 'Content-Type': 'application/json', ...headers },
+    })
+  } catch (error) {
+    Sentry.captureException(error, {
+      tags: {
+        url,
+        method,
+        isFormData,
+      },
+      extra: {
+        data,
+        customHeaders,
+      },
+    })
+    throw error
   }
 }

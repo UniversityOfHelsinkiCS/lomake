@@ -1,26 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
-import { basePath } from '../common'
-import { getHeaders } from './keyDataReducer'
-import { alertSentry } from '../common'
-
+import { apiConnection } from '../apiConnection'
 
 export const getDocuments = createAsyncThunk<any, Record<string, any>>(
   'documents/getDocuments',
   async (payload, { rejectWithValue }) => {
     const { studyprogrammeKey } = payload
     try {
-      const response = await axios.get(`${basePath}api/documents/${studyprogrammeKey}`, {
-        headers: {
-          ...getHeaders(),
-        },
-      })
+      const response = await apiConnection(
+        `/documents/${studyprogrammeKey}`,
+        'get'
+      )
       return response.data
-    } catch (err) {
-      alertSentry(err, `${basePath}api/documents/${studyprogrammeKey}`, 'GET', {})
-      return rejectWithValue((err as any).response.data)
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data || err.message)
     }
-  },
+  }
 )
 
 export const getAllDocuments = createAsyncThunk<any, Record<string, any>>(
@@ -28,17 +22,15 @@ export const getAllDocuments = createAsyncThunk<any, Record<string, any>>(
   async (payload, { rejectWithValue }) => {
     const { activeYear } = payload
     try {
-      const response = await axios.get(`${basePath}api/documents/all/${activeYear}`, {
-        headers: {
-          ...getHeaders(),
-        },
-      })
+      const response = await apiConnection(
+        `/documents/all/${activeYear}`,
+        'get'
+      )
       return response.data
-    } catch (err) {
-      alertSentry(err, `${basePath}api/documents/all/${activeYear}`, 'GET', {})
-      return rejectWithValue((err as any).response.data)
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data || err.message)
     }
-  },
+  }
 )
 
 export const createDocument = createAsyncThunk<any, Record<string, any>>(
@@ -46,21 +38,16 @@ export const createDocument = createAsyncThunk<any, Record<string, any>>(
   async (payload, { rejectWithValue }) => {
     const { studyprogrammeKey, data } = payload
     try {
-      const response = await axios.post(
-        `${basePath}api/documents/${studyprogrammeKey}`,
-        { data },
-        {
-          headers: {
-            ...getHeaders(),
-          },
-        },
+      const response = await apiConnection(
+        `/documents/${studyprogrammeKey}`,
+        'post',
+        { data }
       )
       return response.data
-    } catch (err) {
-      alertSentry(err, `${basePath}api/documents/${studyprogrammeKey}`, 'POST', {})
-      return rejectWithValue((err as any).response.data)
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data || err.message)
     }
-  },
+  }
 )
 
 export const updateDocument = createAsyncThunk<any, Record<string, any>>(
@@ -68,21 +55,16 @@ export const updateDocument = createAsyncThunk<any, Record<string, any>>(
   async (payload, { rejectWithValue }) => {
     const { studyprogrammeKey, id, data } = payload
     try {
-      const response = await axios.put(
-        `${basePath}api/documents/${studyprogrammeKey}/${id}`,
-        { data },
-        {
-          headers: {
-            ...getHeaders(),
-          },
-        },
+      const response = await apiConnection(
+        `/documents/${studyprogrammeKey}/${id}`,
+        'put',
+        { data }
       )
       return response.data
-    } catch (err) {
-      alertSentry(err, `${basePath}api/documents/${studyprogrammeKey}/${id}`, 'PUT', {})
-      return rejectWithValue((err as any).response.data)
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data || err.message)
     }
-  },
+  }
 )
 
 export const closeInterventionProcedure = createAsyncThunk<any, Record<string, any>>(
@@ -90,21 +72,16 @@ export const closeInterventionProcedure = createAsyncThunk<any, Record<string, a
   async (payload, { rejectWithValue }) => {
     const { studyprogrammeKey, data } = payload
     try {
-      const response = await axios.put(
-        `${basePath}api/documents/${studyprogrammeKey}/close/all`,
-        { data },
-        {
-          headers: {
-            ...getHeaders(),
-          },
-        },
+      const response = await apiConnection(
+        `/documents/${studyprogrammeKey}/close/all`,
+        'put',
+        { data }
       )
       return response.data
-    } catch (err) {
-      alertSentry(err, `${basePath}api/documents/${studyprogrammeKey}/close/all`, 'PUT', {})
-      return rejectWithValue((err as any).response.data)
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data || err.message)
     }
-  },
+  }
 )
 
 const initialState = {
@@ -112,7 +89,7 @@ const initialState = {
   status: 'idle',
 }
 
-const documentsSlicer = createSlice({
+const documentsSlice = createSlice({
   name: 'documents',
   initialState,
   reducers: {
@@ -165,7 +142,6 @@ const documentsSlicer = createSlice({
       state.status = 'loading'
     })
     builder.addCase(closeInterventionProcedure.fulfilled, (state, action) => {
-      console.log('action payload', action.payload)
       state.data = action.payload
       state.status = 'succeeded'
     })
@@ -175,4 +151,4 @@ const documentsSlicer = createSlice({
   },
 })
 
-export default documentsSlicer.reducer
+export default documentsSlice.reducer

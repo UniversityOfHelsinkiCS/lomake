@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { getReport } from '@/client/util/redux/reportsSlicer'
+import { getReport } from '@/client/util/redux/reportsSlice'
 import { wsLeaveRoom } from '@/client/util/redux/websocketReducer.js'
 import { setViewOnly } from '@/client/util/redux/formReducer'
 

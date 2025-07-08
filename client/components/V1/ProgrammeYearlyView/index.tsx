@@ -6,7 +6,7 @@ import { useHistory, useParams, useLocation } from 'react-router'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-import { getReport } from '../../../util/redux/reportsSlicer'
+import { getReport } from '../../../util/redux/reportsSlice'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
 import { setViewOnly } from '../../../util/redux/formReducer'
 import { setKeyDataYear } from '../../../util/redux/filterReducer'

@@ -11,10 +11,10 @@ import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Alert, Button, Typography } from '@mui/material'
-import { getReports } from '@/client/util/redux/reportsSlicer'
+import { getReports } from '@/client/util/redux/reportsSlice'
 import { inProduction, isAdmin } from '@/config/common'
 import { ArrowForward } from '@mui/icons-material'
-import { getAllDocuments } from '@/client/util/redux/documentsSlicer'
+import { getAllDocuments } from '@/client/util/redux/documentsSlice'
 
 const OverviewPage = () => {
   const { t } = useTranslation()

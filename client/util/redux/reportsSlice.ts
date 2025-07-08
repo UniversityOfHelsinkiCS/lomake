@@ -1,42 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
-import { basePath } from '../common'
-import { getHeaders } from './keyDataReducer'
-import { Sentry } from '../sentry'
+import { apiConnection } from '../apiConnection'
 import type { ReportData } from '@/shared/lib/types'
-
-const alertSentry = (err: any, route: string, method: string, data: any) => {
-  Sentry.captureException(err, {
-    tags: {
-      route,
-      method,
-      data,
-    },
-  })
-}
 
 export const updateReportHttp = createAsyncThunk<ReportData, Record<string, any>>(
   'reports/putData',
   async (payload, { rejectWithValue }) => {
     const { room, year, id, content } = payload
     try {
-      const response = await axios.put(
-        `${basePath}api/reports/${room}/${year}`,
-        {
-          [id]: content,
-        },
-        {
-          headers: {
-            ...getHeaders(),
-          },
-        },
+      const response = await apiConnection(
+        `/reports/${room}/${year}`,
+        'put',
+        { [id]: content }
       )
       return response.data
-    } catch (err) {
-      alertSentry(err, `${basePath}api/reports/${room}/${year}`, 'PUT', { [id]: content })
-      return rejectWithValue((err as any).response.data)
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data || err.message)
     }
-  },
+  }
 )
 
 export const getReport = createAsyncThunk<ReportData, Record<string, any>>(
@@ -44,17 +24,15 @@ export const getReport = createAsyncThunk<ReportData, Record<string, any>>(
   async (payload, { rejectWithValue }) => {
     const { studyprogrammeKey, year } = payload
     try {
-      const response = await axios.get(`${basePath}api/reports/${studyprogrammeKey}/${year}`, {
-        headers: {
-          ...getHeaders(),
-        },
-      })
+      const response = await apiConnection(
+        `/reports/${studyprogrammeKey}/${year}`,
+        'get'
+      )
       return response.data
-    } catch (err) {
-      alertSentry(err, `${basePath}api/reports/${studyprogrammeKey}/${year}`, 'GET', {})
-      return rejectWithValue((err as any).response.data)
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data || err.message)
     }
-  },
+  }
 )
 
 export const getReports = createAsyncThunk<ReportData, Record<string, any>>(
@@ -62,17 +40,16 @@ export const getReports = createAsyncThunk<ReportData, Record<string, any>>(
   async (payload, { rejectWithValue }) => {
     const { year } = payload
     try {
-      const response = await axios.get(`${basePath}api/reports/${year}`, {
-        headers: {
-          ...getHeaders(),
-        },
-      })
+      const response = await apiConnection(
+        `/reports/${year}`,
+        'get'
+      )
       return response.data
-    } catch (err) {
-      alertSentry(err, `${basePath}api/reports/${year}`, 'GET', {})
-      return rejectWithValue((err as any).response.data)
+    } catch (err: any) {
+      // Sentry already handled in apiConnection
+      return rejectWithValue(err.response?.data || err.message)
     }
-  },
+  }
 )
 
 const initialState = {
@@ -81,7 +58,7 @@ const initialState = {
   status: 'idle',
 }
 
-const reportsReducer = createSlice({
+const reportsSlice = createSlice({
   name: 'reports',
   initialState,
   reducers: {
@@ -123,4 +100,4 @@ const reportsReducer = createSlice({
   },
 })
 
-export default reportsReducer.reducer
+export default reportsSlice.reducer

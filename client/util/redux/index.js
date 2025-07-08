@@ -17,10 +17,10 @@ import faculties from './facultyReducer'
 import summaries from './summaryReducer'
 import reformAnswers from './reformAnswerReducer'
 import monitoring from './facultyMonitoringReducer'
-import keyData from './keyDataReducer'
-import reports from './reportsSlicer'
-import documents from './documentsSlicer'
-import organisation from './organisationSlicer'
+import keyData from './keyDataSlice'
+import reports from './reportsSlice'
+import documents from './documentsSlice'
+import organisation from './organisationSlice'
 
 export default combineReducers({
   form,

@@ -9,7 +9,7 @@ import CurrentEditor from '../../Generic/CurrentEditor'
 import { getLockHttp } from '../../../util/redux/formReducer'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
-import { getReports, updateReportHttp } from '../../../util/redux/reportsSlicer'
+import { getReports, updateReportHttp } from '../../../util/redux/reportsSlice'
 import { useParams } from 'react-router'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 

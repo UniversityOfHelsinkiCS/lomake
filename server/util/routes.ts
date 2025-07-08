@@ -23,8 +23,6 @@ import {
   requireDekanaatti,
 } from '../middleware/accessControlMiddleware.js'
 import { getJoryMapFromJami, getOrganisationData } from './jami.js'
-import { getJoryMap } from '@/client/util/redux/organisationSlicer.js'
-import axios from 'axios'
 
 const router = Router()
 

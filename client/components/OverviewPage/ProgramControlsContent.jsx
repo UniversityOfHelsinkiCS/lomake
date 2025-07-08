@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getProgrammesUsersAction } from '../../util/redux/programmesUsersReducer'
 import ProgramControlsUsers from './ProgramControlsUsers'
 import FormLocker from './FormLocker'
-import { getJoryMap } from '../../util/redux/organisationSlicer'
+import { getJoryMap } from '../../util/redux/organisationSlice'
 import { organisationCodeToIam } from '@/config/common'
 
 const OwnerAccordionContent = ({ programKey, form }) => {
