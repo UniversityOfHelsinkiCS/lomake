@@ -7,7 +7,7 @@ import NavigationSidebar from '../../FormView/NavigationSidebar'
 import bigWheel from '../../../assets/big_wheel.jpg'
 import StatusMessage from '../../FormView/StatusMessage'
 
-import { setViewOnly, updateIndividualReady, getSingleUsersAnswers } from '../../../util/redux/formReducer'
+import { setViewOnly, updateIndividualReady, getSingleUsersAnswers } from '../../../redux/formReducer'
 import SaveIndicator from '../../FormView/SaveIndicator'
 import { getYearToShow } from '../../../util/common'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'

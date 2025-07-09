@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import { useGetOrganisationDataQuery } from '@/client/util/redux/organisation'
+import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'

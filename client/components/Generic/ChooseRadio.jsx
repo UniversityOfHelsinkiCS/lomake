@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from '../../util/redux/formReducer'
+import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from '../../redux/formReducer'
 import { colors, getForm } from '../../util/common'
 import { formKeys } from '../../../config/data'
 import BasicRadio from './BasicRadio'

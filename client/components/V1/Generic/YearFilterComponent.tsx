@@ -1,4 +1,4 @@
-import { setKeyDataYear, clearLevelSpecificFilters } from '../../../util/redux/filterReducer'
+import { setKeyDataYear, clearLevelSpecificFilters } from '../../../redux/filterReducer'
 
 import { MenuItem, FormControl } from '@mui/material'
 

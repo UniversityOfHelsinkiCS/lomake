@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { updateFormField } from '../../../util/redux/formReducer'
+import { updateFormField } from '../../../redux/formReducer'
 import '../../Generic/Generic.scss'
 
 const QuestionPicker = ({ index, label, questionsList, form }) => {

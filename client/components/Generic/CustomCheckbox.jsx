@@ -7,7 +7,7 @@ import {
   updateFormField,
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
-} from '../../util/redux/formReducer'
+} from '../../redux/formReducer'
 import { getFilters, getForm } from '../../util/common'
 import './Generic.scss'
 

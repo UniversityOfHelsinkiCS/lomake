@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { RTKApi } from '../apiConnection'
+import { RTKApi } from '../util/apiConnection'
 
 const organisationApi = RTKApi.injectEndpoints({
   endpoints: builder => ({

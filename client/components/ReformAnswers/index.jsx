@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Divider, Radio, Loader } from 'semantic-ui-react'
-import { getReformAnswers } from '../../util/redux/reformAnswerReducer'
+import { getReformAnswers } from '../../redux/reformAnswerReducer'
 import { degreeReformIndividualQuestions as questionData } from '../../questionData'
 
 import RadioQuestion from './RadioQuestion'

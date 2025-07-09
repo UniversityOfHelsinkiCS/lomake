@@ -6,8 +6,8 @@ import { Accordion } from 'semantic-ui-react'
 import sortBy from 'lodash/sortBy'
 
 import { isAdmin } from '../../../../config/common'
-import { getProgramme } from '../../../util/redux/studyProgrammesReducer'
-import { getProgrammeOldAnswersAction } from '../../../util/redux/summaryReducer'
+import { getProgramme } from '../../../redux/studyProgrammesReducer'
+import { getProgrammeOldAnswersAction } from '../../../redux/summaryReducer'
 import { modifiedQuestions, answersByQuestions } from '../../../util/common'
 import Question from '../../ComparisonPage/Question'
 

@@ -1,4 +1,4 @@
-import callBuilder from '../apiConnection'
+import callBuilder from '../util/apiConnection'
 
 export const setDeadlineAndDraftYear = ({ deadline, draftYear, form }) => {
   const route = '/deadlines'

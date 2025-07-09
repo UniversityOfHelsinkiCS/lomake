@@ -2,7 +2,7 @@ import React from 'react'
 import { MenuItem, Dropdown } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { setLevel } from '../../../util/redux/filterReducer'
+import { setLevel } from '../../../redux/filterReducer'
 
 const DegreeDropdown = () => {
   const { t } = useTranslation()

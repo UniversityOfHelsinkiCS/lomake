@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { getLabel } from '../../util/common'
-import { setQuestions } from '../../util/redux/filterReducer'
+import { setQuestions } from '../../redux/filterReducer'
 import './Generic.scss'
 
 const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {

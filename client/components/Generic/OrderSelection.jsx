@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Button, Grid, Header, Segment } from 'semantic-ui-react'
 
 import './Generic.scss'
-import { updateFormField } from '../../util/redux/formReducer'
+import { updateFormField } from '../../redux/formReducer'
 
 const OrderSelection = ({ id, label, description, extrainfo, lang, options, form }) => {
   const dispatch = useDispatch()

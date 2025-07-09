@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { Faculty } from '@/shared/lib/types'
-import { clearLevelSpecificFilters, setFaculty } from '@/client/util/redux/filterReducer'
+import { clearLevelSpecificFilters, setFaculty } from '@/client/redux/filterReducer'
 
 import { MenuItem, FormControl, Checkbox, ListItemText } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select'

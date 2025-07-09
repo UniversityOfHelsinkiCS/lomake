@@ -1,4 +1,4 @@
-import callBuilder from '../apiConnection'
+import callBuilder from '../util/apiConnection'
 
 export const getFaculties = () => {
   const route = `/faculties`

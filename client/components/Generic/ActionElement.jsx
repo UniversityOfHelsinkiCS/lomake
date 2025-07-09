@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextArea, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { updateFormField } from '../../util/redux/formReducer'
+import { updateFormField } from '../../redux/formReducer'
 import './Generic.scss'
 import { formKeys } from '../../../config/data'
 

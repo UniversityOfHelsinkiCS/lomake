@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { uploadKeyData, getKeyDataMeta, deleteKeyData, setActiveKeyData } from '../../util/redux/keyDataSlice'
-import { RootState } from '@/client/util/redux'
+import { uploadKeyData, getKeyDataMeta, deleteKeyData, setActiveKeyData } from '../../redux/keyDataSlice'
+import { RootState } from '@/client/redux'
 
 export const KeyData = () => {
   const dispatch = useDispatch()

@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import { basePath, inProduction } from './common'
 import { getHeaders } from '../../config/mockHeaders'
 // eslint-disable-next-line import/no-cycle
-import store from './redux'
+import store from '../redux'
 
 const connect = () => {
   const headers = !inProduction ? { ...getHeaders() } : {}

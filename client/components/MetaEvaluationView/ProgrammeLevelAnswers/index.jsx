@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Loader, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
-import { getAllTempAnswersAction } from '../../../util/redux/tempAnswersReducer'
+import { getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
 import {
   modifiedQuestions,
   answersByQuestions,
@@ -11,7 +11,7 @@ import {
   filterUserProgrammes,
   getLabel,
 } from '../../../util/common'
-import { setQuestions } from '../../../util/redux/filterReducer'
+import { setQuestions } from '../../../redux/filterReducer'
 import WrittenAnswers from '../../ReportPage/WrittenAnswers'
 import { formKeys } from '../../../../config/data'
 import useDebounce from '../../../util/useDebounce'

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { apiConnection } from '../apiConnection'
+import { apiConnection } from '../util/apiConnection'
 import type { ReportData } from '@/shared/lib/types'
 
 export const updateReportHttp = createAsyncThunk<ReportData, Record<string, any>>(

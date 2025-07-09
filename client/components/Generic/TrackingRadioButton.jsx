@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { updateFormField } from '../../util/redux/formReducer'
+import { updateFormField } from '../../redux/formReducer'
 
 const TrackingRadioButton = ({ id, form }) => {
   const dispatch = useDispatch()

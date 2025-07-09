@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { apiConnection } from '../apiConnection'
+import { apiConnection } from '../util/apiConnection'
 
 export const getDocuments = createAsyncThunk<any, Record<string, any>>(
   'documents/getDocuments',

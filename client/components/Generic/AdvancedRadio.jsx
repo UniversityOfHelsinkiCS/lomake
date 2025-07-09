@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Radio, Form, Input } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from '../../util/redux/formReducer'
+import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from '../../redux/formReducer'
 import { getForm } from '../../util/common'
 import { useTranslation } from 'react-i18next'
 import useDebounce from '../../util/useDebounce'

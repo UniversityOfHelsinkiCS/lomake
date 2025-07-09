@@ -1,5 +1,5 @@
-import { sortedItems } from '../common'
-import callBuilder from '../apiConnection'
+import { sortedItems } from '../util/common'
+import callBuilder from '../util/apiConnection'
 /**
  * Actions and reducers are in the same file for readability
  */

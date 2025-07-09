@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useVisibleOverviewProgrammes } from '../../../util/overview'
 import NoPermissions from '../../Generic/NoPermissions'
 import { formKeys } from '../../../../config/data'
-import { setLevel } from '../../../util/redux/filterReducer'
+import { setLevel } from '../../../redux/filterReducer'
 import MetaOverview from './MetaOverview'
 
 const ProgrammeLevelOverview = () => {

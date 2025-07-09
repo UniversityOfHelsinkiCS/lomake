@@ -3,7 +3,7 @@ import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { calculateKeyDataColor } from '@/client/util/v1'
 import { calculateInterventionAreas } from '../components/V1/Generic/InterventionProcedure'
-import { RootState } from '../util/redux'
+import { RootState } from '../redux'
 import { useTranslation } from 'react-i18next'
 
 export const useNotificationBadge = () => {

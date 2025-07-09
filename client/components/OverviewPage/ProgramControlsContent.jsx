@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getProgrammesUsersAction } from '../../util/redux/programmesUsersReducer'
+import { getProgrammesUsersAction } from '../../redux/programmesUsersReducer'
 import ProgramControlsUsers from './ProgramControlsUsers'
 import FormLocker from './FormLocker'
-import { useGetJoryMapQuery } from '../../util/redux/organisation'
+import { useGetJoryMapQuery } from '../../redux/organisation'
 import { organisationCodeToIam } from '@/config/common'
 
 const OwnerAccordionContent = ({ programKey, form }) => {

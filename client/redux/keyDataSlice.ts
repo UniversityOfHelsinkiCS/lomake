@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { apiConnection } from '../apiConnection'
+import { apiConnection } from '../util/apiConnection'
 
 export const fetchKeyData = createAsyncThunk(
   'keyData/fetchKeyData',

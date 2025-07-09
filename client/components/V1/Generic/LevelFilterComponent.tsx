@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { setLevel, clearLevelSpecificFilters } from '../../../util/redux/filterReducer'
+import { setLevel, clearLevelSpecificFilters } from '../../../redux/filterReducer'
 
 import { MenuItem, FormControl, Tooltip } from '@mui/material'
 

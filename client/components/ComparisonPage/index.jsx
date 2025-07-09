@@ -15,10 +15,10 @@ import {
   answersByQuestions,
 } from '../../util/common'
 import useDebounce from '../../util/useDebounce'
-import { setForm } from '../../util/redux/filterReducer'
-import { getAnswersActionAll } from '../../util/redux/oldAnswersReducer'
+import { setForm } from '../../redux/filterReducer'
+import { getAnswersActionAll } from '../../redux/oldAnswersReducer'
 
-import { getAllTempAnswersAction } from '../../util/redux/tempAnswersReducer'
+import { getAllTempAnswersAction } from '../../redux/tempAnswersReducer'
 import { isAdmin } from '../../../config/common'
 import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'

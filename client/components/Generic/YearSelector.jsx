@@ -4,9 +4,9 @@ import { Select } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '../../../config/data'
 
-import { setYear, setMultipleYears } from '../../util/redux/filterReducer'
-import { setViewOnly, setViewingOldAnswers } from '../../util/redux/formReducer'
-import { getYearsUserHasAccessToAction } from '../../util/redux/currentUserReducer'
+import { setYear, setMultipleYears } from '../../redux/filterReducer'
+import { setViewOnly, setViewingOldAnswers } from '../../redux/formReducer'
+import { getYearsUserHasAccessToAction } from '../../redux/currentUserReducer'
 import './Generic.scss'
 
 // eslint-disable-next-line react/function-component-definition

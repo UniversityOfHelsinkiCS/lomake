@@ -27,7 +27,7 @@ import { KeyDataByCode, KeyDataProgramme } from '@/shared/lib/types'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
-import { closeInterventionProcedure, createDocument, getDocuments } from '@/client/util/redux/documentsSlice'
+import { closeInterventionProcedure, createDocument, getDocuments } from '@/client/redux/documentsSlice'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 const ProgrammeHomeView = () => {

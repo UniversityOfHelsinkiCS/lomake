@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import ReactToPrint from 'react-to-print'
 
 import { colors } from '../../util/common'
-import { setQuestions } from '../../util/redux/filterReducer'
+import { setQuestions } from '../../redux/filterReducer'
 import './Generic.scss'
 
 const PDFDownload = ({ componentRef, linkName = null }) => {

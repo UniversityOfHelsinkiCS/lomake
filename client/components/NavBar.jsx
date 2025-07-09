@@ -4,8 +4,8 @@ import { Link, useLocation, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Box, Container, Chip, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 import { LanguageSharp, Logout, ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 import { images } from '../util/common'
-import { logoutAction } from '../util/redux/currentUserReducer'
-import { setLanguage } from '../util/redux/languageReducer'
+import { logoutAction } from '../redux/currentUserReducer'
+import { setLanguage } from '../redux/languageReducer'
 import { useTranslation } from 'react-i18next'
 import {
   isAdmin,

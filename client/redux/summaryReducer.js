@@ -1,4 +1,4 @@
-import callBuilder from '../apiConnection'
+import callBuilder from '../util/apiConnection'
 
 export const getCommitteeFacultyAnswersAction = (committee, lang) => {
   const route = `/answers/committeeSummary/${committee}/${lang}`

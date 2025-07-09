@@ -1,7 +1,7 @@
-import { ARCHIVE_LAST_YEAR, isAdmin, isSuperAdmin } from '../../../config/common'
-import { Sentry } from '../sentry'
-import { defaultYears } from '../common'
-import callBuilder from '../apiConnection'
+import { ARCHIVE_LAST_YEAR, isAdmin, isSuperAdmin } from '../../config/common'
+import { Sentry } from '../util/sentry'
+import { defaultYears } from '../util/common'
+import callBuilder from '../util/apiConnection'
 /**
  * Actions and reducers are in the same file for readability
  */

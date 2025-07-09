@@ -5,8 +5,8 @@ import { Typography, Button } from '@mui/material'
 
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 
-import { setViewOnly } from '@/client/util/redux/formReducer'
-import { getReport } from '@/client/util/redux/reportsSlice'
+import { setViewOnly } from '@/client/redux/formReducer'
+import { getReport } from '@/client/redux/reportsSlice'
 
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 

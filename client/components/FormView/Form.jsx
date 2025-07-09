@@ -6,7 +6,7 @@ import Measures from '../Generic/Measures'
 import Selection from '../Generic/Selection'
 import OrderSelection from '../Generic/OrderSelection'
 import { colors, romanize } from '../../util/common'
-import { getPreviousAnswersAction } from '../../util/redux/previousAnswersReducer'
+import { getPreviousAnswersAction } from '../../redux/previousAnswersReducer'
 import Section from './Section'
 
 const Form = ({ questions, programmeKey, form }) => {

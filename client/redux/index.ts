@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { handleRequest, RTKApi } from '../apiConnection'
-import webSocketMiddleware from '../webSocket'
+import { handleRequest, RTKApi } from '../util/apiConnection'
+import webSocketMiddleware from '../util/webSocket'
 
 import form from './formReducer'
 import room from './roomReducer'

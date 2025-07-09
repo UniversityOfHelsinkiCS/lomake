@@ -8,14 +8,14 @@ import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
 import ReactMarkdown from 'react-markdown'
 import { useTranslation } from 'react-i18next'
-import { releaseFieldLocally } from '../../util/redux/currentEditorsReducer'
+import { releaseFieldLocally } from '../../redux/currentEditorsReducer'
 import { formKeys } from '../../../config/data'
 import {
   updateFormField,
   getLockHttp,
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
-} from '../../util/redux/formReducer'
+} from '../../redux/formReducer'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { Sentry } from '../../util/sentry'
 

@@ -22,9 +22,9 @@ import KeyDataCard from './KeyDataCardComponent'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
 import { TextFieldCard } from './TextFieldComponent'
-import { getReport } from '@/client/util/redux/reportsSlice'
+import { getReport } from '@/client/redux/reportsSlice'
 import DocumentForm from './DocumentForm'
-import { getDocuments } from '@/client/util/redux/documentsSlice'
+import { getDocuments } from '@/client/redux/documentsSlice'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 export const calculateInterventionAreas = ({

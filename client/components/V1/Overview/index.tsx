@@ -2,7 +2,7 @@ import { useLocation, useHistory } from 'react-router'
 import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../../util/hooks'
 import { useTranslation } from 'react-i18next'
-import { setFaculty, setKeyDataYear, setLevel } from '../../../util/redux/filterReducer'
+import { setFaculty, setKeyDataYear, setLevel } from '../../../redux/filterReducer'
 import { useVisibleOverviewProgrammes } from '../../../util/overview'
 
 import KeyDataTableComponent from './OverviewKeyDataTableComponent'
@@ -11,10 +11,10 @@ import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Alert, Button, Typography } from '@mui/material'
-import { getReports } from '@/client/util/redux/reportsSlice'
+import { getReports } from '@/client/redux/reportsSlice'
 import { inProduction, isAdmin } from '@/config/common'
 import { ArrowForward } from '@mui/icons-material'
-import { getAllDocuments } from '@/client/util/redux/documentsSlice'
+import { getAllDocuments } from '@/client/redux/documentsSlice'
 
 const OverviewPage = () => {
   const { t } = useTranslation()

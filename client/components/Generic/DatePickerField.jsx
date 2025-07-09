@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFormField } from '../../util/redux/formReducer'
+import { updateFormField } from '../../redux/formReducer'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import { fi, enGB, sv } from 'date-fns/locale'
 import './Generic.scss'

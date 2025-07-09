@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Message, Segment } from 'semantic-ui-react'
 
-import { updateStudyprogrammes } from '../../util/redux/studyProgrammesReducer'
+import { updateStudyprogrammes } from '../../redux/studyProgrammesReducer'
 
 export default () => {
   const dispatch = useDispatch()

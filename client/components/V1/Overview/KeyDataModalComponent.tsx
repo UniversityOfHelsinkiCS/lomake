@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { getReport } from '@/client/util/redux/reportsSlice'
-import { wsLeaveRoom } from '@/client/util/redux/websocketReducer.js'
-import { setViewOnly } from '@/client/util/redux/formReducer'
+import { getReport } from '@/client/redux/reportsSlice'
+import { wsLeaveRoom } from '@/client/redux/websocketReducer.js'
+import { setViewOnly } from '@/client/redux/formReducer'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
