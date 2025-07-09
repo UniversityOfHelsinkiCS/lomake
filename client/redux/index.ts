@@ -53,7 +53,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(RTKApi.middleware)
-      .concat(webSocketMiddleware, handleRequest),
+      .concat(webSocketMiddleware)
+      .concat(handleRequest),
   devTools: process.env.NODE_ENV !== 'production',
 })
 

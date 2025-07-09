@@ -2,12 +2,12 @@
 import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Table } from 'semantic-ui-react'
+import { Loader, Table } from 'semantic-ui-react'
 // import { useTranslation } from 'react-i18next'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)
-  const { data } = useGetOrganisationDataQuery()
+  const { data, isFetching } = useGetOrganisationDataQuery()
   // const { t } = useTranslation()
 
   const { id } = question
@@ -24,6 +24,8 @@ const Question = ({ question, answers }) => {
       faculties[faculty] += 1
     }
   }
+
+  if (isFetching) return <Loader active />
 
   return (
     <div style={{ marginTop: 20, marginLeft: 20 }}>

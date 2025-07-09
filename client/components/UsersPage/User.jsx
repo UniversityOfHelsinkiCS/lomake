@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import moment from 'moment'
-import { Table, Icon, Label, Popup } from 'semantic-ui-react'
+import { Table, Icon, Label, Popup, Loader } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { colors, getUserRole } from '../../util/common'
@@ -53,7 +53,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const history = useHistory()
-  const { data } = useGetOrganisationDataQuery()
+  const { data, isFetching } = useGetOrganisationDataQuery()
 
   const logInAs = () => {
     localStorage.setItem('adminLoggedInAs', user.uid)
@@ -92,35 +92,34 @@ export default ({ user, lang, programmeCodesAndNames }) => {
     )
   }
 
-  return useMemo(
-    () => (
-      <Table.Row>
-        <Table.Cell width={2}>
-          {user.firstname} {user.lastname}
-        </Table.Cell>
-        <Table.Cell width={1}>{user.uid}</Table.Cell>
-        <Table.Cell data-cy={`${user.uid}-userAccess`} style={{ display: 'flex' }}>
-          <FormattedAccess />
-        </Table.Cell>
-        <Table.Cell data-cy={`${user.uid}-userGroup`}>{getUserType(user, t)}</Table.Cell>
-        <Table.Cell>
-          {user.lastLogin ? (
-            moment(user.lastLogin).format('DD.MM.YYYY')
-          ) : (
-            <span style={{ color: colors.gray }}>Ei tallennettu</span>
-          )}
-        </Table.Cell>
-        <Table.Cell data-cy="user-access-groups">
-          {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(user, group, lang, t, data))}
-        </Table.Cell>
-        <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
-        {isAdmin(currentUser) && (
-          <Table.Cell>
-            {mayHijack(currentUser, user) && <Icon onClick={logInAs} size="large" name="sign-in" />}
-          </Table.Cell>
+  if (isFetching) return <Loader active />
+
+  return (
+    <Table.Row>
+      <Table.Cell width={2}>
+        {user.firstname} {user.lastname}
+      </Table.Cell>
+      <Table.Cell width={1}>{user.uid}</Table.Cell>
+      <Table.Cell data-cy={`${user.uid}-userAccess`} style={{ display: 'flex' }}>
+        <FormattedAccess />
+      </Table.Cell>
+      <Table.Cell data-cy={`${user.uid}-userGroup`}>{getUserType(user, t)}</Table.Cell>
+      <Table.Cell>
+        {user.lastLogin ? (
+          moment(user.lastLogin).format('DD.MM.YYYY')
+        ) : (
+          <span style={{ color: colors.gray }}>Ei tallennettu</span>
         )}
-      </Table.Row>
-    ),
-    [user],
+      </Table.Cell>
+      <Table.Cell data-cy="user-access-groups">
+        {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(user, group, lang, t, data))}
+      </Table.Cell>
+      <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
+      {isAdmin(currentUser) && (
+        <Table.Cell>
+          {mayHijack(currentUser, user) && <Icon onClick={logInAs} size="large" name="sign-in" />}
+        </Table.Cell>
+      )}
+    </Table.Row>
   )
 }
