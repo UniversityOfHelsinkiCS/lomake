@@ -1,14 +1,12 @@
-import { useSelector } from 'react-redux'
 import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { calculateKeyDataColor } from '@/client/util/v1'
 import { calculateInterventionAreas } from '../components/V1/Generic/InterventionProcedure'
-import { RootState } from '../redux'
 import { useTranslation } from 'react-i18next'
+import { useAppSelector } from '../util/hooks'
 
-export const useNotificationBadge = () => {
-  const reports = useSelector((state: { reports: any }) => state.reports.dataForYear)
-  const documents = useSelector((state: RootState) => state.documents.data)
+export const useNotificationBadge = (documents: any) => {
+  const reports = useAppSelector((state: { reports: any }) => state.reports.dataForYear)
   const { t } = useTranslation()
 
   const renderTabBadge = (programmeData: KeyDataProgramme, metadata: KeyDataMetadata[]) => {

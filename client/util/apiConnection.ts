@@ -107,7 +107,8 @@ export const formatToArray = <T>(param: T | T[]): T[] => {
 export const RTKApi = createApi({
   reducerPath: 'api',
   tagTypes: [
-    'Organisation'
+    'Organisation',
+    'Documents',
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${basePath}api`,

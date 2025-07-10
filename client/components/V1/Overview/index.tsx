@@ -12,9 +12,7 @@ import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Alert, Button, Typography } from '@mui/material'
 import { getReports } from '@/client/redux/reportsSlice'
-import { inProduction, isAdmin } from '@/config/common'
 import { ArrowForward } from '@mui/icons-material'
-import { getAllDocuments } from '@/client/redux/documentsSlice'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -55,7 +53,6 @@ const OverviewPage = () => {
   useEffect(() => {
     if (selectedYear) {
       dispatch(getReports({ year: selectedYear }))
-      dispatch(getAllDocuments({ activeYear: selectedYear }))
     }
   }, [selectedYear])
 

@@ -25,6 +25,7 @@ import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
+import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 
 const ProgrammeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -37,6 +38,12 @@ const ProgrammeView = () => {
   const [activeTab, setActiveTab] = useState(0)
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
   const form = 10
+  const activeYear = useAppSelector(state => state.filters.keyDataYear)
+  const { data: documents = [] } = useGetAllDocumentsQuery(activeYear, {
+    refetchOnFocus: false,
+    refetchOnReconnect: false,
+    pollingInterval: 0,
+  })
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
@@ -145,7 +152,7 @@ const ProgrammeView = () => {
     programmeData: KeyDataProgramme
     metadata: KeyDataMetadata[]
   }) => {
-    const { renderActionsBadge } = useNotificationBadge()
+    const { renderActionsBadge } = useNotificationBadge(documents)
 
     const actionsBadgeData = useMemo(() => {
       return renderActionsBadge(programmeData, metadata, true)
@@ -169,7 +176,7 @@ const ProgrammeView = () => {
     metadata: KeyDataMetadata[]
     level: ProgrammeLevel
   }) => {
-    const { renderTrafficLightBadge } = useNotificationBadge()
+    const { renderTrafficLightBadge } = useNotificationBadge(documents)
 
     const color = useMemo(
       () => calculateKeyDataColor(metadata, programmeData, groupKey, level),
@@ -192,7 +199,7 @@ const ProgrammeView = () => {
     tab: 'lights' | 'actions'
     metadata: KeyDataMetadata[]
   }) => {
-    const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
+    const { renderTabBadge, renderActionsBadge } = useNotificationBadge(documents)
 
     const shouldRenderBadge = useMemo(() => {
       if (tab === 'lights') return renderTabBadge(programmeData, metadata)

@@ -19,6 +19,8 @@ import { orderBy } from 'lodash'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppSelector } from '@/client/util/hooks'
+import { useSelector } from 'react-redux'
+import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -53,7 +55,13 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const keyData = useFetchKeyData()
   const { t } = useTranslation()
-  const { renderInterventionBadge } = useNotificationBadge()
+  const activeYear = useAppSelector(state => state.filters.keyDataYear)
+  const { data: documents = [] } = useGetAllDocumentsQuery(activeYear, {
+    refetchOnFocus: false,
+    refetchOnReconnect: false,
+    pollingInterval: 0,
+  })
+  const { renderInterventionBadge } = useNotificationBadge(documents)
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')

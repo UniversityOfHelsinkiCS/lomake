@@ -24,7 +24,7 @@ import { TFunction } from 'i18next'
 import { TextFieldCard } from './TextFieldComponent'
 import { getReport } from '@/client/redux/reportsSlice'
 import DocumentForm from './DocumentForm'
-import { getDocuments } from '@/client/redux/documentsSlice'
+import { useGetDocumentsQuery } from '@/client/redux/documents'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 export const calculateInterventionAreas = ({
@@ -53,7 +53,7 @@ const InterventionProcedure = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const year = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
-  const documents = useAppSelector(state => state.documents.data)
+  const { data: documents } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
   const document = documents.length > 0 ? documents.find(doc => doc.id.toString() === id) : null
 
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
@@ -61,7 +61,6 @@ const InterventionProcedure = () => {
   useEffect(() => {
     if (programmeKey) {
       dispatch(getReport({ studyprogrammeKey: programmeKey, year: year }))
-      dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
     }
   }, [programmeKey, year])
 

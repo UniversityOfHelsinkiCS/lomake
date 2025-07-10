@@ -10,6 +10,8 @@ import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
+import { useGetAllDocumentsQuery } from '@/client/redux/documents'
+import { useAppSelector } from '@/client/util/hooks'
 
 const TrafficLightCell = ({
   metadata,
@@ -22,7 +24,9 @@ const TrafficLightCell = ({
   groupKey: GroupKey
   handleModalOpen: (programme: KeyDataProgramme, type: GroupKey) => void
 }) => {
-  const { renderTrafficLightBadge } = useNotificationBadge()
+  const activeYear = useAppSelector(state => state.filters.keyDataYear)
+  const { data: documents = [] } = useGetAllDocumentsQuery(activeYear)
+  const { renderTrafficLightBadge } = useNotificationBadge(documents)
   const { t } = useTranslation()
   const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
   const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)

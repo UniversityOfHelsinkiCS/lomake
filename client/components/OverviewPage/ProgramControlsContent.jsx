@@ -11,7 +11,7 @@ const OwnerAccordionContent = ({ programKey, form }) => {
   const [dataLoading, setDataLoading] = useState(false)
   const [dataReady, setDataReady] = useState(false)
   const usersPending = useSelector(({ programmesUsers }) => programmesUsers.pending)
-  const { data } = useGetJoryMapQuery()
+  const { data = [], isFetching } = useGetJoryMapQuery()
   const programJoryIam = organisationCodeToIam(programKey, data)
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const OwnerAccordionContent = ({ programKey, form }) => {
     }
   }, [usersPending])
 
-  if (!dataReady) return null
+  if (!dataReady || isFetching) return null
 
   return (
     <>

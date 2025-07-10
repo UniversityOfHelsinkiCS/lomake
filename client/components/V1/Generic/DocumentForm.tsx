@@ -6,11 +6,10 @@ import { fiFI, svSE, enUS } from '@mui/x-date-pickers/locales'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useTranslation } from 'react-i18next'
 import { DocumentFormSchema } from '@/shared/validators'
-import { updateDocument } from '@/client/redux/documentsSlice'
+import { useUpdateDocumentMutation } from '@/client/redux/documents'
 import { TFunction } from 'i18next'
 import { useHistory } from 'react-router-dom'
-import { basePath } from '@/config/common'
-import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { useAppSelector } from '@/client/util/hooks'
 
 const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followupDate']
 
@@ -36,7 +35,6 @@ const DocumentForm = ({
   document: Record<string, any>
 }) => {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const lang = useAppSelector(state => state.language)
   const history = useHistory()
 
@@ -94,7 +92,7 @@ const DocumentForm = ({
   const handleSubmit = (e: any) => {
     e.preventDefault()
     if (validateForm()) {
-      dispatch(updateDocument({ studyprogrammeKey: programmeKey, id: id, data: formData }))
+      useUpdateDocumentMutation({ studyprogrammeKey: programmeKey, id: id, data: formData })
       setFormData(initForm(t, false))
       setErrors(initForm(t, true))
       history.push(`/v1/programmes/10/${programmeKey}`)

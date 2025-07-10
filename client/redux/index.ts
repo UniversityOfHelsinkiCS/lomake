@@ -21,7 +21,6 @@ import reformAnswers from './reformAnswerReducer'
 import monitoring from './facultyMonitoringReducer'
 import keyData from './keyDataSlice'
 import reports from './reportsSlice'
-import documents from './documentsSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 // import organisation from './organisation'
 
@@ -46,7 +45,7 @@ const store = configureStore({
     monitoring,
     keyData,
     reports,
-    documents,
+    //documents,
     // organisation,
     [RTKApi.reducerPath]: RTKApi.reducer,
   },

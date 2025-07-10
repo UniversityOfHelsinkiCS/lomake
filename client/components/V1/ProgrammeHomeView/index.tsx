@@ -27,7 +27,7 @@ import { KeyDataByCode, KeyDataProgramme } from '@/shared/lib/types'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
-import { closeInterventionProcedure, createDocument, getDocuments } from '@/client/redux/documentsSlice'
+import { useGetDocumentsQuery, useCreateDocumentMutation, useCloseInterventionProcedureMutation } from '@/client/redux/documents'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
 const ProgrammeHomeView = () => {
@@ -36,7 +36,7 @@ const ProgrammeHomeView = () => {
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const dispatch = useAppDispatch()
   const history = useHistory()
-  const documents = useAppSelector(state => state.documents.data)
+  const { data: documents } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
   const user = useAppSelector(state => state.currentUser.data)
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
@@ -50,8 +50,7 @@ const ProgrammeHomeView = () => {
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
-    dispatch(getDocuments({ studyprogrammeKey: programmeKey }))
-  }, [dispatch, programmeKey])
+  }, [programmeKey])
 
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
@@ -74,7 +73,7 @@ const ProgrammeHomeView = () => {
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t })
 
   const handleClick = () => {
-    dispatch(createDocument({ studyprogrammeKey: programmeKey, data: null })).then(({ payload }) => {
+    useCreateDocumentMutation({ studyprogrammeKey: programmeKey, data: null }).then(({ payload }) => {
       history.push(`/v1/programmes/${form}/${programmeKey}/document/${payload.at(-1).id}`)
     })
   }
@@ -87,8 +86,8 @@ const ProgrammeHomeView = () => {
         reason: reason,
         additionalInfo: additionalInfo,
       }
-      dispatch(closeInterventionProcedure({ studyprogrammeKey: programmeKey, data: data })).then(() =>
-        dispatch(getDocuments({ studyprogrammeKey: programmeKey })),
+      useCloseInterventionProcedureMutation({ studyprogrammeKey: programmeKey, data: data }).then(() =>
+        useGetDocumentsQuery({ studyprogrammeKey: programmeKey }),
       )
     }
   }
