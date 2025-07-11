@@ -10,7 +10,7 @@ import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
 
 import { Box, Button, CircularProgress, Link, Typography } from '@mui/material'
-import TextFieldCard from '../Generic/TextFieldComponent'
+import { TextFieldCard } from '../Generic/TextFieldComponent'
 import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import { getKeyDataPoints, formatURLFragment } from '@/client/util/v1'
@@ -89,7 +89,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
             programme={programme}
             {...content}
           />
-          <TextFieldCard id={content.groupKey} type="Comment" />
+          <TextFieldCard id={content.groupKey} t={t} type="Comment" />
           <Link
             href={`${basePath}v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}/#${formatURLFragment(content.groupKey)}`}
           >
