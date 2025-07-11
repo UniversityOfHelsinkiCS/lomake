@@ -52,6 +52,9 @@ describe('Notification badge tests', () => {
     it('Adding comments or actions should reflect in overview page badges', () => {
       cy.visit(`/v1/programmes/10/${redProgramme}/${defaultYears[0]}`)
 
+      cy.intercept('/api/reports/KH50_005/2024').as('getReport')
+      cy.visit(`/v1/programmes/10/${redProgramme}/${defaultYears[0]}`)
+      cy.wait('@getReport')
       cy.typeInTextField('Vetovoimaisuus-Comment', 'Test comment')
       cy.get(`[data-cy=save-Vetovoimaisuus-Comment]`).click()
 
@@ -134,6 +137,10 @@ describe('Notification badge tests', () => {
 
     it('Actions tab + text field badge should appear and disappear when actions are added', () => {
       cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
+
+      cy.intercept(`/api/reports/${oneRedProgramme}/${defaultYears[0]}`).as('getReport')
+      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
+      cy.wait('@getReport')
 
       cy.get(`[data-cy="tabBadge-actions"]`).should('exist')
       cy.get('[data-cy="actionsTab"]').click()
