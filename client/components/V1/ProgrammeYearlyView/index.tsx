@@ -152,7 +152,7 @@ const ProgrammeView = () => {
     programmeData: KeyDataProgramme
     metadata: KeyDataMetadata[]
   }) => {
-    const { renderActionsBadge } = useNotificationBadge(documents)
+    const { renderActionsBadge } = useNotificationBadge()
 
     const actionsBadgeData = useMemo(() => {
       return renderActionsBadge(programmeData, metadata, true)
@@ -176,7 +176,7 @@ const ProgrammeView = () => {
     metadata: KeyDataMetadata[]
     level: ProgrammeLevel
   }) => {
-    const { renderTrafficLightBadge } = useNotificationBadge(documents)
+    const { renderTrafficLightBadge } = useNotificationBadge()
 
     const color = useMemo(
       () => calculateKeyDataColor(metadata, programmeData, groupKey, level),
@@ -199,7 +199,7 @@ const ProgrammeView = () => {
     tab: 'lights' | 'actions'
     metadata: KeyDataMetadata[]
   }) => {
-    const { renderTabBadge, renderActionsBadge } = useNotificationBadge(documents)
+    const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
 
     const shouldRenderBadge = useMemo(() => {
       if (tab === 'lights') return renderTabBadge(programmeData, metadata)
