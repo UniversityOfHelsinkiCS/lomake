@@ -125,6 +125,10 @@ describe('Notification badge tests', () => {
     it('Opinion of programme tab + text field badge should appear and disappear when opinion of the programme is added', () => {
       cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
 
+      cy.intercept(`/api/reports/${oneRedProgramme}/${defaultYears[0]}`).as('getReport')
+      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
+      cy.wait('@getReport')
+
       cy.get(`[data-cy="tabBadge-lights"]`).should('exist')
       cy.get(`[data-cy=textfieldBadge-Vetovoimaisuus]`).should('exist')
 
@@ -137,10 +141,6 @@ describe('Notification badge tests', () => {
 
     it('Actions tab + text field badge should appear and disappear when actions are added', () => {
       cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
-
-      cy.intercept(`/api/reports/${oneRedProgramme}/${defaultYears[0]}`).as('getReport')
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
-      cy.wait('@getReport')
 
       cy.get(`[data-cy="tabBadge-actions"]`).should('exist')
       cy.get('[data-cy="actionsTab"]').click()
