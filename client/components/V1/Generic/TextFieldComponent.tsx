@@ -9,7 +9,7 @@ import CurrentEditor from '../../Generic/CurrentEditor'
 import { getLockHttp } from '../../../redux/formReducer'
 import { releaseFieldLocally } from '../../../redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
-import { getReports, updateReportHttp } from '../../../redux/reportsSlice'
+import { useGetReportQuery, useUpdateReportHttpMutation } from '../../../redux/reports'
 import { useParams } from 'react-router'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
@@ -19,8 +19,10 @@ type TextFieldComponentProps = {
   children?: React.ReactNode // for passing notification badges next to textfield title
 }
 
-export const TextFieldCard = ({ id, t, type }: { id: string; t: TFunction; type: string }) => {
-  const content = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
+export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: string; t: TFunction; type: string, studyprogrammeKey: string }) => {
+  const year = useAppSelector(state => state.filters.keyDataYear)
+  const { data, isFetching } = useGetReportQuery({ studyprogrammeKey, year })
+  const content = (!isFetching && data[id]) ? data[id] : ''
   return (
     <Box sx={{ mt: '1rem' }} data-cy="textfield-viewonly">
       <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
@@ -79,9 +81,12 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const [hasLock, setHasLock] = useState<boolean>(false)
   const [gettingLock, setGettingLock] = useState<boolean>(false)
 
+  const [updateReportHttp] = useUpdateReportHttpMutation()
   const year = useAppSelector(state => state.filters.keyDataYear)
-  const { programme: room } = useParams<{ programme: string }>()
-  const dataFromRedux = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
+  const { programme: studyprogrammeKey } = useParams<{ programme: string }>()
+  // const dataFromRedux = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
+  const { data, isFetching } = useGetReportQuery({ studyprogrammeKey, year })
+  const dataFromRedux = (!isFetching && data[id]) ? data[id] : ''
   const currentEditors = useSelector(
     ({ currentEditors }: { currentEditors: Record<string, any> }) => currentEditors.data,
     deepCheck,
@@ -109,7 +114,6 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
-    dispatch(getReports({ year }))
   }, [dataFromRedux])
 
   useEffect(() => {
@@ -157,18 +161,18 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const handleStopEditing = () => {
     setHasLock(false)
     dispatch(releaseFieldLocally(id))
-    dispatch(updateReportHttp({ room, year, id, content }))
+    updateReportHttp({ studyprogrammeKey, year, id, content })
   }
 
   const askForLock = () => {
     if (!hasLock && !gettingLock && currentEditors && currentEditors[id] === undefined) {
       setGettingLock(true)
-      dispatch(getLockHttp(id, room))
+      dispatch(getLockHttp(id, studyprogrammeKey))
     }
   }
 
   if (viewOnly) {
-    return <TextFieldCard id={id} t={t} type={type} />
+    return <TextFieldCard id={id} t={t} type={type} studyprogrammeKey={studyprogrammeKey} />
   }
 
   return (

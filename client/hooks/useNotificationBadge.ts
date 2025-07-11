@@ -4,10 +4,13 @@ import { calculateKeyDataColor } from '@/client/util/v1'
 import { calculateInterventionAreas } from '../components/V1/Generic/InterventionProcedure'
 import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '../util/hooks'
+import { useGetReportQuery } from '../redux/reports'
+import { DocumentType } from '../lib/types'
+import Report from '@/server/models/reports'
 
 export const useNotificationBadge = () => {
-  const reports = useAppSelector((state: { reports: any }) => state.reports.dataForYear)
   const { t } = useTranslation()
+  const year = useAppSelector(state => state.filters.keyDataYear)
 
   const renderTabBadge = (programmeData: KeyDataProgramme, metadata: KeyDataMetadata[]) => {
     const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
@@ -28,7 +31,8 @@ export const useNotificationBadge = () => {
     return false
   }
 
-  const renderTrafficLightBadge = (programmeData: KeyDataProgramme, groupKey: GroupKey, color: LightColors) => {
+  const renderTrafficLightBadge = (programmeData: KeyDataProgramme, groupKey: GroupKey, color: LightColors, reports: any) => {
+
     if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return false
     }
@@ -41,6 +45,7 @@ export const useNotificationBadge = () => {
     programmeData: KeyDataProgramme,
     metadata: KeyDataMetadata[],
     includeReport: boolean = false,
+    reports: any
   ) => {
     const redLights = []
 
@@ -85,13 +90,13 @@ export const useNotificationBadge = () => {
     }
 
     const hasDocumentsForYear = documents.some(
-      doc =>
+      (doc: DocumentType) =>
         doc.studyprogrammeKey.toString() === programmeData.koulutusohjelmakoodi &&
         doc.activeYear === parseInt(selectedYear),
     )
 
     const hasActiveDocumentsForYear = documents.some(
-      doc =>
+      (doc: DocumentType) =>
         doc.studyprogrammeKey.toString() === programmeData.koulutusohjelmakoodi &&
         doc.activeYear === parseInt(selectedYear) &&
         doc.active === true,
@@ -111,6 +116,5 @@ export const useNotificationBadge = () => {
     renderActionsBadge,
     renderTabBadge,
     renderInterventionBadge,
-    reports,
   }
 }

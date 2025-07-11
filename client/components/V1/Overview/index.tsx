@@ -11,7 +11,6 @@ import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Alert, Button, Typography } from '@mui/material'
-import { getReports } from '@/client/redux/reportsSlice'
 import { ArrowForward } from '@mui/icons-material'
 
 const OverviewPage = () => {
@@ -49,12 +48,6 @@ const OverviewPage = () => {
       })
     }
   }, [selectedFaculties, selectedLevel, selectedYear])
-
-  useEffect(() => {
-    if (selectedYear) {
-      dispatch(getReports({ year: selectedYear }))
-    }
-  }, [selectedYear])
 
   useEffect(() => {
     document.title = `${t('overview:overviewPage')}`

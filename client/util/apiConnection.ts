@@ -109,6 +109,7 @@ export const RTKApi = createApi({
   tagTypes: [
     'Organisation',
     'Documents',
+    'Reports',
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${basePath}api`,

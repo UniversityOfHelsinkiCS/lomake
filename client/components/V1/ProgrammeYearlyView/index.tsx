@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useRef, useLayoutEffect } from 'react'
+import React, { useEffect, useMemo, useState, useRef } from 'react'
 import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
@@ -6,7 +6,6 @@ import { useHistory, useParams, useLocation } from 'react-router'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-import { getReport } from '../../../redux/reportsSlice'
 import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer.js'
 import { setViewOnly } from '../../../redux/formReducer'
 import { setKeyDataYear } from '../../../redux/filterReducer'
@@ -25,7 +24,7 @@ import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
-import { useGetAllDocumentsQuery } from '@/client/redux/documents'
+import { useGetReportQuery } from '@/client/redux/reports'
 
 const ProgrammeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -38,12 +37,7 @@ const ProgrammeView = () => {
   const [activeTab, setActiveTab] = useState(0)
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
   const form = 10
-  const activeYear = useAppSelector(state => state.filters.keyDataYear)
-  const { data: documents = [] } = useGetAllDocumentsQuery(activeYear, {
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-    pollingInterval: 0,
-  })
+  const { data: reports = [] } = useGetReportQuery({ studyprogrammeKey: programmeKey, year: selectedYear })
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
@@ -84,7 +78,6 @@ const ProgrammeView = () => {
 
     document.title = `${t('form')} - ${programmeKey}`
     dispatch(setKeyDataYear(selectedYear))
-    dispatch(getReport({ studyprogrammeKey: programmeKey, year: selectedYear }))
   }, [lang, programmeKey, selectedYear, keyData])
 
   useEffect(() => {
@@ -152,10 +145,10 @@ const ProgrammeView = () => {
     programmeData: KeyDataProgramme
     metadata: KeyDataMetadata[]
   }) => {
-    const { renderActionsBadge } = useNotificationBadge(documents)
+    const { renderActionsBadge } = useNotificationBadge()
 
     const actionsBadgeData = useMemo(() => {
-      return renderActionsBadge(programmeData, metadata, true)
+      return renderActionsBadge(programmeData, metadata, true, reports)
     }, [programmeData, metadata, renderActionsBadge])
 
     return (
@@ -176,7 +169,7 @@ const ProgrammeView = () => {
     metadata: KeyDataMetadata[]
     level: ProgrammeLevel
   }) => {
-    const { renderTrafficLightBadge } = useNotificationBadge(documents)
+    const { renderTrafficLightBadge } = useNotificationBadge()
 
     const color = useMemo(
       () => calculateKeyDataColor(metadata, programmeData, groupKey, level),
@@ -184,7 +177,7 @@ const ProgrammeView = () => {
     )
 
     const shouldRenderBadge = useMemo(() => {
-      return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color)
+      return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color, reports)
     }, [programmeData, groupKey, color, renderTrafficLightBadge])
 
     return shouldRenderBadge && <NotificationBadge data-cy={`textfieldBadge-${groupKey}`} variant={'small'} />
@@ -199,11 +192,11 @@ const ProgrammeView = () => {
     tab: 'lights' | 'actions'
     metadata: KeyDataMetadata[]
   }) => {
-    const { renderTabBadge, renderActionsBadge } = useNotificationBadge(documents)
+    const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
 
     const shouldRenderBadge = useMemo(() => {
       if (tab === 'lights') return renderTabBadge(programmeData, metadata)
-      else return renderActionsBadge(programmeData, metadata).showBadge
+      else return renderActionsBadge(programmeData, metadata, false, reports).showBadge
     }, [programmeData, metadata, tab, renderTabBadge, renderActionsBadge])
 
     return (
@@ -309,7 +302,7 @@ const ProgrammeView = () => {
             </Box>
           </Alert>
 
-          {Object.values(KeyDataPoints).map((data: KeyDataCardData, index: number) => {
+          {Object.values(KeyDataPoints).map((data: KeyDataCardData) => {
             const anchor = formatURLFragment(data.groupKey)
             return (
               <Box
