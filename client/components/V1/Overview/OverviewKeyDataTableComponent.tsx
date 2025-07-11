@@ -56,7 +56,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const keyData = useFetchKeyData()
   const { t } = useTranslation()
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
-  const { data: documents = [] } = useGetAllDocumentsQuery(activeYear)
+  const { data: documents = [] } = useGetAllDocumentsQuery({ activeYear })
   const { renderInterventionBadge } = useNotificationBadge()
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')

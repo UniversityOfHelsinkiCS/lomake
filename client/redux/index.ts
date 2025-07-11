@@ -22,7 +22,6 @@ import monitoring from './facultyMonitoringReducer'
 import keyData from './keyDataSlice'
 import reports from './reportsSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
-// import organisation from './organisation'
 
 const store = configureStore({
   reducer: {
@@ -45,8 +44,6 @@ const store = configureStore({
     monitoring,
     keyData,
     reports,
-    //documents,
-    // organisation,
     [RTKApi.reducerPath]: RTKApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

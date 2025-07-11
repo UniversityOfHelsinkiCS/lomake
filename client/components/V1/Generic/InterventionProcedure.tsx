@@ -14,7 +14,7 @@ import {
   CircularProgress,
 } from '@mui/material'
 import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
-import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme, DocumentType } from '@/shared/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack, ExpandMore } from '@mui/icons-material'
 import { basePath, isAdmin } from '@/config/common'
@@ -54,7 +54,7 @@ const InterventionProcedure = () => {
   const year = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
   const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
-  const document = (documents.length > 0 || !isFetching) ? documents.find(doc => doc.id.toString() === id) : null
+  const document = (documents.length > 0 || !isFetching) ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 

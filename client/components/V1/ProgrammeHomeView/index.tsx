@@ -35,7 +35,7 @@ const ProgrammeHomeView = () => {
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const history = useHistory()
-  const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
+  const { data: documents = [] } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
   const user = useAppSelector(state => state.currentUser.data)
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins

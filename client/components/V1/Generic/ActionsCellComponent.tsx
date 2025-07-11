@@ -16,7 +16,6 @@ import Modal from '../Generic/ModalTemplateComponent'
 import { TextFieldCard } from '../Generic/TextFieldComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
-import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 
 const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgramme; metadata: KeyDataMetadata[] }) => {
   const { renderActionsBadge } = useNotificationBadge()
