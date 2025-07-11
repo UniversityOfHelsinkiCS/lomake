@@ -53,8 +53,8 @@ const InterventionProcedure = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const year = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
-  const { data: documents } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
-  const document = documents.length > 0 ? documents.find(doc => doc.id.toString() === id) : null
+  const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
+  const document = (documents.length > 0 || !isFetching) ? documents.find(doc => doc.id.toString() === id) : null
 
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
@@ -83,7 +83,7 @@ const InterventionProcedure = () => {
 
   if (!keyData || !hasWriteRights) return null
 
-  if (documents.length === 0) return <CircularProgress />
+  if (isFetching || !document) return <CircularProgress />
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>

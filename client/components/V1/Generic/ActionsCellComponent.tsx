@@ -19,9 +19,7 @@ import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 
 const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgramme; metadata: KeyDataMetadata[] }) => {
-  const activeYear = useAppSelector(state => state.filters.year)
-  const { data: documents = [] } = useGetAllDocumentsQuery(activeYear)
-  const { renderActionsBadge } = useNotificationBadge(documents)
+  const { renderActionsBadge } = useNotificationBadge()
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const year = useAppSelector(state => state.filters.keyDataYear)

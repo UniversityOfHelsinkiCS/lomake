@@ -28,15 +28,14 @@ import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { useGetDocumentsQuery, useCreateDocumentMutation, useCloseInterventionProcedureMutation } from '@/client/redux/documents'
-import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { useAppSelector } from '@/client/util/hooks'
 
 const ProgrammeHomeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
-  const dispatch = useAppDispatch()
   const history = useHistory()
-  const { data: documents } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
+  const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
   const user = useAppSelector(state => state.currentUser.data)
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
@@ -47,6 +46,9 @@ const ProgrammeHomeView = () => {
 
   const [reason, setReason] = useState('')
   const [additionalInfo, setAdditionalInfo] = useState('')
+
+  const [createDocument] = useCreateDocumentMutation()
+  const [closeInterventionProcedure] = useCloseInterventionProcedureMutation()
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
@@ -73,9 +75,9 @@ const ProgrammeHomeView = () => {
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t })
 
   const handleClick = () => {
-    useCreateDocumentMutation({ studyprogrammeKey: programmeKey, data: null }).then(({ payload }) => {
-      history.push(`/v1/programmes/${form}/${programmeKey}/document/${payload.at(-1).id}`)
-    })
+    createDocument({ studyprogrammeKey: programmeKey, data: null })
+      .then(({ data }) => history.push(`/v1/programmes/${form}/${programmeKey}/document/${data.at(-1).id}`)
+      )
   }
 
   const handleCloseProcedure = () => {
@@ -86,9 +88,7 @@ const ProgrammeHomeView = () => {
         reason: reason,
         additionalInfo: additionalInfo,
       }
-      useCloseInterventionProcedureMutation({ studyprogrammeKey: programmeKey, data: data }).then(() =>
-        useGetDocumentsQuery({ studyprogrammeKey: programmeKey }),
-      )
+      closeInterventionProcedure({ studyprogrammeKey: programmeKey, data: data })
     }
   }
 

@@ -56,12 +56,8 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const keyData = useFetchKeyData()
   const { t } = useTranslation()
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
-  const { data: documents = [] } = useGetAllDocumentsQuery(activeYear, {
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-    pollingInterval: 0,
-  })
-  const { renderInterventionBadge } = useNotificationBadge(documents)
+  const { data: documents = [] } = useGetAllDocumentsQuery(activeYear)
+  const { renderInterventionBadge } = useNotificationBadge()
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
@@ -157,7 +153,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     programmeData: KeyDataProgramme
     selectedYear: string
   }) => {
-    const interventionData = renderInterventionBadge(programmeData, metadata, selectedYear)
+    const interventionData = renderInterventionBadge(programmeData, metadata, selectedYear, documents)
 
     if (!interventionData.interventionStatus || programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return (

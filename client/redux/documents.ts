@@ -7,12 +7,14 @@ const documentsApi = RTKApi.injectEndpoints({
         url: `/documents/${studyprogrammeKey}`,
         method: 'GET',
       }),
+      providesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
     getAllDocuments: builder.query({
       query: (activeYear) => ({
         url: `/documents/all/${activeYear}`,
         method: 'GET',
       }),
+
     }),
     createDocument: builder.mutation({
       query: ({ studyprogrammeKey, data }) => ({
@@ -20,13 +22,15 @@ const documentsApi = RTKApi.injectEndpoints({
         method: 'post',
         body: { data },
       }),
+      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
-    updateDocument: builder.mutation<any, any>({
+    updateDocument: builder.mutation({
       query: ({ studyprogrammeKey, id, data }) => ({
         url: `/documents/${studyprogrammeKey}/${id}`,
         method: 'put',
         body: { data },
       }),
+      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
     closeInterventionProcedure: builder.mutation({
       query: ({ studyprogrammeKey, data }) => ({
@@ -34,6 +38,7 @@ const documentsApi = RTKApi.injectEndpoints({
         method: 'put',
         body: { data },
       }),
+      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
   })
 })

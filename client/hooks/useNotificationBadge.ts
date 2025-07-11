@@ -5,7 +5,7 @@ import { calculateInterventionAreas } from '../components/V1/Generic/Interventio
 import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '../util/hooks'
 
-export const useNotificationBadge = (documents: any) => {
+export const useNotificationBadge = () => {
   const reports = useAppSelector((state: { reports: any }) => state.reports.dataForYear)
   const { t } = useTranslation()
 
@@ -72,6 +72,7 @@ export const useNotificationBadge = (documents: any) => {
     programmeData: KeyDataProgramme,
     metadata: KeyDataMetadata[],
     selectedYear: string,
+    documents: Record<string, any>
   ) => {
     if (programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return { interventionStatus: false, showBadge: false }
