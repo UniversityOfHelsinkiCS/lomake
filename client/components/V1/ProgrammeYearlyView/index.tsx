@@ -82,7 +82,7 @@ const ProgrammeView = () => {
 
   useEffect(() => {
     if (!programmeKey || !keyData) return
-    if (formDeadline?.form !== form || !writeAccess) {
+    if ((new Date(formDeadline?.date).getFullYear().toString() !== selectedYear) || !writeAccess) {
       dispatch(setViewOnly(true))
       if (currentRoom) {
         dispatch(wsLeaveRoom(form))
