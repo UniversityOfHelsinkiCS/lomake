@@ -2,7 +2,6 @@
 import '../support/commands'
 import { possibleUsers } from '../../config/mockHeaders'
 
-const user = 'cypressUser'
 const year = 2025
 
 describe('Textfield tests', () => {
@@ -78,7 +77,8 @@ describe('Textfield tests', () => {
     })
     cy.visit(`/v1/programmes/10/KH50_005/${year}`)
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('be.disabled')
-    cy.login(user)
+    cy.login(possibleUsers[7].uid)
+    cy.visit(`/v1/programmes/10/KH50_005/${year}`)
     const id = `Vetovoimaisuus-Comment`
     cy.typeInTextField(id, 'Test comment')
     cy.get(`[data-cy=save-${id}]`).click()
