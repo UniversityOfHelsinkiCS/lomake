@@ -6,7 +6,7 @@ import { useHistory, useParams, useLocation } from 'react-router'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer.js'
+// import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer.js'
 import { setViewOnly } from '../../../redux/formReducer'
 import { setKeyDataYear } from '../../../redux/filterReducer'
 
@@ -68,7 +68,7 @@ const ProgrammeView = () => {
     setActiveTab(parseInt(tabParam) || 0)
 
     return () => {
-      dispatch(wsLeaveRoom(form))
+      // dispatch(wsLeaveRoom(form))
     }
   }, [])
 
@@ -88,7 +88,7 @@ const ProgrammeView = () => {
         dispatch(wsLeaveRoom(form))
       }
     } else {
-      dispatch(wsJoinRoom(programmeKey, form))
+      // dispatch(wsJoinRoom(programmeKey, form))
       dispatch(setViewOnly(false))
     }
   }, [programmeKey, form, keyData])

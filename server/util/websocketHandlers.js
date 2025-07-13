@@ -235,25 +235,9 @@ const getLockHttp = (currentUser, payload, io) => {
   return stripTimeouts(currentEditors[room])
 }
 
-const updateWSAndClearEditors = (io, payload) => {
-  const { room, data, field } = payload
-
-  currentEditors = {
-    ...currentEditors,
-    [room]: {
-      ...currentEditors[room],
-      [field]: undefined,
-    },
-  }
-
-  emitCurrentEditorsTo(io, room, currentEditors)
-  logAndEmitToRoom(io, room, 'new_reports_data', data)
-}
-
 export default {
   joinRoom: withLogging(joinRoom),
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),
   getLockHttp,
-  updateWSAndClearEditors,
 }

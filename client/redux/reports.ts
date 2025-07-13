@@ -1,9 +1,8 @@
 import { RTKApi } from '../util/apiConnection'
-import type { ReportData } from '@/shared/lib/types'
 
 const reportsApi = RTKApi.injectEndpoints({
   endpoints: builder => ({
-    updateReportHttp: builder.mutation({
+    updateReport: builder.mutation({
       query: ({ studyprogrammeKey, year, id, content }) => ({
         url: `/reports/${studyprogrammeKey}/${year}`,
         method: 'put',
@@ -27,5 +26,5 @@ const reportsApi = RTKApi.injectEndpoints({
   })
 })
 
-export const { useUpdateReportHttpMutation, useGetReportQuery, useGetReportsQuery } = reportsApi
+export const { useUpdateReportMutation, useGetReportQuery, useGetReportsQuery } = reportsApi
 

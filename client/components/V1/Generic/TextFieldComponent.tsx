@@ -9,9 +9,10 @@ import CurrentEditor from '../../Generic/CurrentEditor'
 import { getLockHttp } from '../../../redux/formReducer'
 import { releaseFieldLocally } from '../../../redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
-import { useGetReportQuery, useUpdateReportHttpMutation } from '../../../redux/reports'
+import { useGetReportQuery, useUpdateReportMutation } from '../../../redux/reports'
 import { useParams } from 'react-router'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { useDeleteLockMutation, useFetchLockQuery, useSetLockMutation } from '@/client/redux/lock'
 
 type TextFieldComponentProps = {
   id: string
@@ -21,8 +22,10 @@ type TextFieldComponentProps = {
 
 export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: string; t: TFunction; type: string, studyprogrammeKey: string }) => {
   const year = useAppSelector(state => state.filters.keyDataYear)
-  const { data, isFetching } = useGetReportQuery({ studyprogrammeKey, year })
-  const content = (!isFetching && data[id]) ? data[id] : ''
+  const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
+    pollingInterval: 2000,
+  })
+  const content = (!isLoading && data[id]) ? data[id] : ''
   return (
     <Box sx={{ mt: '1rem' }} data-cy="textfield-viewonly">
       <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
@@ -81,16 +84,20 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const [hasLock, setHasLock] = useState<boolean>(false)
   const [gettingLock, setGettingLock] = useState<boolean>(false)
 
-  const [updateReportHttp] = useUpdateReportHttpMutation()
+  const [updateReport] = useUpdateReportMutation()
+  const [setLock] = useSetLockMutation()
+  const [deleteLock] = useDeleteLockMutation()
   const year = useAppSelector(state => state.filters.keyDataYear)
   const { programme: studyprogrammeKey } = useParams<{ programme: string }>()
-  // const dataFromRedux = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
-  const { data, isFetching } = useGetReportQuery({ studyprogrammeKey, year })
-  const dataFromRedux = (!isFetching && data[id]) ? data[id] : ''
-  const currentEditors = useSelector(
-    ({ currentEditors }: { currentEditors: Record<string, any> }) => currentEditors.data,
-    deepCheck,
-  )
+  const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
+    pollingInterval: 1000,
+  })
+  const { data: currentEditors } = useFetchLockQuery({ room: studyprogrammeKey }, { pollingInterval: 1000 })
+  const dataFromRedux = (!isLoading && data[id]) ? data[id] : ''
+  // const currentEditors = useSelector(
+  //   ({ currentEditors }: { currentEditors: Record<string, any> }) => currentEditors.data,
+  //   deepCheck,
+  // )
   const currentUser = useSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
   const isSomeoneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
   const viewOnly = useSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
@@ -161,13 +168,15 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const handleStopEditing = () => {
     setHasLock(false)
     dispatch(releaseFieldLocally(id))
-    updateReportHttp({ studyprogrammeKey, year, id, content })
+    updateReport({ studyprogrammeKey, year, id, content })
+    deleteLock({ room: studyprogrammeKey, field: id })
   }
 
   const askForLock = () => {
     if (!hasLock && !gettingLock && currentEditors && currentEditors[id] === undefined) {
       setGettingLock(true)
       dispatch(getLockHttp(id, studyprogrammeKey))
+      setLock({ room: studyprogrammeKey, field: id })
     }
   }
 

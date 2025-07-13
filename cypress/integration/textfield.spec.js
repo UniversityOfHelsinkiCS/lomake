@@ -66,8 +66,9 @@ describe('Textfield tests', () => {
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
     cy.request({
       method: 'POST',
-      url: '/api/lock/KH50_005',
+      url: '/api/lock',
       body: {
+        room: 'KH50_005',
         field: 'Vetovoimaisuus',
       },
       headers: {
