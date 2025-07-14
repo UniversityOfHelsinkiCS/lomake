@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
 import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { useTranslation } from 'react-i18next'
 import { TFunction } from 'i18next'
 import ReactMarkdown from 'react-markdown'
 import CurrentEditor from '../../Generic/CurrentEditor'
-import { getLockHttp } from '../../../redux/formReducer'
-import { releaseFieldLocally } from '../../../redux/currentEditorsReducer'
-import { deepCheck } from '../../Generic/Textarea'
 import { useGetReportQuery, useUpdateReportMutation } from '../../../redux/reports'
 import { useParams } from 'react-router'
-import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { useAppSelector } from '@/client/util/hooks'
 import { useDeleteLockMutation, useFetchLockQuery, useSetLockMutation } from '@/client/redux/lock'
 
 type TextFieldComponentProps = {
@@ -76,31 +72,31 @@ export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: string; 
   )
 }
 
+
+// TODO: After 5 mins the field is released, make some check
+// if the content !== dataFromRedux and if time after last save is > 1 the call setLock again
+// 
 const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => {
+  const { programme: studyprogrammeKey } = useParams<{ programme: string }>()
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
-
-  const [content, setContent] = useState<string>('')
-  const [hasLock, setHasLock] = useState<boolean>(false)
-  const [gettingLock, setGettingLock] = useState<boolean>(false)
-
   const [updateReport] = useUpdateReportMutation()
   const [setLock] = useSetLockMutation()
   const [deleteLock] = useDeleteLockMutation()
   const year = useAppSelector(state => state.filters.keyDataYear)
-  const { programme: studyprogrammeKey } = useParams<{ programme: string }>()
+  const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
+  const viewOnly = useAppSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
   const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
     pollingInterval: 1000,
   })
-  const { data: currentEditors } = useFetchLockQuery({ room: studyprogrammeKey }, { pollingInterval: 1000 })
+  const { data: currentEditors } = useFetchLockQuery({ room: studyprogrammeKey }, {
+    pollingInterval: 1000
+  })
   const dataFromRedux = (!isLoading && data[id]) ? data[id] : ''
-  // const currentEditors = useSelector(
-  //   ({ currentEditors }: { currentEditors: Record<string, any> }) => currentEditors.data,
-  //   deepCheck,
-  // )
-  const currentUser = useSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
   const isSomeoneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
-  const viewOnly = useSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
+
+  const [content, setContent] = useState<string>('')
+  const [hasLock, setHasLock] = useState<boolean>(false)
+  const [gettingLock, setGettingLock] = useState<boolean>(false)
 
   const textFieldRef = useRef<HTMLInputElement>(null)
   const componentRef = useRef<HTMLDivElement>(null)
@@ -167,15 +163,13 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   const handleStopEditing = () => {
     setHasLock(false)
-    dispatch(releaseFieldLocally(id))
-    updateReport({ studyprogrammeKey, year, id, content })
     deleteLock({ room: studyprogrammeKey, field: id })
+    updateReport({ studyprogrammeKey, year, id, content })
   }
 
   const askForLock = () => {
     if (!hasLock && !gettingLock && currentEditors && currentEditors[id] === undefined) {
       setGettingLock(true)
-      dispatch(getLockHttp(id, studyprogrammeKey))
       setLock({ room: studyprogrammeKey, field: id })
     }
   }
