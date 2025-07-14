@@ -10,13 +10,15 @@ import { useParams } from 'react-router'
 import { useAppSelector } from '@/client/util/hooks'
 import { useDeleteLockMutation, useFetchLockQuery, useSetLockMutation } from '@/client/redux/lock'
 
+type ReportDataKey = 'Vetovoimaisuus' | 'Opintojen sujuvuus ja valmistuminen' | 'Resurssien käyttö' | 'Toimenpiteet'
+
 type TextFieldComponentProps = {
-  id: string
+  id: ReportDataKey
   type: string
   children?: React.ReactNode // for passing notification badges next to textfield title
 }
 
-export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: string; t: TFunction; type: string, studyprogrammeKey: string }) => {
+export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: ReportDataKey; t: TFunction; type: string, studyprogrammeKey: string }) => {
   const year = useAppSelector(state => state.filters.keyDataYear)
   const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
     pollingInterval: 2000,
