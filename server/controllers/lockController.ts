@@ -1,3 +1,4 @@
+import type { Request, Response } from 'express'
 import getUserByUid from '../services/userService.js'
 import logger from '../util/logger.js'
 import { getLockForHttp } from '../websocket.js'
@@ -5,9 +6,24 @@ import { inProduction, isDevSuperAdminUid } from '../../config/common.js'
 
 type User = any
 
-let lockMap = {}
+type Error = any
 
-const stripTimeouts = (room: string) => {
+type Lock = {
+  uid: string
+  firstname: string
+  lastname: string
+  timeoutId: ReturnType<typeof setTimeout>
+}
+
+type LockMap = {
+  [room: string]: {
+    [field: string]: Lock | undefined
+  } | undefined
+}
+
+let LOCKMAP: LockMap = {}
+
+const stripTimeouts = (room: Record<string, Lock | undefined>) => {
   if (!room) return {}
   return Object.keys(room).reduce((acc, key) => {
     if (!room[key]) return acc
@@ -24,7 +40,7 @@ const stripTimeouts = (room: string) => {
 
 const serializeLockMap = (room: string) => {
   return {
-    ...stripTimeouts(lockMap[room]),
+    ...stripTimeouts(LOCKMAP[room]),
   }
 }
 
@@ -52,7 +68,7 @@ const getCurrentUser = async (req: Request & { user: User }) => {
   return user
 }
 
-const getLock = async (req, res) => {
+const getLock = async (req: Request & { user: User }, res: Response) => {
   try {
     const { field } = req.body
     const { room } = req.params
@@ -69,61 +85,75 @@ const getLock = async (req, res) => {
   }
 }
 
-const setLock = async (req, res) => {
-  const { room, field } = req.body
-  const currentUser = await getCurrentUser(req)
+const setLock = async (req: Request & { user: User }, res: Response) => {
+  try {
+    const { room, field } = req.body
+    const currentUser = await getCurrentUser(req)
 
-  if (lockMap[room] && lockMap[room][field] && lockMap[room][field].uid !== currentUser.uid) {
-    return res.status(401).json({ error: 'Field locked....' })
-  }
-
-  // force release lock after 5 mins if no save:
-  const timeoutId = setTimeout(() => {
-    lockMap = {
-      ...lockMap,
-      [room]: { ...lockMap[room], [field]: undefined },
+    if (LOCKMAP[room] && LOCKMAP[room][field] && LOCKMAP[room][field].uid !== currentUser.uid) {
+      return res.status(401).json({ error: 'Field locked....' })
     }
 
-    stripTimeouts(lockMap[room])
-  }, 300 * 1000)
+    // force release lock after 5 mins if no save:
+    const timeoutId = setTimeout(() => {
+      LOCKMAP = {
+        ...LOCKMAP,
+        [room]: { ...LOCKMAP[room], [field]: undefined },
+      }
+      stripTimeouts(LOCKMAP[room])
+    }, 300 * 1000)
 
-  lockMap = {
-    ...lockMap,
-    [room]: {
-      ...lockMap[room],
-      [field]: {
-        uid: currentUser.uid,
-        firstname: currentUser.firstname,
-        lastname: currentUser.lastname,
-        timeoutId,
-      },
-    },
-  }
-
-  return res.status(204).json(serializeLockMap(room))
-}
-
-const fetchLocks = async (req, res) => {
-  const { room } = req.params
-  return res.json(serializeLockMap(room))
-}
-
-const deleteLock = async (req, res) => {
-  const { room, field } = req.body
-  const currentUser = await getCurrentUser(req)
-
-  if (lockMap[room] && lockMap[room][field] && lockMap[room][field].uid === currentUser.uid) {
-    lockMap = {
-      ...lockMap,
+    LOCKMAP = {
+      ...LOCKMAP,
       [room]: {
-        ...lockMap[room],
-        [field]: undefined,
+        ...LOCKMAP[room],
+        [field]: {
+          uid: currentUser.uid,
+          firstname: currentUser.firstname,
+          lastname: currentUser.lastname,
+          timeoutId,
+        },
       },
     }
-    return res.status(204).json(serializeLockMap(room))
-  }
 
-  return res.status(404).json({ error: 'Field not found...' })
+    return res.status(204).json(serializeLockMap(room))
+  } catch (error: Error) {
+    logger.error(error)
+    return res.status(500).json({ error })
+  }
+}
+
+const fetchLocks = async (req: Request & { user: User }, res: Response) => {
+  try {
+    const { room } = req.params
+    return res.json(serializeLockMap(room))
+  } catch (error: Error) {
+    logger.error(error)
+    return res.status(500).json({ error })
+  }
+}
+
+const deleteLock = async (req: Request & { user: User }, res: Response) => {
+  try {
+    const { room, field } = req.body
+    const currentUser = await getCurrentUser(req)
+
+    if (LOCKMAP[room] && LOCKMAP[room][field] && LOCKMAP[room][field].uid === currentUser.uid) {
+      LOCKMAP = {
+        ...LOCKMAP,
+        [room]: {
+          ...LOCKMAP[room],
+          [field]: undefined,
+        },
+      }
+      return res.status(204).json(serializeLockMap(room))
+    }
+
+    return res.status(404).json({ error: 'Field not found...' })
+  } catch (error: Error) {
+    logger.error(error)
+    return res.status(500).json({ error })
+  }
 }
 
 export default { getLock, setLock, fetchLocks, deleteLock }
