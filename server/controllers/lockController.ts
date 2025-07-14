@@ -1,9 +1,13 @@
+import getUserByUid from '../services/userService.js'
 import logger from '../util/logger.js'
 import { getLockForHttp } from '../websocket.js'
+import { inProduction, isDevSuperAdminUid } from '../../config/common.js'
+
+type User = any
 
 let lockMap = {}
 
-const stripTimeouts = room => {
+const stripTimeouts = (room: string) => {
   if (!room) return {}
   return Object.keys(room).reduce((acc, key) => {
     if (!room[key]) return acc
@@ -18,10 +22,34 @@ const stripTimeouts = room => {
   }, {})
 }
 
-const serializeLockMap = room => {
+const serializeLockMap = (room: string) => {
   return {
     ...stripTimeouts(lockMap[room]),
   }
+}
+
+const parseCookies = (cookieString: string | undefined) => {
+  return cookieString
+    .split(';')
+    .map((cookie: string) => cookie.trim().split('='))
+    .reduce((acc, [key, value]) => {
+      acc[key] = value === undefined || value === '' || value === 'null' ? undefined : value
+      return acc
+    }, {} as Record<string, string | undefined>)
+}
+
+const getCurrentUser = async (req: Request & { user: User }) => {
+  const user = req.user
+  const parsedCookies = parseCookies(req.headers.cookie)
+
+  const loggedInAs = parsedCookies['x-admin-logged-in-as']
+
+  if (!inProduction && loggedInAs && isDevSuperAdminUid(user.uid)) {
+    const user = await getUserByUid(loggedInAs)
+    return user
+  }
+
+  return user
 }
 
 const getLock = async (req, res) => {
@@ -43,13 +71,13 @@ const getLock = async (req, res) => {
 
 const setLock = async (req, res) => {
   const { room, field } = req.body
-  const currentUser = req.user
+  const currentUser = await getCurrentUser(req)
 
   if (lockMap[room] && lockMap[room][field] && lockMap[room][field].uid !== currentUser.uid) {
     return res.status(401).json({ error: 'Field locked....' })
   }
 
-  // force release lock after 5 mins if no save
+  // force release lock after 5 mins if no save:
   const timeoutId = setTimeout(() => {
     lockMap = {
       ...lockMap,
@@ -82,7 +110,7 @@ const fetchLocks = async (req, res) => {
 
 const deleteLock = async (req, res) => {
   const { room, field } = req.body
-  const currentUser = req.user
+  const currentUser = await getCurrentUser(req)
 
   if (lockMap[room] && lockMap[room][field] && lockMap[room][field].uid === currentUser.uid) {
     lockMap = {

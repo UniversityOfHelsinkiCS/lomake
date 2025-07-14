@@ -6,7 +6,6 @@ import { useHistory, useParams, useLocation } from 'react-router'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-// import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer.js'
 import { setViewOnly } from '../../../redux/formReducer'
 import { setKeyDataYear } from '../../../redux/filterReducer'
 
@@ -43,7 +42,6 @@ const ProgrammeView = () => {
 
   const { nextDeadline } = useAppSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null
-  const currentRoom = useAppSelector(state => state.room)
   const user = useAppSelector(state => state.currentUser.data)
 
   const writeAccess = (user.access[programmeKey] && user.access[programmeKey].write) || isAdmin(user)
@@ -84,11 +82,7 @@ const ProgrammeView = () => {
     if (!programmeKey || !keyData) return
     if ((new Date(formDeadline?.date).getFullYear().toString() !== selectedYear) || !writeAccess) {
       dispatch(setViewOnly(true))
-      if (currentRoom) {
-        dispatch(wsLeaveRoom(form))
-      }
     } else {
-      // dispatch(wsJoinRoom(programmeKey, form))
       dispatch(setViewOnly(false))
     }
   }, [programmeKey, form, keyData])

@@ -125,7 +125,6 @@ router.get('/organisation-data', async (_, res) => {
 
 router.get('/jory-map', async (_, res) => {
   const joryMap = await getJoryMapFromJami()
-
   res.send(joryMap)
 })
 

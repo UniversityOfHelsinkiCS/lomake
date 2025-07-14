@@ -86,10 +86,10 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
   const viewOnly = useAppSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
   const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
-    pollingInterval: 1000,
+    pollingInterval: 5000,
   })
   const { data: currentEditors } = useFetchLockQuery({ room: studyprogrammeKey }, {
-    pollingInterval: 1000
+    pollingInterval: 5000
   })
   const dataFromRedux = (!isLoading && data[id]) ? data[id] : ''
   const isSomeoneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
