@@ -15,8 +15,6 @@ export type KeyDataMetadata = z.infer<typeof MetadataSchema>
 export type KeyDataMetadataRaw = z.infer<typeof MetadataRawSchema>
 export type DocumentForm = z.infer<typeof DocumentFormSchema>
 
-
-
 export interface KeyData {
   data: {
     kandiohjelmat: KeyDataProgramme[]
@@ -50,4 +48,11 @@ export interface ReportData {
   'Palaute ja työllistyminen'?: string
   'Resurssien käyttö'?: string
   Toimenpiteet?: string
+}
+
+export type Lock = {
+  uid: string
+  firstname: string
+  lastname: string
+  timeoutId: ReturnType<typeof setTimeout>
 }

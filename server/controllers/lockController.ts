@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express'
+import type { Lock } from '../../shared/lib/types.js'
 import getUserByUid from '../services/userService.js'
 import logger from '../util/logger.js'
 import { getLockForHttp } from '../websocket.js'
@@ -7,13 +8,6 @@ import { inProduction, isDevSuperAdminUid } from '../../config/common.js'
 type User = any
 
 type Error = any
-
-type Lock = {
-  uid: string
-  firstname: string
-  lastname: string
-  timeoutId: ReturnType<typeof setTimeout>
-}
 
 type LockMap = {
   [room: string]: {

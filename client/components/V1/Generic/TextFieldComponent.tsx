@@ -88,11 +88,11 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
     pollingInterval: 5000,
   })
-  const { data: currentEditors } = useFetchLockQuery({ room: studyprogrammeKey }, {
+  const { data: lockMap } = useFetchLockQuery({ room: studyprogrammeKey }, {
     pollingInterval: 5000
   })
   const dataFromRedux = (!isLoading && data[id]) ? data[id] : ''
-  const isSomeoneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
+  const isSomeoneElseEditing = lockMap && lockMap[id] && lockMap[id].uid !== currentUser.uid
 
   const [content, setContent] = useState<string>('')
   const [hasLock, setHasLock] = useState<boolean>(false)
@@ -106,14 +106,14 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const MAX_CONTENT_LENGTH = type === 'Comment' ? 1000 : 5000
 
   useEffect(() => {
-    const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
+    const gotTheLock = lockMap && lockMap[id] && lockMap[id].uid === currentUser.uid
     setHasLock(gotTheLock)
-    if (gettingLock && currentEditors[id]) {
+    if (gettingLock && lockMap[id]) {
       setGettingLock(false)
     }
     // Do not add currentUser or dataFromRedux to the dependencies
     // it will clear the field if lock is released by the server
-  }, [currentEditors])
+  }, [lockMap])
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
@@ -168,7 +168,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   }
 
   const askForLock = () => {
-    if (!hasLock && !gettingLock && currentEditors && currentEditors[id] === undefined) {
+    if (!hasLock && !gettingLock && lockMap && lockMap[id] === undefined) {
       setGettingLock(true)
       setLock({ room: studyprogrammeKey, field: id })
     }
