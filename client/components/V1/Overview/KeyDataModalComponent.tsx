@@ -87,6 +87,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
             programme={programme}
             {...content}
           />
+
           <TextFieldCard id={content.groupKey} t={t} type="Comment" studyprogrammeKey={programme.koulutusohjelmakoodi} />
           <Link
             href={`${basePath}v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}/#${formatURLFragment(content.groupKey)}`}
