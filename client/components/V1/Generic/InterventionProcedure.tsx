@@ -14,7 +14,8 @@ import {
   CircularProgress,
 } from '@mui/material'
 import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
-import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme, DocumentType } from '@/shared/lib/types'
+import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import type { DocumentType } from '@/client/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack, ExpandMore } from '@mui/icons-material'
 import { basePath, isAdmin } from '@/config/common'
@@ -22,10 +23,9 @@ import KeyDataCard from './KeyDataCardComponent'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
 import { TextFieldCard } from './TextFieldComponent'
-import { getReport } from '@/client/redux/reportsSlice'
 import DocumentForm from './DocumentForm'
 import { useGetDocumentsQuery } from '@/client/redux/documents'
-import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { useAppSelector } from '@/client/util/hooks'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -48,7 +48,6 @@ export const calculateInterventionAreas = ({
 const InterventionProcedure = () => {
   const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const year = useAppSelector(state => state.filters.keyDataYear)
@@ -60,7 +59,6 @@ const InterventionProcedure = () => {
 
   useEffect(() => {
     if (programmeKey) {
-      dispatch(getReport({ studyprogrammeKey: programmeKey, year: year }))
     }
   }, [programmeKey, year])
 
@@ -122,7 +120,7 @@ const InterventionProcedure = () => {
                 programme={programmeData}
                 {...props}
               />
-              <TextFieldCard id={groupKey} t={t} type="Comment" />
+              <TextFieldCard id={groupKey} t={t} type="Comment" studyprogrammeKey={programmeKey} />
             </AccordionDetails>
           )
         })}
@@ -133,7 +131,7 @@ const InterventionProcedure = () => {
             <Typography variant="h4">{t('keyData:actions')}</Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ display: 'flex', flexDirection: 'column' }}>
-            <TextFieldCard id="Toimenpiteet" t={t} type="Measure" />
+            <TextFieldCard id="Toimenpiteet" t={t} type="Measure" studyprogrammeKey={programmeKey} />
             <Button
               sx={{ alignSelf: 'flex-end', mt: '1rem' }}
               variant="outlined"

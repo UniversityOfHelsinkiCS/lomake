@@ -31,16 +31,15 @@ const documentsApi = RTKApi.injectEndpoints({
     getDocuments: builder.query<DocumentType[], GetDocumentsArgs>({
       query: ({ studyprogrammeKey }) => ({
         url: `/documents/${studyprogrammeKey}`,
-        method: 'GET',
+        method: 'get',
       }),
       providesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
     getAllDocuments: builder.query<DocumentType[], GetAllDocumentsArgs>({
       query: ({ activeYear }) => ({
         url: `/documents/all/${activeYear}`,
-        method: 'GET',
+        method: 'get',
       }),
-
     }),
     createDocument: builder.mutation<DocumentType[], CreateDocumentArgs>({
       query: ({ studyprogrammeKey, data }) => ({

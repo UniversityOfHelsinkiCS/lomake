@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { getReport } from '@/client/redux/reportsSlice'
 import { wsLeaveRoom } from '@/client/redux/websocketReducer.js'
 import { setViewOnly } from '@/client/redux/formReducer'
 
@@ -62,7 +61,6 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
 
     const KeyDataPoints = getKeyDataPoints(t)
 
-    dispatch(getReport({ studyprogrammeKey: programme.koulutusohjelmakoodi, year: year }))
     setProgramme(programme)
     setMetadata(metadata)
     setContent(KeyDataPoints[data.type])
@@ -89,7 +87,8 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
             programme={programme}
             {...content}
           />
-          <TextFieldCard id={content.groupKey} t={t} type="Comment" />
+
+          <TextFieldCard id={content.groupKey} t={t} type="Comment" studyprogrammeKey={programme.koulutusohjelmakoodi} />
           <Link
             href={`${basePath}v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}/#${formatURLFragment(content.groupKey)}`}
           >

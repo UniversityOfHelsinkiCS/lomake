@@ -6,7 +6,6 @@ import { Typography, Button } from '@mui/material'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 
 import { setViewOnly } from '@/client/redux/formReducer'
-import { getReport } from '@/client/redux/reportsSlice'
 
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
@@ -30,7 +29,6 @@ const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgra
 
   const handleOpen = () => {
     dispatch(setViewOnly(true))
-    dispatch(getReport({ studyprogrammeKey: programmeData.koulutusohjelmakoodi, year }))
     return setOpen(true)
   }
 

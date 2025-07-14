@@ -19,7 +19,6 @@ import { orderBy } from 'lodash'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppSelector } from '@/client/util/hooks'
-import { useSelector } from 'react-redux'
 import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 
 interface KeyDataTableProps {

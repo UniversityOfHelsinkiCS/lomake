@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
 import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { useTranslation } from 'react-i18next'
 import { TFunction } from 'i18next'
 import ReactMarkdown from 'react-markdown'
 import CurrentEditor from '../../Generic/CurrentEditor'
-import { getLockHttp } from '../../../redux/formReducer'
-import { releaseFieldLocally } from '../../../redux/currentEditorsReducer'
-import { deepCheck } from '../../Generic/Textarea'
-import { getReports, updateReportHttp } from '../../../redux/reportsSlice'
+import { useGetReportQuery, useUpdateReportMutation } from '../../../redux/reports'
 import { useParams } from 'react-router'
-import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { useAppSelector } from '@/client/util/hooks'
+import { useDeleteLockMutation, useFetchLockQuery, useSetLockMutation } from '@/client/redux/lock'
 
 type TextFieldComponentProps = {
   id: string
@@ -19,8 +16,12 @@ type TextFieldComponentProps = {
   children?: React.ReactNode // for passing notification badges next to textfield title
 }
 
-export const TextFieldCard = ({ id, t, type }: { id: string; t: TFunction; type: string }) => {
-  const content = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
+export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: string; t: TFunction; type: string, studyprogrammeKey: string }) => {
+  const year = useAppSelector(state => state.filters.keyDataYear)
+  const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
+    pollingInterval: 2000,
+  })
+  const content = (!isLoading && data[id]) ? data[id] : ''
   return (
     <Box sx={{ mt: '1rem' }} data-cy="textfield-viewonly">
       <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
@@ -71,24 +72,31 @@ export const TextFieldCard = ({ id, t, type }: { id: string; t: TFunction; type:
   )
 }
 
+
+// TODO: After 5 mins the field is released, make some check
+// if the content !== dataFromRedux and if time after last save is > 1 the call setLock again
+// 
 const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => {
+  const { programme: studyprogrammeKey } = useParams<{ programme: string }>()
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
+  const [updateReport] = useUpdateReportMutation()
+  const [setLock] = useSetLockMutation()
+  const [deleteLock] = useDeleteLockMutation()
+  const year = useAppSelector(state => state.filters.keyDataYear)
+  const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
+  const viewOnly = useAppSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
+  const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
+    pollingInterval: 5000,
+  })
+  const { data: currentEditors } = useFetchLockQuery({ room: studyprogrammeKey }, {
+    pollingInterval: 5000
+  })
+  const dataFromRedux = (!isLoading && data[id]) ? data[id] : ''
+  const isSomeoneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
 
   const [content, setContent] = useState<string>('')
   const [hasLock, setHasLock] = useState<boolean>(false)
   const [gettingLock, setGettingLock] = useState<boolean>(false)
-
-  const year = useAppSelector(state => state.filters.keyDataYear)
-  const { programme: room } = useParams<{ programme: string }>()
-  const dataFromRedux = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
-  const currentEditors = useSelector(
-    ({ currentEditors }: { currentEditors: Record<string, any> }) => currentEditors.data,
-    deepCheck,
-  )
-  const currentUser = useSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
-  const isSomeoneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
-  const viewOnly = useSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
 
   const textFieldRef = useRef<HTMLInputElement>(null)
   const componentRef = useRef<HTMLDivElement>(null)
@@ -109,7 +117,6 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
-    dispatch(getReports({ year }))
   }, [dataFromRedux])
 
   useEffect(() => {
@@ -156,19 +163,19 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   const handleStopEditing = () => {
     setHasLock(false)
-    dispatch(releaseFieldLocally(id))
-    dispatch(updateReportHttp({ room, year, id, content }))
+    deleteLock({ room: studyprogrammeKey, field: id })
+    updateReport({ studyprogrammeKey, year, id, content })
   }
 
   const askForLock = () => {
     if (!hasLock && !gettingLock && currentEditors && currentEditors[id] === undefined) {
       setGettingLock(true)
-      dispatch(getLockHttp(id, room))
+      setLock({ room: studyprogrammeKey, field: id })
     }
   }
 
   if (viewOnly) {
-    return <TextFieldCard id={id} t={t} type={type} />
+    return <TextFieldCard id={id} t={t} type={type} studyprogrammeKey={studyprogrammeKey} />
   }
 
   return (

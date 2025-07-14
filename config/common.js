@@ -97,7 +97,7 @@ const requiredFormIds = [
 
 const requiredDegreeReformIds = ['background_unit', 'primary_role', 'how_many_years']
 
-const DEV_SUPERADMINS = ['admin', 'cypressSuperAdminUser']
+const DEV_SUPERADMINS = ['admin', 'cypressSuperAdminUser', 'superAdmin']
 
 const hasSpecialGroup = (user, group) => {
   if (user && user.specialGroup) {

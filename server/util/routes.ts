@@ -27,6 +27,9 @@ import { getJoryMapFromJami, getOrganisationData } from './jami.js'
 const router = Router()
 
 router.post('/lock/:room', locks.getLock)
+router.get('/lock/:room', locks.fetchLocks)
+router.post('/lock', locks.setLock)
+router.delete('/lock', locks.deleteLock)
 
 router.get('/reform/temp', checkAdminOrKatselmusryhma, degreeReform.getAllTemp)
 router.get('/reform/faculties/:faculty', requireFacultyRead, degreeReform.getForFaculty)
@@ -122,7 +125,6 @@ router.get('/organisation-data', async (_, res) => {
 
 router.get('/jory-map', async (_, res) => {
   const joryMap = await getJoryMapFromJami()
-
   res.send(joryMap)
 })
 

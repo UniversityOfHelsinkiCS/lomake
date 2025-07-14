@@ -3,7 +3,6 @@ import db from '../models/index.js'
 
 import Report from '../models/reports.js'
 import { Op } from 'sequelize'
-import { updateWSAndClearEditors } from '../websocket.js'
 
 import { Request, Response } from 'express'
 import type { ReportData } from '@/shared/lib/types.js'
@@ -156,7 +155,6 @@ const updateReport = async (req: Request, res: Response) => {
     const updatedData = updatedReport[0].data
     const field = Object.keys(data)[0]
 
-    updateWSAndClearEditors({ room: req.params.programme, data: updatedData, field })
     return res.status(200).json(updatedData)
   } catch (error) {
     logger.error(`Database error ${error}`)
