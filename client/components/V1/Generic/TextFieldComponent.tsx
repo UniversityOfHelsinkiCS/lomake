@@ -23,7 +23,7 @@ export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: ReportDa
   const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
     pollingInterval: 2000,
   })
-  const content = (!isLoading && data[id]) ? data[id] : ''
+  const content = (!isLoading && data?.[id]) ? data[id] : ''
   return (
     <Box sx={{ mt: '1rem' }} data-cy="textfield-viewonly">
       <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>

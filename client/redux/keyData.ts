@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { apiConnection } from '../util/apiConnection'
+import { apiConnection, RTKApi } from '../util/apiConnection'
 
 export const fetchKeyData = createAsyncThunk(
   'keyData/fetchKeyData',
@@ -155,3 +155,50 @@ const keyDataSlice = createSlice({
 })
 
 export default keyDataSlice.reducer
+
+export const keyDataApi = RTKApi.injectEndpoints({
+  endpoints: (builder) => ({
+    fetchKeyData: builder.query<any, void>({
+      query: () => 'keyData',
+      providesTags: ['KeyData'],
+    }),
+    uploadKeyData: builder.mutation<boolean, File>({
+      query: (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        return {
+          url: 'keydata',
+          method: 'POST',
+          body: formData,
+        }
+      },
+      invalidatesTags: ['KeyData', 'KeyDataMeta'],
+    }),
+    getKeyDataMeta: builder.query<any, void>({
+      query: () => 'keyData/meta',
+      providesTags: ['KeyDataMeta'],
+    }),
+    deleteKeyData: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `keydata/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['KeyData', 'KeyDataMeta'],
+    }),
+    setActiveKeyData: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `keydata/${id}`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['KeyData', 'KeyDataMeta'],
+    }),
+  }),
+})
+
+export const {
+  useFetchKeyDataQuery,
+  useUploadKeyDataMutation,
+  useGetKeyDataMetaQuery,
+  useDeleteKeyDataMutation,
+  useSetActiveKeyDataMutation,
+} = keyDataApi

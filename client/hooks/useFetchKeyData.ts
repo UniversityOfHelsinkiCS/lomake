@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { fetchKeyData } from '../redux/keyDataSlice'
+import { fetchKeyData } from '../redux/keyData'
 import type { KeyDataProgramme, KeyDataByCode } from '@/shared/lib/types'
 import { useAppDispatch, useAppSelector } from '../util/hooks'
 

@@ -111,6 +111,8 @@ export const RTKApi = createApi({
     'Documents',
     'Reports',
     'Lock',
+    'KeyData',
+    'KeyDataMeta',
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${basePath}api`,
