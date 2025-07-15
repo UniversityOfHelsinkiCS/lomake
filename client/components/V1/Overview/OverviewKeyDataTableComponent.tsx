@@ -20,6 +20,7 @@ import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppSelector } from '@/client/util/hooks'
 import { useGetAllDocumentsQuery } from '@/client/redux/documents'
+import { useGetReportsQuery } from '@/client/redux/reports'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -62,6 +63,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
+  const { data: reports = {} } = useGetReportsQuery({ year: activeYear })
 
   const metadata = useMemo(() => {
     return keyData?.data ? keyData.data.metadata : []
@@ -248,6 +250,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       programmeData={programmeData}
                       groupKey={GroupKey.VETOVOIMAISUUS}
                       handleModalOpen={handleModalOpen}
+                      reports={reports}
                     />
 
                     <TrafficLightCell
@@ -255,6 +258,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       programmeData={programmeData}
                       groupKey={GroupKey.LAPIVIRTAUS}
                       handleModalOpen={handleModalOpen}
+                      reports={reports}
                     />
 
                     <TrafficLightCell
@@ -262,6 +266,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       programmeData={programmeData}
                       groupKey={GroupKey.OPISKELIJAPALAUTE}
                       handleModalOpen={handleModalOpen}
+                      reports={reports}
                     />
 
                     <TrafficLightCell
@@ -269,9 +274,10 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       programmeData={programmeData}
                       groupKey={GroupKey.RESURSSIT}
                       handleModalOpen={handleModalOpen}
+                      reports={reports}
                     />
 
-                    <ActionsCell programmeData={programmeData} metadata={metadata} />
+                    <ActionsCell programmeData={programmeData} metadata={metadata} reports={reports} />
                     <TableCell disabled></TableCell>
                     <TableCell>
                       <InterventionCell programmeData={programmeData} selectedYear={yearFilter} />

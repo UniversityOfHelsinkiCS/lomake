@@ -14,7 +14,7 @@ import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme, ReportData } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
 import { calculateKeyDataColor, formatURLFragment, getKeyDataPoints } from '@/client/util/v1'
@@ -23,7 +23,7 @@ import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
-import { useGetReportQuery } from '@/client/redux/reports'
+import { useGetReportsQuery } from '@/client/redux/reports'
 
 const ProgrammeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -32,19 +32,19 @@ const ProgrammeView = () => {
   const { t } = useTranslation()
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  const { programme: programmeKey, year: selectedYear } = useParams<{ programme: string; year: string }>()
+  const { programme: studyprogrammeKey, year } = useParams<{ programme: string; year: string }>()
   const [activeTab, setActiveTab] = useState(0)
-  const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
+  const keyData: KeyDataByCode = useFetchSingleKeyData(studyprogrammeKey)
   const form = 10
-  const { data: reports = [] } = useGetReportQuery({ studyprogrammeKey: programmeKey, year: selectedYear })
+  const { data: reports = {} } = useGetReportsQuery({ year })
 
-  const level = programmeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
+  const level = studyprogrammeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
   const { nextDeadline } = useAppSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null
   const user = useAppSelector(state => state.currentUser.data)
 
-  const writeAccess = (user.access[programmeKey] && user.access[programmeKey].write) || isAdmin(user)
+  const writeAccess = (user.access[studyprogrammeKey] && user.access[studyprogrammeKey].write) || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
 
   const anchorItems = useRef<Record<string, HTMLDivElement | null>>({})
@@ -72,20 +72,20 @@ const ProgrammeView = () => {
 
   useEffect(() => {
     if (!keyData) return
-    if (!isValidYear(parseInt(selectedYear), keyData)) return
+    if (!isValidYear(parseInt(year), keyData)) return
 
-    document.title = `${t('form')} - ${programmeKey}`
-    dispatch(setKeyDataYear(selectedYear))
-  }, [lang, programmeKey, selectedYear, keyData])
+    document.title = `${t('form')} - ${studyprogrammeKey}`
+    dispatch(setKeyDataYear(year))
+  }, [lang, studyprogrammeKey, year, keyData])
 
   useEffect(() => {
-    if (!programmeKey || !keyData) return
-    if ((new Date(formDeadline?.date).getFullYear().toString() !== selectedYear) || !writeAccess) {
+    if (!studyprogrammeKey || !keyData) return
+    if ((new Date(formDeadline?.date).getFullYear().toString() !== year) || !writeAccess) {
       dispatch(setViewOnly(true))
     } else {
       dispatch(setViewOnly(false))
     }
-  }, [programmeKey, form, keyData])
+  }, [studyprogrammeKey, form, keyData])
 
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
@@ -95,11 +95,11 @@ const ProgrammeView = () => {
     if (keyData) {
       return keyData.programme.find(
         (programmeData: KeyDataProgramme) =>
-          programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year === parseInt(selectedYear) - 1,
+          programmeData.koulutusohjelmakoodi === studyprogrammeKey && programmeData.year === parseInt(year) - 1,
       )
     }
     return {}
-  }, [keyData, selectedYear])
+  }, [keyData, year])
 
   useEffect(() => {
     if (!keyData || !programmeData) return
@@ -119,7 +119,7 @@ const ProgrammeView = () => {
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 
-  if (!isValidYear(parseInt(selectedYear), keyData)) {
+  if (!isValidYear(parseInt(year), keyData)) {
     history.push('/404')
     return
   }
@@ -140,13 +140,11 @@ const ProgrammeView = () => {
     metadata: KeyDataMetadata[]
   }) => {
     const { renderActionsBadge } = useNotificationBadge()
-
-    const actionsBadgeData = useMemo(() => {
+    const actionsBadgeData = () => {
       return renderActionsBadge(programmeData, metadata, true, reports)
-    }, [programmeData, metadata, renderActionsBadge])
-
+    }
     return (
-      actionsBadgeData.showBadge && (
+      actionsBadgeData().showBadge && (
         <NotificationBadge data-cy={`actionsfieldBadge`} variant={'small'} style={{ marginLeft: 0 }} />
       )
     )
@@ -170,11 +168,11 @@ const ProgrammeView = () => {
       [metadata, programmeData, groupKey, level],
     )
 
-    const shouldRenderBadge = useMemo(() => {
+    const shouldRenderBadge = () => {
       return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color, reports)
-    }, [programmeData, groupKey, color, renderTrafficLightBadge])
+    }
 
-    return shouldRenderBadge && <NotificationBadge data-cy={`textfieldBadge-${groupKey}`} variant={'small'} />
+    return shouldRenderBadge() && <NotificationBadge data-cy={`textfieldBadge-${groupKey}`} variant={'small'} />
   }
 
   const TabBadge = ({
@@ -188,13 +186,13 @@ const ProgrammeView = () => {
   }) => {
     const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
 
-    const shouldRenderBadge = useMemo(() => {
-      if (tab === 'lights') return renderTabBadge(programmeData, metadata)
+    const shouldRenderBadge = () => {
+      if (tab === 'lights') return renderTabBadge(programmeData, metadata, reports)
       else return renderActionsBadge(programmeData, metadata, false, reports).showBadge
-    }, [programmeData, metadata, tab, renderTabBadge, renderActionsBadge])
+    }
 
     return (
-      shouldRenderBadge && (
+      shouldRenderBadge() && (
         <NotificationBadge data-cy={`tabBadge-${tab}`} variant={'medium'} style={{ marginLeft: '1.5rem' }} />
       )
     )
@@ -208,10 +206,10 @@ const ProgrammeView = () => {
         <BreadcrumbComponent
           links={[
             { label: t('keyData:overview'), href: `${basePath}v1/overview` },
-            { label: t('keyData:programmeHome'), href: `${basePath}v1/programmes/${form}/${programmeKey}` },
+            { label: t('keyData:programmeHome'), href: `${basePath}v1/programmes/${form}/${studyprogrammeKey}` },
             {
-              label: `${t('keyData:year')} ${selectedYear}`,
-              href: `${basePath}v1/programmes/${form}/${programmeKey}/${selectedYear}`,
+              label: `${t('keyData:year')} ${year}`,
+              href: `${basePath}v1/programmes/${form}/${studyprogrammeKey}/${year}`,
             },
           ]}
         />
@@ -227,7 +225,7 @@ const ProgrammeView = () => {
         </IconButton>
 
         <Typography variant="h2">
-          {programmeData.koulutusohjelma[lang]} {selectedYear}
+          {programmeData.koulutusohjelma[lang]} {year}
         </Typography>
       </div>
 

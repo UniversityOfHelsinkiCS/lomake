@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Typography } from '@mui/material'
 
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { GroupKey } from '@/client/lib/enums'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import ActionsCell from '../Generic/ActionsCellComponent'
 import TrafficLightCell from '../Generic/TrafficLightCellComponent'
 import KeyDataModal, { type selectedKeyFigureData } from '../Overview/KeyDataModalComponent'
 import { AppDispatch } from '@/client/redux'
 import { setKeyDataYear } from '@/client/redux/filterReducer'
+import { useGetReportsQuery } from '@/client/redux/reports'
 
 const ProgrammeKeyDataTableComponent = ({
   programmeData,
@@ -77,52 +78,59 @@ const ProgrammeKeyDataTableComponent = ({
 
         {programmeData.length > 0 ? (
           <TableBody>
-            {programmeData.map((programmeData: KeyDataProgramme, index) => (
-              <TableRow key={programmeData.koulutusohjelmakoodi + index}>
-                <TableCell
-                  style={{ borderRadius: '0.5rem 0 0 0.5rem' }}
-                  data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
-                >
-                  <Link
-                    to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${annualFollowUpYear(programmeData.year)}`}
-                    style={{ width: '100%', textAlign: 'left' }}
-                    onClick={() => dispatch(setKeyDataYear(annualFollowUpYear(programmeData.year)))}
+            {programmeData.map((programmeData: KeyDataProgramme, index) => {
+              const { data: reports = {} } = useGetReportsQuery({ year: annualFollowUpYear(programmeData.year).toString() })
+              return (
+                <TableRow key={programmeData.koulutusohjelmakoodi + index}>
+                  <TableCell
+                    style={{ borderRadius: '0.5rem 0 0 0.5rem' }}
+                    data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
                   >
-                    <Typography variant="h5">{annualFollowUpYear(programmeData.year)}</Typography>
-                  </Link>
-                </TableCell>
+                    <Link
+                      to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${annualFollowUpYear(programmeData.year)}`}
+                      style={{ width: '100%', textAlign: 'left' }}
+                      onClick={() => dispatch(setKeyDataYear(annualFollowUpYear(programmeData.year)))}
+                    >
+                      <Typography variant="h5">{annualFollowUpYear(programmeData.year)}</Typography>
+                    </Link>
+                  </TableCell>
 
-                <TrafficLightCell
-                  metadata={metadata}
-                  programmeData={programmeData}
-                  groupKey={GroupKey.VETOVOIMAISUUS}
-                  handleModalOpen={handleModalOpen}
-                />
+                  <TrafficLightCell
+                    metadata={metadata}
+                    programmeData={programmeData}
+                    groupKey={GroupKey.VETOVOIMAISUUS}
+                    handleModalOpen={handleModalOpen}
+                    reports={reports}
+                  />
 
-                <TrafficLightCell
-                  metadata={metadata}
-                  programmeData={programmeData}
-                  groupKey={GroupKey.LAPIVIRTAUS}
-                  handleModalOpen={handleModalOpen}
-                />
+                  <TrafficLightCell
+                    metadata={metadata}
+                    programmeData={programmeData}
+                    groupKey={GroupKey.LAPIVIRTAUS}
+                    handleModalOpen={handleModalOpen}
+                    reports={reports}
+                  />
 
-                <TrafficLightCell
-                  metadata={metadata}
-                  programmeData={programmeData}
-                  groupKey={GroupKey.OPISKELIJAPALAUTE}
-                  handleModalOpen={handleModalOpen}
-                />
+                  <TrafficLightCell
+                    metadata={metadata}
+                    programmeData={programmeData}
+                    groupKey={GroupKey.OPISKELIJAPALAUTE}
+                    handleModalOpen={handleModalOpen}
+                    reports={reports}
+                  />
 
-                <TrafficLightCell
-                  metadata={metadata}
-                  programmeData={programmeData}
-                  groupKey={GroupKey.RESURSSIT}
-                  handleModalOpen={handleModalOpen}
-                />
+                  <TrafficLightCell
+                    metadata={metadata}
+                    programmeData={programmeData}
+                    groupKey={GroupKey.RESURSSIT}
+                    handleModalOpen={handleModalOpen}
+                    reports={reports}
+                  />
 
-                <ActionsCell programmeData={programmeData} metadata={metadata} />
-              </TableRow>
-            ))}
+                  <ActionsCell programmeData={programmeData} metadata={metadata} reports={reports} />
+                </TableRow>
+              )
+            })}
             <TableRow>
               <TableCell>
                 {/* @ts-expect-error */}

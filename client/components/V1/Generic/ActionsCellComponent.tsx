@@ -3,7 +3,7 @@ import { TableCell } from '../Generic/TableComponent'
 import { useTranslation } from 'react-i18next'
 import { Typography, Button } from '@mui/material'
 
-import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataMetadata, KeyDataProgramme, ReportData } from '@/shared/lib/types'
 
 import { setViewOnly } from '@/client/redux/formReducer'
 
@@ -16,7 +16,7 @@ import { TextFieldCard } from '../Generic/TextFieldComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
-const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgramme; metadata: KeyDataMetadata[] }) => {
+const ActionsCell = ({ programmeData, metadata, reports }: { programmeData: KeyDataProgramme; metadata: KeyDataMetadata[]; reports: Record<string, ReportData | undefined> }) => {
   const { renderActionsBadge } = useNotificationBadge()
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -25,7 +25,7 @@ const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgra
 
   const dispatch = useAppDispatch()
 
-  const actionsBadgeData = renderActionsBadge(programmeData, metadata, true)
+  const actionsBadgeData = renderActionsBadge(programmeData, metadata, true, reports)
 
   const handleOpen = () => {
     dispatch(setViewOnly(true))
@@ -50,7 +50,7 @@ const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgra
         <Typography variant="h3">
           {programmeData.koulutusohjelma[lang]} {year}
         </Typography>
-        <TextFieldCard id={'Toimenpiteet'} t={t} type={'Measure'}></TextFieldCard>
+        <TextFieldCard id={'Toimenpiteet'} t={t} type={'Measure'} studyprogrammeKey={programmeData.koulutusohjelmakoodi}></TextFieldCard>
       </Modal>
     </TableCell>
   )

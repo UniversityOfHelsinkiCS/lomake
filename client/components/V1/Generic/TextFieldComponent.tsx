@@ -10,7 +10,7 @@ import { useParams } from 'react-router'
 import { useAppSelector } from '@/client/util/hooks'
 import { useDeleteLockMutation, useFetchLockQuery, useSetLockMutation } from '@/client/redux/lock'
 
-type ReportDataKey = 'Vetovoimaisuus' | 'Opintojen sujuvuus ja valmistuminen' | 'Resurssien käyttö' | 'Toimenpiteet'
+type ReportDataKey = 'Vetovoimaisuus' | 'Opintojen sujuvuus ja valmistuminen' | 'Resurssien käyttö' | 'Palaute ja työllistyminen' | 'Toimenpiteet'
 
 type TextFieldComponentProps = {
   id: ReportDataKey

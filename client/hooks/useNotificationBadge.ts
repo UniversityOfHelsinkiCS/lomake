@@ -1,18 +1,14 @@
 import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
-import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import type { KeyDataMetadata, KeyDataProgramme, ReportData } from '@/shared/lib/types'
 import { calculateKeyDataColor } from '@/client/util/v1'
 import { calculateInterventionAreas } from '../components/V1/Generic/InterventionProcedure'
 import { useTranslation } from 'react-i18next'
-import { useAppSelector } from '../util/hooks'
-import { useGetReportQuery } from '../redux/reports'
 import { DocumentType } from '../lib/types'
-import Report from '@/server/models/reports'
 
 export const useNotificationBadge = () => {
   const { t } = useTranslation()
-  const year = useAppSelector(state => state.filters.keyDataYear)
 
-  const renderTabBadge = (programmeData: KeyDataProgramme, metadata: KeyDataMetadata[]) => {
+  const renderTabBadge = (programmeData: KeyDataProgramme, metadata: KeyDataMetadata[], reports: Record<string, ReportData | undefined>) => {
     const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
     if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
@@ -24,14 +20,14 @@ export const useNotificationBadge = () => {
 
       const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
 
-      if (renderTrafficLightBadge(programmeData, groupKey, color)) {
+      if (renderTrafficLightBadge(programmeData, groupKey, color, reports)) {
         return true
       }
     }
     return false
   }
 
-  const renderTrafficLightBadge = (programmeData: KeyDataProgramme, groupKey: GroupKey, color: LightColors, reports: any) => {
+  const renderTrafficLightBadge = (programmeData: KeyDataProgramme, groupKey: GroupKey, color: LightColors, reports: Record<string, ReportData | undefined>) => {
 
     if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return false
@@ -45,7 +41,7 @@ export const useNotificationBadge = () => {
     programmeData: KeyDataProgramme,
     metadata: KeyDataMetadata[],
     includeReport: boolean = false,
-    reports: any
+    reports: Record<string, ReportData | undefined>
   ) => {
     const redLights = []
 

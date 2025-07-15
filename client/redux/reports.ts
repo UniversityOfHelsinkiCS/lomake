@@ -37,6 +37,7 @@ const reportsApi = RTKApi.injectEndpoints({
         url: `/reports/${year}`,
         method: 'get',
       }),
+      providesTags: [{ type: 'Reports', id: 'REPS' }]
     })
   })
 })
