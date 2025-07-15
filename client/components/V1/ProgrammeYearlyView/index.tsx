@@ -5,7 +5,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { useHistory, useParams, useLocation } from 'react-router'
 import { Trans, useTranslation } from 'react-i18next'
 
-import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
 import { setViewOnly } from '../../../redux/formReducer'
 import { setKeyDataYear } from '../../../redux/filterReducer'
 
@@ -14,7 +13,7 @@ import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme, ReportData } from '@/shared/lib/types'
+import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
 import { calculateKeyDataColor, formatURLFragment, getKeyDataPoints } from '@/client/util/v1'
@@ -24,6 +23,7 @@ import { TrafficLight } from '../Generic/TrafficLightComponent'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
 import { useGetReportsQuery } from '@/client/redux/reports'
+import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
 const ProgrammeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -34,7 +34,7 @@ const ProgrammeView = () => {
   const searchParams = new URLSearchParams(location.search)
   const { programme: studyprogrammeKey, year } = useParams<{ programme: string; year: string }>()
   const [activeTab, setActiveTab] = useState(0)
-  const keyData: KeyDataByCode = useFetchSingleKeyData(studyprogrammeKey)
+  const keyData: KeyDataByCode = useFetchSingleKeyDataQuery({ studyprogrammeKey })
   const form = 10
   const { data: reports = {} } = useGetReportsQuery({ year })
 

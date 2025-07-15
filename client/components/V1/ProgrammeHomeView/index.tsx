@@ -1,5 +1,4 @@
 import { useMemo, useEffect, useState } from 'react'
-import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
 import { useHistory, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
@@ -29,6 +28,7 @@ import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { useGetDocumentsQuery, useCreateDocumentMutation, useCloseInterventionProcedureMutation } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
+import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
 const ProgrammeHomeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -40,7 +40,7 @@ const ProgrammeHomeView = () => {
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 
-  const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
+  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
 
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
@@ -54,23 +54,14 @@ const ProgrammeHomeView = () => {
     document.title = `${t('form')} - ${programmeKey}`
   }, [programmeKey])
 
-  const metadata = useMemo(() => {
-    return keyData ? keyData.metadata : []
-  }, [keyData])
-
-  const programmeData = useMemo(() => {
-    if (keyData) {
-      return keyData.programme.filter(
-        (programmeData: KeyDataProgramme) =>
-          programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear,
-      )
-    }
-    return []
-  }, [keyData])
-
-  if (!keyData) {
+  if (isLoading || !programme || !metadata) {
     return <CircularProgress />
   }
+
+  const programmeData = programme.filter((programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear)
+
+  console.log(programme, programmeKey)
+  if (!programmeData[0]) return <p>Koira on kusessa</p>
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t })
 

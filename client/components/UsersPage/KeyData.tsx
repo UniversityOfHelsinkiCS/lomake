@@ -1,24 +1,20 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { uploadKeyData, getKeyDataMeta, deleteKeyData, setActiveKeyData } from '../../redux/keyData'
-import { RootState } from '@/client/redux'
+import { useUploadKeyDataMutation, useGetKeyDataMetaQuery, useDeleteKeyDataMutation, useSetActiveKeyDataMutation } from '../../redux/keyData'
 
 export const KeyData = () => {
-  const dispatch = useDispatch()
-  const meta = useSelector((state: RootState) => state.keyData.meta)
+  const [uploadKeyData] = useUploadKeyDataMutation()
+  const [setActiveKeyData] = useSetActiveKeyDataMutation()
+  const [deleteKeyData] = useDeleteKeyDataMutation()
+  const { data: meta } = useGetKeyDataMetaQuery()
 
-  useEffect(() => {
-    dispatch(getKeyDataMeta())
-  }, [dispatch])
 
   const handleDelete = (id: number) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
-      dispatch(deleteKeyData(id))
+      deleteKeyData(id)
     }
   }
 
   const handleSetActive = (id: number) => {
-    dispatch(setActiveKeyData(id))
+    setActiveKeyData(id)
   }
 
   return (
@@ -28,7 +24,7 @@ export const KeyData = () => {
           e.preventDefault()
           const form = e.currentTarget as HTMLFormElement
           const file = form.elements.namedItem('file') as HTMLInputElement
-          dispatch(uploadKeyData(file.files?.[0]))
+          uploadKeyData(file.files?.[0])
         }}
       >
         <input type="file" name="file" />

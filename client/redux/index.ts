@@ -19,7 +19,6 @@ import faculties from './facultyReducer'
 import summaries from './summaryReducer'
 import reformAnswers from './reformAnswerReducer'
 import monitoring from './facultyMonitoringReducer'
-import keyData from './keyData'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
 const store = configureStore({
@@ -41,7 +40,6 @@ const store = configureStore({
     summaries,
     reformAnswers,
     monitoring,
-    keyData,
     [RTKApi.reducerPath]: RTKApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

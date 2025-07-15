@@ -13,7 +13,6 @@ import {
   Button,
   CircularProgress,
 } from '@mui/material'
-import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
 import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import type { DocumentType } from '@/client/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
@@ -26,6 +25,7 @@ import { TextFieldCard } from './TextFieldComponent'
 import DocumentForm from './DocumentForm'
 import { useGetDocumentsQuery } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
+import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -48,7 +48,7 @@ export const calculateInterventionAreas = ({
 const InterventionProcedure = () => {
   const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { t } = useTranslation()
-  const keyData: KeyDataByCode = useFetchSingleKeyData(programmeKey)
+  const keyData: KeyDataByCode = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const year = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)

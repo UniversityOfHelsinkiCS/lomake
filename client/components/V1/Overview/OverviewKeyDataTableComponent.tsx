@@ -8,8 +8,6 @@ import SwapVertIcon from '@mui/icons-material/SwapVert'
 import { GroupKey } from '@/client/lib/enums'
 import { KeyDataProgramme } from '@/shared/lib/types'
 
-import useFetchKeyData from '@/client/hooks/useFetchKeyData'
-
 import ActionsCell from '../Generic/ActionsCellComponent'
 import TrafficLightCell from '../Generic/TrafficLightCellComponent'
 import SearchInput from '../Generic/SearchInputComponent'
@@ -21,6 +19,7 @@ import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppSelector } from '@/client/util/hooks'
 import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 import { useGetReportsQuery } from '@/client/redux/reports'
+import { useFetchKeyDataQuery } from '@/client/redux/keyData'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -53,7 +52,7 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
 
 const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
-  const keyData = useFetchKeyData()
+  const { data: keyData } = useFetchKeyDataQuery()
   const { t } = useTranslation()
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
   const { data: documents = [] } = useGetAllDocumentsQuery({ activeYear })
