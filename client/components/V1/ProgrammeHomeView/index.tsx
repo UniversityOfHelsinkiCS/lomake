@@ -60,8 +60,7 @@ const ProgrammeHomeView = () => {
 
   const programmeData = programme.filter((programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear)
 
-  console.log(programme, programmeKey)
-  if (!programmeData[0]) return <p>Koira on kusessa</p>
+  if (!programmeData[0]) return null
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t })
 

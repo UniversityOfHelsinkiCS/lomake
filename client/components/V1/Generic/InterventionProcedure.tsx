@@ -37,6 +37,7 @@ export const calculateInterventionAreas = ({
   t: TFunction
 }) => {
   let res: string[] = []
+  if (!metadata || !programme) return res
   const keyDataPoints = getKeyDataPoints(t)
   Object.values(keyDataPoints).map((point: any) => {
     const color = calculateKeyDataColor(metadata, programme, point.groupKey, programme.level as ProgrammeLevel)

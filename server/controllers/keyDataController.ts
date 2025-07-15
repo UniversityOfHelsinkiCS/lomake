@@ -53,7 +53,7 @@ const getKeyData = async (_req: Request, res: Response) => {
       throw new Error('Invalid KeyData format')
     }
 
-    return res.status(200).json({ data: formattedKeyData })
+    return res.status(200).json(formattedKeyData)
   } catch (error) {
     return res.status(500).json({ error: (error as Error).message })
   }

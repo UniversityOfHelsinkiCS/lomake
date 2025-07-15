@@ -3,11 +3,11 @@ import { KeyDataProgramme } from '@/shared/lib/types'
 
 export const keyDataApi = RTKApi.injectEndpoints({
   endpoints: (builder) => ({
-    fetchKeyData: builder.query<any, void>({
+    fetchKeyData: builder.query({
       query: () => '/keyData',
       providesTags: ['KeyData'],
     }),
-    uploadKeyData: builder.mutation<boolean, File>({
+    uploadKeyData: builder.mutation({
       query: (file) => {
         const formData = new FormData();
         formData.append('file', file);
@@ -19,7 +19,7 @@ export const keyDataApi = RTKApi.injectEndpoints({
       },
       invalidatesTags: ['KeyData', 'KeyDataMeta'],
     }),
-    getKeyDataMeta: builder.query<any, void>({
+    getKeyDataMeta: builder.query({
       query: () => '/keyData/meta',
       providesTags: ['KeyDataMeta'],
     }),
@@ -30,7 +30,7 @@ export const keyDataApi = RTKApi.injectEndpoints({
       }),
       invalidatesTags: ['KeyData', 'KeyDataMeta'],
     }),
-    setActiveKeyData: builder.mutation<void, number>({
+    setActiveKeyData: builder.mutation({
       query: (id) => ({
         url: `/keydata/${id}`,
         method: 'PUT',
