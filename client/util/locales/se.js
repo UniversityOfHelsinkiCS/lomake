@@ -674,6 +674,7 @@ export default {
     homeDescription:
       'Denna vy samlar nyckeltalen för utbildningsprogrammet, dokumenterade synpunkterna på nyckeltalen och utvecklingsplanerna för olika åren. ',
     moveToOpinion: 'Redigera vyn över utbildningsprogrammet',
+    moveToAction: 'Gå till att redigera utvecklingsplanen',
     interventionProcedure: 'INTERVENTIONSFÖRFARANDE ',
     documentingHeader: 'Dokumentation av interventionsförfarandet',
     interventionOn: 'Aktiv',

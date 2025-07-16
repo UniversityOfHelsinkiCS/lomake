@@ -635,6 +635,7 @@ export default {
     overview: 'Annual follow-up overview',
     programmeHome: 'Programmes homepage',
     moveToOpinion: 'Edit the opinion of the programme',
+    moveToAction: 'Go to edit the development plan',
     homeHeader: 'Key Figures and Development plans',
     homeDescription:
       'This view brings together the key figures for the degree programme, the documented views on the key figures and the development plans for the different years. ',

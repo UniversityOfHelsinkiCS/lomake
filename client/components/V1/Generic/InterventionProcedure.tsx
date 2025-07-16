@@ -128,7 +128,7 @@ const InterventionProcedure = () => {
               component={Link}
               href={`${basePath}v1/programmes/10/${programmeKey}/${year}?tab=1`}
             >
-              Siirry muokkaamaan kehittämissuunnitelmaa
+              {t('keyData:moveToAction')}
             </Button>
           </AccordionDetails>
         </Accordion>

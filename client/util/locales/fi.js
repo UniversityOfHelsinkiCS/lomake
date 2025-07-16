@@ -638,6 +638,7 @@ export default {
     interventionProcedure: 'Toimenpidemenettely',
     documentingHeader: 'Toimenpidemenettelyn dokumentointi',
     moveToOpinion: 'Siirry muokkaamaan näkemystä',
+    moveToAction: 'Siirry muokkaamaan kehittämissuunnitelmaa',
     homeDescription:
       'Tähän näkymään kootaan koulutusohjelman avainluvut, avainlukuihin liittyvät kirjatut näkemykset sekä kehittämissuunnitelmat eri vuosilta. ',
     interventionOn: 'Käynnissä',
