@@ -4,7 +4,7 @@ import Document from '../models/document.js'
 import { Request, Response } from 'express'
 import { DocumentFormSchema, InterventionProcedureCloseSchema } from '../../shared/validators/index.js'
 import { sequelize } from '../database/connection.js'
-import { get } from 'lodash'
+import Studyprogramme from '../models/studyprogramme.js'
 
 interface ValidateOperationResponse {
   success: boolean
@@ -34,9 +34,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     return resultObject
   }
 
-  // @ts-expect-error
-  // ignore db type error for now since it has not been typed
-  const studyprogramme = await db.studyprogramme.findOne({
+  const studyprogramme = await Studyprogramme.findOne({
     where: {
       key: programme,
     },
@@ -140,10 +138,7 @@ const createDocument = async (req: Request, res: Response) => {
       activeYear: calculateActiveYear(),
     })
 
-    // @ts-expect-error
-    documents.push(document)
-
-    res.status(201).json(documents)
+    res.status(201).json([...documents, document])
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

@@ -4,6 +4,7 @@ import moment from 'moment'
 import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { formKeys } from '../../config/data.js'
+import Studyprogramme from '../models/studyprogramme.js'
 
 const loggerPrefix = 'Cronjob::deadlineWatcher | '
 
@@ -25,7 +26,7 @@ const startDeadlineWatcher = async () => {
     if (deadlinesToday && deadlinesToday.length > 0 && draftYear) {
       logger.info(`${loggerPrefix} Today is a deadline, taking backups...`)
 
-      const programmes = await db.studyprogramme.findAll({})
+      const programmes = await Studyprogramme.findAll({})
 
       await deadlinesToday.forEach(async ({ form }) => {
         logger.info(`${loggerPrefix} Processing backups for form ${form}...`)

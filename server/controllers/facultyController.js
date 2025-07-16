@@ -1,9 +1,9 @@
-import db from '../models/index.js'
+import Faculty from '../models/faculty.js'
 import logger from '../util/logger.js'
 
 const getAll = async (_, res) => {
   try {
-    const data = await db.faculty.findAll({
+    const data = await Faculty.findAll({
       include: ['ownedProgrammes', 'companionStudyprogrammes'],
       order: [['code', 'ASC']],
     })

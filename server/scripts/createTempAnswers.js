@@ -2,12 +2,13 @@ import { Op } from 'sequelize'
 import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { getYearsArray, LOMAKE_SINCE_YEAR } from '../../config/common.js'
+import Studyprogramme from '../models/studyprogramme.js'
 
 const createTempAnswers = async () => {
   logger.info(`Creating empty temp answers `)
 
   try {
-    const programmes = await db.studyprogramme.findAll({})
+    const programmes = await Studyprogramme.findAll({})
     const years = getYearsArray(LOMAKE_SINCE_YEAR)
 
     years.forEach(async currentYear => {

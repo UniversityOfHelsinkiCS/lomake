@@ -1,9 +1,7 @@
 import logger from '../util/logger.js'
-import db from '../models/index.js'
-
 import Report from '../models/reports.js'
+import Studyprogramme from '../models/studyprogramme.js'
 import { Op } from 'sequelize'
-
 import { Request, Response } from 'express'
 import type { ReportData } from '@/shared/lib/types.js'
 
@@ -43,9 +41,8 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     return resultObject
   }
 
-  // @ts-expect-error
   // ignore db type error for now since it has not been typed
-  const studyprogramme = await db.studyprogramme.findOne({
+  const studyprogramme = await Studyprogramme.findOne({
     where: {
       key: programme,
     },

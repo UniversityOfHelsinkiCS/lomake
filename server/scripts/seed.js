@@ -1,16 +1,17 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
-import db from '../models/index.js'
-
 import logger from '../util/logger.js'
 
 import { facultyMap } from '../../config/data.js'
 import { getOrganisationData } from '../util/jami.js'
+import Studyprogramme from '../models/studyprogramme.js'
+import Faculty from '../models/faculty.js'
+import CompanionFaculty from '../models/companionFaculty.js'
 
 const seedFacultiesAndStudyprogrammes = async () => {
-  await db.companionFaculty.destroy({ where: {} })
-  await db.studyprogramme.destroy({ where: {} })
-  await db.faculty.destroy({ where: {} })
+  await CompanionFaculty.destroy({ where: {} })
+  await Studyprogramme.destroy({ where: {} })
+  await Faculty.destroy({ where: {} })
 
   const data = await getOrganisationData()
 
@@ -18,7 +19,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
    * Create faculties
    */
   for (const { code, name } of data) {
-    await db.faculty.create({
+    await Faculty.create({
       code,
       name,
     })
@@ -28,10 +29,10 @@ const seedFacultiesAndStudyprogrammes = async () => {
    * Create studyprogrammes
    */
   for (const { code, programmes } of data) {
-    const primaryFaculty = await db.faculty.findOne({ where: { code } })
+    const primaryFaculty = await Faculty.findOne({ where: { code } })
 
     for (const { key, name, level, international } of programmes) {
-      await db.studyprogramme.create({
+      await Studyprogramme.create({
         key,
         name: { fi: name.fi, se: name.sv, en: name.en },
         level,
@@ -53,7 +54,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
         const facultyCode = facultyMap[faculty]
 
         const facultyId = (
-          await db.faculty.findOne({
+          await Faculty.findOne({
             where: {
               code: facultyCode,
             },
@@ -61,14 +62,14 @@ const seedFacultiesAndStudyprogrammes = async () => {
         ).id
 
         const studyprogrammeId = (
-          await db.studyprogramme.findOne({
+          await Studyprogramme.findOne({
             where: {
               key,
             },
           })
         ).id
 
-        await db.companionFaculty.create({
+        await CompanionFaculty.create({
           facultyId,
           studyprogrammeId,
         })

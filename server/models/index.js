@@ -8,6 +8,10 @@ import { fileURLToPath } from 'url'
 import { Sequelize } from 'sequelize'
 import config from '../../config/sequelize.js'
 import logger from '../util/logger.js'
+import Studyprogramme from './studyprogramme.js'
+import Report from './reports.js'
+import Faculty from './faculty.js'
+import CompanionFaculty from './companionFaculty.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -57,5 +61,41 @@ initializeModels()
   .catch(err => {
     logger.error('Error initializing models:', err)
   })
+
+CompanionFaculty.belongsTo(Faculty, {
+  foreignKey: 'faculty_id'
+})
+
+CompanionFaculty.belongsTo(Studyprogramme, {
+  foreignKey: 'studyprogramme_id'
+})
+
+Studyprogramme.hasMany(Report, {
+  foreignKey: 'studyprogramme_id',
+  as: 'reports'
+})
+
+Studyprogramme.belongsTo(Faculty, {
+  foreignKey: 'primary_faculty_id',
+  as: 'primaryFaculty'
+})
+
+Studyprogramme.belongsToMany(Faculty, {
+  through: CompanionFaculty,
+  foreignKey: 'studyprogramme_id',
+  as: 'companionFaculties'
+})
+
+Faculty.belongsToMany(Studyprogramme, {
+  through: CompanionFaculty,
+  foreignKey: 'faculty_id',
+  as: 'companionStudyprogrammes',
+})
+
+Faculty.hasMany(Studyprogramme, {
+  as: 'ownedProgrammes',
+  foreignKey: 'primary_faculty_id',
+})
+
 
 export default db

@@ -1,6 +1,7 @@
 import fs from 'fs'
 import db from '../models/index.js'
 import logger from '../util/logger.js'
+import Studyprogramme from '../models/studyprogramme.js'
 
 const mapProgrammes = programmes => {
   const programmeMap = new Map()
@@ -19,7 +20,7 @@ const getUserList = async () => {
     logger.info(`Getting all users and their rights`)
 
     const users = await db.user.findAll({})
-    const programmes = await db.studyprogramme.findAll({})
+    const programmes = await Studyprogramme.findAll({})
     const programmeKeyMap = mapProgrammes(programmes)
 
     let data = ''

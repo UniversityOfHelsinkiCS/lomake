@@ -5,6 +5,8 @@ import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { formKeys, committeeList } from '../../config/data.js'
 import initReports from './initReports.js'
+import Studyprogramme from '../models/studyprogramme.js'
+import Faculty from '../models/faculty.js'
 
 const handleNonProgrammeDraftAnswers = async form => {
   // here programme contains actually an uid
@@ -114,11 +116,11 @@ const createDraftAnswers = async (newYear, form) => {
     let toOpen = []
 
     if (form === formKeys.EVALUATION_FACULTIES) {
-      toOpen = await db.faculty.findAll({})
+      toOpen = await Faculty.findAll({})
     } else if (form === formKeys.EVALUATION_COMMTTEES) {
       toOpen = committeeList
     } else {
-      toOpen = await db.studyprogramme.findAll({})
+      toOpen = await Studyprogramme.findAll({})
     }
 
     // Save the current answers as tempanswers
@@ -166,7 +168,7 @@ const createFinalAnswers = async (newYear, form) => {
   } else if (form === 10) {
     logger.info('Reports do not have final answers')
   } else {
-    const programmes = await db.studyprogramme.findAll({})
+    const programmes = await Studyprogramme.findAll({})
 
     programmes.forEach(async programme => {
       const { key } = programme

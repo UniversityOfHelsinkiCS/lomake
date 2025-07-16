@@ -26,10 +26,10 @@ import { getJoryMapFromJami, getOrganisationData } from './jami.js'
 
 const router = Router()
 
-router.post('/lock/:room', locks.getLock)
-router.get('/lock/:room', locks.fetchLocks)
-router.post('/lock', locks.setLock)
-router.delete('/lock', locks.deleteLock)
+router.post('/lock/:room', async (req, res) => { await locks.getLock(req, res) })
+router.get('/lock/:room', async (req, res) => { await locks.fetchLocks(req, res) })
+router.post('/lock', async (req, res) => { await locks.setLock(req, res) })
+router.delete('/lock', async (req, res) => { await locks.deleteLock(req, res) })
 
 router.get('/reform/temp', checkAdminOrKatselmusryhma, degreeReform.getAllTemp)
 router.get('/reform/faculties/:faculty', requireFacultyRead, degreeReform.getForFaculty)
@@ -75,58 +75,25 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 
 router.get('/faculties', faculty.getAll)
 
-router.get('/reports/:year', async (req, res) => {
-  await reports.getReports(req, res)
-})
-router.get('/reports/:programme/:year', async (req, res) => {
-  await reports.getReport(req, res)
-})
-router.put('/reports/:programme/:year', requireProgrammeWrite, async (req, res) => {
-  await reports.updateReport(req, res)
-})
+router.get('/reports/:year', async (req, res) => { await reports.getReports(req, res) })
+router.get('/reports/:programme/:year', async (req, res) => { await reports.getReport(req, res) })
+router.put('/reports/:programme/:year', requireProgrammeWrite, async (req, res) => { await reports.updateReport(req, res) })
 
-router.get('/keydata', async (req, res) => {
-  await keyData.getKeyData(req, res)
-})
-router.post('/keydata', checkAdmin, async (req, res) => {
-  await keyData.uploadKeyData(req, res)
-})
-router.get('/keydata/meta', checkAdmin, async (req, res) => {
-  await keyData.getKeyDataMeta(req, res)
-})
-router.delete('/keydata/:id', checkAdmin, async (req, res) => {
-  await keyData.deleteKeyData(req, res)
-})
-router.put('/keydata/:id', checkAdmin, async (req, res) => {
-  await keyData.updateKeyData(req, res)
-})
+router.get('/keydata', async (req, res) => { await keyData.getKeyData(req, res) })
+router.post('/keydata', checkAdmin, async (req, res) => { await keyData.uploadKeyData(req, res) })
+router.get('/keydata/meta', checkAdmin, async (req, res) => { await keyData.getKeyDataMeta(req, res) })
+router.delete('/keydata/:id', checkAdmin, async (req, res) => { await keyData.deleteKeyData(req, res) })
+router.put('/keydata/:id', checkAdmin, async (req, res) => { await keyData.updateKeyData(req, res) })
 
-router.get('/documents/all/:activeYear', async (req, res) => {
-  await documents.getAllDocuments(req, res)
-})
+router.get('/documents/all/:activeYear', async (req, res) => { await documents.getAllDocuments(req, res) })
+router.get('/documents/:programme', async (req, res) => { await documents.getDocuments(req, res) })
+router.post('/documents/:programme', requireProgrammeWrite, async (req, res) => { await documents.createDocument(req, res) })
+router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) => { await documents.updateDocument(req, res) })
+router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => { await documents.closeInterventionProcedure(req, res) })
 
-router.get('/documents/:programme', async (req, res) => {
-  await documents.getDocuments(req, res)
-})
-router.post('/documents/:programme', requireProgrammeWrite, async (req, res) => {
-  await documents.createDocument(req, res)
-})
-router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) => {
-  documents.updateDocument(req, res)
-})
-router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => {
-  await documents.closeInterventionProcedure(req, res)
-})
+router.get('/organisation-data', async (_, res) => { const data = await getOrganisationData(); res.send(data) })
 
-router.get('/organisation-data', async (_, res) => {
-  const data = await getOrganisationData()
-  res.send(data)
-})
-
-router.get('/jory-map', async (_, res) => {
-  const joryMap = await getJoryMapFromJami()
-  res.send(joryMap)
-})
+router.get('/jory-map', async (_, res) => { const joryMap = await getJoryMapFromJami(); res.send(joryMap) })
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)

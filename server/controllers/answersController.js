@@ -4,6 +4,7 @@ import logger from '../util/logger.js'
 import { whereDraftYear, isAdmin, isSuperAdmin } from '../util/common.js'
 import { formKeys } from '../../config/data.js'
 import { ARCHIVE_LAST_YEAR } from '../../config/common.js'
+import Faculty from '../models/faculty.js'
 
 /**
  * The LINJAUS function: if user has ANY access, they can see all programmes' answers
@@ -258,7 +259,7 @@ const getFacultySummaryData = async (req, res) => {
     throw new Error('No faculty defined')
   }
   try {
-    const faculty = await db.faculty.findOne({ where: { code }, include: ['ownedProgrammes'] })
+    const faculty = await Faculty.findOne({ where: { code }, include: ['ownedProgrammes'] })
     const programmes = faculty.ownedProgrammes
     programmes.sort((a, b) => {
       return a?.name[lang].localeCompare(b?.name[lang])
@@ -287,7 +288,7 @@ const getCommitteeSummaryData = async (req, res) => {
     throw new Error('No faculty defined')
   }
   try {
-    const faculty = await db.faculty.findAll({})
+    const faculty = await Faculty.findAll({})
     const faculties = faculty.sort((a, b) => {
       return a?.name[lang].localeCompare(b?.name[lang])
     })
@@ -366,7 +367,7 @@ const getOldFacultySummaryData = async (req, res) => {
     throw new Error('No programme defined')
   }
   try {
-    const faculty = await db.faculty.findOne({ where: { code }, include: ['ownedProgrammes'] })
+    const faculty = await Faculty.findOne({ where: { code }, include: ['ownedProgrammes'] })
     const programmes = faculty.ownedProgrammes
     programmes.sort((a, b) => {
       return a?.name[lang].localeCompare(b?.name[lang])
@@ -415,7 +416,7 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
     throw new Error('No programme defined')
   }
   try {
-    const faculty = await db.faculty.findOne({ where: { code }, include: ['ownedProgrammes'] })
+    const faculty = await Faculty.findOne({ where: { code }, include: ['ownedProgrammes'] })
     const programmes = faculty.ownedProgrammes
     programmes.sort((a, b) => {
       return a?.name[lang].localeCompare(b?.name[lang])

@@ -14,6 +14,8 @@ import {
   logZodError,
   ZodError,
 } from '../../shared/validators/index.js'
+import { previousSaturday } from 'date-fns'
+import Studyprogramme from '../models/studyprogramme.js'
 
 const getKeyData = async (_req: Request, res: Response) => {
   try {
@@ -23,8 +25,7 @@ const getKeyData = async (_req: Request, res: Response) => {
       },
     })
 
-    // @ts-expect-error
-    const programmeData = await db.studyprogramme.findAll({
+    const programmeData = await Studyprogramme.findAll({
       attributes: ['key', 'name', 'level', 'international'],
       include: ['primaryFaculty', 'companionFaculties'],
     })

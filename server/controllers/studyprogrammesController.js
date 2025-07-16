@@ -3,10 +3,11 @@ import db from '../models/index.js'
 import { isAdmin, isSuperAdmin, getFormType } from '../util/common.js'
 import logger from '../util/logger.js'
 import seed from '../scripts/seed.js'
+import Studyprogramme from '../models/studyprogramme.js'
 
 const getAll = async (_, res) => {
   try {
-    const data = await db.studyprogramme.findAll({
+    const data = await Studyprogramme.findAll({
       attributes: {
         exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
       },
@@ -22,7 +23,7 @@ const getAll = async (_, res) => {
 const getUsersProgrammes = async (req, res) => {
   try {
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
-      const data = await db.studyprogramme.findAll({
+      const data = await Studyprogramme.findAll({
         attributes: {
           exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
         },
@@ -30,7 +31,7 @@ const getUsersProgrammes = async (req, res) => {
       })
       return res.status(200).json(data)
     }
-    const data = await db.studyprogramme.findAll({
+    const data = await Studyprogramme.findAll({
       where: {
         key: Object.keys(req.user.access),
       },
@@ -49,7 +50,7 @@ const getUsersProgrammes = async (req, res) => {
 const getOne = async (req, res) => {
   try {
     const { programme } = req.params
-    const programEntity = await db.studyprogramme.findOne({
+    const programEntity = await Studyprogramme.findOne({
       where: {
         key: programme,
       },
@@ -88,7 +89,7 @@ const toggleLock = async (req, res) => {
     const { programme, form } = req.params
     const formInt = parseInt(form, 10)
 
-    const programEntity = await db.studyprogramme.findOne({ where: { key: programme } })
+    const programEntity = await Studyprogramme.findOne({ where: { key: programme } })
     programEntity.lockedForms[getFormType(formInt)] = !programEntity.lockedForms[getFormType(formInt)]
     programEntity.changed('lockedForms', true)
     await programEntity.save()
@@ -105,7 +106,7 @@ const toggleLock = async (req, res) => {
  */
 const getOwners = async (_, res) => {
   try {
-    const programmes = await db.studyprogramme.findAll()
+    const programmes = await Studyprogramme.findAll()
     let results = {}
 
     programmes.forEach(async p => {

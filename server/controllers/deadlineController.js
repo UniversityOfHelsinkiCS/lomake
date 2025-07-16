@@ -2,6 +2,7 @@ import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { getFormType } from '../util/common.js'
 import { createDraftAnswers, createFinalAnswers } from '../scripts/draftAndFinalAnswers.js'
+import Studyprogramme from '../models/studyprogramme.js'
 
 const createOrUpdate = async (req, res) => {
   const { deadline, draftYear, form } = req.body
@@ -14,14 +15,14 @@ const createOrUpdate = async (req, res) => {
     if ([1, 2, 4].includes(form)) {
       // Unlock all programmes
       const formType = getFormType(form)
-      const studyprogrammes = await db.studyprogramme.findAll({})
+      const studyprogrammes = await Studyprogramme.findAll({})
 
       await studyprogrammes.forEach(async programme => {
         programme.lockedForms = { ...programme.lockedForms, [formType]: false }
         await programme.save()
       })
 
-      // await db.studyprogramme.update({ lockedForms: { [formType]: false } }, { where: {} })
+      // await Studyprogramme.update({ lockedForms: { [formType]: false } }, { where: {} })
     }
 
     // Create new or update old deadline
@@ -84,7 +85,7 @@ const remove = async (req, res) => {
 
     // Unlock all programmes and remove draft year if no deadlines remain
     if (remainingDeadlines.length === 0) {
-      await db.studyprogramme.update(
+      await Studyprogramme.update(
         { lockedForms: { evaluation: true, yearly: true, 'degree-reform': true } },
         { where: {} },
       )

@@ -16,6 +16,7 @@ import {
   MaisteriohjelmatValuesSchema,
   logZodError,
 } from '../../shared/validators/index.js'
+import Studyprogramme from '../models/studyprogramme.js'
 
 const getFakeYearlyAnswers = year => {
   const fields = [
@@ -130,7 +131,7 @@ const resetDeadlines = async () => {
 
   try {
     // Unlock all programmes
-    await db.studyprogramme.update(
+    await Studyprogramme.update(
       {
         locked: false,
         lockedForms: { evaluation: false, yearly: false, 'degree-reform': false, 'evaluation-faculty': false },
@@ -209,7 +210,7 @@ const createAnswers = async (req, res) => {
     await db.answer.destroy({ where: {} })
     await db.tempAnswer.destroy({ where: {} })
 
-    const programmes = await db.studyprogramme.findAll({})
+    const programmes = await Studyprogramme.findAll({})
 
     defaultYears.forEach(async year => {
       const fakeanswers = getFakeYearlyAnswers(year)
