@@ -63,27 +63,27 @@ initializeModels()
   })
 
 CompanionFaculty.belongsTo(Faculty, {
-  foreignKey: 'faculty_id'
+  foreignKey: 'faculty_id',
 })
 
 CompanionFaculty.belongsTo(Studyprogramme, {
-  foreignKey: 'studyprogramme_id'
+  foreignKey: 'studyprogramme_id',
 })
 
 Studyprogramme.hasMany(Report, {
   foreignKey: 'studyprogramme_id',
-  as: 'reports'
+  as: 'reports',
 })
 
 Studyprogramme.belongsTo(Faculty, {
   foreignKey: 'primary_faculty_id',
-  as: 'primaryFaculty'
+  as: 'primaryFaculty',
 })
 
 Studyprogramme.belongsToMany(Faculty, {
   through: CompanionFaculty,
   foreignKey: 'studyprogramme_id',
-  as: 'companionFaculties'
+  as: 'companionFaculties',
 })
 
 Faculty.belongsToMany(Studyprogramme, {
@@ -96,6 +96,5 @@ Faculty.hasMany(Studyprogramme, {
   as: 'ownedProgrammes',
   foreignKey: 'primary_faculty_id',
 })
-
 
 export default db
