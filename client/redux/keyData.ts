@@ -50,7 +50,7 @@ export const {
 
 export const useFetchSingleKeyDataQuery = ({ studyprogrammeKey }: { studyprogrammeKey: string }) => {
   const { data, isLoading, error } = useFetchKeyDataQuery()
-  const { kandiohjelmat = [], maisteriohjelmat = [], metadata = {} } = data ?? {}
+  const { kandiohjelmat = [], maisteriohjelmat = [], metadata = [] } = data ?? {}
   const programmes = [...kandiohjelmat, ...maisteriohjelmat]
   const programme: KeyDataProgramme[] = programmes.filter(p => p.koulutusohjelmakoodi.trim() === studyprogrammeKey.trim())
   return { isLoading, error, programme, metadata }

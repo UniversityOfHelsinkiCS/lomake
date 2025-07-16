@@ -26,6 +26,7 @@ import DocumentForm from './DocumentForm'
 import { useGetDocumentsQuery } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
+import { Loader } from 'semantic-ui-react'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -49,7 +50,7 @@ export const calculateInterventionAreas = ({
 const InterventionProcedure = () => {
   const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { t } = useTranslation()
-  const { programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
+  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const year = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
@@ -58,23 +59,15 @@ const InterventionProcedure = () => {
 
   const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
-  useEffect(() => {
-    if (programmeKey) {
-    }
-  }, [programmeKey, year])
-
   // For this function the year variable is not needed cuz
   // intervention procedure is independent from years.
-  const programmeData = useMemo(() => {
-    if (!programme) {
-      return programme.find(
-        (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey,
-      )
-    }
-    return {}
-  }, [programme, year])
+  const programmeData = programme.find(
+    (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey,
+  )
 
-  const areas = calculateInterventionAreas({ metadata: [metadata], programme: programmeData, t })
+  if (isLoading || !programmeData) return <Loader active />
+
+  const areas = calculateInterventionAreas({ metadata, programme: programmeData, t })
 
   if (!programme || !hasWriteRights) return null
 

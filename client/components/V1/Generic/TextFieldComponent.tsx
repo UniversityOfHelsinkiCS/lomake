@@ -30,7 +30,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const { data: lockMap } = useFetchLockQuery({ room: studyprogrammeKey }, {
     pollingInterval: 1000
   })
-  const dataFromRedux = (!isLoading && data[id]) ? data[id] : ''
+  const dataFromRedux = (!isLoading && data?.[id]) ? data[id] : ''
   const isSomeoneElseEditing = lockMap && lockMap[id] && lockMap[id].uid !== currentUser.uid
 
   const [content, setContent] = useState<string>('')
