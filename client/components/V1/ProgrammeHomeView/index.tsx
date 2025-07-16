@@ -21,7 +21,7 @@ import {
 import { ExpandMore } from '@mui/icons-material'
 import { Add, ArrowBack, Edit } from '@mui/icons-material'
 import { basePath, dekanaattiIamGroup, isAdmin } from '@/config/common'
-import { KeyDataByCode, KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataProgramme } from '@/shared/lib/types'
 
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
@@ -54,13 +54,18 @@ const ProgrammeHomeView = () => {
     document.title = `${t('form')} - ${programmeKey}`
   }, [programmeKey])
 
-  if (isLoading || !programme || !metadata) {
+  if (isLoading) {
     return <CircularProgress />
   }
 
-  const programmeData = programme.filter((programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear)
-
-  if (!programmeData[0]) return null
+  const programmeData = useMemo(() => {
+    if (programme) {
+      return programme.filter(
+        (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear
+      )
+    }
+    return []
+  }, [programme, startYear])
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t })
 

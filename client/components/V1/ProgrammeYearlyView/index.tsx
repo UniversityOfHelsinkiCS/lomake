@@ -13,7 +13,7 @@ import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
 import { calculateKeyDataColor, formatURLFragment, getKeyDataPoints } from '@/client/util/v1'
@@ -34,7 +34,7 @@ const ProgrammeView = () => {
   const searchParams = new URLSearchParams(location.search)
   const { programme: studyprogrammeKey, year } = useParams<{ programme: string; year: string }>()
   const [activeTab, setActiveTab] = useState(0)
-  const keyData: KeyDataByCode = useFetchSingleKeyDataQuery({ studyprogrammeKey })
+  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey })
   const form = 10
   const { data: reports = {} } = useGetReportsQuery({ year })
 
@@ -49,8 +49,8 @@ const ProgrammeView = () => {
 
   const anchorItems = useRef<Record<string, HTMLDivElement | null>>({})
 
-  const isValidYear = (targetYear: number, keyData: KeyDataByCode) => {
-    const availableYears = keyData.programme.map((programmeData: KeyDataProgramme) => programmeData.year)
+  const isValidYear = (targetYear: number, programme: KeyDataProgramme[]) => {
+    const availableYears = programme.map((programmeData: KeyDataProgramme) => programmeData.year)
 
     if (inProduction) {
       if (availableYears.includes(targetYear - 1) && targetYear >= 2025) return true
@@ -71,38 +71,34 @@ const ProgrammeView = () => {
   }, [])
 
   useEffect(() => {
-    if (!keyData) return
-    if (!isValidYear(parseInt(year), keyData)) return
+    if (!programme) return
+    if (!isValidYear(parseInt(year), programme)) return
 
     document.title = `${t('form')} - ${studyprogrammeKey}`
     dispatch(setKeyDataYear(year))
-  }, [lang, studyprogrammeKey, year, keyData])
+  }, [lang, studyprogrammeKey, year, programme])
 
   useEffect(() => {
-    if (!studyprogrammeKey || !keyData) return
+    if (!studyprogrammeKey || !programme) return
     if ((new Date(formDeadline?.date).getFullYear().toString() !== year) || !writeAccess) {
       dispatch(setViewOnly(true))
     } else {
       dispatch(setViewOnly(false))
     }
-  }, [studyprogrammeKey, form, keyData])
-
-  const metadata = useMemo(() => {
-    return keyData ? keyData.metadata : []
-  }, [keyData])
+  }, [studyprogrammeKey, form, programme])
 
   const programmeData = useMemo(() => {
-    if (keyData) {
-      return keyData.programme.find(
+    if (programme) {
+      return programme.find(
         (programmeData: KeyDataProgramme) =>
           programmeData.koulutusohjelmakoodi === studyprogrammeKey && programmeData.year === parseInt(year) - 1,
       )
     }
     return {}
-  }, [keyData, year])
+  }, [programme, year])
 
   useEffect(() => {
-    if (!keyData || !programmeData) return
+    if (!programme || !programmeData) return
     const anchor = location.hash.substring(1)
 
     if (anchor && anchorItems.current[anchor]) {
@@ -113,13 +109,13 @@ const ProgrammeView = () => {
     }
   }, [programmeData, location.hash])
 
-  if (!keyData) {
+  if (isLoading) {
     return <CircularProgress />
   }
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 
-  if (!isValidYear(parseInt(year), keyData)) {
+  if (!isValidYear(parseInt(year), programme)) {
     history.push('/404')
     return
   }

@@ -3,7 +3,7 @@ import { KeyDataProgramme } from '@/shared/lib/types'
 
 export const keyDataApi = RTKApi.injectEndpoints({
   endpoints: (builder) => ({
-    fetchKeyData: builder.query({
+    fetchKeyData: builder.query<any, void>({
       query: () => '/keyData',
       providesTags: ['KeyData'],
     }),

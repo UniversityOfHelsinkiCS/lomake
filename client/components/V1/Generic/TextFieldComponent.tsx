@@ -74,7 +74,6 @@ export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: ReportDa
   )
 }
 
-
 // TODO: After 5 mins the field is released, make some check
 // if the content !== dataFromRedux and if time after last save is > 1 the call setLock again
 // 

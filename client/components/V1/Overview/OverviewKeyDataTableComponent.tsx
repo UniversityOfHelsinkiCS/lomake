@@ -65,12 +65,12 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const { data: reports = {} } = useGetReportsQuery({ year: activeYear })
 
   const metadata = useMemo(() => {
-    return keyData?.data ? keyData.data.metadata : []
+    return keyData ? keyData.metadata : []
   }, [keyData])
 
   const programmeData = useMemo(() => {
     if (keyData) {
-      const { kandiohjelmat, maisteriohjelmat } = keyData.data
+      const { kandiohjelmat, maisteriohjelmat } = keyData
       return [...kandiohjelmat, ...maisteriohjelmat]
     }
     return []

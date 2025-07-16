@@ -4,6 +4,7 @@ import { calculateColor, calculateValue } from '@/client/util/v1'
 import { TrafficLight } from './TrafficLightComponent'
 import { ProgrammeLevel } from '@/shared/lib/enums'
 import { useAppSelector } from '@/client/util/hooks'
+import { useFetchKeyDataQuery } from '@/client/redux/keyData'
 
 const ColorHistoryComponent = (props: any) => {
   if (!props.programme || props.value == 'Ei dataa') {
@@ -11,7 +12,7 @@ const ColorHistoryComponent = (props: any) => {
   }
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language)
-  const data = useAppSelector(state => state.keyData.data.data)
+  const { data } = useFetchKeyDataQuery()
 
   const metadataItem = data.metadata.find(
     (item: any) => item.avainluvunNimi[lang] === props.title && item.ohjelmanTaso === props.level,

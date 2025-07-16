@@ -40,6 +40,7 @@ const DocumentForm = ({
 
   const data = document.data.date !== undefined ? document.data : initForm(t, false)
 
+  const [updateDocument] = useUpdateDocumentMutation()
   const [formData, setFormData] = useState(data)
   const [errors, setErrors] = useState(initForm(t, true))
   const [localeComponent, setLocaleComponent] = useState(fiFI)
@@ -92,7 +93,7 @@ const DocumentForm = ({
   const handleSubmit = (e: any) => {
     e.preventDefault()
     if (validateForm()) {
-      useUpdateDocumentMutation({ studyprogrammeKey: programmeKey, id: id, data: formData })
+      updateDocument({ studyprogrammeKey: programmeKey, id: id, data: formData })
       setFormData(initForm(t, false))
       setErrors(initForm(t, true))
       history.push(`/v1/programmes/10/${programmeKey}`)
