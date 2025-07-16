@@ -31,3 +31,5 @@ export interface DocumentType {
   activeYear: number
   reason: Reason | null
 }
+
+export type ReportDataKey = 'Vetovoimaisuus' | 'Opintojen sujuvuus ja valmistuminen' | 'Resurssien käyttö' | 'Palaute ja työllistyminen' | 'Toimenpiteet'

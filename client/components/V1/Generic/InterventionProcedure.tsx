@@ -13,7 +13,7 @@ import {
   Button,
   CircularProgress,
 } from '@mui/material'
-import type { KeyDataByCode, KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import type { DocumentType } from '@/client/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack, ExpandMore } from '@mui/icons-material'
@@ -21,7 +21,7 @@ import { basePath, isAdmin } from '@/config/common'
 import KeyDataCard from './KeyDataCardComponent'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
-import { TextFieldCard } from './TextFieldComponent'
+import { TextFieldCard } from './TextFieldCard'
 import DocumentForm from './DocumentForm'
 import { useGetDocumentsQuery } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
@@ -49,7 +49,7 @@ export const calculateInterventionAreas = ({
 const InterventionProcedure = () => {
   const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { t } = useTranslation()
-  const keyData: KeyDataByCode = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
+  const { programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const year = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
@@ -63,24 +63,20 @@ const InterventionProcedure = () => {
     }
   }, [programmeKey, year])
 
-  const metadata = useMemo(() => {
-    return keyData ? keyData.metadata : []
-  }, [keyData])
-
   // For this function the year variable is not needed cuz
   // intervention procedure is independent from years.
   const programmeData = useMemo(() => {
-    if (keyData) {
-      return keyData.programme.find(
+    if (!programme) {
+      return programme.find(
         (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey,
       )
     }
     return {}
-  }, [keyData, year])
+  }, [programme, year])
 
-  const areas = calculateInterventionAreas({ metadata, programme: programmeData, t })
+  const areas = calculateInterventionAreas({ metadata: [metadata], programme: programmeData, t })
 
-  if (!keyData || !hasWriteRights) return null
+  if (!programme || !hasWriteRights) return null
 
   if (isFetching || !document) return <CircularProgress />
 

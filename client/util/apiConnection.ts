@@ -10,9 +10,6 @@ import { Sentry } from './sentry'
 
 const getAxios = axios.create({ baseURL: `${basePath}api` })
 
-
-const api = axios.create({ baseURL: `${basePath}api` })
-
 // @ts-expect-error
 export const callApi = async (url, method = 'get', data) => {
   const defaultHeaders = !inProduction ? getHeaders() : {}
@@ -69,41 +66,6 @@ export const handleRequest = store => next => async action => {
   }
 }
 
-export const apiConnection = async (
-  url: string,
-  method: 'get' | 'post' | 'put' | 'delete' = 'get',
-  data?: any,
-  customHeaders?: any
-) => {
-  const headers = !inProduction ? { ...getHeaders(), ...customHeaders } : { ...customHeaders }
-  const isFormData = data instanceof FormData
-  try {
-    return await api({
-      method,
-      url,
-      data,
-      headers: isFormData ? headers : { 'Content-Type': 'application/json', ...headers },
-    })
-  } catch (error) {
-    Sentry.captureException(error, {
-      tags: {
-        url,
-        method,
-        isFormData,
-      },
-      extra: {
-        data,
-        customHeaders,
-      },
-    })
-    throw error
-  }
-}
-
-export const formatToArray = <T>(param: T | T[]): T[] => {
-  return Array.isArray(param) ? param : [param]
-}
-
 export const RTKApi = createApi({
   reducerPath: 'api',
   tagTypes: [
@@ -121,16 +83,6 @@ export const RTKApi = createApi({
       Object.entries(getHeaders()).forEach(([key, value]) => headers.set(key, value))
       return headers
     },
-    paramsSerializer: params => {
-      const searchParams = new URLSearchParams()
-
-      Object.entries(params).map(([key, val]) => {
-        const subfix = Array.isArray(val) ? '[]' : ''
-        formatToArray(val).forEach(item => searchParams.append(key + subfix, item))
-      })
-      return searchParams.toString()
-    },
   }),
-
   endpoints: () => ({}),
 })

@@ -9,7 +9,7 @@ import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
 
 import { Box, Button, CircularProgress, Link, Typography } from '@mui/material'
-import { TextFieldCard } from '../Generic/TextFieldComponent'
+import { TextFieldCard } from '../Generic/TextFieldCard'
 import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import { getKeyDataPoints, formatURLFragment } from '@/client/util/v1'

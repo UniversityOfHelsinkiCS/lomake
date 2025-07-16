@@ -2,15 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { useTranslation } from 'react-i18next'
-import { TFunction } from 'i18next'
 import ReactMarkdown from 'react-markdown'
 import CurrentEditor from '../../Generic/CurrentEditor'
-import { useGetReportQuery, useUpdateReportMutation } from '../../../redux/reports'
+import { useGetReportQuery } from '../../../redux/reports'
 import { useParams } from 'react-router'
 import { useAppSelector } from '@/client/util/hooks'
-import { useDeleteLockMutation, useFetchLockQuery, useSetLockMutation } from '@/client/redux/lock'
-
-type ReportDataKey = 'Vetovoimaisuus' | 'Opintojen sujuvuus ja valmistuminen' | 'Resurssien käyttö' | 'Palaute ja työllistyminen' | 'Toimenpiteet'
+import { useFetchLockQuery } from '@/client/redux/lock'
+import { TextFieldCard } from './TextFieldCard'
+import { useLockSync } from '@/client/hooks/useLockSync'
+import { ReportDataKey } from '@/client/lib/types'
 
 type TextFieldComponentProps = {
   id: ReportDataKey
@@ -18,86 +18,24 @@ type TextFieldComponentProps = {
   children?: React.ReactNode // for passing notification badges next to textfield title
 }
 
-export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: ReportDataKey; t: TFunction; type: string, studyprogrammeKey: string }) => {
-  const year = useAppSelector(state => state.filters.keyDataYear)
-  const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
-    pollingInterval: 2000,
-  })
-  const content = (!isLoading && data?.[id]) ? data[id] : ''
-  return (
-    <Box sx={{ mt: '1rem' }} data-cy="textfield-viewonly">
-      <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
-        {t(`keyData:${type}`)}
-      </Typography>
-      <Card
-        variant="outlined"
-        sx={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'flex-start',
-          flexDirection: 'row',
-          minHeight: type !== 'Comment' ? '19rem' : undefined,
-        }}
-      >
-        {type === 'Comment' && (
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
-                <ChatBubbleOutlineIcon sx={{ fontSize: 30 }} />
-              </Avatar>
-            }
-            sx={{
-              '& .MuiCardHeader-avatar': {
-                marginRight: 0,
-              },
-            }}
-          />
-        )}
-        <CardContent
-          sx={{
-            paddingLeft: type === 'Comment' ? 0 : undefined,
-            minWidth: 0,
-            overflowWrap: 'break-word',
-            alignSelf: 'center',
-          }}
-        >
-          {content ? (
-            <Typography variant="regular">
-              <ReactMarkdown>{content}</ReactMarkdown>
-            </Typography>
-          ) : (
-            <Typography variant="italic">{t(`keyData:no${type}`)}</Typography>
-          )}
-        </CardContent>
-      </Card>
-    </Box>
-  )
-}
-
-// TODO: After 5 mins the field is released, make some check
-// if the content !== dataFromRedux and if time after last save is > 1 the call setLock again
-// 
 const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => {
   const { programme: studyprogrammeKey } = useParams<{ programme: string }>()
   const { t } = useTranslation()
-  const [updateReport] = useUpdateReportMutation()
-  const [setLock] = useSetLockMutation()
-  const [deleteLock] = useDeleteLockMutation()
   const year = useAppSelector(state => state.filters.keyDataYear)
   const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
   const viewOnly = useAppSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
   const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
-    pollingInterval: 5000,
+    pollingInterval: 1000,
   })
   const { data: lockMap } = useFetchLockQuery({ room: studyprogrammeKey }, {
-    pollingInterval: 5000
+    pollingInterval: 1000
   })
   const dataFromRedux = (!isLoading && data[id]) ? data[id] : ''
   const isSomeoneElseEditing = lockMap && lockMap[id] && lockMap[id].uid !== currentUser.uid
 
   const [content, setContent] = useState<string>('')
-  const [hasLock, setHasLock] = useState<boolean>(false)
-  const [gettingLock, setGettingLock] = useState<boolean>(false)
+
+  const { hasLock, askForLock, handleStopEditing } = useLockSync({ id, content, dataFromRedux, studyprogrammeKey, year })
 
   const textFieldRef = useRef<HTMLInputElement>(null)
   const componentRef = useRef<HTMLDivElement>(null)
@@ -105,16 +43,6 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const hasUnsavedChanges = hasLock && dataFromRedux !== content
 
   const MAX_CONTENT_LENGTH = type === 'Comment' ? 1000 : 5000
-
-  useEffect(() => {
-    const gotTheLock = lockMap && lockMap[id] && lockMap[id].uid === currentUser.uid
-    setHasLock(gotTheLock)
-    if (gettingLock && lockMap[id]) {
-      setGettingLock(false)
-    }
-    // Do not add currentUser or dataFromRedux to the dependencies
-    // it will clear the field if lock is released by the server
-  }, [lockMap])
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
@@ -161,19 +89,6 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [hasUnsavedChanges, t, dataFromRedux, content])
-
-  const handleStopEditing = () => {
-    setHasLock(false)
-    deleteLock({ room: studyprogrammeKey, field: id })
-    updateReport({ studyprogrammeKey, year, id, content })
-  }
-
-  const askForLock = () => {
-    if (!hasLock && !gettingLock && lockMap && lockMap[id] === undefined) {
-      setGettingLock(true)
-      setLock({ room: studyprogrammeKey, field: id })
-    }
-  }
 
   if (viewOnly) {
     return <TextFieldCard id={id} t={t} type={type} studyprogrammeKey={studyprogrammeKey} />

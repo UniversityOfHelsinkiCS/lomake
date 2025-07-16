@@ -12,7 +12,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 
 import Modal from '../Generic/ModalTemplateComponent'
-import { TextFieldCard } from '../Generic/TextFieldComponent'
+import { TextFieldCard } from '../Generic/TextFieldCard'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
