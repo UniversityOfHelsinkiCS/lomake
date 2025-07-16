@@ -16,11 +16,9 @@ export type KeyDataMetadataRaw = z.infer<typeof MetadataRawSchema>
 export type DocumentForm = z.infer<typeof DocumentFormSchema>
 
 export interface KeyData {
-  data: {
-    kandiohjelmat: KeyDataProgramme[]
-    maisteriohjelmat: KeyDataProgramme[]
-    metadata: KeyDataMetadata[]
-  }
+  kandiohjelmat: KeyDataProgramme[]
+  maisteriohjelmat: KeyDataProgramme[]
+  metadata: KeyDataMetadata[]
 }
 
 export interface KeyDataByCode {

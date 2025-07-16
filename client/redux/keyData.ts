@@ -1,13 +1,13 @@
 import { RTKApi } from '../util/apiConnection'
-import { KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataProgramme, KeyData } from '@/shared/lib/types'
 
 export const keyDataApi = RTKApi.injectEndpoints({
   endpoints: (builder) => ({
-    fetchKeyData: builder.query<any, void>({
+    fetchKeyData: builder.query<KeyData, void>({
       query: () => '/keyData',
       providesTags: ['KeyData'],
     }),
-    uploadKeyData: builder.mutation({
+    uploadKeyData: builder.mutation<void, any>({
       query: (file) => {
         const formData = new FormData();
         formData.append('file', file);
@@ -30,7 +30,7 @@ export const keyDataApi = RTKApi.injectEndpoints({
       }),
       invalidatesTags: ['KeyData', 'KeyDataMeta'],
     }),
-    setActiveKeyData: builder.mutation({
+    setActiveKeyData: builder.mutation<void, number>({
       query: (id) => ({
         url: `/keydata/${id}`,
         method: 'PUT',
@@ -51,7 +51,7 @@ export const {
 export const useFetchSingleKeyDataQuery = ({ studyprogrammeKey }: { studyprogrammeKey: string }) => {
   const { data, isLoading, error } = useFetchKeyDataQuery()
   const { kandiohjelmat = [], maisteriohjelmat = [], metadata = {} } = data ?? {}
-  const allProgrammes = [...kandiohjelmat, ...maisteriohjelmat]
-  const programme: KeyDataProgramme[] = allProgrammes.filter(p => p.koulutusohjelmakoodi.trim() === studyprogrammeKey.trim())
+  const programmes = [...kandiohjelmat, ...maisteriohjelmat]
+  const programme: KeyDataProgramme[] = programmes.filter(p => p.koulutusohjelmakoodi.trim() === studyprogrammeKey.trim())
   return { isLoading, error, programme, metadata }
 }
