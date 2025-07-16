@@ -58,14 +58,7 @@ const ProgrammeHomeView = () => {
     return <CircularProgress />
   }
 
-  const programmeData = useMemo(() => {
-    if (programme) {
-      return programme.filter(
-        (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear
-      )
-    }
-    return []
-  }, [programme, startYear])
+  const programmeData = programme.filter((programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear)
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t })
 
