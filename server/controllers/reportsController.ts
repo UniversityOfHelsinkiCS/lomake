@@ -28,7 +28,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     report: null,
     studyprogrammeId: null,
     year: null,
-    data: {},
+    data: {} as ReportData,
   }
 
   if (!programme) {
@@ -91,7 +91,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
 
   resultObject.success = true
   resultObject.report = report
-  resultObject.studyprogrammeId = parseInt(studyprogramme.id)
+  resultObject.studyprogrammeId = Number(studyprogramme.id)
   resultObject.year = parseInt(year)
   resultObject.status = 200
   resultObject.data = data
@@ -108,6 +108,7 @@ const getReport = async (req: Request, res: Response) => {
     return res.status(200).json(result.report.data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: `Database error` })
   }
 }
 
@@ -153,7 +154,6 @@ const updateReport = async (req: Request, res: Response) => {
     )
 
     const updatedData = updatedReport[0].data
-    const field = Object.keys(data)[0]
 
     return res.status(200).json(updatedData)
   } catch (error) {
