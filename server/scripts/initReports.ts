@@ -1,10 +1,10 @@
 import { Op } from 'sequelize'
-import db from '../models/index.js'
 import Report from '../models/reports.js'
+import Studyprogramme from '../models/studyprogramme.js'
 import logger from '../util/logger.js'
 
 const initReports = async () => {
-  const programmes = await (db as { studyprogramme: any }).studyprogramme.findAll({})
+  const programmes = await Studyprogramme.findAll({})
   const years = [2024, 2025]
 
   years.forEach(async (currentYear: number) => {
