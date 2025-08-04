@@ -17,10 +17,11 @@ import WritingImage from '../../assets/writing.jpg'
 import ArchiveImage from '../../assets/archive.jpg'
 import { ArrowForward, MailOutlined } from '@mui/icons-material'
 import { basePath } from '@/config/common'
+import { useGetAuthUserQuery } from '@/client/redux/currentUserReducer'
 
 const Homepage = () => {
   const { t } = useTranslation()
-  const currentUser = useSelector(state => state.currentUser)
+  const currentUser = useGetAuthUserQuery()
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const Homepage = () => {
 
   if (!usersProgrammes) return <CircularProgress />
 
-  if (usersProgrammes.length + Object.keys(currentUser.data.access).length < 1) {
+  if (usersProgrammes.length + Object.keys(currentUser.access).length < 1) {
     return <NoPermissions t={t} requestedForm={t('landingPage:title')} />
   }
 

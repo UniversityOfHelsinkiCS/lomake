@@ -4,10 +4,6 @@ import { getHeaders } from '../../config/mockHeaders'
 import { basePath, inProduction } from '../../config/common'
 import { Sentry } from './sentry'
 
-/**
- * ApiConnection simplifies redux usage
- */
-
 const getAxios = axios.create({ baseURL: `${basePath}api` })
 
 // @ts-expect-error

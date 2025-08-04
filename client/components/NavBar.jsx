@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Box, Container, Chip, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 import { LanguageSharp, Logout, ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 import { images } from '../util/common'
-import { logoutAction } from '../redux/currentUserReducer'
+import { useGetAuthUserQuery, useLogoutMutation } from '../redux/currentUserReducer'
 import { setLanguage } from '../redux/languageReducer'
 import { useTranslation } from 'react-i18next'
 import {
   isAdmin,
-  isSuperAdmin,
   isEvaluationFacultyUser,
   isKatselmusProjektiOrOhjausryhma,
   isEvaluationUniversityUser,
@@ -175,19 +174,20 @@ const UnHijackButton = ({ handleUnhijack }) => (
 const NavBar = () => {
   const dispatch = useDispatch()
   const { t, i18n } = useTranslation()
-  const user = useSelector(state => state.currentUser.data)
+  const user = useGetAuthUserQuery()
   const lang = useSelector(state => state.language)
   const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const location = useLocation()
   const history = useHistory()
   const [openMenus, setOpenMenus] = React.useState({})
+  const [logout] = useLogoutMutation()
 
   const setLanguageCode = code => {
     dispatch(setLanguage(code))
     i18n.changeLanguage(code)
   }
 
-  const handleLogout = () => dispatch(logoutAction())
+  const handleLogout = () => logout()
 
   const handleUnhijack = () => {
     window.localStorage.removeItem('adminLoggedInAs')
@@ -213,7 +213,7 @@ const NavBar = () => {
         <Logout />
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
           <Typography variant="light">{`${t('logOut')} (${user.uid})`}</Typography>
-          {isSuperAdmin(user) && (
+          {user.isSuperAdmin && (
             <Chip color="error" label={`Server running since ${new Date(user.lastRestart).toLocaleTimeString()}`} />
           )}
         </Box>

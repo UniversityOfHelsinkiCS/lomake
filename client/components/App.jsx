@@ -9,7 +9,7 @@ import Router from './Router'
 import { formKeys } from '../../config/data'
 
 import { wsConnect } from '../redux/websocketReducer'
-import { loginAction } from '../redux/currentUserReducer'
+import { useGetAuthUserQuery } from '../redux/currentUserReducer'
 import { getStudyProgrammes, getUsersProgrammes } from '../redux/studyProgrammesReducer'
 import { getDeadlineAndDraftYear } from '../redux/deadlineReducer'
 import { getFaculties } from '../redux/facultyReducer'
@@ -39,11 +39,11 @@ const languageFromUrl = () => {
   return undefined
 }
 
-const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, formKeys, setYear, setMultipleYears }) => {
+const useSetupCurrentYear = ({ oldAnswers, deadlines, yearsUserHasAccessTo, dispatch, formKeys, setYear, setMultipleYears }) => {
   // TODO: deprecate this and set the year by form
   // When oldAnswers are ready, set default year based on deadline or most recent answers
   useEffect(() => {
-    if (!oldAnswers.data) return
+    if (!oldAnswers.data || !yearsUserHasAccessTo) return
 
     let year = 2019
 
@@ -71,7 +71,7 @@ const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, for
       }, 2019)
     }
 
-    if (currentUser.data?.yearsUserHasAccessTo.includes(year)) {
+    if (yearsUserHasAccessTo.includes(year)) {
       dispatch(setYear(year))
       dispatch(setMultipleYears([year]))
     }
@@ -84,12 +84,13 @@ export default () => {
     window.location.href.includes('/degree-reform') && window.location.search.startsWith('?faculty=')
   const isNotDegreeReformSummary = !isDegreeReformSummary
   const dispatch = useDispatch()
-  const currentUser = useSelector(state => state.currentUser)
+  // const currentUser = useSelector(state => state.currentUser)
   const studyProgrammes = useSelector(state => state.studyProgrammes)
   const faculties = useSelector(state => state.faculties)
   const deadlines = useSelector(state => state.deadlines)
   const oldAnswers = useSelector(state => state.oldAnswers) // (({ oldAnswers }) => oldAnswers.data)
   const lang = useSelector(state => state.language)
+  const { isLoading, isFetching, yearsUserHasAccessTo } = useGetAuthUserQuery()
 
   const { i18n } = useTranslation()
 
@@ -107,7 +108,6 @@ export default () => {
   }, [])
 
   useEffect(() => {
-    dispatch(loginAction())
     if (isNotIndividualForm && isNotDegreeReformSummary && !window.location.pathname.includes('/previous-years')) {
       dispatch(wsConnect())
     }
@@ -118,8 +118,7 @@ export default () => {
   // Do this after user.data is ready, so that there wont be dupe users in db.
   // Because of accessControlMiddleware
   useEffect(() => {
-    const user = currentUser.data
-    if (user) {
+    if (isLoading) {
       dispatch(getDeadlineAndDraftYear())
       dispatch(getFaculties())
       dispatch(getStudyProgrammes())
@@ -128,19 +127,19 @@ export default () => {
         dispatch(getAnswersAction())
       }
     }
-  }, [currentUser])
+  }, [isLoading])
 
   useSetupCurrentYear({
     oldAnswers,
     deadlines,
-    currentUser,
+    yearsUserHasAccessTo,
     dispatch,
     formKeys,
     setYear,
     setMultipleYears,
   })
 
-  if (!currentUser.data) return null
+  if (isLoading || isFetching) return null
 
   const isCommonDataReady = studyProgrammes?.data && oldAnswers?.data
   const isIndividualDataReady = studyProgrammes?.data && faculties?.data

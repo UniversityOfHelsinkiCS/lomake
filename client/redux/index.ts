@@ -4,7 +4,6 @@ import webSocketMiddleware from '../util/webSocket'
 
 import form from './formReducer'
 import room from './roomReducer'
-import currentUser from './currentUserReducer'
 import filters from './filterReducer'
 import users from './usersReducer'
 import tempAnswers from './tempAnswersReducer'
@@ -25,7 +24,6 @@ const store = configureStore({
   reducer: {
     form,
     room,
-    currentUser,
     filters,
     users,
     tempAnswers,
