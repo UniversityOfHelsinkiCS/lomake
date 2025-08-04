@@ -1,4 +1,4 @@
-import db from '../models/index.js'
+import User from '../models/user.js'
 import { isAdmin } from '../../config/common.js'
 
 const currentUser = async (req, _, next) => {
@@ -7,7 +7,7 @@ const currentUser = async (req, _, next) => {
   if (isAdmin(req.user)) {
     const loggedInAs = req.headers['x-admin-logged-in-as']
     if (loggedInAs) {
-      const fakeUser = await db.user.findOne({ where: { uid: loggedInAs } })
+      const fakeUser = await User.findOne({ where: { uid: loggedInAs } })
 
       req.user = fakeUser
     }

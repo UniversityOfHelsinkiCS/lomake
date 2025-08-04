@@ -1,6 +1,6 @@
 import { LRUCache } from 'lru-cache'
-import db from '../models/index.js'
 import logger from '../util/logger.js'
+import User from '../models/user.js'
 
 const lru = new LRUCache({
   max: 200,
@@ -28,7 +28,7 @@ const getUserByUid = async uid => {
     return userFromCache
   }
 
-  const userFromDb = await db.user.findOne({
+  const userFromDb = await User.findOne({
     where: {
       uid,
     },
