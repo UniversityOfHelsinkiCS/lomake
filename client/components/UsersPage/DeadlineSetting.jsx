@@ -7,8 +7,9 @@ import { setDeadlineAndDraftYear, deleteDeadlineAndDraftYear } from '../../redux
 import { fi, enGB, sv } from 'date-fns/locale'
 import { useTranslation } from 'react-i18next'
 import { colors } from '../../util/common'
-import { isSuperAdmin, LOMAKE_SINCE_YEAR } from '../../../config/common'
+import { LOMAKE_SINCE_YEAR } from '../../../config/common'
 import { forms } from '../../../config/data'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const DeadlineSetting = () => {
   const { t } = useTranslation()
@@ -23,7 +24,7 @@ const DeadlineSetting = () => {
   const allDeadlines = useSelector(({ deadlines }) => deadlines.nextDeadline)
 
   const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
-  const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const { isSuperAdmin } = useGetAuthUserQuery()
   const dispatch = useDispatch()
 
   registerLocale('fi', fi)
@@ -41,7 +42,7 @@ const DeadlineSetting = () => {
       }
     })
     setYearOptions(options)
-  }, [currentUser])
+  }, [isSuperAdmin])
 
   useEffect(() => {
     if (newDraftYear && draftYear && draftYear.year !== newDraftYear) {
@@ -101,7 +102,7 @@ const DeadlineSetting = () => {
     setFormDeadline(null)
   }
 
-  if (!isSuperAdmin(currentUser)) return null
+  if (!isSuperAdmin) return null
 
   const formatDate = date => {
     const temp = new Date(date)

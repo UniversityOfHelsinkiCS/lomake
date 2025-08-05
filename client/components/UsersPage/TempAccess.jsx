@@ -10,6 +10,7 @@ import { fi, enGB, sv } from 'date-fns/locale'
 import { isAdmin } from '../../../config/common'
 import TempAccessTable from './TempAccessTable'
 import './UsersPage.scss'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const TempAccess = () => {
   const { t } = useTranslation()
@@ -17,7 +18,7 @@ const TempAccess = () => {
   const history = useHistory()
   const lang = useSelector(state => state.language)
   const programmes = useSelector(state => state.studyProgrammes.data)
-  const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const currentUser = useGetAuthUserQuery()
   const [email, setEmail] = useState('')
   const [programme, setProgramme] = useState('')
   const [endDate, setEndDate] = useState(null)

@@ -22,6 +22,7 @@ import { setYear } from '../../../redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
   // This is used since faculty doesn't have stuyprogramme
@@ -122,7 +123,7 @@ const FacultyFormView = ({ room, formString }) => {
   const dispatch = useDispatch()
   const componentRef = useRef()
   const lang = useSelector(state => state.language)
-  const user = useSelector(state => state.currentUser.data)
+  const user = useGetAuthUserQuery()
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const currentRoom = useSelector(state => state.room)
 

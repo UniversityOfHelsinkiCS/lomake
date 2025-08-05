@@ -9,6 +9,7 @@ import { colors, getUserRole } from '../../util/common'
 import './UsersPage.scss'
 import { isSuperAdmin, isBasicUser, isAdmin } from '../../../config/common'
 import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const getSpecialGroup = (user, group, lang, t, data) => {
   const specialGroups = [
@@ -51,7 +52,8 @@ const mayHijack = (current, toMock) => {
 
 export default ({ user, lang, programmeCodesAndNames }) => {
   const { t } = useTranslation()
-  const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const currentUser = useGetAuthUserQuery()
+  const { isAdmin } = currentUser
   const history = useHistory()
   const { data, isFetching } = useGetOrganisationDataQuery()
 
@@ -115,7 +117,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
         {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(user, group, lang, t, data))}
       </Table.Cell>
       <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
-      {isAdmin(currentUser) && (
+      {isAdmin && (
         <Table.Cell>
           {mayHijack(currentUser, user) && <Icon onClick={logInAs} size="large" name="sign-in" />}
         </Table.Cell>

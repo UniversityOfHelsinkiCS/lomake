@@ -6,6 +6,7 @@ import ColorTableCell from '../../OverviewPage/ColorTableCell'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '../../../../config/common'
 import PieForFaculty from './PieForFaculty'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const ManageCell = ({ faculty, setProgramControlsToShow }) => (
   <div className="table-container-manage-cell">
@@ -23,7 +24,7 @@ const TableRow = ({
   setProgramControlsToShow,
 }) => {
   const lang = useSelector(state => state.language)
-  const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const currentUser = useGetAuthUserQuery()
   const { t } = useTranslation()
   let answers = []
   if (showDataByProgramme) {
@@ -63,30 +64,30 @@ const TableRow = ({
       </div>
       {showDataByProgramme
         ? tableIds.map(idObject => (
-            <PieForFaculty
-              key={`${faculty.code}-${idObject.id}`}
-              questionId={idObject.id}
-              selectedAnswers={selectedAnswers}
-              facultyName={faculty.name[lang]}
-              facultyKey={faculty.code}
-              programmesAnswers={answers}
-              form={form}
-              setModalData={setModalData}
-            />
-          ))
+          <PieForFaculty
+            key={`${faculty.code}-${idObject.id}`}
+            questionId={idObject.id}
+            selectedAnswers={selectedAnswers}
+            facultyName={faculty.name[lang]}
+            facultyKey={faculty.code}
+            programmesAnswers={answers}
+            form={form}
+            setModalData={setModalData}
+          />
+        ))
         : tableIds.map(idObject => (
-            <ColorTableCell
-              key={`${faculty.code}-${idObject.id}`}
-              programmesName={faculty.name[lang]}
-              programmesKey={faculty.code}
-              programmesAnswers={answers}
-              programmesOldAnswers={null}
-              questionId={idObject.id}
-              questionType={idObject.type}
-              setModalData={setModalData}
-              form={form}
-            />
-          ))}
+          <ColorTableCell
+            key={`${faculty.code}-${idObject.id}`}
+            programmesName={faculty.name[lang]}
+            programmesKey={faculty.code}
+            programmesAnswers={answers}
+            programmesOldAnswers={null}
+            questionId={idObject.id}
+            questionType={idObject.type}
+            setModalData={setModalData}
+            form={form}
+          />
+        ))}
 
       {hasManagementAccess(faculty.code) ? (
         <ManageCell faculty={faculty} setProgramControlsToShow={setProgramControlsToShow} />

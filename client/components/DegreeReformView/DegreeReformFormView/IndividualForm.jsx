@@ -12,6 +12,7 @@ import SaveIndicator from '../../FormView/SaveIndicator'
 import { getYearToShow } from '../../../util/common'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './ProgramForm'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, ready, form }) => {
   if (!draftYear) return true
@@ -24,7 +25,7 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, ready, form }) =>
 const DegreeReformIndividual = () => {
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const { t } = useTranslation()
-  const user = useSelector(state => state.currentUser.data)
+  const user = useGetAuthUserQuery()
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formData = useSelector(state => state.form)
   const [message, setMessage] = useState(null)

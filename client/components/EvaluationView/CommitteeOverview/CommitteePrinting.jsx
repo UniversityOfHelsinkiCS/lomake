@@ -10,6 +10,7 @@ import { universityEvaluationQuestions as questions } from '/client/questionData
 import PDFDownload from '../../Generic/PDFDownload'
 
 import { getActionsAnswerForUniversity } from './Square'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const StudyLevelContainer = ({ answerLevels }) => {
   const { t } = useTranslation()
@@ -175,7 +176,7 @@ const QuestionContainer = ({ question, currentAnswer, questionLabelCorrectCase }
 
 const CommitteePrinting = ({ type = null }) => {
   const dispatch = useDispatch()
-  const currentUser = useSelector(state => state.currentUser.data)
+  const currentUser = useGetAuthUserQuery()
   const answers = useSelector(state => state.tempAnswers)
   const oldAnswers = useSelector(state => state.oldAnswers)
   const lang = useSelector(state => state.language)

@@ -10,6 +10,7 @@ import { deepCheck } from '../../Generic/Textarea'
 import { releaseFieldLocally } from '../../../redux/currentEditorsReducer'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import '../../Generic/Generic.scss'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const Answer = ({ question, faculty }) => {
   const { t } = useTranslation()
@@ -29,11 +30,11 @@ const Answer = ({ question, faculty }) => {
   const isEditable = !viewOnly
   const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
   const lastSaveSuccess = useSelector(state => state.form.lastSaveSuccess)
-  const date = new Date(lastSaveSuccess) 
+  const date = new Date(lastSaveSuccess)
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
-  const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const currentUser = useGetAuthUserQuery()
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
   const lockRef = useRef(gettingLock)

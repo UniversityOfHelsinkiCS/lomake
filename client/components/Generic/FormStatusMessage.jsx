@@ -5,11 +5,12 @@ import { useTranslation } from 'react-i18next'
 
 import { isAdmin } from '../../../config/common'
 import './Generic.scss'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const FormStatusMessage = ({ programme, form }) => {
   const { t } = useTranslation()
   const [visible, setVisible] = useState(false)
-  const user = useSelector(state => state.currentUser.data)
+  const user = useGetAuthUserQuery()
   const lang = useSelector(state => state.language)
   const year = useSelector(state => state.filters.year)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)

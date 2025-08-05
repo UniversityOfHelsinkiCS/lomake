@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { formKeys } from '../../../../config/data'
 import { Loader } from 'semantic-ui-react'
 import { isAdmin } from '../../../../config/common'
-import NoPermissions from '../../Generic/NoPermissions' 
+import NoPermissions from '../../Generic/NoPermissions'
 import MonitoringOverview from './MonitoringOverview'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const FacultyMonitoringOverview = () => {
   const { t } = useTranslation()
@@ -13,7 +14,7 @@ const FacultyMonitoringOverview = () => {
   const faculties = useSelector(state => state.faculties.data)
   const form = formKeys.FACULTY_MONITORING
   const formType = 'faculty-evaluation'
-  const user = useSelector(state => state.currentUser.data)
+  const user = useGetAuthUserQuery()
 
   const hasReadRights = (faculties, user) => {
     const readRights = faculties?.some(faculty => user.access[faculty.code]?.read)
