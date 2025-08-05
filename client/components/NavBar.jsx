@@ -4,7 +4,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Box, Container, Chip, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 import { LanguageSharp, Logout, ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 import { images } from '../util/common'
-import { useGetAuthUserQuery, useLogoutMutation } from '../redux/currentUserReducer'
+import { useGetAuthUserQuery, useLogoutMutation } from '../redux/auth'
 import { setLanguage } from '../redux/languageReducer'
 import { useTranslation } from 'react-i18next'
 import {

@@ -12,6 +12,7 @@ import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Alert, Button, Typography } from '@mui/material'
 import { ArrowForward } from '@mui/icons-material'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -25,7 +26,7 @@ const OverviewPage = () => {
   const selectedFaculties = useAppSelector(state => state.filters.faculty)
   const selectedLevel = useAppSelector(state => state.filters.level)
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
-  const currentUser = useAppSelector(state => state.currentUser)
+  const currentUser = useGetAuthUserQuery()
   const programmes = useAppSelector(state => state.studyProgrammes.data)
 
   useEffect(() => {

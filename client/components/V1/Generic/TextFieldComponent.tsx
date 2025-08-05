@@ -11,6 +11,7 @@ import { useFetchLockQuery } from '@/client/redux/lock'
 import { TextFieldCard } from './TextFieldCard'
 import { useLockSync } from '@/client/hooks/useLockSync'
 import { ReportDataKey } from '@/client/lib/types'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 type TextFieldComponentProps = {
   id: ReportDataKey
@@ -22,7 +23,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const { programme: studyprogrammeKey } = useParams<{ programme: string }>()
   const { t } = useTranslation()
   const year = useAppSelector(state => state.filters.keyDataYear)
-  const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
+  const currentUser = useGetAuthUserQuery()
   const viewOnly = useAppSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
   const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
     pollingInterval: 1000,
@@ -35,7 +36,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   const [content, setContent] = useState<string>('')
 
-  const { hasLock, askForLock, handleStopEditing } = useLockSync({ id, content, dataFromRedux, studyprogrammeKey, year })
+  const { hasLock, askForLock, handleStopEditing } = useLockSync({ id, content, studyprogrammeKey, year })
 
   const textFieldRef = useRef<HTMLInputElement>(null)
   const componentRef = useRef<HTMLDivElement>(null)

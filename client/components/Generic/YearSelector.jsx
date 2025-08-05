@@ -6,7 +6,7 @@ import { formKeys } from '../../../config/data'
 
 import { setYear, setMultipleYears } from '../../redux/filterReducer'
 import { setViewOnly, setViewingOldAnswers } from '../../redux/formReducer'
-import { getYearsUserHasAccessToAction } from '../../redux/currentUserReducer'
+import { getYearsUserHasAccessToAction } from '../../redux/auth'
 import './Generic.scss'
 
 // eslint-disable-next-line react/function-component-definition

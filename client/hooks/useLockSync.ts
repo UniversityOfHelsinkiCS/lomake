@@ -1,13 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
-import { useAppSelector } from "../util/hooks";
 import { useDeleteLockMutation, useFetchLockQuery, useSetLockMutation } from "../redux/lock";
 import { useUpdateReportMutation } from "../redux/reports";
 import { ReportDataKey } from "../lib/types";
+import { useGetAuthUserQuery } from "../redux/auth";
 
 type UseLockSyncProps = {
   id: ReportDataKey
   content: string
-  dataFromRedux: string
   studyprogrammeKey: string
   year: string
 }
@@ -15,13 +14,12 @@ type UseLockSyncProps = {
 export function useLockSync({
   id,
   content,
-  dataFromRedux,
   studyprogrammeKey,
   year
 }: UseLockSyncProps) {
   const [hasLock, setHasLock] = useState(false)
   const [gettingLock, setGettingLock] = useState(false)
-  const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
+  const { uid, isLoading } = useGetAuthUserQuery()
   const { data: lockMap } = useFetchLockQuery({ room: studyprogrammeKey }, {
     pollingInterval: 1000
   })
@@ -31,14 +29,9 @@ export function useLockSync({
   const [updateReport] = useUpdateReportMutation()
 
   useEffect(() => {
-    const gotTheLock = lockMap && lockMap[id] && lockMap[id].uid === currentUser.uid
+    const gotTheLock = lockMap && lockMap[id] && !isLoading && lockMap[id].uid === uid
     setHasLock(gotTheLock)
     if (gettingLock && lockMap?.[id]) setGettingLock(false)
-
-    if (!gotTheLock && content !== dataFromRedux) {
-      setGettingLock(true)
-      setLock({ room: studyprogrammeKey, field: id })
-    }
   }, [lockMap])
 
   const askForLock = useCallback(() => {

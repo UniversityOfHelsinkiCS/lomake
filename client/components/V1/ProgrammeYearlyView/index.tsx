@@ -24,6 +24,7 @@ import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
 import { useGetReportsQuery } from '@/client/redux/reports'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const ProgrammeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -42,7 +43,7 @@ const ProgrammeView = () => {
 
   const { nextDeadline } = useAppSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null
-  const user = useAppSelector(state => state.currentUser.data)
+  const user = useGetAuthUserQuery()
 
   const writeAccess = (user.access[studyprogrammeKey] && user.access[studyprogrammeKey].write) || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)

@@ -29,6 +29,7 @@ import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { useGetDocumentsQuery, useCreateDocumentMutation, useCloseInterventionProcedureMutation } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
+import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const ProgrammeHomeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -36,13 +37,14 @@ const ProgrammeHomeView = () => {
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const history = useHistory()
   const { data: documents = [] } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
-  const user = useAppSelector(state => state.currentUser.data)
+  const user = useGetAuthUserQuery()
+  const { isAdmin } = user
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
 
-  const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
+  const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin
 
   const [reason, setReason] = useState('')
   const [additionalInfo, setAdditionalInfo] = useState('')
@@ -100,7 +102,7 @@ const ProgrammeHomeView = () => {
 
   const hasAccessToCloseInterventionProcedure = () => {
     const isUserInDekanaattiGroup = user.iamGroups.some((group: string) => dekanaattiIamGroup.includes(group))
-    return isAdmin(user) || isUserInDekanaattiGroup
+    return isAdmin || isUserInDekanaattiGroup
   }
 
   return (

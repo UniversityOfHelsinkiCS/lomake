@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { isAdmin } from '../../config/common'
 
 const getOverviewProgrammesToShow = (programmes, access) => {
   const usersPermissionsEntries = Object.entries(access)
@@ -12,20 +11,20 @@ const getOverviewProgrammesToShow = (programmes, access) => {
 
 export const useVisibleOverviewProgrammes = ({ currentUser, programmes, showAllProgrammes, faculty, dropdownFilter }) =>
   React.useMemo(() => {
-    if (isAdmin(currentUser.data)) {
+    if (currentUser.isAdmin === true) {
       return programmes
     }
-    if (currentUser.data.access || currentUser.specialGroup) {
+    if (currentUser.access || currentUser.specialGroup) {
       if (
         (!showAllProgrammes && faculty !== 'UNI') ||
         (!showAllProgrammes && dropdownFilter.length > 0 && faculty === 'UNI')
       ) {
-        return getOverviewProgrammesToShow(programmes, currentUser.data.access)
+        return getOverviewProgrammesToShow(programmes, currentUser.access)
       }
       return programmes
     }
 
     return []
-  }, [programmes, currentUser.data, showAllProgrammes, faculty, dropdownFilter])
+  }, [programmes, currentUser, showAllProgrammes, faculty, dropdownFilter])
 
 export const deleteWhenMoreThanOneExport = 0
