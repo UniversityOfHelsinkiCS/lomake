@@ -34,11 +34,6 @@ export function useLockSync({
     const gotTheLock = lockMap && lockMap[id] && lockMap[id].uid === currentUser.uid
     setHasLock(gotTheLock)
     if (gettingLock && lockMap?.[id]) setGettingLock(false)
-
-    if (!gotTheLock && content !== dataFromRedux) {
-      setGettingLock(true)
-      setLock({ room: studyprogrammeKey, field: id })
-    }
   }, [lockMap])
 
   const askForLock = useCallback(() => {
