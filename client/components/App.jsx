@@ -18,6 +18,7 @@ import { setYear, setMultipleYears, setKeyDataYear } from '../redux/filterReduce
 import { setLanguage } from '../redux/languageReducer'
 import Footer from './Footer'
 import { ARCHIVE_LAST_YEAR } from '../../config/common'
+import { useGetAuthUserQuery } from '../redux/auth'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -39,7 +40,7 @@ const languageFromUrl = () => {
   return undefined
 }
 
-const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, formKeys, setYear, setMultipleYears }) => {
+const useSetupCurrentYear = ({ oldAnswers, deadlines, yearsUserHasAccessTo, dispatch, formKeys, setYear, setMultipleYears }) => {
   // TODO: deprecate this and set the year by form
   // When oldAnswers are ready, set default year based on deadline or most recent answers
   useEffect(() => {
@@ -53,7 +54,7 @@ const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, for
       deadlines.nextDeadline?.length > 0 &&
       new Date(deadlines.nextDeadline.find(d => d.form === formKeys.YEARLY_ASSESSMENT)?.date) >= new Date()
 
-    if (hasUpcomingDeadline && currentUser.data?.yearsUserHasAccessTo.includes(deadlines.draftYear.year)) {
+    if (hasUpcomingDeadline && yearsUserHasAccessTo?.includes(deadlines.draftYear.year)) {
       year = deadlines.draftYear.year
     } else {
       // Find the most recent year with data but the max is 2024
@@ -71,7 +72,7 @@ const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, for
       }, 2019)
     }
 
-    if (currentUser.data?.yearsUserHasAccessTo.includes(year)) {
+    if (yearsUserHasAccessTo?.includes(year)) {
       dispatch(setYear(year))
       dispatch(setMultipleYears([year]))
     }
@@ -84,7 +85,7 @@ export default () => {
     window.location.href.includes('/degree-reform') && window.location.search.startsWith('?faculty=')
   const isNotDegreeReformSummary = !isDegreeReformSummary
   const dispatch = useDispatch()
-  const currentUser = useSelector(state => state.currentUser)
+  const { isLoading, yearUserHasAccessTo, uid } = useGetAuthUserQuery()
   const studyProgrammes = useSelector(state => state.studyProgrammes)
   const faculties = useSelector(state => state.faculties)
   const deadlines = useSelector(state => state.deadlines)
@@ -118,8 +119,7 @@ export default () => {
   // Do this after user.data is ready, so that there wont be dupe users in db.
   // Because of accessControlMiddleware
   useEffect(() => {
-    const user = currentUser.data
-    if (user) {
+    if (!isLoading) {
       dispatch(getDeadlineAndDraftYear())
       dispatch(getFaculties())
       dispatch(getStudyProgrammes())
@@ -128,19 +128,19 @@ export default () => {
         dispatch(getAnswersAction())
       }
     }
-  }, [currentUser])
+  }, [isLoading])
 
   useSetupCurrentYear({
     oldAnswers,
     deadlines,
-    currentUser,
+    yearUserHasAccessTo,
     dispatch,
     formKeys,
     setYear,
     setMultipleYears,
   })
 
-  if (!currentUser.data) return null
+  if (!uid) return null
 
   const isCommonDataReady = studyProgrammes?.data && oldAnswers?.data
   const isIndividualDataReady = studyProgrammes?.data && faculties?.data

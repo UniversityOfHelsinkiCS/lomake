@@ -4,6 +4,7 @@ import { isAdmin, isSuperAdmin, getFormType } from '../util/common.js'
 import logger from '../util/logger.js'
 import seed from '../scripts/seed.js'
 import Studyprogramme from '../models/studyprogramme.js'
+import User from '../models/user.js'
 
 const getAll = async (_, res) => {
   try {
@@ -110,7 +111,7 @@ const getOwners = async (_, res) => {
     let results = {}
 
     programmes.forEach(async p => {
-      const owners = await db.user.findAll({
+      const owners = await User.findAll({
         where: {
           access: {
             [p.key]: { admin: 'true' },

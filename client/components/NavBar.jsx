@@ -14,6 +14,7 @@ import {
   isKatselmusProjektiOrOhjausryhma,
   isEvaluationUniversityUser,
 } from '../../config/common'
+import { useGetAuthUserQuery, useLogoutMutation } from '../redux/auth'
 
 const NavBarItems = {
   yearly: { key: 'yearly', label: 'landingPage:yearlyAssessmentTitle', path: '/v1/overview', access: ['programme', 'special'] },
@@ -175,19 +176,18 @@ const UnHijackButton = ({ handleUnhijack }) => (
 const NavBar = () => {
   const dispatch = useDispatch()
   const { t, i18n } = useTranslation()
-  const user = useSelector(state => state.currentUser.data)
+  const { uid, isSuperAdmin, isAdmin, specialGroup, iamGroups, lastRestart } = useGetAuthUserQuery()
   const lang = useSelector(state => state.language)
   const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const location = useLocation()
   const history = useHistory()
   const [openMenus, setOpenMenus] = React.useState({})
+  const [logout] = useLogoutMutation()
 
   const setLanguageCode = code => {
     dispatch(setLanguage(code))
     i18n.changeLanguage(code)
   }
-
-  const handleLogout = () => dispatch(logoutAction())
 
   const handleUnhijack = () => {
     window.localStorage.removeItem('adminLoggedInAs')
@@ -209,12 +209,12 @@ const NavBar = () => {
     <Box sx={{ marginLeft: 'auto', alignItems: 'center', display: 'flex' }}>
       <LanguageDropdown t={t} lang={lang} handleLanguageChange={handleLanguageChange} />
       {window.localStorage.getItem('adminLoggedInAs') && <UnHijackButton handleUnhijack={handleUnhijack} />}
-      <MenuItem data-cy="nav-logout" onClick={handleLogout} sx={{ gap: 1 }}>
+      <MenuItem data-cy="nav-logout" onClick={() => logout()} sx={{ gap: 1 }}>
         <Logout />
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-          <Typography variant="light">{`${t('logOut')} (${user.uid})`}</Typography>
-          {isSuperAdmin(user) && (
-            <Chip color="error" label={`Server running since ${new Date(user.lastRestart).toLocaleTimeString()}`} />
+          <Typography variant="light">{`${t('logOut')} (${uid})`}</Typography>
+          {isSuperAdmin && (
+            <Chip color="error" label={`Server running since ${new Date(lastRestart).toLocaleTimeString()}`} />
           )}
         </Box>
       </MenuItem>
@@ -241,19 +241,19 @@ const NavBar = () => {
         case 'programme':
           return programmes && programmes.length > 0
         case 'special':
-          return user.specialGroup && Object.keys(user.specialGroup).length > 0
+          return specialGroup && Object.keys(specialGroup).length > 0
         case 'admin':
-          return isAdmin(user)
+          return isAdmin
         case 'evaluationFaculty':
-          return isEvaluationFacultyUser(user)
+          return isEvaluationFacultyUser({ specialGroup, iamGroups })
         case 'evaluationUniversity':
-          return isEvaluationUniversityUser(user)
+          return isEvaluationUniversityUser({ specialGroup, iamGroups })
         case 'employee':
-          return user.iamGroups && user.iamGroups.includes('hy-employees')
+          return iamGroups && iamGroups.includes('hy-employees')
         case 'katselmusProjektiOrOhjausryhma':
-          return isKatselmusProjektiOrOhjausryhma(user)
+          return isKatselmusProjektiOrOhjausryhma({ specialGroup, iamGroups })
         case 'universityForm':
-          return user.specialGroup && user.specialGroup.universityForm
+          return specialGroup && specialGroup.universityForm
         default:
           return false
       }
@@ -372,7 +372,7 @@ const NavBar = () => {
     )
   }
 
-  if (location.pathname.startsWith('/evaluation-faculty/previous-years') || !user) return null
+  if (location.pathname.startsWith('/evaluation-faculty/previous-years') || !uid) return null
 
   return (
     <AppBar

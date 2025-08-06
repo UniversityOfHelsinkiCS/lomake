@@ -9,7 +9,7 @@ import callBuilder from '../util/apiConnection'
 export const loginAction = () => {
   const route = '/login'
   const prefix = 'LOGIN'
-  return callBuilder(route, prefix, 'post')
+  return callBuilder(route, prefix)
 }
 
 export const logoutAction = () => {
