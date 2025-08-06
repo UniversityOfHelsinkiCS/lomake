@@ -18,7 +18,6 @@ import { setYear, setMultipleYears, setKeyDataYear } from '../redux/filterReduce
 import { setLanguage } from '../redux/languageReducer'
 import Footer from './Footer'
 import { ARCHIVE_LAST_YEAR } from '../../config/common'
-import { useGetAuthUserQuery } from '../redux/auth'
 
 const languageFromUrl = () => {
   const url = window.location.href
