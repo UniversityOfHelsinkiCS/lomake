@@ -10,7 +10,6 @@ import { getProgramme } from '../../../redux/studyProgrammesReducer'
 import { getOldYearlyFacultyAnswersAction } from '../../../redux/summaryReducer'
 import { modifiedQuestions, answersByQuestions } from '../../../util/common'
 import Question from '../../ComparisonPage/Question'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const getTotalWritten = ({ question, allAnswers }) => {
   const mapped = allAnswers.map(data => {
@@ -28,7 +27,7 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
-  const user = useGetAuthUserQuery()
+  const user = useSelector(state => state.currentUser.data)
   const filters = useSelector(state => state.filters)
   const [showingQuestion, setShowingQuestion] = useState(-1)
 

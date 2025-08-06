@@ -14,7 +14,6 @@ import { formKeys } from '../../../../config/data'
 import FacultyColorTable from './FacultyColorTable'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import FacultyCellModal from './FacultyCellModal'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 export default () => {
   const { t } = useTranslation()
@@ -25,7 +24,7 @@ export default () => {
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
   const lang = useSelector(state => state.language)
-  const currentUser = useGetAuthUserQuery()
+  const currentUser = useSelector(state => state.currentUser.data)
   const faculties = useSelector(({ faculties }) => faculties.data)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const form = formKeys.EVALUATION_FACULTIES
@@ -83,8 +82,9 @@ export default () => {
       )}
       {programControlsToShow && (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
-            }`}
+          title={`${t('overview:accessRights')} - ${
+            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
+          }`}
           closeModal={() => setProgramControlsToShow(null)}
         >
           <ProgramControlsContent programKey={programControlsToShow.code} />

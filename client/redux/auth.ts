@@ -2,7 +2,7 @@ import { ARCHIVE_LAST_YEAR, isAdmin, isSuperAdmin } from '../../config/common'
 import { defaultYears } from '../util/common'
 import { RTKApi } from '../util/apiConnection'
 
-export const getYearsUserHasAccessTo = (access: any) => {
+export const getYearsUserHasAccessToAction = (access: any) => {
   let usersYears: any = []
 
   // Set all the three answered years to be the options by default
@@ -50,7 +50,7 @@ export const useGetAuthUserQuery = () => {
 
   return {
     ...data,
-    yearsUserHasAccessTo: getYearsUserHasAccessTo(data.access),
+    yearsUserHasAccessTo: getYearsUserHasAccessToAction(data.access),
     isAdmin: isAdmin(data) || isSuperAdmin(data),
     isSuperAdmin: isSuperAdmin(data),
     isLoading,

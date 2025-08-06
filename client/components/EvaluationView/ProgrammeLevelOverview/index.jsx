@@ -17,7 +17,6 @@ import { formKeys } from '../../../../config/data'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 export default () => {
   const { t } = useTranslation()
@@ -29,7 +28,7 @@ export default () => {
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
 
   const debouncedFilter = useDebounce(filter, 200)
-  const currentUser = useGetAuthUserQuery()
+  const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const form = formKeys.EVALUATION_PROGRAMMES
@@ -45,7 +44,7 @@ export default () => {
   useEffect(() => {
     document.title = `${t('evaluation')}`
   }, [lang])
-
+ 
   const handleFilterChange = ({ target }) => {
     const { value } = target
     setFilter(value)
@@ -69,8 +68,8 @@ export default () => {
   }, [usersProgrammes, lang, debouncedFilter])
 
   const moreThanFiveProgrammes = useMemo(() => {
-    if (isAdmin(currentUser)) return true
-    if (currentUser.access && Object.keys(currentUser.access).length > 5) return true
+    if (isAdmin(currentUser.data)) return true
+    if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
     return false
   }, [currentUser])
 
@@ -89,8 +88,9 @@ export default () => {
 
       {programControlsToShow && (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
-            }`}
+          title={`${t('overview:accessRights')} - ${
+            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
+          }`}
           closeModal={() => setProgramControlsToShow(null)}
         >
           <ProgramControlsContent programKey={programControlsToShow.key} form={form} />

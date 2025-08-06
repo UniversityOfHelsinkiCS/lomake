@@ -22,7 +22,6 @@ import { setYear } from '../../../redux/filterReducer'
 import EvaluationForm from './EvaluationForm'
 
 import { evaluationQuestions as questions, yearlyQuestions } from '../../../questionData'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const handleMeasures = (yearData, relatedQuestion) => {
   let count = 0
@@ -69,7 +68,7 @@ const EvaluationFormView = ({ room, formString }) => {
   const history = useHistory()
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
-  const user = useGetAuthUserQuery()
+  const user = useSelector(state => state.currentUser.data)
   const componentRef = useRef()
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)

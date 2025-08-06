@@ -6,7 +6,7 @@ import { formKeys } from '../../../config/data'
 
 import { setYear, setMultipleYears } from '../../redux/filterReducer'
 import { setViewOnly, setViewingOldAnswers } from '../../redux/formReducer'
-import { getYearsUserHasAccessTo, useGetAuthUserQuery } from '../../redux/auth'
+import { getYearsUserHasAccessToAction } from '../../redux/auth'
 import './Generic.scss'
 
 // eslint-disable-next-line react/function-component-definition
@@ -14,7 +14,7 @@ export default function YearSelector({ multiple, size, label }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const previousYearsWithAnswers = useSelector(state => state.oldAnswers.years)
-  const currentUser = useGetAuthUserQuery()
+  const currentUser = useSelector(state => state.currentUser.data)
   const year = useSelector(({ filters }) => filters.year)
   const form = useSelector(({ filters }) => filters.form)
   const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
@@ -34,7 +34,7 @@ export default function YearSelector({ multiple, size, label }) {
 
   useEffect(() => {
     if (!previousYearsWithAnswers || !currentUser) return
-    let years = getYearsUserHasAccessTo(currentUser.access)
+    let years = getYearsUserHasAccessToAction(currentUser)
     if (form === formKeys.EVALUATION_PROGRAMMES || form === formKeys.EVALUATION_FACULTIES) {
       years = [2023]
       handleYearChange(null, { value: 2023 })
@@ -55,7 +55,7 @@ export default function YearSelector({ multiple, size, label }) {
     else dispatch(setMultipleYears(value))
   }
 
-  if (currentUser.isLoading) return null
+  if (!currentUser) return null
   if (yearOptions.length === formKeys.YEARLY_ASSESSMENT) return <div />
 
   return (

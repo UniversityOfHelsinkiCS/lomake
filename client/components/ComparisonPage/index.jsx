@@ -23,7 +23,6 @@ import { isAdmin } from '../../../config/common'
 import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
 import './ComparisonPage.scss'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const answersForFaculty = ({
   usersProgrammes,
@@ -61,7 +60,7 @@ export default () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useHistory()
-  const user = useGetAuthUserQuery()
+  const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
@@ -135,17 +134,17 @@ export default () => {
 
   const compareByFacultyAnswers = usersProgrammes
     ? answersForFaculty({
-      usersProgrammes,
-      year: filters.year,
-      answers,
-      oldAnswers,
-      draftYear,
-      questionsList,
-      lang,
-      form: filters.form,
-      deadline: nextDeadline,
-      t,
-    })
+        usersProgrammes,
+        year: filters.year,
+        answers,
+        oldAnswers,
+        draftYear,
+        questionsList,
+        lang,
+        form: filters.form,
+        deadline: nextDeadline,
+        t,
+      })
     : []
 
   let panes = [

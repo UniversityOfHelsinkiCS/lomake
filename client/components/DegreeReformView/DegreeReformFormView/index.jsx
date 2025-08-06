@@ -17,14 +17,13 @@ import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formRedu
 import DegreeReformForm from './ProgramForm'
 
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const DegreeReformFormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
-  const user = useGetAuthUserQuery()
+  const user = useSelector(state => state.currentUser.data)
 
   const form = 2
 

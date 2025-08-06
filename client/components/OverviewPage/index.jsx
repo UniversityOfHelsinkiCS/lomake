@@ -18,7 +18,6 @@ import StatsContent from './StatsContent'
 import ColorTable from './ColorTable'
 import ProgramControlsContent from './ProgramControlsContent'
 import './OverviewPage.scss'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 export default () => {
   const { t } = useTranslation()
@@ -31,7 +30,7 @@ export default () => {
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
 
   const lang = useSelector(state => state.language)
-  const currentUser = useGetAuthUserQuery()
+  const currentUser = useSelector(state => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   const form = formKeys.YEARLY_ASSESSMENT
@@ -70,8 +69,8 @@ export default () => {
   }, [usersProgrammes, lang, debouncedFilter])
 
   const moreThanFiveProgrammes = useMemo(() => {
-    if (currentUser.isAdmin) return true
-    if (currentUser.access && Object.keys(currentUser.access).length > 5) return true
+    if (isAdmin(currentUser.data)) return true
+    if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
     return false
   }, [currentUser])
 
@@ -90,8 +89,9 @@ export default () => {
 
       {programControlsToShow && (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
-            }`}
+          title={`${t('overview:accessRights')} - ${
+            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
+          }`}
           closeModal={() => setProgramControlsToShow(null)}
         >
           <ProgramControlsContent programKey={programControlsToShow.key} />

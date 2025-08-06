@@ -12,7 +12,6 @@ import { committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
 import CommitteePrinting from './CommitteePrinting'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 export default () => {
   const { t } = useTranslation()
@@ -24,7 +23,7 @@ export default () => {
   const [modalData, setModalData] = useState(null)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const lang = useSelector(state => state.language)
-  const currentUser = useGetAuthUserQuery()
+  const currentUser = useSelector(state => state.currentUser.data)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const [selectedLevels, setSelectedLevels] = useState({ master: false, doctoral: false })
 

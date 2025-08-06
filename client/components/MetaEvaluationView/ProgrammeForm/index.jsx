@@ -18,7 +18,6 @@ import { formKeys } from '../../../../config/data'
 import MetaEvaluationForm from './MetaEvaluationForm'
 
 import { metareviewQuestions as questions } from '../../../questionData'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 // tämä on samanlainen kuin Evaluationiew/EvaluationFormView/index.js
 
 const ProgrammeLevelForm = ({ room }) => {
@@ -26,7 +25,7 @@ const ProgrammeLevelForm = ({ room }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const form = formKeys.META_EVALUATION
-  const user = useGetAuthUserQuery()
+  const user = useSelector(state => state.currentUser.data)
   const currentRoom = useSelector(state => state.room)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const year = useSelector(({ filters }) => filters.year)

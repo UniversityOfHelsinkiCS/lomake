@@ -13,13 +13,12 @@ import UpdateStudyprogrammes from './UpdateStudyprogrammes'
 import TempAccess from './TempAccess'
 import Debug from './Debug'
 import KeyData from './KeyData'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 export default () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
-  const user = useGetAuthUserQuery()
+  const user = useSelector(({ currentUser }) => currentUser.data)
 
   useEffect(() => {
     document.title = t('users:adminPage')
@@ -68,36 +67,36 @@ export default () => {
     panes = [
       ...panes,
       {
-        menuItem: t('users:updateStudyprogrammes'),
-        render: () => (
-          <Tab.Pane>
-            <UpdateStudyprogrammes />
-          </Tab.Pane>
-        ),
+      menuItem: t('users:updateStudyprogrammes'),
+      render: () => (
+        <Tab.Pane>
+        <UpdateStudyprogrammes />
+        </Tab.Pane>
+      ),
       },
       {
-        menuItem: t('users:deadlineSettings'),
-        render: () => (
-          <Tab.Pane>
-            <DeadlineSetting />
-          </Tab.Pane>
-        ),
+      menuItem: t('users:deadlineSettings'),
+      render: () => (
+        <Tab.Pane>
+        <DeadlineSetting />
+        </Tab.Pane>
+      ),
       },
       {
-        menuItem: 'Debug',
-        render: () => (
-          <Tab.Pane>
-            <Debug />
-          </Tab.Pane>
-        ),
+      menuItem: 'Debug',
+      render: () => (
+        <Tab.Pane>
+        <Debug />
+        </Tab.Pane>
+      ),
       },
       {
-        menuItem: t('users:uploadKeydata'),
-        render: () => (
-          <Tab.Pane>
-            <KeyData />
-          </Tab.Pane>
-        ),
+      menuItem: t('users:uploadKeydata'),
+      render: () => (
+        <Tab.Pane>
+        <KeyData />
+        </Tab.Pane>
+      ),
       },
     ]
   }

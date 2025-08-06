@@ -9,7 +9,6 @@ import useDebounce from '../../util/useDebounce'
 import { sortedItems } from '../../util/common'
 import { isAdmin } from '../../../config/common'
 import './UsersPage.scss'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 export default () => {
   const [sorter, setSorter] = useState('')
@@ -22,7 +21,7 @@ export default () => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const users = useSelector(state => state.users)
-  const user = useGetAuthUserQuery()
+  const user = useSelector(({ currentUser }) => currentUser.data)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const history = useHistory()
 

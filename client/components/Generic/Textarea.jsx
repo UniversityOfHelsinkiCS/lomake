@@ -24,7 +24,6 @@ import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
 import './Generic.scss'
 import ProgrammeTextAnswerSummary from './ProgrammeTextAnswerSummary'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 export const deepCheck = (a, b) => {
   return JSON.stringify(a) === JSON.stringify(b)
@@ -82,7 +81,7 @@ const Textarea = ({
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
-  const currentUser = useGetAuthUserQuery()
+  const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
   const [unsavedContent, setUnsavedContent] = useState(false)

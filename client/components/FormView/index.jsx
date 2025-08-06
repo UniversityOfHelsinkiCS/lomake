@@ -21,7 +21,6 @@ import Form from './Form'
 import { yearlyQuestions as questions } from '../../questionData'
 import Downloads from './Downloads'
 import './FormView.scss'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
@@ -36,7 +35,7 @@ const FormView = ({ room }) => {
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
-  const user = useGetAuthUserQuery()
+  const user = useSelector(state => state.currentUser.data)
   const year = useSelector(state => state.filters.year)
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const currentRoom = useSelector(state => state.room)

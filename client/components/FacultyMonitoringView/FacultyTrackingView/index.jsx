@@ -15,7 +15,6 @@ import Answer from './Answer'
 import QuestionPicker from './QuestionPicker'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 import './FacultyTrackingView.scss'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
@@ -23,7 +22,7 @@ const FacultyTrackingView = ({ faculty }) => {
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties.data)
   const facultyName = faculties?.find(f => f.code === faculty)?.name[lang]
-  const user = useGetAuthUserQuery()
+  const user = useSelector(state => state.currentUser.data)
   const form = formKeys.FACULTY_MONITORING
   const currentRoom = useSelector(state => state.room)
   const fieldName = `selectedQuestionIds`

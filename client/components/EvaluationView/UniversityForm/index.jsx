@@ -23,7 +23,6 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
   if (!draftYear) return true
@@ -125,7 +124,7 @@ const CommitteeFormView = ({ room, formString }) => {
   const dispatch = useDispatch()
   const componentRef = useRef()
   const lang = useSelector(state => state.language)
-  const user = useGetAuthUserQuery()
+  const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const currentRoom = useSelector(state => state.room)
 

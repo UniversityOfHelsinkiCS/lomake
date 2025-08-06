@@ -53,7 +53,7 @@ const useSetupCurrentYear = ({ oldAnswers, deadlines, yearsUserHasAccessTo, disp
       deadlines.nextDeadline?.length > 0 &&
       new Date(deadlines.nextDeadline.find(d => d.form === formKeys.YEARLY_ASSESSMENT)?.date) >= new Date()
 
-    if (hasUpcomingDeadline && yearsUserHasAccessTo.includes(deadlines.draftYear.year)) {
+    if (hasUpcomingDeadline && currentUser.data?.yearsUserHasAccessTo.includes(deadlines.draftYear.year)) {
       year = deadlines.draftYear.year
     } else {
       // Find the most recent year with data but the max is 2024
@@ -84,6 +84,7 @@ export default () => {
     window.location.href.includes('/degree-reform') && window.location.search.startsWith('?faculty=')
   const isNotDegreeReformSummary = !isDegreeReformSummary
   const dispatch = useDispatch()
+  // const currentUser = useSelector(state => state.currentUser)
   const studyProgrammes = useSelector(state => state.studyProgrammes)
   const faculties = useSelector(state => state.faculties)
   const deadlines = useSelector(state => state.deadlines)

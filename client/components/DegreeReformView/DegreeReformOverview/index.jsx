@@ -16,7 +16,6 @@ import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import { TextQuestionGroup } from '../../ReformAnswers'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const TextualAnswers = ({ reformAnswers }) => {
   const { data } = reformAnswers
@@ -64,7 +63,7 @@ export default () => {
   const dispatch = useDispatch()
 
   const debouncedFilter = useDebounce(filter, 200)
-  const currentUser = useGetAuthUserQuery()
+  const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const faculties = useSelector(({ faculties }) => faculties)
@@ -178,8 +177,9 @@ export default () => {
 
       {programControlsToShow && (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
-            }`}
+          title={`${t('overview:accessRights')} - ${
+            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
+          }`}
           closeModal={() => setProgramControlsToShow(null)}
         >
           <ProgramControlsContent programKey={programControlsToShow.key} form={getForm(formType)} />

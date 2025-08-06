@@ -5,7 +5,6 @@ import { Button } from 'semantic-ui-react'
 
 import { isAdmin } from '../../../config/common'
 import ColorTableCell from './ColorTableCell'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const ManageCell = ({ program, setProgramControlsToShow }) => (
   <div className="table-container-manage-cell">
@@ -15,7 +14,7 @@ const ManageCell = ({ program, setProgramControlsToShow }) => (
 
 const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramControlsToShow, formType, form }) => {
   const oldAnswers = useSelector(state => state.oldAnswers)
-  const currentUser = useGetAuthUserQuery()
+  const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const year = useSelector(({ filters }) => filters.year)
   const lang = useSelector(state => state.language)
 

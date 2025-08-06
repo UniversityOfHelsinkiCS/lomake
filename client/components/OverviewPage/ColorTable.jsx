@@ -19,7 +19,6 @@ import {
   degreeReformIndividualQuestions,
   metareviewQuestions,
 } from '../../questionData'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const answerValues = ['first', 'second', 'third', 'fourth', 'fifth']
 const answerValuesReversed = ['fifth', 'fourth', 'third', 'second', 'first']
@@ -113,7 +112,8 @@ const ColorTable = React.memo(
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
-    const currentUser = useGetAuthUserQuery()
+
+    const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
     const year = useSelector(({ filters }) => filters.year)
     const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
@@ -337,33 +337,33 @@ const ColorTable = React.memo(
           <div className="sticky-header" style={{ marginTop: '1em' }} />
           {!showAllProgrammes && facultyView
             ? sortedFacultyProgrammes.map(p => {
-              return (
-                <TableRow
-                  p={p}
-                  selectedAnswers={selectedAnswers}
-                  tableIds={tableIds}
-                  setModalData={setModalData}
-                  setProgramControlsToShow={setProgramControlsToShow}
-                  key={p.key}
-                  formType={formType}
-                  form={form}
-                />
-              )
-            })
+                return (
+                  <TableRow
+                    p={p}
+                    selectedAnswers={selectedAnswers}
+                    tableIds={tableIds}
+                    setModalData={setModalData}
+                    setProgramControlsToShow={setProgramControlsToShow}
+                    key={p.key}
+                    formType={formType}
+                    form={form}
+                  />
+                )
+              })
             : sortedAllProgrammes.map(p => {
-              return (
-                <TableRow
-                  p={p}
-                  selectedAnswers={selectedAnswers}
-                  tableIds={tableIds}
-                  setModalData={setModalData}
-                  setProgramControlsToShow={setProgramControlsToShow}
-                  key={p.key}
-                  formType={formType}
-                  form={form}
-                />
-              )
-            })}
+                return (
+                  <TableRow
+                    p={p}
+                    selectedAnswers={selectedAnswers}
+                    tableIds={tableIds}
+                    setModalData={setModalData}
+                    setProgramControlsToShow={setProgramControlsToShow}
+                    key={p.key}
+                    formType={formType}
+                    form={form}
+                  />
+                )
+              })}
         </div>
       </>
     )

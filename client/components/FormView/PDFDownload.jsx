@@ -5,7 +5,6 @@ import ReactToPrint from 'react-to-print'
 import { setViewOnly } from '../../redux/formReducer'
 import { colors, isFormLocked } from '../../util/common'
 import { isAdmin } from '../../../config/common'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, viewingOldAnswers, userHasWriteAccess }) => {
   if (!draftYear) return true
@@ -22,7 +21,7 @@ const PDFDownload = ({ componentRef, form }) => {
   const deadline = useSelector(state => state.deadlines.nextDeadline)
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
-  const user = useGetAuthUserQuery()
+  const user = useSelector(state => state.currentUser.data)
   const draftYear = useSelector(state => state.deadlines.draftYear)
   const year = useSelector(state => state.filters.year)
 
