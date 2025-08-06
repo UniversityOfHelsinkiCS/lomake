@@ -9,7 +9,7 @@ import Router from './Router'
 import { formKeys } from '../../config/data'
 
 import { wsConnect } from '../redux/websocketReducer'
-import { useGetAuthUserQuery } from '../redux/auth'
+import { useGetAuthUserQuery } from '../redux/currentUserReducer'
 import { getStudyProgrammes, getUsersProgrammes } from '../redux/studyProgrammesReducer'
 import { getDeadlineAndDraftYear } from '../redux/deadlineReducer'
 import { getFaculties } from '../redux/facultyReducer'

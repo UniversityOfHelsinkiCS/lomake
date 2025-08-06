@@ -14,10 +14,10 @@ import {
   CircularProgress,
 } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
-import type { DocumentType, ReportDataKey } from '@/client/lib/types'
+import type { DocumentType } from '@/client/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack, ExpandMore } from '@mui/icons-material'
-import { basePath } from '@/config/common'
+import { basePath, isAdmin } from '@/config/common'
 import KeyDataCard from './KeyDataCardComponent'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
@@ -27,7 +27,6 @@ import { useGetDocumentsQuery } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import { Loader } from 'semantic-ui-react'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -54,13 +53,11 @@ const InterventionProcedure = () => {
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const year = useAppSelector(state => state.filters.keyDataYear)
-  const user = useGetAuthUserQuery()
-  const { isAdmin } = user
-
+  const user = useAppSelector(state => state.currentUser.data)
   const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
   const document = (documents.length > 0 || !isFetching) ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
-  const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin
+  const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   // For this function the year variable is not needed cuz
   // intervention procedure is independent from years.
@@ -113,7 +110,7 @@ const InterventionProcedure = () => {
                 programme={programmeData}
                 {...props}
               />
-              <TextFieldCard id={groupKey as ReportDataKey} t={t} type="Comment" studyprogrammeKey={programmeKey} />
+              <TextFieldCard id={groupKey} t={t} type="Comment" studyprogrammeKey={programmeKey} />
             </AccordionDetails>
           )
         })}

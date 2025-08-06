@@ -6,15 +6,14 @@ import { Typography } from '@mui/material'
 
 import { colors } from '../../util/common'
 import './Generic.scss'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 export default ({ fieldName }) => {
   const { t } = useTranslation()
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data)
-  const { uid } = useGetAuthUserQuery()
+  const currentUserUid = useSelector(state => state.currentUser.data.uid)
 
   if (!currentEditors || !currentEditors[fieldName]) return null
-  if (currentEditors[fieldName].uid === uid) return null
+  if (currentEditors[fieldName].uid === currentUserUid) return null
 
   return (
     <Typography variant="italic" style={{ color: colors.blue, marginLeft: '1em' }}>

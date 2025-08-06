@@ -17,7 +17,7 @@ import WritingImage from '../../assets/writing.jpg'
 import ArchiveImage from '../../assets/archive.jpg'
 import { ArrowForward, MailOutlined } from '@mui/icons-material'
 import { basePath } from '@/config/common'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
+import { useGetAuthUserQuery } from '@/client/redux/currentUserReducer'
 
 const Homepage = () => {
   const { t } = useTranslation()
