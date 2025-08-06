@@ -1,8 +1,8 @@
 import isEqual from 'lodash/isEqual.js'
+import db from '../models/index.js'
 import { AUTOMATIC_IAM_PERMISSIONS_ENABLED } from '../util/common.js'
 import logger from '../util/logger.js'
 import { getIamAccess } from '../util/jami.js'
-import User from '../models/user.js'
 
 const parseHyGroupsFromHeader = hyGroups => {
   let parsedHyGroups = []
@@ -57,7 +57,7 @@ const IAMmiddleware = async (req, _, next) => {
       user.iamGroups = iamGroups
 
       // can not do this to cached user
-      const userFromDb = await User.findOne({
+      const userFromDb = await db.user.findOne({
         where: {
           uid: user.uid,
         },

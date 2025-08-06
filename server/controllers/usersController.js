@@ -1,9 +1,9 @@
 import { Op } from 'sequelize'
+import db from '../models/index.js'
 import logger from '../util/logger.js'
 import lastRestart from '../util/lastRestart.js'
 import { isAdmin } from '../util/common.js'
 import sendNewTempAccessNotification from './mailController.js'
-import User from '../models/user.js'
 
 const { getLastRestart } = lastRestart
 
@@ -11,7 +11,7 @@ const getCurrentUser = async (req, res) => {
   if (req.user && !req.headers['x-admin-logged-in-as']) {
     try {
       const now = new Date()
-      await User.update(
+      await db.user.update(
         { lastLogin: now },
         {
           where: {
@@ -56,7 +56,7 @@ const getLogoutUrl = async (req, res) => {
 
 const getAllUsers = async (_, res) => {
   try {
-    const users = await User.findAll({})
+    const users = await db.user.findAll({})
     res.json(users)
   } catch (e) {
     logger.error(e)
@@ -66,7 +66,7 @@ const getAllUsers = async (_, res) => {
 
 const getProgrammesUsers = async (req, res) => {
   try {
-    const users = await User.findAll({})
+    const users = await db.user.findAll({})
     const { programme } = req.params
 
     const filteredUsers = users.filter(u => u.access[programme])
@@ -83,7 +83,7 @@ const saveTempAccess = async (req, res) => {
     const newAccess = req.body
     const email = newAccess.email.toLowerCase()
 
-    const user = await User.findOne({
+    const user = await db.user.findOne({
       where: {
         email: {
           [Op.iLike]: email,
@@ -147,7 +147,7 @@ const saveTempAccess = async (req, res) => {
 
 const deleteTempAccess = async (req, res) => {
   try {
-    const user = await User.findOne({
+    const user = await db.user.findOne({
       where: {
         uid: req.params.uid,
       },

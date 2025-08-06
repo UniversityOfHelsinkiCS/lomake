@@ -1,5 +1,5 @@
 import logger from '../util/logger.js'
-import User from '../models/user.js'
+import db from '../models/index.js'
 import getUserByUid from '../services/userService.js'
 
 const userMiddleware = async (req, res, next) => {
@@ -18,7 +18,7 @@ const userMiddleware = async (req, res, next) => {
   }
 
   try {
-    const [user, created] = await User.findOrCreate({
+    const [user, created] = await db.user.findOrCreate({
       where: {
         uid: req.headers.uid,
       },

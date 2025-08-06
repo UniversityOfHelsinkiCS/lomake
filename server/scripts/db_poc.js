@@ -1,11 +1,11 @@
 import 'module-alias/register'
-import User from '../models/user.js'
+import db from '../models/index.js'
 
 require('dotenv').config()
 
 const func = async () => {
   const start = new Date().valueOf()
-  const user = await User.findOne({
+  const user = await db.user.findOne({
     where: {
       uid: 'mluukkai',
     },
