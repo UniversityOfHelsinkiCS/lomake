@@ -167,7 +167,7 @@ const CommitteeFormView = ({ room, formString }) => {
       dispatch(wsJoinRoom(room, form))
       dispatch(setViewOnly(false))
     }
-  }, [committee, singleFacultyPending, draftYear, room])
+  }, [committee, singleFacultyPending, draftYear, room, user])
 
   useEffect(() => {
     if (window.location.href.match('((/UNI_EN)|(/UNI_SE))') && year) {

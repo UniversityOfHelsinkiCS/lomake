@@ -177,8 +177,13 @@ const FacultyFormView = ({ room, formString }) => {
   }, [
     faculty,
     singleFacultyPending,
+    // writeAccess,
+    // viewingOldAnswers,
     draftYear,
+    // accessToTempAnswers,
+    // readAccess,
     room,
+    user,
   ])
 
   const facultyProgrammeAnswers = useMemo(() => {

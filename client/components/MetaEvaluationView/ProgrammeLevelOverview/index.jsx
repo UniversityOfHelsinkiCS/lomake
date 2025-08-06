@@ -6,14 +6,13 @@ import NoPermissions from '../../Generic/NoPermissions'
 import { formKeys } from '../../../../config/data'
 import { setLevel } from '../../../redux/filterReducer'
 import MetaOverview from './MetaOverview'
-import { useGetAuthUserQuery } from '@/client/redux/auth'
 
 const ProgrammeLevelOverview = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
   const selectedLevel = useSelector(({ filters }) => filters.level)
-  const currentUser = useGetAuthUserQuery()
+  const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
