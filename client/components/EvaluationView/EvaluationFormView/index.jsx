@@ -122,14 +122,10 @@ const EvaluationFormView = ({ room, formString }) => {
   }, [
     programme,
     singleProgramPending,
-    writeAccess,
     viewingOldAnswers,
     year,
     draftYear,
-    accessToTempAnswers,
-    readAccess,
     room,
-    user,
   ])
 
   useEffect(() => {

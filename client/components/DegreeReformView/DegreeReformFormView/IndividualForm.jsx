@@ -51,7 +51,7 @@ const DegreeReformIndividual = () => {
     } else {
       dispatch(setViewOnly(false))
     }
-  }, [year, draftYear, user, formDeadline, currentRoom])
+  }, [year, draftYear, formDeadline, currentRoom])
 
   const handleFormReady = async () => {
     if (!requiredDegreeReformIds.every(id => formData.data[id])) {

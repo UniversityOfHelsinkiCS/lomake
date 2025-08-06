@@ -34,7 +34,7 @@ export default function YearSelector({ multiple, size, label }) {
 
   useEffect(() => {
     if (!previousYearsWithAnswers || !currentUser) return
-    let years = getYearsUserHasAccessTo(currentUser.access)
+    let years = currentUser.yearsUserHasAccessTo
     if (form === formKeys.EVALUATION_PROGRAMMES || form === formKeys.EVALUATION_FACULTIES) {
       years = [2023]
       handleYearChange(null, { value: 2023 })
@@ -48,7 +48,7 @@ export default function YearSelector({ multiple, size, label }) {
       }
     })
     setYearOptions(options)
-  }, [previousYearsWithAnswers, currentUser, form])
+  }, [previousYearsWithAnswers, form])
 
   const handleMultipleYearChange = (_, { value }) => {
     if (value.length > 3) dispatch(setMultipleYears(value.slice(value.length - 3), value.length))
