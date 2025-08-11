@@ -20,7 +20,6 @@ const getSpecialGroup = (user, group, lang, t, data) => {
     { group: 'universityForm', translationTag: 'accessEvaluationUniversity' },
     ...data.map(f => ({ group: f.code, translationTag: f.name, faculty: true })),
   ]
-
   const special = specialGroups.find(s => s.group === group)
   if (!special) return null
   return (
@@ -49,11 +48,10 @@ const mayHijack = (current, toMock) => {
   return false
 }
 
-export default ({ user, lang, programmeCodesAndNames }) => {
+export default ({ user, lang, programmeCodesAndNames, data }) => {
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const history = useHistory()
-  const { data, isFetching } = useGetOrganisationDataQuery()
 
   const logInAs = () => {
     localStorage.setItem('adminLoggedInAs', user.uid)
@@ -91,8 +89,6 @@ export default ({ user, lang, programmeCodesAndNames }) => {
       />
     )
   }
-
-  if (isFetching) return <Loader active />
 
   return (
     <Table.Row>

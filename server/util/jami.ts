@@ -3,6 +3,8 @@ import * as Sentry from '@sentry/node'
 import { JAMI_URL, API_TOKEN, inProduction } from './common.js'
 import { access } from 'fs'
 
+
+console.log(JAMI_URL, "jami")
 const jamiClient = axios.create({
   baseURL: JAMI_URL,
   params: {
@@ -39,6 +41,7 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Re
 export const getOrganisationData = async () => {
   const { data } = await jamiClient.get('/organisation-data')
 
+  console.log("getting organisation data")
   return data
 }
 

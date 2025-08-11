@@ -18,6 +18,7 @@ import { setYear, setMultipleYears, setKeyDataYear } from '../redux/filterReduce
 import { setLanguage } from '../redux/languageReducer'
 import Footer from './Footer'
 import { ARCHIVE_LAST_YEAR } from '../../config/common'
+import { useGetOrganisationDataQuery } from '../redux/organisation'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -90,6 +91,7 @@ export default () => {
   const deadlines = useSelector(state => state.deadlines)
   const oldAnswers = useSelector(state => state.oldAnswers) // (({ oldAnswers }) => oldAnswers.data)
   const lang = useSelector(state => state.language)
+  const organisation = useGetOrganisationDataQuery()
 
   const { i18n } = useTranslation()
 

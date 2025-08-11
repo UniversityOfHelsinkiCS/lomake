@@ -9,6 +9,7 @@ import useDebounce from '../../util/useDebounce'
 import { sortedItems } from '../../util/common'
 import { isAdmin } from '../../../config/common'
 import './UsersPage.scss'
+import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
 
 export default () => {
   const [sorter, setSorter] = useState('')
@@ -24,12 +25,13 @@ export default () => {
   const user = useSelector(({ currentUser }) => currentUser.data)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const history = useHistory()
+  const { data, isFetching } = useGetOrganisationDataQuery()
 
   if (!isAdmin(user)) {
     history.push('/')
   }
 
-  if (users.pending || !users.data || !usersProgrammes) return <Loader active inline="centered" />
+  if (users.pending || !users.data || !usersProgrammes || isFetching) return <Loader active inline="centered" />
 
   if (!users) return null
 
@@ -132,6 +134,7 @@ export default () => {
               user={u}
               key={u.id}
               programmeCodesAndNames={programmeCodesAndNames}
+              data={data}
             />
           ))}
         </Table.Body>

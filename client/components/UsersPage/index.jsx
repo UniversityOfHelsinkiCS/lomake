@@ -67,36 +67,36 @@ export default () => {
     panes = [
       ...panes,
       {
-      menuItem: t('users:updateStudyprogrammes'),
-      render: () => (
-        <Tab.Pane>
-        <UpdateStudyprogrammes />
-        </Tab.Pane>
-      ),
+        menuItem: t('users:updateStudyprogrammes'),
+        render: () => (
+          <Tab.Pane>
+            <UpdateStudyprogrammes />
+          </Tab.Pane>
+        ),
       },
       {
-      menuItem: t('users:deadlineSettings'),
-      render: () => (
-        <Tab.Pane>
-        <DeadlineSetting />
-        </Tab.Pane>
-      ),
+        menuItem: t('users:deadlineSettings'),
+        render: () => (
+          <Tab.Pane>
+            <DeadlineSetting />
+          </Tab.Pane>
+        ),
       },
       {
-      menuItem: 'Debug',
-      render: () => (
-        <Tab.Pane>
-        <Debug />
-        </Tab.Pane>
-      ),
+        menuItem: 'Debug',
+        render: () => (
+          <Tab.Pane>
+            <Debug />
+          </Tab.Pane>
+        ),
       },
       {
-      menuItem: t('users:uploadKeydata'),
-      render: () => (
-        <Tab.Pane>
-        <KeyData />
-        </Tab.Pane>
-      ),
+        menuItem: t('users:uploadKeydata'),
+        render: () => (
+          <Tab.Pane>
+            <KeyData />
+          </Tab.Pane>
+        ),
       },
     ]
   }
