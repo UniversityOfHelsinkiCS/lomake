@@ -2,6 +2,7 @@ import axios from 'axios'
 import * as Sentry from '@sentry/node'
 import { JAMI_URL, API_TOKEN, inProduction } from './common.js'
 import { access } from 'fs'
+import { KeyboardDoubleArrowLeftRounded } from '@mui/icons-material'
 
 
 console.log(JAMI_URL, "jami")
@@ -22,7 +23,44 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Re
 
     let { specialGroup, ...access } = iamAccess
 
+    console.log("Här är vi", iamGroups)
+
+    const lomakeKatselmus = [
+      'hy-rehtoraatti',
+      'hy-ttdk-dekanaatti',
+      'hy-oiktdk-dekanaatti',
+      'hy-ltdk-dekanaatti',
+      'hy-humtdk-dekanaatti',
+      'hy-mltdk-dekanaatti',
+      'hy-ftdk-dekanaatti',
+      'hy-bytdk-dekanaatti',
+      'hy-ktdk-dekanaatti',
+      'hy-valttdk-dekanaatti',
+      'hy-sskh-rehtoraatti',
+      'hy-mmtdk-dekanaatti',
+      'hy-eltdk-dekanaatti',
+      'hy-ypa-toimi-helsinki',
+      'hy-ypa-opa-oymp-jory',
+      'grp-katselmus-projektiryhma',
+      'grp-katselmus-ohjausryhma',
+      'grp-a01807-svenskaarenden',
+      'grp-tilannekuvaoymp',
+      'grp-koordinaatioryhma',
+      'yhy-ypa-hr-henkilostopaallikot',
+    ]
+
     if (iamGroups.includes('hy-ypa-opa-ospa')) specialGroup = { admin: true, ...specialGroup }
+    else if (iamGroups.some((group) => lomakeKatselmus.includes(group))) {
+      const organisation = await getOrganisationData()
+
+      const access: any = {}
+      organisation.forEach((faculty: any) => {
+        faculty.programmes.forEach((program: any) => {
+          access[program.key] = { read: true, write: false, admin: false }
+        })
+      })
+      return access
+    }
 
     return { specialGroup, access: { ...access } }
   } catch (error: any) {
@@ -40,8 +78,6 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Re
 
 export const getOrganisationData = async () => {
   const { data } = await jamiClient.get('/organisation-data')
-
-  console.log("getting organisation data")
   return data
 }
 

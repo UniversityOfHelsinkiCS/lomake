@@ -37,11 +37,7 @@ const IAMmiddleware = async (req, _, next) => {
   if (req.path.includes('login') && AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
     const iamGroups = parseHyGroupsFromHeader(headers?.hygroupcn)
 
-    // const { access, specialGroup } = getIAMRights(headers?.hygroupcn)
-
     const { access, specialGroup } = await getIamAccess(iamGroups)
-
-    // console.log('access: ', access, 'special: ', specialGroup)
 
     logger.info({ message: `${user?.uid}: ${headers?.hygroupcn}` })
 
