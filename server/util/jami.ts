@@ -75,7 +75,7 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
     let lomakeAccess: Record<string, OrganisationAccess> = {}
 
     if (iamGroups.some((group) => lomakeKatselmus.includes(group))) {
-      const organisation: Faculty[] = await getOrganisationData()
+      const organisation = await getOrganisationData()
 
       organisation.forEach((faculty: Faculty) => {
         faculty.programmes.forEach((program: Programme) => {
@@ -102,14 +102,13 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
 }
 
 
-export const getOrganisationData = async () => {
+export const getOrganisationData = async (): Promise<Faculty[]> => {
   const { data } = await jamiClient.get('/organisation-data')
   return data
 }
 
-export const getJoryMapFromJami = async (): Promise<Faculty[]> => {
+export const getJoryMapFromJami = async () => {
   const { data } = await jamiClient.get('/jory-map')
-
   return data
 }
 
