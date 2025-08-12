@@ -3,9 +3,37 @@ import * as Sentry from '@sentry/node'
 import { JAMI_URL, API_TOKEN, inProduction } from './common.js'
 import { access } from 'fs'
 import { KeyboardDoubleArrowLeftRounded } from '@mui/icons-material'
+import { ProgrammeLevel } from '@/shared/lib/enums.js'
 
+interface Faculty {
+  readonly code: string
+  readonly name: string
+  readonly programmes: Readonly<Programme[]>
+}
 
-console.log(JAMI_URL, "jami")
+type Programme = {
+  readonly key: string
+  readonly name: string
+  readonly level: ProgrammeLevel
+  readonly companionFaculties: Readonly<string[]>
+  readonly international: boolean
+}
+
+interface Access {
+  specialGroup?: SpecialGroup
+  access?: Record<string, OrganisationAccess>
+}
+
+type SpecialGroup = {
+  [key: string]: boolean
+}
+
+type OrganisationAccess = {
+  read?: boolean
+  write?: boolean
+  admin?: boolean
+}
+
 const jamiClient = axios.create({
   baseURL: JAMI_URL,
   params: {
@@ -14,19 +42,14 @@ const jamiClient = axios.create({
   }
 })
 
-export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Record<string, Record<string, string>>> => {
+export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Access> => {
   try {
     const { data: iamAccess } = await jamiClient.post('/', {
       userId: "",
       iamGroups,
     })
 
-    let { specialGroup, ...access } = iamAccess
-
-    console.log("Här är vi", iamGroups)
-
     const lomakeKatselmus = [
-      'hy-rehtoraatti',
       'hy-ttdk-dekanaatti',
       'hy-oiktdk-dekanaatti',
       'hy-ltdk-dekanaatti',
@@ -49,20 +72,23 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Re
       'yhy-ypa-hr-henkilostopaallikot',
     ]
 
-    if (iamGroups.includes('hy-ypa-opa-ospa')) specialGroup = { admin: true, ...specialGroup }
-    else if (iamGroups.some((group) => lomakeKatselmus.includes(group))) {
-      const organisation = await getOrganisationData()
+    let lomakeAccess: Record<string, OrganisationAccess> = {}
 
-      const access: any = {}
-      organisation.forEach((faculty: any) => {
-        faculty.programmes.forEach((program: any) => {
-          access[program.key] = { read: true, write: false, admin: false }
+    if (iamGroups.some((group) => lomakeKatselmus.includes(group))) {
+      const organisation: Faculty[] = await getOrganisationData()
+
+      organisation.forEach((faculty: Faculty) => {
+        faculty.programmes.forEach((program: Programme) => {
+          lomakeAccess[program.key] = { read: true, write: false, admin: false }
         })
       })
-      return access
     }
 
-    return { specialGroup, access: { ...access } }
+    let { specialGroup, ...access } = iamAccess
+
+    if (iamGroups.includes('hy-ypa-opa-ospa')) specialGroup = { admin: true, ...specialGroup }
+
+    return { specialGroup, access: { ...lomakeAccess, ...access } }
   } catch (error: any) {
     if (attempt > 3) {
       console.log('[Jami] error: ', error)
@@ -81,7 +107,7 @@ export const getOrganisationData = async () => {
   return data
 }
 
-export const getJoryMapFromJami = async () => {
+export const getJoryMapFromJami = async (): Promise<Faculty[]> => {
   const { data } = await jamiClient.get('/jory-map')
 
   return data

@@ -1,5 +1,5 @@
 const getTotalProgrammeCount = () => {
-  return 134
+  return 132
 }
 
 const getDoctoralProgrammeCount = () => {

@@ -8,13 +8,13 @@ describe('IAM permission tests', () => {
     const user = 'cypressKatselmusProjektiryhmaUser'
     cy.login(user)
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 132)
     cy.visit('/evaluation')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 132)
     cy.visit('/degree-reform')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 132)
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 12)
     cy.visit('/evaluation-university')
     cy.contains('University level')
 
@@ -96,7 +96,7 @@ describe('IAM permission tests', () => {
   it('Faculty iam group gives reading rights to all programmes', () => {
     cy.login('cypressTheologyFacultyUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 3) // count of theology faculty programmes but when clicking show all, all programmes are shown
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressTheologyFacultyUser', 'All programmes')
   })
@@ -104,7 +104,7 @@ describe('IAM permission tests', () => {
   it('Kosu user gets wide writing access', () => {
     cy.login('cypressKosuUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 35)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 34)
 
     cy.hasAccess('cypressKosuUser', 'KH57_001', { read: true, write: true, admin: false })
     cy.hasAccess('cypressKosuUser', 'MH80_003', { read: true, write: true, admin: false })
@@ -123,7 +123,7 @@ describe('IAM permission tests', () => {
   it('Kosu who is also a jory-member gets writing rights to all programmes', () => {
     cy.login('cypressKosuJoryUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
     cy.hasAccess('cypressKosuJoryUser', 'MH50_002', { read: true, write: true, admin: false })
     cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: true, admin: false })
   })
