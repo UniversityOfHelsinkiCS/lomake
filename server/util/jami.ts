@@ -1,9 +1,8 @@
 import axios from 'axios'
 import * as Sentry from '@sentry/node'
 import { JAMI_URL, API_TOKEN, inProduction } from './common.js'
-import { access } from 'fs'
-import { KeyboardDoubleArrowLeftRounded } from '@mui/icons-material'
 import { ProgrammeLevel } from '@/shared/lib/enums.js'
+import logger from './logger.js'
 
 interface Faculty {
   readonly code: string
@@ -91,7 +90,7 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
     return { specialGroup, access: { ...lomakeAccess, ...access } }
   } catch (error: any) {
     if (attempt > 3) {
-      console.log('[Jami] error: ', error)
+      logger.error('[Jami] error: ', error)
       Sentry.captureException(error)
 
       return {}
@@ -107,7 +106,7 @@ export const getOrganisationData = async (): Promise<Faculty[]> => {
   return data
 }
 
-export const getJoryMapFromJami = async () => {
+export const getJoryMapFromJami = async (): Promise<Record<string, string | string[]>> => {
   const { data } = await jamiClient.get('/jory-map')
   return data
 }
@@ -115,11 +114,11 @@ export const getJoryMapFromJami = async () => {
 export const testJami = async () => {
   try {
     await jamiClient.get('/ping', { timeout: 4000 })
-    console.log('JAMI connected')
+    logger.info('JAMI connected')
   } catch (error) {
-    console.log(error)
-    console.log(JAMI_URL)
-    console.log('JAMI not responding :(')
-    console.log('Are you sure you are using the latest JAMI image?')
+    logger.error(error)
+    logger.error(JAMI_URL)
+    logger.error('JAMI not responding :(')
+    logger.error('Are you sure you are using the latest JAMI image?')
   }
 }
