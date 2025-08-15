@@ -4,8 +4,6 @@ CONTAINER=lomake_db
 SERVICE_NAME=db
 DB_NAME=postgres
 
-current_date=$(date +"%Y%m%d")
-FILE_NAME="lomake_${current_date}.sql.gz"
 FOLDER_NAME="lomake"
 
 PROJECT_ROOT=$(dirname $(dirname $(realpath "$0")))
@@ -32,9 +30,32 @@ fi
 echo "Creating backups folder"
 mkdir -p ${BACKUPS}
 
-echo "Fetching a new dump"
+echo "Listing available backups in S3 bucket..."
+backup_files=$(s3cmd -c "$S3_CONF" ls "s3://psyduck/${FOLDER_NAME}/" | awk '{print $4}' | grep '\.sql\.gz$')
 
-s3cmd -c $S3_CONF get "s3://psyduck/${FOLDER_NAME}/${FILE_NAME}" $BACKUPS
+if [ -z "$backup_files" ]; then
+  echo "No backup files found in S3 bucket!"
+  exit 1
+fi
+
+echo "Available backups:"
+select chosen_backup in $backup_files; do
+  if [ -n "$chosen_backup" ]; then
+    echo "You selected: $chosen_backup"
+    FILE_NAME=$(basename "$chosen_backup")
+    break
+  else
+    echo "Invalid selection. Please select a valid backup number."
+  fi
+done
+
+echo "Fetching the selected dump: $FILE_NAME"
+s3cmd -c "$S3_CONF" get "$chosen_backup" "$BACKUPS"
+
+if [ ! -f "${BACKUPS}${FILE_NAME}" ]; then
+  echo "Download failed or file not found: ${BACKUPS}${FILE_NAME}"
+  exit 1
+fi
 
 echo "Removing database and related volume"
 docker-compose -f $DOCKER_COMPOSE down -v
