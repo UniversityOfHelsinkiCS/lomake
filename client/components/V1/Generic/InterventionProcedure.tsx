@@ -14,7 +14,7 @@ import {
   CircularProgress,
 } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
-import type { DocumentType } from '@/client/lib/types'
+import type { DocumentType, ReportDataKey } from '@/client/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack, ExpandMore } from '@mui/icons-material'
 import { basePath, isAdmin } from '@/config/common'
@@ -110,7 +110,7 @@ const InterventionProcedure = () => {
                 programme={programmeData}
                 {...props}
               />
-              <TextFieldCard id={groupKey} t={t} type="Comment" studyprogrammeKey={programmeKey} />
+              <TextFieldCard id={groupKey as ReportDataKey} t={t} type="Comment" studyprogrammeKey={programmeKey} />
             </AccordionDetails>
           )
         })}

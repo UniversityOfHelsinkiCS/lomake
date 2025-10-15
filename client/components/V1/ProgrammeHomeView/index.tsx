@@ -42,7 +42,7 @@ const ProgrammeHomeView = () => {
 
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
 
-  const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
+  const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
   const [reason, setReason] = useState('')
   const [additionalInfo, setAdditionalInfo] = useState('')
