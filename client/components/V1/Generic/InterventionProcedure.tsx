@@ -57,7 +57,7 @@ const InterventionProcedure = () => {
   const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
   const document = (documents.length > 0 || !isFetching) ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
-  const hasWriteRights = (user.access[programmeKey]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
+  const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
   // For this function the year variable is not needed cuz
   // intervention procedure is independent from years.
