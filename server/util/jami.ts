@@ -69,6 +69,7 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
       'grp-tilannekuvaoymp',
       'grp-koordinaatioryhma',
       'yhy-ypa-hr-henkilostopaallikot',
+      'hy-ypa-hr-kestavahyvinvointi',
     ]
 
     let lomakeAccess: Record<string, OrganisationAccess> = {}
