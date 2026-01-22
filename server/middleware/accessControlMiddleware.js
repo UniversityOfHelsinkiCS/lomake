@@ -69,7 +69,7 @@ const requireDekanaatti = (req, res, next) => {
 const checkEmployee = (req, res, next) => {
   if (req.path === '/api/login') {
     next()
-  } else if (req.user && req.user.iamGroups.includes('hy-employees')) {
+  } else if (!req.user || req.user.iamGroups.includes('hy-employees')) {
     next()
   } else {
     res.status(401).json({ error: 'Unauthorized access.' }).end()
