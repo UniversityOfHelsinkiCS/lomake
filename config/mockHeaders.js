@@ -205,7 +205,7 @@ const possibleUsers = [
     givenName: 'kosuJoryUser',
     mail: 'cypress-kosu-jory-user@helsinki.fi',
     schacDateOfBirth: 19990110,
-    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula;hy-employees',
+    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula',
     sn: 'nah',
   },
   {
@@ -224,7 +224,7 @@ const possibleUsers = [
     mail: 'cypress-random-rights-user@helsinki.fi',
     schacDateOfBirth: 19990112,
     hyGroupCn:
-      'hy-mltdk-geok-jory;random-iam-group-should-have-no-effect;hy-employees;random-iam-group-should-have-no-effect;hy-employees',
+      'hy-mltdk-geok-jory;random-iam-group-should-have-no-effect;hy-employees;random-iam-group-should-have-no-effect',
     sn: 'nah',
   },
   {
