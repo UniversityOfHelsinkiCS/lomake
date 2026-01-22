@@ -25,6 +25,7 @@ import initializeSentry from './util/sentry.js'
 import createWebsocketServer from './websocket.js'
 import { initializeDatabaseConnection } from './database/connection.js'
 import { testJami } from './util/jami.js'
+import { checkEmployee } from './middleware/accessControlMiddleware.js'
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url)
@@ -53,6 +54,7 @@ if (AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
 }
 
 app.use(currentUserMiddleware)
+app.use(checkEmployee)
 app.use('/api', routes)
 
 Sentry.setupExpressErrorHandler(app)

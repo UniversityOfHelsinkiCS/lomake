@@ -148,6 +148,12 @@ export default () => {
   const isIndividualDataReady = studyProgrammes?.data && faculties?.data
   const showRouter = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
 
+  const isEmployee = currentUser.data && currentUser.data.iamGroups.includes('hy-employees')
+
+  if (!isEmployee) {
+    return null
+  }
+
   return (
     <Box className="v1" sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', fontSize: 16 }}>
       <NavBar />
