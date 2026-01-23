@@ -7,7 +7,6 @@ import { Box } from '@mui/material'
 import NavBar from './NavBar'
 import Router from './Router'
 import { formKeys } from '../../config/data'
-import NoPermissions from './Generic/NoPermissions'
 
 import { wsConnect } from '../redux/websocketReducer'
 import { loginAction } from '../redux/currentUserReducer'
@@ -152,7 +151,7 @@ export default () => {
   const isEmployee = currentUser.data && currentUser.data.iamGroups.includes('hy-employees')
 
   if (!isEmployee) {
-    return <NoPermissions t={t} />
+    return <div data-cy="no-permissions-message" />
   }
 
   return (

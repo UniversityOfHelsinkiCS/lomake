@@ -67,7 +67,7 @@ const requireDekanaatti = (req, res, next) => {
 }
 
 const checkEmployee = (req, res, next) => {
-  if (req.path === '/api/login') {
+  if (req.path === '/api/login' || req.path === '/api/lock') {
     next()
   } else if (!req.user || req.user.iamGroups.includes('hy-employees')) {
     next()
