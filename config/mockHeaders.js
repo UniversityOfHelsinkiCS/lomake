@@ -34,7 +34,7 @@ const possibleUsers = [
     givenName: 'superAdmin',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'grp-toska',
+    hyGroupCn: 'hy-employees;grp-toska',
     sn: 'superAdmin',
   },
   {
@@ -43,7 +43,7 @@ const possibleUsers = [
     givenName: 'cypressSuperAdminUser',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'grp-toska',
+    hyGroupCn: 'hy-employees;grp-toska',
     sn: 'cypressSuperAdminUser',
   },
   {
@@ -52,7 +52,7 @@ const possibleUsers = [
     givenName: 'no rights',
     mail: 'no-rights@fake.helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-rehtoraatti',
+    hyGroupCn: 'hy-employees;hy-rehtoraatti',
     sn: 'nah',
   },
   {
@@ -79,7 +79,7 @@ const possibleUsers = [
     givenName: 'ospaUser',
     mail: 'cypress-ospa-user@helsinki.fi',
     schacDateOfBirth: 19990101,
-    hyGroupCn: 'hy-ypa-opa-ospa',
+    hyGroupCn: 'hy-employees;hy-ypa-opa-ospa',
     sn: 'nah',
   },
   {
@@ -88,7 +88,7 @@ const possibleUsers = [
     givenName: 'toskaUser',
     mail: 'cypress-toska-user@helsinki.fi',
     schacDateOfBirth: 19990102,
-    hyGroupCn: 'grp-toska',
+    hyGroupCn: 'hy-employees;grp-toska',
     sn: 'nah',
   },
   {
