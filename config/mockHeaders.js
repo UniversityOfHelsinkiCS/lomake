@@ -106,7 +106,7 @@ const possibleUsers = [
     givenName: 'joryReadUser',
     mail: 'cypress-joryRead-user@helsinki.fi',
     schacDateOfBirth: 19990103,
-    hyGroupCn: 'hy-ttdk-tuk-jory',
+    hyGroupCn: 'hy-ttdk-tuk-jory;hy-employees',
     sn: 'nah',
   },
   {
@@ -115,7 +115,7 @@ const possibleUsers = [
     givenName: 'doctoralUser',
     mail: 'cypress-doctoral-user@helsinki.fi',
     schacDateOfBirth: 19990104,
-    hyGroupCn: 'hy-tohtorikoulutus-johtoryhma',
+    hyGroupCn: 'hy-tohtorikoulutus-johtoryhma;hy-employees',
     sn: 'nah',
   },
   {
@@ -124,7 +124,7 @@ const possibleUsers = [
     givenName: 'doctoralUser',
     mail: 'cypress-doctoral-writing-user@helsinki.fake.fi',
     schacDateOfBirth: 19990104,
-    hyGroupCn: 'hy-ypa-tutto-toht',
+    hyGroupCn: 'hy-ypa-tutto-toht;hy-employees',
     sn: 'nah',
   },
   {
@@ -133,7 +133,7 @@ const possibleUsers = [
     givenName: 'psykoUser',
     mail: 'cypress-psyko-user@helsinki.fi',
     schacDateOfBirth: 19990105,
-    hyGroupCn: 'hy-ltdk-psyk-jory',
+    hyGroupCn: 'hy-ltdk-psyk-jory;hy-employees',
     sn: 'nah',
   },
   {
@@ -142,7 +142,7 @@ const possibleUsers = [
     givenName: 'logoUser',
     mail: 'cypress-logo-user@helsinki.fi',
     schacDateOfBirth: 19990106,
-    hyGroupCn: 'hy-ltdk-logo-jory',
+    hyGroupCn: 'hy-ltdk-logo-jory;hy-employees',
     sn: 'nah',
   },
   {
@@ -151,7 +151,7 @@ const possibleUsers = [
     givenName: 'rehtoriUser',
     mail: 'cypress-rehtori-user@helsinki.fi',
     schacDateOfBirth: 19990106,
-    hyGroupCn: 'hy-rehtoraatti',
+    hyGroupCn: 'hy-rehtoraatti;hy-employees',
     sn: 'nah',
   },
   {
@@ -160,7 +160,7 @@ const possibleUsers = [
     givenName: 'theologyFacultyUser',
     mail: 'cypress-theologyfaculty-user@helsinki.fi',
     schacDateOfBirth: 19990106,
-    hyGroupCn: 'hy-ttdk-dekanaatti',
+    hyGroupCn: 'hy-ttdk-dekanaatti;hy-employees',
     sn: 'nah',
   },
   {
@@ -169,7 +169,7 @@ const possibleUsers = [
     givenName: 'kojoUser',
     mail: 'cypress-kojo-user@helsinki.fi',
     schacDateOfBirth: 19990107,
-    hyGroupCn: 'hy-ttdk-tuk-jory;hy-ttdk-kandi-kojot',
+    hyGroupCn: 'hy-ttdk-tuk-jory;hy-ttdk-kandi-kojot;hy-employees',
     sn: 'nah',
   },
   {
@@ -178,7 +178,7 @@ const possibleUsers = [
     givenName: 'kosuUser',
     mail: 'cypress-kosu-user@helsinki.fi',
     schacDateOfBirth: 19990108,
-    hyGroupCn: 'hy-ypa-opa-kosu-viikki', // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
+    hyGroupCn: 'hy-ypa-opa-kosu-viikki;hy-employees', // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
     sn: 'nah',
   },
   {
@@ -187,7 +187,7 @@ const possibleUsers = [
     givenName: 'kojoDeanUser',
     mail: 'cypress-kojo-dean-user@helsinki.fi',
     schacDateOfBirth: 19990109,
-    hyGroupCn: 'hy-mltdk-mast-jory;hy-mltdk-maisteri-kojot;hy-mltdk-dekanaatti',
+    hyGroupCn: 'hy-mltdk-mast-jory;hy-mltdk-maisteri-kojot;hy-mltdk-dekanaatti;hy-employees',
     sn: 'nah',
   },
   {
@@ -196,7 +196,7 @@ const possibleUsers = [
     givenName: 'kosuJoryUser',
     mail: 'cypress-kosu-jory-user@helsinki.fi',
     schacDateOfBirth: 19990110,
-    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula',
+    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula;hy-employees',
     sn: 'nah',
   },
   {
@@ -205,7 +205,7 @@ const possibleUsers = [
     givenName: 'doctoralUser',
     mail: 'cypress-doctoral-kosu-regular-kosu-user@helsinki.fi',
     schacDateOfBirth: 19990111,
-    hyGroupCn: 'hy-ypa-tutto-toht;hy-ypa-opa-kosu-kumpula',
+    hyGroupCn: 'hy-ypa-tutto-toht;hy-ypa-opa-kosu-kumpula;hy-employees',
     sn: 'nah',
   },
   {
@@ -252,7 +252,7 @@ const possibleUsers = [
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
     hyGroupCn:
-      'hy-employees;grp-katselmus-valttdk;grp-koordinaatioryhma;hy-ypa-tutto-toht;grp-katselmus-projektiryhma;hy-tutkijakoulu-johtokunta',
+      'hy-employees;grp-katselmus-valttdk;grp-koordinaatioryhma;hy-ypa-tutto-toht;grp-katselmus-projektiryhma;hy-tutkijakoulu-johtokunta;hy-employees',
     sn: 'AcualFakePerson',
   },
   {
