@@ -54,11 +54,6 @@ if (AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
 }
 
 app.use(currentUserMiddleware)
-app.use(checkEmployee)
-app.use('/api', routes)
-
-Sentry.setupExpressErrorHandler(app)
-app.use(errorMiddleware)
 
 if (inProduction || inStaging) {
   const DIST_PATH = path.resolve(__dirname, '../build')
@@ -66,6 +61,12 @@ if (inProduction || inStaging) {
   app.use(express.static(DIST_PATH))
   app.get('*', (_req, res) => res.sendFile(INDEX_PATH))
 }
+
+app.use(checkEmployee)
+app.use('/api', routes)
+
+Sentry.setupExpressErrorHandler(app)
+app.use(errorMiddleware)
 
 initializeDatabaseConnection().then(async () => {
   // if there is a argument and return
