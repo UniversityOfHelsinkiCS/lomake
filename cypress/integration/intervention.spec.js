@@ -8,6 +8,7 @@ describe('Textfield tests', () => {
     cy.request(`/api/cypress/initKeyData`)
     cy.visit(`/v1/programmes/10/KH50_005`)
   })
+
   it('user can create new document', () => {
     // login to klemstro
     cy.login(possibleUsers[1].uid)
@@ -38,6 +39,7 @@ describe('Textfield tests', () => {
     cy.get(':nth-child(12) > .MuiPickersInputBase-root > .MuiPickersSectionList-root').type('25062026')
     cy.get('[data-cy=save-document]').click()
   })
+
   it('dean can close the intervention procedure and it wont display as active any more', () => {
     cy.login('cypressKojoDeanUser')
     cy.visit(`/v1/programmes/10/KH50_005`)

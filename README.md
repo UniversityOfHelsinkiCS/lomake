@@ -31,6 +31,10 @@ When deploying Lomake to a production server for the first time, the database sh
 
 The seeding should be performed only **once** by executing `docker exec -it lomake bash -c "npm run seed"`
 
+### Seeding the key data
+
+`curl http://localhost:8000/api/cypress/initKeyData`
+
 ### Running Cypress tests
 
 There's quite a lot of end-to-end tests in the cypress/integration folder.
@@ -92,8 +96,6 @@ The current questions of the degree reform forms can be found in **degreeReformI
 | fi       | string | Yes      | Finnish text |
 | se       | string | Yes      | Swedish text |
 | en       | string | Yes      | English text |
-
-
 
 
 ## IAMs
