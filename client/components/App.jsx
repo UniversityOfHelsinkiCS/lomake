@@ -7,6 +7,7 @@ import { Box } from '@mui/material'
 import NavBar from './NavBar'
 import Router from './Router'
 import { formKeys } from '../../config/data'
+import NoPermissions from './Generic/NoPermissions'
 
 import { wsConnect } from '../redux/websocketReducer'
 import { loginAction } from '../redux/currentUserReducer'
@@ -93,7 +94,7 @@ export default () => {
   const lang = useSelector(state => state.language)
   const organisation = useGetOrganisationDataQuery()
 
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   useEffect(() => {
     const linkLang = languageFromUrl()
@@ -151,7 +152,7 @@ export default () => {
   const isEmployee = currentUser.data && currentUser.data.iamGroups.includes('hy-employees')
 
   if (!isEmployee) {
-    return null
+    return <NoPermissions t={t} />
   }
 
   return (
