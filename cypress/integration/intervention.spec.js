@@ -3,7 +3,6 @@ import '../support/commands'
 import { possibleUsers } from '../../config/mockHeaders'
 
 describe('Textfield tests', () => {
-
   beforeEach(() => {
     cy.request(`/api/cypress/initKeyData`)
   })
