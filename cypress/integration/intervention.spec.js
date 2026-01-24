@@ -3,13 +3,13 @@ import '../support/commands'
 import { possibleUsers } from '../../config/mockHeaders'
 
 describe('Textfield tests', () => {
+
   beforeEach(() => {
-    cy.login('cypressSuperAdminUser')
     cy.request(`/api/cypress/initKeyData`)
-    cy.visit(`/v1/programmes/10/KH50_005`)
   })
 
   it('user can create new document', () => {
+    cy.request(`/api/cypress/resetDocuments`)
     // login to klemstro
     cy.login(possibleUsers[1].uid)
     cy.visit(`/v1/programmes/10/KH50_005`)

@@ -3,6 +3,7 @@ import moment from 'moment'
 import db from '../models/index.js'
 import KeyData from '../models/keyData.js'
 import Report from '../models/reports.js'
+import Document from '../models/document.js'
 import logger from '../util/logger.js'
 import { testProgrammeCode, defaultYears } from '../util/common.js'
 import { createDraftAnswers } from '../scripts/draftAndFinalAnswers.js'
@@ -1140,6 +1141,17 @@ const initData = {
   ],
 }
 
+const resetDocuments = async (req, res) => {
+  try {
+    logger.info('Cypress::resetDocuments')
+    await Document.destroy({ where: {} })
+    return res.status(200).send('OK')
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const initKeyData = async (_req, res) => {
   try {
     try {
@@ -1163,4 +1175,4 @@ const initKeyData = async (_req, res) => {
   }
 }
 
-export default { seed, createAnswers, createFacultyAnswers, initKeyData }
+export default { seed, createAnswers, createFacultyAnswers, initKeyData, resetDocuments }
