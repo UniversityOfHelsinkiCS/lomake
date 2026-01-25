@@ -84,9 +84,9 @@ const checkEmployee = (req, res, next) => {
   } else if (!req.user || req.user.iamGroups.includes('hy-employees')) {
     next()
   } else if (!req.path.includes('/api/')) {
-    res.status(401).json({ error: 'Unauthorized access.' }).end()
-  } else {
     next()
+  } else {
+    res.status(401).json({ error: 'Unauthorized access.' }).end()
   }
 }
 
