@@ -71,11 +71,18 @@ const checkEmployee = (req, res, next) => {
   console.log('checkEmployee')
   // eslint-disable-next-line no-console
   console.log(req.user)
-  if (req.path === '/api/login' || req.path === '/api/lock' || req.path.startsWith('/api/cypress')) {
+  if (req.path.includes('/api/login') || req.path.includes('/api/lock') || req.path.startsWith('/api/cypress')) {
     next()
   } else if (!req.user || req.user.iamGroups.includes('hy-employees')) {
     next()
   } else {
+    // eslint-disable-next-line no-console
+    console.log(
+      'if1',
+      req.path.includes('/api/login') || req.path.includes('/api/lock') || req.path.startsWith('/api/cypress'),
+    )
+    // eslint-disable-next-line no-console
+    console.log('if2', !req.user || req.user.iamGroups.includes('hy-employees'))
     res.status(401).json({ error: 'Unauthorized access.' }).end()
   }
 }
