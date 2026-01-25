@@ -24,6 +24,7 @@ describe('Textfield tests', () => {
 
     cy.get('[data-cy=updateDeadline]').click()
     cy.get('[data-cy=form-10-deadline]').contains('14.')
+
     cy.visit(`/v1/programmes/10/KH50_005/${year}`)
   })
 

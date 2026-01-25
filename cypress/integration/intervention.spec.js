@@ -4,11 +4,11 @@ import { possibleUsers } from '../../config/mockHeaders'
 
 describe('Textfield tests', () => {
   beforeEach(() => {
-    cy.login('cypressSuperAdminUser')
     cy.request(`/api/cypress/initKeyData`)
-    cy.visit(`/v1/programmes/10/KH50_005`)
   })
+
   it('user can create new document', () => {
+    cy.request(`/api/cypress/resetDocuments`)
     // login to klemstro
     cy.login(possibleUsers[1].uid)
     cy.visit(`/v1/programmes/10/KH50_005`)
@@ -38,6 +38,7 @@ describe('Textfield tests', () => {
     cy.get(':nth-child(12) > .MuiPickersInputBase-root > .MuiPickersSectionList-root').type('25062026')
     cy.get('[data-cy=save-document]').click()
   })
+
   it('dean can close the intervention procedure and it wont display as active any more', () => {
     cy.login('cypressKojoDeanUser')
     cy.visit(`/v1/programmes/10/KH50_005`)

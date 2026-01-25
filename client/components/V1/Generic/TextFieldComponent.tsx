@@ -24,6 +24,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const year = useAppSelector(state => state.filters.keyDataYear)
   const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
   const viewOnly = useAppSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
+
   const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
     pollingInterval: 1000,
   })

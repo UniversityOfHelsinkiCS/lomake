@@ -147,6 +147,11 @@ export default () => {
   const isCommonDataReady = studyProgrammes?.data && oldAnswers?.data
   const isIndividualDataReady = studyProgrammes?.data && faculties?.data
   const showRouter = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
+  const isEmployee = currentUser.data && currentUser.data.iamGroups.includes('hy-employees')
+
+  if (!isEmployee) {
+    return <div data-cy="no-permissions-message" />
+  }
 
   const isEmployee = currentUser.data && currentUser.data.iamGroups.includes('hy-employees')
 

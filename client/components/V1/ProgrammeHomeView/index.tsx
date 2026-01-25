@@ -88,7 +88,6 @@ const ProgrammeHomeView = () => {
     if (documents.length === 0) {
       return true
     }
-
     const lastDocument = documents.at(-1)
 
     if (!lastDocument.active && lastDocument.activeYear !== new Date().getFullYear()) {
