@@ -93,7 +93,7 @@ export default () => {
   const lang = useSelector(state => state.language)
   const organisation = useGetOrganisationDataQuery()
 
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   useEffect(() => {
     const linkLang = languageFromUrl()
@@ -147,6 +147,11 @@ export default () => {
   const isCommonDataReady = studyProgrammes?.data && oldAnswers?.data
   const isIndividualDataReady = studyProgrammes?.data && faculties?.data
   const showRouter = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
+  const isEmployee = currentUser.data && currentUser.data.iamGroups.includes('hy-employees')
+
+  if (!isEmployee) {
+    return <div data-cy="no-permissions-message" />
+  }
 
   return (
     <Box className="v1" sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', fontSize: 16 }}>
