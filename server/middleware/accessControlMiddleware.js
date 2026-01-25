@@ -67,7 +67,9 @@ const requireDekanaatti = (req, res, next) => {
 }
 
 const checkEmployee = (req, res, next) => {
+  // eslint-disable-next-line no-console
   console.log('checkEmployee')
+  // eslint-disable-next-line no-console
   console.log(req.user)
   if (req.path === '/api/login' || req.path === '/api/lock' || req.path.startsWith('/api/cypress')) {
     next()
