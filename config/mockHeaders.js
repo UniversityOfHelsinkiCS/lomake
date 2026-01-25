@@ -2,15 +2,6 @@ const ITEM_NAME = 'fakeUser'
 
 const possibleUsers = [
   {
-    uid: 'vesuvesu',
-    employeeNumber: undefined,
-    givenName: 'Acual student',
-    mail: 'vesuvesu@helsinki.fi',
-    schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-sivari',
-    sn: 'AcualStudent',
-  },
-  {
     uid: 'thairaks',
     employeeNumber: undefined,
     givenName: 'Acual dekaani fake user',
@@ -43,7 +34,7 @@ const possibleUsers = [
     givenName: 'superAdmin',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'grp-toska;hy-employees',
+    hyGroupCn: 'hy-employees;grp-toska',
     sn: 'superAdmin',
   },
   {
@@ -52,7 +43,7 @@ const possibleUsers = [
     givenName: 'cypressSuperAdminUser',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'grp-toska;hy-employees',
+    hyGroupCn: 'hy-employees;grp-toska',
     sn: 'cypressSuperAdminUser',
   },
   {
@@ -61,7 +52,7 @@ const possibleUsers = [
     givenName: 'no rights',
     mail: 'no-rights@fake.helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-rehtoraatti;hy-employees',
+    hyGroupCn: 'hy-employees;hy-rehtoraatti',
     sn: 'nah',
   },
   {
@@ -88,7 +79,7 @@ const possibleUsers = [
     givenName: 'ospaUser',
     mail: 'cypress-ospa-user@helsinki.fi',
     schacDateOfBirth: 19990101,
-    hyGroupCn: 'hy-ypa-opa-ospa;hy-employees',
+    hyGroupCn: 'hy-employees;hy-ypa-opa-ospa',
     sn: 'nah',
   },
   {
@@ -97,7 +88,7 @@ const possibleUsers = [
     givenName: 'toskaUser',
     mail: 'cypress-toska-user@helsinki.fi',
     schacDateOfBirth: 19990102,
-    hyGroupCn: 'grp-toska;hy-employees',
+    hyGroupCn: 'hy-employees;grp-toska',
     sn: 'nah',
   },
   {
@@ -205,7 +196,7 @@ const possibleUsers = [
     givenName: 'kosuJoryUser',
     mail: 'cypress-kosu-jory-user@helsinki.fi',
     schacDateOfBirth: 19990110,
-    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula',
+    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula;hy-employees',
     sn: 'nah',
   },
   {
@@ -261,7 +252,7 @@ const possibleUsers = [
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
     hyGroupCn:
-      'hy-employees;grp-katselmus-valttdk;grp-koordinaatioryhma;hy-ypa-tutto-toht;grp-katselmus-projektiryhma;hy-tutkijakoulu-johtokunta',
+      'hy-employees;grp-katselmus-valttdk;grp-koordinaatioryhma;hy-ypa-tutto-toht;grp-katselmus-projektiryhma;hy-tutkijakoulu-johtokunta;hy-employees',
     sn: 'AcualFakePerson',
   },
   {
@@ -281,6 +272,15 @@ const possibleUsers = [
     schacDateOfBirth: undefined,
     hyGroupCn: 'hy-tine;hy-employees',
     sn: 'nah',
+  },
+  {
+    uid: 'vesuvesu',
+    employeeNumber: undefined,
+    givenName: 'Acual student',
+    mail: 'vesuvesu@helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: 'hy-sivari',
+    sn: 'AcualStudent',
   },
 ]
 
