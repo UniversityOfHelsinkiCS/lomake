@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { inProduction } from '../util/common.js'
 import { isAdmin, isSuperAdmin, isKatselmusProjektiOrOhjausryhma, dekanaattiIamGroup } from '../../config/common.js'
 import logger from '../util/logger.js'
@@ -67,23 +68,25 @@ const requireDekanaatti = (req, res, next) => {
 }
 
 const checkEmployee = (req, res, next) => {
-  // eslint-disable-next-line no-console
   console.log('checkEmployee')
-  // eslint-disable-next-line no-console
   console.log(req.user)
+  console.log(req.path)
+
+  console.log(
+    'if1',
+    req.path.includes('/api/login') || req.path.includes('/api/lock') || req.path.startsWith('/api/cypress'),
+  )
+  console.log('if2', !req.user || req.user.iamGroups.includes('hy-employees'))
+  console.log('if3', !req.path.includes('/api/'))
+
   if (req.path.includes('/api/login') || req.path.includes('/api/lock') || req.path.startsWith('/api/cypress')) {
     next()
   } else if (!req.user || req.user.iamGroups.includes('hy-employees')) {
     next()
-  } else {
-    // eslint-disable-next-line no-console
-    console.log(
-      'if1',
-      req.path.includes('/api/login') || req.path.includes('/api/lock') || req.path.startsWith('/api/cypress'),
-    )
-    // eslint-disable-next-line no-console
-    console.log('if2', !req.user || req.user.iamGroups.includes('hy-employees'))
+  } else if (!req.path.includes('/api/')) {
     res.status(401).json({ error: 'Unauthorized access.' }).end()
+  } else {
+    next()
   }
 }
 
