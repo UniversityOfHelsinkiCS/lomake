@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { Op } from 'sequelize'
 import moment from 'moment'
 import db from '../models/index.js'
@@ -1175,4 +1176,38 @@ const initKeyData = async (_req, res) => {
   }
 }
 
-export default { seed, createAnswers, createFacultyAnswers, initKeyData, resetDocuments }
+const initReports = async (_req, res) => {
+  try {
+    logger.info('Cypress::initReports')
+    const programmes = await Studyprogramme.findAll({})
+    const years = [2024, 2025, 2026]
+
+    for (const currentYear of years) {
+      for (const { id, key } of programmes) {
+        // eslint-disable-next-line no-await-in-loop
+        const report = await Report.findOne({
+          where: {
+            [Op.and]: [{ studyprogrammeId: id }, { year: currentYear }],
+          },
+        })
+
+        if (!report) {
+          // eslint-disable-next-line no-await-in-loop
+          await Report.create({
+            studyprogrammeId: id,
+            studyprogrammeKey: key,
+            year: currentYear,
+            data: {},
+          })
+        }
+      }
+    }
+
+    return res.status(200).json({ message: 'Reports initialized' })
+  } catch (err) {
+    logger.error(`Database error: ${err}`)
+    return res.status(500).json({ error: `Database error: ${err}` })
+  }
+}
+
+export default { seed, createAnswers, createFacultyAnswers, initKeyData, resetDocuments, initReports }

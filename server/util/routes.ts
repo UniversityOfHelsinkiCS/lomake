@@ -99,6 +99,7 @@ router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
 router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.createFacultyAnswers)
 router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
+router.get('/cypress/initReports', notInProduction, cypress.initReports)
 router.get('/cypress/resetDocuments', notInProduction, cypress.resetDocuments)
 
 export default router

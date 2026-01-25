@@ -275,7 +275,7 @@ const ProgrammeHomeView = () => {
               variant="contained"
               onClick={handleCloseProcedure}
               color="error"
-              disabled={!(reason && documents.length > 0)}
+              disabled={!(reason)}
             >
               {t('document:closeButton')}
             </Button>

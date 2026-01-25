@@ -1,16 +1,28 @@
-import { defaultYears } from '../../config/common'
-
 describe('Notification badge tests', () => {
+  const year = 2026
+
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
     cy.request(`/api/cypress/initKeyData`)
+    cy.request(`/api/cypress/initReports`)
     cy.visit(`/admin`)
     cy.contains('Deadline settings').click()
-    cy.createDeadline(defaultYears[0], 'Vuosiseuranta - UUSI')
+    cy.closeDeadline(year, 'Vuosiseuranta')
+
+    cy.get('[data-cy=draft-year-selector]').click()
+    cy.get('.item').contains(year).click()
+
+    cy.get('[data-cy=form-selector]').click()
+    cy.get('.item').contains('Vuosiseuranta - UUSI').click()
+
+    cy.get('.react-datepicker__input-container > input').click() // Open datepicked
+    cy.get('.react-datepicker__navigation--next').click() // Go to next month
+    cy.get('.react-datepicker__day--014').click() // Select 14th day
+
+    cy.get('[data-cy=updateDeadline]').click()
     cy.get('[data-cy=form-10-deadline]').contains('14.')
+
     cy.visit('/v1/overview')
-    cy.get('[data-cy="year-filter"] > .MuiSelect-select').click()
-    cy.contains('2024').click()
   })
 
   const redProgramme = 'KH50_005' // all red
@@ -50,10 +62,10 @@ describe('Notification badge tests', () => {
     })
 
     it('Adding comments or actions should reflect in overview page badges', () => {
-      cy.visit(`/v1/programmes/10/${redProgramme}/${defaultYears[0]}`)
+      cy.visit(`/v1/programmes/10/${redProgramme}/${year}`)
 
-      cy.intercept('/api/reports/KH50_005/2024').as('getReport')
-      cy.visit(`/v1/programmes/10/${redProgramme}/${defaultYears[0]}`)
+      cy.intercept(`/api/reports/KH50_005/${year}`).as('getReport')
+      cy.visit(`/v1/programmes/10/${redProgramme}/${year}`)
       cy.wait('@getReport')
       cy.typeInTextField('Vetovoimaisuus-Comment', 'Test comment')
       cy.get(`[data-cy=save-Vetovoimaisuus-Comment]`).click()
@@ -79,7 +91,7 @@ describe('Notification badge tests', () => {
 
   describe('Testing badges in programme view page', () => {
     it('Light and actions badges should display on red lights', () => {
-      cy.visit(`/v1/programmes/10/${redProgramme}/${defaultYears[0]}`)
+      cy.visit(`/v1/programmes/10/${redProgramme}/${year}`)
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('exist')
       cy.get(`[data-cy="tabBadge-actions"]`).should('exist')
@@ -90,7 +102,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Light or action badges should not display on green or gray lights', () => {
-      cy.visit(`/v1/programmes/10/${greenProgramme}/${defaultYears[0]}`)
+      cy.visit(`/v1/programmes/10/${greenProgramme}/${year}`)
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('not.exist')
       cy.get(`[data-cy="tabBadge-actions"]`).should('not.exist')
@@ -101,7 +113,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Light badges should but action badges shouldnt display on yellow lights', () => {
-      cy.visit(`/v1/programmes/10/${yellowProgramme}/${defaultYears[0]}`)
+      cy.visit(`/v1/programmes/10/${yellowProgramme}/${year}`)
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('exist')
       cy.get(`[data-cy="tabBadge-actions"]`).should('not.exist')
@@ -112,7 +124,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Any badges shouldnt display on a discontinued programme', () => {
-      cy.visit(`/v1/programmes/10/${discontinuedProgramme}/${defaultYears[0]}`)
+      cy.visit(`/v1/programmes/10/${discontinuedProgramme}/${year}`)
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('not.exist')
       cy.get(`[data-cy="tabBadge-actions"]`).should('not.exist')
@@ -123,10 +135,10 @@ describe('Notification badge tests', () => {
     })
 
     it('Opinion of programme tab + text field badge should appear and disappear when opinion of the programme is added', () => {
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
+      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${year}`)
 
-      cy.intercept(`/api/reports/${oneRedProgramme}/${defaultYears[0]}`).as('getReport')
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
+      cy.intercept(`/api/reports/${oneRedProgramme}/${year}`).as('getReport')
+      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${year}`)
       cy.wait('@getReport')
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('exist')
@@ -140,7 +152,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Actions tab + text field badge should appear and disappear when actions are added', () => {
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${defaultYears[0]}`)
+      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${year}`)
 
       cy.get(`[data-cy="tabBadge-actions"]`).should('exist')
       cy.get('[data-cy="actionsTab"]').click()
@@ -175,6 +187,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Intervention badges disappear on creating new intervention procedure document', () => {
+      cy.request(`/api/cypress/resetDocuments`)
       cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('exist')
       cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('exist')
 
@@ -186,6 +199,7 @@ describe('Notification badge tests', () => {
     })
 
     it('Intervention badge and text disappears on closing intervention procedure', () => {
+      cy.request(`/api/cypress/resetDocuments`)
       cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('exist')
       cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('exist')
 
