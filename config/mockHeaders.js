@@ -2,15 +2,6 @@ const ITEM_NAME = 'fakeUser'
 
 const possibleUsers = [
   {
-    uid: 'vesuvesu',
-    employeeNumber: undefined,
-    givenName: 'Acual student',
-    mail: 'vesuvesu@helsinki.fi',
-    schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-sivari',
-    sn: 'AcualStudent',
-  },
-  {
     uid: 'thairaks',
     employeeNumber: undefined,
     givenName: 'Acual dekaani fake user',
@@ -281,6 +272,15 @@ const possibleUsers = [
     schacDateOfBirth: undefined,
     hyGroupCn: 'hy-tine;hy-employees',
     sn: 'nah',
+  },
+  {
+    uid: 'vesuvesu',
+    employeeNumber: undefined,
+    givenName: 'Acual student',
+    mail: 'vesuvesu@helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: 'hy-sivari',
+    sn: 'AcualStudent',
   },
 ]
 
