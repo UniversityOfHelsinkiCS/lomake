@@ -6,7 +6,7 @@ const initializeSentry = () => {
   if (!(process.env.NODE_ENV === 'production')) return
 
   Sentry.init({
-    dsn: 'https://a6ceb1539cbea12e147f5e73189a1d45@toska.cs.helsinki.fi/13',
+    dsn: 'https://33826484e41156258524cf4c1209b38f@toska.it.helsinki.fi/26',
     environment: process.env.SENTRY_ENVIRONMENT,
     release: `lomake:${GIT_SHA}`,
     integrations: [Sentry.httpIntegration({ breadcrumbs: true }), Sentry.expressIntegration()],
