@@ -13,20 +13,55 @@ import {
   logZodError,
   ZodError,
 } from '../../shared/validators/index.js'
+import { CanonicalSheetName, KeyData as KeyDataType } from '@/shared/lib/types.js'
 import Studyprogramme from '../models/studyprogramme.js'
 import logger from '../util/logger.js'
 
-type CanonicalSheetName = 'kandiohjelmat' | 'maisteriohjelmat' | 'tohtoriohjelmat' | 'metadata'
+
+const deactivateExistingKeyData = async () => {
+  await KeyData.update(
+    { active: false },
+    { where: { active: true } }
+  )
+}
+
+const fetchProgrammeData = async () => {
+  return await Studyprogramme.findAll({
+    attributes: ['key', 'name', 'level', 'international'],
+    include: ['primaryFaculty', 'companionFaculties'],
+  })
+}
+
+const validateKeyData = async (keyData: any) => {
+  try {
+    KeyDataProgrammeSchema.extend({
+      values: KandiohjelmatValuesSchema,
+    })
+      .array()
+      .parse(keyData.kandiohjelmat)
+    KeyDataProgrammeSchema.extend({
+      values: MaisteriohjelmatValuesSchema,
+    })
+      .array()
+      .parse(keyData.maisteriohjelmat)
+    MetadataSchema.array().parse(keyData.metadata)
+  } catch (zodError) {
+    logZodError(zodError as ZodError)
+    throw new Error('Invalid KeyData format')
+  }
+}
 
 const getKeyData = async (_req: Request, res: Response) => {
   try {
-    const keyData = await KeyData.findAll({
+    const { data } = await KeyData.findOne({
       where: {
         active: true,
       },
     })
 
-    return res.status(200).json(keyData[0].data)
+    await validateKeyData(data)
+
+    return res.status(200).json(data)
   } catch (error) {
     return res.status(500).json({ error: (error as Error).message })
   }
@@ -78,40 +113,10 @@ const uploadKeyData = async (req: Request, res: Response) => {
           data[canonicalName] = Array.isArray(sheetAsJson) ? sheetAsJson : []
         })
 
-        await KeyData.update(
-          {
-            active: false,
-          },
-          {
-            where: {
-              active: true,
-            },
-          },
-        )
-
-        const programmeData = await Studyprogramme.findAll({
-          attributes: ['key', 'name', 'level', 'international'],
-          include: ['primaryFaculty', 'companionFaculties'],
-        })
-
-        const formattedKeyData = formatKeyData(data, programmeData)
-
-        try {
-          KeyDataProgrammeSchema.extend({
-            values: KandiohjelmatValuesSchema,
-          })
-            .array()
-            .parse(formattedKeyData.kandiohjelmat)
-          KeyDataProgrammeSchema.extend({
-            values: MaisteriohjelmatValuesSchema,
-          })
-            .array()
-            .parse(formattedKeyData.maisteriohjelmat)
-          MetadataSchema.array().parse(formattedKeyData.metadata)
-        } catch (zodError) {
-          logZodError(zodError as ZodError)
-          throw new Error('Invalid KeyData format')
-        }
+        await deactivateExistingKeyData()
+        const programmeData = await fetchProgrammeData()
+        const formattedKeyData: KeyDataType = formatKeyData(data, programmeData)
+        await validateKeyData(formatKeyData)
 
         await KeyData.create({
           data: formattedKeyData,
@@ -167,16 +172,7 @@ const updateKeyData = async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'Key data not found' })
     }
 
-    await KeyData.update(
-      {
-        active: false,
-      },
-      {
-        where: {
-          active: true,
-        },
-      },
-    )
+    await deactivateExistingKeyData()
 
     await keyData.update({
       active: true,

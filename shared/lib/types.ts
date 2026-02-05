@@ -54,3 +54,5 @@ export type Lock = {
   lastname: string
   timeoutId: ReturnType<typeof setTimeout>
 }
+
+export type CanonicalSheetName = 'kandiohjelmat' | 'maisteriohjelmat' | 'tohtoriohjelmat' | 'metadata'

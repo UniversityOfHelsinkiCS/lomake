@@ -1,83 +1,69 @@
 import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } from '@/shared/lib/types'
 import { ProgrammeLevel } from '../../shared/lib/enums'
 
+const transformProgramme = (programme: any) => ({
+  key: programme.key,
+  name: programme.name,
+  level: programme.level,
+  companionFaculties: programme.companionFaculties,
+  international: programme.international,
+})
+
+const extractMultilingualField = (obj: any, fieldPrefix: string) => ({
+  fi: obj[`${fieldPrefix}_fi`],
+  se: obj[`${fieldPrefix}_se`],
+  en: obj[`${fieldPrefix}_en`],
+})
+
+const restructureProgramme = <T extends KandiohjelmatValues | MaisteriohjelmatValues>(
+  programme: T,
+  programmes: ReturnType<typeof transformProgramme>[],
+) => {
+  const matchedProgramme = programmes.find(
+    (p) => p.key === programme['Koulutusohjelman koodi'].trim(),
+  )
+
+  return {
+    koulutusohjelmakoodi: programme['Koulutusohjelman koodi'],
+    koulutusohjelma: matchedProgramme?.name,
+    values: programme,
+    year: programme['Vuosi'],
+    international: matchedProgramme?.international,
+    level: matchedProgramme?.level,
+    additionalInfo: extractMultilingualField(programme, 'Lisätietoja'),
+  }
+}
+
+const PROGRAMME_LEVEL_MAPPING: Record<string, ProgrammeLevel> = {
+  'Kandi': ProgrammeLevel.Bachelor,
+  'Maisteri': ProgrammeLevel.Master,
+  'Tohtori': ProgrammeLevel.Doctor,
+} as const
+
+const restructureMetadata = (m: KeyDataMetadataRaw) => ({
+  yksikko: m['Yksikkö'],
+  kynnysarvot: m['Kynnysarvot'],
+  ohjelmanTaso: PROGRAMME_LEVEL_MAPPING[m['Ohjelman taso']],
+  liikennevalo: m['Liikennevalo'],
+  mittarinRajat: m['Mittarin rajat'],
+  arviointialue: m['Arviointialue_fi'],
+  avainluvunNimi: extractMultilingualField(m, 'Avainluvun nimi'),
+  maaritelma: extractMultilingualField(m, 'Määritelmä'),
+  avainluvunArvo: m['Avainluvun nimi_fi'],
+})
+
 export const formatKeyData = (data: any, programmeData: any) => {
   const { kandiohjelmat, maisteriohjelmat, metadata } = data
 
-  const programmes = programmeData.map((programme: any) => ({
-    key: programme.key,
-    name: programme.name,
-    level: programme.level,
-    companionFaculties: programme.companionFaculties,
-    international: programme.international,
-  }))
+  const programmes = programmeData.map(transformProgramme)
 
-  const kandiohjelmat_restructured = kandiohjelmat.map((kandiohjelma: KandiohjelmatValues) => {
-    const matchedProgramme = programmes.find(
-      (programme: any) => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim(),
-    )
-
-    return {
-      koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
-      koulutusohjelma: matchedProgramme && matchedProgramme.name,
-      values: kandiohjelma,
-      year: kandiohjelma['Vuosi'],
-      international: matchedProgramme?.international,
-      level: matchedProgramme?.level,
-      additionalInfo: {
-        fi: kandiohjelma[`Lisätietoja_fi`],
-        se: kandiohjelma[`Lisätietoja_se`],
-        en: kandiohjelma[`Lisätietoja_en`],
-      },
-    }
-  })
-
-  const maisteriohjelmat_restructured = maisteriohjelmat.map((maisteriohjelma: MaisteriohjelmatValues) => {
-    const matchedProgramme = programmes.find(
-      (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
-    )
-
-    return {
-      koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
-      koulutusohjelma: matchedProgramme && matchedProgramme.name,
-      values: maisteriohjelma,
-      year: maisteriohjelma['Vuosi'],
-      international: matchedProgramme?.international,
-      level: matchedProgramme?.level,
-      additionalInfo: {
-        fi: maisteriohjelma[`Lisätietoja_fi`],
-        se: maisteriohjelma[`Lisätietoja_se`],
-        en: maisteriohjelma[`Lisätietoja_en`],
-      },
-    }
-  })
-
-  const metadata_restructured = metadata.map((m: KeyDataMetadataRaw) => {
-    const ohjelmanTasoMapping: { [key: string]: ProgrammeLevel } = {
-      ["Kandi"]: ProgrammeLevel.Bachelor,
-      ["Maisteri"]: ProgrammeLevel.Master,
-      ["Tohtori"]: ProgrammeLevel.Doctor,
-    }
-
-    return {
-      yksikko: m['Yksikkö'],
-      kynnysarvot: m['Kynnysarvot'],
-      ohjelmanTaso: ohjelmanTasoMapping[m['Ohjelman taso']],
-      liikennevalo: m['Liikennevalo'],
-      mittarinRajat: m['Mittarin rajat'],
-      arviointialue: m['Arviointialue_fi'],
-      avainluvunNimi: {
-        fi: m[`Avainluvun nimi_fi`],
-        se: m[`Avainluvun nimi_se`],
-        en: m[`Avainluvun nimi_en`],
-      },
-      maaritelma: {
-        fi: m[`Määritelmä_fi`],
-        se: m[`Määritelmä_se`],
-        en: m[`Määritelmä_en`],
-      },
-      avainluvunArvo: m['Avainluvun nimi_fi'],
-    }
-  })
-  return { kandiohjelmat: kandiohjelmat_restructured, maisteriohjelmat: maisteriohjelmat_restructured, metadata: metadata_restructured }
+  return {
+    kandiohjelmat: kandiohjelmat.map((k: KandiohjelmatValues) =>
+      restructureProgramme(k, programmes)
+    ),
+    maisteriohjelmat: maisteriohjelmat.map((m: MaisteriohjelmatValues) =>
+      restructureProgramme(m, programmes)
+    ),
+    metadata: metadata.map(restructureMetadata),
+  }
 }
