@@ -2,7 +2,7 @@ import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } 
 import { ProgrammeLevel } from '../../shared/lib/enums'
 
 export const formatKeyData = (data: any, programmeData: any) => {
-  const { Kandiohjelmat, Maisteriohjelmat, metadata } = data
+  let { kandiohjelmat, maisteriohjelmat, metadata } = data
 
   const programmes = programmeData.map((programme: any) => ({
     key: programme.key,
@@ -12,7 +12,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     international: programme.international,
   }))
 
-  const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: KandiohjelmatValues) => {
+  kandiohjelmat = kandiohjelmat.map((kandiohjelma: KandiohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim(),
     )
@@ -32,7 +32,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     }
   })
 
-  const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: MaisteriohjelmatValues) => {
+  maisteriohjelmat = maisteriohjelmat.map((maisteriohjelma: MaisteriohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
     )
@@ -52,7 +52,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     }
   })
 
-  const meta = metadata.map((m: KeyDataMetadataRaw) => {
+  metadata = metadata.map((m: KeyDataMetadataRaw) => {
     const ohjelmanTasoMapping: { [key: string]: ProgrammeLevel } = {
       ["Kandi"]: ProgrammeLevel.Bachelor,
       ["Maisteri"]: ProgrammeLevel.Master,
@@ -79,5 +79,5 @@ export const formatKeyData = (data: any, programmeData: any) => {
       avainluvunArvo: m['Avainluvun nimi_fi'],
     }
   })
-  return { kandiohjelmat, maisteriohjelmat, metadata: meta }
+  return { kandiohjelmat, maisteriohjelmat, metadata }
 }

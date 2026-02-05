@@ -2,7 +2,6 @@ import type { Request, Response } from 'express'
 import multer from 'multer'
 import xlsx from 'xlsx'
 import KeyData from '../models/keyData.js'
-import db from '../models/index.js'
 import { formatKeyData } from '../services/keyDataService.js'
 
 // Validations
@@ -14,8 +13,10 @@ import {
   logZodError,
   ZodError,
 } from '../../shared/validators/index.js'
-import { previousSaturday } from 'date-fns'
 import Studyprogramme from '../models/studyprogramme.js'
+import logger from '../util/logger.js'
+
+type CanonicalSheetName = 'kandiohjelmat' | 'maisteriohjelmat' | 'tohtoriohjelmat' | 'metadata'
 
 const getKeyData = async (_req: Request, res: Response) => {
   try {
@@ -25,36 +26,7 @@ const getKeyData = async (_req: Request, res: Response) => {
       },
     })
 
-    const programmeData = await Studyprogramme.findAll({
-      attributes: ['key', 'name', 'level', 'international'],
-      include: ['primaryFaculty', 'companionFaculties'],
-    })
-
-    if (!keyData.length) {
-      return res.status(404).json({ error: 'No key data found' })
-    }
-
-    const formattedKeyData = formatKeyData(keyData[0].data, programmeData)
-
-    // Validate formatted key data
-    try {
-      KeyDataProgrammeSchema.extend({
-        values: KandiohjelmatValuesSchema,
-      })
-        .array()
-        .parse(formattedKeyData.kandiohjelmat)
-      KeyDataProgrammeSchema.extend({
-        values: MaisteriohjelmatValuesSchema,
-      })
-        .array()
-        .parse(formattedKeyData.maisteriohjelmat)
-      MetadataSchema.array().parse(formattedKeyData.metadata)
-    } catch (zodError) {
-      logZodError(zodError as ZodError)
-      throw new Error('Invalid KeyData format')
-    }
-
-    return res.status(200).json(formattedKeyData)
+    return res.status(200).json(keyData[0].data)
   } catch (error) {
     return res.status(500).json({ error: (error as Error).message })
   }
@@ -79,12 +51,31 @@ const uploadKeyData = async (req: Request, res: Response) => {
 
       try {
         const workbook = xlsx.read(file.buffer, { type: 'buffer' })
-        const jsonSheet: { [key: string]: any[] } = {}
 
-        workbook.SheetNames.forEach(sheetName => {
-          const worksheet = workbook.Sheets[sheetName]
-          const data = xlsx.utils.sheet_to_json(worksheet)
-          jsonSheet[sheetName] = data
+        if (!workbook || !workbook.SheetNames?.length) {
+          logger.error('Workbook is invalid or has no sheets')
+          throw new Error('Invalid workbook: no sheets found')
+        }
+        const data: Partial<Record<CanonicalSheetName, any[]>> = {}
+
+        const { SheetNames, Sheets } = workbook
+
+        const order: CanonicalSheetName[] = [
+          'kandiohjelmat',
+          'maisteriohjelmat',
+          // 'tohtoriohjelmat', commented out cuz not in pilotti
+          'metadata',
+        ]
+
+        order.forEach((canonicalName, idx) => {
+          const rawName = SheetNames[idx]
+          const ws = Sheets[rawName]
+          if (!ws) {
+            throw new Error(`Worksheet at index ${idx} (${rawName}) is missing`)
+          }
+
+          const sheetAsJson = xlsx.utils.sheet_to_json(ws) as any[]
+          data[canonicalName] = Array.isArray(sheetAsJson) ? sheetAsJson : []
         })
 
         await KeyData.update(
@@ -98,10 +89,35 @@ const uploadKeyData = async (req: Request, res: Response) => {
           },
         )
 
+        const programmeData = await Studyprogramme.findAll({
+          attributes: ['key', 'name', 'level', 'international'],
+          include: ['primaryFaculty', 'companionFaculties'],
+        })
+
+        const formattedKeyData = formatKeyData(data, programmeData)
+
+        try {
+          KeyDataProgrammeSchema.extend({
+            values: KandiohjelmatValuesSchema,
+          })
+            .array()
+            .parse(formattedKeyData.kandiohjelmat)
+          KeyDataProgrammeSchema.extend({
+            values: MaisteriohjelmatValuesSchema,
+          })
+            .array()
+            .parse(formattedKeyData.maisteriohjelmat)
+          MetadataSchema.array().parse(formattedKeyData.metadata)
+        } catch (zodError) {
+          logZodError(zodError as ZodError)
+          throw new Error('Invalid KeyData format')
+        }
+
         await KeyData.create({
-          data: jsonSheet,
+          data,
           active: true,
         })
+
         resolve(res.status(201).json({ message: 'Key data uploaded' }))
       } catch (error) {
         resolve(res.status(500).json({ error: (error as Error).message }))
