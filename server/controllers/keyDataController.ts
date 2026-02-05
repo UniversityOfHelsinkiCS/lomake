@@ -114,7 +114,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
         }
 
         await KeyData.create({
-          data,
+          data: formattedKeyData,
           active: true,
         })
 

@@ -2,7 +2,7 @@ import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } 
 import { ProgrammeLevel } from '../../shared/lib/enums'
 
 export const formatKeyData = (data: any, programmeData: any) => {
-  let { kandiohjelmat, maisteriohjelmat, metadata } = data
+  const { kandiohjelmat, maisteriohjelmat, metadata } = data
 
   const programmes = programmeData.map((programme: any) => ({
     key: programme.key,
@@ -12,7 +12,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     international: programme.international,
   }))
 
-  kandiohjelmat = kandiohjelmat.map((kandiohjelma: KandiohjelmatValues) => {
+  const kandiohjelmat_restructured = kandiohjelmat.map((kandiohjelma: KandiohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim(),
     )
@@ -32,7 +32,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     }
   })
 
-  maisteriohjelmat = maisteriohjelmat.map((maisteriohjelma: MaisteriohjelmatValues) => {
+  const maisteriohjelmat_restructured = maisteriohjelmat.map((maisteriohjelma: MaisteriohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
     )
@@ -52,7 +52,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     }
   })
 
-  metadata = metadata.map((m: KeyDataMetadataRaw) => {
+  const metadata_restructured = metadata.map((m: KeyDataMetadataRaw) => {
     const ohjelmanTasoMapping: { [key: string]: ProgrammeLevel } = {
       ["Kandi"]: ProgrammeLevel.Bachelor,
       ["Maisteri"]: ProgrammeLevel.Master,
@@ -79,5 +79,5 @@ export const formatKeyData = (data: any, programmeData: any) => {
       avainluvunArvo: m['Avainluvun nimi_fi'],
     }
   })
-  return { kandiohjelmat, maisteriohjelmat, metadata }
+  return { kandiohjelmat: kandiohjelmat_restructured, maisteriohjelmat: maisteriohjelmat_restructured, metadata: metadata_restructured }
 }
