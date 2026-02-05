@@ -8,7 +8,11 @@ export const up = async ({ context: queryInterface }) => {
     const facultyId = faculty[0]?.id
 
     if (!facultyId) {
-      throw new Error('Faculty "Lääketieteellinen tiedekunta" not found')
+      // Faculty doesn't exist yet - this is expected in a fresh database before seeding
+      // Skip the insertion silently since seeding will recreate the data from JAMI
+      // eslint-disable-next-line no-console
+      console.log('Migration skipped: Faculty H30 not found. This is expected before seeding.')
+      return
     }
 
     await queryInterface.bulkInsert('studyprogrammes', [

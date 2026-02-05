@@ -10,6 +10,7 @@ import { testProgrammeCode, defaultYears } from '../util/common.js'
 import { createDraftAnswers } from '../scripts/draftAndFinalAnswers.js'
 import { facultyList } from '../../config/data.js'
 import { ARCHIVE_LAST_YEAR } from '../../config/common.js'
+import { formatKeyData } from '../services/keyDataService.js'
 
 // Validations
 import {
@@ -1165,8 +1166,22 @@ const initKeyData = async (_req, res) => {
       throw new Error('Invalid KeyData format')
     }
 
+    // Fetch programme data and format the key data to match the expected structure
+    const programmeData = await Studyprogramme.findAll({
+      attributes: ['key', 'name', 'level', 'international'],
+      include: ['primaryFaculty', 'companionFaculties'],
+    })
+
+    const rawData = {
+      kandiohjelmat: initData.Kandiohjelmat,
+      maisteriohjelmat: initData.Maisteriohjelmat,
+      metadata: initData.metadata,
+    }
+
+    const formattedKeyData = formatKeyData(rawData, programmeData)
+
     await KeyData.create({
-      data: initData,
+      data: formattedKeyData,
       active: true,
     })
 
