@@ -52,20 +52,20 @@ const InterventionProcedure = () => {
   const { t } = useTranslation()
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
-  const year = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
   const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
   const document = (documents.length > 0 || !isFetching) ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
+  if (isLoading) return <Loader active />
   // For this function the year variable is not needed cuz
   // intervention procedure is independent from years.
   const programmeData = programme.find(
     (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey,
   )
 
-  if (isLoading || !programmeData) return <Loader active />
+  const year = `${programmeData.year + 1}`
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData, t })
 
@@ -110,7 +110,7 @@ const InterventionProcedure = () => {
                 programme={programmeData}
                 {...props}
               />
-              <TextFieldCard id={groupKey as ReportDataKey} t={t} type="Comment" studyprogrammeKey={programmeKey} />
+              <TextFieldCard id={groupKey as ReportDataKey} t={t} type="Comment" studyprogrammeKey={programmeKey} year={year} />
             </AccordionDetails>
           )
         })}
@@ -121,7 +121,7 @@ const InterventionProcedure = () => {
             <Typography variant="h4">{t('keyData:actions')}</Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ display: 'flex', flexDirection: 'column' }}>
-            <TextFieldCard id="Toimenpiteet" t={t} type="Measure" studyprogrammeKey={programmeKey} />
+            <TextFieldCard id="Toimenpiteet" t={t} type="Measure" studyprogrammeKey={programmeKey} year={year} />
             <Button
               sx={{ alignSelf: 'flex-end', mt: '1rem' }}
               variant="outlined"

@@ -21,7 +21,7 @@ type TextFieldComponentProps = {
 const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => {
   const { programme: studyprogrammeKey } = useParams<{ programme: string }>()
   const { t } = useTranslation()
-  const year = useAppSelector(state => state.filters.keyDataYear)
+  const { year } = useParams<{ year: string }>()
   const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
   const viewOnly = useAppSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
 
@@ -92,7 +92,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   }, [hasUnsavedChanges, t, dataFromRedux, content])
 
   if (viewOnly) {
-    return <TextFieldCard id={id} t={t} type={type} studyprogrammeKey={studyprogrammeKey} />
+    return <TextFieldCard id={id} t={t} type={type} studyprogrammeKey={studyprogrammeKey} year={year} />
   }
 
   return (

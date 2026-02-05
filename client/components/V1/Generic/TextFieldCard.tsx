@@ -8,8 +8,7 @@ import { useAppSelector } from '@/client/util/hooks'
 
 type ReportDataKey = 'Vetovoimaisuus' | 'Opintojen sujuvuus ja valmistuminen' | 'Resurssien käyttö' | 'Palaute ja työllistyminen' | 'Toimenpiteet'
 
-export const TextFieldCard = ({ id, t, type, studyprogrammeKey }: { id: ReportDataKey; t: TFunction; type: string, studyprogrammeKey: string }) => {
-  const year = useAppSelector(state => state.filters.keyDataYear)
+export const TextFieldCard = ({ id, t, type, studyprogrammeKey, year }: { id: ReportDataKey; t: TFunction; type: string, studyprogrammeKey: string, year: string }) => {
   const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
     pollingInterval: 2000,
   })

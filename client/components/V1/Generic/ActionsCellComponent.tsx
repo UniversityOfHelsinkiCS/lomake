@@ -15,12 +15,13 @@ import Modal from '../Generic/ModalTemplateComponent'
 import { TextFieldCard } from '../Generic/TextFieldCard'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { useParams } from 'react-router'
 
 const ActionsCell = ({ programmeData, metadata, reports }: { programmeData: KeyDataProgramme; metadata: KeyDataMetadata[]; reports: Record<string, ReportData | undefined> }) => {
   const { renderActionsBadge } = useNotificationBadge()
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
-  const year = useAppSelector(state => state.filters.keyDataYear)
+  const year = `${programmeData.year + 1}`
   const [open, setOpen] = useState(false)
 
   const dispatch = useAppDispatch()
@@ -50,7 +51,7 @@ const ActionsCell = ({ programmeData, metadata, reports }: { programmeData: KeyD
         <Typography variant="h3">
           {programmeData.koulutusohjelma[lang]} {year}
         </Typography>
-        <TextFieldCard id={'Toimenpiteet'} t={t} type={'Measure'} studyprogrammeKey={programmeData.koulutusohjelmakoodi}></TextFieldCard>
+        <TextFieldCard id={'Toimenpiteet'} t={t} type={'Measure'} studyprogrammeKey={programmeData.koulutusohjelmakoodi} year={year} />
       </Modal>
     </TableCell>
   )
