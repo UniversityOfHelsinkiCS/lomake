@@ -68,17 +68,6 @@ const requireDekanaatti = (req, res, next) => {
 }
 
 const checkEmployee = (req, res, next) => {
-  console.log('checkEmployee')
-  console.log(req.user)
-  console.log(req.path)
-
-  console.log(
-    'if1',
-    req.path.includes('/api/login') || req.path.includes('/api/lock') || req.path.startsWith('/api/cypress'),
-  )
-  console.log('if2', !req.user || req.user.iamGroups.includes('hy-employees'))
-  console.log('if3', !req.path.includes('/api/'))
-
   if (req.path.includes('/api/login') || req.path.includes('/api/lock') || req.path.startsWith('/api/cypress')) {
     next()
   } else if (!req.user || req.user.iamGroups.includes('hy-employees')) {
