@@ -89,7 +89,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
 
           <TextFieldCard id={content.groupKey} t={t} type="Comment" studyprogrammeKey={programme.koulutusohjelmakoodi} year={year} />
           <Link
-            href={`${basePath}v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}/?year=${year}#${formatURLFragment(content.groupKey)}`}
+            href={`${basePath}v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}/#${formatURLFragment(content.groupKey)}`}
           >
             <Button variant="outlined" startIcon={<ArrowForward />} sx={{ marginTop: 2, float: 'right' }}>
               {t('keyData:moveToOpinion')}

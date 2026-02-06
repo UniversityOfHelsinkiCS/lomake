@@ -115,11 +115,11 @@ const uploadKeyData = async (req: Request, res: Response) => {
 
         await deactivateExistingKeyData()
         const programmeData = await fetchProgrammeData()
-        const formattedKeyData: KeyDataType = formatKeyData(data, programmeData)
-        await validateKeyData(formatKeyData)
+        const formattedData: KeyDataType = formatKeyData(data, programmeData)
+        await validateKeyData(formattedData)
 
         await KeyData.create({
-          data: formattedKeyData,
+          data: formattedData,
           active: true,
         })
 
