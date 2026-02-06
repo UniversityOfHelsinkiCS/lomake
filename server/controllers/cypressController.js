@@ -1168,7 +1168,6 @@ const initKeyData = async (_req, res) => {
 
     const programmeData = await Studyprogramme.findAll({
       attributes: ['key', 'name', 'level', 'international'],
-      include: ['primaryFaculty', 'companionFaculty'],
     })
 
     const rawData = {
