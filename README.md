@@ -12,8 +12,8 @@ The project is split into 2 parts: client and server while index.js in root work
 
 1. git clone
 2. run `npm install`
-3. run `npm run dev`
-4. run `docker exec -it lomake_dev bash -c "npm run seed"` OR obtain a database dump and use that while developing (see [this page](https://www.postgresqltutorial.com/postgresql-restore-database/))
+3. To build image the first time run `npm run dev:build` and when image exists use `npm run dev`
+4. run `docker exec -it lomake_dev bash -c "npm run seed"` OR obtain a database dump by running `./script/get_prod.sh` (Access needed)
 5. go to http://localhost:8000
 
 ### Changing logged in user while developing
