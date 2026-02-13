@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "dev": "docker compose up",
+    "dev:build": "docker compose build",
     "build": "vite build",
     "start:prod": "cross-env NODE_ENV=production node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts",
     "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon --exec node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts\" \"vite\"",
