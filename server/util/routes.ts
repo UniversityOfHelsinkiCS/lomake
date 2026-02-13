@@ -90,6 +90,7 @@ router.get('/documents/:programme', async (req, res) => { await documents.getDoc
 router.post('/documents/:programme', requireProgrammeWrite, async (req, res) => { await documents.createDocument(req, res) })
 router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) => { await documents.updateDocument(req, res) })
 router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => { await documents.closeInterventionProcedure(req, res) })
+router.delete('/documents/:programme/:id', checkAdmin, async (req, res) => { await documents.deleteDocument(req, res) })
 
 router.get('/organisation-data', async (_, res) => { const data = await getOrganisationData(); res.send(data) })
 

@@ -675,6 +675,7 @@ export default {
     keyFigure: 'Arviointialueet',
     newDocument: 'Luo uusi dokumentti',
     edit: 'Muokkaa dokumenttia',
+    delete: 'Poista dokumentti',
     closeInterventionProcedureHeader: 'Toimenpidemenettelyn päättäminen',
     closeInterventionProcedureDescription:
       'Toimenpidemenettely voidaan päättää varadekaanin ja koulutusohjelman johtajan yhteisellä päätöksellä, mikäli koulutusohjelman avainluvut ovat riittävästi parantuneet tai koulutusohjelmalle on käynnistynyt valmistelu, jossa koulutusohjelma liitetään toiseen koulutusohjelmaan tai lakkautetaan. Tilannekuvalomakkeella toimenpidemenettelyn voi lopettaa koulutusohjelmasta vastaavan tiedekunnan varadekaani. ',
@@ -691,6 +692,7 @@ export default {
       'Koulutusohjelmalle on käynnistynyt valmistelu sen lakkauttamiseksi tai liittämiseksi toiseen koulutusohjelmaan',
     option3: 'Muu syy, mikä?',
     confirm: 'Haluatko varmasti sulkea toimenpidemenettelyn?',
+    confirmDelete: 'Haluatko varmasti poistaa dokumentin?',
     terminated: 'Edellinen toimenpidemenettely on lopetettu perusteella:',
   },
   error: {

@@ -19,14 +19,17 @@ import {
   TextField,
 } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
-import { Add, ArrowBack, Edit } from '@mui/icons-material'
+import { Add, ArrowBack, Edit, Delete } from '@mui/icons-material'
 import { basePath, dekanaattiIamGroup, isAdmin } from '@/config/common'
 import { KeyDataProgramme } from '@/shared/lib/types'
 
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
-import { useGetDocumentsQuery, useCreateDocumentMutation, useCloseInterventionProcedureMutation } from '@/client/redux/documents'
+import { useGetDocumentsQuery,
+  useCreateDocumentMutation,
+  useCloseInterventionProcedureMutation,
+  useDeleteDocumentMutation } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
@@ -49,6 +52,7 @@ const ProgrammeHomeView = () => {
 
   const [createDocument] = useCreateDocumentMutation()
   const [closeInterventionProcedure] = useCloseInterventionProcedureMutation()
+  const [deleteDocument] = useDeleteDocumentMutation()
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
@@ -66,6 +70,14 @@ const ProgrammeHomeView = () => {
     createDocument({ studyprogrammeKey: programmeKey, data: null })
       .then(({ data }) => history.push(`/v1/programmes/${form}/${programmeKey}/document/${data.at(-1).id}`)
       )
+  }
+
+  const handleDelete = (id:string) => {
+    const isConfirmed = window.confirm(t('document:confirmDelete'))
+    console.log(id, programmeKey)
+    if (isConfirmed) {
+      deleteDocument({ studyprogrammeKey: programmeKey, id })
+    }
   }
 
   const handleCloseProcedure = () => {
@@ -216,6 +228,18 @@ const ProgrammeHomeView = () => {
                     >
                       {t('document:edit')}
                     </Button>
+                  )}
+                  {isAdmin(user) && !doc.data?.date && (
+                      <Button
+                        data-cy={`accordion-${index}-delete-button`}
+                        variant='contained'
+                        color='error'
+                        component={Link}
+                        onClick={() => handleDelete(doc.id)}
+                        startIcon={<Delete />}
+                      >
+                        {t('document:delete')}
+                      </Button>
                   )}
                 </div>
               </AccordionDetails>

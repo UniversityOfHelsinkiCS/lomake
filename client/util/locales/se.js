@@ -710,6 +710,7 @@ export default {
     keyFigureDescription: 'Utbildningsprogrammet är under den lägsta gränsvärdet på följande utvärderingsområden',
     keyFigure: 'Utvärderingsområden',
     edit: 'Redigera dokumentet',
+    delete: 'Radera dokumentet',
     newDocument: 'Skapa ett nytt dokument',
 
     closeInterventionProcedureHeader:
@@ -729,6 +730,7 @@ export default {
     backgroundInfoDescription:
       'Som bakgrundsmaterial för interventionsförfarandet finns det synpunkter som registrerats i den årliga uppföljningen på de utvärderingsområden som ledde till interventionsförfarandet samt utvecklingsplanen. ',
     confirm: 'Är du säker på att du vill stänga proceduren?',
+    confirmDelete: 'Är du säker på att du vill radera dokumentet?',
     terminated: 'Det tidigare förfarandet har avslutats med motiveringen:',
   },
   error: {

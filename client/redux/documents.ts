@@ -21,6 +21,11 @@ interface UpdateDocumentArgs {
   data: DocumentForm
 }
 
+interface DeleteDocumentArgs {
+  studyprogrammeKey: string
+  id: string
+}
+
 interface CloseInterventionProcedureArgs {
   studyprogrammeKey: string
   data: Reason
@@ -65,8 +70,21 @@ const documentsApi = RTKApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
+    deleteDocument: builder.mutation<void, DeleteDocumentArgs>({
+      query: ({ studyprogrammeKey, id }) => ({
+        url: `documents/${studyprogrammeKey}/${id}`,
+        method: 'delete',
+      }),
+      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
+    }),
   })
 })
 
-export const { useGetDocumentsQuery, useGetAllDocumentsQuery, useCreateDocumentMutation, useUpdateDocumentMutation, useCloseInterventionProcedureMutation } = documentsApi
-
+export const { 
+  useGetDocumentsQuery, 
+  useGetAllDocumentsQuery,
+  useCreateDocumentMutation,
+  useUpdateDocumentMutation,
+  useCloseInterventionProcedureMutation, 
+  useDeleteDocumentMutation } 
+= documentsApi

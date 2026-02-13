@@ -678,6 +678,7 @@ export default {
     keyFigure: 'Evaluation areas',
     newDocument: 'Create new document',
     edit: 'Edit the document',
+    delete: 'Delete the document',
     closeInterventionProcedureHeader: 'Termination of the intervention procedure (only visible to the Vice-Dean)',
     closeInterventionProcedureDescription:
       'The procedure may be terminated by joint decision of the Vice-Dean and the Director of the degree programme if the key figures of the degree programme have improved sufficiently or if the programme is in the process of being merged with another degree programme or discontinued. A status report form may be used by the Vice-Dean to terminate the procedure.',
@@ -688,6 +689,7 @@ export default {
     option2: 'The programme is in the process of being merged with another degree programme or discontinued',
     option3: 'Any other reason (open text box)',
     confirm: 'Are you sure you want to close the procedure?',
+    confirmDelete: 'Are you sure you want to delete document?',
     terminated: 'The previous procedure has been terminated on the grounds of:',
   },
 

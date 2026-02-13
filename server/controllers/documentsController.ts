@@ -1,5 +1,4 @@
 import logger from '../util/logger.js'
-import db from '../models/index.js'
 import Document from '../models/document.js'
 import { Request, Response } from 'express'
 import { DocumentFormSchema, InterventionProcedureCloseSchema } from '../../shared/validators/index.js'
@@ -190,5 +189,24 @@ const closeInterventionProcedure = async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Database error' })
   }
 }
+// Only admins allowed, checked in routes file
+const deleteDocument = async (req: Request, res: Response) => {
+  const { id, programme } = req.params
 
-export default { getDocuments, createDocument, updateDocument, closeInterventionProcedure, getAllDocuments }
+  try {
+    await Document.destroy({
+      where: {
+        id,
+        studyprogrammeKey: programme,
+      },
+    })
+
+    return res.status(204).send()
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    console.log()
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+export default { getDocuments, createDocument, updateDocument, closeInterventionProcedure, getAllDocuments, deleteDocument }
