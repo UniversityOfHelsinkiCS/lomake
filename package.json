@@ -35,7 +35,7 @@
     "@sentry/browser": "8.55.0",
     "@sentry/node": "8.55.0",
     "@sentry/tracing": "7.120.3",
-    "@sentry/vite-plugin": "^2.23.0",
+    "@sentry/vite-plugin": "^4.0.0",
     "@uiw/react-md-editor": "^4.0.4",
     "@vitejs/plugin-react-swc": "^3.8.1",
     "axios": "^1.6.0",
