@@ -229,7 +229,7 @@ const ProgrammeHomeView = () => {
                       {t('document:edit')}
                     </Button>
                   )}
-                  {hasWriteRights && !doc.data.date && (
+                  {isAdmin(user) && !doc.data?.date && (
                       <Button
                         data-cy={`accordion-${index}-delete-button`}
                         variant='contained'
