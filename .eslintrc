@@ -7,6 +7,7 @@
   "extends": ["airbnb", "eslint:recommended", "plugin:prettier/recommended", "plugin:cypress/recommended"],
   "plugins": ["prettier", "cypress", "react", "import", "prefer-object-spread", "babel", "react-hooks"],
   "rules": {
+    "react/react-in-jsx-scope": "off",
     "react/no-did-mount-set-state": "off",
     "react/destructuring-assignment": "off",
     "react/no-typos": "off",
