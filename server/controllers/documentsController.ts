@@ -194,14 +194,19 @@ const deleteDocument = async (req: Request, res: Response) => {
   const { id, programme } = req.params
 
   try {
-    await Document.destroy({
-      where: {
-        id,
-        studyprogrammeKey: programme,
-      },
-    })
+    // Allow deletion only for empty documents.
+    const docToBeDestroyed = await Document.findByPk(id)
+    if (!docToBeDestroyed?.data?.date) {
+      await Document.destroy({
+        where: {
+          id,
+          studyprogrammeKey: programme,
+        },
+      })
 
-    return res.status(204).send()
+      return res.status(204).send()
+    } 
+    return res.status(405).send({ error: 'Document not empty.' })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     console.log()
