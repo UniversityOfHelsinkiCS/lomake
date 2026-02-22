@@ -48,6 +48,10 @@ export interface ReportData {
   Toimenpiteet?: string
 }
 
+export type ErrorObject = {
+  error: string
+}
+
 export type Lock = {
   uid: string
   firstname: string

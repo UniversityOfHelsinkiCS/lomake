@@ -10,6 +10,7 @@ import locks from '../controllers/lockController.js'
 import reports from '../controllers/reportsController.js'
 import keyData from '../controllers/keyDataController.js'
 import documents from '../controllers/documentsController.js'
+import qualityDocuments from '../controllers/qualityDocumentsController.js'
 
 import {
   checkAdmin,
@@ -91,6 +92,10 @@ router.post('/documents/:programme', requireProgrammeWrite, async (req, res) => 
 router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) => { await documents.updateDocument(req, res) })
 router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => { await documents.closeInterventionProcedure(req, res) })
 router.delete('/documents/:programme/:id', checkAdmin, async (req, res) => { await documents.deleteDocument(req, res) })
+
+router.get('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.getQualityDocuments(req, res) })
+router.post('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.createQualityDocument(req, res) })
+router.put('/documents/:programme/:id', checkAdmin, async (req, res) => { await qualityDocuments.updateQualityDocument(req, res) })
 
 router.get('/organisation-data', async (_, res) => { const data = await getOrganisationData(); res.send(data) })
 

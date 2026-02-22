@@ -142,6 +142,23 @@ export const DocumentFormSchema = z.object({
   followupDate: z.string().date('date'),
 }).strict()
 
+export const QualityDocumentFormSchema = z.object({
+  title: z.string().min(3, 'title'),
+  curriculumProcess: z.string().min(100, 'curriculumProcess'),
+  guidancePolicies: z.string().min(100, 'guidancePolicies'),
+  feedbackUtilization: z.object({
+    norppa: z.boolean(),
+    bachelorFeedback: z.boolean(),
+    careerTracking: z.boolean(),
+    other: z.object({
+      checked: z.boolean(),
+      feedbackType: z.string().optional(),
+    }).strict(),
+  }).strict(),
+  feedbackActions: z.string().min(50, 'feedbackActions'),
+  actionsRegularity: z.enum(['monthly', 'everySemester', 'moreFrequently'])
+}).strict()
+
 export const InterventionProcedureCloseSchema = z.object({
   reason: z.string(),
   additionalInfo: z.string(),
