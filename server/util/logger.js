@@ -9,15 +9,13 @@ const { combine, timestamp, printf, splat } = winston.format
 const transports = []
 
 if (!inProduction) {
-  const devFormat = printf(
-    ({ level, message, timestamp, ...rest }) => `${timestamp} ${level}: ${message} ${JSON.stringify(rest)}`,
-  )
+  const devFormat = printf(({ level, message, timestamp }) => `${timestamp} ${level}: ${message} }`)
 
   transports.push(
     new winston.transports.Console({
       level: 'debug',
       format: combine(splat(), timestamp(), devFormat),
-    }),
+    })
   )
 }
 
@@ -36,7 +34,7 @@ if (inProduction) {
     JSON.stringify({
       level: levels[level],
       ...rest,
-    }),
+    })
   )
   transports.push(new winston.transports.Console({ format: prodFormat }))
 
@@ -44,7 +42,7 @@ if (inProduction) {
     new LokiTransport({
       host: 'http://loki-svc.toska-lokki.svc.cluster.local:3100',
       labels: { app: 'lomake', environment: process.env.NODE_ENV || 'production' },
-    }),
+    })
   )
 
   transports.push(
@@ -58,7 +56,7 @@ if (inProduction) {
         app: 'lomake',
         environment: 'production',
       },
-    }),
+    })
   )
 }
 
