@@ -174,25 +174,30 @@ const ProgrammeHomeView = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  <div style={{ display: 'flex', gap: '1rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <Typography variant="h4">{t('qualitydocument:curriculumProcessHeader')}</Typography>
                     <Typography variant="h5">{t('qualitydocument:curriculumProcess')}:</Typography>
                     <Typography color={doc.data.curriculumProcess ? 'default' : 'secondary'}>
                       {doc.data.curriculumProcess || t('common:empty')}
                     </Typography>
                   </div>
-                  <div style={{ display: 'flex', gap: '1rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <Typography variant="h4">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
                     <Typography variant="h5">{t('qualitydocument:guidancePolicies')}:</Typography>
                     <Typography color={doc.data.guidancePolicies ? 'default' : 'secondary'}>
                       {doc.data.guidancePolicies || t('common:empty')}
                     </Typography>
                   </div>
-                  <div style={{ display: 'flex', gap: '1rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <Typography variant="h4">{t('qualitydocument:feedbackHeader')}</Typography>
                     <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}:</Typography>
                     <Typography color={doc.data.feedbackUtilization ? 'default' : 'secondary'}>
-                      {doc.data.feedbackUtilization && Object.entries(doc.data.feedbackUtilization).filter(([, value]) => value).map(([key]) => t(`qualitydocument:${key.charAt(0) + key.slice(1)}`)).join(', ') || t('common:empty')}
+                      {doc.data.feedbackUtilization && Object.entries(doc.data.feedbackUtilization).filter(([, value]) => value).map(([key]) => (
+                        <li key={key} style={{ listStyle: 'none' }}>{t(`qualitydocument:${key.charAt(0) + key.slice(1)}`)}</li>
+                      )) || t('common:empty')}
                     </Typography>
                   </div>
-                  <div style={{ display: 'flex', gap: '1rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                     <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>
                       {t('qualitydocument:feedbackActions')}:
                     </Typography>
@@ -200,7 +205,7 @@ const ProgrammeHomeView = () => {
                       {doc.data.feedbackActions || t('common:empty')}
                     </Typography>
                   </div>
-                  <div style={{ display: 'flex', gap: '1rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                     <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>
                       {t('qualitydocument:feedbackRegularityHeader')}:
                     </Typography>
