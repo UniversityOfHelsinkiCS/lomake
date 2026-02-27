@@ -95,7 +95,7 @@ router.delete('/documents/:programme/:id', checkAdmin, async (req, res) => { awa
 
 router.get('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.getQualityDocuments(req, res) })
 router.post('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.createQualityDocument(req, res) })
-router.put('/documents/:programme/:id', checkAdmin, async (req, res) => { await qualityDocuments.updateQualityDocument(req, res) })
+router.put('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) => { await qualityDocuments.updateQualityDocument(req, res) })
 
 router.get('/organisation-data', async (_, res) => { const data = await getOrganisationData(); res.send(data) })
 

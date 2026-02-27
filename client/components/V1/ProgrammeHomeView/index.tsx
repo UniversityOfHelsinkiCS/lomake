@@ -30,6 +30,7 @@ import { useGetDocumentsQuery,
   useCreateDocumentMutation,
   useCloseInterventionProcedureMutation,
   useDeleteDocumentMutation } from '@/client/redux/documents'
+import { useCreateQualityDocumentMutation, useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
@@ -39,6 +40,7 @@ const ProgrammeHomeView = () => {
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const history = useHistory()
   const { data: documents = [] } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
+  const { data: qualitydocuments = [] } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
   const user = useAppSelector(state => state.currentUser.data)
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
@@ -53,6 +55,8 @@ const ProgrammeHomeView = () => {
   const [createDocument] = useCreateDocumentMutation()
   const [closeInterventionProcedure] = useCloseInterventionProcedureMutation()
   const [deleteDocument] = useDeleteDocumentMutation()
+
+  const [createQualityDocument] = useCreateQualityDocumentMutation()
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
@@ -69,6 +73,12 @@ const ProgrammeHomeView = () => {
   const handleClick = () => {
     createDocument({ studyprogrammeKey: programmeKey, data: null })
       .then(({ data }) => history.push(`/v1/programmes/${form}/${programmeKey}/document/${data.at(-1).id}`)
+      )
+  }
+
+  const handleQualityDocumentClick = () => {
+    createQualityDocument({ studyprogrammeKey: programmeKey, data: null })
+      .then(({ data }) => history.push(`/v1/programmes/${form}/${programmeKey}/qualitydocument/${data.at(-1).id}`)
       )
   }
 
@@ -137,13 +147,68 @@ const ProgrammeHomeView = () => {
         <Typography variant="light">{t('keyData:homeDescription')}</Typography>
         <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} />
       </Box>
-      <Box sx={{ mb: 4 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Typography variant="h3" sx={{ mb: '2rem' }}>
           {t('keyData:qualityControl').toUpperCase()}
         </Typography>
-        <Alert severity="info" sx={{ gap: 1 }}>
-          <Typography variant="light">{t('keyData:notUsed2025')}</Typography>
-        </Alert>
+         <Typography variant="h4" sx={{ mt: 4 }}>
+          {t('keyData:qualitydocumentingHeader')}
+        </Typography>
+        {Array.isArray(qualitydocuments) &&
+          qualitydocuments.map((doc: Record<string, any>, index) => (
+            <Accordion key={doc.id} sx={{ padding: '2rem' }}>
+              <AccordionSummary expandIcon={<ExpandMore />}>
+                <Typography data-cy={`accordion-${index}`} variant="h4">
+                  {doc.data.title}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <div style={{ display: 'flex', gap: '1rem' }}>
+                    <Typography variant="h5">{t('qualitydocument:curriculumProcess')}:</Typography>
+                    <Typography color={doc.data.curriculumProcess ? 'default' : 'secondary'}>
+                      {doc.data.curriculumProcess || t('common:empty')}
+                    </Typography>
+                  </div>
+                  <div style={{ display: 'flex', gap: '1rem' }}>
+                    <Typography variant="h5">{t('qualitydocument:guidancePolicies')}:</Typography>
+                    <Typography color={doc.data.guidancePolicies ? 'default' : 'secondary'}>
+                      {doc.data.guidancePolicies || t('common:empty')}
+                    </Typography>
+                  </div>
+                  <div style={{ display: 'flex', gap: '1rem' }}>
+                    <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}:</Typography>
+                    <Typography color={doc.data.feedbackUtilization ? 'default' : 'secondary'}>
+                      {doc.data.feedbackUtilization && Object.entries(doc.data.feedbackUtilization).filter(([, value]) => value).map(([key]) => t(`qualitydocument:${key.charAt(0) + key.slice(1)}`)).join(', ') || t('common:empty')}
+                    </Typography>
+                  </div>
+                  <div style={{ display: 'flex', gap: '1rem' }}>
+                    <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>
+                      {t('qualitydocument:feedbackActions')}:
+                    </Typography>
+                    <Typography color={doc.data.feedbackActions ? 'default' : 'secondary'}>
+                      {doc.data.feedbackActions || t('common:empty')}
+                    </Typography>
+                  </div>
+                  <div style={{ display: 'flex', gap: '1rem' }}>
+                    <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>
+                      {t('qualitydocument:feedbackRegularityHeader')}:
+                    </Typography>
+                    <Typography color={doc.data.actionsRegularity ? 'default' : 'secondary'}>
+                      {t(`qualitydocument:${doc.data.actionsRegularity}`) || t('common:empty')}
+                    </Typography>
+                  </div>
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        {hasWriteRights && activeProcedure() && (
+          <Box>
+            <Button data-cy="create-new-qualitydocument" onClick={handleQualityDocumentClick} variant="outlined" startIcon={<Add />}>
+              {t('document:newDocument')}
+            </Button>
+          </Box>
+        )}
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Typography variant="h3">{t('keyData:interventionProcedure').toUpperCase()} </Typography>

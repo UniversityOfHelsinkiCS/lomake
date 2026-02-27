@@ -6,6 +6,7 @@ import {
   MetadataRawSchema,
   MetadataSchema,
   DocumentFormSchema,
+  QualityDocumentFormSchema,
 } from '../validators'
 
 export type KeyDataProgramme = z.infer<typeof KeyDataProgrammeSchema>
@@ -14,6 +15,7 @@ export type MaisteriohjelmatValues = z.infer<typeof MaisteriohjelmatValuesSchema
 export type KeyDataMetadata = z.infer<typeof MetadataSchema>
 export type KeyDataMetadataRaw = z.infer<typeof MetadataRawSchema>
 export type DocumentForm = z.infer<typeof DocumentFormSchema>
+export type QualityDocumentForm = z.infer<typeof QualityDocumentFormSchema>
 
 export interface KeyData {
   kandiohjelmat: KeyDataProgramme[]

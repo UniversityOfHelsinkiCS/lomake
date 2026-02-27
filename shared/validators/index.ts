@@ -147,13 +147,13 @@ export const QualityDocumentFormSchema = z.object({
   curriculumProcess: z.string().min(100, 'curriculumProcess'),
   guidancePolicies: z.string().min(100, 'guidancePolicies'),
   feedbackUtilization: z.object({
-    norppa: z.boolean(), // better z.enum(['norppaPos', 'norppaNeg']) ?
-    bachelorFeedback: z.boolean(), // z.enum(['bachelorFeedbackPos', 'bachelorFeedbackNeg']) 
-    careerTracking: z.boolean(), // z.enum(['careerTrackingPos', 'careerTrackingNeg']) 
-    other: z.boolean(), // z.enum(['otherPos', 'otherNeg'])
+    norppa: z.boolean(),
+    bachelorFeedback: z.boolean(), 
+    careerMonitoring: z.boolean(), 
+    other: z.boolean(), 
   }).strict(),
   feedbackActions: z.string().min(50, 'feedbackActions'),
-  actionsRegularity: z.enum(['monthly', 'everySemester', 'moreFrequently'])
+  actionsRegularity: z.enum(['annually', 'everySemester', 'moreFrequently'])
 }).strict()
 
 export const InterventionProcedureCloseSchema = z.object({
