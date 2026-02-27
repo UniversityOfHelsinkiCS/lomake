@@ -30,7 +30,7 @@ import { useGetDocumentsQuery,
   useCreateDocumentMutation,
   useCloseInterventionProcedureMutation,
   useDeleteDocumentMutation } from '@/client/redux/documents'
-import { useCreateQualityDocumentMutation, useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
+import { useCreateQualityDocumentMutation, useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
@@ -55,6 +55,7 @@ const ProgrammeHomeView = () => {
   const [createDocument] = useCreateDocumentMutation()
   const [closeInterventionProcedure] = useCloseInterventionProcedureMutation()
   const [deleteDocument] = useDeleteDocumentMutation()
+  const [deleteQualityDocument] = useDeleteQualityDocumentMutation()
 
   const [createQualityDocument] = useCreateQualityDocumentMutation()
 
@@ -87,6 +88,14 @@ const ProgrammeHomeView = () => {
     console.log(id, programmeKey)
     if (isConfirmed) {
       deleteDocument({ studyprogrammeKey: programmeKey, id })
+    }
+  }
+
+  const handleDeleteQualityDocument = (id:string) => {
+    const isConfirmed = window.confirm(t('document:confirmDelete'))
+    console.log(id, programmeKey)
+    if (isConfirmed) {
+      deleteQualityDocument({ studyprogrammeKey: programmeKey, id })
     }
   }
 
@@ -123,6 +132,7 @@ const ProgrammeHomeView = () => {
     const isUserInDekanaattiGroup = user.iamGroups.some((group: string) => dekanaattiIamGroup.includes(group))
     return isAdmin(user) || isUserInDekanaattiGroup
   }
+
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
@@ -199,9 +209,24 @@ const ProgrammeHomeView = () => {
                     </Typography>
                   </div>
                 </div>
+                <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right' }}>
+                  {isAdmin(user) && !doc.data?.feedbackActions && (
+                      <Button
+                        data-cy={`accordion-${index}-delete-qualitydocument-button`}
+                        variant='contained'
+                        color='error'
+                        component={Link}
+                        onClick={() => handleDeleteQualityDocument(doc.id)}
+                        startIcon={<Delete />}
+                      >
+                        {t('document:delete')}
+                      </Button>
+                  )}
+                </div>
               </AccordionDetails>
             </Accordion>
           ))}
+
         {hasWriteRights && activeProcedure() && (
           <Box>
             <Button data-cy="create-new-qualitydocument" onClick={handleQualityDocumentClick} variant="outlined" startIcon={<Add />}>

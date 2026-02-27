@@ -17,6 +17,11 @@ interface UpdateDocumentArgs {
   data: QualityDocumentForm
 }
 
+interface DeleteDocumentArgs {
+  studyprogrammeKey: string
+  id: string
+}
+
 const qualityDocumentsApi = RTKApi.injectEndpoints({
   endpoints: builder => ({
     getQualityDocuments: builder.query<DocumentType[], GetDocumentsArgs>({
@@ -42,6 +47,13 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
+    deleteQualityDocument: builder.mutation<void, DeleteDocumentArgs>({
+      query: ({ studyprogrammeKey, id }) => ({
+        url: `qualitydocuments/${studyprogrammeKey}/${id}`,
+        method: 'delete',
+      }),
+      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
+    }),
   })
 })
 
@@ -49,5 +61,6 @@ export const {
   useGetQualityDocumentsQuery, 
   useCreateQualityDocumentMutation,
   useUpdateQualityDocumentMutation,
+  useDeleteQualityDocumentMutation
 } 
 = qualityDocumentsApi

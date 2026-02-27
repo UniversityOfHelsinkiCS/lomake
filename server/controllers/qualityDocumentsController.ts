@@ -131,5 +131,29 @@ const updateQualityDocument = async (req: Request, res: Response<QualityDocument
   }
 }
 
+// Only admins allowed, checked in routes file
+const deleteQualityDocument = async (req: Request, res: Response) => {
+  const { id, programme } = req.params
 
-export default { getQualityDocuments, createQualityDocument, updateQualityDocument }
+  try {
+    // Allow deletion only for empty documents.
+    const docToBeDestroyed = await QualityDocument.findByPk(id)
+    if (!docToBeDestroyed?.data?.feedbackActions) {
+      await QualityDocument.destroy({
+        where: {
+          id,
+          studyprogrammeKey: programme,
+        },
+      })
+
+      return res.status(204).send()
+    } 
+    return res.status(405).send({ error: 'Document not empty.' })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+
+export default { getQualityDocuments, createQualityDocument, updateQualityDocument, deleteQualityDocument }
