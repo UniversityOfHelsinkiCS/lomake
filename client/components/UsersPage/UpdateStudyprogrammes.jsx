@@ -21,7 +21,7 @@ export default () => {
           Nappulan painaminen poistaa tietokannasta kaikki koulutusohjelmat, tiedekunnat sekä yhteistyötiedekunnat.
           Tämän jälkeen ohjelmat tallennetaan uudestaan tietokantaan siinä muodossa, kuin ne on tallennettu{' '}
           <a
-            href="https://github.com/UniversityOfHelsinkiCS/lomake/blob/master../../config/data.js"
+            href="https://github.com/UniversityOfHelsinkiCS/jami/blob/master/src/organisation/faculties.ts"
             target="_blank"
             rel="noreferrer"
           >
