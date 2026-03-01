@@ -14,7 +14,7 @@ const YearFilterComponent = () => {
 
   // If an invalid year is selected, the user will see the year as an greyed out option and state will not be updated.
   // allow 2024 when running tests
-  const allowedYears = !inProduction ? ['2024', '2025'] : ['2025']
+  const allowedYears = !inProduction ? ['2024', '2025', '2026'] : ['2025']
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     dispatch(clearLevelSpecificFilters())
