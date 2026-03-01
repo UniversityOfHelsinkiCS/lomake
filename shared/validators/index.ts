@@ -21,6 +21,10 @@ export const KandiohjelmatValuesSchema = z
     'Opintojen ohjaus': z.number().optional(),
     'Opetuksen laatu': z.number().optional(),
     Palauteaktiivisuus: z.number().optional(),
+    'Opetusresurssien määrä': z.number().optional(),
+    'Opetuksen tuottavuus': z.number().optional(),
+    'Tilojen tehokas käyttö': z.number().optional(),
+    'Jatkuvan oppimisen tulos': z.number().optional(),
 
     // Muut
     Vuosi: z.number().int(),
@@ -49,6 +53,10 @@ export const MaisteriohjelmatValuesSchema = z
     'Oppimista edistävä palaute': z.number().optional(),
     'Opintojen kiinnostavuus': z.number().optional(),
     Työllistyminen: z.number().optional(),
+    'Opetusresurssien määrä': z.number().optional(),
+    'Opetuksen tuottavuus': z.number().optional(),
+    'Tilojen tehokas käyttö': z.number().optional(),
+    'Jatkuvan oppimisen tulos': z.number().optional(),
 
     // Muut
     Vuosi: z.number().int(),
