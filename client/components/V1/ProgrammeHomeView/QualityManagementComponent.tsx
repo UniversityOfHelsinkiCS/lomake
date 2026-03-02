@@ -161,7 +161,7 @@ const QualityManagementComponent= () => {
             </Accordion>
           ))}
 
-        {hasWriteRights && activeProcedure() && (
+        {hasWriteRights && (
           <Box>
             <Button data-cy="create-new-qualitydocument" onClick={handleClick} variant="outlined" startIcon={<Add />}>
               {t('document:newDocument')}
