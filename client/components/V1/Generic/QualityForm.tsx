@@ -22,7 +22,7 @@ const initForm = (t: TFunction, error: boolean) => {
   )
 }
 
-const QualityDocumentForm = ({
+const QualityForm = ({
   programmeKey,
   id,
   document,
@@ -216,4 +216,4 @@ const QualityDocumentForm = ({
   )
 }
 
-export default QualityDocumentForm
+export default QualityForm

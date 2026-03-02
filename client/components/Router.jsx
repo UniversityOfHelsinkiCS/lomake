@@ -35,7 +35,7 @@ import OverviewPageV1 from './V1/Overview'
 import ProgrammeHomeView from './V1/ProgrammeHomeView'
 import ProgrammeYearlyView from './V1/ProgrammeYearlyView'
 import InterventionProcedure from './V1/Generic/InterventionProcedure'
-import QualityProcedure from './V1/Generic/QualityProcedure'
+import QualityManagement from './V1/Generic/QualityManagement'
 
 export default () => (
   <div className="content">
@@ -111,7 +111,7 @@ export default () => (
         <Route exact path="/v1/overview" component={OverviewPageV1} />
         <Route exact path="/v1/programmes/:form/:programme" component={ProgrammeHomeView} />
         <Route exact path="/V1/programmes/:form/:programme/document/:id" component={InterventionProcedure} />
-        <Route exact path="/V1/programmes/:form/:programme/qualitydocument/:id" component={QualityProcedure} />
+        <Route exact path="/V1/programmes/:form/:programme/qualitydocument/:id" component={QualityManagement} />
         <Route exact path="/v1/programmes/:form/:programme/:year" component={ProgrammeYearlyView} />
 
         {/* Route for programmatic redirects */}
