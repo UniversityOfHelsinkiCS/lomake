@@ -1,28 +1,20 @@
 import { useParams } from 'react-router'
-import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
   IconButton,
   Typography,
   Link,
-  Alert,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Button,
   CircularProgress,
 } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
-import type { DocumentType, ReportDataKey } from '@/client/lib/types'
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { ArrowBack, ExpandMore } from '@mui/icons-material'
+import type { DocumentType} from '@/client/lib/types'
+import { ProgrammeLevel } from '@/client/lib/enums'
+import { ArrowBack } from '@mui/icons-material'
 import { basePath, isAdmin } from '@/config/common'
-import KeyDataCard from './KeyDataCardComponent'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
-import { TextFieldCard } from './TextFieldCard'
-import QualityDocumentForm from './QualityDocumentForm'
+import QualityForm from './QualityForm'
 import { useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
@@ -47,7 +39,7 @@ export const calculateInterventionAreas = ({
   return res
 }
 
-const QualityProcedure = () => {
+const QualityManagement = () => {
   const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { t } = useTranslation()
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
@@ -66,9 +58,6 @@ const QualityProcedure = () => {
     (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey,
   )
 
-  const year = `${programmeData.year + 1}`
-
-  const areas = calculateInterventionAreas({ metadata, programme: programmeData, t })
 
   if (!programme || !hasWriteRights) return null
 
@@ -86,9 +75,9 @@ const QualityProcedure = () => {
       </Box>
       <br />
       <br />
-      <QualityDocumentForm programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document} />
+      <QualityForm programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document} />
     </Box>
   )
 }
 
-export default QualityProcedure
+export default QualityManagement
