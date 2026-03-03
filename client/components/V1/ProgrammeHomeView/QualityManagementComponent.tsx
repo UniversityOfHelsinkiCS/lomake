@@ -69,7 +69,7 @@ const QualityManagementComponent= () => {
           documents.map((doc: Record<string, any>, index) => (
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography data-cy={`accordion-${index}`} variant="h4">
+                <Typography data-cy={`accordion-${index}-quality-document`} variant="h4">
                   {doc.data.title}
                 </Typography>
               </AccordionSummary>
