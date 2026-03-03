@@ -131,7 +131,7 @@ const createDocument = async (req: Request, res: Response) => {
     }
 
     const document: Document = await Document.create({
-      data: { title: `${new Date().toLocaleDateString('fi-FI')}` },
+      data: req.body.data,
       studyprogrammeKey: programme,
       active: true,
       activeYear: calculateActiveYear(),

@@ -1,5 +1,4 @@
 import { useParams } from 'react-router'
-import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -14,7 +13,7 @@ import {
   CircularProgress,
 } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
-import type { DocumentType, ReportDataKey } from '@/client/lib/types'
+import type { DocumentType, ReportDataKey  } from '@/client/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack, ExpandMore } from '@mui/icons-material'
 import { basePath, isAdmin } from '@/config/common'
@@ -27,6 +26,7 @@ import { useGetDocumentsQuery } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import { Loader } from 'semantic-ui-react'
+import EditDocument from './EditDocument'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -71,7 +71,8 @@ const InterventionProcedure = () => {
 
   if (!programme || !hasWriteRights) return null
 
-  if (isFetching || !document) return <CircularProgress />
+  if (isFetching) return <CircularProgress />
+
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -80,7 +81,7 @@ const InterventionProcedure = () => {
           <ArrowBack />
         </IconButton>
         <Typography variant="h2">
-          {programmeData.koulutusohjelma[lang]} - {`${document.data.title}`}
+          {programmeData.koulutusohjelma[lang]} 
         </Typography>
       </Box>
       <Alert severity="info">
@@ -135,7 +136,7 @@ const InterventionProcedure = () => {
       )}
       <br />
       <br />
-      <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document} />
+      {!id || !document ? (<DocumentForm programmeKey={programmeData.koulutusohjelmakoodi}/>) : (<EditDocument programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document}/>)}
     </Box>
   )
 }

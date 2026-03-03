@@ -1,21 +1,17 @@
 import { useParams } from 'react-router'
-import { useTranslation } from 'react-i18next'
 import {
   Box,
   IconButton,
   Typography,
   Link,
-  CircularProgress,
 } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
-import type { DocumentType} from '@/client/lib/types'
 import { ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack } from '@mui/icons-material'
 import { basePath, isAdmin } from '@/config/common'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
 import QualityForm from './QualityForm'
-import { useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import { Loader } from 'semantic-ui-react'
@@ -40,13 +36,10 @@ export const calculateInterventionAreas = ({
 }
 
 const QualityManagement = () => {
-  const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
-  const { t } = useTranslation()
-  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
+  const { programme: programmeKey } = useParams<{ programme: string }>()
+  const { isLoading, programme } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const user = useAppSelector(state => state.currentUser.data)
-  const { data: documents = [], isFetching } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
-  const document = (documents.length > 0 || !isFetching) ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
 
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
@@ -61,8 +54,6 @@ const QualityManagement = () => {
 
   if (!programme || !hasWriteRights) return null
 
-  if (isFetching || !document) return <CircularProgress />
-
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '1rem' }}>
@@ -70,12 +61,12 @@ const QualityManagement = () => {
           <ArrowBack />
         </IconButton>
         <Typography variant="h2">
-          {programmeData.koulutusohjelma[lang]} - {`${document.data.title}`}
+          {programmeData.koulutusohjelma[lang]}
         </Typography>
       </Box>
       <br />
       <br />
-      <QualityForm programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document} />
+      <QualityForm programmeKey={programmeData.koulutusohjelmakoodi} />
     </Box>
   )
 }

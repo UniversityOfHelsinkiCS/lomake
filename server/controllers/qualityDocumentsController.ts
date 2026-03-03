@@ -103,7 +103,7 @@ const createQualityDocument = async (req: Request, res: Response<QualityDocument
     if (!programme) return res.status(status).json({ error: error })
 
     const qualityDocument: QualityDocument = await QualityDocument.create({
-      data: { title: `${new Date().toLocaleDateString('fi-FI')}` },
+      data: req.body.data,
       studyprogrammeKey: programme,
     })
 
@@ -136,19 +136,15 @@ const deleteQualityDocument = async (req: Request, res: Response) => {
   const { id, programme } = req.params
 
   try {
-    // Allow deletion only for empty documents.
-    const docToBeDestroyed = await QualityDocument.findByPk(id)
-    if (!docToBeDestroyed?.data?.feedbackActions) {
-      await QualityDocument.destroy({
-        where: {
-          id,
-          studyprogrammeKey: programme,
-        },
-      })
+    await QualityDocument.destroy({
+      where: {
+        id,
+        studyprogrammeKey: programme,
+      },
+    })
 
-      return res.status(204).send()
-    } 
-    return res.status(405).send({ error: 'Document not empty.' })
+    return res.status(204).send()
+
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

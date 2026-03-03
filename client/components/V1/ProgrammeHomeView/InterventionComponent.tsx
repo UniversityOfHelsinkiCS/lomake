@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import {
   Box,
   CircularProgress,
-  IconButton,
   Button,
   Link,
   Typography,
@@ -64,11 +63,6 @@ const InterventionComponent = () => {
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t })
 
-  const handleClick = () => {
-    createDocument({ studyprogrammeKey: programmeKey, data: null })
-      .then(({ data }) => history.push(`/v1/programmes/${form}/${programmeKey}/document/${data.at(-1).id}`)
-      )
-  }
 
   const handleDelete = (id:string) => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
@@ -111,7 +105,6 @@ const InterventionComponent = () => {
     const isUserInDekanaattiGroup = user.iamGroups.some((group: string) => dekanaattiIamGroup.includes(group))
     return isAdmin(user) || isUserInDekanaattiGroup
   }
-
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
@@ -217,7 +210,7 @@ const InterventionComponent = () => {
           ))}
         {hasWriteRights && activeProcedure() && (
           <Box>
-            <Button data-cy="create-new-document" onClick={handleClick} variant="outlined" startIcon={<Add />}>
+            <Button data-cy="create-new-document" onClick={() => history.push(`/v1/programmes/${form}/${programmeKey}/document/new`)} variant="outlined" startIcon={<Add />}>
               {t('document:newDocument')}
             </Button>
           </Box>

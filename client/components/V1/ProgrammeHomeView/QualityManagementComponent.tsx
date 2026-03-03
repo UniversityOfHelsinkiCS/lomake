@@ -14,9 +14,7 @@ import {
 import { ExpandMore } from '@mui/icons-material'
 import { Add, Delete } from '@mui/icons-material'
 import { isAdmin } from '@/config/common'
-import { KeyDataProgramme } from '@/shared/lib/types'
-import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
-import { useCreateQualityDocumentMutation, useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '@/client/redux/qualityDocuments'
+import { useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
@@ -28,15 +26,14 @@ const QualityManagementComponent= () => {
   const { data: documents = [] } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
   const user = useAppSelector(state => state.currentUser.data)
   const form = 10
-  const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 
-  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
+  const { isLoading } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
 
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
   const [deleteDocument] = useDeleteQualityDocumentMutation()
 
-  const [createDocument] = useCreateQualityDocumentMutation()
+
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
@@ -46,17 +43,7 @@ const QualityManagementComponent= () => {
     return <CircularProgress />
   }
 
-  const programmeData = programme.filter((programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear)
 
-  const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t })
-
- 
-
-  const handleClick = () => {
-    createDocument({ studyprogrammeKey: programmeKey, data: null })
-      .then(({ data }) => history.push(`/v1/programmes/${form}/${programmeKey}/qualitydocument/${data.at(-1).id}`)
-      )
-  }
 
   const handleDelete = (id:string) => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
@@ -66,22 +53,7 @@ const QualityManagementComponent= () => {
     }
   }
 
-  const activeProcedure = () => {
-    if (areas.length === 0) {
-      return false
-    }
 
-    if (documents.length === 0) {
-      return true
-    }
-    const lastDocument = documents.at(-1)
-
-    if (!lastDocument.active && lastDocument.activeYear !== new Date().getFullYear()) {
-      return true
-    }
-
-    return lastDocument.active
-  }
 
 
   return (
@@ -120,10 +92,12 @@ const QualityManagementComponent= () => {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                     <Typography variant="h4">{t('qualitydocument:feedbackHeader')}</Typography>
                     <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}:</Typography>
-                    <Typography color={doc.data.feedbackUtilization ? 'default' : 'secondary'}>
-                      {doc.data.feedbackUtilization && Object.entries(doc.data.feedbackUtilization).filter(([, value]) => value).map(([key]) => (
-                        <li key={key} style={{ listStyle: 'none' }}>{t(`qualitydocument:${key.charAt(0) + key.slice(1)}`)}</li>
-                      )) || t('common:empty')}
+                    <Typography color={Object.entries(doc.data.feedbackUtilization || {}).filter(([, value]) => value).length > 0 ? 'default' : 'secondary'}>
+                      {Object.entries(doc.data.feedbackUtilization || {}).filter(([, value]) => value).length > 0 ?
+                        Object.entries(doc.data.feedbackUtilization).filter(([, value]) => value).map(([key]) => (
+                            <li key={key} style={{ listStyle: 'none' }}>{t(`qualitydocument:${key.charAt(0) + key.slice(1)}`)}</li>
+                          )) : t('common:empty')
+                      }
                     </Typography>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -144,7 +118,7 @@ const QualityManagementComponent= () => {
                   </div>
                 </div>
                 <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right' }}>
-                  {isAdmin(user) && !doc.data?.feedbackActions && (
+                  {isAdmin(user) && (
                       <Button
                         data-cy={`accordion-${index}-delete-qualitydocument-button`}
                         variant='contained'
@@ -163,7 +137,7 @@ const QualityManagementComponent= () => {
 
         {hasWriteRights && (
           <Box>
-            <Button data-cy="create-new-qualitydocument" onClick={handleClick} variant="outlined" startIcon={<Add />}>
+            <Button data-cy="create-new-qualitydocument" onClick={() => history.push(`/v1/programmes/${form}/${programmeKey}/qualitydocument/new`)} variant="outlined" startIcon={<Add />}>
               {t('document:newDocument')}
             </Button>
           </Box>

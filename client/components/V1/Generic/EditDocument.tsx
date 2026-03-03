@@ -6,7 +6,7 @@ import { fiFI, svSE, enUS } from '@mui/x-date-pickers/locales'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useTranslation } from 'react-i18next'
 import { DocumentFormSchema } from '@/shared/validators'
-import { useCreateDocumentMutation } from '@/client/redux/documents'
+import { useUpdateDocumentMutation } from '@/client/redux/documents'
 import { TFunction } from 'i18next'
 import { useHistory } from 'react-router-dom'
 import { useAppSelector } from '@/client/util/hooks'
@@ -25,17 +25,22 @@ const initForm = (t: TFunction, error: boolean) => {
   )
 }
 
-const DocumentForm = ({
+const EditDocument = ({
   programmeKey,
+  id,
+  document,
 }: {
   programmeKey: string
+  id: string
+  document: Record<string, any>
 }) => {
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language)
   const history = useHistory()
 
-  const data = initForm(t, false)
-  const [createDocument] = useCreateDocumentMutation()
+  const data = document.data.date !== undefined ? document.data : initForm(t, false)
+
+  const [updateDocument] = useUpdateDocumentMutation()
   const [formData, setFormData] = useState(data)
   const [errors, setErrors] = useState(initForm(t, true))
   const [localeComponent, setLocaleComponent] = useState(fiFI)
@@ -88,7 +93,7 @@ const DocumentForm = ({
   const handleSubmit = (e: any) => {
     e.preventDefault()
     if (validateForm()) {
-      createDocument({ studyprogrammeKey: programmeKey, data: formData })
+      updateDocument({ studyprogrammeKey: programmeKey, id: id, data: formData })
       setFormData(initForm(t, false))
       setErrors(initForm(t, true))
       history.push(`/v1/programmes/10/${programmeKey}`)
@@ -98,7 +103,7 @@ const DocumentForm = ({
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <Typography variant="h3" sx={{ mb: '4rem' }}>
-        {t('document:header')} - {`${new Date().toLocaleDateString('fi-FI')}`}
+        {`${document.data.title}`}
       </Typography>
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -207,4 +212,4 @@ const DocumentForm = ({
   )
 }
 
-export default DocumentForm
+export default EditDocument

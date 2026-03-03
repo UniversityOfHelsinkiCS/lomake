@@ -5,7 +5,7 @@ import { QualityDocumentFormSchema } from '@/shared/validators'
 import { TFunction } from 'i18next'
 import { useHistory } from 'react-router-dom'
 import { Checkbox, Radio } from 'semantic-ui-react'
-import { useUpdateQualityDocumentMutation } from '@/client/redux/qualityDocuments'
+import { useCreateQualityDocumentMutation } from '@/client/redux/qualityDocuments'
 
 const fields = ['title', 'curriculumProcess', 'guidancePolicies', 'feedbackUtilization', 'feedbackActions', 'actionsRegularity']
 
@@ -23,20 +23,16 @@ const initForm = (t: TFunction, error: boolean) => {
 }
 
 const QualityForm = ({
-  programmeKey,
-  id,
-  document,
+  programmeKey
 }: {
   programmeKey: string
-  id: string
-  document: Record<string, any>
 }) => {
   const { t } = useTranslation()
   const history = useHistory()
 
-  const data = document.data.date !== undefined ? document.data : initForm(t, false)
+  const data = initForm(t, false)
 
-  const [updateDocument] = useUpdateQualityDocumentMutation()
+  const [createDocument] = useCreateQualityDocumentMutation()
   const [formData, setFormData] = useState(data)
   const [errors, setErrors] = useState(initForm(t, true))
   const [norppa, setNorppa] = useState(false)
@@ -84,17 +80,17 @@ const QualityForm = ({
         feedbackUtilization: { norppa, careerMonitoring: careerMonitoring, bachelorFeedback, other },
       }
       if (validateForm(payload)) {
-        updateDocument({ studyprogrammeKey: programmeKey, id: id, data: payload })
-        setFormData(initForm(t, false))
-        setErrors(initForm(t, true))
-        history.push(`/v1/programmes/10/${programmeKey}`)
+        createDocument({ studyprogrammeKey: programmeKey, data: payload })
+          setFormData(initForm(t, false))
+          setErrors(initForm(t, true))
+          history.push(`/v1/programmes/10/${programmeKey}`)
       }
     }
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <Typography variant="h3" sx={{ mb: '4rem' }}>
-        {t('qualitydocument:header')}
+        {t('qualitydocument:header')} - {`${new Date().toLocaleDateString('fi-FI')}`}
       </Typography>
       <form onSubmit={handleSubmit}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
