@@ -135,7 +135,7 @@ const QualityManagementComponent= () => {
             </Accordion>
           ))}
 
-        {hasWriteRights && (
+        {hasWriteRights && documents.length === 0 && (
           <Box>
             <Button data-cy="create-new-qualitydocument" onClick={() => history.push(`/v1/programmes/${form}/${programmeKey}/qualitydocument/new`)} variant="outlined" startIcon={<Add />}>
               {t('document:newDocument')}
