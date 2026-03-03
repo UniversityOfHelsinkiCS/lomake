@@ -5,6 +5,7 @@ class QualityDocument extends Model<InferAttributes<QualityDocument>, InferCreat
   declare id: CreationOptional<number>
   declare data: Record<string, any>
   declare studyprogrammeKey: string
+  declare year: number
   declare createdAt: Date
   declare updatedAt: Date
 }
@@ -22,6 +23,10 @@ QualityDocument.init(
     },
     studyprogrammeKey: {
       type: STRING,
+      allowNull: false,
+    },
+    year: {
+      type: INTEGER,
       allowNull: false,
     },
     createdAt: DATE,

@@ -100,11 +100,12 @@ const getQualityDocuments = async (req: Request, res: Response<QualityDocument[]
 const createQualityDocument = async (req: Request, res: Response<QualityDocument[] | ErrorObject>) => {
   try {
     const { programme, status, error, qualityDocuments} = await validationOperation(req)
-    if (!programme) return res.status(status).json({ error: error })
+    if (!programme) return res.status(status).json({ error: error })  
 
     const qualityDocument: QualityDocument = await QualityDocument.create({
       data: req.body.data,
       studyprogrammeKey: programme,
+      year: new Date().getFullYear(),
     })
 
     res.status(201).json([ ...qualityDocuments, qualityDocument ])
