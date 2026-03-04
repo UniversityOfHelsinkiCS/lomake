@@ -18,8 +18,8 @@ export default () => {
       <Segment padded>
         <h3>Päivitä koulutusohjelmat</h3>
         <div style={{ paddingBottom: '10px' }}>
-          Nappulan painaminen poistaa tietokannasta kaikki koulutusohjelmat, tiedekunnat sekä yhteistyötiedekunnat.
-          Tämän jälkeen ohjelmat tallennetaan uudestaan tietokantaan siinä muodossa, kuin ne on tallennettu{' '}
+          Nappulan painaminen päivittää tietokannasta kaikki koulutusohjelmat, tiedekunnat sekä yhteistyötiedekunnat
+          perustuen{' '}
           <a
             href="https://github.com/UniversityOfHelsinkiCS/jami/blob/master/src/organisation/faculties.ts"
             target="_blank"
@@ -29,7 +29,7 @@ export default () => {
           </a>
           . Mikäli siis koulutusohjelman muut tiedot kuin koulutusohjelman koodi muuttuvat (esim. nimi tai
           yhteistyötiedekunta), ne voi päivittää täältä. Päivittämisellä ei ole vaikutusta jo annettuihin vastauksiin
-          tai käyttäjien oikeuksiin.
+          tai käyttäjien oikeuksiin. Poistuneita koulutusohjelmia ei poisteta tietokannasta.
         </div>
         <Button color="blue" onClick={() => handleClick()}>
           Päivitä
