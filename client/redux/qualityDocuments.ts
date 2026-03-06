@@ -9,6 +9,7 @@ interface GetDocumentsArgs {
 interface CreateDocumentArgs {
   studyprogrammeKey: string
   data: QualityDocumentForm | null
+  year: number
 }
 
 interface UpdateDocumentArgs {
@@ -32,10 +33,10 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
       providesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
     createQualityDocument: builder.mutation<DocumentType[], CreateDocumentArgs>({
-      query: ({ studyprogrammeKey, data }) => ({
+      query: ({ studyprogrammeKey, data, year }) => ({
         url: `/qualitydocuments/${studyprogrammeKey}`,
         method: 'post',
-        body: { data },
+        body: { data, year },
       }),
       invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),

@@ -105,7 +105,7 @@ const createQualityDocument = async (req: Request, res: Response<QualityDocument
     const qualityDocument: QualityDocument = await QualityDocument.create({
       data: req.body.data,
       studyprogrammeKey: programme,
-      year: new Date().getFullYear(),
+      year: req.body.year,
     })
 
     res.status(201).json([ ...qualityDocuments, qualityDocument ])

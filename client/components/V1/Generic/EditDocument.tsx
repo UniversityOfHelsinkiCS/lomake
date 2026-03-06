@@ -1,6 +1,6 @@
 import { useEffect, useState, Fragment } from 'react'
 import dayjs from 'dayjs'
-import { Box, Typography, TextField, Button } from '@mui/material'
+import { Box, Typography, TextField, Button, CircularProgress } from '@mui/material'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { fiFI, svSE, enUS } from '@mui/x-date-pickers/locales'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -24,6 +24,9 @@ const initForm = (t: TFunction, error: boolean) => {
     {} as Record<string, string>,
   )
 }
+
+
+
 
 const EditDocument = ({
   programmeKey,
@@ -99,6 +102,8 @@ const EditDocument = ({
       history.push(`/v1/programmes/10/${programmeKey}`)
     }
   }
+
+  if (!document) return <CircularProgress />
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>

@@ -1,12 +1,11 @@
 import { useState, Fragment } from 'react'
-import { Box, Typography, TextField, Button } from '@mui/material'
+import { Box, Typography, TextField, Button, CircularProgress } from '@mui/material'
+import { Checkbox, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { QualityDocumentFormSchema } from '@/shared/validators'
+import { useUpdateQualityDocumentMutation } from '@/client/redux/qualityDocuments'
 import { TFunction } from 'i18next'
 import { useHistory } from 'react-router-dom'
-import { Checkbox, Radio } from 'semantic-ui-react'
-import { useCreateQualityDocumentMutation } from '@/client/redux/qualityDocuments'
-import { useAppSelector } from '@/client/util/hooks'
 
 const fields = ['title', 'curriculumProcess', 'guidancePolicies', 'feedbackUtilization', 'feedbackActions', 'actionsRegularity']
 
@@ -14,8 +13,7 @@ const initForm = (t: TFunction, error: boolean) => {
   return fields.reduce(
     (acc, field) => {
       if (field === 'title' && !error)
-        acc[field] = `${t('qualitydocument:header')} - ${new Date().toLocaleDateString('fi-FI')}`
-      else if (field === 'feedbackActions') acc[field] = ''
+        acc[field] = `${t('document:header')} - ${new Date().toLocaleDateString('fi-FI')}`
       else acc[field] = ''
       return acc
     },
@@ -23,74 +21,78 @@ const initForm = (t: TFunction, error: boolean) => {
   )
 }
 
-const QualityForm = ({
-  programmeKey
+const EditQualityDocument = ({
+  programmeKey,
+  id,
+  document
 }: {
   programmeKey: string
+  id: string
+  document: Record<string, any>
 }) => {
   const { t } = useTranslation()
   const history = useHistory()
 
-  const data = initForm(t, false)
+  const data = document.data.curriculumProcess !== undefined ? document.data : initForm(t, false)
 
-  const [createDocument] = useCreateQualityDocumentMutation()
+  const [updateDocument] = useUpdateQualityDocumentMutation()
   const [formData, setFormData] = useState(data)
   const [errors, setErrors] = useState(initForm(t, true))
-  const [norppa, setNorppa] = useState(false)
-  const [careerMonitoring, setCareerMonitoring] = useState(false)
-  const [bachelorFeedback, setBachelorFeedback] = useState(false)
-  const [other, setOther] = useState(false)
-  const [regularity, setRegularity] = useState<'annually' | 'everySemester' | 'moreFrequently'>('annually')
+  const [norppa, setNorppa] = useState(document.data.feedbackUtilization.norppa || false)
+  const [careerMonitoring, setCareerMonitoring] = useState(document.data.feedbackUtilization.careerMonitoring || false)
+  const [bachelorFeedback, setBachelorFeedback] = useState(document.data.feedbackUtilization.bachelorFeedback || false)
+  const [other, setOther] = useState(document.data.feedbackUtilization.other || false)
+  const [regularity, setRegularity] = useState<'annually' | 'everySemester' | 'moreFrequently'>(document.data.actionsRegularity || 'annually')
 
-  const selectedYear = useAppSelector(state => state.filters.keyDataYear)
 
-  
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const { name, value } = e.target
-      setFormData((prevData: Record<string, any>) => ({
-        ...prevData,
-        [name]: value,
-      }))
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prevData: Record<string, string>) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
+  const validateForm = (payload: Record<string, any> = formData) => {
+    const res = QualityDocumentFormSchema.safeParse(payload)
+    if (!res.success) {
+      const fieldErrors = res.error.format()
+      setErrors(
+        fields.reduce(
+          (acc, field) => {
+            // @ts-expect-error
+            acc[field] = t(`error:${fieldErrors[field]?._errors?.[0]}`) || ''
+            return acc
+          },
+          {} as Record<string, string>,
+        ),
+      )
     }
-  
-  
-    const validateForm = (payload: Record<string, any> = formData) => {
-      const res = QualityDocumentFormSchema.safeParse(payload)
-      if (!res.success) {
-        const fieldErrors = res.error.format()
-        setErrors(
-          fields.reduce(
-            (acc, field) => {
-              // @ts-expect-error
-              acc[field] = t(`error:${fieldErrors[field]?._errors?.[0]}`) || ''
-              return acc
-            },
-            {} as Record<string, string>,
-          ),
-        )
-      }
-      return res.success
-    }
-  
-    const handleSubmit = (e: any) => {
-      e.preventDefault()
-      const payload = {
+    return res.success
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    const payload = {
         ...formData,
+        title: document.data.title,
         actionsRegularity: regularity,
         feedbackUtilization: { norppa, careerMonitoring, bachelorFeedback, other },
       }
-      if (validateForm(payload)) {
-        createDocument({ studyprogrammeKey: programmeKey, data: payload, year: selectedYear })
-          setFormData(initForm(t, false))
-          setErrors(initForm(t, true))
-          history.push(`/v1/programmes/10/${programmeKey}`)
-      }
+    if (validateForm(payload)) {
+      updateDocument({ studyprogrammeKey: programmeKey, id: id, data: payload })
+      setFormData(initForm(t, false))
+      setErrors(initForm(t, true))
+      history.push(`/v1/programmes/10/${programmeKey}`)
     }
+  }
+
+  if (!document) return <CircularProgress />
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <Typography variant="h3" sx={{ mb: '4rem' }}>
-        {t('qualitydocument:header')} - {`${new Date().toLocaleDateString('fi-FI')}`}
+        {`${document.data.title}`}
       </Typography>
       <form onSubmit={handleSubmit}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -207,9 +209,8 @@ const QualityForm = ({
                 </Button>
               </div>
             </form>
-     
     </Box>
   )
 }
 
-export default QualityForm
+export default EditQualityDocument

@@ -113,6 +113,7 @@ export default () => (
         <Route exact path="/V1/programmes/:form/:programme/document/new" component={InterventionProcedure} />
         <Route exact path="/V1/programmes/:form/:programme/document/:id" component={InterventionProcedure} />
         <Route exact path="/V1/programmes/:form/:programme/qualitydocument/new" component={QualityManagement} />
+        <Route exact path="/V1/programmes/:form/:programme/qualitydocument/:id" component={QualityManagement} />
         <Route exact path="/v1/programmes/:form/:programme/:year" component={ProgrammeYearlyView} />
 
         {/* Route for programmatic redirects */}

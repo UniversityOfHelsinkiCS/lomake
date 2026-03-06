@@ -24,7 +24,6 @@ import { KeyDataProgramme } from '@/shared/lib/types'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 
 import { useGetDocumentsQuery,
-  useCreateDocumentMutation,
   useCloseInterventionProcedureMutation,
   useDeleteDocumentMutation } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
@@ -46,7 +45,6 @@ const InterventionComponent = () => {
   const [reason, setReason] = useState('')
   const [additionalInfo, setAdditionalInfo] = useState('')
 
-  const [createDocument] = useCreateDocumentMutation()
   const [closeInterventionProcedure] = useCloseInterventionProcedureMutation()
   const [deleteDocument] = useDeleteDocumentMutation()
 

@@ -4,6 +4,7 @@ import {
   IconButton,
   Typography,
   Link,
+  CircularProgress
 } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { ProgrammeLevel } from '@/client/lib/enums'
@@ -15,6 +16,9 @@ import QualityForm from './QualityForm'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import { Loader } from 'semantic-ui-react'
+import { useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
+import type { DocumentType } from '@/client/lib/types'
+import EditQualityDocument from './EditQualityDocument'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -36,10 +40,12 @@ export const calculateInterventionAreas = ({
 }
 
 const QualityManagement = () => {
-  const { programme: programmeKey } = useParams<{ programme: string }>()
+  const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { isLoading, programme } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const user = useAppSelector(state => state.currentUser.data)
+  const { data: documents = [], isFetching } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
+  const document = (documents.length > 0 || !isFetching) ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
 
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
@@ -54,6 +60,8 @@ const QualityManagement = () => {
 
   if (!programme || !hasWriteRights) return null
 
+  if (isFetching) return <CircularProgress />
+
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '1rem' }}>
@@ -66,7 +74,8 @@ const QualityManagement = () => {
       </Box>
       <br />
       <br />
-      <QualityForm programmeKey={programmeData.koulutusohjelmakoodi} />
+      {!id ? (<QualityForm programmeKey={programmeData.koulutusohjelmakoodi} />) : (<EditQualityDocument programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document}/>)}
+      
     </Box>
   )
 }

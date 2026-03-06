@@ -136,7 +136,7 @@ const InterventionProcedure = () => {
       )}
       <br />
       <br />
-      {!id || !document ? (<DocumentForm programmeKey={programmeData.koulutusohjelmakoodi}/>) : (<EditDocument programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document}/>)}
+      {!id ? (<DocumentForm programmeKey={programmeData.koulutusohjelmakoodi}/>) : (<EditDocument programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document}/>)}
     </Box>
   )
 }
