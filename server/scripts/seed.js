@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
-// import { Op } from 'sequelize'
 import logger from '../util/logger.js'
 import { facultyMap } from '../../config/data.js'
 import { getOrganisationData } from '../util/jami.js'
@@ -112,48 +111,6 @@ const seedFacultiesAndStudyprogrammes = async () => {
       }
     }
   }
-  // Check if this is needed fucntionality, if not please delete
-  // const removedFaculties = facultyCodes.filter(code => !existingFaculties.includes(code))
-  // const removedProgrammes = studyProgrammeKeys.filter(key => !existingStudyProgrammeKeys.includes(key))
-
-  // if (removedProgrammes.length > 0 || removedFaculties.length > 0) {
-  //   const facultiesToBeRemoved = (
-  //     await Faculty.findAll({
-  //       where: {
-  //         code: removedFaculties,
-  //       },
-  //       attributes: ['id'],
-  //     })
-  //   ).map(f => f.id)
-  //   const programmesToBeRemoved = (
-  //     await Faculty.findAll({
-  //       where: {
-  //         code: removedProgrammes,
-  //       },
-  //       attributes: ['id'],
-  //     })
-  //   ).map(p => p.id)
-
-  //   CompanionFaculty.destroy({
-  //     where: {
-  //       [Op.or]: [
-  //         {
-  //           facultyId: facultiesToBeRemoved,
-  //         },
-  //         {
-  //           studyprogrammeId: programmesToBeRemoved,
-  //         },
-  //       ],
-  //     },
-  //   })
-  // }
-  // if (removedProgrammes.length > 0) {
-  //   Studyprogramme.destroy({ key: removedProgrammes })
-  // }
-
-  // if (removedFaculties.length > 0) {
-  //   Faculty.destroy({ code: removedFaculties })
-  // }
 }
 
 const seed = async () => {
