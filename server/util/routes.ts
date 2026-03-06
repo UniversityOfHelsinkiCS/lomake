@@ -93,6 +93,7 @@ router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) 
 router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => { await documents.closeInterventionProcedure(req, res) })
 router.delete('/documents/:programme/:id', checkAdmin, async (req, res) => { await documents.deleteDocument(req, res) })
 
+router.get('/qualitydocuments/all/:activeYear', async (req, res) => { await qualityDocuments.getAllQualityDocuments(req, res) })
 router.get('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.getQualityDocuments(req, res) })
 router.post('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.createQualityDocument(req, res) })
 router.put('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) => { await qualityDocuments.updateQualityDocument(req, res) })

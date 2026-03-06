@@ -1,6 +1,6 @@
 import { RTKApi } from '../util/apiConnection'
 import type { QualityDocumentForm } from '@/shared/lib/types'
-import type { DocumentType } from '../lib/types'
+import type { QualityDocumentType } from '../lib/types'
 
 interface GetDocumentsArgs {
   studyprogrammeKey: string
@@ -10,6 +10,10 @@ interface CreateDocumentArgs {
   studyprogrammeKey: string
   data: QualityDocumentForm | null
   year: number
+}
+
+interface GetAllQualityDocumentsArgs {
+  activeYear: string
 }
 
 interface UpdateDocumentArgs {
@@ -25,14 +29,20 @@ interface DeleteDocumentArgs {
 
 const qualityDocumentsApi = RTKApi.injectEndpoints({
   endpoints: builder => ({
-    getQualityDocuments: builder.query<DocumentType[], GetDocumentsArgs>({
+    getQualityDocuments: builder.query<QualityDocumentType[], GetDocumentsArgs>({
       query: ({ studyprogrammeKey }) => ({
         url: `/qualitydocuments/${studyprogrammeKey}`,
         method: 'get',
       }),
       providesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
-    createQualityDocument: builder.mutation<DocumentType[], CreateDocumentArgs>({
+    getAllQualityDocuments: builder.query<QualityDocumentType[], GetAllQualityDocumentsArgs>({
+          query: ({ activeYear }) => ({
+            url: `/qualitydocuments/all/${activeYear}`,
+            method: 'get',
+          }),
+        }),
+    createQualityDocument: builder.mutation<QualityDocumentType[], CreateDocumentArgs>({
       query: ({ studyprogrammeKey, data, year }) => ({
         url: `/qualitydocuments/${studyprogrammeKey}`,
         method: 'post',
@@ -40,7 +50,7 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
     }),
-    updateQualityDocument: builder.mutation<DocumentType[], UpdateDocumentArgs>({
+    updateQualityDocument: builder.mutation<QualityDocumentType[], UpdateDocumentArgs>({
       query: ({ studyprogrammeKey, id, data }) => ({
         url: `/qualitydocuments/${studyprogrammeKey}/${id}`,
         method: 'put',
@@ -60,6 +70,7 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
 
 export const { 
   useGetQualityDocumentsQuery, 
+  useGetAllQualityDocumentsQuery,
   useCreateQualityDocumentMutation,
   useUpdateQualityDocumentMutation,
   useDeleteQualityDocumentMutation

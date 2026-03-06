@@ -17,7 +17,7 @@ import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import { Loader } from 'semantic-ui-react'
 import { useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
-import type { DocumentType } from '@/client/lib/types'
+import type { QualityDocumentType } from '@/client/lib/types'
 import EditQualityDocument from './EditQualityDocument'
 
 export const calculateInterventionAreas = ({
@@ -45,7 +45,7 @@ const QualityManagement = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const user = useAppSelector(state => state.currentUser.data)
   const { data: documents = [], isFetching } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
-  const document = (documents.length > 0 || !isFetching) ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
+  const document = (documents.length > 0 || !isFetching) ? documents.find((doc: QualityDocumentType) => doc.id.toString() === id) : null
 
 
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)

@@ -7,8 +7,9 @@ import SwapVertIcon from '@mui/icons-material/SwapVert'
 
 import { GroupKey } from '@/client/lib/enums'
 import { KeyDataProgramme } from '@/shared/lib/types'
-
+import { isAdmin } from '@/config/common'
 import ActionsCell from '../Generic/ActionsCellComponent'
+import QualityCell from '../Generic/QualityCellComponent'
 import TrafficLightCell from '../Generic/TrafficLightCellComponent'
 import SearchInput from '../Generic/SearchInputComponent'
 import { Table, TableHead, TableBody, TableRow, TableCell } from '../Generic/TableComponent'
@@ -63,7 +64,8 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
   const { data: reports = {} } = useGetReportsQuery({ year: activeYear })
-
+  const user = useAppSelector(state => state.currentUser.data)
+  
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
   }, [keyData])
@@ -221,23 +223,38 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 <TableCell>
                   <Typography variant="regularSmall">{t('keyData:opiskelijapalaute')}</Typography>
                 </TableCell>
+                {activeYear != 2026 && !(isAdmin(user))? (
+                <TableCell disabled isHeader>
+                  <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
+                    <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
+                  </Tooltip>
+                </TableCell>
+                ) : (
+     
                 <TableCell>
                   <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
                 </TableCell>
+                )}
                 <TableCell>
                   <Typography variant="regularSmall">{t('keyData:actions')}</Typography>
                 </TableCell>
-
+                {activeYear != 2026 ? (
                 <TableCell disabled isHeader>
                   <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
                     <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
                   </Tooltip>
                 </TableCell>
+                ) : (
+                <TableCell>
+                  <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
+                </TableCell>
+                )}
                 <TableCell isHeader>
                   <Typography variant="regularSmall">{t('keyData:supportProcess')}</Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
+            {activeYear != 2026 ||(isAdmin(user) && activeYear == 2026) ? (
 
             <TableBody>
               {keyFigureData.length > 0 ? (
@@ -267,7 +284,9 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       handleModalOpen={handleModalOpen}
                       reports={reports}
                     />
-
+                    {activeYear != 2026 && !(isAdmin(user))? (
+                    <TableCell disabled></TableCell>
+                    ) : (
                     <TrafficLightCell
                       metadata={metadata}
                       programmeData={programmeData}
@@ -275,9 +294,14 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       handleModalOpen={handleModalOpen}
                       reports={reports}
                     />
+                    )}
 
                     <ActionsCell programmeData={programmeData} metadata={metadata} reports={reports} />
+                    {activeYear != 2026 ? (
                     <TableCell disabled></TableCell>
+                    ) : (
+                      <QualityCell programmeData={programmeData} />
+                    )}
                     <TableCell>
                       <InterventionCell programmeData={programmeData} selectedYear={yearFilter} />
                     </TableCell>
@@ -291,6 +315,13 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 </TableRow>
               )}
             </TableBody>
+            ) : (
+              <TableRow variant="single-cell">
+                  <TableCell>
+                    <Typography variant="light">{t('common:noData')}</Typography>
+                  </TableCell>
+              </TableRow>
+            )}
           </Table>
 
           <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />

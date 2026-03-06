@@ -615,7 +615,7 @@ export default {
       'Den förnyade årliga uppföljningen av utbildningsprogram pilottestas våren 2025 i alla kandidat- och magisterprogram. Doktorandprogrammen deltar ännu inte i pilotfasen.',
     pilotInfo2:
       '15.4-30.5.2025 Utbildningsprogrammens ledningsgrupper går igenom sina egna utvärderingsområden och utarbetar sina utvecklingsplaner. De utbildningsprogram som inleder interventionsförfarandet diskuterar ärendet med prodekanen senast den 30 oktober 2025.',
-    notUsed2025: 'Inte tillänglig 2025',
+    notUsed2025: 'Inte tillänglig 2024 eller 2025',
     keyFigure: 'Utvärderingsområden och nyckeltal',
     keyFigureInfo: 'Nyckeltalen för kandidat- och magisterprogrammen är:  ',
 
@@ -647,6 +647,8 @@ export default {
     Measure: 'Utvecklingsplan för utbildningsprogrammet',
     noMeasure: 'Inget svar',
     noData: 'Ingen data',
+    Quality: 'Kvalitetsstyrningsdokument för utbildningsprogrammet',
+    noQuality: 'Inget svar',
     missingMeasure: 'Ingen utvecklingsplan!',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',

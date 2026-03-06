@@ -1,5 +1,5 @@
 import { GroupKey, StudyLevel } from './enums'
-import { DocumentForm } from '@/shared/lib/types'
+import { DocumentForm, QualityDocumentForm } from '@/shared/lib/types'
 
 export interface KeyDataCardData {
   title: string
@@ -30,6 +30,14 @@ export interface DocumentType {
   active: boolean
   activeYear: number
   reason: Reason | null
+}
+
+export interface QualityDocumentType {
+  id: number
+  data: QualityDocumentForm
+  year: number
+  studyprogrammeKey: string
+  createdAt: string
 }
 
 export type ReportDataKey = 'Vetovoimaisuus' | 'Opintojen sujuvuus ja valmistuminen' | 'Resurssien käyttö' | 'Palaute ja työllistyminen' | 'Toimenpiteet'

@@ -97,6 +97,26 @@ const getQualityDocuments = async (req: Request, res: Response<QualityDocument[]
   }
 }
 
+
+const getAllQualityDocuments = async (req: Request, res: Response) => {
+  try {
+    const { activeYear } = req.params
+
+    if (!activeYear) {
+      return res.status(400).json({ error: 'Active year param is required' })
+    }
+
+    const documents = await QualityDocument.findAll({
+      where: { year: activeYear },
+    })
+
+    return res.status(200).json(documents)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const createQualityDocument = async (req: Request, res: Response<QualityDocument[] | ErrorObject>) => {
   try {
     const { programme, status, error, qualityDocuments} = await validationOperation(req)
@@ -153,4 +173,4 @@ const deleteQualityDocument = async (req: Request, res: Response) => {
 }
 
 
-export default { getQualityDocuments, createQualityDocument, updateQualityDocument, deleteQualityDocument }
+export default { getQualityDocuments, createQualityDocument, updateQualityDocument, deleteQualityDocument, getAllQualityDocuments }
