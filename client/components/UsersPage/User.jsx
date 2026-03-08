@@ -1,14 +1,12 @@
-import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import moment from 'moment'
-import { Table, Icon, Label, Popup, Loader } from 'semantic-ui-react'
+import { Table, Icon, Label, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { colors, getUserRole } from '../../util/common'
 import './UsersPage.scss'
 import { isSuperAdmin, isBasicUser, isAdmin } from '../../../config/common'
-import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
 
 const getSpecialGroup = (user, group, lang, t, data) => {
   const specialGroups = [
@@ -47,6 +45,36 @@ const mayHijack = (current, toMock) => {
   if (!isSuperAdmin(toMock)) return true
   return false
 }
+const FormattedAccess = (programmeCodesAndNames, user) => {
+  const programmeKeys = user.access ? Object.keys(user.access) : []
+  if (!programmeKeys.length > 0 || programmeKeys.every(key => key === '')) {
+    return <div>None</div>
+  }
+  return (
+    <Popup
+      position="bottom center"
+      trigger={
+        <div>
+          <div className="user-access-list">{programmeCodesAndNames.get(programmeKeys[0])}</div>
+          {programmeKeys.length > 1 && (
+            <div>
+              +{programmeKeys.length - 1} {t('users:moreProgrammes', { count: programmeKeys.length - 1 })}
+            </div>
+          )}
+        </div>
+      }
+      content={
+        <div className="user-programme-list-popup">
+          {programmeKeys.map(p => (
+            <p key={p}>
+              {programmeCodesAndNames.get(p)}: {formatRights(user.access[p])}
+            </p>
+          ))}
+        </div>
+      }
+    />
+  )
+}
 
 export default ({ user, lang, programmeCodesAndNames, data }) => {
   const { t } = useTranslation()
@@ -59,37 +87,6 @@ export default ({ user, lang, programmeCodesAndNames, data }) => {
     window.location.reload()
   }
 
-  const FormattedAccess = () => {
-    const programmeKeys = user.access ? Object.keys(user.access) : []
-    if (!programmeKeys.length > 0 || programmeKeys.every(key => key === '')) {
-      return <div>None</div>
-    }
-    return (
-      <Popup
-        position="bottom center"
-        trigger={
-          <div>
-            <div className="user-access-list">{programmeCodesAndNames.get(programmeKeys[0])}</div>
-            {programmeKeys.length > 1 && (
-              <div>
-                +{programmeKeys.length - 1} {t('users:moreProgrammes', { count: programmeKeys.length - 1 })}
-              </div>
-            )}
-          </div>
-        }
-        content={
-          <div className="user-programme-list-popup">
-            {programmeKeys.map(p => (
-              <p key={p}>
-                {programmeCodesAndNames.get(p)}: {formatRights(user.access[p])}
-              </p>
-            ))}
-          </div>
-        }
-      />
-    )
-  }
-
   return (
     <Table.Row>
       <Table.Cell width={2}>
@@ -97,7 +94,7 @@ export default ({ user, lang, programmeCodesAndNames, data }) => {
       </Table.Cell>
       <Table.Cell width={1}>{user.uid}</Table.Cell>
       <Table.Cell data-cy={`${user.uid}-userAccess`} style={{ display: 'flex' }}>
-        <FormattedAccess />
+        <FormattedAccess user={user} programmeCodesAndNames={programmeCodesAndNames} />
       </Table.Cell>
       <Table.Cell data-cy={`${user.uid}-userGroup`}>{getUserType(user, t)}</Table.Cell>
       <Table.Cell>
