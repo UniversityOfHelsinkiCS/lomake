@@ -76,6 +76,7 @@ export const RTKApi = createApi({
     'KeyData',
     'KeyDataMeta',
     'Auth',
+    'QualityDocuments'
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${basePath}api`,

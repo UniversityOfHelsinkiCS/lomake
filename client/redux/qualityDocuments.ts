@@ -34,7 +34,7 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
         url: `/qualitydocuments/${studyprogrammeKey}`,
         method: 'get',
       }),
-      providesTags: [{ type: 'Documents', id: 'DOCS' }]
+      providesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }]
     }),
     getAllQualityDocuments: builder.query<QualityDocumentType[], GetAllQualityDocumentsArgs>({
           query: ({ activeYear }) => ({
@@ -48,7 +48,7 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
         method: 'post',
         body: { data, year },
       }),
-      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
+      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }]
     }),
     updateQualityDocument: builder.mutation<QualityDocumentType[], UpdateDocumentArgs>({
       query: ({ studyprogrammeKey, id, data }) => ({
@@ -56,14 +56,14 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
         method: 'put',
         body: { data },
       }),
-      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
+      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }]
     }),
     deleteQualityDocument: builder.mutation<void, DeleteDocumentArgs>({
       query: ({ studyprogrammeKey, id }) => ({
         url: `qualitydocuments/${studyprogrammeKey}/${id}`,
         method: 'delete',
       }),
-      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
+      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }]
     }),
   })
 })
