@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router'
 
-import User from '../UsersPage/User'
+import User from './User'
 import useDebounce from '../../util/useDebounce'
 import { sortedItems } from '../../util/common'
 import { isAdmin } from '../../../config/common'
@@ -72,13 +72,13 @@ export default () => {
   const getCustomHeader = ({ name, width, field, sortable = true }) => {
     const sortHandler = sortable
       ? () => {
-        if (sorter === field) {
-          setReverse(!reverse)
-        } else {
-          setReverse(false)
-          setSorter(field)
+          if (sorter === field) {
+            setReverse(!reverse)
+          } else {
+            setReverse(false)
+            setSorter(field)
+          }
         }
-      }
       : undefined
 
     return (

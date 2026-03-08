@@ -46,6 +46,7 @@ const mayHijack = (current, toMock) => {
   return false
 }
 const FormattedAccess = (programmeCodesAndNames, user) => {
+  const { t } = useTranslation()
   const programmeKeys = user.access ? Object.keys(user.access) : []
   if (!programmeKeys.length > 0 || programmeKeys.every(key => key === '')) {
     return <div>None</div>
