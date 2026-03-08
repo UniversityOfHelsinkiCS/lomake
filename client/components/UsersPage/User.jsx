@@ -45,7 +45,7 @@ const mayHijack = (current, toMock) => {
   if (!isSuperAdmin(toMock)) return true
   return false
 }
-const FormattedAccess = (programmeCodesAndNames, user) => {
+const FormattedAccess = ({ user, programmeCodesAndNames }) => {
   const { t } = useTranslation()
   const programmeKeys = user.access ? Object.keys(user.access) : []
   if (!programmeKeys.length > 0 || programmeKeys.every(key => key === '')) {
