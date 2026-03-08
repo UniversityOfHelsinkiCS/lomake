@@ -95,13 +95,13 @@ export const MetadataSchema = z
     yksikko: z.literal('%').optional(),
     kynnysarvot: z
       .string()
-      .regex(/^\d+(?:\.\d+)?;\d+(?:\.\d+)?;\d+(?:\.\d+)?;\d+(?:\.\d+)?$/, 'Should be in format number;number;number;number')
+      .regex(/^\d+(?:\.\d+)?;\d+(?:\.\d+)?;\d+(?:\.\d+)?;\d+(?:\.\d+)?$/, 'Should be in format number;number;number;number. Use . as decimal separator')
       .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
     ohjelmanTaso: z.enum(['bachelor', 'master', 'doctoral']),
     liikennevalo: z.boolean(),
     mittarinRajat: z
       .string()
-      .regex(/^\d+;\d+$/, 'Should be in format number;number')
+      .regex(/^\d+(?:\.\d+)?;\d+(?:\.\d+)?$/, 'Should be in format number;number. Use . as decimal separator')
       .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
     arviointialue: z.string(),
     avainluvunNimi: z
