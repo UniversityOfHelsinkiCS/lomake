@@ -28,7 +28,7 @@ const ColorHistoryComponent = (props: any) => {
     .filter((programme: any) => {
       const isMatchingProgram = programme.koulutusohjelmakoodi === props.programme.koulutusohjelmakoodi
       const hasValue = dataKey && programme.values[dataKey] !== undefined
-      const isDifferentYear = programme.year !== selectedYear - 1
+      const isDifferentYear = programme.year < selectedYear - 1
 
       return isMatchingProgram && hasValue && isDifferentYear
     })
@@ -41,7 +41,7 @@ const ColorHistoryComponent = (props: any) => {
     <Box sx={{ mt: 4, mb: 2 }}>
       <Typography variant="italic">{t('keyData:yearlyDevelopment')}</Typography>
       {history.length > 0 ? (
-        <Table key={data.year} sx={{ mt: 2 }}>
+        <Table sx={{ mt: 2 }}>
           <TableHead>
             <TableRow>
               <TableCell align="center">
