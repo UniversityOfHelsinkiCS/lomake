@@ -140,15 +140,6 @@ const ProgrammeKeyDataTableComponent = ({
                 </TableRow>
               )
             })}
-            {!isAdmin(user) ? null : (
-            <TableRow>
-              <TableCell>
-                  <Typography aria-disabled style={{ width: '100%', textAlign: 'left' }} variant="h5" color="secondary">
-                    {getNextFollowUpYear()}
-                  </Typography>
-                </TableCell><TableCell disabled /><TableCell disabled /><TableCell disabled /><TableCell disabled /><TableCell disabled />
-            </TableRow>
-            )}
           </TableBody>
         ) : (
           <TableBody>
