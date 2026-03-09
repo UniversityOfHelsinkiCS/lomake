@@ -595,7 +595,7 @@ export default {
     resurssit: 'Use of resources',
     resurssitInfo:
       'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme. Key figures are collected from the previous year.',
-    qualityControl: 'Quality management tools',
+    qualityControl: 'Quality management',
     supportProcess: 'Intervention procedure',
     actions: 'Development plan',
     moveToActions: 'Continue to development plan',

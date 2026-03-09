@@ -631,7 +631,7 @@ export default {
     resurssit: 'Resursanvändning',
     resurssitInfo:
       'Utbildningsprogrammets resurser gäller både mängden av undervisningsresurser som är tillgängliga för programmet och resursbehoven. Nyckeltal hämtas från föregående år.',
-    qualityControl: 'Kvalitetsstyrningsverktyg',
+    qualityControl: 'Kvalitetsstyrning',
     supportProcess: 'Interventionsförfarande',
     actions: 'Utvecklingsplan',
     moveToActions: 'Flytta till utvecklingsplan',

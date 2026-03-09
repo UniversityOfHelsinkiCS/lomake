@@ -595,7 +595,7 @@ export default {
     resurssit: 'Resurssien käyttö',
     resurssitInfo:
       'Koulutusohjelman resurssien kohdalla tarkastellaan ohjelman käytettävissä olevan opetusresurssin määrää sekä resurssien käyttöä. Tämän arviointialueen määrittely ja kriteerit tarkennetaan myöhemmin, kun muun muassa resurssiryhmien työskentely tiedekunnissa on käynnistynyt. Avainluvut ovat kerätty edeltävältä vuodelta.',
-    qualityControl: 'Laadunhallinnan välineet',
+    qualityControl: 'Laadunhallinta',
     supportProcess: 'Toimenpidemenettely',
     actions: 'Kehittämissuunnitelma',
     moveToActions: 'Jatka kehittämisuunnitelmaan',
