@@ -37,6 +37,7 @@ const ProgrammeView = () => {
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey })
   const form = 10
   const { data: reports = {} } = useGetReportsQuery({ year })
+  const activeYear = useAppSelector(state => state.filters.keyDataYear)
 
   const level = studyprogrammeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
@@ -291,6 +292,9 @@ const ProgrammeView = () => {
           </Alert>
 
           {Object.values(KeyDataPoints).map((data: KeyDataCardData) => {
+            if (data.title === 'Resurssien käyttö' && activeYear < 2026 && !isAdmin(user)) {
+                return null
+            }
             const anchor = formatURLFragment(data.groupKey)
             return (
               <Box

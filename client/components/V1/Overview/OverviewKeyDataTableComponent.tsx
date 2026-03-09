@@ -223,7 +223,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 <TableCell>
                   <Typography variant="regularSmall">{t('keyData:opiskelijapalaute')}</Typography>
                 </TableCell>
-                {activeYear != 2026 && !(isAdmin(user))? (
+                {activeYear < 2026 && !(isAdmin(user))? (
                 <TableCell disabled isHeader>
                   <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
                     <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
@@ -238,7 +238,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 <TableCell>
                   <Typography variant="regularSmall">{t('keyData:actions')}</Typography>
                 </TableCell>
-                {activeYear != 2026 ? (
+                {activeYear < 2026 ? (
                 <TableCell disabled isHeader>
                   <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
                     <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
@@ -254,7 +254,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 </TableCell>
               </TableRow>
             </TableHead>
-            {activeYear != 2026 ||(isAdmin(user) && activeYear == 2026) ? (
+            {activeYear < 2026 ||(isAdmin(user) && activeYear == 2026) ? (
 
             <TableBody>
               {keyFigureData.length > 0 ? (
@@ -284,7 +284,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       handleModalOpen={handleModalOpen}
                       reports={reports}
                     />
-                    {activeYear != 2026 && !(isAdmin(user))? (
+                    {activeYear < 2026 && !(isAdmin(user))? (
                     <TableCell disabled></TableCell>
                     ) : (
                     <TrafficLightCell
@@ -297,7 +297,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                     )}
 
                     <ActionsCell programmeData={programmeData} metadata={metadata} reports={reports} />
-                    {activeYear != 2026 ? (
+                    {activeYear < 2026 ? (
                     <TableCell disabled></TableCell>
                     ) : (
                       <QualityCell programmeData={programmeData} />

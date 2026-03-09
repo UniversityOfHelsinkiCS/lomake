@@ -10,6 +10,7 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Alert
 } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import { Add, Edit, Delete } from '@mui/icons-material'
@@ -26,6 +27,7 @@ const QualityManagementComponent= () => {
   const { data: documents = [] } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
   const user = useAppSelector(state => state.currentUser.data)
   const form = 10
+  const activeYear = useAppSelector(state => state.filters.keyDataYear)
 
   const { isLoading } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
 
@@ -65,6 +67,11 @@ const QualityManagementComponent= () => {
          <Typography variant="h4" sx={{ mt: 4 }}>
           {t('keyData:qualitydocumentingHeader')}
         </Typography>
+        {activeYear < 2026  && (
+          <Alert severity="info" sx={{ gap: 1 }}>
+            <Typography variant="light">{t('keyData:notUsed2025')}</Typography>
+          </Alert>
+        )}
         {Array.isArray(documents) &&
           documents.map((doc: Record<string, any>, index) => (
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
@@ -146,7 +153,7 @@ const QualityManagementComponent= () => {
             </Accordion>
           ))}
 
-        {hasWriteRights && documents.length === 0 && (
+        {hasWriteRights && documents.length === 0 && activeYear > 2025 && (
           <Box>
             <Button data-cy="create-new-qualitydocument" onClick={() => history.push(`/v1/programmes/${form}/${programmeKey}/qualitydocument/new`)} variant="outlined" startIcon={<Add />}>
               {t('document:newDocument')}

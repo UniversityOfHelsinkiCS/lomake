@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Typography } from '@mui/material'
-
+import { isAdmin } from '@/config/common'
 import { GroupKey } from '@/client/lib/enums'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import ActionsCell from '../Generic/ActionsCellComponent'
@@ -13,6 +13,7 @@ import KeyDataModal, { type selectedKeyFigureData } from '../Overview/KeyDataMod
 import { AppDispatch } from '@/client/redux'
 import { setKeyDataYear } from '@/client/redux/filterReducer'
 import { useGetReportsQuery } from '@/client/redux/reports'
+import { useAppSelector } from '@/client/util/hooks'
 
 const ProgrammeKeyDataTableComponent = ({
   programmeData,
@@ -25,6 +26,7 @@ const ProgrammeKeyDataTableComponent = ({
   const dispatch: AppDispatch = useDispatch()
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
+  const user = useAppSelector(state => state.currentUser.data)
 
   const handleModalOpen = (programme: KeyDataProgramme, type: GroupKey) => {
     setModalOpen(true)
@@ -79,8 +81,12 @@ const ProgrammeKeyDataTableComponent = ({
         {programmeData.length > 0 ? (
           <TableBody>
             {programmeData.map((programmeData: KeyDataProgramme, index) => {
-              const { data: reports = {} } = useGetReportsQuery({ year: annualFollowUpYear(programmeData.year).toString() })
+              if (annualFollowUpYear(programmeData.year) == 2026 && !isAdmin(user)) {
+                return null
+              }
+              const { data: reports = {} } = useGetReportsQuery({ year: annualFollowUpYear(programmeData.year).toString() }) 
               return (
+                
                 <TableRow key={programmeData.koulutusohjelmakoodi + index}>
                   <TableCell
                     style={{ borderRadius: '0.5rem 0 0 0.5rem' }}
@@ -118,31 +124,31 @@ const ProgrammeKeyDataTableComponent = ({
                     handleModalOpen={handleModalOpen}
                     reports={reports}
                   />
-
-                  <TrafficLightCell
-                    metadata={metadata}
-                    programmeData={programmeData}
-                    groupKey={GroupKey.RESURSSIT}
-                    handleModalOpen={handleModalOpen}
-                    reports={reports}
-                  />
+                  {programmeData.year < 2026 && !(isAdmin(user))? (
+                    <TableCell disabled></TableCell>
+                  ) : (
+                    <TrafficLightCell
+                      metadata={metadata}
+                      programmeData={programmeData}
+                      groupKey={GroupKey.RESURSSIT}
+                      handleModalOpen={handleModalOpen}
+                      reports={reports}
+                    />
+                    )}
 
                   <ActionsCell programmeData={programmeData} metadata={metadata} reports={reports} />
                 </TableRow>
               )
             })}
+            {!isAdmin(user) ? null : (
             <TableRow>
               <TableCell>
-                <Typography aria-disabled style={{ width: '100%', textAlign: 'left' }} variant="h5" color="secondary">
-                  {getNextFollowUpYear()}
-                </Typography>
-              </TableCell>
-              <TableCell disabled />
-              <TableCell disabled />
-              <TableCell disabled />
-              <TableCell disabled />
-              <TableCell disabled />
+                  <Typography aria-disabled style={{ width: '100%', textAlign: 'left' }} variant="h5" color="secondary">
+                    {getNextFollowUpYear()}
+                  </Typography>
+                </TableCell><TableCell disabled /><TableCell disabled /><TableCell disabled /><TableCell disabled /><TableCell disabled />
             </TableRow>
+            )}
           </TableBody>
         ) : (
           <TableBody>
