@@ -650,6 +650,7 @@ export default {
     Quality: 'Kvalitetsstyrningsdokument för utbildningsprogrammet',
     noQuality: 'Inget svar',
     missingMeasure: 'Ingen utvecklingsplan!',
+    missingQualityDocument: 'Ingen kvalitetsstyrningsdokumentet!',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',
     noHistory: 'Inga tidigare historia',

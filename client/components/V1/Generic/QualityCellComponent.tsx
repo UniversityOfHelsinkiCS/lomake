@@ -9,6 +9,7 @@ import { Box, Card, CardContent, Typography, Button } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 import { useGetAllQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import ReactMarkdown from 'react-markdown'
+import NotificationBadge from '../Generic/NotificationBadge'
 
 const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
 
@@ -31,8 +32,15 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
   }
 
   if (!document) {
-    return <TableCell />
-  }
+    return (
+      <TableCell> 
+        <NotificationBadge
+            data-cy={`actionsCellBadge-${programmeData.koulutusohjelmakoodi}`}
+            variant="medium"
+            tooltip={t('keyData:missingQualityDocument')}
+          />
+      </TableCell>
+    )}
 
   return (
     <TableCell>

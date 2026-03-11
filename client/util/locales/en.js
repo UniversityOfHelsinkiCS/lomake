@@ -606,6 +606,7 @@ export default {
     Comment: 'Opinion of the programme',
     noComment: 'No answer',
     missingComment: 'The opinion of the programme is missing!',
+    missingQualityDocument: 'Quality management document is missing!',
     editMeasure: 'Edit the development plan',
     saveMeasure: 'Save the development plan',
     Measure: 'Development plan of the programme',

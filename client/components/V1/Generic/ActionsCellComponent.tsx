@@ -15,7 +15,6 @@ import Modal from '../Generic/ModalTemplateComponent'
 import { TextFieldCard } from '../Generic/TextFieldCard'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
-import { useParams } from 'react-router'
 
 const ActionsCell = ({ programmeData, metadata, reports }: { programmeData: KeyDataProgramme; metadata: KeyDataMetadata[]; reports: Record<string, ReportData | undefined> }) => {
   const { renderActionsBadge } = useNotificationBadge()

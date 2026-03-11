@@ -614,6 +614,7 @@ export default {
     noQuality: 'Ei vastausta',
     noData: 'Ei dataa',
     missingMeasure: 'Kehittämisuunnitelma puuttuu!',
+    missingQualityDocument: 'Laadunhallinnan dokumentti puuttuu!',
     colormeterError: 'Virhe liikennevalojen liukuvan mittarin arviossa',
     colormeterNoDisplay: 'Tälle avainluvulle ei näytetä liikennevaloarviota.',
     noHistory: 'Ei aiempia arvioita',
