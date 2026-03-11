@@ -35,7 +35,7 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
     return (
       <TableCell> 
         <NotificationBadge
-            data-cy={`actionsCellBadge-${programmeData.koulutusohjelmakoodi}`}
+            data-cy={`qualityCellBadge-${programmeData.koulutusohjelmakoodi}`}
             variant="medium"
             tooltip={t('keyData:missingQualityDocument')}
           />
