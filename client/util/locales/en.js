@@ -717,6 +717,8 @@ export default {
     moreFrequently: 'Student feedback processing and actions are carried out more frequently than each semester',
     submit: 'Save Document',
     undefined: 'Not defined',
+    documentingDescription:
+      'This annual report section contains questions about the development of the study programme’s curriculum, guidance, learning objectives and feedback practices.',
   },
 
   error: {

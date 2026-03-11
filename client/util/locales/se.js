@@ -758,6 +758,8 @@ export default {
     moreFrequently: 'Hanteringen av studentrespons och åtgärder sker oftare än varje termin',
     submit: 'Spara dokument',
     undefined: 'Odefinierat',
+    documentingDescription:
+      'Denna del av årsuppföljningen innehåller frågor om utvecklingen av utbildningsprogrammets läroplan, handledning, lärandemål och återkopplingspraxis.',
   },
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',

@@ -705,7 +705,7 @@ export default {
     curriculumProcess: 'Opetussuunnitelmaprosessin toimivuus',
     guidancePoliciesHeader: 'Ohjauskäytännöt',
     guidancePolicies: 'Ohjauskäytäntöjen toimivuus',
-    feedbackHeader: 'Opiskelijapalaute',
+    feedbackHeader: 'Palautteiden hyödyntäminen koulutusohjelman kehittämisessä',
     feedbackActions: 'Opiskelijapalautteen käsittely ja toimenpiteet',
     feedbackDescription:
       'Miten opiskelijapalutetta on käsitelty ja mitä toimenpiteitä palautteiden perusteella on tehty? Miten tehdyistä toimenpiteistä on tiedotettu?',
@@ -720,6 +720,8 @@ export default {
     moreFrequently: 'Opiskelijapalautteen käsittely ja toimenpiteet tapahtuvat useammin kuin lukukausittain',
     submit: 'Tallenna dokumentti',
     undefined: 'Ei määritelty',
+    documentingDescription:
+      'Tämä vuosiseurannan osio sisältää kysymyksiä koulutusohjelman opetussuunnitelman, ohjauksen, osaamistavoitteiden ja palautekäytäntöjen kehittämisestä.',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',

@@ -49,10 +49,6 @@ const ProgrammeKeyDataTableComponent = ({
     return programmeDataYear + 1
   }
 
-  const getNextFollowUpYear = () => {
-    const years = programmeData.map(data => data.year)
-    return (annualFollowUpYear(Math.max(...years)) + 1).toString()
-  }
 
   return (
     <div style={{ minWidth: 1200, marginTop: 20 }}>

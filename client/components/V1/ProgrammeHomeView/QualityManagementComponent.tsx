@@ -67,6 +67,9 @@ const QualityManagementComponent= () => {
          <Typography variant="h4" sx={{ mt: 4 }}>
           {t('keyData:qualitydocumentingHeader')}
         </Typography>
+        <Alert severity="info" sx={{ gap: 1, mb: 2 }}>
+                  <Typography variant="light">{t('qualitydocument:documentingDescription')}</Typography>
+                </Alert>
         {activeYear < 2026  && (
           <Alert severity="info" sx={{ gap: 1 }}>
             <Typography variant="light">{t('keyData:notUsed2025')}</Typography>
