@@ -13,7 +13,7 @@ interface CreateDocumentArgs {
 }
 
 interface GetAllQualityDocumentsArgs {
-  activeYear: string
+  selectedYear: string
 }
 
 interface UpdateDocumentArgs {
@@ -37,8 +37,8 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
       providesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }]
     }),
     getAllQualityDocuments: builder.query<QualityDocumentType[], GetAllQualityDocumentsArgs>({
-          query: ({ activeYear }) => ({
-            url: `/qualitydocuments/all/${activeYear}`,
+          query: ({ selectedYear }) => ({
+            url: `/qualitydocuments/all/${selectedYear}`,
             method: 'get',
           }),
         }),

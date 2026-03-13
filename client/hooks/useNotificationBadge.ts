@@ -3,7 +3,8 @@ import type { KeyDataMetadata, KeyDataProgramme, ReportData } from '@/shared/lib
 import { calculateKeyDataColor } from '@/client/util/v1'
 import { calculateInterventionAreas } from '../components/V1/Generic/InterventionProcedure'
 import { useTranslation } from 'react-i18next'
-import { DocumentType } from '../lib/types'
+import { DocumentType, InterventionProcedureType } from '../lib/types'
+import { useGetProgrammesInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
 
 export const useNotificationBadge = () => {
   const { t } = useTranslation()
@@ -73,33 +74,40 @@ export const useNotificationBadge = () => {
     programmeData: KeyDataProgramme,
     metadata: KeyDataMetadata[],
     selectedYear: string,
-    documents: Record<string, any>
+    documents: DocumentType[]
   ) => {
     if (programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return { interventionStatus: false, showBadge: false }
     }
+    const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({studyprogrammeKey: programmeData.koulutusohjelmakoodi})
+    const redLights = calculateInterventionAreas({ selectedYear, metadata, programme: programmeData, t }).length > 0
+    
+    
+    
+    
+    const selectedYearInt = parseInt(selectedYear)
+    const programmeDocuments = documents.filter(
+      (doc: DocumentType) => doc.studyprogrammeKey.toString() === programmeData.koulutusohjelmakoodi,
+    )
 
-    const redLights = calculateInterventionAreas({ metadata, programme: programmeData, t }).length > 0
+    const hasActiveInterventionProceduresForEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYearInt)    
 
-    if (!redLights) {
+     if (!redLights && !hasActiveInterventionProceduresForEarlierYears) {
       return { interventionStatus: false, showBadge: false }
     }
-
-    const hasDocumentsForYear = documents.some(
-      (doc: DocumentType) =>
-        doc.studyprogrammeKey.toString() === programmeData.koulutusohjelmakoodi &&
-        doc.activeYear === parseInt(selectedYear),
+    const hasDocumentsForYear = programmeDocuments.some(
+      (doc: DocumentType) => doc.activeYear === selectedYearInt,
     )
 
-    const hasActiveDocumentsForYear = documents.some(
-      (doc: DocumentType) =>
-        doc.studyprogrammeKey.toString() === programmeData.koulutusohjelmakoodi &&
-        doc.activeYear === parseInt(selectedYear) &&
-        doc.active === true,
+    const hasActiveDocumentsForSameOrEarlierYears = programmeDocuments.some(
+      (doc: DocumentType) => doc.activeYear <= selectedYearInt && doc.active === true,
     )
 
-    const interventionStatus = !hasDocumentsForYear || hasActiveDocumentsForYear
-    const showBadge = interventionStatus && !hasActiveDocumentsForYear
+    const interventionStatus =
+      hasActiveInterventionProceduresForEarlierYears || redLights
+
+    const showBadge = interventionStatus && !hasActiveDocumentsForSameOrEarlierYears
+
 
     return {
       interventionStatus,

@@ -4,6 +4,7 @@ import { Request, Response } from 'express'
 import { DocumentFormSchema, InterventionProcedureCloseSchema } from '../../shared/validators/index.js'
 import { sequelize } from '../database/connection.js'
 import Studyprogramme from '../models/studyprogramme.js'
+import { Op } from 'sequelize'
 
 interface ValidateOperationResponse {
   success: boolean
@@ -109,9 +110,12 @@ const getAllDocuments = async (req: Request, res: Response) => {
     }
 
     const documents = await Document.findAll({
-      where: { activeYear },
+      where: {
+        [Op.or]: [{ activeYear }, { active: true }],
+      },
+      order: [['createdAt', 'ASC']],
     })
-
+    
     return res.status(200).json(documents)
   } catch (error) {
     logger.error(`Database error: ${error}`)

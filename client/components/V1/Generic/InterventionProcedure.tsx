@@ -32,15 +32,18 @@ export const calculateInterventionAreas = ({
   metadata,
   programme,
   t,
+  selectedYear,
 }: {
   metadata: KeyDataMetadata[]
   programme: KeyDataProgramme
   t: TFunction
+  selectedYear: string | number
 }) => {
   let res: string[] = []
   if (!metadata || !programme) return res
   const keyDataPoints = getKeyDataPoints(t)
   Object.values(keyDataPoints).map((point: any) => {
+    if (`${selectedYear}` === '2025' && point.groupKey === GroupKey.RESURSSIT) return
     const color = calculateKeyDataColor(metadata, programme, point.groupKey, programme.level as ProgrammeLevel)
     if (color === 'Punainen') res.push(point.groupKey)
   })
@@ -52,6 +55,7 @@ const InterventionProcedure = () => {
   const { t } = useTranslation()
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
+  const selectedYear = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
   const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
   const document = (documents.length > 0 || !isFetching) ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
@@ -67,7 +71,7 @@ const InterventionProcedure = () => {
 
   const year = `${programmeData.year + 1}`
 
-  const areas = calculateInterventionAreas({ metadata, programme: programmeData, t })
+  const areas = calculateInterventionAreas({ metadata, programme: programmeData, t, selectedYear })
 
   if (!programme || !hasWriteRights) return null
 

@@ -17,12 +17,12 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const year = `${programmeData.year + 1}`
   const [open, setOpen] = useState(false)
-  const activeYear = useAppSelector(state => state.filters.keyDataYear)
+  const selectedYear = useAppSelector(state => state.filters.keyDataYear)
 
 
   const dispatch = useAppDispatch()
 
-  const { data: qualityDocuments = [] } = useGetAllQualityDocumentsQuery({ activeYear })
+  const { data: qualityDocuments = [] } = useGetAllQualityDocumentsQuery({ selectedYear })
 
   const document = qualityDocuments.find((doc) => doc.studyprogrammeKey === programmeData.koulutusohjelmakoodi)
 

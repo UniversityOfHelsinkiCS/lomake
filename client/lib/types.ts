@@ -40,4 +40,12 @@ export interface QualityDocumentType {
   createdAt: string
 }
 
+export interface InterventionProcedureType {
+  id: number
+  studyprogrammeKey: string
+  active: boolean
+  startYear: number
+  endYear: number | null
+}
+
 export type ReportDataKey = 'Vetovoimaisuus' | 'Opintojen sujuvuus ja valmistuminen' | 'Resurssien käyttö' | 'Palaute ja työllistyminen' | 'Toimenpiteet'

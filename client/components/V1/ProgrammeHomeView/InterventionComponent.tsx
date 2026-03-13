@@ -22,12 +22,13 @@ import { Add, Edit, Delete } from '@mui/icons-material'
 import { basePath, dekanaattiIamGroup, isAdmin } from '@/config/common'
 import { KeyDataProgramme } from '@/shared/lib/types'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
-
+import { useGetProgrammesInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
 import { useGetDocumentsQuery,
   useCloseInterventionProcedureMutation,
   useDeleteDocumentMutation } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
+import { InterventionProcedureType } from '@/client/lib/types'
 
 const InterventionComponent = () => {
   const { t } = useTranslation()
@@ -37,9 +38,8 @@ const InterventionComponent = () => {
   const user = useAppSelector(state => state.currentUser.data)
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
-
-  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
-
+  const selectedYear = useAppSelector(state => state.filters.keyDataYear)
+  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey }) 
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
   const [reason, setReason] = useState('')
@@ -59,8 +59,10 @@ const InterventionComponent = () => {
 
   const programmeData = programme.filter((programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear)
 
-  const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t })
+  const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t, selectedYear })
 
+    const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({studyprogrammeKey: programmeKey})
+  const hasActiveInterventionProceduresForEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYear)   
 
   const handleDelete = (id:string) => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
@@ -83,6 +85,9 @@ const InterventionComponent = () => {
   }
 
   const activeProcedure = () => {
+    if (hasActiveInterventionProceduresForEarlierYears) {
+      return true
+    }
     if (areas.length === 0) {
       return false
     }

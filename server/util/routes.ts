@@ -11,6 +11,7 @@ import reports from '../controllers/reportsController.js'
 import keyData from '../controllers/keyDataController.js'
 import documents from '../controllers/documentsController.js'
 import qualityDocuments from '../controllers/qualityDocumentsController.js'
+import interventionProcedures from '../controllers/interventionProceduresController.js'
 
 import {
   checkAdmin,
@@ -93,7 +94,7 @@ router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) 
 router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => { await documents.closeInterventionProcedure(req, res) })
 router.delete('/documents/:programme/:id', checkAdmin, async (req, res) => { await documents.deleteDocument(req, res) })
 
-router.get('/qualitydocuments/all/:activeYear', async (req, res) => { await qualityDocuments.getAllQualityDocuments(req, res) })
+router.get('/qualitydocuments/all/:selectedYear', async (req, res) => { await qualityDocuments.getAllQualityDocuments(req, res) })
 router.get('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.getQualityDocuments(req, res) })
 router.post('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.createQualityDocument(req, res) })
 router.put('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) => { await qualityDocuments.updateQualityDocument(req, res) })
@@ -109,5 +110,9 @@ router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.creat
 router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
 router.get('/cypress/initReports', notInProduction, cypress.initReports)
 router.get('/cypress/resetDocuments', notInProduction, cypress.resetDocuments)
+
+router.get('/interventionprocedures/active', async (req, res) => { await interventionProcedures.getActiveInterventionProcedures(req, res) })
+router.get('/interventionprocedures/:programme', async (req, res) => { await interventionProcedures.getProgrammesInterventionProcedures(req, res) })
+
 
 export default router

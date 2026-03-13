@@ -100,14 +100,14 @@ const getQualityDocuments = async (req: Request, res: Response<QualityDocument[]
 
 const getAllQualityDocuments = async (req: Request, res: Response) => {
   try {
-    const { activeYear } = req.params
+    const { selectedYear } = req.params
 
-    if (!activeYear) {
-      return res.status(400).json({ error: 'Active year param is required' })
+    if (!selectedYear) {
+      return res.status(400).json({ error: 'Selected year param is required' })
     }
 
     const documents = await QualityDocument.findAll({
-      where: { year: activeYear },
+      where: { year: selectedYear },
     })
 
     return res.status(200).json(documents)
