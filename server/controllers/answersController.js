@@ -30,11 +30,7 @@ const getAllTempUserHasAccessTo = async (req, res) => {
   try {
     // admin route
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
-      const data = await db.tempAnswer.findAll({
-        // where: {
-        //   year: await whereDraftYear(),
-        // },
-      })
+      const data = await db.tempAnswer.findAll({})
       return res.send(data)
     }
 
@@ -134,6 +130,9 @@ const getSingleProgrammesAnswers = async (req, res) => {
 const getIndividualFormAnswerForUser = async (req, res) => {
   try {
     const { uid } = req.user
+    if (!uid) {
+      return res.status(401).json({ error: 'Unauthorized' })
+    }
     const deadline = await db.deadline.findOne({ where: { form: 3 } })
     let data = null
     if (deadline) {
