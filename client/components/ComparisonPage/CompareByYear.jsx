@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'

@@ -1,4 +1,3 @@
-import React from 'react'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { useTranslation } from 'react-i18next'
 import { colors } from '../../util/common'

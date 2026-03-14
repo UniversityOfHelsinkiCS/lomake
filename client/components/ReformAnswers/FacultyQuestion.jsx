@@ -1,14 +1,11 @@
 /* eslint-disable no-restricted-syntax */
-import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { Loader, Table } from 'semantic-ui-react'
-// import { useTranslation } from 'react-i18next'
+import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)
   const { data, isFetching } = useGetOrganisationDataQuery()
-  // const { t } = useTranslation()
 
   const { id } = question
 

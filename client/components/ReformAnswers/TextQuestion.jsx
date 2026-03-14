@@ -1,6 +1,4 @@
 /* eslint-disable no-restricted-syntax */
-import React from 'react'
-
 const Question = ({ question, answers }) => {
   const { id } = question
 

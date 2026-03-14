@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'

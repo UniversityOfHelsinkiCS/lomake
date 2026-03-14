@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'

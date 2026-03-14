@@ -1,8 +1,7 @@
-import React from 'react'
 import { Form, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { formKeys } from '../../../config/data'
 import { useSelector } from 'react-redux'
+import { formKeys } from '../../../config/data'
 
 const LabelOptions = ({ unit, setUnit }) => {
   const { t } = useTranslation()

@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import { Button, Loader } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import rypsiImage from "../../assets/rypsi.jpg"
+import rypsiImage from '../../assets/rypsi.jpg'
 import NoPermissions from '../Generic/NoPermissions'
 import YearSelector from '../Generic/YearSelector'
 import FormStatusMessage from '../Generic/FormStatusMessage'

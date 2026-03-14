@@ -1,4 +1,3 @@
-import React from 'react'
 import { Route, Switch } from 'react-router-dom' //  Redirect
 
 import AboutPage from './AboutPage'

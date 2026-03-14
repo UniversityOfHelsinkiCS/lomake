@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { Button } from 'semantic-ui-react'

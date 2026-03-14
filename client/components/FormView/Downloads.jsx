@@ -1,5 +1,4 @@
 import CsvDownload from '../Generic/CsvDownload'
-import React from 'react'
 import PDFDownload from './PDFDownload'
 
 const Downloads = ({ programme, componentRef, form }) => {

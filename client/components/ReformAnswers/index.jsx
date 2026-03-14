@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Divider, Radio, Loader } from 'semantic-ui-react'
 import { getReformAnswers } from '../../redux/reformAnswerReducer'

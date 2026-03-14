@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import React from 'react'
 import { Message, Icon } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'

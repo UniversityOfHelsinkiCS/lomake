@@ -1,6 +1,5 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-restricted-syntax */
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { degreeReformIndividualQuestions as questionData } from '../../questionData'

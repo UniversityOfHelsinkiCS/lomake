@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
-
-import CsvDownload from '../../Generic/CsvDownload'
 import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
+import CsvDownload from '../../Generic/CsvDownload'
 import { filterFromUrl } from '../../../util/common'
 import { useVisibleOverviewProgrammes } from '../../../util/overview'
 import YearSelector from '../../Generic/YearSelector'
@@ -44,7 +43,7 @@ export default () => {
   useEffect(() => {
     document.title = `${t('evaluation')}`
   }, [lang])
- 
+
   const handleFilterChange = ({ target }) => {
     const { value } = target
     setFilter(value)

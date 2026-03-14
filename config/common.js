@@ -152,6 +152,26 @@ const isEvaluationUniversityUser = user => {
   return false
 }
 
+const studentIams = [
+  'hy-mltdk-students',
+  'hy-eltdk-students',
+  'hy-ftdk-students',
+  'hy-bytdk-students',
+  'hy-humtdk-students',
+  'hy-ktdk-students',
+  'hy-ltdk-students',
+  'hy-valttdk-students',
+  'hy-ttdk-students',
+  'hy-sskh-students',
+  'hy-oiktdk-students',
+  'hy-mmtdk-students',
+]
+
+const isDegreeStudentOrEmployee = user => {
+  if (user.iamGroups.map(group => ['hy-employee', ...studentIams].includes(group))) return true
+  return false
+}
+
 const hasSomeReadAccess = user => Object.values(user?.access || {}).some(a => a.read)
 
 const internationalAccess = {
@@ -238,6 +258,7 @@ export {
   isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
+  isDegreeStudentOrEmployee,
   organisationCodeToIam,
   isEvaluationFacultyUser,
   hasSomeReadAccess,

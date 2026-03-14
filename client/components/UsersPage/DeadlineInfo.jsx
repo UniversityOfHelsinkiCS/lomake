@@ -1,4 +1,3 @@
-import React from 'react'
 import { Header, Message } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSelector } from 'react-redux'
