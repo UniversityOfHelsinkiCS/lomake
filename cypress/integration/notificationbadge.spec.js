@@ -33,31 +33,31 @@ describe('Notification badge tests', () => {
 
   describe('Testing badges in overview page', () => {
     it('Light and actions badges should display on red lights', () => {
-      cy.get(`[data-cy=lightCellBadge-${redProgramme}-Vetovoimaisuus]`).should('exist')
-      cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Opintojen sujuvuus ja valmistuminen"]`).should('exist')
-      cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Palaute ja työllistyminen"]`).should('exist')
+      cy.get(`[data-cy=lightCellBadge-${redProgramme}-Vetovoimaisuus-${year}]`).should('exist')
+      cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Opintojen sujuvuus ja valmistuminen-${year}"]`).should('exist')
+      cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Palaute ja työllistyminen-${year}"]`).should('exist')
       cy.get(`[data-cy="actionsCellBadge-${redProgramme}"]`).should('exist')
     })
 
     it('Light or actions badges shouldnt display on green or gray lights', () => {
-      cy.get(`[data-cy=lightCellBadge-${greenProgramme}-Vetovoimaisuus]`).should('not.exist')
-      cy.get(`[data-cy*="lightCellBadge-${greenProgramme}-Opintojen sujuvuus ja valmistuminen"]`).should('not.exist')
-      cy.get(`[data-cy*="lightCellBadge-${greenProgramme}-Palaute ja työllistyminen"]`).should('not.exist')
+      cy.get(`[data-cy=lightCellBadge-${greenProgramme}-Vetovoimaisuus-${year}]`).should('not.exist')
+      cy.get(`[data-cy*="lightCellBadge-${greenProgramme}-Opintojen sujuvuus ja valmistuminen-${year}"]`).should('not.exist')
+      cy.get(`[data-cy*="lightCellBadge-${greenProgramme}-Palaute ja työllistyminen-${year}"]`).should('not.exist')
     })
 
     it('Light badges should but action badges shouldnt display on yellow lights ', () => {
-      cy.get(`[data-cy=lightCellBadge-${yellowProgramme}-Vetovoimaisuus]`).should('exist')
-      cy.get(`[data-cy*="lightCellBadge-${yellowProgramme}-Opintojen sujuvuus ja valmistuminen"]`).should('exist')
-      cy.get(`[data-cy*="lightCellBadge-${yellowProgramme}-Palaute ja työllistyminen"]`).should('exist')
+      cy.get(`[data-cy=lightCellBadge-${yellowProgramme}-Vetovoimaisuus-${year}]`).should('exist')
+      cy.get(`[data-cy*="lightCellBadge-${yellowProgramme}-Opintojen sujuvuus ja valmistuminen-${year}"]`).should('exist')
+      cy.get(`[data-cy*="lightCellBadge-${yellowProgramme}-Palaute ja työllistyminen-${year}"]`).should('exist')
       cy.get(`[data-cy="actionsCellBadge-${yellowProgramme}"]`).should('not.exist')
     })
 
     it('Any badges shouldnt display on a discontinued programme', () => {
-      cy.get(`[data-cy=lightCellBadge-${discontinuedProgramme}-Vetovoimaisuus]`).should('not.exist')
-      cy.get(`[data-cy*="lightCellBadge-${discontinuedProgramme}-Opintojen sujuvuus ja valmistuminen"]`).should(
+      cy.get(`[data-cy=lightCellBadge-${discontinuedProgramme}-Vetovoimaisuus-${year}]`).should('not.exist')
+      cy.get(`[data-cy*="lightCellBadge-${discontinuedProgramme}-Opintojen sujuvuus ja valmistuminen-${year}"]`).should(
         'not.exist',
       )
-      cy.get(`[data-cy*="lightCellBadge-${discontinuedProgramme}-Palaute ja työllistyminen"]`).should('not.exist')
+      cy.get(`[data-cy*="lightCellBadge-${discontinuedProgramme}-Palaute ja työllistyminen-${year}"]`).should('not.exist')
       cy.get(`[data-cy="actionsCellBadge-${discontinuedProgramme}"]`).should('not.exist')
     })
 
@@ -82,9 +82,9 @@ describe('Notification badge tests', () => {
       cy.get('[data-cy="save-Toimenpiteet-Measure"]').click()
 
       cy.visit('/v1/overview')
-      cy.get(`[data-cy=lightCellBadge-${redProgramme}-Vetovoimaisuus]`).should('not.exist')
-      cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Opintojen sujuvuus ja valmistuminen"]`).should('not.exist')
-      cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Palaute ja työllistyminen"]`).should('not.exist')
+      cy.get(`[data-cy=lightCellBadge-${redProgramme}-Vetovoimaisuus-${year}]`).should('not.exist')
+      cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Opintojen sujuvuus ja valmistuminen-${year}"]`).should('not.exist')
+      cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Palaute ja työllistyminen-${year}"]`).should('not.exist')
       cy.get(`[data-cy="actionsCellBadge-${redProgramme}"]`).should('not.exist')
     })
   })
