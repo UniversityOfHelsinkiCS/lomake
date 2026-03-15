@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Box, Container, Chip, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 import { LanguageSharp, Logout, ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
+import { useTranslation } from 'react-i18next'
 import { images } from '../util/common'
 import { logoutAction } from '../redux/currentUserReducer'
 import { setLanguage } from '../redux/languageReducer'
-import { useTranslation } from 'react-i18next'
 import {
   isAdmin,
   isSuperAdmin,
@@ -16,7 +16,12 @@ import {
 } from '../../config/common'
 
 const NavBarItems = {
-  yearly: { key: 'yearly', label: 'landingPage:yearlyAssessmentTitle', path: '/v1/overview', access: ['programme', 'special'] },
+  yearly: {
+    key: 'yearly',
+    label: 'landingPage:yearlyAssessmentTitle',
+    path: '/v1/overview',
+    access: [],
+  },
   archive: {
     key: 'archive',
     label: 'archive',
@@ -61,7 +66,7 @@ const NavBarItems = {
             key: 'university-overview',
             label: 'overview:universityOverview',
             path: '/evaluation-university',
-            access: [],
+            access: ['admin', 'evaluationUniversity', 'special', 'programme'],
           },
           {
             key: 'meta-evaluation',
@@ -76,6 +81,7 @@ const NavBarItems = {
             access: ['admin', 'evaluationFaculty'],
           },
         ],
+        access: ['admin', 'evaluationUniversity', 'special', 'programme', 'evaluationFaculty'],
       },
       {
         key: 'degreeReform',
@@ -97,6 +103,14 @@ const NavBarItems = {
         ],
         access: ['programme'],
       },
+    ],
+    access: [
+      'admin',
+      'evaluationUniversity',
+      'special',
+      'programme',
+      'katselmusProjektiOrOhjausryhma',
+      'universityForm',
     ],
   },
   admin: { key: 'admin', label: 'adminPage', path: '/admin', access: ['admin'] },
@@ -204,6 +218,18 @@ const NavBar = () => {
       </Tooltip>
     </MenuItem>
   )
+  const handleLanguageChange = (e, { value }) => {
+    e.preventDefault()
+    setLanguageCode(value)
+    if (window.location.href.includes('/6/UNI')) {
+      const uniFormCodeMap = {
+        en: 'UNI_EN',
+        se: 'UNI_SE',
+      }
+      const uniFormCode = uniFormCodeMap[value] || 'UNI'
+      history.push(`/evaluation-university/form/6/${uniFormCode}`)
+    }
+  }
 
   const renderLogOut = () => (
     <Box sx={{ marginLeft: 'auto', alignItems: 'center', display: 'flex' }}>
@@ -220,19 +246,6 @@ const NavBar = () => {
       </MenuItem>
     </Box>
   )
-
-  const handleLanguageChange = (e, { value }) => {
-    e.preventDefault()
-    setLanguageCode(value)
-    if (window.location.href.includes('/6/UNI')) {
-      const uniFormCodeMap = {
-        en: 'UNI_EN',
-        se: 'UNI_SE',
-      }
-      const uniFormCode = uniFormCodeMap[value] || 'UNI'
-      history.push(`/evaluation-university/form/6/${uniFormCode}`)
-    }
-  }
 
   const hasAccess = accessRights => {
     if (!accessRights || accessRights.length === 0) return true // If no access rights specified, allow access

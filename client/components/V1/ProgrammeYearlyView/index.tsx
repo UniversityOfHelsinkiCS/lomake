@@ -15,7 +15,7 @@ import NoPermissions from '../../Generic/NoPermissions'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
-import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
+import { basePath, isAdmin, hasSomeReadAccess, inProduction, isDegreeStudentOrEmployee } from '@/config/common'
 import { calculateKeyDataColor, formatURLFragment, getKeyDataPoints } from '@/client/util/v1'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
@@ -46,7 +46,7 @@ const ProgrammeView = () => {
   const user = useAppSelector(state => state.currentUser.data)
 
   const writeAccess = (user.access[studyprogrammeKey] && user.access[studyprogrammeKey].write) || isAdmin(user)
-  const readAccess = hasSomeReadAccess(user) || isAdmin(user)
+  const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user)
 
   const anchorItems = useRef<Record<string, HTMLDivElement | null>>({})
 

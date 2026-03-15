@@ -168,7 +168,12 @@ const studentIams = [
 ]
 
 const isDegreeStudentOrEmployee = user => {
-  if (user.iamGroups.map(group => ['hy-employee', ...studentIams].includes(group))) return true
+  if (user.iamGroups.map(group => ['hy-employees', ...studentIams].includes(group))) return true
+  return false
+}
+
+const isEmployee = user => {
+  if (user.iamGroups.map(group => ['hy-employees'].includes(group))) return true
   return false
 }
 
@@ -259,6 +264,7 @@ export {
   isSpecialGroupUser,
   isInternationalUser,
   isDegreeStudentOrEmployee,
+  isEmployee,
   organisationCodeToIam,
   isEvaluationFacultyUser,
   hasSomeReadAccess,

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import express from 'express'
 import * as Sentry from '@sentry/node'
 import path from 'path'
@@ -25,7 +24,7 @@ import initializeSentry from './util/sentry.js'
 import createWebsocketServer from './websocket.js'
 import { initializeDatabaseConnection } from './database/connection.js'
 import { testJami } from './util/jami.js'
-import { checkEmployee } from './middleware/accessControlMiddleware.js'
+import { checkEmployeeOrStudent } from './middleware/accessControlMiddleware.js'
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url)
@@ -54,7 +53,7 @@ if (AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
 }
 
 app.use(currentUserMiddleware)
-app.use(checkEmployee)
+app.use(checkEmployeeOrStudent)
 app.use('/api', routes)
 
 if (inProduction || inStaging) {

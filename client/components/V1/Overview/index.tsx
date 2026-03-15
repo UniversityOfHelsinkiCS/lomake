@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../../util/hooks'
 import { useTranslation } from 'react-i18next'
 import { setFaculty, setKeyDataYear, setLevel } from '../../../redux/filterReducer'
-import { useVisibleOverviewProgrammes } from '../../../util/overview'
 
 import KeyDataTableComponent from './OverviewKeyDataTableComponent'
 import YearFilter from '../Generic/YearFilterComponent'
@@ -12,6 +11,7 @@ import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Alert, Button, Typography } from '@mui/material'
 import { ArrowForward } from '@mui/icons-material'
+import { isAdmin, hasSomeReadAccess, isDegreeStudentOrEmployee } from '@/config/common'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -25,9 +25,9 @@ const OverviewPage = () => {
   const selectedFaculties = useAppSelector(state => state.filters.faculty)
   const selectedLevel = useAppSelector(state => state.filters.level)
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
-  const currentUser = useAppSelector(state => state.currentUser)
-  const programmes = useAppSelector(state => state.studyProgrammes.data)
+  const user = useAppSelector(state => state.currentUser.data)
 
+  const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user) 
   useEffect(() => {
     // This checks the URL for query parameters and updates the redux store accordingly
     const facultyParams = searchParams.get('faculties')?.split(',') || []
@@ -53,15 +53,7 @@ const OverviewPage = () => {
     document.title = `${t('overview:overviewPage')}`
   }, [lang])
 
-  const usersProgrammes = useVisibleOverviewProgrammes({
-    currentUser,
-    programmes,
-    showAllProgrammes: false,
-    faculty: selectedFaculties,
-    dropdownFilter: selectedLevel,
-  })
-
-  if (usersProgrammes === null || usersProgrammes.length === 0) {
+  if (!readAccess) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
   }
 

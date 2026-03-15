@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
@@ -17,8 +17,7 @@ import { getAnswersAction } from '../redux/oldAnswersReducer'
 import { setYear, setMultipleYears, setKeyDataYear } from '../redux/filterReducer'
 import { setLanguage } from '../redux/languageReducer'
 import Footer from './Footer'
-import { ARCHIVE_LAST_YEAR } from '../../config/common'
-import { useGetOrganisationDataQuery } from '../redux/organisation'
+import { ARCHIVE_LAST_YEAR, isDegreeStudentOrEmployee } from '../../config/common'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -91,9 +90,8 @@ export default () => {
   const deadlines = useSelector(state => state.deadlines)
   const oldAnswers = useSelector(state => state.oldAnswers) // (({ oldAnswers }) => oldAnswers.data)
   const lang = useSelector(state => state.language)
-  const organisation = useGetOrganisationDataQuery()
 
-  const { i18n, t } = useTranslation()
+  const { i18n } = useTranslation()
 
   useEffect(() => {
     const linkLang = languageFromUrl()
@@ -147,9 +145,8 @@ export default () => {
   const isCommonDataReady = studyProgrammes?.data && oldAnswers?.data
   const isIndividualDataReady = studyProgrammes?.data && faculties?.data
   const showRouter = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
-  const isEmployee = currentUser.data && currentUser.data.iamGroups.includes('hy-employees')
-
-  if (!isEmployee) {
+  const isStudentOrEmployee = currentUser.data && isDegreeStudentOrEmployee(currentUser.data)
+  if (!isStudentOrEmployee) {
     return <div data-cy="no-permissions-message" />
   }
 

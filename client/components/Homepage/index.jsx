@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import NoPermissions from '../Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import {
   CircularProgress,
@@ -13,10 +12,11 @@ import {
   Box,
   Button,
 } from '@mui/material'
+import { ArrowForward, MailOutlined } from '@mui/icons-material'
+import NoPermissions from '../Generic/NoPermissions'
 import WritingImage from '../../assets/writing.jpg'
 import ArchiveImage from '../../assets/archive.jpg'
-import { ArrowForward, MailOutlined } from '@mui/icons-material'
-import { basePath } from '@/config/common'
+import { basePath, isDegreeStudentOrEmployee, isEmployee } from '@/config/common'
 
 const Homepage = () => {
   const { t } = useTranslation()
@@ -29,7 +29,7 @@ const Homepage = () => {
 
   if (!usersProgrammes) return <CircularProgress />
 
-  if (usersProgrammes.length + Object.keys(currentUser.data.access).length < 1) {
+  if (!isDegreeStudentOrEmployee(currentUser.data)) {
     return <NoPermissions t={t} requestedForm={t('landingPage:title')} />
   }
 
@@ -57,35 +57,37 @@ const Homepage = () => {
           <CardActions sx={{ justifyContent: 'right', p: 2 }}>
             <Button size="small" href={`${basePath}v1/overview`} sx={{ gap: 1, p: 1 }}>
               <Typography variant="h6">{t('landingPage:toYearly')}</Typography>
-              {<ArrowForward />}
+              <ArrowForward />
             </Button>
           </CardActions>
         </Card>
-        <Card sx={{ width: 400, marginTop: 5 }}>
-          <CardMedia component="img" height="120" image={ArchiveImage} alt="library" />
-          <CardContent sx={{ height: 200 }}>
-            <Typography gutterBottom variant="h4regular" component="div" sx={{ pb: 2, pt: 1 }}>
-              {t('landingPage:archiveCardTitle')}
-            </Typography>
-            <Typography variant="lightSmall" color="text.secondary" sx={{ lineHeight: 1.3 }}>
-              {t('landingPage:archiveCardHeader')}
-              <ul>
-                <li>{t('landingPage:archiveList1')}</li>
-                <li>{t('landingPage:archiveList2')}</li>
-                <li>{t('landingPage:archiveList3')}</li>
-              </ul>
-            </Typography>
-          </CardContent>
-          <CardActions sx={{ justifyContent: 'right', p: 2 }}>
-            <Button size="small" href={`${basePath}yearly`} sx={{ gap: 1, p: 1 }}>
-              <Typography variant="h6">{t('landingPage:toArchive')}</Typography>
-              {<ArrowForward />}
-            </Button>
-          </CardActions>
-        </Card>
+        {usersProgrammes.length + Object.keys(currentUser.data.access).length > 0 && (
+          <Card sx={{ width: 400, marginTop: 5 }}>
+            <CardMedia component="img" height="120" image={ArchiveImage} alt="library" />
+            <CardContent sx={{ height: 200 }}>
+              <Typography gutterBottom variant="h4regular" component="div" sx={{ pb: 2, pt: 1 }}>
+                {t('landingPage:archiveCardTitle')}
+              </Typography>
+              <Typography variant="lightSmall" color="text.secondary" sx={{ lineHeight: 1.3 }}>
+                {t('landingPage:archiveCardHeader')}
+                <ul>
+                  <li>{t('landingPage:archiveList1')}</li>
+                  <li>{t('landingPage:archiveList2')}</li>
+                  <li>{t('landingPage:archiveList3')}</li>
+                </ul>
+              </Typography>
+            </CardContent>
+            <CardActions sx={{ justifyContent: 'right', p: 2 }}>
+              <Button size="small" href={`${basePath}yearly`} sx={{ gap: 1, p: 1 }}>
+                <Typography variant="h6">{t('landingPage:toArchive')}</Typography>
+                <ArrowForward />
+              </Button>
+            </CardActions>
+          </Card>
+        )}
       </Box>
       <Box marginTop={10}>
-        <Typography alignItems={'center'} sx={{ textAlign: 'center' }}>
+        <Typography alignItems="center" sx={{ textAlign: 'center' }}>
           {t('landingPage:feedback')}
         </Typography>
         <a

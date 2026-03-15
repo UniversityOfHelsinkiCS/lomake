@@ -1,12 +1,33 @@
 /* eslint-disable no-console */
 import { inProduction } from '../util/common.js'
-import { isAdmin, isSuperAdmin, isKatselmusProjektiOrOhjausryhma, dekanaattiIamGroup } from '../../config/common.js'
+import {
+  isAdmin,
+  isSuperAdmin,
+  isKatselmusProjektiOrOhjausryhma,
+  dekanaattiIamGroup,
+  isDegreeStudentOrEmployee,
+  isEmployee,
+} from '../../config/common.js'
 import logger from '../util/logger.js'
 
 const requireProgrammeRead = (req, res, next) => {
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
   else if (Object.values(req.user?.access || {}).some(a => a.read)) next()
   else res.status(401).json({ error: 'Unauthorized access.' }).end()
+}
+
+const requireRead = (req, res, next) => {
+  if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
+  else if (isDegreeStudentOrEmployee(req.user)) next()
+  else res.status(401).json({ error: 'Unauthorized access.' }).end()
+}
+
+const requireEmployee = (req, res, next) => {
+  if (isAdmin(req.user) || isSuperAdmin(req.user) || isEmployee(req.user)) {
+    next()
+  } else {
+    res.status(401).json({ error: 'Unauthorized access.' }).end()
+  }
 }
 
 const requireFacultyRead = (req, res, next) => {
@@ -67,10 +88,10 @@ const requireDekanaatti = (req, res, next) => {
   else res.status(401).json({ error: 'Unautorized access.' }).end()
 }
 
-const checkEmployee = (req, res, next) => {
+const checkEmployeeOrStudent = (req, res, next) => {
   if (req.path.includes('/api/login') || req.path.includes('/api/lock') || req.path.startsWith('/api/cypress')) {
     next()
-  } else if (!req.user || req.user.iamGroups.includes('hy-employees')) {
+  } else if (!req.user || isDegreeStudentOrEmployee(req.user)) {
     next()
   } else if (!req.path.includes('/api/')) {
     next()
@@ -89,5 +110,7 @@ export {
   checkAdminOrKatselmusryhma,
   requireUniFormRight,
   requireDekanaatti,
-  checkEmployee,
+  requireRead,
+  requireEmployee,
+  checkEmployeeOrStudent,
 }
