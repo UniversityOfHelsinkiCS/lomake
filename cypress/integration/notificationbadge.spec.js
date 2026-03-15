@@ -42,7 +42,7 @@ describe('Notification badge tests', () => {
     it('Light or actions badges shouldnt display on green or gray lights', () => {
       cy.get(`[data-cy=lightCellBadge-${greenProgramme}-Vetovoimaisuus-${year}]`).should('not.exist')
       cy.get(`[data-cy*="lightCellBadge-${greenProgramme}-Opintojen sujuvuus ja valmistuminen-${year}"]`).should(
-        'not.exist'
+        'not.exist',
       )
       cy.get(`[data-cy*="lightCellBadge-${greenProgramme}-Palaute ja työllistyminen-${year}"]`).should('not.exist')
     })
@@ -50,7 +50,7 @@ describe('Notification badge tests', () => {
     it('Light badges should but action badges shouldnt display on yellow lights ', () => {
       cy.get(`[data-cy=lightCellBadge-${yellowProgramme}-Vetovoimaisuus-${year}]`).should('exist')
       cy.get(`[data-cy*="lightCellBadge-${yellowProgramme}-Opintojen sujuvuus ja valmistuminen-${year}"]`).should(
-        'exist'
+        'exist',
       )
       cy.get(`[data-cy*="lightCellBadge-${yellowProgramme}-Palaute ja työllistyminen-${year}"]`).should('exist')
       cy.get(`[data-cy="actionsCellBadge-${yellowProgramme}"]`).should('not.exist')
@@ -62,7 +62,7 @@ describe('Notification badge tests', () => {
         'not.exist',
       )
       cy.get(`[data-cy*="lightCellBadge-${discontinuedProgramme}-Palaute ja työllistyminen-${year}"]`).should(
-        'not.exist'
+        'not.exist',
       )
       cy.get(`[data-cy="actionsCellBadge-${discontinuedProgramme}"]`).should('not.exist')
     })
@@ -90,7 +90,7 @@ describe('Notification badge tests', () => {
       cy.visit('/v1/overview')
       cy.get(`[data-cy=lightCellBadge-${redProgramme}-Vetovoimaisuus-${year}]`).should('not.exist')
       cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Opintojen sujuvuus ja valmistuminen-${year}"]`).should(
-        'not.exist'
+        'not.exist',
       )
       cy.get(`[data-cy*="lightCellBadge-${redProgramme}-Palaute ja työllistyminen-${year}"]`).should('not.exist')
       cy.get(`[data-cy="actionsCellBadge-${redProgramme}"]`).should('not.exist')
