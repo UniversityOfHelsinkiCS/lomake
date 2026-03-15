@@ -11,7 +11,6 @@ import {
 import { ArrowBack } from '@mui/icons-material'
 import { basePath } from '@/config/common'
 import { KeyDataProgramme } from '@/shared/lib/types'
-
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import InterventionComponent from './InterventionComponent'
@@ -28,8 +27,6 @@ const ProgrammeHomeView = () => {
 
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
 
-
-
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
   }, [programmeKey])
@@ -39,8 +36,6 @@ const ProgrammeHomeView = () => {
   }
 
   const programmeData = programme.filter((programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear)
-
-
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
@@ -66,7 +61,6 @@ const ProgrammeHomeView = () => {
         <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} />
       </Box>
       <QualityManagementComponent />   
-
       <InterventionComponent />
     </Box>
   )

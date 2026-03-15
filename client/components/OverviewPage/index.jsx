@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown, Button, Menu, MenuItem } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-
 import { filterFromUrl } from '../../util/common'
 import { useVisibleOverviewProgrammes } from '../../util/overview'
 import { isAdmin } from '../../../config/common'
@@ -164,7 +163,7 @@ export default () => {
         </>
       ) : (
         <>
-          {false && <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />}
+          <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
           <div data-cy="no-permissions-message">
             <a href="https://opetushallinto.cs.helsinki.fi/tilannekuva/evaluation-university/">
               {t('overview:toKatselmus')}
