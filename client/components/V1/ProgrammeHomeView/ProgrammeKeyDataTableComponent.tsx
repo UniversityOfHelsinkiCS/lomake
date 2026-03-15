@@ -49,7 +49,6 @@ const ProgrammeKeyDataTableComponent = ({
     return programmeDataYear + 1
   }
 
-
   return (
     <div style={{ minWidth: 1200, marginTop: 20 }}>
       <Table variant="programme">
@@ -77,7 +76,7 @@ const ProgrammeKeyDataTableComponent = ({
         {programmeData.length > 0 ? (
           <TableBody>
             {programmeData.map((programmeData: KeyDataProgramme, index) => {
-              if (annualFollowUpYear(programmeData.year) == 2026 && !isAdmin(user)) {
+              if (annualFollowUpYear(programmeData.year) === 2026 && !isAdmin(user)) {
                 return null
               }
               const { data: reports = {} } = useGetReportsQuery({ year: annualFollowUpYear(programmeData.year).toString() }) 
@@ -86,7 +85,7 @@ const ProgrammeKeyDataTableComponent = ({
                 <TableRow key={programmeData.koulutusohjelmakoodi + index}>
                   <TableCell
                     style={{ borderRadius: '0.5rem 0 0 0.5rem' }}
-                    data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
+                    data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}-${programmeData.year}`}
                   >
                     <Link
                       to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${annualFollowUpYear(programmeData.year)}`}
@@ -103,6 +102,7 @@ const ProgrammeKeyDataTableComponent = ({
                     groupKey={GroupKey.VETOVOIMAISUUS}
                     handleModalOpen={handleModalOpen}
                     reports={reports}
+                    activeYear = {annualFollowUpYear(programmeData.year)}
                   />
 
                   <TrafficLightCell
@@ -111,6 +111,7 @@ const ProgrammeKeyDataTableComponent = ({
                     groupKey={GroupKey.LAPIVIRTAUS}
                     handleModalOpen={handleModalOpen}
                     reports={reports}
+                    activeYear = {annualFollowUpYear(programmeData.year)}
                   />
 
                   <TrafficLightCell
@@ -119,6 +120,7 @@ const ProgrammeKeyDataTableComponent = ({
                     groupKey={GroupKey.OPISKELIJAPALAUTE}
                     handleModalOpen={handleModalOpen}
                     reports={reports}
+                    activeYear = {annualFollowUpYear(programmeData.year)}
                   />
                   {programmeData.year < 2026 && !(isAdmin(user))? (
                     <TableCell disabled></TableCell>
@@ -129,6 +131,7 @@ const ProgrammeKeyDataTableComponent = ({
                       groupKey={GroupKey.RESURSSIT}
                       handleModalOpen={handleModalOpen}
                       reports={reports}
+                      activeYear = {annualFollowUpYear(programmeData.year)}
                     />
                     )}
 

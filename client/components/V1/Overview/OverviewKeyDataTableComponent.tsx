@@ -267,6 +267,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       groupKey={GroupKey.VETOVOIMAISUUS}
                       handleModalOpen={handleModalOpen}
                       reports={reports}
+                      activeYear = {activeYear}
                     />
 
                     <TrafficLightCell
@@ -275,6 +276,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       groupKey={GroupKey.LAPIVIRTAUS}
                       handleModalOpen={handleModalOpen}
                       reports={reports}
+                      activeYear = {activeYear}
                     />
 
                     <TrafficLightCell
@@ -283,6 +285,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       groupKey={GroupKey.OPISKELIJAPALAUTE}
                       handleModalOpen={handleModalOpen}
                       reports={reports}
+                      activeYear = {activeYear}
                     />
                     {activeYear < 2026 && !(isAdmin(user))? (
                     <TableCell disabled></TableCell>
@@ -293,6 +296,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       groupKey={GroupKey.RESURSSIT}
                       handleModalOpen={handleModalOpen}
                       reports={reports}
+                      activeYear = {activeYear}
                     />
                     )}
 

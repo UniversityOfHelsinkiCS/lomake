@@ -17,12 +17,14 @@ describe('Overview page test', () => {
 
   describe('Testing modals', () => {
     it('Should open modal on trafficlight cell click', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus"]').should('exist').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus-2024"]').should('exist').click()
       cy.get('[data-cy="keydata-modal"]').should('be.visible')
     })
 
     it('Should have view only textfields', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Opintojen sujuvuus ja valmistuminen"]').should('exist').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Opintojen sujuvuus ja valmistuminen-2024"]')
+        .should('exist')
+        .click()
       cy.get('[data-cy="textfield-viewonly"]').should('exist')
     })
 
@@ -103,7 +105,7 @@ describe('Overview page test', () => {
 
   describe('Testing trafficlights', () => {
     it('Calculates correct values for evaluationarea', () => {
-      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Vetovoimaisuus"]').click()
+      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Vetovoimaisuus-2024"]').click()
       cy.get(`[data-cy="Eligible applicants for Master's application-Punainen"]`).should('exist')
       cy.get('[data-cy="Number of new students-Punainen"]').should('exist')
       cy.get('[data-cy="Intake-Keltainen"]').should('exist')
@@ -131,7 +133,7 @@ describe('Overview page test', () => {
     })
 
     it('Calculates correct values with one grey', () => {
-      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Opintojen sujuvuus ja valmistuminen"]').click()
+      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Opintojen sujuvuus ja valmistuminen-2024"]').click()
 
       cy.get('[data-cy="MH50_009-Opintojen sujuvuus ja valmistuminen-Punainen"]')
         .should('exist')
@@ -153,7 +155,7 @@ describe('Overview page test', () => {
     })
 
     it('Calculates correct values when values are at 0', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Palaute ja työllistyminen"]').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Palaute ja työllistyminen-2024"]').click()
 
       cy.get('[data-cy="KH50_005-Palaute ja työllistyminen-Punainen"]')
         .should('exist')
@@ -175,7 +177,7 @@ describe('Overview page test', () => {
     })
 
     it('Calculates correct values with two yellows and two reds', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus"]').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus-2024"]').click()
 
       cy.get('[data-cy="KH50_005-Vetovoimaisuus-Punainen"]')
         .should('exist')
@@ -204,12 +206,12 @@ describe('Overview page test', () => {
 
   describe('Color history tests', () => {
     beforeEach(() => {
-      cy.get('[data-cy="year-filter"] > .MuiSelect-select').click()
+      cy.get('[data-cy="year-filter"]').click()
       cy.contains('2025').click()
     })
 
     it('Displays correct color history for previous years', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Vetovoimaisuus"]').should('exist').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Vetovoimaisuus-2025"]').should('exist').click()
 
       // Red + lightgreen
       cy.get('[data-cy="Applications per student place-Vaaleanvihreä"]').should('exist').click()
@@ -248,7 +250,9 @@ describe('Overview page test', () => {
     })
 
     it('Displays color history correctly for missing values', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Opintojen sujuvuus ja valmistuminen"]').should('exist').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Opintojen sujuvuus ja valmistuminen-2025"]')
+        .should('exist')
+        .click()
 
       // No history
       cy.get('[data-cy="Degrees-Tummanvihreä"]').should('exist').click()
@@ -267,7 +271,7 @@ describe('Overview page test', () => {
     })
 
     it('Displays no color history for gray values ', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Palaute ja työllistyminen"]').should('exist').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Palaute ja työllistyminen-2025"]').should('exist').click()
 
       // No color meter or history
       cy.get('[data-cy="Guidance-Harmaa"]').should('exist').click()
