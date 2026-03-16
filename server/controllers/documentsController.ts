@@ -5,6 +5,7 @@ import { DocumentFormSchema, InterventionProcedureCloseSchema } from '../../shar
 import { sequelize } from '../database/connection.js'
 import Studyprogramme from '../models/studyprogramme.js'
 import { Op } from 'sequelize'
+import InterventionProcedure from '../models/interventionProcedure.js'
 
 interface ValidateOperationResponse {
   success: boolean
@@ -182,6 +183,13 @@ const closeInterventionProcedure = async (req: Request, res: Response) => {
         active: true,
       },
       transaction,
+    })
+
+    await InterventionProcedure.update({active:false, endYear: new Date().getFullYear()}, {
+      where: {
+        studyprogrammeKey: programme,
+        active: true,
+      },
     })
 
     await transaction.commit()

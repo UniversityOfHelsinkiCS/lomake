@@ -74,12 +74,12 @@ export const useNotificationBadge = () => {
     programmeData: KeyDataProgramme,
     metadata: KeyDataMetadata[],
     selectedYear: string,
-    documents: DocumentType[]
+    documents: DocumentType[],
+    interventionProcedures: InterventionProcedureType[]
   ) => {
     if (programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return { interventionStatus: false, showBadge: false }
     }
-    const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({studyprogrammeKey: programmeData.koulutusohjelmakoodi})
     const redLights = calculateInterventionAreas({ selectedYear, metadata, programme: programmeData, t }).length > 0
     
     
@@ -90,21 +90,17 @@ export const useNotificationBadge = () => {
       (doc: DocumentType) => doc.studyprogrammeKey.toString() === programmeData.koulutusohjelmakoodi,
     )
 
-    const hasActiveInterventionProceduresForEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYearInt)    
-
-     if (!redLights && !hasActiveInterventionProceduresForEarlierYears) {
+    const hasActiveInterventionProceduresForEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYearInt && procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi)   
+    if (!redLights && !hasActiveInterventionProceduresForEarlierYears) {
       return { interventionStatus: false, showBadge: false }
     }
-    const hasDocumentsForYear = programmeDocuments.some(
-      (doc: DocumentType) => doc.activeYear === selectedYearInt,
-    )
 
     const hasActiveDocumentsForSameOrEarlierYears = programmeDocuments.some(
       (doc: DocumentType) => doc.activeYear <= selectedYearInt && doc.active === true,
     )
 
     const interventionStatus =
-      hasActiveInterventionProceduresForEarlierYears || redLights
+      hasActiveInterventionProceduresForEarlierYears || (redLights && !(interventionProcedures.some((procedure: InterventionProcedureType) => !procedure.active && procedure.endYear === selectedYearInt && procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi)))
 
     const showBadge = interventionStatus && !hasActiveDocumentsForSameOrEarlierYears
 

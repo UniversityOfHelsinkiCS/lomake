@@ -21,6 +21,8 @@ import { useAppSelector } from '@/client/util/hooks'
 import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 import { useGetReportsQuery } from '@/client/redux/reports'
 import { useFetchKeyDataQuery } from '@/client/redux/keyData'
+import { useGetActiveInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
+import { InterventionProcedureType } from '@/client/lib/types'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -65,6 +67,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
   const { data: reports = {} } = useGetReportsQuery({ year: activeYear })
   const user = useAppSelector(state => state.currentUser.data)
+  const { data: interventionProcedures = [] } = useGetActiveInterventionProceduresQuery()
   
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
@@ -151,11 +154,13 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const InterventionCell = ({
     programmeData,
     selectedYear,
+    interventionProcedures,
   }: {
     programmeData: KeyDataProgramme
-    selectedYear: string
+    selectedYear: string,
+    interventionProcedures: InterventionProcedureType[]
   }) => {
-    const interventionData = renderInterventionBadge(programmeData, metadata, selectedYear, documents)
+    const interventionData = renderInterventionBadge(programmeData, metadata, selectedYear, documents, interventionProcedures)
 
     if (!interventionData.interventionStatus || programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return (
@@ -307,7 +312,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                       <QualityCell programmeData={programmeData} />
                     )}
                     <TableCell>
-                      <InterventionCell programmeData={programmeData} selectedYear={yearFilter} />
+                      <InterventionCell programmeData={programmeData} selectedYear={yearFilter} interventionProcedures={interventionProcedures} />
                     </TableCell>
                   </TableRow>
                 ))

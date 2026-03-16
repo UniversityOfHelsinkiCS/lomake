@@ -120,4 +120,8 @@ router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
 router.get('/cypress/initReports', notInProduction, cypress.initReports)
 router.get('/cypress/resetDocuments', notInProduction, cypress.resetDocuments)
 
+router.get('/interventionprocedures', async (req, res) => { await interventionProcedures.getActiveInterventionProcedures(req, res) })
+router.get('/interventionprocedures/:programme', async (req, res) => { await interventionProcedures.getProgrammesInterventionProcedures(req, res) })
+
+
 export default router

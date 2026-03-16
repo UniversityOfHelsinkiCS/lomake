@@ -76,9 +76,7 @@ const getProgrammesInterventionProcedures = async (req: Request, res: Response) 
 
 const getActiveInterventionProcedures = async (req: Request, res: Response) => {
   try {
-    const interventionProcedures = await InterventionProcedure.findAll({
-      where: { active: true }
-    })
+    const interventionProcedures = await InterventionProcedure.findAll({})
     
     return res.status(200).json(interventionProcedures)
   } catch (error) {
