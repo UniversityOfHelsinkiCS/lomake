@@ -187,7 +187,7 @@ describe('Notification badge tests', () => {
       cy.get(`[data-cy="interventionBadge-${discontinuedProgramme}"]`).should('not.exist')
       cy.get(`[data-cy*="interventionText-${discontinuedProgramme}"]`).should('not.exist')
 
-      cy.get(`[data-cy="interventionBadge-${redProgramme}"]`).should('exist')
+      cy.get(`[data-cy*="interventionBadge-${redProgramme}"]`).should('exist')
       cy.get(`[data-cy*="interventionText-${redProgramme}"]`).should('exist')
 
       cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('exist')
