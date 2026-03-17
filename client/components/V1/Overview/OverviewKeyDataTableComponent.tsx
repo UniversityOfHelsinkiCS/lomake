@@ -20,7 +20,7 @@ import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppSelector } from '@/client/util/hooks'
 import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 import { useGetReportsQuery } from '@/client/redux/reports'
-import { useFetchKeyDataQuery } from '@/client/redux/keyData'
+import { useFetchKeyDataForYearQuery, useFetchKeyDataQuery } from '@/client/redux/keyData'
 import { useGetActiveInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
 import { InterventionProcedureType } from '@/client/lib/types'
 
@@ -55,7 +55,6 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
 
 const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
-  const { data: keyData } = useFetchKeyDataQuery()
   const { t } = useTranslation()
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
   const { data: documents = [] } = useGetAllDocumentsQuery({ activeYear })
@@ -68,6 +67,18 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const { data: reports = {} } = useGetReportsQuery({ year: activeYear })
   const user = useAppSelector(state => state.currentUser.data)
   const { data: interventionProcedures = [] } = useGetActiveInterventionProceduresQuery()
+  const { data: keyDataForYear } = useFetchKeyDataForYearQuery(activeYear)
+  const { data: currentKeyData } = useFetchKeyDataQuery()
+  let keyData
+
+
+  if (activeYear !== new Date().getFullYear() ) {
+    keyData = keyDataForYear
+  } else {
+    keyData = currentKeyData
+  }
+
+  
   
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []

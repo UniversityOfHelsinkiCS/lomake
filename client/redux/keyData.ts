@@ -7,6 +7,10 @@ export const keyDataApi = RTKApi.injectEndpoints({
       query: () => '/keyData',
       providesTags: ['KeyData'],
     }),
+    fetchKeyDataForYear: builder.query<KeyData, string>({
+      query: (year) => `/keyData/${year}`,
+      providesTags: ['KeyData'],
+    }),
     uploadKeyData: builder.mutation<void, any>({
       query: (file) => {
         const formData = new FormData();
@@ -20,7 +24,7 @@ export const keyDataApi = RTKApi.injectEndpoints({
       invalidatesTags: ['KeyData', 'KeyDataMeta'],
     }),
     getKeyDataMeta: builder.query({
-      query: () => '/keyData/meta',
+      query: () => '/keyMetaData',
       providesTags: ['KeyDataMeta'],
     }),
     deleteKeyData: builder.mutation<void, number>({
@@ -42,6 +46,7 @@ export const keyDataApi = RTKApi.injectEndpoints({
 
 export const {
   useFetchKeyDataQuery,
+  useFetchKeyDataForYearQuery,
   useUploadKeyDataMutation,
   useGetKeyDataMetaQuery,
   useDeleteKeyDataMutation,

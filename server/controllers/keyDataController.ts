@@ -51,11 +51,67 @@ const validateKeyData = async (keyData: any) => {
   }
 }
 
+const parseYearValue = (value: unknown): number | null => {
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return Math.trunc(value)
+  }
+
+  if (typeof value === 'string') {
+    const parsed = Number(value.trim())
+    if (Number.isFinite(parsed)) {
+      return Math.trunc(parsed)
+    }
+  }
+
+  return null
+}
+
+const getYear = (keyData: Partial<Record<CanonicalSheetName, any[]>>) => {
+  const rows = [...(keyData.kandiohjelmat ?? []), ...(keyData.maisteriohjelmat ?? [])]
+
+  const years = rows
+    .map(row => {
+      if (!row || typeof row !== 'object') {
+        return null
+      }
+
+      const yearEntry = Object.entries(row as Record<string, unknown>).find(
+        ([columnName]) => ['year', 'vuosi'].includes(columnName.trim().toLowerCase())
+      )
+
+      return parseYearValue(yearEntry?.[1])
+    })
+    .filter((year): year is number => year !== null)
+
+  if (!years.length) {
+    throw new Error('No valid year values found in kandiohjelmat or maisteriohjelmat sheets')
+  }
+
+  return Math.max(...years) + 1
+}
+
 const getKeyData = async (_req: Request, res: Response) => {
   try {
     const { data } = await KeyData.findOne({
       where: {
         active: true,
+      },
+    })
+
+    await validateKeyData(data)
+
+    return res.status(200).json(data)
+  } catch (error) {
+    return res.status(500).json({ error: (error as Error).message })
+  }
+}
+
+const getKeyDataForYear = async (req: Request, res: Response) => {
+  try {
+    const { year } = req.params
+    const { data } = await KeyData.findOne({
+      where: {
+        year: year,
       },
     })
 
@@ -121,6 +177,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
         await KeyData.create({
           data: formattedData,
           active: true,
+          year: getYear(data),
         })
 
         resolve(res.status(201).json({ message: 'Key data uploaded' }))
@@ -184,4 +241,4 @@ const updateKeyData = async (req: Request, res: Response) => {
   }
 }
 
-export default { getKeyData, uploadKeyData, getKeyDataMeta, deleteKeyData, updateKeyData }
+export default { getKeyData, getKeyDataForYear, uploadKeyData, getKeyDataMeta, deleteKeyData, updateKeyData }

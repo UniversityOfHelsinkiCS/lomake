@@ -86,8 +86,9 @@ router.get('/reports/:programme/:year', requireRead, async (req, res) => { await
 router.put('/reports/:programme/:year', requireProgrammeWrite, async (req, res) => { await reports.updateReport(req, res) })
 
 router.get('/keydata', requireRead, async (req, res) => { await keyData.getKeyData(req, res) })
+router.get('/keydata/:year', requireRead, async (req, res) => { await keyData.getKeyDataForYear(req, res) })
 router.post('/keydata', checkAdmin, async (req, res) => { await keyData.uploadKeyData(req, res) })
-router.get('/keydata/meta', checkAdmin, async (req, res) => { await keyData.getKeyDataMeta(req, res) })
+router.get('/keymetadata', checkAdmin, async (req, res) => { await keyData.getKeyDataMeta(req, res) })
 router.delete('/keydata/:id', checkAdmin, async (req, res) => { await keyData.deleteKeyData(req, res) })
 router.put('/keydata/:id', checkAdmin, async (req, res) => { await keyData.updateKeyData(req, res) })
 

@@ -5,6 +5,7 @@ import { KeyData as KeyDataType } from '@/shared/lib/types.js'
 class KeyData extends Model<InferAttributes<KeyData>, InferCreationAttributes<KeyData>> {
   declare id: CreationOptional<number>
   declare data: KeyDataType
+  declare year: number | null
   declare active: boolean
   declare createdAt: Date
   declare updatedAt: Date
@@ -20,6 +21,10 @@ KeyData.init(
     data: {
       type: JSONB,
       allowNull: false,
+    },
+    year: {
+      type: INTEGER,
+      allowNull: true,
     },
     active: BOOLEAN,
     createdAt: DATE,
