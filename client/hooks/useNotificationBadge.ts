@@ -90,17 +90,19 @@ export const useNotificationBadge = () => {
       (doc: DocumentType) => doc.studyprogrammeKey.toString() === programmeData.koulutusohjelmakoodi,
     )
 
-    const hasActiveInterventionProceduresForEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYearInt && procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi)   
-    if (!redLights && !hasActiveInterventionProceduresForEarlierYears) {
+    const hasActiveInterventionProceduresForSameOrEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYearInt && procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi)   
+    if (!redLights && !hasActiveInterventionProceduresForSameOrEarlierYears) {
       return { interventionStatus: false, showBadge: false }
     }
+
+    const hasEndedInterventionProceduresForSameYear = interventionProcedures.some((procedure: InterventionProcedureType) => !procedure.active && procedure.endYear === new Date().getFullYear() && procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi)
 
     const hasActiveDocumentsForSameOrEarlierYears = programmeDocuments.some(
       (doc: DocumentType) => doc.activeYear <= selectedYearInt && doc.active === true,
     )
 
     const interventionStatus =
-      hasActiveInterventionProceduresForEarlierYears || (redLights && !(interventionProcedures.some((procedure: InterventionProcedureType) => !procedure.active && procedure.endYear === selectedYearInt && procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi)))
+      hasActiveInterventionProceduresForSameOrEarlierYears || (redLights && !hasEndedInterventionProceduresForSameYear)
 
     const showBadge = interventionStatus && !hasActiveDocumentsForSameOrEarlierYears
 

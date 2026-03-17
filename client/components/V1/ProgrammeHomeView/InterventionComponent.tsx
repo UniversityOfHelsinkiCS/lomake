@@ -61,8 +61,9 @@ const InterventionComponent = () => {
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t, selectedYear })
 
-    const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({studyprogrammeKey: programmeKey})
-  const hasActiveInterventionProceduresForEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYear)   
+  const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({studyprogrammeKey: programmeKey})
+  const hasActiveInterventionProceduresForSameOrEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYear)   
+  const hasEndedInterventionProceduresForSameYear = interventionProcedures.some((procedure: InterventionProcedureType) => !procedure.active && procedure.endYear === new Date().getFullYear())
 
   const handleDelete = (id:string) => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
@@ -85,10 +86,14 @@ const InterventionComponent = () => {
   }
 
   const activeProcedure = () => {
-    if (hasActiveInterventionProceduresForEarlierYears) {
+    if (hasActiveInterventionProceduresForSameOrEarlierYears) {
       return true
     }
     if (areas.length === 0) {
+      return false
+    }
+
+    if (hasEndedInterventionProceduresForSameYear) {
       return false
     }
 
