@@ -93,6 +93,10 @@ export const calculateKeyDataColor = (
     colorsCount[LightColors.DarkGreen]++
   }
 
+  if (evaluationArea.length === 3) {
+    colorsCount[LightColors.DarkGreen]++
+  }
+
   // Determine final color based on the distribution of colors
   switch (true) {
     case colorsCount[LightColors.Red] >= 2:
