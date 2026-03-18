@@ -89,11 +89,7 @@ export const calculateKeyDataColor = (
   }
 
   // If exactly 1 key data point is missing, treat it as DarkGreen
-  if (missingCount === 1) {
-    colorsCount[LightColors.DarkGreen]++
-  }
-
-  if (evaluationArea.length === 3) {
+  if (missingCount === 1 || evaluationArea.length === 3) {
     colorsCount[LightColors.DarkGreen]++
   }
 
