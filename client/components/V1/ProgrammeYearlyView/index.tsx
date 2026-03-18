@@ -23,7 +23,7 @@ import { TrafficLight } from '../Generic/TrafficLightComponent'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
 import { useGetReportsQuery } from '@/client/redux/reports'
-import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
+import { useFetchKeyDataMetadataForYearQuery, useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
 const ProgrammeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -34,7 +34,9 @@ const ProgrammeView = () => {
   const searchParams = new URLSearchParams(location.search)
   const { programme: studyprogrammeKey, year } = useParams<{ programme: string; year: string }>()
   const [activeTab, setActiveTab] = useState(0)
-  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey })
+  const { isLoading, programme, metadata: metadata2026 } = useFetchSingleKeyDataQuery({ studyprogrammeKey })
+  const { isLoading: isMetadata2025Loading, metadata: metadata2025 } = useFetchKeyDataMetadataForYearQuery({ year: '2025' })
+  const metadata = (year === '2025' && metadata2025.length>0 )? metadata2025 : metadata2026
   const form = 10
   const { data: reports = {} } = useGetReportsQuery({ year })
   const activeYear = useAppSelector(state => state.filters.keyDataYear)

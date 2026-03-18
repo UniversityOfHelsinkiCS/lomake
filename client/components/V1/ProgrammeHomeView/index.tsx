@@ -16,7 +16,7 @@ import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
 import InterventionComponent from './InterventionComponent'
 import QualityManagementComponent from './QualityManagementComponent'
 import { useAppSelector } from '@/client/util/hooks'
-import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
+import { useFetchKeyDataMetadataForYearQuery, useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
 const ProgrammeHomeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -26,12 +26,13 @@ const ProgrammeHomeView = () => {
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
-
+  const { isLoading: isMetadata2025Loading, metadata: metadata2025 } = useFetchKeyDataMetadataForYearQuery({ year: '2025' })
+  
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
   }, [programmeKey])
 
-  if (isLoading) {
+  if (isLoading || isMetadata2025Loading) {
     return <CircularProgress />
   }
 
@@ -58,7 +59,7 @@ const ProgrammeHomeView = () => {
           {t('keyData:homeHeader').toUpperCase()}
         </Typography>
         <Typography variant="light">{t('keyData:homeDescription')}</Typography>
-        <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} />
+        <ProgrammeKeyDataTable programmeData={programmeData} metadata={metadata} metadata2025={metadata2025} />
       </Box>
       <QualityManagementComponent />   
       <InterventionComponent />

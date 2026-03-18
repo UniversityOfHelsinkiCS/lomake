@@ -18,9 +18,11 @@ import { useAppSelector } from '@/client/util/hooks'
 const ProgrammeKeyDataTableComponent = ({
   programmeData,
   metadata,
+  metadata2025,
 }: {
   programmeData: KeyDataProgramme[]
   metadata: KeyDataMetadata[]
+  metadata2025: KeyDataMetadata[]
 }) => {
   const { t } = useTranslation()
   const dispatch: AppDispatch = useDispatch()
@@ -30,12 +32,14 @@ const ProgrammeKeyDataTableComponent = ({
 
   const handleModalOpen = (programme: KeyDataProgramme, type: GroupKey) => {
     setModalOpen(true)
-    setSelecteKeyFigureData({
-      programme,
-      metadata,
-      type,
-    })
+      setSelecteKeyFigureData({
+        programme,
+        metadata: (programme.year + 1 === 2025 && metadata2025.length > 0) ? metadata2025 : metadata,
+        type,
+      })
   }
+    
+  
 
   useEffect(() => {
     if (!modalOpen) {
@@ -79,6 +83,7 @@ const ProgrammeKeyDataTableComponent = ({
               if (annualFollowUpYear(programmeData.year) === 2026 && !isAdmin(user)) {
                 return null
               }
+              const selectedMetadata = (annualFollowUpYear(programmeData.year) === 2025 && metadata2025.length>0 )? metadata2025 : metadata
               const { data: reports = {} } = useGetReportsQuery({ year: annualFollowUpYear(programmeData.year).toString() }) 
               return (
                 
@@ -97,7 +102,7 @@ const ProgrammeKeyDataTableComponent = ({
                   </TableCell>
 
                   <TrafficLightCell
-                    metadata={metadata}
+                    metadata={selectedMetadata}
                     programmeData={programmeData}
                     groupKey={GroupKey.VETOVOIMAISUUS}
                     handleModalOpen={handleModalOpen}
@@ -106,7 +111,7 @@ const ProgrammeKeyDataTableComponent = ({
                   />
 
                   <TrafficLightCell
-                    metadata={metadata}
+                    metadata={selectedMetadata}
                     programmeData={programmeData}
                     groupKey={GroupKey.LAPIVIRTAUS}
                     handleModalOpen={handleModalOpen}
@@ -115,7 +120,7 @@ const ProgrammeKeyDataTableComponent = ({
                   />
 
                   <TrafficLightCell
-                    metadata={metadata}
+                    metadata={selectedMetadata}
                     programmeData={programmeData}
                     groupKey={GroupKey.OPISKELIJAPALAUTE}
                     handleModalOpen={handleModalOpen}
@@ -126,7 +131,7 @@ const ProgrammeKeyDataTableComponent = ({
                     <TableCell disabled></TableCell>
                   ) : (
                     <TrafficLightCell
-                      metadata={metadata}
+                      metadata={selectedMetadata}
                       programmeData={programmeData}
                       groupKey={GroupKey.RESURSSIT}
                       handleModalOpen={handleModalOpen}

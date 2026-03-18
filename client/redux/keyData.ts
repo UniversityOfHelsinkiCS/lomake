@@ -60,3 +60,10 @@ export const useFetchSingleKeyDataQuery = ({ studyprogrammeKey }: { studyprogram
   const programme: KeyDataProgramme[] = programmes.filter(p => p.koulutusohjelmakoodi.trim() === studyprogrammeKey.trim())
   return { isLoading, error, programme, metadata }
 }
+
+export const useFetchKeyDataMetadataForYearQuery = ({ year }: { year: string }) => {
+  const { data, isLoading, error } = useFetchKeyDataForYearQuery(year)
+  const { metadata = [] } = data ?? {}
+
+  return { isLoading, error, metadata }
+}
