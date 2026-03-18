@@ -282,12 +282,19 @@ const ProgrammeView = () => {
                   </li>
                 </ul>
               </Box>
-
+              {year === '2025' && (
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Typography variant="h5">{t('keyData:pilotHeader')}</Typography>
                 <Typography variant="light">{t('keyData:pilotInfo1')}</Typography>
                 <Typography variant="light">{t('keyData:pilotInfo2')}</Typography>
               </Box>
+              )}
+              {year === '2026' && (
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Typography variant="h5">{t('keyData:year2026Header')}</Typography>
+                <Typography variant="light">{t('keyData:year2026Info1')}</Typography>
+              </Box>
+              )}
             </Box>
           </Alert>
 

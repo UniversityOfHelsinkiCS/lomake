@@ -580,6 +580,9 @@ export default {
       'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Tohtoriohjelmat eivät ole mukana vielä pilotointivaiheessa.',
     pilotInfo2:
       '15.4.-30.5.2025 Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa ja laativat kehittämissuunnitelmansa. Ne koulutusohjelmat, joissa käynnistyy toimenpidemenettely, käyvät keskustelun opetusvaradekaanin kanssa 30.10.2025 mennessä.',
+    year2026Header: 'Vuoden 2026 vuosiseuranta',
+    year2026Info1:
+      'Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa ja laativat kehittämissuunnitelmansa. Ne koulutusohjelmat, joissa käynnistyy toimenpidemenettely, käyvät keskustelun opetusvaradekaanin kanssa.',
     notUsed2025: 'Ei käytössä vuonna 2025',
     keyFigure: 'Arviointialueet ja avainluvut',
     keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
