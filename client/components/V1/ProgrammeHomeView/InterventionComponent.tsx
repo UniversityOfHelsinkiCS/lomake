@@ -225,7 +225,7 @@ const InterventionComponent = () => {
         )}
       </Box>
       <br />
-      {hasAccessToCloseInterventionProcedure && activeProcedure() && (
+      {hasAccessToCloseInterventionProcedure() && activeProcedure() && (
         <Alert data-cy="closeInterventionProcedureAlertBox" severity="warning" variant="outlined">
           <Typography variant="h5" sx={{ mb: 2 }}>
             {t('document:closeInterventionProcedureHeader')}
