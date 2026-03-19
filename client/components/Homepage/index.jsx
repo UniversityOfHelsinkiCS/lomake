@@ -92,11 +92,11 @@ const Homepage = () => {
           {t('landingPage:feedback')}
         </Typography>
         <a
-          href="mailto:ospa@helsinki.fi"
+          href="mailto:paivi.aronen@helsinki.fi"
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 4, marginTop: 8 }}
         >
           <MailOutlined />
-          ospa@helsinki.fi
+          paivi.aronen@helsinki.fi
         </a>
       </Box>
     </Container>

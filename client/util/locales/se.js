@@ -144,7 +144,7 @@ export default {
     whatElseTitle: 'Vad annat kan man göra med blanketten?',
     whatElse:
       'Du kan läsa ditt egna och andra utbildningsprograms skriftliga dokumentationer. Med hjälp av rapporteringsverktygen kan du jämföra data från ditt eget utbildningsprogram med data från andra program. Du kan även skapa grafer utifrån datan.',
-    contactInfo: 'Frågor? Kontakta ospa@helsinki.fi',
+    contactInfo: 'Frågor? Kontakta paivi.aronen@helsinki.fi',
     broughtBy: 'Förverkligad av',
   },
 

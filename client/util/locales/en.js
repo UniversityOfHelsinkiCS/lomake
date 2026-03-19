@@ -147,7 +147,7 @@ export default {
     whatElseTitle: 'What else can I do with the form?',
     whatElse:
       "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
-    contactInfo: 'Questions? Contact ospa@helsinki.fi',
+    contactInfo: 'Questions? Contact paivi.aronen@helsinki.fi',
     broughtBy: 'Brought to you by:',
   },
 

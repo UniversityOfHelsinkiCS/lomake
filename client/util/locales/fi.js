@@ -149,7 +149,7 @@ export default {
     whatElseTitle: 'Mitä muuta lomakkeella voi tehdä?',
     whatElse:
       'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
-    contactInfo: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',
+    contactInfo: 'Kysyttävää? Ota yhteys osoitteeseen paivi.aronen@helsinki.fi',
     broughtBy: 'Toteutus:',
   },
 
