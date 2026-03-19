@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -47,7 +48,7 @@ const ColorTableCell = ({
     7: metareviewQuestions,
   }
 
-  const questions = questionMap[form] ?? yearlyQuestions
+  const questions = questionMap[form] || yearlyQuestions
   if (form === formKeys.DEGREE_REFORM_PROGRAMMES) {
     return (
       <DegreeReformCell
@@ -65,8 +66,8 @@ const ColorTableCell = ({
   const textId = `${questionId}_text`
   const commentId = `${questionId}_comment_text`
   let colorId = `${questionId}_light`
-  let textAnswer = programmesAnswers[textId] ?? getMeasuresAnswer(programmesAnswers, textId)
-  const commentAnswer = programmesAnswers[commentId] ?? getMeasuresAnswer(programmesAnswers, commentId)
+  let textAnswer = programmesAnswers[textId] || getMeasuresAnswer(programmesAnswers, textId)
+  const commentAnswer = programmesAnswers[commentId] || getMeasuresAnswer(programmesAnswers, commentId)
   let colorAnswer = null
   const commentAppendix = `${t('comment')}:\n\n`
 

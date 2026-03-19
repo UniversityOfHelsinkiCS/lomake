@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable import-x/no-named-as-default-member */
 import type { Request, Response } from 'express'
@@ -66,7 +67,7 @@ const parseYearValue = (value: unknown): number | null => {
 }
 
 const getYear = (keyData: Partial<Record<CanonicalSheetName, any[]>>) => {
-  const rows = [...(keyData.kandiohjelmat ?? []), ...(keyData.maisteriohjelmat ?? [])]
+  const rows = [...(keyData.kandiohjelmat || []), ...(keyData.maisteriohjelmat || [])]
 
   const years = rows
     .map(row => {

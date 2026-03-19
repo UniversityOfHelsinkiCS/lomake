@@ -44,7 +44,8 @@ const QualityManagement = () => {
   const document =
     documents.length > 0 || !isFetching ? documents.find((doc: QualityDocumentType) => doc.id.toString() === id) : null
 
-  const hasWriteRights = user.access[programmeKey]?.write ?? isAdmin(user)
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
   if (isLoading) return <Loader active />
   // For this function the year variable is not needed cuz

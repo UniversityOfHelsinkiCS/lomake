@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useRef } from 'react'
@@ -29,7 +30,7 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form
   const isFormDeadlineInvalid = formDeadline?.form !== form
   const isWriteAccessInvalid = !writeAccess
 
-  return isDraftYearInvalid ?? isFormDeadlineInvalid ?? isWriteAccessInvalid
+  return isDraftYearInvalid || isFormDeadlineInvalid || isWriteAccessInvalid
 }
 
 const findEntityLevelAnswers = (programmes, allAnswers, question) => {
@@ -140,12 +141,13 @@ const FacultyFormView = () => {
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
   const hasReadRights =
-    user.access[faculty.code] ??
-    isAdmin(user) ??
-    user.specialGroup.evaluationFaculty ??
-    isKatselmusProjektiOrOhjausryhma(user) ??
+    user.access[faculty.code] ||
+    isAdmin(user) ||
+    user.specialGroup.evaluationFaculty ||
+    isKatselmusProjektiOrOhjausryhma(user) ||
     Object.keys(user.access).length > 0
-  const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) ?? isAdmin(user)
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`

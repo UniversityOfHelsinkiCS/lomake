@@ -31,7 +31,8 @@ const QualityManagementComponent = () => {
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
   const { isLoading } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
 
-  const hasWriteRights = user.access[programmeKey]?.write ?? isAdmin(user)
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
   const [deleteDocument] = useDeleteQualityDocumentMutation()
 

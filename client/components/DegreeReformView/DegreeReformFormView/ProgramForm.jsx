@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useSelector } from 'react-redux'
 import Textarea from '../../Generic/Textarea'
 import Entity from '../../Generic/Entity'
@@ -23,7 +24,7 @@ const partComponentMap = {
 
 const Part = ({ part, programAnswerLevels, formData, lang, formType, programmeKey, form, number }) => {
   const summary =
-    part.id.includes('meta') ?? part.id.includes('information_needed') ?? part.id.includes('information_used')
+    part.id.includes('meta') || part.id.includes('information_needed') || part.id.includes('information_used')
 
   const divStyle = summary
     ? {

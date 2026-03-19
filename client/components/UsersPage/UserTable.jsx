@@ -56,7 +56,8 @@ export default () => {
       const firstname = user.firstname.toLowerCase()
       const lastname = user.lastname.toLowerCase()
 
-      return firstname.includes(debouncedName.toLowerCase()) ?? lastname.includes(debouncedName.toLowerCase())
+      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+      return firstname.includes(debouncedName.toLowerCase()) || lastname.includes(debouncedName.toLowerCase())
     })
 
     const byAccess = byName.filter(user =>

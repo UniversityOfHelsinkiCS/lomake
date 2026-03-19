@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
@@ -62,7 +63,7 @@ export default () => {
       const name = prog.name[lang]
       const code = prog.key
       return (
-        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ??
+        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
         code.toLowerCase().includes(debouncedFilter.toLowerCase())
       )
     })
@@ -90,7 +91,7 @@ export default () => {
       {programControlsToShow ? (
         <CustomModal
           closeModal={() => setProgramControlsToShow(null)}
-          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ?? programControlsToShow.name.en}`}
+          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] || programControlsToShow.name.en}`}
         >
           <ProgramControlsContent programKey={programControlsToShow.key} />
         </CustomModal>

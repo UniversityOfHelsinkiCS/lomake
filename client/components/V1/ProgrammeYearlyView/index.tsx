@@ -101,7 +101,7 @@ const TabBadge = ({
   )
 }
 
-const ProgrammeView = () => {
+const ProgrammeYearlyView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -126,7 +126,8 @@ const ProgrammeView = () => {
   const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null
   const user = useAppSelector(state => state.currentUser.data)
 
-  const writeAccess = user.access[studyprogrammeKey]?.write ?? isAdmin(user)
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const writeAccess = user.access[studyprogrammeKey]?.write || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user)
 
   const anchorItems = useRef<Record<string, HTMLDivElement | null>>({})
@@ -378,4 +379,4 @@ const ProgrammeView = () => {
   )
 }
 
-export default ProgrammeView
+export default ProgrammeYearlyView

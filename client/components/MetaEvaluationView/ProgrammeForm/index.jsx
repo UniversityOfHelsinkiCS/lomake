@@ -33,7 +33,8 @@ const ProgrammeLevelForm = () => {
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
-  const writeAccess = user.access[room]?.write ?? isAdmin(user)
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const writeAccess = user.access[room]?.write || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const answers = useSelector(state => state.tempAnswers)
 

@@ -87,7 +87,8 @@ const EvaluationFormView = () => {
   const oodiProgURL = `https://oodikone.helsinki.fi/evaluationoverview/programme/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${faculty}`
   const rapoLink = `https://rapocloud.it.helsinki.fi/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FHelsingin%20yliopiston%20dashboardit%2F_portal%2FTohtorikoulutus&Page=Tohtoriohjelman%20vuosiseuranta%20%2F%20Annual%20review%20by%20doctoral%20programme`
-  const writeAccess = user.access[room]?.write ?? isAdmin(user)
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const writeAccess = user.access[room]?.write || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 

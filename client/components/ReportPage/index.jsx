@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useEffect, useState } from 'react'
@@ -48,8 +49,8 @@ export default () => {
     ...(filters.form === formKeys.FACULTY_MONITORING
       ? {
           // faculty monitoring is designed to be always ongoing but the form may be closed at times, hence this current year fallback
-          draftYear: draftYear?.year ?? new Date().getFullYear(),
-          deadline: nextDeadline ?? new Date(),
+          draftYear: draftYear?.year || new Date().getFullYear(),
+          deadline: nextDeadline || new Date(),
         }
       : {
           draftYear: draftYear?.year,

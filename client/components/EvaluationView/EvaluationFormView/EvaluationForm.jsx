@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useSelector } from 'react-redux'
 import { formKeys } from '../../../../config/data'
 
@@ -32,9 +33,9 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
 
   const partMap = part => {
     const summary =
-      part.id.includes('meta') ??
-      part.id.includes('_opinion_differences') ??
-      part.id.includes('programme_strengths') ??
+      part.id.includes('meta') ||
+      part.id.includes('_opinion_differences') ||
+      part.id.includes('programme_strengths') ||
       part.id.includes('seamless_studies')
 
     const divStyle = summary

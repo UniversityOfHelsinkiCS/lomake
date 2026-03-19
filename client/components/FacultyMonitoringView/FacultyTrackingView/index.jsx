@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useMemo } from 'react'
 import { Menu, MenuItem, Button, Header, Accordion, Icon } from 'semantic-ui-react'
@@ -36,8 +37,8 @@ const FacultyTrackingView = () => {
   const { nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
 
-  const hasReadRights = user.access[faculty]?.read ?? user.specialGroup?.evaluationFaculty ?? isAdmin(user)
-  const hasWriteRights = (user.access[faculty]?.write && user.specialGroup?.evaluationFaculty) ?? isAdmin(user)
+  const hasReadRights = user.access[faculty]?.read || user.specialGroup?.evaluationFaculty || isAdmin(user)
+  const hasWriteRights = (user.access[faculty]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   const questionLevel = selectedLevel === 'doctoral' ? 'doctoral' : 'kandimaisteri'
   const questionData = questions.filter(q => q.level === questionLevel)

@@ -41,7 +41,8 @@ const DegreeReformFormView = () => {
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
-  const writeAccess = user.access[room]?.write ?? isAdmin(user)
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const writeAccess = user.access[room]?.write || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const viewingOldAnswers = false
