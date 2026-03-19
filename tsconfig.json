@@ -3,7 +3,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "moduleDetection": "force",
-    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "types": ["vite/client"],
     "paths": {
       "@/*": ["./*"]
     },
@@ -21,12 +21,14 @@
     "strict": true,
     "target": "esnext",
     "useDefineForClassFields": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "baseUrl": "."
   },
   "include": [
     "server/**/*",
-    "client/**/*"
+    "client/**/*",
+    "scripts/*",
+    "shared/**/*"
   ],
   "exclude": ["node_modules", "build"],
   "references": [{ "path": "./tsconfig.node.json" }],

@@ -68,15 +68,15 @@ export default ({ question, answers, showEmpty, programmeName, programmeFaculty,
         <Chart
           center={[72, 65]}
           data={data(question)}
+          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
+          labelPosition={114}
+          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
           lengthAngle={360}
           lineWidth={100}
-          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
           paddingAngle={0}
           radius={50}
           startAngle={270}
           viewBoxSize={[145, 145]}
-          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
-          labelPosition={114}
         />
       </div>
     </div>

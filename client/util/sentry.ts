@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser'
 
-const GIT_SHA = process.env.GIT_SHA || ''
+const GIT_SHA = process.env.GIT_SHA ?? ''
 
 const initSentry = () => {
   Sentry.init({

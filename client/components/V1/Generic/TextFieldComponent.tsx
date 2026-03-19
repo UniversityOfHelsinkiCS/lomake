@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react'
 import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
@@ -25,18 +27,30 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
   const viewOnly = useAppSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
 
-  const { data, isLoading } = useGetReportQuery({ studyprogrammeKey, year }, {
-    pollingInterval: 1000,
-  })
-  const { data: lockMap } = useFetchLockQuery({ room: studyprogrammeKey }, {
-    pollingInterval: 1000
-  })
-  const dataFromRedux = (!isLoading && data?.[id]) ? data[id] : ''
-  const isSomeoneElseEditing = lockMap && lockMap[id] && lockMap[id].uid !== currentUser.uid
+  const { data, isLoading } = useGetReportQuery(
+    { studyprogrammeKey, year },
+    {
+      pollingInterval: 1000,
+    }
+  )
+  const { data: lockMap } = useFetchLockQuery(
+    { room: studyprogrammeKey },
+    {
+      pollingInterval: 1000,
+    }
+  )
+  const dataFromRedux = !isLoading && data?.[id] ? data[id] : ''
+  const isSomeoneElseEditing = lockMap?.[id] && lockMap[id].uid !== currentUser.uid
 
   const [content, setContent] = useState<string>('')
 
-  const { hasLock, askForLock, handleStopEditing } = useLockSync({ id, content, dataFromRedux, studyprogrammeKey, year })
+  const { hasLock, askForLock, handleStopEditing } = useLockSync({
+    id,
+    content,
+    dataFromRedux,
+    studyprogrammeKey,
+    year,
+  })
 
   const textFieldRef = useRef<HTMLInputElement>(null)
   const componentRef = useRef<HTMLDivElement>(null)
@@ -92,7 +106,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   }, [hasUnsavedChanges, t, dataFromRedux, content])
 
   if (viewOnly) {
-    return <TextFieldCard id={id} t={t} type={type} studyprogrammeKey={studyprogrammeKey} year={year} />
+    return <TextFieldCard id={id} studyprogrammeKey={studyprogrammeKey} t={t} type={type} year={year} />
   }
 
   return (
@@ -102,7 +116,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
       sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start', mt: '1rem' }}
     >
       <div style={{ display: 'flex', alignContent: 'center', gap: 10 }}>
-        <Typography variant="h5" color="textSecondary">
+        <Typography color="textSecondary" variant="h5">
           {t(`keyData:${type}`)}
         </Typography>
         {children}
@@ -110,15 +124,11 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
       {hasLock || content !== dataFromRedux ? (
         <>
           <TextField
-            style={{}}
             data-cy={`editor-${id}-${type}`}
-            type="text"
-            variant="outlined"
-            multiline
-            minRows={type === 'Comment' ? 1 : 10}
             fullWidth
             inputRef={textFieldRef}
-            value={content}
+            minRows={type === 'Comment' ? 1 : 10}
+            multiline
             onChange={e => {
               if (e.target.value.length <= MAX_CONTENT_LENGTH) {
                 setContent(e.target.value)
@@ -143,29 +153,33 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
                 }),
               },
             }}
+            style={{}}
+            type="text"
+            value={content}
+            variant="outlined"
           />
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
             <Box sx={{ mt: '1rem' }}>
               <Button
                 data-cy={`save-${id}-${type}`}
-                variant="contained"
                 onClick={handleStopEditing}
                 sx={{ marginRight: 2 }}
+                variant="contained"
               >
                 {t(`keyData:save${type}`)}
               </Button>
               {content !== dataFromRedux && (
-                <Typography variant="regular" style={{ color: 'red' }}>
+                <Typography style={{ color: 'red' }} variant="regular">
                   {t('keyData:unsavedChanges')}!
                 </Typography>
               )}
-              {hasLock && content === dataFromRedux && (
-                <Typography variant="regular" style={{ color: 'gray' }}>
+              {hasLock && content === dataFromRedux ? (
+                <Typography style={{ color: 'gray' }} variant="regular">
                   {t('generic:textUnsavedRelease')}
                 </Typography>
-              )}
+              ) : null}
             </Box>
-            <Typography variant="regularSmall" style={{ color: 'gray', marginTop: '1rem' }}>
+            <Typography style={{ color: 'gray', marginTop: '1rem' }} variant="regularSmall">
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>
           </div>
@@ -173,7 +187,6 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
       ) : (
         <>
           <Card
-            variant="outlined"
             sx={{
               width: '100%',
               display: 'flex',
@@ -181,6 +194,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
               flexDirection: 'row',
               minHeight: type !== 'Comment' ? '18.75rem' : undefined,
             }}
+            variant="outlined"
           >
             {type === 'Comment' && (
               <CardHeader
@@ -207,7 +221,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
               {content ? (
                 <ReactMarkdown>{content}</ReactMarkdown>
               ) : (
-                <Typography variant="italic" color="textSecondary">
+                <Typography color="textSecondary" variant="italic">
                   {t(`keyData:no${type}`)}
                 </Typography>
               )}
@@ -225,17 +239,17 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
             <Box sx={{}}>
               <Button
                 data-cy={`edit-${id}-${type}`}
-                variant="outlined"
                 disabled={isSomeoneElseEditing}
                 onClick={askForLock}
                 sx={{ marginRight: 2 }}
+                variant="outlined"
               >
                 {t(`keyData:edit${type}`)}
               </Button>
 
               <CurrentEditor fieldName={id} />
             </Box>
-            <Typography variant="regularSmall" style={{ color: 'gray' }}>
+            <Typography style={{ color: 'gray' }} variant="regularSmall">
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>
           </div>

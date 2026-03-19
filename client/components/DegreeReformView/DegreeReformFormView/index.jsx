@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { Redirect, useHistory } from 'react-router'
+import { Link, Navigate, useNavigate, useParams } from 'react-router'
 import StatusMessage from '../../FormView/StatusMessage'
 import SaveIndicator from '../../FormView/SaveIndicator'
 
@@ -18,9 +20,10 @@ import DegreeReformForm from './ProgramForm'
 
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 
-const DegreeReformFormView = ({ room }) => {
+const DegreeReformFormView = () => {
+  const { room } = useParams()
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
@@ -38,7 +41,7 @@ const DegreeReformFormView = ({ room }) => {
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
-  const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
+  const writeAccess = user.access[room]?.write ?? isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const viewingOldAnswers = false
@@ -83,24 +86,24 @@ const DegreeReformFormView = ({ room }) => {
     user,
   ])
 
-  if (!room) return <Redirect to="/" />
+  if (!room) return <Navigate to="/" />
 
-  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('degree-reform')} />
+  if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('degree-reform')} t={t} />
 
   const formType = 'degree-reform'
   return (
     <div className="form-container" data-cy="reform-form-group-container">
-      <NavigationSidebar programmeKey={room} formType={formType} questionData={questionDataFiltered} />
+      <NavigationSidebar formType={formType} programmeKey={room} questionData={questionDataFiltered} />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/degree-reform')} icon="arrow left" />
+              <Button as={Link} icon="arrow left" onClick={() => navigate('/degree-reform')} />
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
-          <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+          <h3 data-cy="formview-title" style={{ marginTop: '0' }}>
             {t('degree-reform')}
           </h3>
           <StatusMessage form={form} writeAccess={writeAccess} />

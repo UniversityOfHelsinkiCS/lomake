@@ -1,4 +1,3 @@
-import React from 'react'
 import { InView } from 'react-intersection-observer'
 import { basePath, colors } from '../../../util/common'
 import { formKeys } from '../../../../config/data'
@@ -16,7 +15,7 @@ const Section = ({ title, number, children, programmeKey, form }) => {
 
   return (
     <>
-      <div data-cy={`form-section-${number}`} id={number || '0'}>
+      <div data-cy={`form-section-${number}`} id={number ?? '0'}>
         <InView
           as="div"
           onChange={inView => {
@@ -36,7 +35,7 @@ const Section = ({ title, number, children, programmeKey, form }) => {
               color: colors.white,
             }}
           >
-            {number || '0'} - {title}
+            {number ?? '0'} - {title}
           </h2>
         </InView>
       </div>

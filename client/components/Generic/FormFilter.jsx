@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -37,12 +38,12 @@ const FormFilter = ({ version = null, comparison = false }) => {
         <label style={{ paddingRight: '1em' }}>{t('chooseForm')}</label>
         <Select
           className="button basic gray"
-          style={{ width: '280px' }}
           data-cy="form-filter"
           fluid
-          selection
-          options={options}
           onChange={handleChange}
+          options={options}
+          selection
+          style={{ width: '280px' }}
           value={filterForm}
         />
       </div>
@@ -53,12 +54,12 @@ const FormFilter = ({ version = null, comparison = false }) => {
       <label style={{ paddingRight: '1em' }}>{t('chooseForm')}</label>
       <Select
         className="button basic gray"
-        style={{ width: '280px' }}
         data-cy="form-filter"
         fluid
-        selection
-        options={options}
         onChange={handleChange}
+        options={options}
+        selection
+        style={{ width: '280px' }}
         value={filterForm}
       />
     </div>

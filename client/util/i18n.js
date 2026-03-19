@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import * as i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 

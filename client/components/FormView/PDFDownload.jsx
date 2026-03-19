@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactToPrint from 'react-to-print'
@@ -27,8 +27,7 @@ const PDFDownload = ({ componentRef, form }) => {
 
   const handleViewOnlyChange = value => dispatch(setViewOnly(value))
 
-  const userHasWriteAccess =
-    isAdmin(user) || (programme && user.access[programme.key] && user.access[programme.key].write)
+  const userHasWriteAccess = isAdmin(user) || (programme && user.access[programme.key]?.write)
   let userCanEdit = false
   if (form !== 5 && form !== 6) {
     userCanEdit = !!(userHasWriteAccess && !isFormLocked(form, programme.lockedForms) && deadline && !viewingOldAnswers)
@@ -64,9 +63,7 @@ const PDFDownload = ({ componentRef, form }) => {
 
   return (
     <ReactToPrint
-      content={() => componentRef.current}
-      // eslint-disable-next-line react/no-unstable-nested-components
-      trigger={() => <span style={{ cursor: 'pointer', color: colors.blue }}>{t('formView:downloadPDF')}</span>}
+      onAfterPrint={handleReady}
       onBeforeGetContent={() =>
         new Promise(resolve => {
           promiseResolveRef.current = resolve
@@ -74,7 +71,10 @@ const PDFDownload = ({ componentRef, form }) => {
           setIsPrinting(true)
         })
       }
-      onAfterPrint={handleReady}
+      // eslint-disable-next-line react/jsx-sort-props
+      content={() => componentRef.current}
+      // eslint-disable-next-line react/no-unstable-nested-components
+      trigger={() => <span style={{ cursor: 'pointer', color: colors.blue }}>{t('formView:downloadPDF')}</span>}
     />
   )
 }

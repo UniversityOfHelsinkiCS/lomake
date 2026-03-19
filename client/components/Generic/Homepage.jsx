@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { Item, Button, Icon, ItemMeta, ItemGroup, ItemHeader, Header, Container } from 'semantic-ui-react'
 
 export const PageItem = ({ title, content }) => (
@@ -46,6 +45,7 @@ export const FormCard = ({ item, dl, t }) => (
         }}
       >
         <img
+          alt={`Thumbnail for ${item.title}`}
           src={item.thumbnail}
           style={{
             position: 'absolute',
@@ -56,19 +56,18 @@ export const FormCard = ({ item, dl, t }) => (
             height: '100%',
             objectFit: 'cover',
           }}
-          alt={`Thumbnail for ${item.title}`}
         />
       </div>
       <Item.Content>
         <ItemHeader as="h2">{item.parent}</ItemHeader>
         <ItemMeta>
-          <span>{item.content && item.content}</span>
+          <span>{item.content ?? null}</span>
           <span>
-            <DateItem timestamp={dl.date} t={t} />
+            <DateItem t={t} timestamp={dl.date} />
           </span>
         </ItemMeta>
         {item.links.map(link => (
-          <Button data-cy={`button-${link}`} key={link} as={Link} to={link}>
+          <Button as={Link} data-cy={`button-${link}`} key={link} to={link}>
             {item.title}
             <Icon name="right chevron" />
           </Button>

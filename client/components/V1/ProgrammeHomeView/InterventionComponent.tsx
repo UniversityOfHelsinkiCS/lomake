@@ -1,5 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-alert */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -17,15 +20,16 @@ import {
   InputLabel,
   TextField,
 } from '@mui/material'
-import { ExpandMore } from '@mui/icons-material'
-import { Add, Edit, Delete } from '@mui/icons-material'
+import { ExpandMore, Add, Edit, Delete } from '@mui/icons-material'
 import { basePath, dekanaattiIamGroup, isAdmin } from '@/config/common'
 import { KeyDataProgramme } from '@/shared/lib/types'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import { useGetProgrammesInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
-import { useGetDocumentsQuery,
+import {
+  useGetDocumentsQuery,
   useCloseInterventionProcedureMutation,
-  useDeleteDocumentMutation } from '@/client/redux/documents'
+  useDeleteDocumentMutation,
+} from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import { InterventionProcedureType } from '@/client/lib/types'
@@ -33,21 +37,20 @@ import { InterventionProcedureType } from '@/client/lib/types'
 const InterventionComponent = () => {
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { data: documents = [] } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
   const user = useAppSelector(state => state.currentUser.data)
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
-  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey }) 
-  const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
+  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
+  const hasWriteRights = user.access[programmeKey]?.write ?? isAdmin(user)
 
   const [reason, setReason] = useState('')
   const [additionalInfo, setAdditionalInfo] = useState('')
 
   const [closeInterventionProcedure] = useCloseInterventionProcedureMutation()
   const [deleteDocument] = useDeleteDocumentMutation()
-
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
@@ -57,17 +60,26 @@ const InterventionComponent = () => {
     return <CircularProgress />
   }
 
-  const programmeData = programme.filter((programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear)
+  const programmeData = programme.filter(
+    (programmeData: KeyDataProgramme) =>
+      programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear
+  )
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t, selectedYear })
 
-  const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({studyprogrammeKey: programmeKey})
-  const hasActiveInterventionProceduresForSameOrEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYear)   
-  const hasEndedInterventionProceduresForSameYear = interventionProcedures.some((procedure: InterventionProcedureType) => !procedure.active && procedure.endYear === new Date().getFullYear())
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({
+    studyprogrammeKey: programmeKey,
+  })
+  const hasActiveInterventionProceduresForSameOrEarlierYears = interventionProcedures.some(
+    (procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYear
+  )
+  const hasEndedInterventionProceduresForSameYear = interventionProcedures.some(
+    (procedure: InterventionProcedureType) => !procedure.active && procedure.endYear === new Date().getFullYear()
+  )
 
-  const handleDelete = (id:string) => {
+  const handleDelete = (id: string) => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
-    console.log(id, programmeKey)
     if (isConfirmed) {
       deleteDocument({ studyprogrammeKey: programmeKey, id })
     }
@@ -75,13 +87,12 @@ const InterventionComponent = () => {
 
   const handleCloseProcedure = () => {
     const isConfirmed = window.confirm(t('document:confirm'))
-
     if (isConfirmed) {
       const data = {
-        reason: reason,
-        additionalInfo: additionalInfo,
+        reason,
+        additionalInfo,
       }
-      closeInterventionProcedure({ studyprogrammeKey: programmeKey, data: data })
+      closeInterventionProcedure({ studyprogrammeKey: programmeKey, data })
     }
   }
 
@@ -108,7 +119,6 @@ const InterventionComponent = () => {
 
     return lastDocument.active
   }
-
   const hasAccessToCloseInterventionProcedure = () => {
     const isUserInDekanaattiGroup = user.iamGroups.some((group: string) => dekanaattiIamGroup.includes(group))
     return isAdmin(user) || isUserInDekanaattiGroup
@@ -120,20 +130,20 @@ const InterventionComponent = () => {
         <Typography variant="h3">{t('keyData:interventionProcedure').toUpperCase()} </Typography>
         <Typography variant="light">{t('document:homeDescription')}</Typography>
         <Alert severity={activeProcedure() ? 'warning' : 'success'} sx={{ gap: 1 }}>
-          <Typography variant="h6" sx={{ mb: 2, display: activeProcedure() ? 'block' : 'none' }}>
+          <Typography sx={{ mb: 2, display: activeProcedure() ? 'block' : 'none' }} variant="h6">
             {t('document:warningTextHeader')}
           </Typography>
           <Typography variant="light">
             {activeProcedure() ? t('document:warningTextDescription') : t('document:successText')}
           </Typography>
         </Alert>
-        {documents.length > 0 && documents.at(-1).reason && (
+        {documents.length > 0 && documents.at(-1).reason ? (
           <Alert severity="info">
             <Typography variant="h6">{t('document:terminated')}</Typography>
             <Typography>{t(`document:option${documents.at(-1).reason.reason}`)}</Typography>
           </Alert>
-        )}
-        <Typography variant="h4" sx={{ mt: 4 }}>
+        ) : null}
+        <Typography sx={{ mt: 4 }} variant="h4">
           {t('keyData:documentingHeader')}
         </Typography>
         <Alert severity="info" sx={{ gap: 1, mb: 2 }}>
@@ -155,79 +165,85 @@ const InterventionComponent = () => {
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant="h5">{t('document:date')}:</Typography>
                     <Typography color={doc.data.date ? 'default' : 'secondary'}>
-                      {(doc.data.date && new Date(doc.data.date).toLocaleDateString('fi-FI')) || t('common:empty')}
+                      {(doc.data.date && new Date(doc.data.date).toLocaleDateString('fi-FI')) ?? t('common:empty')}
                     </Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant="h5">{t('document:participants')}:</Typography>
                     <Typography color={doc.data.participants ? 'default' : 'secondary'}>
-                      {doc.data.participants || t('common:empty')}
+                      {doc.data.participants ?? t('common:empty')}
                     </Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
-                    <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>
+                    <Typography sx={{ whiteSpace: 'nowrap' }} variant="h5">
                       {t('document:matters')}:
                     </Typography>
                     <Typography color={doc.data.matters ? 'default' : 'secondary'}>
-                      {doc.data.matters || t('common:empty')}
+                      {doc.data.matters ?? t('common:empty')}
                     </Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
-                    <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>
+                    <Typography sx={{ whiteSpace: 'nowrap' }} variant="h5">
                       {t('document:schedule')}:
                     </Typography>
                     <Typography color={doc.data.schedule ? 'default' : 'secondary'}>
-                      {doc.data.schedule || t('common:empty')}
+                      {doc.data.schedule ?? t('common:empty')}
                     </Typography>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Typography variant="h5">{t('document:followupDate')}:</Typography>
                     <Typography color={doc.data.followupDate ? 'default' : 'secondary'}>
-                      {(doc.data.followupDate && new Date(doc.data.followupDate).toLocaleDateString('fi-FI')) ||
+                      {(doc.data.followupDate && new Date(doc.data.followupDate).toLocaleDateString('fi-FI')) ??
                         t('common:empty')}
                     </Typography>
                   </div>
                 </div>
                 <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right' }}>
-                  {hasWriteRights && activeProcedure() && doc.active && (
+                  {hasWriteRights && activeProcedure() && doc.active ? (
                     <Button
-                      data-cy={`accordion-${index}-edit-button`}
-                      variant="contained"
                       component={Link}
+                      data-cy={`accordion-${index}-edit-button`}
                       href={`${basePath}v1/programmes/10/${programmeKey}/document/${doc.id}`}
                       startIcon={<Edit />}
+                      variant="contained"
                     >
                       {t('document:edit')}
                     </Button>
-                  )}
+                  ) : null}
                   {isAdmin(user) && !doc.data?.date && (
-                      <Button
-                        data-cy={`accordion-${index}-delete-button`}
-                        variant='contained'
-                        color='error'
-                        component={Link}
-                        onClick={() => handleDelete(doc.id)}
-                        startIcon={<Delete />}
-                      >
-                        {t('document:delete')}
-                      </Button>
+                    <Button
+                      color="error"
+                      component={Link}
+                      data-cy={`accordion-${index}-delete-button`}
+                      onClick={() => handleDelete(doc.id)}
+                      startIcon={<Delete />}
+                      variant="contained"
+                    >
+                      {t('document:delete')}
+                    </Button>
                   )}
                 </div>
               </AccordionDetails>
             </Accordion>
           ))}
-        {hasWriteRights && activeProcedure() && (
+        {hasWriteRights && activeProcedure() ? (
           <Box>
-            <Button data-cy="create-new-document" onClick={() => history.push(`/v1/programmes/${form}/${programmeKey}/document/new`)} variant="outlined" startIcon={<Add />}>
+            <Button
+              data-cy="create-new-document"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={() => navigate(`/v1/programmes/${form}/${programmeKey}/document/new`)}
+              startIcon={<Add />}
+              variant="outlined"
+            >
               {t('document:newDocument')}
             </Button>
           </Box>
-        )}
+        ) : null}
       </Box>
       <br />
       {hasAccessToCloseInterventionProcedure() && activeProcedure() && (
         <Alert data-cy="closeInterventionProcedureAlertBox" severity="warning" variant="outlined">
-          <Typography variant="h5" sx={{ mb: 2 }}>
+          <Typography sx={{ mb: 2 }} variant="h5">
             {t('document:closeInterventionProcedureHeader')}
           </Typography>
           <Typography variant="light">{t('document:closeInterventionProcedureDescription')}</Typography>
@@ -246,10 +262,10 @@ const InterventionComponent = () => {
             </InputLabel>
             <Select
               data-cy="reasonDropdown"
-              value={reason}
               label={t('document:dropdownReason')}
               onChange={event => setReason(event.target.value)}
               sx={{ width: '50%' }}
+              value={reason}
             >
               <MenuItem value={'1'}>{t('document:option1')}</MenuItem>
               <MenuItem value={'2'}>{t('document:option2')}</MenuItem>
@@ -257,20 +273,20 @@ const InterventionComponent = () => {
             </Select>
             {reason === '3' && (
               <TextField
-                sx={{ width: '65%' }}
                 label={t('document:textfieldReason')}
-                value={additionalInfo}
                 onChange={event => setAdditionalInfo(event.target.value)}
+                sx={{ width: '65%' }}
+                value={additionalInfo}
               />
             )}
           </FormControl>
           <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
             <Button
-              data-cy="closeInterventionProcedureButton"
-              variant="contained"
-              onClick={handleCloseProcedure}
               color="error"
-              disabled={!(reason)}
+              data-cy="closeInterventionProcedureButton"
+              disabled={!reason}
+              onClick={handleCloseProcedure}
+              variant="contained"
             >
               {t('document:closeButton')}
             </Button>

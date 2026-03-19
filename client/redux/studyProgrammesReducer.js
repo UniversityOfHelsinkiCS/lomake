@@ -41,6 +41,7 @@ export const getProgrammeOwners = () => {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
+
 export default (state = { data: null, updateStatus: null }, action) => {
   switch (action.type) {
     case 'GET_STUDYPROGRAMMES_SUCCESS':

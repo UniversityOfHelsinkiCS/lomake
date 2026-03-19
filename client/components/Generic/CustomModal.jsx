@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { Icon } from 'semantic-ui-react'
 
 import useOnClickOutside from '../../util/useOnClickOutside'
@@ -11,8 +11,8 @@ const CustomModal = ({ children, title, closeModal, borderColor }) => {
     <div className="customModal-dimmer">
       <div
         className="customModal-content"
-        style={borderColor ? { border: '3px solid', borderColor, maxHeight: '95%' } : { maxHeight: '95%' }}
         ref={ref}
+        style={borderColor ? { border: '3px solid', borderColor, maxHeight: '95%' } : { maxHeight: '95%' }}
       >
         <div className="title-and-close">
           <span style={{ maxWidth: '95%' }}>{title}</span>

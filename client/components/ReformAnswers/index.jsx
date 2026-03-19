@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Divider, Radio, Loader } from 'semantic-ui-react'
@@ -20,10 +21,10 @@ const RadioQuestionGroup = ({ questionGroup, answers }) => {
     <div style={{ margin: 30, marginBottom: 10 }}>
       <h3 style={{ marginBotton: 10 }}>{questionGroup.title[lang]}</h3>
       {relevantParts.map(part => (
-        <RadioQuestion key={part.id} question={part} answers={answers} />
+        <RadioQuestion answers={answers} key={part.id} question={part} />
       ))}
-      {primaryRoleQuestion && <RadioQuestion question={primaryRoleQuestion} answers={answers} />}
-      {backroundUnitQuestion && <BackroundUnitQuestion question={backroundUnitQuestion} answers={answers} />}
+      {primaryRoleQuestion ? <RadioQuestion answers={answers} question={primaryRoleQuestion} /> : null}
+      {backroundUnitQuestion ? <BackroundUnitQuestion answers={answers} question={backroundUnitQuestion} /> : null}
       <div style={{ marginTop: 10 }} />
       <Divider />
     </div>
@@ -38,7 +39,7 @@ export const TextQuestionGroup = ({ questionGroup, answers }) => {
     <div style={{ margin: 30, marginBottom: 10 }}>
       <h3 style={{ marginBotton: 10 }}>{questionGroup.title[lang]}</h3>
       {relevantParts.map(part => (
-        <TextQuestion key={part.id} question={part} answers={answers} />
+        <TextQuestion answers={answers} key={part.id} question={part} />
       ))}
       <div style={{ marginTop: 10 }} />
       <Divider />
@@ -76,7 +77,6 @@ export default () => {
       return true
     }
 
-    // eslint-disable-next-line no-restricted-syntax
     for (const filter of filters) {
       const key = Object.keys(filter)[0]
       const value = filter[key]
@@ -95,22 +95,22 @@ export default () => {
 
       <strong>Number of opened forms {answers.data.length}</strong>
 
-      <AnswerFilter setFilters={setFilters} filters={filters} />
+      <AnswerFilter filters={filters} setFilters={setFilters} />
 
       <div style={{ marginTop: 30 }}>
         <div>
           <Radio
+            checked={form === 'number'}
             label="Numerical answers"
             name="answerSelection"
-            checked={form === 'number'}
             onChange={() => setForm('number')}
           />
         </div>
         <div>
           <Radio
+            checked={form === 'textual'}
             label="Text answers"
             name="answerSelection"
-            checked={form === 'textual'}
             onChange={() => setForm('textual')}
           />
         </div>
@@ -119,13 +119,13 @@ export default () => {
       {form === 'textual' ? (
         <>
           {questionData.slice(1).map(group => (
-            <TextQuestionGroup key={group.id} questionGroup={group} answers={answerData} />
+            <TextQuestionGroup answers={answerData} key={group.id} questionGroup={group} />
           ))}
         </>
       ) : (
         <>
           {questionData.map(group => (
-            <RadioQuestionGroup key={group.id} questionGroup={group} answers={answerData} />
+            <RadioQuestionGroup answers={answerData} key={group.id} questionGroup={group} />
           ))}
         </>
       )}

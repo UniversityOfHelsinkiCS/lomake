@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { inProduction } from '../util/common.js'
 
-const pateToken = process.env.PATE_API_TOKEN || ''
-const pateUrl = process.env.PATE_URL || ''
+const pateToken = process.env.PATE_API_TOKEN ?? ''
+const pateUrl = process.env.PATE_URL ?? ''
 
 const pateClient = axios.create({
   baseURL: pateUrl,

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Message, Segment } from 'semantic-ui-react'
 
@@ -14,7 +13,7 @@ export default () => {
 
   return (
     <>
-      {status && <Message color="blue">{status}</Message>}
+      {status ? <Message color="blue">{status}</Message> : null}
       <Segment padded>
         <h3>Päivitä koulutusohjelmat</h3>
         <div style={{ paddingBottom: '10px' }}>
@@ -22,8 +21,8 @@ export default () => {
           perustuen{' '}
           <a
             href="https://github.com/UniversityOfHelsinkiCS/jami/blob/master/src/organisation/faculties.ts"
-            target="_blank"
             rel="noreferrer"
+            target="_blank"
           >
             data-tiedostoon
           </a>

@@ -84,7 +84,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
       cy.get(`[data-cy="saving-answers-notice"]`).contains(
-        'Answers are saved automatically except for text fields. Final day for answering the form:',
+        'Answers are saved automatically except for text fields. Final day for answering the form:'
       )
 
       cy.get(`[data-cy="color-negative-1"]`).click()

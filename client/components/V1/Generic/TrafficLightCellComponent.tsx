@@ -13,7 +13,7 @@ const TrafficLightCell = ({
   groupKey,
   handleModalOpen,
   reports,
-  activeYear
+  activeYear,
 }: {
   metadata: KeyDataMetadata[]
   programmeData: KeyDataProgramme
@@ -26,19 +26,20 @@ const TrafficLightCell = ({
   const { t } = useTranslation()
   const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
   const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
-  const shouldRenderBadge = groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color, reports)
+  const shouldRenderBadge =
+    groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color, reports)
   return (
     <TableCell
-      onClick={() => handleModalOpen(programmeData, groupKey)}
       data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}-${activeYear}`}
+      onClick={() => handleModalOpen(programmeData, groupKey)}
     >
       <TrafficLight color={color} variant="medium" />
-      {shouldRenderBadge && (
+      {shouldRenderBadge ? (
         <NotificationBadge
           data-cy={`lightCellBadge-${programmeData.koulutusohjelmakoodi}-${groupKey}-${activeYear}`}
           tooltip={t('keyData:missingComment')}
         />
-      )}
+      ) : null}
     </TableCell>
   )
 }

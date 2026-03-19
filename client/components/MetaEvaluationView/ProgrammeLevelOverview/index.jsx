@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { useVisibleOverviewProgrammes } from '../../../util/overview'
@@ -49,18 +50,18 @@ const ProgrammeLevelOverview = () => {
 
   return usersProgrammes.length > 0 ? (
     <MetaOverview
-      t={t}
-      lang={lang}
       dispatch={dispatch}
       faculties={faculties}
-      programmes={filteredProgrammes}
       form={form}
       formType={formType}
-      showAllProgrammes={showAllProgrammes}
       handleShowAllProgrammes={handleShowAllProgrammes}
+      lang={lang}
+      programmes={filteredProgrammes}
+      showAllProgrammes={showAllProgrammes}
+      t={t}
     />
   ) : (
-    <NoPermissions t={t} requestedForm={t('metaevaluation')} />
+    <NoPermissions requestedForm={t('metaevaluation')} t={t} />
   )
 }
 

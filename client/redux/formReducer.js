@@ -110,6 +110,7 @@ const initialState = {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_FORM_FIELD':

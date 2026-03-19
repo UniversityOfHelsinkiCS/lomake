@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
 import { Tooltip } from '@mui/material'
 import { customColors } from '../../../../theme'
 import { useTranslation } from 'react-i18next'
@@ -41,13 +42,13 @@ export const TrafficLight = (props: TrafficLightProps) => {
   }
 
   const colorData = getColorData(props.color)
-  const hex = colorData.hex
+  const { hex } = colorData
   const text = colorData.color
   const isDisplayed = props.color === 'Tyhjä' ? 'none' : 'block'
   const size = getSize(props.variant)
 
   return (
-    <Tooltip placement="bottom" title={text} arrow>
+    <Tooltip arrow placement="bottom" title={text}>
       <div
         style={{
           backgroundColor: hex,

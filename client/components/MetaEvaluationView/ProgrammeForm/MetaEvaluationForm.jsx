@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { formKeys } from '../../../../config/data'
 
@@ -41,26 +40,26 @@ const MetaEvaluationForm = ({ questions, programmeKey, summaryData, form, summar
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
     const gapStyle = form === formKeys.EVALUATION_COMMTTEES ? { marginBottom: 70 } : {}
-    const maxLength = part.maxLength ? part.maxLength : undefined
+    const maxLength = part.maxLength ?? undefined
 
     return (
       <div key={`${part.id}-container`} style={gapStyle}>
         <div key={`${part.id}-${part.index}`} style={divStyle}>
           <Component
-            id={part.id}
-            label={part.label[lang]}
             description={description}
-            required={part.required}
+            extrainfo={extrainfo}
+            form={form}
+            id={part.id}
+            kludge={part.kludge}
+            label={part.label[lang]}
+            maxLength={maxLength}
             noColor={part.no_color}
             number={part.index}
-            extrainfo={extrainfo}
             previousYearsAnswers={null}
             programme={programmeKey}
-            summaryData={summaryData?.[part.id] || {}}
-            form={form}
-            summaryUrl={summaryUrl || null}
-            kludge={part.kludge}
-            maxLength={maxLength}
+            required={part.required}
+            summaryData={summaryData?.[part.id] ?? {}}
+            summaryUrl={summaryUrl ?? null}
           />
         </div>
       </div>
@@ -72,10 +71,10 @@ const MetaEvaluationForm = ({ questions, programmeKey, summaryData, form, summar
       {questions.map((section, index) => {
         return (
           <MetaEvaluationSection
-            title={section.title[lang]}
-            number={romanize(index + 1)}
             key={`${section.title[lang]}`}
+            number={romanize(index + 1)}
             programmeKey={programmeKey}
+            title={section.title[lang]}
           >
             {section.parts.map(partMap)}
           </MetaEvaluationSection>

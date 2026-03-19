@@ -1,4 +1,3 @@
-import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -14,14 +13,14 @@ const SingleProgramQuestion = ({ answers, question }) => {
   return (
     <>
       <Accordion.Title
-        index={question.id}
         active
-        data-cy={`report-question-${question.id}`}
         className="question-header"
+        data-cy={`report-question-${question.id}`}
         id={question.labelIndex}
+        index={question.id}
       >
         <Grid>
-          <Grid.Column width={1} className="question-caret noprint" />
+          <Grid.Column className="question-caret noprint" width={1} />
           <Grid.Column width={11}>
             <span>
               <small className="question-title">
@@ -35,7 +34,7 @@ const SingleProgramQuestion = ({ answers, question }) => {
             </p>
             <p className="question-description">{question.description}</p>
           </Grid.Column>
-          <Grid.Column width={4} floated="right">
+          <Grid.Column floated="right" width={4}>
             <Label className="question-answered-label" size="large">
               1 / 1
             </Label>
@@ -43,34 +42,32 @@ const SingleProgramQuestion = ({ answers, question }) => {
         </Grid>
       </Accordion.Title>
       <Accordion.Content active className="question-content">
-        {answers &&
-          answers
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map(programme => (
-              <div key={`${question.id}-${programme.key}`}>
-                <QuestionTitle id={question.id} answerColors={programme.color} programmeName={programme.name} />
-                <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
-                  {programme.answer &&
-                    programme.answer.split('\n').map((row, index) => (
+        {answers
+          ?.sort((a, b) => a.name.localeCompare(b.name))
+          .map(programme => (
+            <div key={`${question.id}-${programme.key}`}>
+              <QuestionTitle answerColors={programme.color} id={question.id} programmeName={programme.name} />
+              <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
+                {programme.answer?.split('\n').map((row, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <li className="answer-row" key={index}>
+                    {row}
+                  </li>
+                ))}
+                {programme.comment ? (
+                  <>
+                    {commentAppendix}
+                    {programme.comment.split('\n').map((row, index) => (
                       // eslint-disable-next-line react/no-array-index-key
-                      <li key={index} className="answer-row">
+                      <li className="answer-row" key={index}>
                         {row}
                       </li>
                     ))}
-                  {programme.comment && (
-                    <>
-                      {commentAppendix}
-                      {programme.comment.split('\n').map((row, index) => (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <li key={index} className="answer-row">
-                          {row}
-                        </li>
-                      ))}
-                    </>
-                  )}
-                </ul>
-              </div>
-            ))}
+                  </>
+                ) : null}
+              </ul>
+            </div>
+          ))}
       </Accordion.Content>
     </>
   )

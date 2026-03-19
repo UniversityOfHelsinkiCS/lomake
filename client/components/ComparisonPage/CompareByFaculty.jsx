@@ -75,7 +75,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   return (
     <div className="tab-pane">
-      <Grid stackable doubling padded columns={isAdmin(user) ? 3 : 2}>
+      <Grid columns={isAdmin(user) ? 3 : 2} doubling padded stackable>
         <Grid.Row>
           <Grid.Column>
             <YearSelector size="small" style={{ paddingBottom: '1em' }} />
@@ -94,21 +94,21 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
             <div style={{ paddingTop: '2em' }}>
               <label>{t('comparison:chosenProgrammes')}</label>
               <Dropdown
+                data-cy="programme-filter"
                 fluid
-                selection
-                search
-                placeholder={t('comparison:chooseProgramme')}
-                value={chosen}
                 onChange={handleChosenChange}
                 options={usersProgrammes ? options : []}
-                data-cy="programme-filter"
+                placeholder={t('comparison:chooseProgramme')}
+                search
+                selection
+                value={chosen}
               />
             </div>
           </Grid.Column>
           <Grid.Column>
             <div className="filter">
               {filters.form !== formKeys.EVALUATION_FACULTIES && (
-                <FacultyFilter size="large" label={t('comparison:compareFaculties')} />
+                <FacultyFilter label={t('comparison:compareFaculties')} size="large" />
               )}
               <small>{t('comparison:noAccessToAll')}</small>
               {faculty[0] !== 'allFaculties' &&
@@ -117,31 +117,31 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
           </Grid.Column>
           <Grid.Column>
             <Radio
-              className={`toggle${isAdmin(user) ? '' : '-marginless'}`}
               checked={showEmpty}
-              onChange={() => setShowEmpty(!showEmpty)}
+              className={`toggle${isAdmin(user) ? '' : '-marginless'}`}
               label={t('comparison:emptyAnswers')}
+              onChange={() => setShowEmpty(!showEmpty)}
               toggle
             />
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <Grid className="color-grid" centered stackable doubling relaxed columns={isAdmin(user) ? 3 : 2}>
+      <Grid centered className="color-grid" columns={isAdmin(user) ? 3 : 2} doubling relaxed stackable>
         <Grid.Column>
           {questionsList.map(
             question =>
               getChosenAnswers(question) &&
               !question.no_color && (
                 <SingleProgramPieChart
-                  key={question.id}
-                  question={question}
                   answers={getChosenAnswers(question)}
-                  programmeName={chosen || ''}
-                  programmeFaculty={getChosenProgrammeFaculty()}
-                  showEmpty={showEmpty}
                   columns={isAdmin(user) ? 3 : 2}
+                  key={question.id}
+                  programmeFaculty={getChosenProgrammeFaculty()}
+                  programmeName={chosen || ''}
+                  question={question}
+                  showEmpty={showEmpty}
                 />
-              ),
+              )
           )}
         </Grid.Column>
         <Grid.Column>
@@ -150,16 +150,16 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
               getComparedAnswers(question) &&
               !question.no_color && (
                 <PieChart
+                  answers={getComparedAnswers(question, facultyProgrammes.all)}
+                  columns={isAdmin(user) ? 3 : 2}
+                  faculty={getComparedFaculty()}
                   key={question.id}
+                  name="faculty"
+                  programmes={facultyProgrammes ? facultyProgrammes.all : ''}
                   question={question}
                   showEmpty={showEmpty}
-                  answers={getComparedAnswers(question, facultyProgrammes.all)}
-                  faculty={getComparedFaculty()}
-                  programmes={facultyProgrammes ? facultyProgrammes.all : ''}
-                  name="faculty"
-                  columns={isAdmin(user) ? 3 : 2}
                 />
-              ),
+              )
           )}
         </Grid.Column>
         {isAdmin(user) && (
@@ -169,16 +169,16 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                 allAnswers.get(question.id) &&
                 !question.no_color && (
                   <PieChart
+                    answers={getComparedAnswers(question, universityProgrammes)}
+                    columns={isAdmin(user) ? 3 : 2}
+                    faculty={t('comparison:university')}
                     key={question.id}
+                    name="university"
+                    programmes={usersProgrammes ? universityProgrammes : []}
                     question={question}
                     showEmpty={showEmpty}
-                    answers={getComparedAnswers(question, universityProgrammes)}
-                    programmes={usersProgrammes ? universityProgrammes : []}
-                    faculty={t('comparison:university')}
-                    name="university"
-                    columns={isAdmin(user) ? 3 : 2}
                   />
-                ),
+                )
             )}
           </Grid.Column>
         )}

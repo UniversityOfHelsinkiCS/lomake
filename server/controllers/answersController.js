@@ -164,8 +164,8 @@ const getIndividualFormAnswerForUser = async (req, res) => {
         order: [['updated_at', 'DESC']],
       })
     }
-    const result = data?.data || {}
-    const ready = data?.ready || false
+    const result = data?.data ?? {}
+    const ready = data?.ready ?? false
 
     return res.status(200).json({ result, ready })
   } catch (error) {
@@ -513,7 +513,7 @@ const clearTempForIndividual = async uid => {
         where: {
           [Op.and]: [{ programme: uid }, { form: formKeys.DEGREE_REFORM_INDIVIDUALS }],
         },
-      },
+      }
     )
     logger.info(`Cleared temp answer for current user`)
   } catch (error) {

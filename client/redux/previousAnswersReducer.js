@@ -11,6 +11,7 @@ export const getPreviousAnswersAction = (programme, form) => {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
+
 export default (state = { data: null }, action) => {
   switch (action.type) {
     case 'GET_PREVIOUS_ANSWERS_ATTEMPT':

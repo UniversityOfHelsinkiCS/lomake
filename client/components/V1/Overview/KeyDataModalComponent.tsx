@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/function-component-definition */
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -70,28 +72,35 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
   }
 
   return (
-    <ModalTemplate open={open} setOpen={setOpen} data-cy="keydata-modal">
+    <ModalTemplate data-cy="keydata-modal" open={open} setOpen={setOpen}>
       {!programme || !metadata || !content ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <CircularProgress />
         </Box>
       ) : (
         <>
-          <Typography variant="h5" color="textSecondary">
+          <Typography color="textSecondary" variant="h5">
             {programme.koulutusohjelma[lang]} {year}
           </Typography>
           <KeyDataCard
             level={getLevel(programme.koulutusohjelmakoodi)}
             metadata={metadata}
             programme={programme}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...content}
           />
 
-          <TextFieldCard id={content.groupKey} t={t} type="Comment" studyprogrammeKey={programme.koulutusohjelmakoodi} year={year} />
+          <TextFieldCard
+            id={content.groupKey}
+            studyprogrammeKey={programme.koulutusohjelmakoodi}
+            t={t}
+            type="Comment"
+            year={year}
+          />
           <Link
             href={`${basePath}v1/programmes/10/${programme.koulutusohjelmakoodi}/${year}/#${formatURLFragment(content.groupKey)}`}
           >
-            <Button variant="outlined" startIcon={<ArrowForward />} sx={{ marginTop: 2, float: 'right' }}>
+            <Button startIcon={<ArrowForward />} sx={{ marginTop: 2, float: 'right' }} variant="outlined">
               {t('keyData:moveToOpinion')}
             </Button>
           </Link>

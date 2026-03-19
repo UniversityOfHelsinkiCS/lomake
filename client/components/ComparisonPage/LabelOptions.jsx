@@ -21,20 +21,20 @@ const LabelOptions = ({ unit, setUnit }) => {
         <Form.Group inline>
           <Form.Field>
             <Radio
+              checked={unit === 'percentage'}
               label={t('comparison:percentage')}
               name="chart-unit"
-              value="percentage"
-              checked={unit === 'percentage'}
               onChange={handleChange}
+              value="percentage"
             />
           </Form.Field>
           <Form.Field>
             <Radio
+              checked={unit === 'programmeAmount'}
               label={amountLabel}
               name="chart-unit"
-              value="programmeAmount"
-              checked={unit === 'programmeAmount'}
               onChange={handleChange}
+              value="programmeAmount"
             />
           </Form.Field>
         </Form.Group>

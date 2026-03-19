@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -46,6 +47,17 @@ export default function FormLocker({ programme, form = 1 }) {
   return (
     <div style={{ margin: '2em 3em 0em 3em', display: 'flex' }}>
       <Popup
+        content={
+          <Button
+            color="red"
+            content={locked ? t('overview:unlockForm') : t('overview:lockForm')}
+            data-cy={`formLocker-verify-${locked ? 'open' : 'close'}-button`}
+            onClick={handleLock}
+            secondary
+          />
+        }
+        on="click"
+        position="top center"
         trigger={
           <Button
             data-cy={`formLocker-button-${locked ? 'open' : 'close'}`}
@@ -57,17 +69,6 @@ export default function FormLocker({ programme, form = 1 }) {
             {locked ? t('overview:formLocked') : t('overview:formUnlocked')}
           </Button>
         }
-        content={
-          <Button
-            data-cy={`formLocker-verify-${locked ? 'open' : 'close'}-button`}
-            color="red"
-            secondary
-            content={locked ? t('overview:unlockForm') : t('overview:lockForm')}
-            onClick={handleLock}
-          />
-        }
-        on="click"
-        position="top center"
       />
     </div>
   )

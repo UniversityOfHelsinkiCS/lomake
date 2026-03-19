@@ -2,8 +2,6 @@ import logger from '../util/logger.js'
 import InterventionProcedure from '../models/interventionProcedure.js'
 import { Request, Response } from 'express'
 import Studyprogramme from '../models/studyprogramme.js'
-import { Op } from 'sequelize'
-
 
 interface ValidateOperationResponse {
   success: boolean
@@ -15,7 +13,6 @@ interface ValidateOperationResponse {
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
   const { programme } = req.params
-
 
   const resultObject: ValidateOperationResponse = {
     success: false,
@@ -45,21 +42,19 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
 
   let interventionProcedures: InterventionProcedure[] = []
 
- 
-    interventionProcedures = await InterventionProcedure.findAll({
-      where: {
-        studyprogrammeKey: studyprogramme.key,
-      },
-      attributes: ['id', 'studyprogrammeKey', 'active', 'startYear', 'endYear'],
-      order: [['createdAt', 'ASC']],
-    })
-
+  interventionProcedures = await InterventionProcedure.findAll({
+    where: {
+      studyprogrammeKey: studyprogramme.key,
+    },
+    attributes: ['id', 'studyprogrammeKey', 'active', 'startYear', 'endYear'],
+    order: [['createdAt', 'ASC']],
+  })
 
   resultObject.success = true
   resultObject.interventionProcedures = interventionProcedures
   resultObject.programme = studyprogramme.key
   resultObject.status = 200
-  
+
   return resultObject
 }
 
@@ -77,15 +72,12 @@ const getProgrammesInterventionProcedures = async (req: Request, res: Response) 
 const getActiveInterventionProcedures = async (req: Request, res: Response) => {
   try {
     const interventionProcedures = await InterventionProcedure.findAll({})
-    
+
     return res.status(200).json(interventionProcedures)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
   }
 }
-
-
-
 
 export default { getProgrammesInterventionProcedures, getActiveInterventionProcedures }

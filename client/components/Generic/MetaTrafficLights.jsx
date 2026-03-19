@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { updateFormField } from '../../redux/formReducer'
@@ -26,29 +25,29 @@ const MetaTrafficLights = ({ id, form }) => {
       <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
         <div title={`${t('urgent')}`}>
           <div
-            data-cy={`color-negative-${id}`}
             className={getClassName('red')}
+            data-cy={`color-negative-${id}`}
             onClick={!viewOnly ? () => choose(fieldName, 'red') : undefined}
           />
         </div>
         <div title={`${t('semiUrgent')}`}>
           <div
-            data-cy={`color-neutral-${id}`}
             className={getClassName('yellow')}
+            data-cy={`color-neutral-${id}`}
             onClick={!viewOnly ? () => choose(fieldName, 'yellow') : undefined}
           />
         </div>
         <div title={`${t('nonUrgent')}`}>
           <div
-            data-cy={`color-positive-${id}`}
             className={getClassName('green')}
+            data-cy={`color-positive-${id}`}
             onClick={!viewOnly ? () => choose(fieldName, 'green') : undefined}
           />
         </div>
         <div title={`${t('irrelevant')}`}>
           <div
-            data-cy={`color-irrelevant-${id}`}
             className={getClassName('gray')}
+            data-cy={`color-irrelevant-${id}`}
             onClick={!viewOnly ? () => choose(fieldName, 'gray') : undefined}
           />
         </div>

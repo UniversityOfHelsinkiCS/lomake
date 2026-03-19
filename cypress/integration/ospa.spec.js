@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-undef */
-
 /// <reference types="cypress" />
 
 import { testProgrammeCode, defaultYears } from '../../config/common'
@@ -144,11 +141,11 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     // Check that changes persisted and fields with no changes stay the same
-    cy.visit('yearly/form/1/KH50_004')
+    cy.visit('/yearly/form/1/KH50_004')
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=textarea-learning_outcomes]').should(
       'contain.text',
-      `Hello from ${defaultYears[1]}, editing old year`,
+      `Hello from ${defaultYears[1]}, editing old year`
     )
     cy.get('[data-cy=textarea-curriculum]').should('contain.text', `Hello from ${defaultYears[1]}`)
   })

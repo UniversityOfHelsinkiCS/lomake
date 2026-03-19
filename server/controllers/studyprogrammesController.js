@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import moment from 'moment'
 import db from '../models/index.js'
 import { isAdmin, isSuperAdmin, getFormType } from '../util/common.js'

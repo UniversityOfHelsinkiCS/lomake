@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /**
  * Insert application wide common items here
  */
@@ -9,7 +10,7 @@ const inStaging = process.env.NODE_ENV === 'production' && process.env.SENTRY_EN
 // And later on, once everything is ok, remove the features behind this flag
 const iamsInUse = true
 
-const basePath = process.env.BASE_PATH || '/'
+const basePath = process.env.BASE_PATH ?? '/'
 
 const LOMAKE_SINCE_YEAR = 2019
 const ARCHIVE_LAST_YEAR = 2024
@@ -100,7 +101,7 @@ const requiredDegreeReformIds = ['background_unit', 'primary_role', 'how_many_ye
 const DEV_SUPERADMINS = ['admin', 'cypressSuperAdminUser', 'superAdmin']
 
 const hasSpecialGroup = (user, group) => {
-  if (user && user.specialGroup) {
+  if (user?.specialGroup) {
     const groups = Object.keys(user.specialGroup)
     return groups.includes(group)
   }
@@ -177,7 +178,12 @@ const isEmployee = user => {
   return false
 }
 
-const hasSomeReadAccess = user => Object.values(user?.access || {}).some(a => a.read)
+const isEmployeeOnly = user => {
+  if (user.iamGroups.length === 1 && user.iamGroups.map(group => ['hy-employees'].includes(group))) return true
+  return false
+}
+
+const hasSomeReadAccess = user => Object.values(user?.access ?? {}).some(a => a.read)
 
 const internationalAccess = {
   MH50_004: { read: true, year: 2020 },
@@ -265,6 +271,7 @@ export {
   isInternationalUser,
   isDegreeStudentOrEmployee,
   isEmployee,
+  isEmployeeOnly,
   organisationCodeToIam,
   isEvaluationFacultyUser,
   hasSomeReadAccess,

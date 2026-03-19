@@ -1,4 +1,14 @@
-import { InferAttributes, InferCreationAttributes, Model, CreationOptional, DATE, INTEGER, JSONB, STRING, BOOLEAN } from 'sequelize'
+import {
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+  CreationOptional,
+  DATE,
+  INTEGER,
+  JSONB,
+  STRING,
+  BOOLEAN,
+} from 'sequelize'
 import { sequelize } from '../database/connection'
 
 class Studyprogramme extends Model<InferAttributes<Studyprogramme>, InferCreationAttributes<Studyprogramme>> {
@@ -31,13 +41,12 @@ Studyprogramme.init(
     primaryFacultyId: INTEGER,
     lockedForms: JSONB,
     createdAt: DATE,
-    updatedAt: DATE
+    updatedAt: DATE,
   },
   {
     sequelize,
     tableName: 'studyprogrammes',
     underscored: true,
-
   }
 )
 

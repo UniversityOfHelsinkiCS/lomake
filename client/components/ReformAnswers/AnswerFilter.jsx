@@ -1,5 +1,3 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-restricted-syntax */
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { degreeReformIndividualQuestions as questionData } from '../../questionData'
@@ -44,12 +42,12 @@ const FilterQuestion = ({ question, filters, setFilters }) => {
       <div style={{ marginBottom: 5 }}>{question.shortLabel[lang]}</div>
       <div>
         {options.map(opt => (
-          <button style={isSet(opt)} key={opt} onClick={() => setTheFilter(opt)}>
+          <button key={opt} onClick={() => setTheFilter(opt)} style={isSet(opt)}>
             {labelFor(opt)}
           </button>
         ))}
         <span>
-          <button style={isSet('all')} onClick={() => resetTheFilter()}>
+          <button onClick={() => resetTheFilter()} style={isSet('all')}>
             {t('report:all')}
           </button>
         </span>
@@ -76,7 +74,7 @@ const AnswerFilter = ({ filters, setFilters }) => {
     <div style={style}>
       <h4>{t('report:filterBy')}</h4>
       {filterQuestions.map(question => (
-        <FilterQuestion key={question.id} question={question} setFilters={setFilters} filters={filters} />
+        <FilterQuestion filters={filters} key={question.id} question={question} setFilters={setFilters} />
       ))}
     </div>
   )

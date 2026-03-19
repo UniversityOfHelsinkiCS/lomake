@@ -72,7 +72,7 @@ const getTotalColors = ({ allAnswers, multipleYears, questionsList, questions, c
       data.answers.forEach((questionsAnswers, key) => {
         const question = questionsList.find(q => q.id === key)
         const questionLabel = getLabel(question)
-        if (questions && questions.selected.includes(questionLabel)) {
+        if (questions?.selected.includes(questionLabel)) {
           let questionColors = {}
           if (form === formKeys.EVALUATION_FACULTIES) {
             const colorsAndCheck = checkFacultyColors({ questionsAnswers, chosenKeys, yearsColors, levels })
@@ -132,7 +132,7 @@ const CompareByYear = ({
   const filters = useSelector(state => state.filters)
   const { multipleYears, questions } = filters
 
-  const chosenKeys = programmes.chosen.map(p => p.key || (filters.form === formKeys.EVALUATION_FACULTIES && p.code))
+  const chosenKeys = programmes.chosen.map(p => p.key ?? (filters.form === formKeys.EVALUATION_FACULTIES && p.code))
 
   const data = getTotalColors({
     allAnswers,
@@ -149,15 +149,15 @@ const CompareByYear = ({
   return (
     <div>
       <FilterTray filter={filter} setFilter={setFilter} />
-      <Grid doubling columns={2} padded>
+      <Grid columns={2} doubling padded>
         <Grid.Row>
           <Grid.Column>
-            <QuestionList label={t('comparison:selectQuestions')} questionsList={questionsList} onlyColoredQuestions />
-            <LabelOptions unit={unit} setUnit={setUnit} />
+            <QuestionList label={t('comparison:selectQuestions')} onlyColoredQuestions questionsList={questionsList} />
+            <LabelOptions setUnit={setUnit} unit={unit} />
           </Grid.Column>
           <Grid.Column>
             <div style={{ paddingTop: '3em' }}>
-              <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+              <ProgrammeList picked={picked} programmes={programmes} setPicked={setPicked} />
             </div>
           </Grid.Column>
         </Grid.Row>
@@ -172,19 +172,19 @@ const CompareByYear = ({
               <Grid.Column width={16}>
                 <h3>{t('comparison:writtenAnswers')}</h3>
                 <div className="ui divider" />
-                <Accordion fluid className="comparison-container">
+                <Accordion className="comparison-container" fluid>
                   {questionsList.map(
                     question =>
                       questions.selected.includes(getLabel(question)) && (
                         <Question
-                          key={question.id}
                           answers={getTotalWritten({ question, allAnswers, chosenKeys })}
-                          question={question}
                           chosenProgrammes={programmes.chosen.map(p => p.key)}
-                          showing={showingQuestion === question.id}
                           handleClick={() => setShowingQuestion(showingQuestion === question.id ? -1 : question.id)}
+                          key={question.id}
+                          question={question}
+                          showing={showingQuestion === question.id}
                         />
-                      ),
+                      )
                   )}
                 </Accordion>
               </Grid.Column>

@@ -1,10 +1,10 @@
-/* eslint-disable react/no-danger */
-import React, { useEffect, useMemo, useRef } from 'react'
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Loader, Icon } from 'semantic-ui-react'
 import { useTranslation, Trans } from 'react-i18next'
-import { Redirect, useHistory } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Navigate, useNavigate, useParams, Link } from 'react-router'
 import Downloads from '../../FormView/Downloads'
 
 import { hasSomeReadAccess, isAdmin } from '../../../../config/common'
@@ -62,10 +62,11 @@ const findAnswers = (allOldAnswers, relatedQuestion) => {
   return result
 }
 
-const EvaluationFormView = ({ room, formString }) => {
+const EvaluationFormView = () => {
+  const { room, form: formString } = useParams()
   const form = parseInt(formString, 10) || null
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
@@ -81,12 +82,12 @@ const EvaluationFormView = ({ room, formString }) => {
 
   const year = getYearToShow({ draftYear, nextDeadline, form }) || new Date().getFullYear()
 
-  const faculty = programme?.primaryFaculty?.code || ''
+  const faculty = programme?.primaryFaculty?.code ?? ''
   const summaryURL = `/evaluation/previous-years/${room}`
   const oodiProgURL = `https://oodikone.helsinki.fi/evaluationoverview/programme/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${faculty}`
   const rapoLink = `https://rapocloud.it.helsinki.fi/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FHelsingin%20yliopiston%20dashboardit%2F_portal%2FTohtorikoulutus&Page=Tohtoriohjelman%20vuosiseuranta%20%2F%20Annual%20review%20by%20doctoral%20programme`
-  const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
+  const writeAccess = user.access[room]?.write ?? isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
@@ -159,28 +160,28 @@ const EvaluationFormView = ({ room, formString }) => {
     return result
   }, [room, user, summaries])
 
-  if (!room || !form) return <Redirect to="/" />
+  if (!room || !form) return <Navigate to="/" />
 
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
 
-  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('evaluation')} />
+  if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('evaluation')} t={t} />
 
   return singleProgramPending ? (
     <Loader active />
   ) : (
     <div className="form-container">
-      <NavigationSidebar programmeKey={room} formType="evaluation" formNumber={form} />
+      <NavigationSidebar formNumber={form} formType="evaluation" programmeKey={room} />
       <div className="the-form" ref={componentRef}>
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/evaluation')} icon="arrow left" />
+              <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation')} />
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={calendarImage} />
           </div>
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
-          <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+          <h3 data-cy="formview-title" style={{ marginTop: '0' }}>
             {t('evaluation')} {year}
           </h3>
 
@@ -234,19 +235,19 @@ const EvaluationFormView = ({ room, formString }) => {
               margin: '2em 0em 1em 0em',
             }}
           >
-            <Link data-cy={`link-to-old-${room}-answers`} to={summaryURL} target="_blank">
+            <Link data-cy={`link-to-old-${room}-answers`} target="_blank" to={summaryURL}>
               <h4 style={{ marginBottom: '0.5em' }}>
                 {t('formView:summaryLinkProg')} <Icon name="external" />{' '}
               </h4>
             </Link>
             {!room.startsWith('T') && (
               <>
-                <a href={oodiProgURL} data-cy={`link-to-oodikone-programme-${room}`} target="_blank" rel="noreferrer">
+                <a data-cy={`link-to-oodikone-programme-${room}`} href={oodiProgURL} rel="noreferrer" target="_blank">
                   <h4 style={{ marginBottom: '0.5em' }}>
                     {t('formView:oodikoneProg')} <Icon name="external" />{' '}
                   </h4>
                 </a>
-                <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
+                <a data-cy={`link-to-oodikone-faculty-${room}`} href={oodiFacultyURL} rel="noreferrer" target="_blank">
                   <h4>
                     {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
                   </h4>
@@ -255,7 +256,7 @@ const EvaluationFormView = ({ room, formString }) => {
             )}
             {room.startsWith('T') ? (
               <div style={{ marginTop: '1em' }}>
-                <a href={rapoLink} data-cy={`link-to-rapo-${room}`} target="_blank" rel="noreferrer">
+                <a data-cy={`link-to-rapo-${room}`} href={rapoLink} rel="noreferrer" target="_blank">
                   <h4>
                     {t('formView:rapo')} <Icon name="external" />{' '}
                   </h4>
@@ -271,13 +272,13 @@ const EvaluationFormView = ({ room, formString }) => {
           </div>
         </div>
         <div style={{ paddingBottom: '6em' }}>
-          <Downloads programme={programme} componentRef={componentRef} form={form} />
+          <Downloads componentRef={componentRef} form={form} programme={programme} />
 
           <EvaluationForm
+            form={form}
             programmeKey={programme.key}
             questions={questions}
             summaryData={yearlyAnswers}
-            form={form}
             summaryUrl={summaryURL}
           />
         </div>

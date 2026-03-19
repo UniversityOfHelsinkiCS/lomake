@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Divider, Grid, Icon, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -23,19 +23,19 @@ const Pie = ({ level, data, onlyBc }) => {
         data={[
           {
             color: '#9dff9d',
-            value: data[level]?.green.length || 0,
+            value: data[level]?.green.length ?? 0,
           },
           {
             color: '#ffffb1',
-            value: data[level]?.yellow.length || 0,
+            value: data[level]?.yellow.length ?? 0,
           },
           {
             color: '#ff7f7f',
-            value: data[level]?.red.length || 0,
+            value: data[level]?.red.length ?? 0,
           },
           {
             color: '#e6e6e6',
-            value: data[level]?.gray.length || 0,
+            value: data[level]?.gray.length ?? 0,
           },
         ]}
         paddingAngle={0}
@@ -68,9 +68,9 @@ const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowS
                   {p.name[lang]}
                 </span>
               </p>
-              {(showText || showSpecific[p.key]) && data.text[p.key] && (
+              {(showText || showSpecific[p.key]) && data.text[p.key] ? (
                 <ReactMarkdown>{data.text[p.key]}</ReactMarkdown>
-              )}
+              ) : null}
             </div>
           )
         })
@@ -134,7 +134,7 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
         <div style={{ maxWidth: '1000px' }}>
           <h3>
             {number}. {label}{' '}
-            {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            {required ? <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span> : null}
           </h3>
         </div>
       </div>
@@ -149,14 +149,14 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
             return (
               <div className="traffic-light-row" key={level}>
                 <label className="traffic-light-row-label">{t(level)}</label>
-                <TrafficLights id={`${id}_${level}`} form={form} />
+                <TrafficLights form={form} id={`${id}_${level}`} />
               </div>
             )
           })
         ) : (
           <div className="traffic-light-row">
             <label className="traffic-light-row-label">{t('bachelor')}</label>
-            <TrafficLights id={`${id}_bachelor`} form={form} />
+            <TrafficLights form={form} id={`${id}_bachelor`} />
           </div>
         )}
       </div>
@@ -169,7 +169,7 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
                 if (level === 'doctoral' && hideLevels) return null
                 if (onlyBc && level === 'master') return null
                 return (
-                  <Grid.Column key={`${id}-summary-labels-${level}`} width={5} style={getStyleForm(level)}>
+                  <Grid.Column key={`${id}-summary-labels-${level}`} style={getStyleForm(level)} width={5}>
                     {t(level)}
                   </Grid.Column>
                 )
@@ -179,10 +179,10 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
             <Grid.Row className="row">
               {levels.map(level => {
                 return (
-                  <Grid.Column width={5} key={level}>
-                    <Pie level={level} data={summaryData} onlyBc={onlyBc} />
+                  <Grid.Column key={level} width={5}>
+                    <Pie data={summaryData} level={level} onlyBc={onlyBc} />
                     {Object.keys(showText).length > 0 && (
-                      <Button style={{ marginTop: '1em' }} onClick={() => handleShowText(level, !showText[level])}>
+                      <Button onClick={() => handleShowText(level, !showText[level])} style={{ marginTop: '1em' }}>
                         {showText?.level === level ? t('formView:hideAnswers') : t('formView:showAnswers')}
                       </Button>
                     )}
@@ -198,45 +198,45 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
             </Grid.Row>
             {Object.keys(showText).length > 0 && (
               <Grid.Row className="row">
-                {showText.level &&
-                  summaryData[showText.level] &&
-                  colorsList.map(color => {
-                    return summaryData[showText.level][color].map(p => {
-                      return (
-                        <div key={p.key} style={{ marginRight: '1em', marginTop: '1em' }}>
-                          <p key={`${p.name[lang]}`}>
-                            <span className={`answer-circle-${color}`} />{' '}
-                            <span
-                              className="programme-list-button"
-                              onClick={() => handleShowSpecific(p.key)}
-                              style={{ marginLeft: '0.5em' }}
-                            >
-                              {p.name[lang]}
-                            </span>
-                          </p>
-                          {(Object.keys(showText).length > 0 || showSpecific[p.key]) &&
-                            summaryData[showText.level].text[p.key] && (
+                {showText.level && summaryData[showText.level]
+                  ? colorsList.map(color => {
+                      return summaryData[showText.level][color].map(p => {
+                        return (
+                          <div key={p.key} style={{ marginRight: '1em', marginTop: '1em' }}>
+                            <p key={`${p.name[lang]}`}>
+                              <span className={`answer-circle-${color}`} />{' '}
+                              <span
+                                className="programme-list-button"
+                                onClick={() => handleShowSpecific(p.key)}
+                                style={{ marginLeft: '0.5em' }}
+                              >
+                                {p.name[lang]}
+                              </span>
+                            </p>
+                            {(Object.keys(showText).length > 0 || showSpecific[p.key]) &&
+                            summaryData[showText.level].text[p.key] ? (
                               <ReactMarkdown>{summaryData[showText.level].text[p.key]}</ReactMarkdown>
-                            )}
-                        </div>
-                      )
+                            ) : null}
+                          </div>
+                        )
+                      })
                     })
-                  })}
+                  : null}
               </Grid.Row>
             )}
-            {showProgrammes && Object.keys(showText).length === 0 && (
+            {showProgrammes && Object.keys(showText).length === 0 ? (
               <Grid.Row className="row">
                 {['bachelor', 'master', 'doctoral'].map(level => {
                   if (level === 'doctoral' && hideLevels) return null
                   return (
-                    <Grid.Column width={5} key={`${id}-summary-programme-list-${level}`}>
+                    <Grid.Column key={`${id}-summary-programme-list-${level}`} width={5}>
                       <ProgrammeList
                         data={summaryData[level]}
+                        handleShowSpecific={handleShowSpecific}
                         lang={lang}
                         onlyBc={false}
-                        showText={showText[level]}
                         showSpecific={showSpecific}
-                        handleShowSpecific={handleShowSpecific}
+                        showText={showText[level]}
                       />
                       <Button onClick={() => handleShowText(level, !showText[level])}>
                         {showText === level ? t('formView:hideAnswers') : t('formView:showAnswers')}
@@ -245,11 +245,11 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
                   )
                 })}
               </Grid.Row>
-            )}
+            ) : null}
           </Grid>
         </div>
       </div>
-      <Textarea id={id} label={textAreaLabel} EntityLastYearsAccordion={null} form={form} />
+      <Textarea EntityLastYearsAccordion={null} form={form} id={id} label={textAreaLabel} />
     </div>
   )
 }

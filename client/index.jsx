@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '../theme'
@@ -33,7 +33,7 @@ const refresh = () => {
           </ThemeProvider>
         </ErrorBoundary>
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   )
 }
 
@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === 'development') {
   if (window.localStorage.getItem('pickUser')) {
     // eslint-disable-next-line no-alert
     const user = window.prompt(
-      `select user (two first only in prod db):\n\n${possibleUsers.map(u => u.uid).join('\n')}`,
+      `select user (two first only in prod db):\n\n${possibleUsers.map(u => u.uid).join('\n')}`
     )
     setHeaders(user)
   }

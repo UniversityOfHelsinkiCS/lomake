@@ -1,4 +1,3 @@
-import React from 'react'
 import { Header } from 'semantic-ui-react'
 
 import './Generic.scss'
@@ -19,7 +18,7 @@ const NoPermissions = ({ t, requestedForm }) => {
       }}
     >
       <Icon name="lock huge grey" />
-      <Header data-cy="no-permissions-message" style={{ textAlign: 'center' }} as="h1" disabled>
+      <Header as="h1" data-cy="no-permissions-message" disabled style={{ textAlign: 'center' }}>
         {noPermissionsText[0]}
         <br />
         {noPermissionsText[1]}

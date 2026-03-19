@@ -4,15 +4,18 @@ import { calculateKeyDataColor } from '@/client/util/v1'
 import { calculateInterventionAreas } from '../components/V1/Generic/InterventionProcedure'
 import { useTranslation } from 'react-i18next'
 import { DocumentType, InterventionProcedureType } from '../lib/types'
-import { useGetProgrammesInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
 
 export const useNotificationBadge = () => {
   const { t } = useTranslation()
 
-  const renderTabBadge = (programmeData: KeyDataProgramme, metadata: KeyDataMetadata[], reports: Record<string, ReportData | undefined>) => {
+  const renderTabBadge = (
+    programmeData: KeyDataProgramme,
+    metadata: KeyDataMetadata[],
+    reports: Record<string, ReportData | undefined>
+  ) => {
     const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
-    if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+    if (programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return false
     }
 
@@ -28,9 +31,13 @@ export const useNotificationBadge = () => {
     return false
   }
 
-  const renderTrafficLightBadge = (programmeData: KeyDataProgramme, groupKey: GroupKey, color: LightColors, reports: Record<string, ReportData | undefined>) => {
-
-    if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+  const renderTrafficLightBadge = (
+    programmeData: KeyDataProgramme,
+    groupKey: GroupKey,
+    color: LightColors,
+    reports: Record<string, ReportData | undefined>
+  ) => {
+    if (programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return false
     }
 
@@ -41,12 +48,12 @@ export const useNotificationBadge = () => {
   const renderActionsBadge = (
     programmeData: KeyDataProgramme,
     metadata: KeyDataMetadata[],
-    includeReport: boolean = false,
+    includeReport = false,
     reports: Record<string, ReportData | undefined>
   ) => {
     const redLights = []
 
-    if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+    if (programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
       return {
         showBadge: false,
         showIcon: false,
@@ -63,7 +70,7 @@ export const useNotificationBadge = () => {
       }
     }
 
-    const hasReport = reports?.[programmeData.koulutusohjelmakoodi]?.['Toimenpiteet']?.length > 0
+    const hasReport = reports?.[programmeData.koulutusohjelmakoodi]?.Toimenpiteet?.length > 0
     return {
       showBadge: redLights.length > 0 && !hasReport,
       showIcon: includeReport && hasReport,
@@ -81,31 +88,37 @@ export const useNotificationBadge = () => {
       return { interventionStatus: false, showBadge: false }
     }
     const redLights = calculateInterventionAreas({ selectedYear, metadata, programme: programmeData, t }).length > 0
-    
-    
-    
-    
+
     const selectedYearInt = parseInt(selectedYear)
     const programmeDocuments = documents.filter(
-      (doc: DocumentType) => doc.studyprogrammeKey.toString() === programmeData.koulutusohjelmakoodi,
+      (doc: DocumentType) => doc.studyprogrammeKey.toString() === programmeData.koulutusohjelmakoodi
     )
 
-    const hasActiveInterventionProceduresForSameOrEarlierYears = interventionProcedures.some((procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYearInt && procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi)   
+    const hasActiveInterventionProceduresForSameOrEarlierYears = interventionProcedures.some(
+      (procedure: InterventionProcedureType) =>
+        procedure.active &&
+        procedure.startYear <= selectedYearInt &&
+        procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi
+    )
     if (!redLights && !hasActiveInterventionProceduresForSameOrEarlierYears) {
       return { interventionStatus: false, showBadge: false }
     }
 
-    const hasEndedInterventionProceduresForSameYear = interventionProcedures.some((procedure: InterventionProcedureType) => !procedure.active && procedure.endYear === new Date().getFullYear() && procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi)
+    const hasEndedInterventionProceduresForSameYear = interventionProcedures.some(
+      (procedure: InterventionProcedureType) =>
+        !procedure.active &&
+        procedure.endYear === new Date().getFullYear() &&
+        procedure.studyprogrammeKey === programmeData.koulutusohjelmakoodi
+    )
 
     const hasActiveDocumentsForSameOrEarlierYears = programmeDocuments.some(
-      (doc: DocumentType) => doc.activeYear <= selectedYearInt && doc.active === true,
+      (doc: DocumentType) => doc.activeYear <= selectedYearInt && doc.active === true
     )
 
     const interventionStatus =
       hasActiveInterventionProceduresForSameOrEarlierYears || (redLights && !hasEndedInterventionProceduresForSameYear)
 
     const showBadge = interventionStatus && !hasActiveDocumentsForSameOrEarlierYears
-
 
     return {
       interventionStatus,

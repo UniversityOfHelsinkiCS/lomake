@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/jsx-no-leaked-render */
+import { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { formKeys } from '../../../../config/data'
 import { Loader } from 'semantic-ui-react'
 import { answersByYear, getYearToShow, isEvaluationUniversityUser } from '../../../util/common'
 import { useTranslation } from 'react-i18next'
 import { getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
-import ReactMarkdown from '/node_modules/react-markdown/index'
-import { universityEvaluationQuestions as questions } from '/client/questionData'
+import ReactMarkdown from 'react-markdown'
+import { universityEvaluationQuestions as questions } from '../,,/../../../questionData'
 import PDFDownload from '../../Generic/PDFDownload'
 
 import { getActionsAnswerForUniversity } from './Square'
@@ -26,10 +28,10 @@ const StudyLevelContainer = ({ answerLevels }) => {
             return (
               <ThemeContainer
                 key={`${upperLevel.title}-${level}-${theme.title.en}`}
-                upperLevel={upperLevel.title}
                 level={level}
                 theme={theme}
                 themeIndex={themeIndex}
+                upperLevel={upperLevel.title}
               />
             )
           })
@@ -50,7 +52,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
   let answerLength = 0
 
   return (
-    <div style={{ margin: '1em' }} className="university-printing-wrapper">
+    <div className="university-printing-wrapper" style={{ margin: '1em' }}>
       <div className="uni-print-theme-parts">
         {theme.parts.map((question, index) => {
           if (question.id === 'meta2' || question.id === 'university_where_are_we_in_five_years_opinion_differences') {
@@ -62,7 +64,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
             year,
             tempAnswers: answers,
             oldAnswers,
-            draftYear: draftYear && draftYear.year,
+            draftYear: draftYear?.year,
             deadline: nextDeadline?.find(d => d.form === formKeys.EVALUATION_COMMTTEES),
             form: formKeys.EVALUATION_COMMTTEES,
           })
@@ -75,7 +77,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
             formLanguageVersion = 'UNI_SE'
           }
 
-          let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === formLanguageVersion)
+          let filteredAnswers = selectedAnswers?.find(a => a.programme === formLanguageVersion)
           if (!filteredAnswers?.data) {
             filteredAnswers = []
           } else {
@@ -110,7 +112,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
           const questionLabelCorrectCase = questionLabel.charAt(0).toUpperCase() + questionLabel.toLowerCase().slice(1)
 
           return (
-            <div key={question.id} className={answerLength > 1500 ? 'page-break' : ''}>
+            <div className={answerLength > 1500 ? 'page-break' : ''} key={question.id}>
               {showThemeTitle && (
                 <h3
                   lang="fi"
@@ -124,12 +126,12 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
               )}
               <div style={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
                 <QuestionContainer
-                  upperLevel={upperLevel}
+                  answerLength={answerLength}
+                  currentAnswer={currentAnswer}
                   level={level}
                   question={question}
-                  currentAnswer={currentAnswer}
-                  answerLength={answerLength}
                   questionLabelCorrectCase={questionLabelCorrectCase}
+                  upperLevel={upperLevel}
                 />
               </div>
             </div>
@@ -232,6 +234,5 @@ const CommitteePrinting = ({ type = null }) => {
     </div>
   )
 }
-//                 <p style={{ fontWeight: 'bold', wordWrap: 'break-word', width: '6em' }}>{theme.title[lang]}</p>
 
 export default CommitteePrinting

@@ -1,3 +1,5 @@
+/* eslint-disable import-x/no-named-as-default-member */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { isAdmin } from '../../config/common'
 

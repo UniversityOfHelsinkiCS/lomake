@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -48,17 +47,17 @@ const ColorTableCell = ({
     7: metareviewQuestions,
   }
 
-  const questions = questionMap[form] || yearlyQuestions
+  const questions = questionMap[form] ?? yearlyQuestions
   if (form === formKeys.DEGREE_REFORM_PROGRAMMES) {
     return (
       <DegreeReformCell
-        programmesKey={programmesKey}
-        questionId={questionId}
         acualQuestionId={acualQuestionId}
         programmesAnswers={programmesAnswers}
+        programmesKey={programmesKey}
+        programmesName={programmesName}
+        questionId={questionId}
         questions={questionMap[2]}
         setModalData={setModalData}
-        programmesName={programmesName}
       />
     )
   }
@@ -66,8 +65,8 @@ const ColorTableCell = ({
   const textId = `${questionId}_text`
   const commentId = `${questionId}_comment_text`
   let colorId = `${questionId}_light`
-  let textAnswer = programmesAnswers[textId] || getMeasuresAnswer(programmesAnswers, textId)
-  const commentAnswer = programmesAnswers[commentId] || getMeasuresAnswer(programmesAnswers, commentId)
+  let textAnswer = programmesAnswers[textId] ?? getMeasuresAnswer(programmesAnswers, textId)
+  const commentAnswer = programmesAnswers[commentId] ?? getMeasuresAnswer(programmesAnswers, commentId)
   let colorAnswer = null
   const commentAppendix = `${t('comment')}:\n\n`
 
@@ -132,8 +131,8 @@ const ColorTableCell = ({
     if (uniFormTrafficLights === null) {
       return (
         <div
-          data-cy={`${programmesKey}-${questionId}`}
           className="square"
+          data-cy={`${programmesKey}-${questionId}`}
           style={{ background: colors.background_gray }}
         />
       )
@@ -153,11 +152,11 @@ const ColorTableCell = ({
   if (form === formKeys.EVALUATION_COMMTTEES && questionId.includes('_actions')) {
     return (
       <Square
-        setModalData={setModalData}
         programmesAnswers={programmesAnswers}
-        questionId={questionId}
-        t={t}
         questionData={questionData}
+        questionId={questionId}
+        setModalData={setModalData}
+        t={t}
       />
     )
   }
@@ -172,12 +171,12 @@ const ColorTableCell = ({
   if ((textAnswer && questionType === 'ENTITY_NOLIGHT') || (textAnswer && !colorAnswer)) {
     return (
       <MeasuresCell
+        form={form}
+        modalConfig={modalConfig}
         programmesAnswers={programmesAnswers}
         programmesKey={programmesKey}
         questionId={questionId}
-        modalConfig={modalConfig}
         setModalData={setModalData}
-        form={form}
         textAnswer={textAnswer}
       />
     )
@@ -189,8 +188,8 @@ const ColorTableCell = ({
     ) {
       return (
         <div
-          data-cy={`${programmesKey}-${questionId}`}
           className="square"
+          data-cy={`${programmesKey}-${questionId}`}
           style={{ background: colors.background_gray }}
         />
       )
@@ -199,8 +198,8 @@ const ColorTableCell = ({
   if (!colorAnswer) {
     return (
       <div
-        data-cy={`${programmesKey}-${questionId}`}
         className="square"
+        data-cy={`${programmesKey}-${questionId}`}
         style={{ background: colors.background_gray }}
       />
     )
@@ -209,9 +208,9 @@ const ColorTableCell = ({
     if (!textAnswer) return null
     return (
       <div
-        key={`${programmesKey}-${questionId}`}
-        data-cy={`${programmesKey}-${questionId}`}
         className="square-blue-wide"
+        data-cy={`${programmesKey}-${questionId}`}
+        key={`${programmesKey}-${questionId}`}
         onClick={() => {
           setModalData(getModalConfig(modalConfig))
         }}
@@ -238,15 +237,15 @@ const ColorTableCell = ({
       {Object.entries(colorAnswer).map(([key, value]) => {
         return (
           <div
-            key={`${programmesKey}-${questionId}-${key}`}
-            data-cy={`${programmesKey}-${questionId}-${key}`}
             className={`square-${value}`}
+            data-cy={`${programmesKey}-${questionId}-${key}`}
+            key={`${programmesKey}-${questionId}-${key}`}
             onClick={() => {
               setModalData(getModalConfig(modalConfig))
             }}
           >
-            {colorBlindMode && t(value)}
-            {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
+            {colorBlindMode ? t(value) : null}
+            {icon ? <Icon name={icon} size="large" style={{ margin: '0 auto' }} /> : null}
           </div>
         )
       })}
@@ -256,7 +255,7 @@ const ColorTableCell = ({
   if (!icon) return IconElement
   return (
     <Popup trigger={IconElement}>
-      <Icon name={icon} style={{ margin: '0 auto' }} size="large" />{' '}
+      <Icon name={icon} size="large" style={{ margin: '0 auto' }} />{' '}
       {icon === 'angle up' ? t('overview:betterThanLastYear') : t('overview:worseThanLastYear')}
     </Popup>
   )

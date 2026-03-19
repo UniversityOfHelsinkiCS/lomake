@@ -1,4 +1,3 @@
-import React from 'react'
 import { cleanText, colors } from '../../../util/common'
 
 export const getActionsAnswerForUniversity = (data, id) => {
@@ -43,16 +42,16 @@ const Square = ({ setModalData, programmesAnswers, questionId, t, questionData }
     type: 'actions',
   }
   if (actions.length === 0) {
-    return <div data-cy={`${questionId}`} className="square" style={{ background: colors.background_gray }} />
+    return <div className="square" data-cy={`${questionId}`} style={{ background: colors.background_gray }} />
   }
   return (
     <div
-      onClick={() => setModalData(tempModalData)}
       className="square-actions"
       data-cy={`${questionId}`}
+      onClick={() => setModalData(tempModalData)}
       style={{ background: colors.background_blue }}
     >
-      <p style={{ fontSize: '1.5em', fontWeight: 'bold' }} key={`${actions}`}>
+      <p key={`${actions}`} style={{ fontSize: '1.5em', fontWeight: 'bold' }}>
         {actions.length}
       </p>
     </div>

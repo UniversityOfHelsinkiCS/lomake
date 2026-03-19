@@ -21,13 +21,12 @@ class Report extends Model<InferAttributes<Report>, InferCreationAttributes<Repo
   declare updatedAt: CreationOptional<Date>
 }
 
-
 Report.init(
   {
     id: {
       type: INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     studyprogrammeId: {
       type: INTEGER,
@@ -43,10 +42,10 @@ Report.init(
     },
     data: {
       type: JSONB,
-      defaultValue: null
+      defaultValue: null,
     },
     createdAt: DATE,
-    updatedAt: DATE
+    updatedAt: DATE,
   },
   {
     sequelize,

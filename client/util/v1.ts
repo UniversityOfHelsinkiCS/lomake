@@ -2,7 +2,6 @@ import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
 import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
-import { useEffect } from 'react'
 
 export const calculateColor = (value: number, threshold: string, liikennevalo: boolean, unit?: string) => {
   if (!liikennevalo) {
@@ -12,6 +11,7 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
   }
 
   if (unit) {
+    // eslint-disable-next-line no-param-reassign
     value = Number((value * 100).toFixed(0))
   }
 
@@ -51,8 +51,9 @@ export const calculateKeyDataColor = (
   metadata: KeyDataMetadata[],
   programme: KeyDataProgramme,
   groupKey: GroupKey,
-  level: ProgrammeLevel,
+  level: ProgrammeLevel
 ) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
   const evaluationArea = metadata.filter(data => data.arviointialue === groupKey && data.ohjelmanTaso === level)
 
   // Return Grey if not enough data points
@@ -115,7 +116,7 @@ export const calculateKeyDataColor = (
 
 export const extractKeyDataValue = (programme: KeyDataProgramme, data: KeyDataMetadata) => {
   const key = Object.keys(programme.values).find(
-    key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase(),
+    key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase()
   )
   return key !== undefined ? programme.values[key] : null
 }
@@ -124,12 +125,12 @@ export const calculateValue = (value: number, unit?: string) => {
   if (value === null) {
     return 'Ei dataa'
   } else if (unit) {
-    return `${((value as number) * 100).toFixed(0)} ${unit}`
+    return `${(value * 100).toFixed(0)} ${unit}`
   } else {
-    if (isInteger(value as number)) {
-      return (value as number).toString()
+    if (isInteger(value)) {
+      return value.toString()
     }
-    return (value as number).toFixed(1)
+    return value.toFixed(1)
   }
 }
 
@@ -153,7 +154,7 @@ export const getKeyDataPoints = (t: TFunction) => {
         acc[key as string] = value
         return acc
       },
-      {} as Record<string, any>,
+      {} as Record<string, any>
     )
 
   return KeyDataPoints

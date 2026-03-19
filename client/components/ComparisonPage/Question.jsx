@@ -15,11 +15,11 @@ const ButtonPopup = ({ color, index, yearsIndex, buttons, filterColor }) => {
       trigger={
         <button
           aria-label="Choose color"
+          className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
           key={color}
           name={color}
-          type="button"
-          className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
           onClick={() => filterColor(yearsIndex, color, index)}
+          type="button"
         >
           <span className={`answer-circle-big-${color}`} />
         </button>
@@ -39,10 +39,10 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
 
   const filterColor = (yearsIndex, color, colorKey) => {
     const newColors = colors.map((c, index) =>
-      index === yearsIndex && colors[yearsIndex] !== color ? color : colors[index],
+      index === yearsIndex && colors[yearsIndex] !== color ? color : colors[index]
     )
     const newButtons = buttons.map((b, index) =>
-      index === yearsIndex && buttons[yearsIndex] !== colorKey ? colorKey : buttons[index],
+      index === yearsIndex && buttons[yearsIndex] !== colorKey ? colorKey : buttons[index]
     )
     setColors(newColors)
     setButtons(newButtons)
@@ -57,14 +57,14 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
   return (
     <>
       <Accordion.Title
-        index={question.id}
         active={showing}
-        data-cy={`comparison-question-${question.id}`}
         className={`question-header ${showing && 'sticky-header'}`}
+        data-cy={`comparison-question-${question.id}`}
+        index={question.id}
         onClick={handleClick}
       >
         <Grid>
-          <Grid.Column width={1} className="question-caret">
+          <Grid.Column className="question-caret" width={1}>
             <Icon name={`caret ${showing ? 'down' : 'right'}`} />
           </Grid.Column>
           <Grid.Column width={15}>
@@ -85,18 +85,18 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
             {answers.map(
               (year, yearsIndex) =>
                 yearSelection.includes(year.year) && (
-                  <Grid.Column key={generateRandomKey(year)} className="question-content">
+                  <Grid.Column className="question-content" key={generateRandomKey(year)}>
                     <div className="comparison color-buttons noprint">
                       <label>{year.year}</label>
                       {!form === 'evaluation' &&
                         buttonColors.map((color, index) => (
                           <ButtonPopup
-                            key={color}
-                            color={color}
-                            index={index}
-                            yearsIndex={yearsIndex}
                             buttons={buttons}
+                            color={color}
                             filterColor={filterColor}
+                            index={index}
+                            key={color}
+                            yearsIndex={yearsIndex}
                           />
                         ))}
                     </div>
@@ -106,17 +106,16 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
                           return (
                             <div key={generateRandomKey(`${programme}-${year}`)}>
                               <QuestionTitle
-                                id={question.id}
                                 answerColors={programme.color}
+                                id={question.id}
                                 programmeName={programme.name}
                               />
                               <ul className="answer-list" data-cy={`compare-question-content-${question.id}`}>
-                                {programme.answer &&
-                                  programme.answer.split('\n').map(row => (
-                                    <li key={generateRandomKey(programme)} className="answer-row">
-                                      {row}
-                                    </li>
-                                  ))}
+                                {programme.answer?.split('\n').map(row => (
+                                  <li className="answer-row" key={generateRandomKey(programme)}>
+                                    {row}
+                                  </li>
+                                ))}
                               </ul>
                             </div>
                           )
@@ -127,7 +126,7 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
                       <h4>{form === 'evaluation' ? t('empty') : t('noData')}</h4>
                     )}
                   </Grid.Column>
-                ),
+                )
             )}
           </Grid.Row>
         </Grid>

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react'
 import { Divider } from 'semantic-ui-react'
 import { formKeys } from '../../../config/data'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,7 +15,7 @@ import './Generic.scss'
 const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOptions, formType }) => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
-  const formData = useSelector(({ form }) => form.data || 'pending')
+  const formData = useSelector(({ form }) => form.data ?? 'pending')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
   const choose = (name, id) => {
@@ -78,7 +79,7 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
       <div className="question-title">
         <div style={{ maxWidth: '750px' }}>
           <h3>
-            {label} {required && <span className="question-required">*</span>}
+            {label} {required ? <span className="question-required">*</span> : null}
           </h3>
         </div>
       </div>
@@ -100,13 +101,13 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
           return (
             <div key={generateRandomKey(o.label)} style={{ marginTop: '1em' }}>
               <input
-                className="checkbox-input"
-                type="checkbox"
-                data-cy={`choose-checkbox-${o.id}`}
                 checked={checked}
+                className="checkbox-input"
+                data-cy={`choose-checkbox-${o.id}`}
+                disabled={viewOnly}
                 id={o.id}
                 onChange={() => handleClick(o.id)}
-                disabled={viewOnly}
+                type="checkbox"
                 value={o.id}
               />
               <label data-cy="testing" htmlFor={o.id}>

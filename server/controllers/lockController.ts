@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 import type { Request, Response } from 'express'
 import type { Lock } from '../../shared/lib/types.js'
 import getUserByUid from '../services/userService.js'
@@ -7,12 +9,15 @@ import { inProduction, isDevSuperAdminUid } from '../../config/common.js'
 
 type User = any
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Error = any
 
 type LockMap = {
-  [room: string]: {
-    [field: string]: Lock | undefined
-  } | undefined
+  [room: string]:
+    | {
+        [field: string]: Lock | undefined
+      }
+    | undefined
 }
 
 let LOCKMAP: LockMap = {}
@@ -42,14 +47,17 @@ const parseCookies = (cookieString: string | undefined) => {
   return cookieString
     .split(';')
     .map((cookie: string) => cookie.trim().split('='))
-    .reduce((acc, [key, value]) => {
-      acc[key] = value === undefined || value === '' || value === 'null' ? undefined : value
-      return acc
-    }, {} as Record<string, string | undefined>)
+    .reduce(
+      (acc, [key, value]) => {
+        acc[key] = value === undefined || value === '' || value === 'null' ? undefined : value
+        return acc
+      },
+      {} as Record<string, string | undefined>
+    )
 }
 
 const getCurrentUser = async (req: Request & { user: User }) => {
-  const user = req.user
+  const { user } = req
   const parsedCookies = parseCookies(req.headers.cookie)
 
   const loggedInAs = parsedCookies['x-admin-logged-in-as']
@@ -84,7 +92,7 @@ const setLock = async (req: Request & { user: User }, res: Response) => {
     const { room, field } = req.body
     const currentUser = await getCurrentUser(req)
 
-    if (LOCKMAP[room] && LOCKMAP[room][field] && LOCKMAP[room][field].uid !== currentUser.uid) {
+    if (LOCKMAP[room]?.[field] && LOCKMAP[room][field].uid !== currentUser.uid) {
       return res.status(401).json({ error: 'Field locked....' })
     }
 
@@ -132,7 +140,7 @@ const deleteLock = async (req: Request & { user: User }, res: Response) => {
     const { room, field } = req.body
     const currentUser = await getCurrentUser(req)
 
-    if (LOCKMAP[room] && LOCKMAP[room][field] && LOCKMAP[room][field].uid === currentUser.uid) {
+    if (LOCKMAP[room]?.[field] && LOCKMAP[room][field].uid === currentUser.uid) {
       LOCKMAP = {
         ...LOCKMAP,
         [room]: {

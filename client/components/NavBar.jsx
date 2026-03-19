@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useHistory } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { AppBar, Toolbar, Box, Container, Chip, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 import { LanguageSharp, Logout, ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
@@ -117,7 +117,7 @@ const NavBarItems = {
 }
 
 const LanguageDropdown = ({ t, lang, handleLanguageChange }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
   const handleClick = event => {
@@ -136,24 +136,24 @@ const LanguageDropdown = ({ t, lang, handleLanguageChange }) => {
   return (
     <Box>
       <MenuItem
+        aria-controls={open ? 'language-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
+        aria-haspopup="true"
         data-cy="navBar-localeDropdown"
         onClick={handleClick}
-        aria-controls={open ? 'language-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
         sx={{ gap: 1 }}
       >
         <LanguageSharp />
-        <Typography variant="light" alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+        <Typography alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }} variant="light">
           {`${t('chosenLanguage')} (${lang.toUpperCase()}) `}
           {open ? <ArrowDropUp /> : <ArrowDropDown />}
         </Typography>
       </MenuItem>
       <Menu
-        id="language-menu"
         anchorEl={anchorEl}
-        open={open}
+        id="language-menu"
         onClose={handleClose}
+        open={open}
         slotProps={{
           list: {
             'aria-labelledby': 'language-button',
@@ -161,17 +161,17 @@ const LanguageDropdown = ({ t, lang, handleLanguageChange }) => {
         }}
       >
         <MenuItem data-cy="navBar-localeOption-fi" onClick={handleMenuItemClick('fi')}>
-          <Typography variant="light" alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+          <Typography alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }} variant="light">
             Suomi
           </Typography>
         </MenuItem>
         <MenuItem data-cy="navBar-localeOption-se" onClick={handleMenuItemClick('se')}>
-          <Typography variant="light" alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+          <Typography alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }} variant="light">
             Svenska
           </Typography>
         </MenuItem>
         <MenuItem data-cy="navBar-localeOption-en" onClick={handleMenuItemClick('en')}>
-          <Typography variant="light" alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+          <Typography alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }} variant="light">
             English
           </Typography>
         </MenuItem>
@@ -193,11 +193,12 @@ const NavBar = () => {
   const lang = useSelector(state => state.language)
   const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const location = useLocation()
-  const history = useHistory()
-  const [openMenus, setOpenMenus] = React.useState({})
+  const navigate = useNavigate()
+  const [openMenus, setOpenMenus] = useState({})
 
   const setLanguageCode = code => {
     dispatch(setLanguage(code))
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     i18n.changeLanguage(code)
   }
 
@@ -209,10 +210,10 @@ const NavBar = () => {
   }
 
   const renderHome = route => (
-    <MenuItem component={Link} to={route} data-cy="nav-home">
-      <Tooltip title={t('toFrontpage')} arrow>
-        <Box display="flex" alignItems="center" sx={{ gap: 2 }}>
-          <img style={{ width: '64px', height: 'auto', margin: '6px 0px' }} src={images.hy} alt="homepage" />
+    <MenuItem component={Link} data-cy="nav-home" to={route}>
+      <Tooltip arrow title={t('toFrontpage')}>
+        <Box alignItems="center" display="flex" sx={{ gap: 2 }}>
+          <img alt="homepage" src={images.hy} style={{ width: '64px', height: 'auto', margin: '6px 0px' }} />
           <Typography variant="light">Tilannekuvalomake</Typography>
         </Box>
       </Tooltip>
@@ -226,14 +227,15 @@ const NavBar = () => {
         en: 'UNI_EN',
         se: 'UNI_SE',
       }
-      const uniFormCode = uniFormCodeMap[value] || 'UNI'
-      history.push(`/evaluation-university/form/6/${uniFormCode}`)
+      const uniFormCode = uniFormCodeMap[value] ?? 'UNI'
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      navigate(`/evaluation-university/form/6/${uniFormCode}`)
     }
   }
 
   const renderLogOut = () => (
     <Box sx={{ marginLeft: 'auto', alignItems: 'center', display: 'flex' }}>
-      <LanguageDropdown t={t} lang={lang} handleLanguageChange={handleLanguageChange} />
+      <LanguageDropdown handleLanguageChange={handleLanguageChange} lang={lang} t={t} />
       {window.localStorage.getItem('adminLoggedInAs') && <UnHijackButton handleUnhijack={handleUnhijack} />}
       <MenuItem data-cy="nav-logout" onClick={handleLogout} sx={{ gap: 1 }}>
         <Logout />
@@ -262,11 +264,11 @@ const NavBar = () => {
         case 'evaluationUniversity':
           return isEvaluationUniversityUser(user)
         case 'employee':
-          return user.iamGroups && user.iamGroups.includes('hy-employees')
+          return user.iamGroups?.includes('hy-employees')
         case 'katselmusProjektiOrOhjausryhma':
           return isKatselmusProjektiOrOhjausryhma(user)
         case 'universityForm':
-          return user.specialGroup && user.specialGroup.universityForm
+          return user.specialGroup?.universityForm
         default:
           return false
       }
@@ -283,7 +285,7 @@ const NavBar = () => {
         const fullKey = parentKey ? `${parentKey}-${key}` : key
 
         if (subItems) {
-          const isOpen = openMenus[fullKey] || false
+          const isOpen = openMenus[fullKey] ?? false
 
           const handleMenuClick = event => {
             setAnchorEl({ ...anchorEl, [fullKey]: event.currentTarget })
@@ -295,12 +297,12 @@ const NavBar = () => {
           }
 
           return (
-            <React.Fragment key={fullKey}>
+            <Fragment key={fullKey}>
               <MenuItem
+                aria-expanded={isOpen ? 'true' : 'false'}
+                aria-haspopup="true"
                 data-cy={`nav-${key}`}
                 onClick={handleMenuClick}
-                aria-haspopup="true"
-                aria-expanded={isOpen ? 'true' : 'false'}
                 sx={{
                   position: 'relative',
                   '&::after': {
@@ -328,12 +330,12 @@ const NavBar = () => {
               </MenuItem>
               <Menu
                 anchorEl={anchorEl[fullKey]}
-                open={isOpen}
-                onClose={handleClose}
                 anchorOrigin={{
                   vertical: 'bottom',
                   horizontal: 'left',
                 }}
+                onClose={handleClose}
+                open={isOpen}
                 transformOrigin={{
                   vertical: 'top',
                   horizontal: 'left',
@@ -341,22 +343,21 @@ const NavBar = () => {
               >
                 {renderItems(subItems, fullKey)}
               </Menu>
-            </React.Fragment>
+            </Fragment>
           )
         }
 
         return (
           <MenuItem
-            key={fullKey}
             component={Link}
-            to={path}
             data-cy={`nav-${key}`}
+            key={fullKey}
             onClick={() => setOpenMenus({})}
             sx={{
               position: 'relative',
               '&::after': (() => {
                 const pathMatch = path.match(/^\/[^/]+/)
-                const currentPathMatch = location.pathname.match(/^\/[^/]+/)
+                const currentPathMatch = /^\/[^/]+/.exec(location.pathname)
                 return {
                   content: '""',
                   position: 'absolute',
@@ -369,6 +370,7 @@ const NavBar = () => {
                 }
               })(),
             }}
+            to={path}
           >
             <Typography variant="regularSmall">{t(label)}</Typography>
           </MenuItem>

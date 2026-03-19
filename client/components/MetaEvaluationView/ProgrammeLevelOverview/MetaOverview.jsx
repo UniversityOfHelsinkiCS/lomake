@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { Button, Dropdown, Menu, MenuItem, Loader } from 'semantic-ui-react'
-import { filterFromUrl, filterUserProgrammes, kludge } from '../../../util/common'
+import { filterFromUrl, filterUserProgrammes } from '../../../util/common'
 import useDebounce from '../../../util/useDebounce'
 
 import CsvDownload from '../../Generic/CsvDownload'
@@ -43,7 +43,7 @@ const MetaOverview = ({
   const filteredProgrammes = useMemo(() => {
     return filterUserProgrammes(programmes, lang, debouncedFilter)
   }, [programmes, lang, debouncedFilter])
-  
+
   const handleDropdownFilterChange = value => {
     window.history.pushState({}, '', `${basePath}meta-evaluation?filter=${value}`)
     setFilter(value)
@@ -57,7 +57,7 @@ const MetaOverview = ({
   const renderModal = () => {
     if (modalData) {
       return (
-        <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
+        <CustomModal borderColor={modalData.color} closeModal={() => setModalData(null)} title={modalData.header}>
           <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
           <div style={{ fontSize: '1.2em' }}>
             <ReactMarkdown>{modalData.content}</ReactMarkdown>
@@ -68,16 +68,16 @@ const MetaOverview = ({
     if (programControlsToShow) {
       return (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang]}`}
           closeModal={() => setProgramControlsToShow(null)}
+          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang]}`}
         >
-          <ProgramControlsContent programKey={programControlsToShow.key} form={form} />
+          <ProgramControlsContent form={form} programKey={programControlsToShow.key} />
         </CustomModal>
       )
     }
     if (statsToShow) {
       return (
-        <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
+        <CustomModal closeModal={() => setStatsToShow(null)} title={statsToShow.title}>
           <StatsContent stats={statsToShow.stats} />
         </CustomModal>
       )
@@ -90,23 +90,23 @@ const MetaOverview = ({
   return (
     <>
       {renderModal()}
-      <Menu size="large" className="filter-row" secondary>
+      <Menu className="filter-row" secondary size="large">
         <MenuItem header style={{ paddingLeft: 0 }}>
           <h2 style={{ maxWidth: '16em' }}>{titleText}</h2>
         </MenuItem>
         <MenuItem>
           <Button
-            data-cy="nav-report"
             as={Link}
-            to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
+            data-cy="nav-report"
             secondary
             size="big"
+            to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
           >
             {t('overview:readAnswers')}
           </Button>
         </MenuItem>
         <MenuItem>
-          <Button data-cy="nav-comparison" as={Link} to="/report?form=7" size="big">
+          <Button as={Link} data-cy="nav-comparison" size="big" to="/report?form=7">
             {t('overview:compareAnswers')}
           </Button>
         </MenuItem>
@@ -115,27 +115,27 @@ const MetaOverview = ({
         </MenuItem>
         <DegreeDropdown />
         <FacultyDropdown
-          t={t}
-          programmes={programmes}
-          handleFilterChange={handleDropdownFilterChange}
-          faculties={faculties}
-          lang={lang}
           debouncedFilter={debouncedFilter}
+          faculties={faculties}
+          handleFilterChange={handleDropdownFilterChange}
+          lang={lang}
+          programmes={programmes}
+          t={t}
         />
         <MenuItem position="right">
           <Dropdown
-            data-cy="csv-download"
             className="button basic gray csv-download"
+            data-cy="csv-download"
             direction="left"
-            text={t('overview:csvDownload')}
             onClick={() => setShowCsv(!showCsv)}
+            text={t('overview:csvDownload')}
           >
             <Dropdown.Menu>
               <Dropdown.Item>
-                <CsvDownload wantedData="written" view="overview" form={form} />
+                <CsvDownload form={form} view="overview" wantedData="written" />
               </Dropdown.Item>
               <Dropdown.Item>
-                <CsvDownload wantedData="colors" view="overview" form={form} />
+                <CsvDownload form={form} view="overview" wantedData="colors" />
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -143,18 +143,18 @@ const MetaOverview = ({
       </Menu>
       <div>
         <ColorTable
+          filterValue={filter}
           filteredProgrammes={filteredProgrammes}
+          form={form}
+          formType={formType}
+          handleFilterChange={handleFilterChange}
+          handleShowProgrammes={handleShowAllProgrammes}
+          isBeingFiltered={debouncedFilter !== ''}
+          meta
           setModalData={setModalData}
           setProgramControlsToShow={setProgramControlsToShow}
           setStatsToShow={setStatsToShow}
-          isBeingFiltered={debouncedFilter !== ''}
-          handleFilterChange={handleFilterChange}
-          filterValue={filter}
-          form={form}
-          formType={formType}
           showAllProgrammes={showAllProgrammes}
-          handleShowProgrammes={handleShowAllProgrammes}
-          meta
         />
       </div>
     </>

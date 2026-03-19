@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { inProduction } from '../util/common.js'
 import {
   isAdmin,
@@ -12,7 +11,7 @@ import logger from '../util/logger.js'
 
 const requireProgrammeRead = (req, res, next) => {
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
-  else if (Object.values(req.user?.access || {}).some(a => a.read)) next()
+  else if (Object.values(req.user?.access ?? {}).some(a => a.read)) next()
   else res.status(401).json({ error: 'Unauthorized access.' }).end()
 }
 
@@ -46,14 +45,14 @@ const requireUniFormRight = (req, res, next) => {
 const requireProgrammeWrite = (req, res, next) => {
   const { programme } = req.params
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
-  else if (req.user.access[programme] && req.user.access[programme].write) next()
+  else if (req.user.access[programme]?.write) next()
   else res.status(401).json({ error: 'Unauthorized access.' }).end()
 }
 
 const requireProgrammeOwner = (req, res, next) => {
   const { programme } = req.params
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
-  else if (req.user.access[programme] && req.user.access[programme].admin) next()
+  else if (req.user.access[programme]?.admin) next()
   else res.status(401).json({ error: 'Unauthorized access.' }).end()
 }
 

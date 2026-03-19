@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
-import { HashLink as Link } from 'react-router-hash-link'
 import { useTranslation } from 'react-i18next'
 import { colors } from '../../util/common'
 import { formKeys } from '../../../config/data'
 import CustomModal from '../Generic/CustomModal'
+import { Link } from '../Link'
 
 export default ({
   question,
@@ -38,7 +38,7 @@ export default ({
       if (!a) return
 
       if (form === formKeys.EVALUATION_FACULTIES) {
-        if (a.color && a.color[level] && colors[a.color[level]]) {
+        if (a.color?.[level] && colors[a.color[level]]) {
           colors[a.color[level]].value += 1
           colors[a.color[level]].programmes = [...colors[a.color[level]].programmes, a.name]
         } else {
@@ -99,7 +99,7 @@ export default ({
         color: colors.gray,
         toolTipColor: 'gray',
         toolTipHeader: t('irrelevant'),
-        value: colorSums.gray.value || 0,
+        value: colorSums.gray.value ?? 0,
         programmes: colorSums.gray.programmes,
       })
     }
@@ -148,7 +148,7 @@ export default ({
   }
 
   return (
-    <div style={{ width: '400px', paddingBottom: '300px' }} key={`${chosenProgrammes}-${answers}-${showEmpty}`}>
+    <div key={`${chosenProgrammes}-${answers}-${showEmpty}`} style={{ width: '400px', paddingBottom: '300px' }}>
       <div>
         <p>
           {question.labelIndex}. {question.label.toUpperCase()}
@@ -161,14 +161,14 @@ export default ({
         </p>
         <p>{colorDistribution()}</p>
         <p>
-          <Link to={`/report#${question.labelIndex}`} onClick={() => showWritten(question.id)}>
+          <Link href={`/report#${question.labelIndex}`} onClick={() => showWritten(question.id)}>
             {t('report:clickToCheck')}
           </Link>
         </p>
       </div>
       <div data-cy={`report-chart-${question.id}`} style={{ maxHeight: '150px' }}>
-        {toolTipData && (
-          <CustomModal closeModal={() => setToolTipData(null)} title={question.label} borderColor={toolTipData.color}>
+        {toolTipData ? (
+          <CustomModal borderColor={toolTipData.color} closeModal={() => setToolTipData(null)} title={question.label}>
             <span>
               <p>
                 <b>
@@ -185,19 +185,19 @@ export default ({
               ))}
             </span>
           </CustomModal>
-        )}
+        ) : null}
         <Chart
-          key={`${chosenProgrammes}-${answers}-${showEmpty}-${level}-${toolTipData}`}
           data={data()}
+          key={`${chosenProgrammes}-${answers}-${showEmpty}-${level}-${toolTipData}`}
+          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
+          labelPosition={112}
+          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
           lengthAngle={360}
           lineWidth={100}
-          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
+          onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
           paddingAngle={0}
           radius={35}
           startAngle={270}
-          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
-          labelPosition={112}
-          onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
         />
       </div>
     </div>

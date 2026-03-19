@@ -9,7 +9,7 @@ export default (sequelize, DataTypes) => {
     {
       underscored: true,
       tableName: 'backup_answers',
-    },
+    }
   )
 
   return backupAnswer

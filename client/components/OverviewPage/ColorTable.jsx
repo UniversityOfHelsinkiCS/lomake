@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable camelcase */
+import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Input, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +10,6 @@ import { answersByYear, sortedItems, reversedPointsInDegreeReform } from '../../
 import { getProgrammeOwners } from '../../redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from '../../redux/tempAnswersReducer'
 import { getAnswersActionAll } from '../../redux/oldAnswersReducer'
-import { formKeys } from '../../../config/data'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
@@ -26,17 +27,17 @@ const answerValuesReversed = ['fifth', 'fourth', 'third', 'second', 'first']
 const getSortedProgrammes = (sortedProgrammes, selectedAnswers, form) => {
   return sortedProgrammes.reduce((statObject, { key }) => {
     const programme = selectedAnswers.find(a => a.programme === key && a.form === form)
-    const answers = programme && programme.data ? programme.data : {}
+    const answers = programme?.data ?? {}
     Object.keys(answers).forEach(answerKey => {
       if (answerKey.includes('_light')) {
         const color = answers[answerKey] // "red", "yellow", "green" or ""
         const baseKey = answerKey.replace('_light', '')
-        if (!statObject[baseKey]) statObject[baseKey] = {}
+        statObject[baseKey] ??= {}
 
         statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
       } else if (!answerKey.includes('_text')) {
         const baseKey = answerKey
-        if (!statObject[baseKey]) statObject[baseKey] = {}
+        statObject[baseKey] ??= {}
         let answerNumber = answers[baseKey]
 
         if (reversedPointsInDegreeReform.includes(answerKey)) {
@@ -63,12 +64,12 @@ const getIndividualAnswers = selectedAnswers => {
       if (answerKey.includes('_light')) {
         const color = data[answerKey] // "red", "yellow", "green" or ""
         const baseKey = answerKey.replace('_light', '')
-        if (!statObject[baseKey]) statObject[baseKey] = {}
+        statObject[baseKey] ??= {}
 
         statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
       } else if (!answerKey.includes('_text')) {
         const baseKey = answerKey
-        if (!statObject[baseKey]) statObject[baseKey] = {}
+        statObject[baseKey] ??= {}
         let answerNumber = data[baseKey]
 
         if (reversedPointsInDegreeReform.includes(answerKey)) {
@@ -88,6 +89,7 @@ const getIndividualAnswers = selectedAnswers => {
   }, {})
 }
 
+// eslint-disable-next-line no-undef
 const ColorTable = React.memo(
   ({
     setModalData,
@@ -137,7 +139,7 @@ const ColorTable = React.memo(
       year,
       tempAnswers: answers,
       oldAnswers,
-      draftYear: draftYear && draftYear.year,
+      draftYear: draftYear?.year,
       deadline: nextDeadline?.find(d => d.form === form),
       form,
     })
@@ -256,17 +258,17 @@ const ColorTable = React.memo(
         {!isUniFacultyView || !isAdmin(currentUser) ? (
           <div className="table-container-degree-reform-button" style={{ paddingTop: 20 }}>
             <Radio
-              style={{ marginRight: 'auto', marginBottom: '2em' }}
-              data-cy="overviewpage-filter-button"
-              toggle
-              onChange={handleShowProgrammes}
               checked={showAllProgrammes}
+              data-cy="overviewpage-filter-button"
               label={selectorLabel}
+              onChange={handleShowProgrammes}
+              style={{ marginRight: 'auto', marginBottom: '2em' }}
+              toggle
             />
           </div>
         ) : null}
         <div className={`overview-color-grid${tableClassName}`}>
-          <TableHeader sort={sort} tableIds={tableIds} meta={meta} />
+          <TableHeader meta={meta} sort={sort} tableIds={tableIds} />
           {facultyView ? (
             <>
               <div className="table-container" style={{ paddingTop: 20 }}>
@@ -278,11 +280,11 @@ const ColorTable = React.memo(
                 </p>
               </div>
               <SummaryRow
+                form={form}
+                selectedAnswers={selectedAnswers}
                 setStatsToShow={setStatsToShow}
                 stats={individualStats}
-                selectedAnswers={selectedAnswers}
                 tableIds={tableIds}
-                form={form}
               />
               <div />
               <div className="table-container" style={{ paddingTop: 20 }}>
@@ -290,84 +292,84 @@ const ColorTable = React.memo(
               </div>
               <div />
               <SummaryRow
+                form={form}
+                selectedAnswers={selectedAnswers}
                 setStatsToShow={setStatsToShow}
                 stats={overallStats}
-                selectedAnswers={selectedAnswers}
                 tableIds={tableIds}
-                form={form}
               />
-              {(isUniFacultyViewFiltered || !isUniFacultyView) && (
+              {isUniFacultyViewFiltered || !isUniFacultyView ? (
                 <>
                   <div />
                   <div className="table-container" style={{ paddingTop: 20 }}>
                     {isUniFacultyViewFiltered ? t('generic:chosenFacultyAvg') : t('generic:facultyAvg')}
                   </div>
                 </>
-              )}
+              ) : null}
             </>
           ) : (
             <div className="table-container">
               {!facultyView && (
                 <Input
-                  style={{ marginBottom: '0.5em' }}
                   data-cy="overviewpage-filter"
                   icon="search"
-                  size="small"
-                  placeholder={t('programmeFilter')}
                   onChange={handleFilterChange}
+                  placeholder={t('programmeFilter')}
+                  size="small"
+                  style={{ marginBottom: '0.5em' }}
                   value={filterValue}
                 />
               )}
             </div>
           )}
 
-          {(!isUniFacultyView || isUniFacultyViewFiltered) && (
+          {!isUniFacultyView || isUniFacultyViewFiltered ? (
             <>
               {' '}
               <div />
               <SummaryRow
+                form={form}
+                selectedAnswers={selectedAnswers}
                 setStatsToShow={setStatsToShow}
                 stats={facultyView ? facultyStats : overallStats}
-                selectedAnswers={selectedAnswers}
                 tableIds={tableIds}
-                form={form}
               />
             </>
-          )}
+          ) : null}
           <div className="sticky-header" style={{ marginTop: '1em' }} />
           {!showAllProgrammes && facultyView
             ? sortedFacultyProgrammes.map(p => {
                 return (
                   <TableRow
+                    form={form}
+                    formType={formType}
+                    key={p.key}
                     p={p}
                     selectedAnswers={selectedAnswers}
-                    tableIds={tableIds}
                     setModalData={setModalData}
                     setProgramControlsToShow={setProgramControlsToShow}
-                    key={p.key}
-                    formType={formType}
-                    form={form}
+                    tableIds={tableIds}
                   />
                 )
               })
             : sortedAllProgrammes.map(p => {
                 return (
                   <TableRow
+                    form={form}
+                    formType={formType}
+                    key={p.key}
                     p={p}
                     selectedAnswers={selectedAnswers}
-                    tableIds={tableIds}
                     setModalData={setModalData}
                     setProgramControlsToShow={setProgramControlsToShow}
-                    key={p.key}
-                    formType={formType}
-                    form={form}
+                    tableIds={tableIds}
                   />
                 )
               })}
         </div>
       </>
     )
-  },
+  }
 )
 
 export default ColorTable

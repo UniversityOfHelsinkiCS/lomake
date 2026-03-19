@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Header } from 'semantic-ui-react'
@@ -10,15 +11,17 @@ import TableRow from './CommitteeTableRow'
 import './OverviewPage.scss'
 import { universityEvaluationQuestions as questions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
+import { useTranslation } from 'react-i18next'
 
-const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgramControlsToShow, selectedLevels }) => {
+// eslint-disable-next-line import-x/no-named-as-default-member
+const CommitteeColorTable = React.memo(({ setModalData, form, selectedLevels }) => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const answers = useSelector(state => state.tempAnswers)
   const oldAnswers = useSelector(state => state.oldAnswers)
   const lang = useSelector(state => state.language)
   const committee = committeeList[0]
-
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
   useEffect(() => {
@@ -28,11 +31,12 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
       dispatch(getAnswersActionAll())
     }
   }, [])
+
   const selectedAnswers = answersByYear({
     year,
     tempAnswers: answers,
     oldAnswers,
-    draftYear: draftYear && draftYear.year,
+    draftYear: draftYear?.year,
     deadline: nextDeadline?.find(d => d.form === form),
     form,
   })
@@ -44,13 +48,14 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
   } else if (lang === 'se') {
     languageVersionOfTheForm = 'UNI_SE'
   }
-  let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === languageVersionOfTheForm)
-  const finnishFormForTrafficLights = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')?.data
+  let filteredAnswers = selectedAnswers?.find(a => a.programme === languageVersionOfTheForm)
+  const finnishFormForTrafficLights = selectedAnswers?.find(a => a.programme === 'UNI')?.data
   if (!filteredAnswers?.data) {
     filteredAnswers = []
   } else {
     filteredAnswers = filteredAnswers.data
   }
+
   if (answers.pending || !answers.data || !oldAnswers.data || !finnishFormForTrafficLights) {
     return <Loader active inline="centered" />
   }
@@ -90,31 +95,28 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
             return null
           }
           return (
-            <Fragment key={`${part.id}-${theme.title}`}>
+            <Fragment key={`${part.id}-${t(theme.title)}`}>
               {index === 0 && (
                 <Header
+                  as="h2"
                   className={`committee-table-theme-title-${gridColumnSize}`}
+                  key={`${t(theme.title)}`}
                   style={{
                     gridRow: index,
                   }}
-                  key={`${theme.title}`}
-                  as="h2"
                 >
                   {indexTopLevel + 1}) {theme.title[lang]}
                 </Header>
               )}
               <TableRow
-                selectedLevels={selectedLevels}
+                committee={committee}
+                finnishFormForTrafficLights={finnishFormForTrafficLights}
+                form={form}
+                gridColumnSize={gridColumnSize}
                 question={part}
                 selectedAnswers={filteredAnswers}
-                tableIds={tableIds}
                 setModalData={setModalData}
-                committee={committee}
-                formType={formType}
-                form={form}
-                setProgramControlsToShow={setProgramControlsToShow}
-                gridColumnSize={gridColumnSize}
-                finnishFormForTrafficLights={finnishFormForTrafficLights}
+                tableIds={tableIds}
               />
             </Fragment>
           )

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable no-alert */
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -10,7 +11,8 @@ const QuestionPicker = ({ index, label, questionsList, form }) => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const answers = useSelector(({ form }) => form.data)
-  const allSelectedQuestions = answers.selectedQuestionIds || []
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const allSelectedQuestions = answers.selectedQuestionIds ?? []
   const [sectionQuestions, setSectionQuestions] = useState([])
 
   useEffect(() => {
@@ -41,7 +43,7 @@ const QuestionPicker = ({ index, label, questionsList, form }) => {
 
   const isFilled = question => {
     const questionKeys = Object.keys(answers).filter(
-      key => key.startsWith(`${question.id}_`) && !key.includes('degree_radio') && !key.includes('modal'),
+      key => key.startsWith(`${question.id}_`) && !key.includes('degree_radio') && !key.includes('modal')
     )
     if (questionKeys.some(key => answers[key] && answers[key].length > 0)) {
       return (
@@ -67,14 +69,14 @@ const QuestionPicker = ({ index, label, questionsList, form }) => {
       <Dropdown
         className="comparison-questions-list-selector"
         data-cy={`questions-list-${index}`}
-        name="questions-list"
         fluid
-        placeholder={t('common:noSelections')}
-        options={dropdownOptions}
-        onChange={handleSelectionChange}
-        value={sectionQuestions}
         multiple
+        name="questions-list"
+        onChange={handleSelectionChange}
+        options={dropdownOptions}
+        placeholder={t('common:noSelections')}
         selection
+        value={sectionQuestions}
       />
     </div>
   )

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
@@ -18,7 +17,7 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) =>
     <>
       <div className="sticky-header">
         <div className="sorter" onClick={() => sort('name')}>
-          {title || t('programmeHeader')}
+          {title ?? t('programmeHeader')}
           <Icon name="sort" />
         </div>
       </div>
@@ -39,7 +38,7 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) =>
         }
 
         return (
-          <div key={idObject.id} className={meta ? 'sticky-header-meta' : 'sticky-header-categories'}>
+          <div className={meta ? 'sticky-header-meta' : 'sticky-header-categories'} key={idObject.id}>
             <Popup position="top center" trigger={<span className="vertical-text">{shortLabel}</span>}>
               {label}
             </Popup>

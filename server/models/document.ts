@@ -1,4 +1,14 @@
-import { InferAttributes, InferCreationAttributes, Model, CreationOptional, INTEGER, JSONB, DATE, STRING, BOOLEAN } from 'sequelize'
+import {
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+  CreationOptional,
+  INTEGER,
+  JSONB,
+  DATE,
+  STRING,
+  BOOLEAN,
+} from 'sequelize'
 import { sequelize } from '../database/connection.js'
 
 class Document extends Model<InferAttributes<Document>, InferCreationAttributes<Document>> {

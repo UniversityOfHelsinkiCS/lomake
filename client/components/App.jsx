@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
 import { Loader } from 'semantic-ui-react'
+
 import { Box } from '@mui/material'
 import NavBar from './NavBar'
 import Router from './Router'
@@ -16,7 +19,7 @@ import { getFaculties } from '../redux/facultyReducer'
 import { getAnswersAction } from '../redux/oldAnswersReducer'
 import { setYear, setMultipleYears, setKeyDataYear } from '../redux/filterReducer'
 import { setLanguage } from '../redux/languageReducer'
-import Footer from './Footer'
+import { Footer } from './Footer'
 import { ARCHIVE_LAST_YEAR, isDegreeStudentOrEmployee } from '../../config/common'
 
 const languageFromUrl = () => {

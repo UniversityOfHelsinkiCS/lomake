@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Divider, Grid, Icon, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -23,19 +23,19 @@ const Pie = ({ level, data, onlyBc }) => {
         data={[
           {
             color: '#9dff9d',
-            value: data[level]?.green.length || 0,
+            value: data[level]?.green.length ?? 0,
           },
           {
             color: '#ffffb1',
-            value: data[level]?.yellow.length || 0,
+            value: data[level]?.yellow.length ?? 0,
           },
           {
             color: '#ff7f7f',
-            value: data[level]?.red.length || 0,
+            value: data[level]?.red.length ?? 0,
           },
           {
             color: '#e6e6e6',
-            value: data[level]?.gray.length || 0,
+            value: data[level]?.gray.length ?? 0,
           },
         ]}
         paddingAngle={0}
@@ -65,9 +65,9 @@ const ProgrammeListCommittee = ({ data, lang, onlyBc, showText, showSpecific, ha
                   {p.name[lang]}
                 </span>
               </p>
-              {(showText || showSpecific[p.key]) && data.text[p.key] && (
+              {(showText || showSpecific[p.key]) && data.text[p.key] ? (
                 <ReactMarkdown>{data.text[p.key]}</ReactMarkdown>
-              )}
+              ) : null}
             </div>
           )
         })
@@ -148,7 +148,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
         <div style={{ maxWidth: '1000px' }}>
           <h3>
             {number}. {label}{' '}
-            {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            {required ? <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span> : null}
           </h3>
         </div>
       </div>
@@ -171,7 +171,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                       <label className="traffic-light-row-label">
                         {!isArviointi ? t(`formView:${level}UniForm`) : t(level)}
                       </label>
-                      <TrafficLights id={`${id}-${object.level}-${level}`} form={form} />
+                      <TrafficLights form={form} id={`${id}-${object.level}-${level}`} />
                     </div>
                   )
                 })
@@ -182,8 +182,8 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                   </label>
                   <TrafficLights
                     className="traffic-light-row-buttons"
-                    id={`${id}-${object.level}-bachelor`}
                     form={form}
+                    id={`${id}-${object.level}-bachelor`}
                   />
                 </div>
               )}
@@ -200,8 +200,8 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                         return (
                           <Grid.Column
                             key={`${id}-${object.level}-summary-labels-${level}`}
-                            width={5}
                             style={getStyleForm(level)}
+                            width={5}
                           >
                             {t(level)}
                           </Grid.Column>
@@ -212,12 +212,12 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                     <Grid.Row className="row">
                       {levels.map(level => {
                         return (
-                          <Grid.Column width={5} key={level}>
-                            <Pie level={level} data={summaryData} onlyBc={onlyBc} />
+                          <Grid.Column key={level} width={5}>
+                            <Pie data={summaryData} level={level} onlyBc={onlyBc} />
                             {Object.keys(showText).length > 0 && (
                               <Button
-                                style={{ marginTop: '1em' }}
                                 onClick={() => handleShowText(level, !showText[level])}
+                                style={{ marginTop: '1em' }}
                               >
                                 {showText?.level === level ? t('formView:hideAnswers') : t('formView:showAnswers')}
                               </Button>
@@ -234,44 +234,45 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                     </Grid.Row>
                     {Object.keys(showText).length > 0 && (
                       <Grid.Row className="row">
-                        {showText.level &&
-                          colorsList.map(color => {
-                            return summaryData[showText.level][color].map(p => {
-                              return (
-                                <div key={p.key} style={{ marginRight: '1em', marginTop: '1em' }}>
-                                  <p key={`${p.name[lang]}`}>
-                                    <span className={`answer-circle-${color}`} />{' '}
-                                    <span
-                                      className="programme-list-button"
-                                      onClick={() => handleShowSpecific(p.key)}
-                                      style={{ marginLeft: '0.5em' }}
-                                    >
-                                      {p.name[lang]}
-                                    </span>
-                                  </p>
-                                  {(Object.keys(showText).length > 0 || showSpecific[p.key]) &&
-                                    summaryData[showText.level].text[p.key] && (
+                        {showText.level
+                          ? colorsList.map(color => {
+                              return summaryData[showText.level][color].map(p => {
+                                return (
+                                  <div key={p.key} style={{ marginRight: '1em', marginTop: '1em' }}>
+                                    <p key={`${p.name[lang]}`}>
+                                      <span className={`answer-circle-${color}`} />{' '}
+                                      <span
+                                        className="programme-list-button"
+                                        onClick={() => handleShowSpecific(p.key)}
+                                        style={{ marginLeft: '0.5em' }}
+                                      >
+                                        {p.name[lang]}
+                                      </span>
+                                    </p>
+                                    {(Object.keys(showText).length > 0 || showSpecific[p.key]) &&
+                                    summaryData[showText.level].text[p.key] ? (
                                       <ReactMarkdown>{summaryData[showText.level].text[p.key]}</ReactMarkdown>
-                                    )}
-                                </div>
-                              )
+                                    ) : null}
+                                  </div>
+                                )
+                              })
                             })
-                          })}
+                          : null}
                       </Grid.Row>
                     )}
-                    {showProgrammes && Object.keys(showText).length === 0 && (
+                    {showProgrammes && Object.keys(showText).length === 0 ? (
                       <Grid.Row className="row">
                         {['bachelor', 'master', 'doctoral'].map(level => {
                           if (level === 'doctoral' && hideLevels) return null
                           return (
-                            <Grid.Column width={5} key={`${id}-${object.level}-summary-programme-list-${level}`}>
+                            <Grid.Column key={`${id}-${object.level}-summary-programme-list-${level}`} width={5}>
                               <ProgrammeListCommittee
                                 data={summaryData[level]}
+                                handleShowSpecific={handleShowSpecific}
                                 lang={lang}
                                 onlyBc={false}
-                                showText={showText[level]}
                                 showSpecific={showSpecific}
-                                handleShowSpecific={handleShowSpecific}
+                                showText={showText[level]}
                               />
                               <Button onClick={() => handleShowText(level, !showText[level])}>
                                 {showText === level ? t('formView:hideAnswers') : t('formView:showAnswers')}
@@ -280,33 +281,33 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                           )
                         })}
                       </Grid.Row>
-                    )}
+                    ) : null}
                   </Grid>
                 </div>
               </div>
             )}
             <div className="page-break" />
             <Textarea
+              EntityLastYearsAccordion={null}
+              form={form}
               id={`${id}-${object.level}-bachelor`}
               isArviointi={isArviointi}
               label={textAreaLabel}
-              EntityLastYearsAccordion={null}
-              form={form}
               maxLength={2500}
             />
             <Textarea
-              id={`${id}-${object.level}-master`}
-              isArviointi={isArviointi}
               EntityLastYearsAccordion={null}
               form={form}
+              id={`${id}-${object.level}-master`}
+              isArviointi={isArviointi}
               maxLength={2500}
             />
             {!hideLevels && (
               <Textarea
-                id={`${id}-${object.level}-doctoral`}
-                isArviointi={isArviointi}
                 EntityLastYearsAccordion={null}
                 form={form}
+                id={`${id}-${object.level}-doctoral`}
+                isArviointi={isArviointi}
                 maxLength={2500}
               />
             )}

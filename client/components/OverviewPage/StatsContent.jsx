@@ -1,4 +1,3 @@
-import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { colors } from '../../util/common'
 import { useTranslation } from 'react-i18next'
@@ -41,17 +40,17 @@ const StatsContent = ({ statsToShow }) => {
             {
               color: colors.background_green,
               title: 'Green',
-              value: stats.green || 0,
+              value: stats.green ?? 0,
             },
             {
               color: colors.background_yellow,
               title: 'Yellow',
-              value: stats.yellow || 0,
+              value: stats.yellow ?? 0,
             },
             {
               color: colors.background_red,
               title: 'Red',
-              value: stats.red || 0,
+              value: stats.red ?? 0,
             },
           ]}
           lengthAngle={360}
@@ -64,7 +63,7 @@ const StatsContent = ({ statsToShow }) => {
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex', alignItems: 'center', fontSize: '1.2em', fontWeight: 'bold' }}>
-          <div className="traffic-light-green" /> {stats.green || 0}
+          <div className="traffic-light-green" /> {stats.green ?? 0}
         </div>
         <div
           style={{
@@ -75,7 +74,7 @@ const StatsContent = ({ statsToShow }) => {
             fontWeight: 'bold',
           }}
         >
-          <div className="traffic-light-yellow" /> {stats.yellow || 0}
+          <div className="traffic-light-yellow" /> {stats.yellow ?? 0}
         </div>
         <div
           style={{
@@ -86,7 +85,7 @@ const StatsContent = ({ statsToShow }) => {
             fontWeight: 'bold',
           }}
         >
-          <div className="traffic-light-red" /> {stats.red || 0}
+          <div className="traffic-light-red" /> {stats.red ?? 0}
         </div>
       </div>
     </div>

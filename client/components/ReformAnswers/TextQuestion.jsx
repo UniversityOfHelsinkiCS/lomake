@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 const Question = ({ question, answers }) => {
   const { id } = question
 

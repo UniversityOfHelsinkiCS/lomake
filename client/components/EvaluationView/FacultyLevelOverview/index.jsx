@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, useMemo } from 'react'
 import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { isAdmin } from '../../../../config/common'
 import useDebounce from '../../../util/useDebounce'
 import YearSelector from '../../Generic/YearSelector'
@@ -56,7 +57,7 @@ export default () => {
       const name = f.name[lang]
       const { code } = f
       return (
-        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ??
         code.toLowerCase().includes(debouncedFilter.toLowerCase())
       )
     })
@@ -70,63 +71,61 @@ export default () => {
 
   return (
     <>
-      {modalData && (
-        <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
+      {modalData ? (
+        <CustomModal borderColor={modalData.color} closeModal={() => setModalData(null)} title={modalData.header}>
           <FacultyCellModal
+            accordionsOpen={accordionsOpen}
             modalData={modalData}
             setAccordionsOpen={setAccordionsOpen}
-            accordionsOpen={accordionsOpen}
             t={t}
           />
         </CustomModal>
-      )}
-      {programControlsToShow && (
+      ) : null}
+      {programControlsToShow ? (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${
-            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
-          }`}
           closeModal={() => setProgramControlsToShow(null)}
+          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ?? programControlsToShow.name.en}`}
         >
           <ProgramControlsContent programKey={programControlsToShow.code} />
         </CustomModal>
-      )}
+      ) : null}
 
       {usersProgrammes.length > 0 ? (
         <>
-          <Menu size="large" className="filter-row" secondary>
+          <Menu className="filter-row" secondary size="large">
             <MenuItem>
               <h2>{t('evaluation').toUpperCase()}</h2>
             </MenuItem>
             <MenuItem>
-              <Button data-cy="nav-report" as={Link} to="/report?form=5" secondary>
+              <Button as={Link} data-cy="nav-report" secondary to="/report?form=5">
                 {t('overview:readAnswers')}
               </Button>
             </MenuItem>
             <MenuItem>
-              {moreThanFiveProgrammes && (
-                <Button data-cy="nav-comparison" as={Link} to="/comparison?form=5">
+              {moreThanFiveProgrammes ? (
+                <Button as={Link} data-cy="nav-comparison" to="/comparison?form=5">
                   {t('overview:compareAnswers')}
                 </Button>
-              )}
+              ) : null}
             </MenuItem>
             <MenuItem>
               <YearSelector size="extra-small" />
             </MenuItem>
             <MenuItem position="right">
               <Dropdown
-                data-cy="csv-download"
                 className="button basic gray csv-download"
+                data-cy="csv-download"
                 direction="left"
-                text={t('overview:csvDownload')}
                 onClick={() => setShowCsv(true)}
+                text={t('overview:csvDownload')}
               >
                 {showCsv ? (
                   <Dropdown.Menu>
                     <Dropdown.Item>
-                      <CsvDownload wantedData="written" view="overview" form={form} />
+                      <CsvDownload form={form} view="overview" wantedData="written" />
                     </Dropdown.Item>
                     <Dropdown.Item>
-                      <CsvDownload wantedData="colors" view="overview" form={form} />
+                      <CsvDownload form={form} view="overview" wantedData="colors" />
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 ) : null}
@@ -136,19 +135,19 @@ export default () => {
           <div style={{ marginTop: '1em' }}>
             <FacultyColorTable
               faculties={filteredFaculties}
-              setModalData={setModalData}
-              setProgramControlsToShow={setProgramControlsToShow}
-              setStatsToShow={null}
-              isBeingFiltered={debouncedFilter !== ''}
-              handleFilterChange={handleFilterChange}
               filterValue={filter}
               form={form}
               formType={formType}
+              handleFilterChange={handleFilterChange}
+              isBeingFiltered={debouncedFilter !== ''}
+              setModalData={setModalData}
+              setProgramControlsToShow={setProgramControlsToShow}
+              setStatsToShow={null}
             />
           </div>
         </>
       ) : (
-        <NoPermissions t={t} requestedForm={t('evaluation')} />
+        <NoPermissions requestedForm={t('evaluation')} t={t} />
       )}
     </>
   )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Divider, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -21,6 +21,7 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
   const lang = useSelector(state => state.language)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     lines = description.split(/\r\n|\r|\n/).length
     lines += label ? label.split(/\r\n|\r|\n/).length : 0
     lines += extrainfo ? extrainfo.split(/\r\n|\r|\n/).length : 0
@@ -46,20 +47,20 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
           overflow: accordion.fetched && accordion.open ? null : 'hidden',
         }}
       >
-        {description && (
+        {description ? (
           <div
+            id="infobox-description-paragraph"
             style={{
               whiteSpace: 'pre-line',
               overflow: 'hidden',
               fontSize: '1.1em',
             }}
-            id="infobox-description-paragraph"
           >
             <ReactMarkdown>{description}</ReactMarkdown>
           </div>
-        )}
-        {extrainfo && <p className="form-question-extrainfo">{extrainfo}</p>}
-        {label && (
+        ) : null}
+        {extrainfo ? <p className="form-question-extrainfo">{extrainfo}</p> : null}
+        {label ? (
           <p
             style={{
               whiteSpace: 'pre-line',
@@ -69,15 +70,15 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
             {' '}
             {label}
           </p>
-        )}
-        {image ? <img src={getImageFor(lang)} alt="three-step" style={{ maxWidth: '100%', height: 'auto' }} /> : null}
+        ) : null}
+        {image ? <img alt="three-step" src={getImageFor(lang)} style={{ maxWidth: '100%', height: 'auto' }} /> : null}
       </div>
       {accordion.fetched && accordion.lines > 4 ? (
         <Button
-          style={accordion.fetched && accordion.open ? null : { top: '-40px' }}
           className="infobox-button"
           content={accordion.open ? t('read-less') : t('read-more')}
           onClick={() => setAccordion({ ...accordion, open: !accordion.open })}
+          style={accordion.fetched && accordion.open ? null : { top: '-40px' }}
         />
       ) : null}
     </div>

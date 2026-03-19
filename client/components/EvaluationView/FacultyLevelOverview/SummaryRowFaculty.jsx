@@ -53,7 +53,7 @@ const SummaryRowFaculty = ({ stats, selectedAnswers, tableIds, showDataByProgram
         })
         return acc
       },
-      { bachelor: {}, master: {}, doctoral: {} },
+      { bachelor: {}, master: {}, doctoral: {} }
     )
   }
   return (
@@ -104,15 +104,15 @@ const SummaryRowFaculty = ({ stats, selectedAnswers, tableIds, showDataByProgram
                     data={[
                       {
                         color: '#9dff9d',
-                        value: levelStats?.green || 0,
+                        value: levelStats?.green ?? 0,
                       },
                       {
                         color: '#ffffb1',
-                        value: levelStats?.yellow || 0,
+                        value: levelStats?.yellow ?? 0,
                       },
                       {
                         color: '#ff7f7f',
-                        value: levelStats?.red || 0,
+                        value: levelStats?.red ?? 0,
                       },
                     ]}
                     labelPosition={50}

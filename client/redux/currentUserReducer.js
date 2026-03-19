@@ -29,7 +29,7 @@ export const getYearsUserHasAccessToAction = user => {
   if (!allYears.includes(ARCHIVE_LAST_YEAR)) allYears.unshift(ARCHIVE_LAST_YEAR)
 
   // eslint disabled as using for-loop is reasonable here
-  // eslint-disable-next-line no-restricted-syntax
+
   for (const p of access) {
     // If user only has access to one year of data, show only that year in the filters and front page
     if (p.year && !usersYears.includes(p.year)) {
@@ -45,6 +45,7 @@ export const getYearsUserHasAccessToAction = user => {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
+
 export default (state = { data: undefined }, action) => {
   switch (action.type) {
     case 'LOGIN_SUCCESS': {

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Op } from 'sequelize'
 import cron from 'node-cron'
 import moment from 'moment'
@@ -47,7 +49,7 @@ const startDeadlineWatcher = async () => {
                 },
               })
 
-              const acualAnswers = temp.data || {}
+              const acualAnswers = temp.data ?? {}
 
               if (answer) {
                 answer.data = acualAnswers
@@ -109,6 +111,7 @@ const startDeadlineWatcher = async () => {
 
         programmes.forEach(async programme => {
           programme.lockedForms = { yearly: true, evaluation: true, 'evaluation-faculty': true, 'degree-reform': true }
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
           programme.save()
         })
       }

@@ -1,4 +1,3 @@
-import React from 'react'
 import { InView } from 'react-intersection-observer'
 import { basePath, colors } from '../../../util/common'
 
@@ -7,7 +6,7 @@ const MetaEvaluationSection = ({ title, number, children, programmeKey }) => {
 
   return (
     <>
-      <div data-cy={`form-section-${number}`} id={number || '0'}>
+      <div data-cy={`form-section-${number}`} id={number ?? '0'}>
         <InView
           as="div"
           onChange={inView => {
@@ -27,7 +26,7 @@ const MetaEvaluationSection = ({ title, number, children, programmeKey }) => {
               color: colors.white,
             }}
           >
-            {number || '0'} - {title}
+            {number ?? '0'} - {title}
           </h2>
         </InView>
       </div>

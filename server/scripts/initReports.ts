@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Op } from 'sequelize'
 import Report from '../models/reports.js'
 import Studyprogramme from '../models/studyprogramme.js'
@@ -7,9 +8,10 @@ const initReports = async () => {
   const programmes = await Studyprogramme.findAll({})
   const years = [2024, 2025]
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   years.forEach(async (currentYear: number) => {
     try {
-      programmes.forEach(async ({ id, key }: { id: number, key: string }) => {
+      programmes.forEach(async ({ id, key }: { id: number; key: string }) => {
         const report = await Report.findOne({
           where: {
             [Op.and]: [{ studyprogrammeId: id }, { year: currentYear }],

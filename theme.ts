@@ -1,4 +1,5 @@
-import { createTheme, ThemeOptions, Theme } from '@mui/material/styles'
+import { createTheme, ThemeOptions } from '@mui/material/styles'
+// eslint-disable-next-line import-x/no-unresolved
 import { CSSProperties } from '@mui/material/styles/createTypography'
 
 declare module '@mui/material/styles' {
@@ -134,7 +135,7 @@ const themeOptions: ThemeOptions = {
   },
 }
 
-const theme = createTheme(themeOptions) as Theme
+const theme = createTheme(themeOptions)
 
 export default theme
 

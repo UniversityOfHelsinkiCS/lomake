@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Icon, Loader } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
@@ -28,51 +27,51 @@ const FacultyCellModal = ({ modalData, setAccordionsOpen, accordionsOpen, t }) =
           <Accordion className="modal-accordion-container" exclusive={false}>
             {modalData.content
               ? Object.entries(modalData.content)
-                .sort((a, b) => {
-                  if (a[0] === 'green' && b[0] === 'yellow') return -1
-                  if (a[0] === 'yellow' && b[0] === 'red') return -1
-                  if (a[0] === 'green' && b[0] === 'red') return -1
-                  if (a[0] === 'yellow' && b[0] === 'green') return 1
-                  if (a[0] === 'red' && b[0] === 'green') return 1
-                  if (a[0] === 'red' && b[0] === 'yellow') return 1
-                  return 0
-                })
-                .map(([key, value]) => {
-                  return (
-                    <div key={`${key}-${value}`}>
-                      <Accordion.Title
-                        className={`accordion-title-${key}`}
-                        active={accordionsOpen[key] === true}
-                        onClick={() => setAccordionsOpen({ ...accordionsOpen, [key]: !accordionsOpen[key] })}
-                      >
-                        <Icon name="angle down" />
-                        <span
-                          style={{
-                            fontSize: '22px',
-                          }}
+                  .sort((a, b) => {
+                    if (a[0] === 'green' && b[0] === 'yellow') return -1
+                    if (a[0] === 'yellow' && b[0] === 'red') return -1
+                    if (a[0] === 'green' && b[0] === 'red') return -1
+                    if (a[0] === 'yellow' && b[0] === 'green') return 1
+                    if (a[0] === 'red' && b[0] === 'green') return 1
+                    if (a[0] === 'red' && b[0] === 'yellow') return 1
+                    return 0
+                  })
+                  .map(([key, value]) => {
+                    return (
+                      <div key={`${key}-${value}`}>
+                        <Accordion.Title
+                          active={accordionsOpen[key] === true}
+                          className={`accordion-title-${key}`}
+                          onClick={() => setAccordionsOpen({ ...accordionsOpen, [key]: !accordionsOpen[key] })}
                         >
-                          {' '}
-                          {t(`overview:${key}ModalAccordion`)}
-                        </span>
-                      </Accordion.Title>
-                      {value.map(answerContent => {
-                        const programmeName = data
-                          .find(f => f.code === modalData.facultyKey)
-                          .programmes.find(p => p.key === answerContent.programme).name[lang]
-                        return (
-                          <Accordion.Content
-                            className={`accordion-content-${key}`}
-                            key={answerContent.programme}
-                            active={accordionsOpen[key] === true}
+                          <Icon name="angle down" />
+                          <span
+                            style={{
+                              fontSize: '22px',
+                            }}
                           >
-                            <h4>{programmeName}</h4>
-                            <ReactMarkdown>{answerContent.answer}</ReactMarkdown>
-                          </Accordion.Content>
-                        )
-                      })}
-                    </div>
-                  )
-                })
+                            {' '}
+                            {t(`overview:${key}ModalAccordion`)}
+                          </span>
+                        </Accordion.Title>
+                        {value.map(answerContent => {
+                          const programmeName = data
+                            .find(f => f.code === modalData.facultyKey)
+                            .programmes.find(p => p.key === answerContent.programme).name[lang]
+                          return (
+                            <Accordion.Content
+                              active={accordionsOpen[key] === true}
+                              className={`accordion-content-${key}`}
+                              key={answerContent.programme}
+                            >
+                              <h4>{programmeName}</h4>
+                              <ReactMarkdown>{answerContent.answer}</ReactMarkdown>
+                            </Accordion.Content>
+                          )
+                        })}
+                      </div>
+                    )
+                  })
               : null}
           </Accordion>
         ) : (

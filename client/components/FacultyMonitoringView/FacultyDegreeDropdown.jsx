@@ -1,4 +1,3 @@
-import React from 'react'
 import { MenuItem, Dropdown } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -13,7 +12,7 @@ const FacultyDegreeDropdown = () => {
 
   return (
     <MenuItem>
-      <Dropdown data-cy="degreeDropdown" className="button basic gray" direction="left" text={t(`${levelText}`)}>
+      <Dropdown className="button basic gray" data-cy="degreeDropdown" direction="left" text={t(`${levelText}`)}>
         <Dropdown.Menu>
           <Dropdown.Item
             onClick={() => {

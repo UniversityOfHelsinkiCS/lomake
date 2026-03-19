@@ -7,15 +7,16 @@ interface SearchAutocompleteInputProps {
   setSearchValue: React.Dispatch<React.SetStateAction<string>>
 }
 
+// eslint-disable-next-line react/function-component-definition
 export default function SearchInput({ placeholder, setSearchValue }: SearchAutocompleteInputProps) {
   const handleOnKeyUp = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    const value = (event.target as HTMLInputElement).value
+    const { value } = event.target as HTMLInputElement
     setSearchValue(value)
   }
 
   return (
     <TextField
-      style={{ width: 600 }}
+      onKeyUp={handleOnKeyUp}
       placeholder={placeholder}
       slotProps={{
         input: {
@@ -27,7 +28,7 @@ export default function SearchInput({ placeholder, setSearchValue }: SearchAutoc
           ),
         },
       }}
-      onKeyUp={handleOnKeyUp}
+      style={{ width: 600 }}
     />
   )
 }

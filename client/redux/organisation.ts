@@ -7,9 +7,8 @@ const organisationApi = RTKApi.injectEndpoints({
     }),
     getJoryMap: builder.query<any, any>({
       query: () => '/jory-map',
-
-    })
-  })
+    }),
+  }),
 })
 
 export const { useGetOrganisationDataQuery, useGetJoryMapQuery } = organisationApi

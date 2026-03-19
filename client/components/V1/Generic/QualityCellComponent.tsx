@@ -12,98 +12,114 @@ import ReactMarkdown from 'react-markdown'
 import NotificationBadge from '../Generic/NotificationBadge'
 
 const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
-
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const year = `${programmeData.year + 1}`
   const [open, setOpen] = useState(false)
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
 
-
   const dispatch = useAppDispatch()
 
   const { data: qualityDocuments = [] } = useGetAllQualityDocumentsQuery({ selectedYear })
 
-  const document = qualityDocuments.find((doc) => doc.studyprogrammeKey === programmeData.koulutusohjelmakoodi)
+  const document = qualityDocuments.find(doc => doc.studyprogrammeKey === programmeData.koulutusohjelmakoodi)
 
-   const handleOpen = () => {
+  const handleOpen = () => {
     dispatch(setViewOnly(true))
     return setOpen(true)
   }
 
   if (!document) {
     return (
-      <TableCell> 
+      <TableCell>
         <NotificationBadge
-            data-cy={`qualityCellBadge-${programmeData.koulutusohjelmakoodi}`}
-            variant="medium"
-            tooltip={t('keyData:missingQualityDocument')}
-          />
+          data-cy={`qualityCellBadge-${programmeData.koulutusohjelmakoodi}`}
+          tooltip={t('keyData:missingQualityDocument')}
+          variant="medium"
+        />
       </TableCell>
-    )}
+    )
+  }
 
   return (
     <TableCell>
       <Button onClick={handleOpen}>
-        <ChatBubbleOutlineIcon sx={{ fontSize: '28px' }} color="secondary" />
+        <ChatBubbleOutlineIcon color="secondary" sx={{ fontSize: '28px' }} />
       </Button>
       <Modal open={open} setOpen={setOpen}>
-              <Typography variant="h3">
-                {programmeData.koulutusohjelma[lang]} {year}
-              </Typography>
-              <Box sx={{ mt: '1rem' }} data-cy="textfield-viewonly">
-      <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
-        {t(`keyData:Quality`)}
-      </Typography>
-      <Card
-        variant="outlined"
-        sx={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'flex-start',
-          flexDirection: 'row',
-          minHeight: '19rem',
-        }}
-      >
-        <CardContent
-          sx={{
-            minWidth: 0,
-            overflowWrap: 'break-word',
-            alignSelf: 'center',
-          }}
-        >
-          {document ? (
-            <Typography variant="regular">
-              <ReactMarkdown>{document.data.title}</ReactMarkdown>
-              <Typography variant="h5">{t('qualitydocument:curriculumProcessHeader')}</Typography>
-              <ReactMarkdown>{document.data.curriculumProcess || t('common:empty')}</ReactMarkdown>
-              <Typography variant="h5">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
-              <ReactMarkdown>{document.data.guidancePolicies || t('common:empty')}</ReactMarkdown>
-              <Typography variant="h5">{t('qualitydocument:feedbackHeader')}</Typography>
-              <br />
-              <Typography variant="h6">{t('qualitydocument:feedbackUtilizationHeader')}:</Typography>
-              <Typography color={Object.entries(document.data.feedbackUtilization || {}).filter(([, value]) => value).length > 0 ? 'default' : 'secondary'}>
-                {Object.entries(document.data.feedbackUtilization || {}).filter(([, value]) => value).length > 0 ?
-                    Object.entries(document.data.feedbackUtilization).filter(([, value]) => value).map(([key]) => (
-                      <li key={key} style={{ listStyle: 'none' }}>{t(`qualitydocument:${key.charAt(0) + key.slice(1)}`)}</li>)) : t('common:empty')}
-              </Typography>
-              <br />
-              <Typography variant="h6" sx={{ whiteSpace: 'nowrap' }}>{t('qualitydocument:feedbackActions')}:</Typography>
-              <ReactMarkdown>{document.data.feedbackActions|| t('common:empty')}</ReactMarkdown>
-              <br />      
-              <Typography variant="h6" sx={{ whiteSpace: 'nowrap' }}>{t('qualitydocument:feedbackRegularityHeader')}:</Typography>
-              <ReactMarkdown>{t(`qualitydocument:${document.data.actionsRegularity}`)   || t('common:empty')}</ReactMarkdown>
-            </Typography>
-          ) : (
-            <Typography variant="italic">{t(`keyData:noQuality`)}</Typography>
-          )}
-        </CardContent>
-      </Card>
-    </Box>
-            </Modal>
+        <Typography variant="h3">
+          {programmeData.koulutusohjelma[lang]} {year}
+        </Typography>
+        <Box data-cy="textfield-viewonly" sx={{ mt: '1rem' }}>
+          <Typography color="textSecondary" sx={{ mb: '1.5rem' }} variant="h5">
+            {t(`keyData:Quality`)}
+          </Typography>
+          <Card
+            sx={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'flex-start',
+              flexDirection: 'row',
+              minHeight: '19rem',
+            }}
+            variant="outlined"
+          >
+            <CardContent
+              sx={{
+                minWidth: 0,
+                overflowWrap: 'break-word',
+                alignSelf: 'center',
+              }}
+            >
+              {document ? (
+                <Typography variant="regular">
+                  <ReactMarkdown>{document.data.title}</ReactMarkdown>
+                  <Typography variant="h5">{t('qualitydocument:curriculumProcessHeader')}</Typography>
+                  <ReactMarkdown>{document.data.curriculumProcess || t('common:empty')}</ReactMarkdown>
+                  <Typography variant="h5">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
+                  <ReactMarkdown>{document.data.guidancePolicies || t('common:empty')}</ReactMarkdown>
+                  <Typography variant="h5">{t('qualitydocument:feedbackHeader')}</Typography>
+                  <br />
+                  <Typography variant="h6">{t('qualitydocument:feedbackUtilizationHeader')}:</Typography>
+                  <Typography
+                    color={
+                      Object.entries(document.data.feedbackUtilization || {}).filter(([, value]) => value).length > 0
+                        ? 'default'
+                        : 'secondary'
+                    }
+                  >
+                    {Object.entries(document.data.feedbackUtilization || {}).filter(([, value]) => value).length > 0
+                      ? Object.entries(document.data.feedbackUtilization)
+                          .filter(([, value]) => value)
+                          .map(([key]) => (
+                            <li key={key} style={{ listStyle: 'none' }}>
+                              {t(`qualitydocument:${key.charAt(0) + key.slice(1)}`)}
+                            </li>
+                          ))
+                      : t('common:empty')}
+                  </Typography>
+                  <br />
+                  <Typography sx={{ whiteSpace: 'nowrap' }} variant="h6">
+                    {t('qualitydocument:feedbackActions')}:
+                  </Typography>
+                  <ReactMarkdown>{document.data.feedbackActions || t('common:empty')}</ReactMarkdown>
+                  <br />
+                  <Typography sx={{ whiteSpace: 'nowrap' }} variant="h6">
+                    {t('qualitydocument:feedbackRegularityHeader')}:
+                  </Typography>
+                  <ReactMarkdown>
+                    {t(`qualitydocument:${document.data.actionsRegularity}`) || t('common:empty')}
+                  </ReactMarkdown>
+                </Typography>
+              ) : (
+                <Typography variant="italic">{t(`keyData:noQuality`)}</Typography>
+              )}
+            </CardContent>
+          </Card>
+        </Box>
+      </Modal>
     </TableCell>
   )
 }
 
 export default QualityCell
-

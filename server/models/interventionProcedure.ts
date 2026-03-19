@@ -1,14 +1,26 @@
-import { InferAttributes, InferCreationAttributes, Model, CreationOptional, INTEGER, DATE, STRING, BOOLEAN } from 'sequelize'
+import {
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+  CreationOptional,
+  INTEGER,
+  DATE,
+  STRING,
+  BOOLEAN,
+} from 'sequelize'
 import { sequelize } from '../database/connection.js'
 
-class InterventionProcedure extends Model<InferAttributes<InterventionProcedure>, InferCreationAttributes<InterventionProcedure>> {
+class InterventionProcedure extends Model<
+  InferAttributes<InterventionProcedure>,
+  InferCreationAttributes<InterventionProcedure>
+> {
   declare id: CreationOptional<number>
   declare studyprogrammeKey: string
   declare active: boolean
   declare startYear: number
   declare endYear: number | null
-  declare createdAt: Date
-  declare updatedAt: Date
+  declare createdAt: CreationOptional<Date>
+  declare updatedAt: CreationOptional<Date>
 }
 
 InterventionProcedure.init(

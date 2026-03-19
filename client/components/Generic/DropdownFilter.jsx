@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import './Generic.scss'
@@ -50,7 +49,7 @@ const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) =>
           key: s.key,
           value: s.key,
           text: s.name[lang],
-        })),
+        }))
       )
     }
 
@@ -59,7 +58,7 @@ const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) =>
         key: f.code,
         value: f.code,
         text: f.name[lang],
-      })),
+      }))
     )
   }
 
@@ -69,10 +68,10 @@ const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) =>
       <Dropdown
         data-cy="dropdown-filter"
         fluid
-        selection
-        search
-        options={getOptions()}
         onChange={handleChange}
+        options={getOptions()}
+        search
+        selection
         value={selectedRadio.secondValue}
       />
     </div>

@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react'
+/* eslint-disable camelcase */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Segment } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -19,17 +21,17 @@ const Answer = ({ question, faculty }) => {
   const answers = useSelector(state => state.tempAnswers.data)
   const [formModalData, setFormModalData] = useState(null)
   const facultyAnswers = useMemo(() => {
-    return answers ? answers.find(answer => answer.programme === faculty)?.data || {} : {}
+    return answers?.find(answer => answer.programme === faculty)?.data ?? {}
   }, [answers, faculty])
   const fieldName = `${question.id}_lights_history`
   const modalName = `${question.id}_modal`
   const dataFromRedux = useSelector(({ form }) => form.data)
-  const lightsHistory = dataFromRedux[fieldName] || []
+  const lightsHistory = dataFromRedux[fieldName] ?? []
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const isEditable = !viewOnly
   const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
   const lastSaveSuccess = useSelector(state => state.form.lastSaveSuccess)
-  const date = new Date(lastSaveSuccess) 
+  const date = new Date(lastSaveSuccess)
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
@@ -43,7 +45,7 @@ const Answer = ({ question, faculty }) => {
     currentEditors && currentUser && currentEditors[modalName] && currentEditors[modalName].uid !== currentUser.uid
 
   useEffect(() => {
-    const gotTheLock = currentEditors && currentEditors[modalName] && currentEditors[modalName].uid === currentUser.uid
+    const gotTheLock = currentEditors?.[modalName] && currentEditors[modalName].uid === currentUser.uid
 
     setHasLock(gotTheLock)
 
@@ -121,7 +123,7 @@ const Answer = ({ question, faculty }) => {
             {lightsHistory.length > 0 ? (
               <>
                 {lightsHistory.map((entry, index) => (
-                  <div data-cy={`${entry.color}-${index}`} className="light" key={entry.date}>
+                  <div className="light" data-cy={`${entry.color}-${index}`} key={entry.date}>
                     <span className={`answer-circle-big-${entry.color}`} />
                     <div className="light-text">
                       <span>{t(`facultyTracking:${entry.color}`)}</span>
@@ -130,11 +132,6 @@ const Answer = ({ question, faculty }) => {
                     </div>
                   </div>
                 ))}
-                {/* lightsHistory.length > 4 && (
-                  <Button onClick={() => setShowAll(!showAll)} style={{ marginTop: '10px' }}>
-                    {showAll ? t('common:showLess') : t('common:showAll')}
-                  </Button>
-                ) */}
               </>
             ) : (
               t('formView:noAnswer')
@@ -162,7 +159,7 @@ const Answer = ({ question, faculty }) => {
             <div className="single-row" key={fieldName}>
               <div>
                 <i>{t(`formView:${labels[fieldName]}`)}</i>
-                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
+                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] ?? t('formView:noAnswer')}</p>
               </div>
             </div>
           )
@@ -174,9 +171,9 @@ const Answer = ({ question, faculty }) => {
               resources: 'monitoringResourceLabel',
             }
             return (
-              <div key={fieldName} className="flex-item">
+              <div className="flex-item" key={fieldName}>
                 <i>{t(`formView:${labels[fieldName]}`)}</i>
-                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
+                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] ?? t('formView:noAnswer')}</p>
               </div>
             )
           })}
@@ -188,7 +185,7 @@ const Answer = ({ question, faculty }) => {
               end_date: 'monitoringEndLabel',
             }
             return (
-              <div key={fieldName} className="flex-item">
+              <div className="flex-item" key={fieldName}>
                 <i>{t(`formView:${labels[fieldName]}`)}</i>
                 <p>
                   {facultyAnswers[`${question.id}_${fieldName}_text`]
@@ -199,35 +196,35 @@ const Answer = ({ question, faculty }) => {
             )
           })}
         </div>
-        {isEditable && (
+        {isEditable ? (
           <div className="button-container">
-            {someoneElseHasTheLock && (
+            {someoneElseHasTheLock ? (
               <i
                 style={{ color: 'gray', padding: '8px' }}
               >{`${currentEditors[modalName].firstname} ${currentEditors[modalName].lastname} ${t('generic:isWriting')}`}</i>
-            )}
+            ) : null}
             <Button
+              content={t('formView:modifyPlan')}
               data-cy={`modify-plan-${question.id}`}
               disabled={someoneElseHasTheLock}
               onClick={() => openFormModal(question)}
-              content={t('formView:modifyPlan')}
             />
           </div>
-        )}
+        ) : null}
       </div>
-      {formModalData && (
+      {formModalData ? (
         <CustomModal
           closeModal={closeFormModal}
           title={`${formModalData.id?.startsWith('T') ? formModalData.id.slice(1) : formModalData.id}. ${formModalData.label[lang]}`}
         >
-          <MonitoringQuestionForm question={formModalData} faculty={faculty} />
-          <Segment inverted color="green">
+          <MonitoringQuestionForm faculty={faculty} question={formModalData} />
+          <Segment color="green" inverted>
             <b>
               {t('lastSaved')} {date.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
             </b>
           </Segment>
         </CustomModal>
-      )}
+      ) : null}
     </>
   )
 }

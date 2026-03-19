@@ -5,12 +5,9 @@ interface GetInterventionProceduresArgs {
   studyprogrammeKey: string
 }
 
-
-
-
 const interventionProceduresApi = RTKApi.injectEndpoints({
   endpoints: builder => ({
-    getProgrammesInterventionProcedures: builder.query<InterventionProcedureType[], GetInterventionProceduresArgs >({
+    getProgrammesInterventionProcedures: builder.query<InterventionProcedureType[], GetInterventionProceduresArgs>({
       query: ({ studyprogrammeKey }) => ({
         url: `/interventionprocedures/${studyprogrammeKey}`,
         method: 'get',
@@ -22,11 +19,8 @@ const interventionProceduresApi = RTKApi.injectEndpoints({
         method: 'get',
       }),
     }),
-  })
+  }),
 })
 
-export const { 
-  useGetProgrammesInterventionProceduresQuery,
-  useGetActiveInterventionProceduresQuery,
-} 
-= interventionProceduresApi
+export const { useGetProgrammesInterventionProceduresQuery, useGetActiveInterventionProceduresQuery } =
+  interventionProceduresApi

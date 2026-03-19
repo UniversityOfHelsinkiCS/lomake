@@ -34,21 +34,21 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
         url: `/qualitydocuments/${studyprogrammeKey}`,
         method: 'get',
       }),
-      providesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }]
+      providesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }],
     }),
     getAllQualityDocuments: builder.query<QualityDocumentType[], GetAllQualityDocumentsArgs>({
-          query: ({ selectedYear }) => ({
-            url: `/qualitydocuments/all/${selectedYear}`,
-            method: 'get',
-          }),
-        }),
+      query: ({ selectedYear }) => ({
+        url: `/qualitydocuments/all/${selectedYear}`,
+        method: 'get',
+      }),
+    }),
     createQualityDocument: builder.mutation<QualityDocumentType[], CreateDocumentArgs>({
       query: ({ studyprogrammeKey, data, year }) => ({
         url: `/qualitydocuments/${studyprogrammeKey}`,
         method: 'post',
         body: { data, year },
       }),
-      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }]
+      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }],
     }),
     updateQualityDocument: builder.mutation<QualityDocumentType[], UpdateDocumentArgs>({
       query: ({ studyprogrammeKey, id, data }) => ({
@@ -56,23 +56,22 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
         method: 'put',
         body: { data },
       }),
-      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }]
+      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }],
     }),
     deleteQualityDocument: builder.mutation<void, DeleteDocumentArgs>({
       query: ({ studyprogrammeKey, id }) => ({
         url: `qualitydocuments/${studyprogrammeKey}/${id}`,
         method: 'delete',
       }),
-      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }]
+      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }],
     }),
-  })
+  }),
 })
 
-export const { 
-  useGetQualityDocumentsQuery, 
+export const {
+  useGetQualityDocumentsQuery,
   useGetAllQualityDocumentsQuery,
   useCreateQualityDocumentMutation,
   useUpdateQualityDocumentMutation,
-  useDeleteQualityDocumentMutation
-} 
-= qualityDocumentsApi
+  useDeleteQualityDocumentMutation,
+} = qualityDocumentsApi

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from '../../redux/formReducer'
 import DatePicker, { registerLocale } from 'react-datepicker'
@@ -15,8 +16,8 @@ const DatePickerField = ({ id, form, setError }) => {
   const endLabel = t('formView:facultyEndLabel')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const lang = useSelector(state => state.language)
-  const startValue = useSelector(({ form }) => form.data[startFieldName] || '')
-  const endValue = useSelector(({ form }) => form.data[endFieldName] || '')
+  const startValue = useSelector(({ form }) => form.data[startFieldName] ?? '')
+  const endValue = useSelector(({ form }) => form.data[endFieldName] ?? '')
   const [startDate, setStartDate] = useState(startValue)
   const [endDate, setEndDate] = useState(endValue)
 
@@ -42,7 +43,7 @@ const DatePickerField = ({ id, form, setError }) => {
     }
   }
 
-  if (viewOnly && (!startValue || !startValue.trim().length) && (!endValue || !endValue.trim().length)) return null
+  if (viewOnly && !startValue?.trim().length && !endValue?.trim().length) return null
 
   return (
     <>
@@ -50,26 +51,26 @@ const DatePickerField = ({ id, form, setError }) => {
         <b style={{ marginBottom: '4px' }}>{startLabel}</b>
         <DatePicker
           dateFormat="dd.MM.yyyy"
+          disabled={!form}
+          fixedHeight
+          locale={lang}
           onChange={date => handleChange(date, 'start')}
           selected={startDate}
-          disabled={!form}
-          locale={lang}
-          showYearDropdown
           showMonthDropdown
-          fixedHeight
+          showYearDropdown
         />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', padding: '0px 6px', width: '100%' }}>
         <b style={{ marginBottom: '4px' }}>{endLabel}</b>
         <DatePicker
           dateFormat="dd.MM.yyyy"
+          disabled={!form}
+          fixedHeight
+          locale={lang}
           onChange={date => handleChange(date, 'end')}
           selected={endDate}
-          disabled={!form}
-          locale={lang}
-          showYearDropdown
           showMonthDropdown
-          fixedHeight
+          showYearDropdown
         />
       </div>
     </>

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextArea, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +10,7 @@ const ActionElement = ({ id, form, viewOnly, index }) => {
   const dispatch = useDispatch()
 
   const fieldName = `${id}-${index}-text`
-  const actionPoint = useSelector(({ form }) => form.data[fieldName] || { title: '', actions: '' })
+  const actionPoint = useSelector(({ form }) => form.data[fieldName] ?? { title: '', actions: '' })
   const { title, actions } = actionPoint
 
   const handleChange = ({ target }) => {
@@ -28,13 +27,13 @@ const ActionElement = ({ id, form, viewOnly, index }) => {
         </Label>
         <TextArea
           data-cy={`${id}-development-area-${index}`}
-          id="title"
-          style={{ width: '50%' }}
-          rows={2}
-          placeholder={t('formView:developmentArea')}
-          onChange={handleChange}
           disabled={viewOnly}
-          value={title || ''}
+          id="title"
+          onChange={handleChange}
+          placeholder={t('formView:developmentArea')}
+          rows={2}
+          style={{ width: '50%' }}
+          value={title ?? ''}
         />
       </div>
       <div className="form-textarea">
@@ -42,7 +41,7 @@ const ActionElement = ({ id, form, viewOnly, index }) => {
         {viewOnly ? (
           actions
         ) : (
-          <textarea data-cy={`${id}-action-${index}`} id="actions" value={actions || ''} onChange={handleChange} />
+          <textarea data-cy={`${id}-action-${index}`} id="actions" onChange={handleChange} value={actions ?? ''} />
         )}
       </div>
     </div>

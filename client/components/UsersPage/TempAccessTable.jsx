@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Checkbox, Confirm, Divider, Header, Icon, Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -29,7 +30,7 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
 
     return (
       <Table.HeaderCell onClick={sortHandler} style={sortable ? { cursor: 'pointer' } : {}} width={width}>
-        {name} {sortable && <Icon name="sort" />}
+        {name} {sortable ? <Icon name="sort" /> : null}
       </Table.HeaderCell>
     )
   }
@@ -83,8 +84,8 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
     <div className="temp-access-table-container">
       <Divider />
       <Header as="h3">{t('users:tempAccesses')} </Header>
-      <Checkbox toggle label={t('users:expired')} onChange={(e, data) => setShowAll(data.checked)} checked={showAll} />
-      <Table celled stackable compact>
+      <Checkbox checked={showAll} label={t('users:expired')} onChange={(e, data) => setShowAll(data.checked)} toggle />
+      <Table celled compact stackable>
         <Table.Header className="sticky-header">
           <Table.Row>
             {getCustomHeader({ name: t('users:name'), width: 2, field: 'lastname' })}
@@ -107,21 +108,20 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
                 {row.progName}
               </Table.Cell>
               <Table.Cell data-cy={`${row.uid}-${row.programme}-writing-right`} textAlign="center">
-                {row.writingRights && <Icon name="check" color="green" />}
+                {row.writingRights ? <Icon color="green" name="check" /> : null}
               </Table.Cell>
               <Table.Cell>{moment(row.endDate).format('DD.MM.YYYY')}</Table.Cell>
               <Table.Cell data-cy="edit-access" textAlign="center">
                 <Icon name="edit" onClick={() => handleEdit(row)} />
               </Table.Cell>
               <Table.Cell data-cy="delete-access" textAlign="center">
-                <Icon name="delete" color="red" onClick={() => handleConfirmOpen(row)} />
+                <Icon color="red" name="delete" onClick={() => handleConfirmOpen(row)} />
               </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
       </Table>
       <Confirm
-        open={confirm}
         content={t('users:confirm', {
           firstname: toDelete?.firstname,
           lastname: toDelete?.lastname,
@@ -129,6 +129,7 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
         })}
         onCancel={() => setConfirm(false)}
         onConfirm={handleConfirm}
+        open={confirm}
       />
     </div>
   )

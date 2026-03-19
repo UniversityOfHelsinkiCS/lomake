@@ -1,7 +1,4 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable global-require */
-
+/* eslint-disable no-redeclare */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -21,7 +18,7 @@ const basename = path.basename(__filename)
 const db = {}
 
 // Determine the current environment
-const env = process.env.NODE_ENV || 'development'
+const env = process.env.NODE_ENV ?? 'development'
 const envConfig = config[env]
 
 let sequelize
@@ -33,12 +30,10 @@ if (envConfig.use_env_variable) {
 
 const initializeModels = async () => {
   const files = fs.readdirSync(__dirname).filter(file => {
-    return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
+    return !file.startsWith('.') && file !== basename && file.endsWith('.js')
   })
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const file of files) {
-    // eslint-disable-next-line no-await-in-loop
     const modelModule = await import(path.join(__dirname, file))
     const model = modelModule.default(sequelize, Sequelize.DataTypes)
     db[model.name] = model
@@ -58,8 +53,8 @@ initializeModels()
   .then(() => {
     logger.info('Models initialized')
   })
-  .catch(err => {
-    logger.error('Error initializing models:', err)
+  .catch(error => {
+    logger.error('Error initializing models:', error)
   })
 
 CompanionFaculty.belongsTo(Faculty, {

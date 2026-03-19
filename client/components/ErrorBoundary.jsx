@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+/* eslint-disable react/jsx-no-leaked-render */
+/* eslint-disable react/jsx-sort-props */
+import { Component } from 'react'
+import { Link } from 'react-router'
 import { Button } from 'semantic-ui-react'
 import { Sentry } from '../util/sentry'
 

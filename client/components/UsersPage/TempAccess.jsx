@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Checkbox, Container, Dropdown, Header, Input, Segment } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { saveTempAccessAction, deleteTempAccessAction } from '../../redux/usersReducer'
@@ -14,7 +15,7 @@ import './UsersPage.scss'
 const TempAccess = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const lang = useSelector(state => state.language)
   const programmes = useSelector(state => state.studyProgrammes.data)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -25,7 +26,7 @@ const TempAccess = () => {
   const [kojoEmail, setKojoEmail] = useState('')
 
   if (!isAdmin(currentUser)) {
-    history.push('/')
+    navigate('/')
   }
 
   const options = programmes.map(p => ({
@@ -77,11 +78,11 @@ const TempAccess = () => {
     <Segment>
       <div>
         <Header as="h3"> {t('users:tempAccessMangement')} </Header>
-        <Container fluid className="temp-access-info">
+        <Container className="temp-access-info" fluid>
           {t('users:tempAccessInfo1')} <br />
           {t('users:tempAccessInfo2')}
         </Container>
-        <Container fluid className="temp-access-info">
+        <Container className="temp-access-info" fluid>
           <i>{t('users:tempAccessNote')}</i>
         </Container>
         <br />
@@ -90,70 +91,70 @@ const TempAccess = () => {
         <div>
           <Header as="h5"> {t('users:receiverEmail')}</Header>
           <Input
-            name="email"
             className="email-input"
-            placeholder={t('email')}
+            name="email"
             onChange={(e, { value }) => setEmail(value)}
+            placeholder={t('email')}
             value={email}
           />
         </div>
         <div>
           <Header as="h5">{t('users:accessProgramme')}</Header>
           <Dropdown
-            selection
-            search
-            placeholder={t('programmeHeader')}
-            value={programme}
+            data-cy="programme-filter"
             onChange={(e, { value }) => setProgramme(value)}
             options={options}
-            data-cy="programme-filter"
+            placeholder={t('programmeHeader')}
+            search
+            selection
+            value={programme}
           />
         </div>
         <div>
           <Header as="h5">{t('users:endOfAccess')}</Header>
           <DatePicker
             dateFormat="dd.MM.yyyy"
-            placeholderText={t('choose')}
-            minDate={new Date()}
-            selected={endDate}
-            onChange={setEndDate}
             locale={lang}
+            minDate={new Date()}
+            onChange={setEndDate}
+            placeholderText={t('choose')}
+            selected={endDate}
           />
         </div>
       </div>
       <div className="temp-access-input">
         <Header as="h5">{t('users:kojoEmail')}</Header>
         <Input
-          name="kojoEmail"
           className="kojoEmail-input"
-          placeholder={t('email')}
+          name="kojoEmail"
           onChange={(e, { value }) => setKojoEmail(value)}
+          placeholder={t('email')}
           value={kojoEmail}
         />
       </div>
       <div className="temp-access-input">
         <Checkbox
+          checked={writing}
           label={t('users:giveWritingRights')}
           onChange={(e, data) => setWriting(data.checked)}
-          checked={writing}
         />
       </div>
       <div>
         <Button
-          data-cy="saveTempAcces"
-          primary
           compact
-          size="mini"
+          data-cy="saveTempAcces"
           disabled={!endDate || !email || !kojoEmail || !programme}
           onClick={handleSave}
+          primary
+          size="mini"
         >
           {t('users:saveRight')}
         </Button>
-        <Button data-cy="cancelTempAcces" negative compact size="mini" onClick={handleCancel}>
+        <Button compact data-cy="cancelTempAcces" negative onClick={handleCancel} size="mini">
           {t('cancel')}
         </Button>
       </div>
-      <TempAccessTable programmes={programmes} lang={lang} handleEdit={handleEdit} handleDelete={handleDelete} />
+      <TempAccessTable handleDelete={handleDelete} handleEdit={handleEdit} lang={lang} programmes={programmes} />
     </Segment>
   )
 }

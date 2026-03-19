@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+// DO NOT CHANGE ORDER, will yield to sequelize not initialized before use -error
 import express from 'express'
 import * as Sentry from '@sentry/node'
 import path from 'path'
@@ -26,21 +28,20 @@ import { initializeDatabaseConnection } from './database/connection.js'
 import { testJami } from './util/jami.js'
 import { checkEmployeeOrStudent } from './middleware/accessControlMiddleware.js'
 
-// eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url)
-// eslint-disable-next-line no-underscore-dangle
 const __dirname = path.dirname(__filename)
 
+// eslint-disable-next-line import-x/no-named-as-default-member
 dotenv.config()
 
 const app = express()
 
-// eslint-disable-next-line
 const server = new http.Server(app)
 
 createWebsocketServer(server)
 initializeSentry()
 
+// eslint-disable-next-line import-x/no-named-as-default-member
 app.use(express.json({ limit: '50mb' }))
 app.use(compression())
 app.use(accessLogger)
@@ -59,6 +60,7 @@ app.use('/api', routes)
 if (inProduction || inStaging) {
   const DIST_PATH = path.resolve(__dirname, '../build')
   const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
+  // eslint-disable-next-line import-x/no-named-as-default-member
   app.use(express.static(DIST_PATH))
   app.get('*', (_req, res) => res.sendFile(INDEX_PATH))
 }
@@ -88,6 +90,7 @@ initializeDatabaseConnection().then(async () => {
     logger.info(`Server started on port ${PORT}`)
     await testJami()
     startBackupJob()
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     startDeadlineWatcher()
   })
 })

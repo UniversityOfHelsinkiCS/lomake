@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
 import { degreeReformBackgroundColor } from '../../util/common'
@@ -66,9 +65,8 @@ const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers
 
         return tableIds.find(tableId => tableId.acual_id === idObject.acual_id) ? (
           <div
-            key={idObject.id}
-            style={{ cursor: 'pointer', background }}
             className="square"
+            key={idObject.id}
             onClick={() =>
               setStatsToShow({
                 stats: stats[idObject.id],
@@ -78,6 +76,7 @@ const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers
                 themeQuestions,
               })
             }
+            style={{ cursor: 'pointer', background }}
           >
             {themeCount > 0 ? averageByTheme : null}
           </div>
@@ -93,9 +92,9 @@ const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds, form }) 
   if (form === formKeys.DEGREE_REFORM_PROGRAMMES) {
     return (
       <DegreeReformPieChart
-        stats={stats}
-        setStatsToShow={setStatsToShow}
         selectedAnswers={selectedAnswers}
+        setStatsToShow={setStatsToShow}
+        stats={stats}
         tableIds={tableIds}
       />
     )
@@ -106,7 +105,6 @@ const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds, form }) 
         return Object.prototype.hasOwnProperty.call(stats, idObject.id) ? (
           <div
             key={idObject.id}
-            style={{ cursor: 'pointer' }}
             onClick={() =>
               setStatsToShow({
                 stats: stats[idObject.id],
@@ -115,6 +113,7 @@ const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds, form }) 
                 questionId: idObject.id,
               })
             }
+            style={{ cursor: 'pointer' }}
           >
             <PieChart
               animationDuration={500}
@@ -123,19 +122,19 @@ const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds, form }) 
               data={[
                 {
                   color: '#9dff9d',
-                  value: stats[idObject.id].green || 0,
+                  value: stats[idObject.id].green ?? 0,
                 },
                 {
                   color: '#ffffb1',
-                  value: stats[idObject.id].yellow || 0,
+                  value: stats[idObject.id].yellow ?? 0,
                 },
                 {
                   color: '#ff7f7f',
-                  value: stats[idObject.id].red || 0,
+                  value: stats[idObject.id].red ?? 0,
                 },
                 {
                   color: '#808080',
-                  value: stats[idObject.id].gray || 0,
+                  value: stats[idObject.id].gray ?? 0,
                 },
               ]}
               labelPosition={50}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,7 @@ const TrackingRadioButton = ({ id, form }) => {
   const { t } = useTranslation()
   const fieldName = `${id}_degree_radio`
 
-  const initialValue = useSelector(state => state.form.data?.[fieldName]) || 'both'
+  const initialValue = useSelector(state => state.form.data?.[fieldName]) ?? 'both'
 
   const [data, setData] = useState(initialValue)
 
@@ -33,22 +33,22 @@ const TrackingRadioButton = ({ id, form }) => {
       </Grid.Row>
       <Grid.Row style={{ marginLeft: '20px' }}>
         <Grid.Column>
-          <Radio label={t('facultyTracking:both')} value="both" checked={data === 'both'} onChange={handleChange} />
+          <Radio checked={data === 'both'} label={t('facultyTracking:both')} onChange={handleChange} value="both" />
         </Grid.Column>
         <Grid.Column>
           <Radio
-            label={t('facultyTracking:bachelor')}
-            value="bachelor"
             checked={data === 'bachelor'}
+            label={t('facultyTracking:bachelor')}
             onChange={handleChange}
+            value="bachelor"
           />
         </Grid.Column>
         <Grid.Column>
           <Radio
-            label={t('facultyTracking:master')}
-            value="master"
             checked={data === 'master'}
+            label={t('facultyTracking:master')}
             onChange={handleChange}
+            value="master"
           />
         </Grid.Column>
       </Grid.Row>

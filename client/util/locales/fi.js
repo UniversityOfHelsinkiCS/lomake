@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 export default {
   // default namespace, can be used without prefix, ie. t('logOut')
   common: {

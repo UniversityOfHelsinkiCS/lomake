@@ -19,12 +19,12 @@ CompanionFaculty.init(
     facultyId: INTEGER,
     studyprogrammeId: INTEGER,
     createdAt: DATE,
-    updatedAt: DATE
+    updatedAt: DATE,
   },
   {
     sequelize,
     tableName: 'companion_faculties',
-    underscored: true
+    underscored: true,
   }
 )
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -40,53 +39,53 @@ const LevelFilter = ({ comparison }) => {
 
           <Form.Field>
             <Radio
+              checked={level === 'allProgrammes'}
               label={t('allProgrammes')}
               name="allProgrammes"
+              onChange={handleChange}
               value="allProgrammes"
-              checked={level === 'allProgrammes'}
-              onChange={handleChange}
             />
           </Form.Field>
           <Form.Field>
             <Radio
-              label={t('bachelor')}
-              disabled={!levels.bachelor}
-              name="bachelor"
-              value="bachelor"
               checked={level === 'bachelor'}
+              disabled={!levels.bachelor}
+              label={t('bachelor')}
+              name="bachelor"
               onChange={handleChange}
+              value="bachelor"
             />
           </Form.Field>
           <Form.Field>
             <Radio
-              data-cy="master-filter"
-              label={t('master')}
-              disabled={!levels.master}
-              name="master"
-              value="master"
               checked={level === 'master'}
+              data-cy="master-filter"
+              disabled={!levels.master}
+              label={t('master')}
+              name="master"
               onChange={handleChange}
+              value="master"
             />
           </Form.Field>
           <Form.Field>
             <Radio
-              data-cy="doctoral-filter"
-              label={t('doctoral')}
-              disabled={!levels.doctoral}
-              name="doctoral"
-              value="doctoral"
               checked={level === 'doctoral'}
+              data-cy="doctoral-filter"
+              disabled={!levels.doctoral}
+              label={t('doctoral')}
+              name="doctoral"
               onChange={handleChange}
+              value="doctoral"
             />
           </Form.Field>
           <Form.Field>
             <Radio
-              label={t('international')}
-              disabled={!levels.international}
-              name="international"
-              value="international"
               checked={level === 'international'}
+              disabled={!levels.international}
+              label={t('international')}
+              name="international"
               onChange={handleChange}
+              value="international"
             />
           </Form.Field>
         </Form.Group>

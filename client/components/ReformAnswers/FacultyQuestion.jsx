@@ -1,4 +1,4 @@
-/* eslint-disable no-restricted-syntax */
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useSelector } from 'react-redux'
 import { Loader, Table } from 'semantic-ui-react'
 import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
@@ -12,7 +12,7 @@ const Question = ({ question, answers }) => {
   const faculties = {}
 
   for (const answer of answers) {
-    const faculty = answer.data[id] && answer.data[id].startsWith('faculty_-_') ? answer.data[id].slice(10) : null
+    const faculty = answer.data[id]?.startsWith('faculty_-_') ? answer.data[id].slice(10) : null
 
     if (faculty) {
       if (!faculties[faculty]) {

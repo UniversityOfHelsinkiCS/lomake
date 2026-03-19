@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react'
+/* eslint-disable react/jsx-key */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -24,11 +26,11 @@ const TextualAnswers = ({ reformAnswers }) => {
     return
   }
 
-  // eslint-disable-next-line consistent-return
+  // eslint-disable-next-line @typescript-eslint/consistent-return
   return (
     <div>
       {questionData.slice(1).map(group => (
-        <TextQuestionGroup key={group.id} questionGroup={group} answers={data} />
+        <TextQuestionGroup answers={data} key={group.id} questionGroup={group} />
       ))}
     </div>
   )
@@ -130,7 +132,7 @@ export default () => {
       const name = prog.name[lang]
       const code = prog.key
       return (
-        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ??
         code.toLowerCase().includes(debouncedFilter.toLowerCase())
       )
     })
@@ -163,9 +165,9 @@ export default () => {
   }
   return (
     <>
-      {faculty && <h2 style={{ marginTop: 5 }}>{nameOf(faculty)}</h2>}
-      {modalData && (
-        <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
+      {faculty ? <h2 style={{ marginTop: 5 }}>{nameOf(faculty)}</h2> : null}
+      {modalData ? (
+        <CustomModal borderColor={modalData.color} closeModal={() => setModalData(null)} title={modalData.header}>
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
@@ -173,28 +175,26 @@ export default () => {
             </div>
           </>
         </CustomModal>
-      )}
+      ) : null}
 
-      {programControlsToShow && (
+      {programControlsToShow ? (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${
-            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
-          }`}
           closeModal={() => setProgramControlsToShow(null)}
+          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ?? programControlsToShow.name.en}`}
         >
-          <ProgramControlsContent programKey={programControlsToShow.key} form={getForm(formType)} />
+          <ProgramControlsContent form={getForm(formType)} programKey={programControlsToShow.key} />
         </CustomModal>
-      )}
+      ) : null}
 
-      {statsToShow && (
-        <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
+      {statsToShow ? (
+        <CustomModal closeModal={() => setStatsToShow(null)} title={statsToShow.title}>
           <StatsContent statsToShow={statsToShow} />
         </CustomModal>
-      )}
+      ) : null}
 
       {usersProgrammes.length > 0 ? (
         <>
-          <Menu size="large" className="filter-row" secondary>
+          <Menu className="filter-row" secondary size="large">
             <MenuItem>
               <h2>{t('degree-reform').toUpperCase()}</h2>
             </MenuItem>
@@ -209,26 +209,26 @@ export default () => {
                     {dropdownFilter.length > 0 &&
                       dropdownFilter.map(f => (
                         <ListItem>
-                          <ListIcon name="circle" color="blue" />
+                          <ListIcon color="blue" name="circle" />
                           <ListContent> {f.name}</ListContent>
                         </ListItem>
                       ))}
                   </List>
                 </MenuItem>
                 <MenuItem>
-                  <Dropdown text={t('overview:chooseFaculty')} button labeled className="icon" defaultUpward={false}>
+                  <Dropdown button className="icon" defaultUpward={false} labeled text={t('overview:chooseFaculty')}>
                     <Dropdown.Menu upward="false">
                       <Dropdown.Divider />
                       {faculties.data.map(f => {
                         const selected = dropdownFilter.filter(d => d.code === f.code).length > 0
                         return (
                           <Dropdown.Item
+                            active={selected}
                             key={f.code}
+                            label={selected ? { color: 'blue', empty: true, circular: true } : null}
+                            multiple
                             onClick={e => handleDropDownFilter(e, f, selected)}
                             text={f.name[lang]}
-                            multiple
-                            active={selected}
-                            label={selected && { color: 'blue', empty: true, circular: true }}
                           />
                         )
                       })}
@@ -240,39 +240,39 @@ export default () => {
           </Menu>
           <div>
             <ColorTable
-              filteredProgrammes={filteredProgrammes}
+              dropdownFilter={dropdownFilter}
               facultyProgrammes={facultyProgrammes}
+              facultyView={faculty}
+              filterValue={filter}
+              filteredProgrammes={filteredProgrammes}
+              form={2}
+              formType={formType}
+              handleFilterChange={handleFilterChange}
+              handleShowProgrammes={handleShowProgrammes}
+              individualAnswers={reformAnswers?.data}
+              isBeingFiltered={debouncedFilter !== ''}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
-              isBeingFiltered={debouncedFilter !== ''}
-              handleFilterChange={handleFilterChange}
-              filterValue={filter}
-              formType={formType}
-              handleShowProgrammes={handleShowProgrammes}
               showAllProgrammes={showAllProgrammes}
-              form={2}
-              facultyView={faculty}
-              individualAnswers={reformAnswers?.data}
-              dropdownFilter={dropdownFilter}
             />
           </div>
-          {faculty && (
+          {faculty ? (
             <div style={{ marginTop: 50 }}>
               <h3>{t('generic:individualTxt')}</h3>
               <Radio
-                style={{ marginRight: 'auto', marginBottom: '2em' }}
-                toggle
-                onChange={() => setTextualVisible(!textualVisible)}
                 checked={textualVisible}
                 label={t('formView:showAnswers')}
+                onChange={() => setTextualVisible(!textualVisible)}
+                style={{ marginRight: 'auto', marginBottom: '2em' }}
+                toggle
               />
             </div>
-          )}
-          {textualVisible && <TextualAnswers reformAnswers={reformAnswers} />}
+          ) : null}
+          {textualVisible ? <TextualAnswers reformAnswers={reformAnswers} /> : null}
         </>
       ) : (
-        <NoPermissions t={t} requestedForm={t('degree-reform')} />
+        <NoPermissions requestedForm={t('degree-reform')} t={t} />
       )}
     </>
   )

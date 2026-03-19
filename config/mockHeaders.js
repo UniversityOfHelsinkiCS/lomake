@@ -302,12 +302,12 @@ const removeLoggedInUsersGroups = () => {
     JSON.stringify({
       ...user,
       hyGroupCn: '',
-    }),
+    })
   )
 }
 
 const getHeaders = () => {
-  const user = JSON.parse(localStorage.getItem(ITEM_NAME) || '{}')
+  const user = JSON.parse(localStorage.getItem(ITEM_NAME) ?? '{}')
   return user
 }
 

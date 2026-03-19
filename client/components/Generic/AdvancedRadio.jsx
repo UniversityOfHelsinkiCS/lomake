@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+import { useState, useEffect } from 'react'
 import { Divider, Radio, Form, Input } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from '../../redux/formReducer'
@@ -95,7 +97,7 @@ const AdvancedRadio = ({
       <div className="question-title">
         <div style={{ maxWidth: '750px' }}>
           <h3>
-            {label} {required && <span className="question-required">*</span>}
+            {label} {required ? <span className="question-required">*</span> : null}
           </h3>
         </div>
       </div>
@@ -108,30 +110,30 @@ const AdvancedRadio = ({
         <div style={{ height: '1em' }} />
       )}
       {radioButtonLabels ? (
-        <Form key={`advanced-radio-${id}`} data-cy={`advanced-radio-${id}`} disabled={viewOnly}>
+        <Form data-cy={`advanced-radio-${id}`} disabled={viewOnly} key={`advanced-radio-${id}`}>
           {radioButtonLabels.map(o => {
             return (
               <div key={`${id}-${o.id}`}>
                 <Form.Field>
                   <Radio
+                    checked={state.firstValue === o.id}
                     disabled={viewOnly}
                     label={o.label}
                     name="radioGroup"
-                    value={o.label}
-                    checked={state.firstValue === o.id}
                     onChange={() => handleClick({ firstPart: o.id, value: '' })}
+                    value={o.label}
                   />
                 </Form.Field>
                 {o.id === 'teaching_or_other_research' && state.firstValue === 'teaching_or_other_research' ? (
                   <>
                     <BasicRadio
-                      handleClick={handleClick}
                       checked={state}
                       disabled={viewOnly}
-                      id={id}
-                      type="advanced"
-                      radioButtonLabels={advancedOptions[o.id][lang]}
+                      handleClick={handleClick}
                       handleOtherField={handleOtherField}
+                      id={id}
+                      radioButtonLabels={advancedOptions[o.id][lang]}
+                      type="advanced"
                     />
                     <div style={{ marginBottom: '1em' }} />
                   </>
@@ -141,21 +143,21 @@ const AdvancedRadio = ({
           })}
           {state.firstValue === 'faculty' || state.firstValue === 'specific-programme' ? (
             <DropdownFilter
-              handleFilterChange={handleClick}
-              version={version}
-              size="small"
-              selectedRadio={state}
               disabled={viewOnly}
+              handleFilterChange={handleClick}
+              selectedRadio={state}
+              size="small"
+              version={version}
             />
           ) : null}
           {state.firstValue === 'other' ? (
             <Input
+              disabled={viewOnly}
+              onChange={value => handleOtherField({ input: value, level: 1 })}
+              placeholder={t('what')}
+              size="small"
               style={{ width: '60%' }}
               value={state.secondValue}
-              onChange={value => handleOtherField({ input: value, level: 1 })}
-              size="small"
-              disabled={viewOnly}
-              placeholder={t('what')}
             />
           ) : null}
         </Form>

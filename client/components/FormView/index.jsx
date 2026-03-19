@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, useHistory } from 'react-router'
+import { Navigate, useNavigate, useParams } from 'react-router'
 import { Button, Loader } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import rypsiImage from '../../assets/rypsi.jpg'
@@ -22,9 +24,10 @@ import { yearlyQuestions as questions } from '../../questionData'
 import Downloads from './Downloads'
 import './FormView.scss'
 
-const FormView = ({ room }) => {
+const FormView = () => {
+  const { room } = useParams()
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const componentRef = useRef()
 
@@ -40,7 +43,7 @@ const FormView = ({ room }) => {
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const currentRoom = useSelector(state => state.room)
 
-  const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
+  const writeAccess = user.access[room]?.write ?? isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
 
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
@@ -91,10 +94,10 @@ const FormView = ({ room }) => {
     }
   }, [])
 
-  if (!room) return <Redirect to="/" />
+  if (!room) return <Navigate to="/" />
 
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
-  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
+  if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('form')} t={t} />
 
   return singleProgramPending || !programme ? (
     <Loader active />
@@ -102,18 +105,18 @@ const FormView = ({ room }) => {
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
       <div className="the-form" ref={componentRef}>
-        <FormStatusMessage programme={room} form={form} />
+        <FormStatusMessage form={form} programme={room} />
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/yearly')} icon="arrow left" />
+              <Button icon="arrow left" onClick={() => navigate('/yearly')} />
             </div>
             <img alt="form-header-rypsi" className="img-responsive" src={rypsiImage} />
           </div>
 
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
-          <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+          <h3 data-cy="formview-title" style={{ marginTop: '0' }}>
             {t('formView:title')} {year}
           </h3>
 
@@ -137,8 +140,8 @@ const FormView = ({ room }) => {
             {t('negative')}
           </div>
         </div>
-        <Downloads programme={programme} componentRef={componentRef} form={form} />
-        <Form programmeKey={programme.key} questions={questions} form={form} />
+        <Downloads componentRef={componentRef} form={form} programme={programme} />
+        <Form form={form} programmeKey={programme.key} questions={questions} />
       </div>
     </div>
   )

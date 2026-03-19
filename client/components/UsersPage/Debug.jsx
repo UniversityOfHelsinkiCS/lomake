@@ -1,5 +1,4 @@
 import { Sentry } from '../../util/sentry'
-import React from 'react'
 
 const Debug = () => {
   const onClick = () => {

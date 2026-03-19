@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -33,11 +33,11 @@ const WrittenAnswers = ({
   const checkIfContent = question => {
     const answer = allAnswers.get(question.id)
     if (!answer) return false
-    return answer.some(a => a.answer || a.comment)
+    return answer.some(a => a.answer ?? a.comment)
   }
 
   // (!metaEvaluation) to check if both are true
-  if (!meta && usersProgrammes.length < 1) return <NoPermissions t={t} requestedForm={t('report:reportPage')} />
+  if (!meta && usersProgrammes.length < 1) return <NoPermissions requestedForm={t('report:reportPage')} t={t} />
 
   if (allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{t('noData')}</h3>
@@ -45,7 +45,7 @@ const WrittenAnswers = ({
 
   return (
     <div ref={componentRef}>
-      <Accordion fluid className="tab-pane">
+      <Accordion className="tab-pane" fluid>
         <Grid className="header">
           <Grid.Row className="noprint">
             <Grid.Column floated="right">
@@ -55,13 +55,13 @@ const WrittenAnswers = ({
               <p className="report side-note-small">{t('report:pdfNotification')}</p>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Column width={4} className="left">
+          <Grid.Column className="left" width={4}>
             {t('report:question')}
           </Grid.Column>
-          <Grid.Column width={6} className="center">
+          <Grid.Column className="center" width={6}>
             {year} - {t('writtenAnswers')}
           </Grid.Column>
-          <Grid.Column width={5} className="right" floated="right">
+          <Grid.Column className="right" floated="right" width={5}>
             {t('report:answered')} / {t('allProgrammes')}
           </Grid.Column>
         </Grid>
@@ -73,30 +73,30 @@ const WrittenAnswers = ({
               <div key={question.id}>
                 {chosenProgrammes.length === 1 ? (
                   <SingleProgramQuestion
-                    answers={allAnswers.get(question.id).filter(p => p.answer || p.comment)}
+                    answers={allAnswers.get(question.id).filter(p => p.answer ?? p.comment)}
                     question={question}
                   />
                 ) : (
                   <Question
-                    answers={allAnswers.get(question.id).filter(p => p.answer || p.comment)}
-                    question={question}
+                    answers={allAnswers.get(question.id).filter(p => p.answer ?? p.comment)}
                     chosenProgrammes={chosenProgrammes}
-                    year={year}
                     handleClick={handleClick}
+                    meta
+                    question={question}
                     showing={
                       chosenProgrammes.length < 2 || questions.open.includes(getLabel(question)) ? question.id : showing
                     }
-                    meta
+                    year={year}
                   />
                 )}
                 <div className="ui divider" />
               </div>
             ) : (
               <div key={question.id}>
-                <DisabledQuestion question={question} chosenProgrammes={chosenProgrammes} />
+                <DisabledQuestion chosenProgrammes={chosenProgrammes} question={question} />
                 <div className="ui divider" />
               </div>
-            )),
+            ))
         )}
       </Accordion>
     </div>

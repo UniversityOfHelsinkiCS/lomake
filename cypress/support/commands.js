@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable cypress/unsafe-to-chain-command */
 /// <reference types="cypress" />
 
@@ -37,7 +36,6 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
 })
 
 Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.get(editorName).click().type(`{moveToEnd}${textToBeTyped}`)
 })
 
@@ -124,7 +122,7 @@ Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
 
 Cypress.Commands.add('typeInEditor', (questionId, textToBeTyped, flakyness = 24) => {
   // focus to aquire lock
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
+
   const attempt = Cypress.currentRetry + 1
   cy.get(`[data-cy=textarea-${questionId}]`)
     .find('.editor-class')

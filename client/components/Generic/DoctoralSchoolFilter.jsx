@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -50,9 +49,9 @@ const DoctoralSchoolFilter = () => {
       <Select
         data-cy="doctoral-school-filter"
         fluid
-        selection
-        options={options}
         onChange={handleChange}
+        options={options}
+        selection
         value={doctoralSchool}
       />
     </div>

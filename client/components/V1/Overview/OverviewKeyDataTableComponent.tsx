@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
 import { CircularProgress, Tooltip, Typography } from '@mui/material'
@@ -36,14 +36,14 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
   const color = additionalInfo.fi === 'Lakkautettu ohjelma' ? 'secondary' : ''
 
   return (
-    <TableCell itemAlign="left" hoverEffect data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}>
-      <Link to={`/v1/programmes/10/${koulutusohjelmakoodi}`} style={{ width: '100%' }}>
-        <Tooltip title={additionalInfo[lang]} placement="top" arrow>
+    <TableCell data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`} hoverEffect itemAlign="left">
+      <Link style={{ width: '100%' }} to={`/v1/programmes/10/${koulutusohjelmakoodi}`}>
+        <Tooltip arrow placement="top" title={additionalInfo[lang]}>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
-            <Typography variant="regular" color={color}>
+            <Typography color={color} variant="regular">
               {koulutusohjelma[lang]}
             </Typography>
-            <Typography variant="regular" color={color}>
+            <Typography color={color} variant="regular">
               {koulutusohjelmakoodi}
             </Typography>
           </div>
@@ -53,12 +53,61 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
   )
 }
 
+const InterventionCell = ({
+  programmeData,
+  selectedYear,
+  interventionProcedures,
+  activeYear,
+  metadata,
+  t,
+}: {
+  programmeData: KeyDataProgramme
+  selectedYear: string
+  interventionProcedures: InterventionProcedureType[]
+  activeYear: any
+  metadata: any
+  t: any
+}) => {
+  const { data: documents = [] } = useGetAllDocumentsQuery({ activeYear })
+  const { renderInterventionBadge } = useNotificationBadge()
+  const interventionData = renderInterventionBadge(
+    programmeData,
+    metadata,
+    selectedYear,
+    documents,
+    interventionProcedures
+  )
+
+  if (!interventionData.interventionStatus || programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+    return (
+      <Typography color="secondary" variant="italic">
+        {t('keyData:interventionOff')}
+      </Typography>
+    )
+  } else if (interventionData.interventionStatus) {
+    return (
+      <>
+        <Typography data-cy={`interventionText-${programmeData.koulutusohjelmakoodi}`} variant="regularSmall">
+          {t('keyData:interventionOn')}
+        </Typography>
+        {interventionData.showBadge ? (
+          <NotificationBadge
+            data-cy={`interventionBadge-${programmeData.koulutusohjelmakoodi}`}
+            tooltip={t('keyData:interventionMissing')}
+            variant="small"
+          />
+        ) : null}
+      </>
+    )
+  }
+  return null
+}
+
 const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { t } = useTranslation()
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
-  const { data: documents = [] } = useGetAllDocumentsQuery({ activeYear })
-  const { renderInterventionBadge } = useNotificationBadge()
+
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
@@ -71,15 +120,12 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const { data: currentKeyData } = useFetchKeyDataQuery()
   let keyData
 
-
-  if (activeYear !== new Date().getFullYear() ) {
-    keyData = keyDataForYear ? keyDataForYear : currentKeyData
+  if (activeYear !== new Date().getFullYear()) {
+    keyData = keyDataForYear ?? currentKeyData
   } else {
     keyData = currentKeyData
   }
 
-  
-  
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
   }, [keyData])
@@ -162,43 +208,6 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     return <CircularProgress />
   }
 
-  const InterventionCell = ({
-    programmeData,
-    selectedYear,
-    interventionProcedures,
-  }: {
-    programmeData: KeyDataProgramme
-    selectedYear: string,
-    interventionProcedures: InterventionProcedureType[]
-  }) => {
-    const interventionData = renderInterventionBadge(programmeData, metadata, selectedYear, documents, interventionProcedures)
-
-    if (!interventionData.interventionStatus || programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
-      return (
-        <Typography variant="italic" color="secondary">
-          {t('keyData:interventionOff')}
-        </Typography>
-      )
-    } else if (interventionData.interventionStatus) {
-      return (
-        <>
-          <Typography data-cy={`interventionText-${programmeData.koulutusohjelmakoodi}`} variant="regularSmall">
-            {t('keyData:interventionOn')}
-          </Typography>
-          {interventionData.showBadge ? (
-            <NotificationBadge
-              variant="small"
-              data-cy={`interventionBadge-${programmeData.koulutusohjelmakoodi}`}
-              tooltip={t('keyData:interventionMissing')}
-            />
-          ) : (
-            <></>
-          )}
-        </>
-      )
-    }
-  }
-
   return (
     <div style={{ width: '100%' }}>
       {/* Search input */}
@@ -215,16 +224,16 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 <TableCell>
                   <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
                     <Typography
-                      variant="h6"
                       onClick={sortByProgrammeName}
                       style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                      variant="h6"
                     >
                       {t('common:programmeHeader')} <SwapVertIcon />
                     </Typography>
                     <Typography
-                      variant="h6"
                       onClick={sortByProgrammeCode}
                       style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                      variant="h6"
                     >
                       {t('common:code')} <SwapVertIcon />
                     </Typography>
@@ -239,115 +248,121 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 <TableCell>
                   <Typography variant="regularSmall">{t('keyData:opiskelijapalaute')}</Typography>
                 </TableCell>
-                {activeYear < 2026 && !(isAdmin(user))? (
-                <TableCell disabled isHeader>
-                  <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
-                    <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
-                  </Tooltip>
-                </TableCell>
+                {activeYear < 2026 && !isAdmin(user) ? (
+                  <TableCell disabled isHeader>
+                    <Tooltip arrow placement="top" title={t('keyData:notUsed2025')}>
+                      <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
+                    </Tooltip>
+                  </TableCell>
                 ) : (
-     
-                <TableCell>
-                  <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
-                </TableCell>
+                  <TableCell>
+                    <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
+                  </TableCell>
                 )}
                 <TableCell>
                   <Typography variant="regularSmall">{t('keyData:actions')}</Typography>
                 </TableCell>
                 {activeYear < 2026 ? (
-                <TableCell disabled isHeader>
-                  <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
-                    <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
-                  </Tooltip>
-                </TableCell>
+                  <TableCell disabled isHeader>
+                    <Tooltip arrow placement="top" title={t('keyData:notUsed2025')}>
+                      <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
+                    </Tooltip>
+                  </TableCell>
                 ) : (
-                <TableCell>
-                  <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
-                </TableCell>
+                  <TableCell>
+                    <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
+                  </TableCell>
                 )}
                 <TableCell isHeader>
                   <Typography variant="regularSmall">{t('keyData:supportProcess')}</Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
-            {activeYear < 2026 ||(isAdmin(user) && activeYear == 2026) ? (
+            {activeYear < 2026 || (isAdmin(user) && activeYear == 2026) ? (
+              <TableBody>
+                {keyFigureData.length > 0 ? (
+                  keyFigureData.map((programmeData: KeyDataProgramme) => (
+                    <TableRow key={programmeData.koulutusohjelmakoodi}>
+                      <ProgrammeInfoCell programmeData={programmeData} />
+                      <TrafficLightCell
+                        activeYear={activeYear}
+                        groupKey={GroupKey.VETOVOIMAISUUS}
+                        handleModalOpen={handleModalOpen}
+                        metadata={metadata}
+                        programmeData={programmeData}
+                        reports={reports}
+                      />
 
-            <TableBody>
-              {keyFigureData.length > 0 ? (
-                keyFigureData.map((programmeData: KeyDataProgramme) => (
-                  <TableRow key={programmeData.koulutusohjelmakoodi}>
-                    <ProgrammeInfoCell programmeData={programmeData} />
-                    <TrafficLightCell
-                      metadata={metadata}
-                      programmeData={programmeData}
-                      groupKey={GroupKey.VETOVOIMAISUUS}
-                      handleModalOpen={handleModalOpen}
-                      reports={reports}
-                      activeYear = {activeYear}
-                    />
+                      <TrafficLightCell
+                        activeYear={activeYear}
+                        groupKey={GroupKey.LAPIVIRTAUS}
+                        handleModalOpen={handleModalOpen}
+                        metadata={metadata}
+                        programmeData={programmeData}
+                        reports={reports}
+                      />
 
-                    <TrafficLightCell
-                      metadata={metadata}
-                      programmeData={programmeData}
-                      groupKey={GroupKey.LAPIVIRTAUS}
-                      handleModalOpen={handleModalOpen}
-                      reports={reports}
-                      activeYear = {activeYear}
-                    />
+                      <TrafficLightCell
+                        activeYear={activeYear}
+                        groupKey={GroupKey.OPISKELIJAPALAUTE}
+                        handleModalOpen={handleModalOpen}
+                        metadata={metadata}
+                        programmeData={programmeData}
+                        reports={reports}
+                      />
+                      {activeYear < 2026 && !isAdmin(user) ? (
+                        <TableCell disabled></TableCell>
+                      ) : (
+                        <TrafficLightCell
+                          activeYear={activeYear}
+                          groupKey={GroupKey.RESURSSIT}
+                          handleModalOpen={handleModalOpen}
+                          metadata={metadata}
+                          programmeData={programmeData}
+                          reports={reports}
+                        />
+                      )}
 
-                    <TrafficLightCell
-                      metadata={metadata}
-                      programmeData={programmeData}
-                      groupKey={GroupKey.OPISKELIJAPALAUTE}
-                      handleModalOpen={handleModalOpen}
-                      reports={reports}
-                      activeYear = {activeYear}
-                    />
-                    {activeYear < 2026 && !(isAdmin(user))? (
-                    <TableCell disabled></TableCell>
-                    ) : (
-                    <TrafficLightCell
-                      metadata={metadata}
-                      programmeData={programmeData}
-                      groupKey={GroupKey.RESURSSIT}
-                      handleModalOpen={handleModalOpen}
-                      reports={reports}
-                      activeYear = {activeYear}
-                    />
-                    )}
-
-                    <ActionsCell programmeData={programmeData} metadata={metadata} reports={reports} />
-                    {activeYear < 2026 ? (
-                    <TableCell disabled></TableCell>
-                    ) : (
-                      <QualityCell programmeData={programmeData} />
-                    )}
+                      <ActionsCell metadata={metadata} programmeData={programmeData} reports={reports} />
+                      {activeYear < 2026 ? (
+                        <TableCell disabled></TableCell>
+                      ) : (
+                        <QualityCell programmeData={programmeData} />
+                      )}
+                      <TableCell>
+                        <InterventionCell
+                          activeYear={activeYear}
+                          interventionProcedures={interventionProcedures}
+                          metadata={metadata}
+                          programmeData={programmeData}
+                          selectedYear={yearFilter}
+                          t={t}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow variant="single-cell">
                     <TableCell>
-                      <InterventionCell programmeData={programmeData} selectedYear={yearFilter} interventionProcedures={interventionProcedures} />
+                      <Typography variant="light">{t('common:noData')}</Typography>
                     </TableCell>
                   </TableRow>
-                ))
-              ) : (
-                <TableRow variant="single-cell">
-                  <TableCell>
-                    <Typography variant="light">{t('common:noData')}</Typography>
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
+                )}
+              </TableBody>
             ) : (
               <TableRow variant="single-cell">
-                  <TableCell>
-                    <Typography variant="light">{t('common:noData')}</Typography>
-                  </TableCell>
+                <TableCell>
+                  <Typography variant="light">{t('common:noData')}</Typography>
+                </TableCell>
               </TableRow>
             )}
           </Table>
 
-          <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
+          <KeyDataModal data={selectedKeyFigureData} open={modalOpen} setOpen={setModalOpen} />
         </div>
       </div>
     </div>
   )
 }
+
 export default KeyDataTableComponent

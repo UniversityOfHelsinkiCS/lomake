@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -60,19 +61,21 @@ export default function YearSelector({ multiple, size, label }) {
 
   return (
     <div className={`year-filter-${size}`}>
-      {multiple && <label className={`year-filter-label${multipleYears.length === 0 ? '-alert' : ''}`}>{label}</label>}
+      {multiple ? (
+        <label className={`year-filter-label${multipleYears.length === 0 ? '-alert' : ''}`}>{label}</label>
+      ) : null}
       <Select
         className="button basic gray"
-        disabled={!year || !previousYearsWithAnswers || yearOptions.length <= 1}
         data-cy="yearSelector"
-        name="year"
+        disabled={!year || !previousYearsWithAnswers || yearOptions.length <= 1}
         fluid
-        placeholder={t('generic:year')}
-        options={yearOptions}
-        onChange={multiple ? handleMultipleYearChange : handleYearChange}
-        value={multiple ? multipleYears : year}
         multiple={multiple}
+        name="year"
+        onChange={multiple ? handleMultipleYearChange : handleYearChange}
+        options={yearOptions}
+        placeholder={t('generic:year')}
         selection={multiple}
+        value={multiple ? multipleYears : year}
       />
     </div>
   )

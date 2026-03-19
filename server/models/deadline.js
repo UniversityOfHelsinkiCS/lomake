@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
     {
       underscored: true,
       tableName: 'deadlines',
-    },
+    }
   )
 
   return deadline

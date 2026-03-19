@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { colors } from '../../util/common'
@@ -14,14 +14,14 @@ const LastYearsAnswersAccordion = ({ children }) => {
 
   return (
     <div className="hide-in-print-mode">
-      {expanded && <blockquote>{children}</blockquote>}
+      {expanded ? <blockquote>{children}</blockquote> : null}
       <span
+        onClick={() => setExpanded(!expanded)}
         style={{
           cursor: 'pointer',
           color: colors.blue,
           float: 'right',
         }}
-        onClick={() => setExpanded(!expanded)}
       >
         {expanded ? t('generic:collapseText') : t('generic:expandText')}
       </span>

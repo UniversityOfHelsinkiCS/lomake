@@ -33,16 +33,24 @@ const router = Router()
 router.get('/login', users.getCurrentUser) // IAM-middleware checks this path
 router.post('/logout', users.getLogoutUrl)
 
-router.post('/lock/:room', async (req, res) => { await locks.getLock(req, res) })
-router.get('/lock/:room', async (req, res) => { await locks.fetchLocks(req, res) })
-router.post('/lock', async (req, res) => { await locks.setLock(req, res) })
-router.delete('/lock', async (req, res) => { await locks.deleteLock(req, res) })
+router.post('/lock/:room', async (req, res) => {
+  await locks.getLock(req, res)
+})
+router.get('/lock/:room', async (req, res) => {
+  await locks.fetchLocks(req, res)
+})
+router.post('/lock', async (req, res) => {
+  await locks.setLock(req, res)
+})
+router.delete('/lock', async (req, res) => {
+  await locks.deleteLock(req, res)
+})
 
 router.get('/reform/temp', checkAdminOrKatselmusryhma, degreeReform.getAllTemp)
 router.get('/reform/faculties/:faculty', requireFacultyRead, degreeReform.getForFaculty)
 router.get('/reform/university/:dropdownFilter', requireUniFormRight, degreeReform.getForUniversity)
 
-router.get('/answers', (requireProgrammeRead || requireFacultyRead || requireEmployee), answers.getAll)
+router.get('/answers', requireProgrammeRead || requireFacultyRead || requireEmployee, answers.getAll)
 router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/temp/:form/:year', requireEmployee, answers.getFacultyTempAnswersAfterDeadline)
 router.get('/answers/temp/:form', requireEmployee, answers.getFacultyTempAnswersByForm)
@@ -57,7 +65,11 @@ router.get('/answers/committeeSummary/:code/:lang', requireEmployee, answers.get
 router.get('/answers/forSummary/:code/:lang', requireEmployee, answers.getFacultySummaryData)
 router.get('/answers/forSummary/:code', requireEmployee, answers.getProgrammeSummaryData)
 router.get('/answers/oldSummaryYearly/faculty/:code/:lang', requireEmployee, answers.getOldFacultySummaryData)
-router.get('/answers/currentSummaryEvaluation/faculty/:code/:lang', requireEmployee, answers.getEvaluationSummaryDataForFaculty)
+router.get(
+  '/answers/currentSummaryEvaluation/faculty/:code/:lang',
+  requireEmployee,
+  answers.getEvaluationSummaryDataForFaculty
+)
 router.get('/answers/:form/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
 router.post('/answers/degreeReform/individualAnswer', requireProgrammeWrite, answers.postIndividualFormAnswer)
 router.post('/answers/degreeReform/individualAnswer/partial', requireEmployee, answers.postIndividualFormPartialAnswer)
@@ -81,37 +93,94 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 
 router.get('/faculties', requireRead, faculty.getAll)
 
-router.get('/reports/:year', requireRead, async (req, res) => { await reports.getReports(req, res) })
-router.get('/reports/:programme/:year', requireRead, async (req, res) => { await reports.getReport(req, res) })
-router.put('/reports/:programme/:year', requireProgrammeWrite, async (req, res) => { await reports.updateReport(req, res) })
+router.get('/reports/:year', requireRead, async (req, res) => {
+  await reports.getReports(req, res)
+})
+router.get('/reports/:programme/:year', requireRead, async (req, res) => {
+  await reports.getReport(req, res)
+})
+router.put('/reports/:programme/:year', requireProgrammeWrite, async (req, res) => {
+  await reports.updateReport(req, res)
+})
 
-router.get('/keydata', requireRead, async (req, res) => { await keyData.getKeyData(req, res) })
-router.get('/keydata/:year', requireRead, async (req, res) => { await keyData.getKeyDataForYear(req, res) })
-router.post('/keydata', checkAdmin, async (req, res) => { await keyData.uploadKeyData(req, res) })
-router.get('/keymetadata', checkAdmin, async (req, res) => { await keyData.getKeyDataMeta(req, res) })
-router.delete('/keydata/:id', checkAdmin, async (req, res) => { await keyData.deleteKeyData(req, res) })
-router.put('/keydata/:id', checkAdmin, async (req, res) => { await keyData.updateKeyData(req, res) })
+router.get('/keydata', requireRead, async (req, res) => {
+  await keyData.getKeyData(req, res)
+})
+router.get('/keydata/:year', requireRead, async (req, res) => {
+  await keyData.getKeyDataForYear(req, res)
+})
+router.post('/keydata', checkAdmin, async (req, res) => {
+  await keyData.uploadKeyData(req, res)
+})
+router.get('/keymetadata', requireRead, async (req, res) => {
+  await keyData.getKeyDataMeta(req, res)
+})
+router.delete('/keydata/:id', checkAdmin, async (req, res) => {
+  await keyData.deleteKeyData(req, res)
+})
+router.put('/keydata/:id', checkAdmin, async (req, res) => {
+  await keyData.updateKeyData(req, res)
+})
 
-router.get('/documents/all/:activeYear', requireRead, async (req, res) => { await documents.getAllDocuments(req, res) })
-router.get('/documents/:programme', requireRead, async (req, res) => { await documents.getDocuments(req, res) })
-router.post('/documents/:programme', requireProgrammeWrite, async (req, res) => { await documents.createDocument(req, res) })
-router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) => { await documents.updateDocument(req, res) })
-router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => { await documents.closeInterventionProcedure(req, res) })
-router.delete('/documents/:programme/:id', checkAdmin, async (req, res) => { await documents.deleteDocument(req, res) })
+router.get('/documents/all/:activeYear', requireRead, async (req, res) => {
+  await documents.getAllDocuments(req, res)
+})
+router.get('/documents/:programme', requireRead, async (req, res) => {
+  await documents.getDocuments(req, res)
+})
+router.post('/documents/:programme', requireProgrammeWrite, async (req, res) => {
+  await documents.createDocument(req, res)
+})
+router.put('/documents/:programme/:id', requireProgrammeWrite, async (req, res) => {
+  await documents.updateDocument(req, res)
+})
+router.put('/documents/:programme/close/all', requireDekanaatti, async (req, res) => {
+  await documents.closeInterventionProcedure(req, res)
+})
+router.delete('/documents/:programme/:id', checkAdmin, async (req, res) => {
+  await documents.deleteDocument(req, res)
+})
 
 // TODO: open the routes for correct access before katselmus starts
-router.get('/qualitydocuments/all/:activeYear', checkAdmin, async (req, res) => { await qualityDocuments.getAllQualityDocuments(req, res) })
-router.get('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.getQualityDocuments(req, res) })
-router.post('/qualitydocuments/:programme', checkAdmin, async (req, res) => { await qualityDocuments.createQualityDocument(req, res) })
-router.put('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) => { await qualityDocuments.updateQualityDocument(req, res) })
-router.delete('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) => { await qualityDocuments.deleteQualityDocument(req, res) })
+router.get('/qualitydocuments/all/:selectedYear', checkAdmin, async (req, res) => {
+  await qualityDocuments.getAllQualityDocuments(req, res)
+})
+router.get('/qualitydocuments/:programme', checkAdmin, async (req, res) => {
+  await qualityDocuments.getQualityDocuments(req, res)
+})
+router.post('/qualitydocuments/:programme', checkAdmin, async (req, res) => {
+  await qualityDocuments.createQualityDocument(req, res)
+})
+router.put('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) => {
+  await qualityDocuments.updateQualityDocument(req, res)
+})
+router.delete('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) => {
+  await qualityDocuments.deleteQualityDocument(req, res)
+})
 
-router.get('/interventionprocedures/active', requireRead, async (req, res) => { await interventionProcedures.getActiveInterventionProcedures(req, res) })
-router.get('/interventionprocedures/:programme', requireRead, async (req, res) => { await interventionProcedures.getProgrammesInterventionProcedures(req, res) })
+router.get('/interventionprocedures/active', requireRead, async (req, res) => {
+  await interventionProcedures.getActiveInterventionProcedures(req, res)
+})
+router.get('/interventionprocedures/:programme', requireRead, async (req, res) => {
+  await interventionProcedures.getProgrammesInterventionProcedures(req, res)
+})
 
-router.get('/organisation-data', async (_, res) => { const data = await getOrganisationData(); res.send(data) })
+router.get('/organisation-data', async (_, res) => {
+  const data = await getOrganisationData()
+  res.send(data)
+})
 
-router.get('/jory-map', async (_, res) => { const joryMap = await getJoryMapFromJami(); res.send(joryMap) })
+router.get('/jory-map', async (_, res) => {
+  const joryMap = await getJoryMapFromJami()
+  res.send(joryMap)
+})
+
+router.get('/interventionprocedures', requireRead, async (req, res) => {
+  await interventionProcedures.getActiveInterventionProcedures(req, res)
+})
+router.get('/interventionprocedures/:programme', requireRead, async (req, res) => {
+  await interventionProcedures.getProgrammesInterventionProcedures(req, res)
+})
 
 // Not used in production
 router.get('/cypress/seed', notInProduction, cypress.seed)
@@ -120,9 +189,5 @@ router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.creat
 router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
 router.get('/cypress/initReports', notInProduction, cypress.initReports)
 router.get('/cypress/resetDocuments', notInProduction, cypress.resetDocuments)
-
-router.get('/interventionprocedures', async (req, res) => { await interventionProcedures.getActiveInterventionProcedures(req, res) })
-router.get('/interventionprocedures/:programme', async (req, res) => { await interventionProcedures.getProgrammesInterventionProcedures(req, res) })
-
 
 export default router

@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useEffect, useMemo, useState, useRef } from 'react'
 import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import { useHistory, useParams, useLocation } from 'react-router'
+import { useNavigate, useParams, useLocation } from 'react-router'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { setViewOnly } from '../../../redux/formReducer'
@@ -25,18 +29,93 @@ import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
 import { useGetReportsQuery } from '@/client/redux/reports'
 import { useFetchKeyDataMetadataForYearQuery, useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 
+const ActionsBadge = ({
+  programmeData,
+  metadata,
+  reports,
+}: {
+  programmeData: KeyDataProgramme
+  metadata: KeyDataMetadata[]
+  reports: any
+}) => {
+  const { renderActionsBadge } = useNotificationBadge()
+  const actionsBadgeData = () => {
+    return renderActionsBadge(programmeData, metadata, true, reports)
+  }
+  return (
+    actionsBadgeData().showBadge && (
+      <NotificationBadge data-cy={`actionsfieldBadge`} style={{ marginLeft: 0 }} variant={'small'} />
+    )
+  )
+}
+
+const TextFieldBadge = ({
+  programmeData,
+  groupKey,
+  metadata,
+  level,
+  reports,
+}: {
+  programmeData: KeyDataProgramme
+  groupKey: GroupKey
+  metadata: KeyDataMetadata[]
+  level: ProgrammeLevel
+  reports: any
+}) => {
+  const { renderTrafficLightBadge } = useNotificationBadge()
+
+  const color = useMemo(
+    () => calculateKeyDataColor(metadata, programmeData, groupKey, level),
+    [metadata, programmeData, groupKey, level]
+  )
+
+  const shouldRenderBadge = () => {
+    return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color, reports)
+  }
+
+  return shouldRenderBadge() && <NotificationBadge data-cy={`textfieldBadge-${groupKey}`} variant={'small'} />
+}
+
+const TabBadge = ({
+  programmeData,
+  tab,
+  metadata,
+  reports,
+}: {
+  programmeData: KeyDataProgramme
+  tab: 'lights' | 'actions'
+  metadata: KeyDataMetadata[]
+  reports: any
+}) => {
+  const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
+
+  const shouldRenderBadge = () => {
+    if (tab === 'lights') return renderTabBadge(programmeData, metadata, reports)
+    else return renderActionsBadge(programmeData, metadata, false, reports).showBadge
+  }
+
+  return (
+    shouldRenderBadge() && (
+      <NotificationBadge data-cy={`tabBadge-${tab}`} style={{ marginLeft: '1.5rem' }} variant={'medium'} />
+    )
+  )
+}
+
 const ProgrammeView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const dispatch = useAppDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const { programme: studyprogrammeKey, year } = useParams<{ programme: string; year: string }>()
   const [activeTab, setActiveTab] = useState(0)
   const { isLoading, programme, metadata: metadata2026 } = useFetchSingleKeyDataQuery({ studyprogrammeKey })
-  const { isLoading: isMetadata2025Loading, metadata: metadata2025 } = useFetchKeyDataMetadataForYearQuery({ year: '2025' })
-  const metadata = (year === '2025' && metadata2025.length>0 )? metadata2025 : metadata2026
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { isLoading: isMetadata2025Loading, metadata: metadata2025 } = useFetchKeyDataMetadataForYearQuery({
+    year: '2025',
+  })
+  const metadata = year === '2025' && metadata2025.length > 0 ? metadata2025 : metadata2026
   const form = 10
   const { data: reports = {} } = useGetReportsQuery({ year })
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
@@ -47,7 +126,7 @@ const ProgrammeView = () => {
   const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null
   const user = useAppSelector(state => state.currentUser.data)
 
-  const writeAccess = (user.access[studyprogrammeKey] && user.access[studyprogrammeKey].write) || isAdmin(user)
+  const writeAccess = user.access[studyprogrammeKey]?.write ?? isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user)
 
   const anchorItems = useRef<Record<string, HTMLDivElement | null>>({})
@@ -66,7 +145,7 @@ const ProgrammeView = () => {
 
   useEffect(() => {
     const tabParam = searchParams.get('tab')
-    setActiveTab(parseInt(tabParam) || 0)
+    setActiveTab(parseInt(tabParam ?? '0') || 0)
 
     return () => {
       // dispatch(wsLeaveRoom(form))
@@ -75,7 +154,7 @@ const ProgrammeView = () => {
 
   useEffect(() => {
     if (!programme) return
-    if (!isValidYear(parseInt(year), programme)) return
+    if (!isValidYear(parseInt(year ?? '0'), programme)) return
 
     document.title = `${t('form')} - ${studyprogrammeKey}`
     dispatch(setKeyDataYear(year))
@@ -83,7 +162,7 @@ const ProgrammeView = () => {
 
   useEffect(() => {
     if (!studyprogrammeKey || !programme) return
-    if ((new Date(formDeadline?.date).getFullYear().toString() !== year) || !writeAccess) {
+    if (new Date(formDeadline?.date).getFullYear().toString() !== year || !writeAccess) {
       dispatch(setViewOnly(true))
     } else {
       dispatch(setViewOnly(false))
@@ -94,7 +173,7 @@ const ProgrammeView = () => {
     if (programme) {
       return programme.find(
         (programmeData: KeyDataProgramme) =>
-          programmeData.koulutusohjelmakoodi === studyprogrammeKey && programmeData.year === parseInt(year) - 1,
+          programmeData.koulutusohjelmakoodi === studyprogrammeKey && programmeData.year === parseInt(year) - 1
       )
     }
     return {}
@@ -116,85 +195,18 @@ const ProgrammeView = () => {
     return <CircularProgress />
   }
 
-  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
+  if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('form')} t={t} />
 
   if (!isValidYear(parseInt(year), programme)) {
-    history.push('/404')
-    return
+    navigate('/404')
   }
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue)
-    history.push({
+    navigate({
       pathname: location.pathname,
       search: `?tab=${newValue}`,
     })
-  }
-
-  const ActionsBadge = ({
-    programmeData,
-    metadata,
-  }: {
-    programmeData: KeyDataProgramme
-    metadata: KeyDataMetadata[]
-  }) => {
-    const { renderActionsBadge } = useNotificationBadge()
-    const actionsBadgeData = () => {
-      return renderActionsBadge(programmeData, metadata, true, reports)
-    }
-    return (
-      actionsBadgeData().showBadge && (
-        <NotificationBadge data-cy={`actionsfieldBadge`} variant={'small'} style={{ marginLeft: 0 }} />
-      )
-    )
-  }
-
-  const TextFieldBadge = ({
-    programmeData,
-    groupKey,
-    metadata,
-    level,
-  }: {
-    programmeData: KeyDataProgramme
-    groupKey: GroupKey
-    metadata: KeyDataMetadata[]
-    level: ProgrammeLevel
-  }) => {
-    const { renderTrafficLightBadge } = useNotificationBadge()
-
-    const color = useMemo(
-      () => calculateKeyDataColor(metadata, programmeData, groupKey, level),
-      [metadata, programmeData, groupKey, level],
-    )
-
-    const shouldRenderBadge = () => {
-      return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color, reports)
-    }
-
-    return shouldRenderBadge() && <NotificationBadge data-cy={`textfieldBadge-${groupKey}`} variant={'small'} />
-  }
-
-  const TabBadge = ({
-    programmeData,
-    tab,
-    metadata,
-  }: {
-    programmeData: KeyDataProgramme
-    tab: 'lights' | 'actions'
-    metadata: KeyDataMetadata[]
-  }) => {
-    const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
-
-    const shouldRenderBadge = () => {
-      if (tab === 'lights') return renderTabBadge(programmeData, metadata, reports)
-      else return renderActionsBadge(programmeData, metadata, false, reports).showBadge
-    }
-
-    return (
-      shouldRenderBadge() && (
-        <NotificationBadge data-cy={`tabBadge-${tab}`} variant={'medium'} style={{ marginLeft: '1.5rem' }} />
-      )
-    )
   }
 
   const KeyDataPoints = getKeyDataPoints(t)
@@ -228,28 +240,28 @@ const ProgrammeView = () => {
         </Typography>
       </div>
 
-      <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth" sx={{ mt: 4 }}>
+      <Tabs onChange={handleTabChange} sx={{ mt: 4 }} value={activeTab} variant="fullWidth">
         <Tab
-          label={t('keyData:keyFigure')}
-          icon={<TabBadge tab="lights" programmeData={programmeData} metadata={metadata} />}
-          iconPosition="end"
           data-cy="keyDataTab"
+          icon={<TabBadge metadata={metadata} programmeData={programmeData} reports={reports} tab="lights" />}
+          iconPosition="end"
+          label={t('keyData:keyFigure')}
         />
         <Tab
-          label={t('keyData:actions')}
-          icon={<TabBadge tab="actions" programmeData={programmeData} metadata={metadata} />}
-          iconPosition="end"
           data-cy="actionsTab"
+          icon={<TabBadge metadata={metadata} programmeData={programmeData} reports={reports} tab="actions" />}
+          iconPosition="end"
+          label={t('keyData:actions')}
         />
       </Tabs>
 
       {activeTab === 0 && (
         <Box sx={{ mt: 4 }}>
-          {programmeData.additionalInfo && programmeData.additionalInfo[lang]?.length && (
+          {programmeData.additionalInfo?.[lang]?.length ? (
             <Alert severity="warning" sx={{ mb: 4 }}>
               <Typography variant="light">{programmeData.additionalInfo[lang]}</Typography>
             </Alert>
-          )}
+          ) : null}
           <Alert severity="info">
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Typography variant="h5">{t('keyData:title')}</Typography>
@@ -285,59 +297,60 @@ const ProgrammeView = () => {
                 </ul>
               </Box>
               {year === '2025' && (
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <Typography variant="h5">{t('keyData:pilotHeader')}</Typography>
-                <Typography variant="light">{t('keyData:pilotInfo1')}</Typography>
-                <Typography variant="light">{t('keyData:pilotInfo2')}</Typography>
-              </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <Typography variant="h5">{t('keyData:pilotHeader')}</Typography>
+                  <Typography variant="light">{t('keyData:pilotInfo1')}</Typography>
+                  <Typography variant="light">{t('keyData:pilotInfo2')}</Typography>
+                </Box>
               )}
               {year === '2026' && (
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <Typography variant="h5">{t('keyData:year2026Header')}</Typography>
-                <Typography variant="light">{t('keyData:year2026Info1')}</Typography>
-              </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <Typography variant="h5">{t('keyData:year2026Header')}</Typography>
+                  <Typography variant="light">{t('keyData:year2026Info1')}</Typography>
+                </Box>
               )}
             </Box>
           </Alert>
 
           {Object.values(KeyDataPoints).map((data: KeyDataCardData) => {
             if (data.title === 'Resurssien käyttö' && activeYear < 2026 && !isAdmin(user)) {
-                return null
+              return null
             }
             const anchor = formatURLFragment(data.groupKey)
             return (
               <Box
-                sx={{ pt: '2.5rem' }}
-                key={data.groupKey}
                 id={anchor}
+                key={data.groupKey}
                 ref={(el: any | null) => {
                   anchorItems.current[anchor] = el
                 }}
+                sx={{ pt: '2.5rem' }}
               >
                 <KeyDataCard level={level} metadata={metadata} programme={programmeData} {...data} />
                 <Box sx={{ alignItems: 'center' }}>
-                  {data.textField && (
+                  {data.textField ? (
                     <div style={{ minHeight: 200 }}>
                       <TextFieldComponent id={data.groupKey} type="Comment">
                         <TextFieldBadge
-                          programmeData={programmeData}
                           groupKey={data.groupKey}
-                          metadata={metadata}
                           level={level}
+                          metadata={metadata}
+                          programmeData={programmeData}
+                          reports={reports}
                         />
                       </TextFieldComponent>
                     </div>
-                  )}
+                  ) : null}
                 </Box>
               </Box>
             )
           })}
 
           <Link
-            sx={{ textDecoration: 'none', cursor: 'pointer' }}
             onClick={() => setActiveTab(activeTab === 0 ? 1 : 0)}
+            sx={{ textDecoration: 'none', cursor: 'pointer' }}
           >
-            <Typography variant="h4" style={{ display: 'flex', justifyContent: 'flex-end', gap: 4, marginTop: '6em' }}>
+            <Typography style={{ display: 'flex', justifyContent: 'flex-end', gap: 4, marginTop: '6em' }} variant="h4">
               {t('keyData:moveToActions')}
               <ArrowForwardIcon />
             </Typography>
@@ -357,7 +370,7 @@ const ProgrammeView = () => {
             </Box>
           </Alert>
           <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
-            <ActionsBadge programmeData={programmeData} metadata={metadata} />{' '}
+            <ActionsBadge metadata={metadata} programmeData={programmeData} reports={reports} />{' '}
           </TextFieldComponent>
         </Box>
       )}

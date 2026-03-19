@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { useTranslation } from 'react-i18next'
@@ -50,7 +51,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
   return (
     <>
       <h3>
-        {number}. {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
+        {number}. {label} {required ? <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span> : null}
       </h3>
       <p
         className="hide-in-print-mode"
@@ -64,18 +65,18 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
       >
         {t('generic:measureLabel')} <span className="form-question-extrainfo">{extrainfo}</span>
       </p>
-      {previousAnswerText && (
+      {previousAnswerText ? (
         <LastYearsAnswersAccordion>
           <ReactMarkdown>{previousAnswerText}</ReactMarkdown>
         </LastYearsAnswersAccordion>
-      )}
+      ) : null}
       {['', '', '', '', ''].reduce((acc, cur, index) => {
         if (index + 1 > amountOfMeasures) return acc
         acc.push(
           // eslint-disable-next-line react/no-array-index-key
-          <div style={{ paddingTop: '0' }} key={index}>
-            <SimpleTextarea label={`${index + 1})`} id={`${id}_${index + 1}`} viewOnly={viewOnly} form={form} />
-          </div>,
+          <div key={index} style={{ paddingTop: '0' }}>
+            <SimpleTextarea form={form} id={`${id}_${index + 1}`} label={`${index + 1})`} viewOnly={viewOnly} />
+          </div>
         )
         return acc
       }, [])}

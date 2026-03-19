@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
 /// <reference types="cypress" />
-
 import { testProgrammeCode, defaultYears, testProgrammeName } from '../../config/common'
 import helpers from '../support/helpers'
 import '../support/commands'
@@ -47,7 +45,7 @@ describe('ComparisonPage tests', () => {
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('a').contains('All faculties').click()
     cy.get('[data-cy=comparison-responses-faculty-programme_identity_text]').contains(
-      `/ ${helpers.getDoctoralProgrammeCount()}`,
+      `/ ${helpers.getDoctoralProgrammeCount()}`
     )
   })
 

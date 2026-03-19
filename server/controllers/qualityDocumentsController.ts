@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import logger from '../util/logger.js'
 import QualityDocument from '../models/qualityDocument.js'
 import { Request, Response } from 'express'
@@ -15,7 +16,7 @@ interface ValidateOperationResponse {
 }
 
 const validationOperation = async (req: Request): Promise<ValidateOperationResponse> => {
-  const {programme, id } = req.params
+  const { programme, id } = req.params
   const { data } = req.body
 
   const resultData: ValidateOperationResponse = {
@@ -66,7 +67,7 @@ const validationOperation = async (req: Request): Promise<ValidateOperationRespo
       },
       attributes: ['id', 'data', 'studyprogrammeKey'],
       order: [['createdAt', 'ASC']],
-    }) 
+    })
   } else {
     qualityDocuments = await QualityDocument.findAll({
       where: {
@@ -79,6 +80,7 @@ const validationOperation = async (req: Request): Promise<ValidateOperationRespo
 
   resultData.success = true
   resultData.qualityDocuments = qualityDocuments
+  // eslint-disable-next-line prettier/prettier
   resultData.programme = studyProgramme.key,
   resultData.status = 200
   resultData.data = data
@@ -97,11 +99,9 @@ const getQualityDocuments = async (req: Request, res: Response<QualityDocument[]
   }
 }
 
-
 const getAllQualityDocuments = async (req: Request, res: Response) => {
   try {
     const { selectedYear } = req.params
-
     if (!selectedYear) {
       return res.status(400).json({ error: 'Selected year param is required' })
     }
@@ -119,8 +119,8 @@ const getAllQualityDocuments = async (req: Request, res: Response) => {
 
 const createQualityDocument = async (req: Request, res: Response<QualityDocument[] | ErrorObject>) => {
   try {
-    const { programme, status, error, qualityDocuments} = await validationOperation(req)
-    if (!programme) return res.status(status).json({ error: error })  
+    const { programme, status, error, qualityDocuments } = await validationOperation(req)
+    if (!programme) return res.status(status).json({ error })
 
     const qualityDocument: QualityDocument = await QualityDocument.create({
       data: req.body.data,
@@ -128,7 +128,7 @@ const createQualityDocument = async (req: Request, res: Response<QualityDocument
       year: req.body.year,
     })
 
-    res.status(201).json([ ...qualityDocuments, qualityDocument ])
+    return res.status(201).json([...qualityDocuments, qualityDocument])
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -138,14 +138,14 @@ const createQualityDocument = async (req: Request, res: Response<QualityDocument
 const updateQualityDocument = async (req: Request, res: Response<QualityDocument[] | ErrorObject>) => {
   try {
     const { qualityDocuments, data, status, error } = await validationOperation(req)
-    if (qualityDocuments.length === 0) return res.status(status).json({ error: error })
+    if (qualityDocuments.length === 0) return res.status(status).json({ error })
 
-    let qualityDocument: QualityDocument = qualityDocuments.pop()
+    const qualityDocument: QualityDocument = qualityDocuments.pop()
     qualityDocument.data = data
 
     const updated: QualityDocument = await qualityDocument.save()
 
-    return res.status(204).json([...qualityDocuments, updated ])
+    return res.status(204).json([...qualityDocuments, updated])
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -165,12 +165,16 @@ const deleteQualityDocument = async (req: Request, res: Response) => {
     })
 
     return res.status(204).send()
-
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
   }
 }
 
-
-export default { getQualityDocuments, createQualityDocument, updateQualityDocument, deleteQualityDocument, getAllQualityDocuments }
+export default {
+  getQualityDocuments,
+  createQualityDocument,
+  updateQualityDocument,
+  deleteQualityDocument,
+  getAllQualityDocuments,
+}
