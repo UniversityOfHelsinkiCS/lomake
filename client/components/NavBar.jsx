@@ -227,7 +227,8 @@ const NavBar = () => {
         en: 'UNI_EN',
         se: 'UNI_SE',
       }
-      const uniFormCode = uniFormCodeMap[value] ?? 'UNI'
+      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+      const uniFormCode = uniFormCodeMap[value] || 'UNI'
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       navigate(`/evaluation-university/form/6/${uniFormCode}`)
     }

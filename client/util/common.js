@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable camelcase */
 /**
  * Insert common items here
@@ -79,8 +80,8 @@ export const sortedItems = (items, sorter, lang) => {
   if (!sorter) return items
   const sorted = [...items].sort((a, b) => {
     if (sorter === 'name') {
-      const aName = a.name[lang] ?? a.name.en
-      const bName = b.name[lang] ?? b.name.en
+      const aName = a.name[lang] || a.name.en
+      const bName = b.name[lang] || b.name.en
       if (!aName || !bName) return a
       return aName.localeCompare(bName)
     }
@@ -313,7 +314,7 @@ export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {
   if (!studyProgrammes) return ''
   const programme = studyProgrammes.find(a => a.key === programmeWithKey.programme)
   if (!programme) return ''
-  return programme.name[lang] ?? programme.name.en
+  return programme.name[lang] || programme.name.en
 }
 
 export const cleanText = string => {
@@ -348,7 +349,7 @@ export const getSelectionAnswer = (data, question, lang) => {
     const selections = JSON.parse(data[id])
     Object.entries(selections).forEach(([key, value]) => {
       if (value) {
-        answer = [...answer, options?.[key]?.[lang] ?? key]
+        answer = [...answer, options?.[key]?.[lang] || key]
       }
     })
   }
@@ -368,7 +369,7 @@ export const getOrderAnswer = (data, question, lang) => {
     const ordered = data[id].split(';;')
     while (i < 4) {
       if (ordered[i - 1]) {
-        answer += `${i}. ${options?.[ordered[i - 1]]?.[lang] ?? ordered[i - 1]} `
+        answer += `${i}. ${options?.[ordered[i - 1]]?.[lang] || ordered[i - 1]} `
       }
       i++
     }
@@ -774,15 +775,15 @@ export const answersByQuestions = ({
       questionsList.forEach(question => {
         let color = null
         if (form === formKeys.EVALUATION_FACULTIES) {
-          const bachelorColor = data[question.color[0]] ?? 'emptyAnswer'
-          const masterColor = data[question.color[1]] ?? 'emptyAnswer'
-          const doctoralColor = data[question.color[2]] ?? 'emptyAnswer'
+          const bachelorColor = data[question.color[0]] || 'emptyAnswer'
+          const masterColor = data[question.color[1]] || 'emptyAnswer'
+          const doctoralColor = data[question.color[2]] || 'emptyAnswer'
           color = { bachelor: bachelorColor, master: masterColor, doctoral: doctoralColor }
         } else if (form === formKeys.FACULTY_MONITORING) {
           const facultyMonitoringAnswer = getFacultyMonitoringAnswer(data, question.id.replace('_text', ''), t)
           color = facultyMonitoringAnswer.color
         } else {
-          color = data[question.color] ?? 'emptyAnswer'
+          color = data[question.color] || 'emptyAnswer'
         }
         let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
         let name = programmeNameByKey(usersProgrammes, programme, lang)
@@ -829,8 +830,8 @@ export const answersByQuestions = ({
 export const filterUserProgrammes = (usersProgrammes, lang, debouncedFilter) => {
   return usersProgrammes.filter(
     prog =>
-      prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ??
-      prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()) ??
+      prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+      prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
       prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase())
   )
 }

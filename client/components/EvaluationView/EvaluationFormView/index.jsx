@@ -82,7 +82,8 @@ const EvaluationFormView = () => {
 
   const year = getYearToShow({ draftYear, nextDeadline, form }) || new Date().getFullYear()
 
-  const faculty = programme?.primaryFaculty?.code ?? ''
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const faculty = programme?.primaryFaculty?.code || ''
   const summaryURL = `/evaluation/previous-years/${room}`
   const oodiProgURL = `https://oodikone.helsinki.fi/evaluationoverview/programme/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${faculty}`

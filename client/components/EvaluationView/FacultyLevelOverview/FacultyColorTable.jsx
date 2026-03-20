@@ -70,7 +70,8 @@ const FacultyColorTable = React.memo(
       if (!selectedAnswers) return {}
       return sortedFaculties.reduce((statObject, { code }) => {
         const faculty = selectedAnswers.find(a => a.programme === code && a.form === form)
-        const answers = faculty?.data ?? {}
+        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+        const answers = faculty?.data || {}
         Object.keys(answers).forEach(answerKey => {
           if (answerKey.includes('_light')) {
             const color = answers[answerKey] // "red", "yellow", "green" or ""

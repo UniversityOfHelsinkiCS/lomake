@@ -307,7 +307,8 @@ const removeLoggedInUsersGroups = () => {
 }
 
 const getHeaders = () => {
-  const user = JSON.parse(localStorage.getItem(ITEM_NAME) ?? '{}')
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const user = JSON.parse(localStorage.getItem(ITEM_NAME) || '{}')
   return user
 }
 

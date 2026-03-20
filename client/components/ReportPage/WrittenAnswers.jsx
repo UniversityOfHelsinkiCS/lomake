@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
@@ -33,7 +34,7 @@ const WrittenAnswers = ({
   const checkIfContent = question => {
     const answer = allAnswers.get(question.id)
     if (!answer) return false
-    return answer.some(a => a.answer ?? a.comment)
+    return answer.some(a => a.answer || a.comment)
   }
 
   // (!metaEvaluation) to check if both are true
@@ -73,12 +74,12 @@ const WrittenAnswers = ({
               <div key={question.id}>
                 {chosenProgrammes.length === 1 ? (
                   <SingleProgramQuestion
-                    answers={allAnswers.get(question.id).filter(p => p.answer ?? p.comment)}
+                    answers={allAnswers.get(question.id).filter(p => p.answer || p.comment)}
                     question={question}
                   />
                 ) : (
                   <Question
-                    answers={allAnswers.get(question.id).filter(p => p.answer ?? p.comment)}
+                    answers={allAnswers.get(question.id).filter(p => p.answer || p.comment)}
                     chosenProgrammes={chosenProgrammes}
                     handleClick={handleClick}
                     meta
