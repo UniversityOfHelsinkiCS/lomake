@@ -146,7 +146,7 @@ const FacultyFormView = () => {
     user.specialGroup.evaluationFaculty ||
     isKatselmusProjektiOrOhjausryhma(user) ||
     Object.keys(user.access).length > 0
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
   const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
