@@ -14,7 +14,8 @@ const TrafficLights = ({ id, form }) => {
   const reduxViewOnly = useSelector(({ form }) => form.viewOnly)
 
   const isUniFormLanguageVersion = /((\/UNI_EN)|(\/UNI_SE))/.exec(window.location.href)
-  const viewOnly = reduxViewOnly ?? isUniFormLanguageVersion
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const viewOnly = reduxViewOnly || isUniFormLanguageVersion
 
   const getClassName = color => {
     let tempValue = value
