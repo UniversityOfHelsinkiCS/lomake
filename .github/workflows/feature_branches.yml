@@ -85,13 +85,6 @@ jobs:
           name: Cypress videos
           path: /home/runner/work/lomake/lomake/cypress/videos
 
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: Cypress screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
-
-
   build:
     name: 'Build and publish staging image'
     needs:
