@@ -89,6 +89,7 @@ const getIndividualAnswers = selectedAnswers => {
   }, {})
 }
 
+// eslint-disable-next-line import-x/no-named-as-default-member
 const ColorTable = React.memo(
   ({
     setModalData,
