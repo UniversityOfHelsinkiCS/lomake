@@ -68,7 +68,7 @@ const documentsApi = RTKApi.injectEndpoints({
         method: 'put',
         body: { data },
       }),
-      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }],
+      invalidatesTags: ['Documents', 'InterventionProcedures'],
     }),
     deleteDocument: builder.mutation<void, DeleteDocumentArgs>({
       query: ({ studyprogrammeKey, id }) => ({

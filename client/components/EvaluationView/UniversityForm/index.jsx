@@ -132,7 +132,8 @@ const CommitteeFormView = () => {
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
-  const committee = committeeList.find(c => c.code === room) ?? null
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const committee = committeeList.find(c => c.code === room) || null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const facultyProgrammeData = useSelector(state => state.summaries)
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-leaked-render */
 import { useState } from 'react'
 import { TableCell } from '../Generic/TableComponent'
 import { useTranslation } from 'react-i18next'
@@ -42,18 +43,18 @@ const ActionsCell = ({
 
   return (
     <TableCell>
-      {actionsBadgeData.showBadge ? (
+      {actionsBadgeData.showBadge && (
         <NotificationBadge
           data-cy={`actionsCellBadge-${programmeData.koulutusohjelmakoodi}`}
           tooltip={t('keyData:missingMeasure')}
           variant="medium"
         />
-      ) : null}
-      {actionsBadgeData.showIcon ? (
+      )}
+      {actionsBadgeData.showIcon && (
         <Button onClick={handleOpen}>
           <ChatBubbleOutlineIcon color="secondary" sx={{ fontSize: '28px' }} />
         </Button>
-      ) : null}
+      )}
       <Modal open={open} setOpen={setOpen}>
         <Typography variant="h3">
           {programmeData.koulutusohjelma[lang]} {year}

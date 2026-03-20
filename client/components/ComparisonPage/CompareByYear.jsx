@@ -132,7 +132,8 @@ const CompareByYear = ({
   const filters = useSelector(state => state.filters)
   const { multipleYears, questions } = filters
 
-  const chosenKeys = programmes.chosen.map(p => p.key ?? (filters.form === formKeys.EVALUATION_FACULTIES && p.code))
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const chosenKeys = programmes.chosen.map(p => p.key || (filters.form === formKeys.EVALUATION_FACULTIES && p.code))
 
   const data = getTotalColors({
     allAnswers,

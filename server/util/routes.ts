@@ -112,7 +112,7 @@ router.get('/keydata/:year', requireRead, async (req, res) => {
 router.post('/keydata', checkAdmin, async (req, res) => {
   await keyData.uploadKeyData(req, res)
 })
-router.get('/keymetadata', requireRead, async (req, res) => {
+router.get('/keydata/meta', requireRead, async (req, res) => {
   await keyData.getKeyDataMeta(req, res)
 })
 router.delete('/keydata/:id', checkAdmin, async (req, res) => {

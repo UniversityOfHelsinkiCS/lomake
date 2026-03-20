@@ -763,7 +763,8 @@ export const answersByQuestions = ({
   }
   const answerMap = new Map()
   const chosenKeys = chosenProgrammes.map(
-    p => p.key ?? ((form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) && p.code)
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+    p => p.key || ((form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) && p.code)
   )
   if (!selectedAnswers) return new Map()
   selectedAnswers.forEach(programme => {

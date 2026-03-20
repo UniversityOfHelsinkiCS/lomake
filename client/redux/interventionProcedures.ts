@@ -12,6 +12,7 @@ const interventionProceduresApi = RTKApi.injectEndpoints({
         url: `/interventionprocedures/${studyprogrammeKey}`,
         method: 'get',
       }),
+      providesTags: ['InterventionProcedures'],
     }),
     getActiveInterventionProcedures: builder.query<InterventionProcedureType[], void>({
       query: () => ({

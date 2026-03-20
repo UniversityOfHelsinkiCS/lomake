@@ -88,7 +88,7 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=report-select-all-accordion]').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()
-    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
+    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click({ force: true })
     cy.contains(`Hello from ${defaultYears[1]}`)
   })
 

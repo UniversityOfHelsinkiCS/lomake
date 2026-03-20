@@ -70,7 +70,17 @@ export const handleRequest = store => next => async action => {
 
 export const RTKApi = createApi({
   reducerPath: 'api',
-  tagTypes: ['Organisation', 'Documents', 'Reports', 'Lock', 'KeyData', 'KeyDataMeta', 'Auth', 'QualityDocuments'],
+  tagTypes: [
+    'Organisation',
+    'Documents',
+    'Reports',
+    'Lock',
+    'KeyData',
+    'KeyDataMeta',
+    'InterventionProcedures',
+    'Auth',
+    'QualityDocuments',
+  ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${basePath}api`,
     prepareHeaders: headers => {

@@ -38,20 +38,23 @@ const InterventionComponent = () => {
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const navigate = useNavigate()
-  const { data: documents = [] } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
+  const { data: documents = [] } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey ?? '' })
   const user = useAppSelector(state => state.currentUser.data)
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
-  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
+  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey ?? '' })
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
+  const hasWriteRights = (programmeKey && user.access[programmeKey]?.write) || isAdmin(user)
 
   const [reason, setReason] = useState('')
   const [additionalInfo, setAdditionalInfo] = useState('')
 
   const [closeInterventionProcedure] = useCloseInterventionProcedureMutation()
   const [deleteDocument] = useDeleteDocumentMutation()
+  const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({
+    studyprogrammeKey: programmeKey ?? '',
+  })
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
@@ -68,10 +71,6 @@ const InterventionComponent = () => {
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData[0], t, selectedYear })
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({
-    studyprogrammeKey: programmeKey,
-  })
   const hasActiveInterventionProceduresForSameOrEarlierYears = interventionProcedures.some(
     (procedure: InterventionProcedureType) => procedure.active && procedure.startYear <= selectedYear
   )
@@ -82,7 +81,7 @@ const InterventionComponent = () => {
   const handleDelete = (id: string) => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
     if (isConfirmed) {
-      deleteDocument({ studyprogrammeKey: programmeKey, id })
+      deleteDocument({ studyprogrammeKey: programmeKey ?? '', id })
     }
   }
 
@@ -93,7 +92,7 @@ const InterventionComponent = () => {
         reason,
         additionalInfo,
       }
-      closeInterventionProcedure({ studyprogrammeKey: programmeKey, data })
+      closeInterventionProcedure({ studyprogrammeKey: programmeKey ?? '', data })
     }
   }
 

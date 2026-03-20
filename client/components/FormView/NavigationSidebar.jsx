@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable camelcase */
 import { Message, Icon } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
@@ -124,7 +125,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
               partNumber = 0
             }
             const titleFromJson = section.title[lang]
-            const title = replaceTitle[titleFromJson] ?? titleFromJson
+            const title = replaceTitle[titleFromJson] || titleFromJson
             const romanNumeral = getCorrectRomanNumeral(index, formType)
             const active = location.hash === `#${romanNumeral}`
             if (formDataFilter?.find(f => f === section.id)) {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -32,7 +33,7 @@ const Form = ({ questions, programmeKey, form }) => {
 
   const partMap = part => {
     const summary =
-      part.id.includes('meta') ?? part.id.includes('information_needed') ?? part.id.includes('information_used')
+      part.id.includes('meta') || part.id.includes('information_needed') || part.id.includes('information_used')
 
     const divStyle = summary
       ? {

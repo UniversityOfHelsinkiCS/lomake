@@ -132,7 +132,8 @@ export default () => {
       const name = prog.name[lang]
       const code = prog.key
       return (
-        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ??
+        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
         code.toLowerCase().includes(debouncedFilter.toLowerCase())
       )
     })
