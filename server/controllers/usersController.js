@@ -38,7 +38,6 @@ const getCurrentUser = async (req, res) => {
 
 const getLogoutUrl = async (req, res) => {
   try {
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const logoutUrl = req.headers.shib_logout_url || req.headers.logout_url
     const { returnUrl } = req.body
     if (logoutUrl) {

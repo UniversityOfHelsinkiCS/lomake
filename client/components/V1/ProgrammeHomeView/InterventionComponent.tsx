@@ -44,7 +44,6 @@ const InterventionComponent = () => {
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey ?? '' })
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const hasWriteRights = (programmeKey && user.access[programmeKey]?.write) || isAdmin(user)
 
   const [reason, setReason] = useState('')
