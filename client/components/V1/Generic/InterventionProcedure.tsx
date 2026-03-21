@@ -62,7 +62,6 @@ const InterventionProcedure = () => {
   const document =
     documents.length > 0 || !isFetching ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
   if (isLoading) return <Loader active />
@@ -71,6 +70,7 @@ const InterventionProcedure = () => {
   const programmeData = programme.find(
     (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey
   )
+  if (!programmeData) return null
 
   const year = `${programmeData.year + 1}`
 

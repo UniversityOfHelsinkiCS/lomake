@@ -126,7 +126,6 @@ const ProgrammeYearlyView = () => {
   const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null
   const user = useAppSelector(state => state.currentUser.data)
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const writeAccess = user.access[studyprogrammeKey]?.write || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user)
 
@@ -192,11 +191,11 @@ const ProgrammeYearlyView = () => {
     }
   }, [programmeData, location.hash])
 
+  if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('form')} t={t} />
+
   if (isLoading) {
     return <CircularProgress />
   }
-
-  if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('form')} t={t} />
 
   if (!isValidYear(parseInt(year), programme)) {
     navigate('/404')
@@ -211,6 +210,7 @@ const ProgrammeYearlyView = () => {
   }
 
   const KeyDataPoints = getKeyDataPoints(t)
+  if (!programmeData) return null
 
   return (
     <Box sx={{ width: '75%' }}>

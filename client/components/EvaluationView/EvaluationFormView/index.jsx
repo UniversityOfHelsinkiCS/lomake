@@ -82,13 +82,12 @@ const EvaluationFormView = () => {
 
   const year = getYearToShow({ draftYear, nextDeadline, form }) || new Date().getFullYear()
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const faculty = programme?.primaryFaculty?.code || ''
   const summaryURL = `/evaluation/previous-years/${room}`
   const oodiProgURL = `https://oodikone.helsinki.fi/evaluationoverview/programme/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${faculty}`
   const rapoLink = `https://rapocloud.it.helsinki.fi/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FHelsingin%20yliopiston%20dashboardit%2F_portal%2FTohtorikoulutus&Page=Tohtoriohjelman%20vuosiseuranta%20%2F%20Annual%20review%20by%20doctoral%20programme`
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
   const writeAccess = user.access[room]?.write || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
@@ -256,7 +255,7 @@ const EvaluationFormView = () => {
                 </a>
               </>
             )}
-            {room.startsWith('T') ? (
+            {room.startsWith('T') && (
               <div style={{ marginTop: '1em' }}>
                 <a data-cy={`link-to-rapo-${room}`} href={rapoLink} rel="noreferrer" target="_blank">
                   <h4>
@@ -264,7 +263,7 @@ const EvaluationFormView = () => {
                   </h4>
                 </a>
               </div>
-            ) : null}
+            )}
             <div style={{ marginTop: '1em' }}>
               <h4 dangerouslySetInnerHTML={{ __html: t('formView:langCenterRaport') }} />
             </div>

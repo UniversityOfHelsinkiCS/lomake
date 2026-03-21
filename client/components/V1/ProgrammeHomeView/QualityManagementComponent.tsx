@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-leaked-render */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable no-alert */
@@ -31,7 +32,6 @@ const QualityManagementComponent = () => {
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
   const { isLoading } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
   const [deleteDocument] = useDeleteQualityDocumentMutation()
@@ -83,14 +83,14 @@ const QualityManagementComponent = () => {
                     <Typography variant="h4">{t('qualitydocument:curriculumProcessHeader')}</Typography>
                     <Typography variant="h5">{t('qualitydocument:curriculumProcess')}:</Typography>
                     <Typography color={doc.data.curriculumProcess ? 'default' : 'secondary'}>
-                      {doc.data.curriculumProcess ?? t('common:empty')}
+                      {doc.data.curriculumProcess || t('common:empty')}
                     </Typography>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                     <Typography variant="h4">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
                     <Typography variant="h5">{t('qualitydocument:guidancePolicies')}:</Typography>
                     <Typography color={doc.data.guidancePolicies ? 'default' : 'secondary'}>
-                      {doc.data.guidancePolicies ?? t('common:empty')}
+                      {doc.data.guidancePolicies || t('common:empty')}
                     </Typography>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -132,7 +132,7 @@ const QualityManagementComponent = () => {
                   </div>
                 </div>
                 <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right', gap: '1rem' }}>
-                  {hasWriteRights ? (
+                  {hasWriteRights && (
                     <Button
                       data-cy={`accordion-${index}-edit-qualitydocument-button`}
                       onClick={() => navigate(`${basePath}v1/programmes/10/${programmeKey}/qualitydocument/${doc.id}`)}
@@ -141,7 +141,7 @@ const QualityManagementComponent = () => {
                     >
                       {t('document:edit')}
                     </Button>
-                  ) : null}
+                  )}
                   {isAdmin(user) && (
                     <Button
                       color="error"
@@ -158,7 +158,7 @@ const QualityManagementComponent = () => {
             </Accordion>
           ))}
 
-        {hasWriteRights && documents.length === 0 && activeYear > 2025 ? (
+        {hasWriteRights && documents.length === 0 && activeYear > 2025 && (
           <Box>
             <Button
               data-cy="create-new-qualitydocument"
@@ -169,7 +169,7 @@ const QualityManagementComponent = () => {
               {t('document:newDocument')}
             </Button>
           </Box>
-        ) : null}
+        )}
       </Box>
     </Box>
   )

@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+/* eslint-disable react/jsx-no-leaked-render */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown, Button, Menu, MenuItem } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router'
 import ReactMarkdown from 'react-markdown'
 import { filterFromUrl } from '../../util/common'
 import { useVisibleOverviewProgrammes } from '../../util/overview'
@@ -19,6 +18,7 @@ import StatsContent from './StatsContent'
 import ColorTable from './ColorTable'
 import ProgramControlsContent from './ProgramControlsContent'
 import './OverviewPage.scss'
+import { Link } from '../Link'
 
 export default () => {
   const { t } = useTranslation()
@@ -74,10 +74,9 @@ export default () => {
     if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
     return false
   }, [currentUser])
-
   return (
     <>
-      {modalData ? (
+      {modalData && (
         <CustomModal borderColor={modalData.color} closeModal={() => setModalData(null)} title={modalData.header}>
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
@@ -86,22 +85,22 @@ export default () => {
             </div>
           </>
         </CustomModal>
-      ) : null}
+      )}
 
-      {programControlsToShow ? (
+      {programControlsToShow && (
         <CustomModal
           closeModal={() => setProgramControlsToShow(null)}
           title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] || programControlsToShow.name.en}`}
         >
           <ProgramControlsContent programKey={programControlsToShow.key} />
         </CustomModal>
-      ) : null}
+      )}
 
-      {statsToShow ? (
+      {statsToShow && (
         <CustomModal closeModal={() => setStatsToShow(null)} title={statsToShow.title}>
           <StatsContent stats={statsToShow.stats} />
         </CustomModal>
-      ) : null}
+      )}
 
       {usersProgrammes.length > 0 ? (
         <>
@@ -110,16 +109,16 @@ export default () => {
               <h2>{t('yearlyAssessment').toUpperCase()}</h2>
             </MenuItem>
             <MenuItem>
-              <Button as={Link} data-cy="nav-report" secondary size="big" to="/report">
+              <Button as={Link} data-cy="nav-report" secondary size="big" to={'/report'}>
                 {t('overview:readAnswers')}
               </Button>
             </MenuItem>
             <MenuItem>
-              {moreThanFiveProgrammes ? (
-                <Button as={Link} data-cy="nav-comparison" size="big" to="/comparison">
+              {moreThanFiveProgrammes && (
+                <Button as={Link} data-cy="nav-comparison" size="big" to={'/comparison'}>
                   {t('overview:compareAnswers')}
                 </Button>
-              ) : null}
+              )}
             </MenuItem>
             <MenuItem>
               <YearSelector size="extra-small" />

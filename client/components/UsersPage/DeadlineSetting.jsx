@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-leaked-render */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
@@ -141,7 +142,7 @@ const DeadlineSetting = () => {
           showYearDropdown
         />
       </div>
-      {warning ? (
+      {warning && (
         <p>
           <b>
             <span className="deadline-warning" data-cy="previousDeadline-warning">
@@ -149,7 +150,7 @@ const DeadlineSetting = () => {
             </span>
           </b>
         </p>
-      ) : null}
+      )}
       <Button
         compact
         data-cy="updateDeadline"
@@ -160,11 +161,11 @@ const DeadlineSetting = () => {
       >
         {formDeadline ? t('users:updateDeadline') : `${t('users:updateDeadline')} and draft year`}
       </Button>
-      {formDeadline && form ? (
+      {formDeadline && form && (
         <Button compact data-cy="deleteDeadline" negative onClick={handleDelete} size="mini">
           {t('users:deleteThisDeadline')}
         </Button>
-      ) : null}
+      )}
       <div style={{ margin: '1em 0em' }}>
         <p>
           <b>

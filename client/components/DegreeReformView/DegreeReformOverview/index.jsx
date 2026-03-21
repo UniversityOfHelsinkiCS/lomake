@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-leaked-render */
 /* eslint-disable react/jsx-key */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useMemo } from 'react'
@@ -132,7 +133,6 @@ export default () => {
       const name = prog.name[lang]
       const code = prog.key
       return (
-        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         name.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
         code.toLowerCase().includes(debouncedFilter.toLowerCase())
       )
@@ -166,8 +166,8 @@ export default () => {
   }
   return (
     <>
-      {faculty ? <h2 style={{ marginTop: 5 }}>{nameOf(faculty)}</h2> : null}
-      {modalData ? (
+      {faculty && <h2 style={{ marginTop: 5 }}>{nameOf(faculty)}</h2>}
+      {modalData && (
         <CustomModal borderColor={modalData.color} closeModal={() => setModalData(null)} title={modalData.header}>
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
@@ -176,22 +176,22 @@ export default () => {
             </div>
           </>
         </CustomModal>
-      ) : null}
+      )}
 
-      {programControlsToShow ? (
+      {programControlsToShow && (
         <CustomModal
           closeModal={() => setProgramControlsToShow(null)}
-          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ?? programControlsToShow.name.en}`}
+          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] || programControlsToShow.name.en}`}
         >
           <ProgramControlsContent form={getForm(formType)} programKey={programControlsToShow.key} />
         </CustomModal>
-      ) : null}
+      )}
 
-      {statsToShow ? (
+      {statsToShow && (
         <CustomModal closeModal={() => setStatsToShow(null)} title={statsToShow.title}>
           <StatsContent statsToShow={statsToShow} />
         </CustomModal>
-      ) : null}
+      )}
 
       {usersProgrammes.length > 0 ? (
         <>
@@ -258,7 +258,7 @@ export default () => {
               showAllProgrammes={showAllProgrammes}
             />
           </div>
-          {faculty ? (
+          {faculty && (
             <div style={{ marginTop: 50 }}>
               <h3>{t('generic:individualTxt')}</h3>
               <Radio
@@ -269,8 +269,8 @@ export default () => {
                 toggle
               />
             </div>
-          ) : null}
-          {textualVisible ? <TextualAnswers reformAnswers={reformAnswers} /> : null}
+          )}
+          {textualVisible && <TextualAnswers reformAnswers={reformAnswers} />}
         </>
       ) : (
         <NoPermissions requestedForm={t('degree-reform')} t={t} />
