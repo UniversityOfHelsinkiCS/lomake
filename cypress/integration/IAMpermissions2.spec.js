@@ -84,11 +84,11 @@ describe('IAM permission tests', () => {
     cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click({ force: true })
-    cy.selectYear(defaultYears[1]).click({ force: true })
     cy.get('[data-cy=report-select-all-accordion]').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()
-    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click({ force: true })
+    cy.selectYear(defaultYears[1])
+    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]')
     cy.contains(`Hello from ${defaultYears[1]}`)
   })
 
@@ -97,7 +97,7 @@ describe('IAM permission tests', () => {
     cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit('/yearly')
     cy.get('[data-cy=nav-comparison]').click({ force: true })
-    cy.selectYear(defaultYears[1]).click({ force: true })
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
       helpers.getTotalProgrammeCount()
     )

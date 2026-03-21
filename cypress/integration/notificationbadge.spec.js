@@ -19,7 +19,7 @@ describe('Notification badge tests', () => {
     cy.get('.react-datepicker__navigation--next').click() // Go to next month
     cy.get('.react-datepicker__day--014').click() // Select 14th day
 
-    cy.get('[data-cy=updateDeadline]').click()
+    cy.get('[data-cy=updateDeadline]').click({ force: true }) // sometimes still behind the datepicker
     cy.get('[data-cy=form-10-deadline]').contains('14.')
 
     cy.visit('/v1/overview')
