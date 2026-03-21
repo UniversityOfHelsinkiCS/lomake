@@ -37,7 +37,6 @@ const PastAnswersView = () => {
   const allProgrammes = useSelector(state => state.studyProgrammes.data)
   const programme = Object.values(allProgrammes).find(p => p.key === programmeKey)
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const readAccess = user.access[programmeKey]?.read || isAdmin(user)
   const questionsList = modifiedQuestions(lang, filters.form)
 

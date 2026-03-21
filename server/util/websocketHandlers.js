@@ -114,7 +114,7 @@ const joinRoom = async (socket, room, form, io) => {
       currentEditors = clearCurrentUser(currentUser)
       socket.join(room)
       emitCurrentEditorsTo(io, room, currentEditors)
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
       logAndEmit(socket, 'new_form_data', answer.data || {})
     }
   } catch (error) {

@@ -17,7 +17,7 @@ const FacultyMonitoringOverview = () => {
 
   const hasReadRights = (faculties, user) => {
     const readRights = faculties?.some(faculty => user.access[faculty.code]?.read)
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
     return readRights || user.specialGroup?.evaluationFaculty || isAdmin(user)
   }
 

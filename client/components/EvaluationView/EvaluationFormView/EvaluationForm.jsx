@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useSelector } from 'react-redux'
 import { formKeys } from '../../../../config/data'
 

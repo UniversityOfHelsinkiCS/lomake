@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useSelector } from 'react-redux'
 import Textarea from '../../Generic/Textarea'
 import Entity from '../../Generic/Entity'

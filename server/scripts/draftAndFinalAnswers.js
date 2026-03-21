@@ -124,7 +124,6 @@ const createDraftAnswers = async (newYear, form) => {
 
     // Save the current answers as tempanswers
     toOpen.forEach(async obj => {
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
       const key = obj?.key || obj?.code
       const answers = await db.answer.findOne({
         where: {

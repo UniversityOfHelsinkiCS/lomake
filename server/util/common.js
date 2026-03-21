@@ -43,7 +43,7 @@ const API_TOKEN = process.env.API_TOKEN ?? ''
 const whereDraftYear = async () => {
   const draftYears = await db.draftYear.findAll({})
   const draftYear = draftYears.length ? draftYears[0].year : new Date().getFullYear()
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
   return draftYear || { [Op.is]: null }
 }
 

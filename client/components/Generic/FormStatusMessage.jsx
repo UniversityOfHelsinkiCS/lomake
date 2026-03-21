@@ -17,7 +17,7 @@ const FormStatusMessage = ({ programme, form }) => {
 
   const deadlineDate = formDeadline?.date ? new Date(formDeadline.date) : undefined
   const locale = lang !== 'se' ? lang : 'sv'
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
   const writeAccess = user.access[programme]?.write || isAdmin(user)
 
   useEffect(() => {

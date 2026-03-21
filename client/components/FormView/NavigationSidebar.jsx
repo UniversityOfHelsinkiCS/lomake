@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable camelcase */
 import { Message, Icon } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'

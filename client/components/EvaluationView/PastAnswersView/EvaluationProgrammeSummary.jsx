@@ -37,7 +37,6 @@ const ViewEvaluationAnswersForFaculty = () => {
   const allProgrammes = useSelector(state => state.studyProgrammes.data)
   const facultyProgrammes = Object.values(allProgrammes).filter(p => p.primaryFaculty.code === programmeKey)
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const readAccess = user.access[programmeKey]?.read || isAdmin(user)
   const questionsList = modifiedQuestions(lang, filters.form)
 

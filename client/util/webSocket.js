@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable import-x/no-named-as-default */
 
 import io from 'socket.io-client'

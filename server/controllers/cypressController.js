@@ -208,7 +208,6 @@ const seed = async (_, res) => {
 }
 
 const createAnswers = async (req, res) => {
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const form = req.params.form || 1
   try {
     logger.info('Cypress::creating answers')
@@ -249,7 +248,6 @@ const createAnswers = async (req, res) => {
 }
 
 const createFacultyAnswers = async (req, res) => {
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const form = req.params.form || 8
   try {
     logger.info('Cypress::creating answers')

@@ -111,6 +111,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-member-access': 'off', // TODO: enable
       '@typescript-eslint/no-unsafe-return': 'off', // TODO: enable
       '@typescript-eslint/restrict-template-expressions': 'off',
+      "@typescript-eslint/prefer-nullish-coalescing": 'off',
     },
     settings: {
       'import-x/internal-regex': '^@lomake/shared/',

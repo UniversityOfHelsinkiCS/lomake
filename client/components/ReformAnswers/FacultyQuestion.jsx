@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useSelector } from 'react-redux'
 import { Loader, Table } from 'semantic-ui-react'
 import { useGetOrganisationDataQuery } from '@/client/redux/organisation'

@@ -38,7 +38,7 @@ const FacultyColorTable = React.memo(
     const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
     const filterYear = useSelector(({ filters }) => filters.year)
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
     const year = filterYear || new Date().getFullYear()
 
     useEffect(() => {
@@ -70,13 +70,13 @@ const FacultyColorTable = React.memo(
       if (!selectedAnswers) return {}
       return sortedFaculties.reduce((statObject, { code }) => {
         const faculty = selectedAnswers.find(a => a.programme === code && a.form === form)
-        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
         const answers = faculty?.data || {}
         Object.keys(answers).forEach(answerKey => {
           if (answerKey.includes('_light')) {
             const color = answers[answerKey] // "red", "yellow", "green" or ""
             const baseKey = answerKey.replace('_light', '')
-            // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
             if (!statObject[baseKey]) statObject[baseKey] = {}
 
             statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
