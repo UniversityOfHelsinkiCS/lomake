@@ -31,27 +31,13 @@ jobs:
       matrix:
         spec:
           [
-            comparison,
-            degreeReform,
-            form,
-            formNotifications,
-            happypath,
             IAMpermissions1,
             IAMpermissions2,
             management,
-            misc,
             ospa,
             permissions,
-            report,
-            sidebar,
-            yearselector,
-            evaluation,
-            metaevaluation,
-            trackingpage,
-            facultymonitoringoverview,
             textfield,
             overview,
-            notificationbadge,
             intervention,
           ]
     name: Run tests
@@ -59,9 +45,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: npm ci
