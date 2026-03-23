@@ -86,7 +86,7 @@
     "umzug": "3.3.1",
     "unfuck-spa-shibboleth-session": "5.0.0",
     "uuid": "11.0.0",
-    "vite": "7.0.0",
+    "vite": "7.0.8",
     "vite-plugin-socket-io": "1.0.2",
     "winston": "3.17.0",
     "winston-gelf-transporter": "1.0.2",
