@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button, Input } from 'semantic-ui-react'
 
 import './Generic.scss'
@@ -7,15 +6,15 @@ const ProgrammeFilter = ({ onEmpty, handleChange, filter, label, t, size = 'norm
   <div className={`programme-filter-${size}`}>
     <label>{label}</label>
     <Input
-      data-cy="programme-filter"
-      name="filter"
       className="programme-filter-input"
+      data-cy="programme-filter"
       icon="search"
-      placeholder={t('programmeFilter')}
+      name="filter"
       onChange={handleChange}
+      placeholder={t('programmeFilter')}
       value={filter}
     />
-    <Button onClick={onEmpty} className="empty-answer" basic color="red" icon="close" />
+    <Button basic className="empty-answer" color="red" icon="close" onClick={onEmpty} />
   </div>
 )
 

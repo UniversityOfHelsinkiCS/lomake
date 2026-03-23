@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { useState, useEffect } from 'react'
 import { Divider, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from '../../redux/formReducer'
@@ -10,7 +12,7 @@ import './Generic.scss'
 const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions, direction, formType, hidePopup }) => {
   const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
-  const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
+  const dataFromRedux = useSelector(({ form }) => form.data[id] ?? '')
   const lang = useSelector(state => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
@@ -55,12 +57,13 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   }
   const hidePopupTrue = hidePopup === true
   return (
-    <div key={`${id}-${formType}-${lang}`} className="form-choose-radio-area" data-cy={`choose-radio-container-${id}`}>
+    <div className="form-choose-radio-area" data-cy={`choose-radio-container-${id}`} key={`${id}-${formType}-${lang}`}>
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <h3>
-            {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            {label}{' '}
+            {required ? <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span> : null}
           </h3>
         </div>
       </div>
@@ -74,14 +77,14 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
       )}
       <Form disabled={viewOnly}>
         <BasicRadio
-          id={id}
+          checked={state.value}
           direction={direction}
           handleClick={handleClick}
-          checked={state.value}
-          viewOnly={viewOnly}
-          radioButtonLabels={radioButtonLabels}
           hidePopup={hidePopupTrue}
+          id={id}
+          radioButtonLabels={radioButtonLabels}
           type="choose"
+          viewOnly={viewOnly}
         />
       </Form>
     </div>

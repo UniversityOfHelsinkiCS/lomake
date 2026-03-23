@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-await-in-loop */
 import logger from '../util/logger.js'
 import { facultyMap } from '../../config/data.js'
 import { getOrganisationData } from '../util/jami.js'
@@ -28,7 +26,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
           where: {
             code,
           },
-        },
+        }
       )
     } else {
       existingFaculties.push(code)
@@ -58,7 +56,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
             where: {
               key,
             },
-          },
+          }
         )
       } else {
         existingStudyProgrammeKeys.push(key)

@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom' //  Redirect
+import { Route, Routes } from 'react-router' //  Navigate
 
 import AboutPage from './AboutPage'
 import FormView from './FormView'
@@ -39,88 +39,54 @@ import QualityManagement from './V1/Generic/QualityManagement'
 export default () => (
   <div className="content">
     <ErrorBoundary>
-      <Switch>
-        <Route exact path="/" component={Homepage} />
-        <Route exact path="/yearly" component={OverviewPage} />
-        <Route exact path="/admin" component={AdminPage} />
-        <Route exact path="/report" component={ReportPage} />
-        <Route exact path="/comparison" component={ComparisonPage} />
-        <Route exact path="/about" component={AboutPage} />
-        <Route exact path="/yearly/form/:form/:room" render={props => <FormView room={props.match.params.room} />} />
+      <Routes>
+        <Route element={<Homepage />} exact path="/" />
+        <Route element={<OverviewPage />} exact path="/yearly" />
+        <Route element={<AdminPage />} exact path="/admin" />
+        <Route element={<ReportPage />} exact path="/report" />
+        <Route element={<ComparisonPage />} exact path="/comparison" />
+        <Route element={<AboutPage />} exact path="/about" />
+        <Route element={<FormView />} exact path="/yearly/form/:form/:room" />
 
-        <Route exact path="/meta-evaluation" component={ProgrammeLevelMetaOverview} />
-        <Route exact path="/meta-evaluation/answers" component={ProgrammeLevelAnswers} />
-        <Route
-          exact
-          path="/meta-evaluation/form/:form/:room"
-          render={props => (
-            <ProgrammeLevelMetaForm room={props.match.params.room} formString={props.match.params.form} />
-          )}
-        />
+        <Route element={<ProgrammeLevelMetaOverview />} exact path="/meta-evaluation" />
+        <Route element={<ProgrammeLevelAnswers />} exact path="/meta-evaluation/answers" />
+        <Route element={<ProgrammeLevelMetaForm />} exact path="/meta-evaluation/form/:form/:room" />
 
-        <Route exact path="/faculty-monitoring" component={FacultyMonitoringOverview} />
-        <Route
-          exact
-          path="/faculty-monitoring/:faculty"
-          render={props => <FacultyTrackingView faculty={props.match.params.faculty} />}
-        />
+        <Route element={<FacultyMonitoringOverview />} exact path="/faculty-monitoring" />
+        <Route element={<FacultyTrackingView />} exact path="/faculty-monitoring/:faculty" />
 
-        <Route exact path="/evaluation" component={ProgrammeLevelOverview} />
-        <Route exact path="/evaluation-faculty" component={FacultyLevelOverview} />
-        <Route exact path="/evaluation-university" component={CommitteeLevelOverview} />
-        <Route exact path="/degree-reform" component={DegreeReformOverview} />
+        <Route element={<ProgrammeLevelOverview />} exact path="/evaluation" />
+        <Route element={<FacultyLevelOverview />} exact path="/evaluation-faculty" />
+        <Route element={<CommitteeLevelOverview />} exact path="/evaluation-university" />
+        <Route element={<DegreeReformOverview />} exact path="/degree-reform" />
+        <Route element={<DegreeReformFormView />} exact path="/degree-reform/form/:room" />
+        <Route element={<DegreeReformIndividualForm />} exact path="/individual" />
+        <Route element={<EvaluationFormView />} exact path="/evaluation/form/:form/:room" />
+        <Route element={<FacultyFormView />} exact path="/evaluation-faculty/form/:form/:room" />
+        <Route element={<UniversityFormView />} exact path="/evaluation-university/form/:form/:room" />
+        <Route element={<CommitteePrinting />} exact path="/evaluation-university/printing" />
+        <Route element={<PastAnswersView />} exact path="/evaluation/previous-years/:programme" />
+        <Route element={<PastAnswersViewFaculty />} exact path="/evaluation-faculty/previous-years/:faculty" />
         <Route
+          element={<ViewEvaluationAnswersForFaculty />}
           exact
-          path="/degree-reform/form/:room"
-          render={props => <DegreeReformFormView room={props.match.params.room} />}
+          path="/evaluation-faculty/programme-summary/:faculty"
         />
-        <Route exact path="/individual" component={DegreeReformIndividualForm} />
-        <Route
-          exact
-          path="/evaluation/form/:form/:room"
-          render={props => <EvaluationFormView room={props.match.params.room} formString={props.match.params.form} />}
-        />
-        <Route
-          exact
-          path="/evaluation-faculty/form/:form/:room"
-          render={props => <FacultyFormView room={props.match.params.room} formString={props.match.params.form} />}
-        />
-        <Route
-          exact
-          path="/evaluation-university/form/:form/:room"
-          render={props => <UniversityFormView room={props.match.params.room} formString={props.match.params.form} />}
-        />
-        <Route exact path="/evaluation-university/printing" component={CommitteePrinting} />
-        <Route
-          exact
-          path="/evaluation/previous-years/:programme"
-          render={props => <PastAnswersView programmeKey={props.match.params.programme} />}
-        />
-        <Route
-          exact
-          path="/evaluation-faculty/previous-years/:faculty"
-          render={props => <PastAnswersViewFaculty programmeKey={props.match.params.faculty} />}
-        />
-        <Route
-          exact
-          path="/evaluation-faculty/programme-evaluation-summary/:faculty"
-          render={props => <ViewEvaluationAnswersForFaculty programmeKey={props.match.params.faculty} />}
-        />
-        <Route exact path="/reform-answers" component={ReformAnswers} />
-        <Route exact path="/v1/overview" component={OverviewPageV1} />
-        <Route exact path="/v1/programmes/:form/:programme" component={ProgrammeHomeView} />
-        <Route exact path="/V1/programmes/:form/:programme/document/new" component={InterventionProcedure} />
-        <Route exact path="/V1/programmes/:form/:programme/document/:id" component={InterventionProcedure} />
-        <Route exact path="/V1/programmes/:form/:programme/qualitydocument/new" component={QualityManagement} />
-        <Route exact path="/V1/programmes/:form/:programme/qualitydocument/:id" component={QualityManagement} />
-        <Route exact path="/v1/programmes/:form/:programme/:year" component={ProgrammeYearlyView} />
+        <Route element={<ReformAnswers />} exact path="/reform-answers" />
+        <Route element={<OverviewPageV1 />} exact path="/v1/overview" />
+        <Route element={<ProgrammeHomeView />} exact path="/v1/programmes/:form/:programme" />
+        <Route element={<InterventionProcedure />} exact path="/V1/programmes/:form/:programme/document/new" />
+        <Route element={<InterventionProcedure />} exact path="/V1/programmes/:form/:programme/document/:id" />
+        <Route element={<QualityManagement />} exact path="/V1/programmes/:form/:programme/qualitydocument/new" />
+        <Route element={<QualityManagement />} exact path="/V1/programmes/:form/:programme/qualitydocument/:id" />
+        <Route element={<ProgrammeYearlyView />} exact path="/v1/programmes/:form/:programme/:year" />
 
         {/* Route for programmatic redirects */}
-        <Route exact path="/404" component={Page404} />
+        <Route element={<Page404 />} exact path="/404" />
 
         {/* Catch-all route for undefined paths */}
-        <Route component={Page404} />
-      </Switch>
+        <Route element={<Page404 />} />
+      </Routes>
     </ErrorBoundary>
   </div>
 )

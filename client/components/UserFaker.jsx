@@ -1,5 +1,4 @@
-/* eslint-disable react/button-has-type */
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default () => {
   const [faker, setFaker] = useState(null)
@@ -28,7 +27,7 @@ export default () => {
 
   return (
     <div>
-      <button onMouseEnter={onHover} onMouseLeave={() => setInfo(null)} onClick={onClick}>
+      <button onClick={onClick} onMouseEnter={onHover} onMouseLeave={() => setInfo(null)}>
         {faker ? 'turn faker off' : 'turn faker on'}
       </button>
       <span style={{ marginLeft: 15 }}>{info}</span>

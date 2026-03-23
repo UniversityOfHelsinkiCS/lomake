@@ -1,4 +1,3 @@
-import React from 'react'
 import './Generic.scss'
 import Actions from './Actions'
 
@@ -40,7 +39,6 @@ const ActionsUniversity = ({
       }
     }
 
-    // eslint-disable-next-line consistent-return
     return {
       marginTop: 30,
       marginBottom: 10,
@@ -60,57 +58,57 @@ const ActionsUniversity = ({
       {questionLevels.map(questionLevel => {
         const isArviointi = questionLevel.level === 'arviointi'
         return (
-          <div style={styleFor(questionLevel)} key={`uni-${id}-${questionLevel.level}`}>
+          <div key={`uni-${id}-${questionLevel.level}`} style={styleFor(questionLevel)}>
             <Actions
+              description={description}
+              extrainfo={extrainfo}
+              form={form}
               id={`${id}-${questionLevel.level}-bachelor`}
               isArviointi={isArviointi}
               label={label}
-              description={description}
-              form={form}
-              required={required}
-              extrainfo={extrainfo}
               programme={programme}
-              summaryData={summaryData}
               questionLevel={questionLevel}
+              required={required}
+              summaryData={summaryData}
             >
               {' '}
             </Actions>
             <Actions
+              description={description}
+              extrainfo={extrainfo}
+              form={form}
               id={`${id}-${questionLevel.level}-master`}
               isArviointi={isArviointi}
               label={label}
-              description={description}
-              form={form}
-              required={required}
-              extrainfo={extrainfo}
               programme={programme}
+              required={required}
               summaryData={summaryData}
             >
               {' '}
             </Actions>
             <Actions
+              description={description}
+              extrainfo={extrainfo}
+              form={form}
               id={`${id}-${questionLevel.level}-doctoral`}
               isArviointi={isArviointi}
               label={label}
-              description={description}
-              form={form}
-              required={required}
-              extrainfo={extrainfo}
               programme={programme}
+              required={required}
               summaryData={summaryData}
             >
               {' '}
             </Actions>
             {questionLevel.level === 'arviointi' && !noUniversityLevel && (
               <Actions
+                description={description}
+                extrainfo={extrainfo}
+                form={form}
                 id={`${id}-${questionLevel.level}-overall`}
                 isArviointi={isArviointi}
                 label={label}
-                description={description}
-                form={form}
-                required={required}
-                extrainfo={extrainfo}
                 programme={programme}
+                required={required}
                 summaryData={summaryData}
               >
                 {' '}

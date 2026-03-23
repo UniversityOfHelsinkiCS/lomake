@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -41,21 +40,21 @@ const FacultyFilter = ({ label }) => {
           key: f.code,
           value: f.code,
           text: f.name[lang],
-        })),
+        }))
     )
   }
   return (
     <div>
       <label>{label}</label>
       <Dropdown
+        className="responsive-dropdown"
         data-cy="faculty-filter"
         fluid
         multiple
-        selection
-        options={faculties ? getOptions() : []}
         onChange={handleChange}
+        options={faculties ? getOptions() : []}
+        selection
         value={selectedFaculties}
-        className="responsive-dropdown"
       />
     </div>
   )

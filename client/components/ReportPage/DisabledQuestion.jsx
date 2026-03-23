@@ -1,4 +1,3 @@
-import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
 import { romanize } from '../../util/common'
 import { useSelector } from 'react-redux'
@@ -9,13 +8,13 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => {
 
   return (
     <Accordion.Title
-      index={question.id}
-      data-cy={`report-question-disabled-${question.id}`}
       className="question-header-disabled"
+      data-cy={`report-question-disabled-${question.id}`}
       id={question.labelIndex}
+      index={question.id}
     >
       <Grid>
-        <Grid.Column width={1} className="question-caret noprint" />
+        <Grid.Column className="question-caret noprint" width={1} />
         <Grid.Column width={11}>
           <span>
             <small className="question-title-disabled">
@@ -30,8 +29,8 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => {
           <p className="question-description-disabled">{question.description}</p>
           <p className="question-extrainfo">{question.extrainfo}</p>
         </Grid.Column>
-        <Grid.Column width={4} floated="right">
-          <Label data-cy={`answered-label-${question.id}`} className="question-answered-label-disabled" size="large">
+        <Grid.Column floated="right" width={4}>
+          <Label className="question-answered-label-disabled" data-cy={`answered-label-${question.id}`} size="large">
             0 / {chosenProgrammes.length}
           </Label>
         </Grid.Column>

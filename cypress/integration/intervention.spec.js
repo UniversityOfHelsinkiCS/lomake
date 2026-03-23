@@ -58,7 +58,8 @@ describe('Textfield tests', () => {
     cy.visit(`/v1/programmes/10/KH50_005`)
     cy.get('[data-cy="closeInterventionProcedureAlertBox"]')
     cy.get('.MuiSelect-select').click()
-    cy.get('[data-value="2"]').click()
+
+    cy.get('[data-value="2"]').click({ force: true })
     cy.request({
       method: 'PUT',
       url: '/api/documents/KH50_005/close/all',

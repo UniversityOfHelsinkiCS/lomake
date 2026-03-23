@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /// <reference types="cypress" />
 
 import { testProgrammeCode, testIAM } from '../../config/common'
@@ -12,7 +11,7 @@ const cypressOspaUser = 'cypressOspaUser'
 describe('Permission tests', () => {
   it('Invalid url shows error', () => {
     cy.login(user)
-    cy.visit('yearly/form/1/lmao')
+    cy.visit('/yearly/form/1/lmao')
     cy.contains('Error: Invalid url.')
   })
 

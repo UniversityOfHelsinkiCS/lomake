@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { Accordion, Button, Icon, Grid, Tab, Menu } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
@@ -24,7 +26,7 @@ import './ReportPage.scss'
 export default () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [openQuestions, setOpenQuestions] = useState(false)
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
@@ -46,8 +48,8 @@ export default () => {
     ...(filters.form === formKeys.FACULTY_MONITORING
       ? {
           // faculty monitoring is designed to be always ongoing but the form may be closed at times, hence this current year fallback
-          draftYear: draftYear?.year ?? new Date().getFullYear(),
-          deadline: nextDeadline ?? new Date(),
+          draftYear: draftYear?.year || new Date().getFullYear(),
+          deadline: nextDeadline || new Date(),
         }
       : {
           draftYear: draftYear?.year,
@@ -104,10 +106,6 @@ export default () => {
       render: () => (
         <Tab.Pane className="tab-pane">
           <WrittenAnswers
-            year={year}
-            questionsList={questionsList}
-            chosenProgrammes={programmes.chosen}
-            usersProgrammes={usersProgrammes}
             allAnswers={
               programmes.chosen
                 ? answersByQuestions({
@@ -121,8 +119,12 @@ export default () => {
                   })
                 : []
             }
-            showing={showing}
+            chosenProgrammes={programmes.chosen}
+            questionsList={questionsList}
             setShowing={setShowing}
+            showing={showing}
+            usersProgrammes={usersProgrammes}
+            year={year}
           />
         </Tab.Pane>
       ),
@@ -132,9 +134,6 @@ export default () => {
       render: () => (
         <Tab.Pane className="tab-pane">
           <ColorAnswers
-            year={year}
-            questionsList={questionsList}
-            chosenProgrammes={programmes.chosen}
             allAnswers={
               programmes.chosen
                 ? answersByQuestions({
@@ -148,8 +147,11 @@ export default () => {
                   })
                 : []
             }
+            chosenProgrammes={programmes.chosen}
+            questionsList={questionsList}
             setActiveTab={setActiveTab}
             setShowing={setShowing}
+            year={year}
           />
         </Tab.Pane>
       ),
@@ -157,14 +159,14 @@ export default () => {
   ]
 
   if (!usersProgrammes || !selectedAnswers) return <div />
-  if (usersProgrammes.length < 1) return <NoPermissions t={t} requestedForm={t('report:reportPage')} />
+  if (usersProgrammes.length < 1) return <NoPermissions requestedForm={t('report:reportPage')} t={t} />
 
   return (
     <div style={{ width: '80%', maxWidth: '80%' }}>
       <div className="no-print">
         <Menu secondary>
           <Menu.Item>
-            <Button onClick={() => history.goBack()} icon="arrow left" size="small" />
+            <Button icon="arrow left" onClick={() => navigate(-1)} size="small" />
           </Menu.Item>
           <Menu.Item>
             <h1>{t('report:reportPage')}</h1>
@@ -177,9 +179,9 @@ export default () => {
           </Menu.Item>
         </Menu>
         <FilterTray filter={filter} setFilter={setFilter} />
-        <Grid doubling columns={2} padded="vertically">
+        <Grid columns={2} doubling padded="vertically">
           <Grid.Column>
-            <Accordion fluid styled style={{ maxHeight: '400px', overflowY: 'auto' }}>
+            <Accordion fluid style={{ maxHeight: '400px', overflowY: 'auto' }} styled>
               <Accordion.Title active onClick={() => setOpenQuestions(!openQuestions)}>
                 {t('report:selectQuestions')}{' '}
                 <span>
@@ -192,14 +194,14 @@ export default () => {
             </Accordion>
           </Grid.Column>
           <Grid.Column>
-            <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+            <ProgrammeList picked={picked} programmes={programmes} setPicked={setPicked} />
           </Grid.Column>
         </Grid>
       </div>
       <Tab
-        onTabChange={handleTabChange}
         activeIndex={activeTab}
         menu={{ secondary: true, pointing: true }}
+        onTabChange={handleTabChange}
         panes={panes}
       />
     </div>

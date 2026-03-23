@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Op } from 'sequelize'
-
 import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { formKeys, committeeList } from '../../config/data.js'
@@ -27,7 +26,7 @@ const handleNonProgrammeDraftAnswers = async form => {
         },
       })
       if (tempAnswer) {
-        tempAnswer.data = a?.data || {}
+        tempAnswer.data = a?.data ?? {}
         tempAnswer.changed('data', true)
         await tempAnswer.save()
       } else {
@@ -58,7 +57,7 @@ const handleNonProgrammeFinalAnswers = async form => {
         },
       })
       if (answer) {
-        answer.data = temp?.data || {}
+        answer.data = temp?.data ?? {}
         await answer.save()
       } else {
         await db.answer.create({
@@ -126,7 +125,6 @@ const createDraftAnswers = async (newYear, form) => {
     // Save the current answers as tempanswers
     toOpen.forEach(async obj => {
       const key = obj?.key || obj?.code
-
       const answers = await db.answer.findOne({
         where: {
           [Op.and]: [{ programme: key }, { year: newYear }, { form }],

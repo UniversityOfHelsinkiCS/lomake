@@ -1,9 +1,7 @@
 /* eslint-disable */
 import fs from 'fs/promises'
-import readline from 'readline'
 import path from 'path'
 import minimist from 'minimist'
-import merge from 'lodash/merge.js'
 
 const args = minimist(process.argv.slice(2))
 

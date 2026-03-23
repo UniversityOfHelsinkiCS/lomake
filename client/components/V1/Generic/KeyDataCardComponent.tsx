@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react'
 import { Box, Card, CardActionArea, Tooltip, Typography } from '@mui/material'
 import { calculateColor, calculateValue, calculateKeyDataColor, extractKeyDataValue } from '@/client/util/v1'
@@ -40,6 +41,7 @@ interface CriteriaCardProps {
 const CriteriaGroup = (props: CriteriaGroupProps) => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
   const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
   return (
     <Box
@@ -57,15 +59,15 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
 
         return (
           <CriteriaCard
-            key={data.avainluvunNimi[lang]}
-            title={data.avainluvunNimi[lang]}
+            color={color}
             description={data.maaritelma[lang]}
             hasTrafficLight={data.liikennevalo}
-            value={valueText}
-            thresholds={data.kynnysarvot}
+            key={data.avainluvunNimi[lang]}
             limits={data.mittarinRajat}
+            thresholds={data.kynnysarvot}
+            title={data.avainluvunNimi[lang]}
             unit={data.yksikko}
-            color={color}
+            value={valueText}
             {...props}
           />
         )
@@ -86,6 +88,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
     <Card sx={{ height: 'fit-content' }}>
       <CardActionArea onClick={handleClick}>
         <div
+          data-cy={`${props.title}-${props.color}`}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -93,33 +96,32 @@ const CriteriaCard = (props: CriteriaCardProps) => {
             padding: '18px',
             flexWrap: 'nowrap',
           }}
-          data-cy={`${props.title}-${props.color}`}
         >
-          <TrafficLight style={{ marginRight: '5px' }} color={props.color} />
+          <TrafficLight color={props.color} style={{ marginRight: '5px' }} />
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
             <Typography variant="italic">{props.title}</Typography>
             <Typography
-              variant="italic"
               style={{ whiteSpace: 'nowrap', color: props.value === 'Ei dataa' ? 'textSecondary' : undefined }}
+              variant="italic"
             >
               {props.value === 'Ei dataa' ? t('keyData:noData') : props.value}
             </Typography>
           </div>
         </div>
-        {showDescription && (
+        {showDescription ? (
           <div style={{ padding: '15px' }}>
             <Typography variant="lightSmall">{props.description}</Typography>
             <ColorMeterComponent
-              year={props.programme.year}
               display={props.hasTrafficLight}
-              value={props.value}
-              thresholds={props.thresholds}
               limits={props.limits}
+              thresholds={props.thresholds}
               unit={props.unit}
+              value={props.value}
+              year={props.programme.year}
             />
             <ColorHistoryComponent {...props} />
           </div>
-        )}
+        ) : null}
       </CardActionArea>
     </Card>
   )
@@ -127,7 +129,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
   return showDescription ? (
     cardContent
   ) : (
-    <Tooltip title={t('keyData:seeMore')} placement="top" arrow>
+    <Tooltip arrow placement="top" title={t('keyData:seeMore')}>
       {cardContent}
     </Tooltip>
   )
@@ -148,7 +150,7 @@ const KeyDataCard = (props: KeyDataCardProps) => {
           <TrafficLight color={color} variant="large" />
         </div>
 
-        <Typography variant="h2" style={{ margin: 0 }}>
+        <Typography style={{ margin: 0 }} variant="h2">
           {props.title.toUpperCase()}
         </Typography>
       </Box>

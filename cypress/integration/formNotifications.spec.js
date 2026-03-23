@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /// <reference types="cypress" />
 
 import { defaultYears, testProgrammeCode } from '../../config/common'

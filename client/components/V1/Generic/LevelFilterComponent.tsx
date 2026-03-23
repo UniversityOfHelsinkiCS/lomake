@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useTranslation } from 'react-i18next'
 import { setLevel, clearLevelSpecificFilters } from '../../../redux/filterReducer'
 
@@ -41,17 +42,17 @@ const LevelFilterComponent = () => {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 350 }}>
-        <Select data-cy="level-filter" value={selectedLevel} onChange={handleChange}>
+        <Select data-cy="level-filter" onChange={handleChange} value={selectedLevel}>
           {allowedLevels.map(option => (
             <MenuItem
-              key={option.key}
-              value={option.value}
               data-cy="level-filter-option"
               disabled={option.value === 'doctoral'}
+              key={option.key}
               style={option.value === 'doctoral' ? { pointerEvents: 'auto' } : {}}
+              value={option.value}
             >
               {option.tooltip ? (
-                <Tooltip title={option.tooltip} placement="bottom" arrow>
+                <Tooltip arrow placement="bottom" title={option.tooltip}>
                   <span>{option.text}</span>
                 </Tooltip>
               ) : (

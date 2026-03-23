@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Card } from 'semantic-ui-react'
 
 const squareStyles = {
@@ -23,9 +23,8 @@ const colors = {
 }
 
 const Square = ({ color, setQuestionModal, answerObject, chevron = null, t }) => {
-  // eslint-disable-next-line no-unused-vars
-  const [showTooltip, setShowTooltip] = useState(false)
-  const { backgroundColor, hover } = colors[color] || colors.gray
+  const [_, setShowTooltip] = useState(false)
+  const { backgroundColor, hover } = colors[color] ?? colors.gray
 
   const handleMouseEnter = e => {
     e.currentTarget.style.filter = hover.filter
@@ -41,13 +40,13 @@ const Square = ({ color, setQuestionModal, answerObject, chevron = null, t }) =>
     <div className="square-container" title={t(`facultyTracking:${color}`)}>
       <Card
         data-cy={`square-${answerObject.faculty}-${answerObject.part.id}`}
+        onClick={() => setQuestionModal(answerObject)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         style={{
           ...squareStyles,
           backgroundColor,
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={() => setQuestionModal(answerObject)}
       >
         {chevron}
       </Card>

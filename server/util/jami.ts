@@ -23,6 +23,7 @@ interface Access {
   access?: Record<string, OrganisationAccess>
 }
 
+// eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 type SpecialGroup = {
   [key: string]: boolean
 }
@@ -38,13 +39,13 @@ const jamiClient = axios.create({
   params: {
     token: API_TOKEN,
     noLogging: !inProduction,
-  }
+  },
 })
 
 export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Access> => {
   try {
     const { data: iamAccess } = await jamiClient.post('/', {
-      userId: "",
+      userId: '',
       iamGroups,
     })
 
@@ -72,9 +73,10 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
       'hy-ypa-hr-kestavahyvinvointi',
     ]
 
+    // eslint-disable-next-line prefer-const
     let lomakeAccess: Record<string, OrganisationAccess> = {}
 
-    if (iamGroups.some((group) => lomakeKatselmus.includes(group))) {
+    if (iamGroups.some(group => lomakeKatselmus.includes(group))) {
       const organisation = await getOrganisationData()
 
       organisation.forEach((faculty: Faculty) => {
@@ -84,6 +86,7 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
       })
     }
 
+    // eslint-disable-next-line prefer-const
     let { specialGroup, ...access } = iamAccess
 
     if (iamGroups.includes('hy-ypa-opa-ospa')) specialGroup = { admin: true, ...specialGroup }
@@ -100,7 +103,6 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
     return getIamAccess(iamGroups, attempt + 1)
   }
 }
-
 
 export const getOrganisationData = async (): Promise<Faculty[]> => {
   const { data } = await jamiClient.get('/organisation-data')

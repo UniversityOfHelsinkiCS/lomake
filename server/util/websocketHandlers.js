@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 import { Op } from 'sequelize'
 import { v4 as uuidv4 } from 'uuid'
 import db from '../models/index.js'
@@ -20,7 +21,7 @@ const withLogging = fn => {
     let payloadString = ''
 
     const userId = args[0]?.request?.headers?.uid
-    payloadString += userId || ''
+    payloadString += userId ?? ''
 
     if (typeof args[1] === 'object') {
       const { room, data, form } = args[1]
@@ -101,11 +102,7 @@ const joinRoom = async (socket, room, form, io) => {
     if (!match || !num) throw new Error(`Invalid room format or form: ${room}, ${form}`)
 
     const currentUser = await getCurrentUser(socket)
-    if (
-      isAdmin(currentUser) ||
-      isSuperAdmin(currentUser) ||
-      (currentUser?.access[room] && currentUser?.access[room].read)
-    ) {
+    if (isAdmin(currentUser) || isSuperAdmin(currentUser) || currentUser?.access[room]?.read) {
       const [answer] = await db.tempAnswer.findOrCreate({
         where: {
           [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
@@ -117,6 +114,7 @@ const joinRoom = async (socket, room, form, io) => {
       currentEditors = clearCurrentUser(currentUser)
       socket.join(room)
       emitCurrentEditorsTo(io, room, currentEditors)
+
       logAndEmit(socket, 'new_form_data', answer.data || {})
     }
   } catch (error) {
@@ -146,7 +144,7 @@ const updateField = async (socket, payload, io, uuid) => {
     if (
       isAdmin(currentUser) ||
       isSuperAdmin(currentUser) ||
-      (currentUser.access[room] && currentUser.access[room].write) ||
+      currentUser.access[room]?.write ||
       room === currentUser.uid
     ) {
       const field = Object.keys(data)[0]
@@ -186,7 +184,7 @@ const updateField = async (socket, payload, io, uuid) => {
             where: {
               [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
             },
-          },
+          }
         )
         logAndEmitToRoom(socket, room, 'new_form_data', data)
       } else {
@@ -202,7 +200,7 @@ const updateField = async (socket, payload, io, uuid) => {
 const getLockHttp = (currentUser, payload, io) => {
   const { field, room } = payload
 
-  if (currentEditors[room] && currentEditors[room][field] && currentEditors[room][field].uid !== currentUser.uid) {
+  if (currentEditors[room]?.[field] && currentEditors[room][field].uid !== currentUser.uid) {
     return undefined
   }
 
@@ -231,7 +229,6 @@ const getLockHttp = (currentUser, payload, io) => {
 
   emitCurrentEditorsTo(io, room, currentEditors, currentUser.uid)
 
-  // eslint-disable-next-line consistent-return
   return stripTimeouts(currentEditors[room])
 }
 

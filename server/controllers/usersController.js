@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 import { Op } from 'sequelize'
 import logger from '../util/logger.js'
 import lastRestart from '../util/lastRestart.js'
@@ -17,7 +18,7 @@ const getCurrentUser = async (req, res) => {
           where: {
             uid: req.user.uid,
           },
-        },
+        }
       )
     } catch (error) {
       logger.error(`Failed to update the last login for user: ${req.user.uid}`)
@@ -42,15 +43,15 @@ const getLogoutUrl = async (req, res) => {
     if (logoutUrl) {
       return res
         .status(200)
-        .send({ logoutUrl: `${logoutUrl}?return=${returnUrl || ''}` })
+        .send({ logoutUrl: `${logoutUrl}?return=${returnUrl ?? ''}` })
         .end()
     }
     return res
       .status(200)
-      .send({ logoutUrl: returnUrl || '' })
+      .send({ logoutUrl: returnUrl ?? '' })
       .end()
-  } catch (err) {
-    return res.status(500).json({ message: 'Error with logout', err })
+  } catch (error) {
+    return res.status(500).json({ message: 'Error with logout', error })
   }
 }
 
@@ -133,7 +134,7 @@ const saveTempAccess = async (req, res) => {
         await sendNewTempAccessNotification(
           `${user.firstname} ${user.lastname}`,
           newAccess.progNames,
-          newAccess.kojoEmail,
+          newAccess.kojoEmail
         )
       }
       return res.status(200).json(updatedUser)
@@ -159,7 +160,7 @@ const deleteTempAccess = async (req, res) => {
     const updatedUser = await user.update({ tempAccess: toUpdate })
     if (updatedUser) {
       logger.info(
-        `Temporary access of user ${user.uid} to programme ${req.params.programme} was deleted by ${req.user.firstname} ${req.user.lastname}`,
+        `Temporary access of user ${user.uid} to programme ${req.params.programme} was deleted by ${req.user.firstname} ${req.user.lastname}`
       )
       return res.status(200).json(updatedUser)
     }

@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Loader, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
@@ -108,52 +109,52 @@ const ProgrammeLevelAnswers = () => {
 
   return (
     <div style={{ width: '80%' }}>
-      <Menu size="large" secondary>
+      <Menu secondary size="large">
         <MenuItem>
-          <Button as={Link} to={filter ? `/meta-evaluation?filter=${filter}` : '/meta-evaluation'} icon="arrow left" />
+          <Button as={Link} icon="arrow left" to={filter ? `/meta-evaluation?filter=${filter}` : '/meta-evaluation'} />
         </MenuItem>
         <MenuItem header>{t('metaEvaluationAnswers').toUpperCase()}</MenuItem>
         <DegreeDropdown />
         <MenuItem>
           <FacultyDropdown
-            t={t}
-            programmes={usersProgrammes}
-            handleFilterChange={handleDropdownFilterChange}
-            faculties={faculties}
-            lang={lang}
             debouncedFilter={debouncedFilter}
+            faculties={faculties}
+            handleFilterChange={handleDropdownFilterChange}
+            lang={lang}
+            programmes={usersProgrammes}
+            t={t}
           />
         </MenuItem>
         <MenuItem>
           <Dropdown
             data-cy="content-type-dropdown"
-            selection
-            options={filterOptions}
-            value={answerFilter}
             onChange={(_, { value }) => setAnswerFilter(value)}
+            options={filterOptions}
+            selection
+            value={answerFilter}
           />
         </MenuItem>
         <MenuItem position="right">
           <Input
             data-cy="overviewpage-filter"
             icon="search"
-            size="small"
-            placeholder={t('programmeFilter')}
             onChange={handleFilterChange}
+            placeholder={t('programmeFilter')}
+            size="small"
             value={filter}
           />
         </MenuItem>
       </Menu>
       <WrittenAnswers
-        year={year}
-        questionsList={filteredQuestions}
-        chosenProgrammes={filteredProgrammes}
-        usersProgrammes={filteredProgrammes}
         allAnswers={filteredAnswersList}
-        showing={showing}
-        setShowing={setShowing}
+        chosenProgrammes={filteredProgrammes}
         form={form}
         metaEvaluation
+        questionsList={filteredQuestions}
+        setShowing={setShowing}
+        showing={showing}
+        usersProgrammes={filteredProgrammes}
+        year={year}
       />
     </div>
   )

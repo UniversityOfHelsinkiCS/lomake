@@ -1,4 +1,3 @@
-import React from 'react'
 import { InView } from 'react-intersection-observer'
 import { List, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -23,7 +22,7 @@ const Section = ({ id, title, number, children, programmeKey, formType }) => {
   ]
   return (
     <>
-      <div data-cy={`form-section-${number}`} id={number || '0'}>
+      <div data-cy={`form-section-${number}`} id={number ?? '0'}>
         <InView
           as="div"
           onChange={inView => {
@@ -49,8 +48,8 @@ const Section = ({ id, title, number, children, programmeKey, formType }) => {
             <List style={{ display: 'flex', flexDirection: 'column' }}>
               {scaleNames.map(scaleName => (
                 <List.Item
-                  style={{ marginRight: '1em', padding: '!important 0.21428571em 0', fontSize: '1.1em' }}
                   key={scaleName.id}
+                  style={{ marginRight: '1em', padding: '!important 0.21428571em 0', fontSize: '1.1em' }}
                 >
                   <Label horizontal>{scaleName.number}</Label>
                   <span> {t(scaleName.text)} </span>

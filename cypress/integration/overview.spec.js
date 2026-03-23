@@ -133,7 +133,9 @@ describe('Overview page test', () => {
     })
 
     it('Calculates correct values with one grey', () => {
-      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Opintojen sujuvuus ja valmistuminen-2024"]').click()
+      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Opintojen sujuvuus ja valmistuminen-2024"]').click({
+        force: true,
+      })
 
       cy.get('[data-cy="MH50_009-Opintojen sujuvuus ja valmistuminen-Punainen"]')
         .should('exist')

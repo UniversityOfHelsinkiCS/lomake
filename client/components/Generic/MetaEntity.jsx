@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { colors } from '../../util/common'
 import { useTranslation } from 'react-i18next'
@@ -24,20 +23,20 @@ const MetaEntity = ({ id, label, description, required, noColor, number, form, k
         <div style={{ flexBasis: '75%' }}>
           <h3>
             {number}. {label}{' '}
-            {required && (
+            {required ? (
               <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600', maxWidth: '' }}>*</span>
-            )}
+            ) : null}
           </h3>
         </div>
-        {!noColor && <MetaTrafficLights id={id} form={form} />}
+        {!noColor && <MetaTrafficLights form={form} id={id} />}
       </div>
-      {bool && <Textarea id={id} label={description} form={form} kludge={kludge} marginTop="0" />}
+      {bool ? <Textarea form={form} id={id} kludge={kludge} label={description} marginTop="0" /> : null}
       <br />
       <Textarea
-        id={`${id}_comment`}
-        label={`${t('formView:metaCommentLabel')}`}
         form={form}
+        id={`${id}_comment`}
         kludge={kludge}
+        label={`${t('formView:metaCommentLabel')}`}
         marginTop="0"
       />
     </div>

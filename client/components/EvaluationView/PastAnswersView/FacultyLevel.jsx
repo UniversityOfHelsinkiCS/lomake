@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router'
+import { Navigate, useParams } from 'react-router'
 import { Accordion, Divider } from 'semantic-ui-react'
 import sortBy from 'lodash/sortBy'
 
@@ -23,7 +24,8 @@ const getTotalWritten = ({ question, allAnswers }) => {
   return mapped
 }
 
-const PastAnswersViewFaculty = ({ programmeKey }) => {
+const PastAnswersViewFaculty = () => {
+  const { programme: programmeKey } = useParams()
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -35,7 +37,7 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
   const allProgrammes = useSelector(state => state.studyProgrammes.data)
   const facultyProgrammes = Object.values(allProgrammes).filter(p => p.primaryFaculty.code === programmeKey)
 
-  const readAccess = (user.access[programmeKey] && user.access[programmeKey].read) || isAdmin(user)
+  const readAccess = user.access[programmeKey]?.read || isAdmin(user)
   const questionsList = modifiedQuestions(lang, filters.form)
 
   const facultyName = facultyProgrammes[0].primaryFaculty.name[lang]
@@ -73,7 +75,7 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
     return result
   }, [forProgramme, pending, user, programmeKey])
 
-  if (!programmeKey || !readAccess) return <Redirect to="/" />
+  if (!programmeKey || !readAccess) return <Navigate to="/" />
   let titleNumberLast = 0
   let titleNumberNew = 0
 
@@ -92,7 +94,7 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
     <>
       <h2>{facultyName}</h2>
       <h3>{t('formView:yearlyFacultyAnswers')}</h3>
-      <Accordion fluid className="comparison-container">
+      <Accordion className="comparison-container" fluid>
         {titleList.map(title => (
           <div key={`${title}`}>
             <Divider section />
@@ -104,11 +106,11 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
                 <div key={question.id}>
                   <Question
                     answers={getTotalWritten({ question, allAnswers, chosenKeys: [programmeKey] })}
-                    question={question}
                     chosenProgrammes={[programmeKey]}
-                    showing={showingQuestion === question.id}
-                    handleClick={() => setShowingQuestion(showingQuestion === question.id ? -1 : question.id)}
                     form="evaluation"
+                    handleClick={() => setShowingQuestion(showingQuestion === question.id ? -1 : question.id)}
+                    question={question}
+                    showing={showingQuestion === question.id}
                   />
                 </div>
               )

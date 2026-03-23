@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react'
+/* eslint-disable camelcase */
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import '../../Generic/Generic.scss'
@@ -8,9 +9,9 @@ const ModalAnswer = ({ question, faculty }) => {
   const lang = useSelector(state => state.language)
   const answers = useSelector(state => state.tempAnswers.data)
   const facultyAnswers = useMemo(() => {
-    return answers ? answers.find(answer => answer.programme === faculty)?.data || {} : {}
+    return answers ? (answers.find(answer => answer.programme === faculty)?.data ?? {}) : {}
   }, [answers, faculty])
-  const lightsHistory = facultyAnswers[`${question.id}_lights_history`] || []
+  const lightsHistory = facultyAnswers[`${question.id}_lights_history`] ?? []
   const displayedHistory = lightsHistory
   const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
 
@@ -72,7 +73,7 @@ const ModalAnswer = ({ question, faculty }) => {
             <div className="single-row" key={fieldName}>
               <div>
                 <i>{t(`formView:${labels[fieldName]}`)}</i>
-                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
+                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] ?? t('formView:noAnswer')}</p>
               </div>
             </div>
           )
@@ -84,9 +85,9 @@ const ModalAnswer = ({ question, faculty }) => {
               resources: 'monitoringResourceLabel',
             }
             return (
-              <div key={fieldName} className="flex-item">
+              <div className="flex-item" key={fieldName}>
                 <i>{t(`formView:${labels[fieldName]}`)}</i>
-                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
+                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] ?? t('formView:noAnswer')}</p>
               </div>
             )
           })}
@@ -98,7 +99,7 @@ const ModalAnswer = ({ question, faculty }) => {
               end_date: 'monitoringEndLabel',
             }
             return (
-              <div key={fieldName} className="flex-item">
+              <div className="flex-item" key={fieldName}>
                 <i>{t(`formView:${labels[fieldName]}`)}</i>
                 <p>
                   {facultyAnswers[`${question.id}_${fieldName}_text`]

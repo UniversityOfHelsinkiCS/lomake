@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Divider, Icon, Grid, Card } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -123,13 +123,13 @@ const Actions = ({
       }}
     >
       {id.indexOf('-bachelor') === -1 && <Divider />}
-      {showDescription && (
+      {showDescription ? (
         <>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ maxWidth: '1000px' }}>
               <h2>
                 {label}{' '}
-                {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+                {required ? <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span> : null}
               </h2>
             </div>
           </div>
@@ -147,10 +147,10 @@ const Actions = ({
             <p className="form-question-extrainfo">{extrainfo}</p>
           </div>
         </>
-      )}
-      {questionLevel && <h3>{questionLevel[lang]}</h3>}
+      ) : null}
+      {questionLevel ? <h3>{questionLevel[lang]}</h3> : null}
 
-      {showSummary && (
+      {showSummary ? (
         <div className="summary-container">
           <h4>{t(summaryTitle)}</h4>
           <div className="summary-grid" data-cy={`${id}-summary`}>
@@ -158,13 +158,13 @@ const Actions = ({
               <Grid.Row className="row">
                 {form === formKeys.EVALUATION_FACULTIES && (
                   <>
-                    <Grid.Column width={5} style={getStyleForm('bachelor')}>
+                    <Grid.Column style={getStyleForm('bachelor')} width={5}>
                       {t('bachelor')}
                     </Grid.Column>
-                    <Grid.Column width={5} style={getStyleForm('master')}>
+                    <Grid.Column style={getStyleForm('master')} width={5}>
                       {!onlyBc ? t('master') : ''}
                     </Grid.Column>
-                    <Grid.Column width={5} style={getStyleForm('doctoral')}>
+                    <Grid.Column style={getStyleForm('doctoral')} width={5}>
                       {!onlyBc ? t('doctoral') : ''}
                     </Grid.Column>
                   </>
@@ -178,11 +178,11 @@ const Actions = ({
                       <Grid.Column width={5}>
                         <ProgrammeAnswerSummaryList
                           data={summaryData.bachelor}
+                          handleShowSpecific={handleShowSpecific}
                           lang={lang}
                           onlyBc={false}
-                          showText={showText.bachelor}
                           showSpecific={showSpecific}
-                          handleShowSpecific={handleShowSpecific}
+                          showText={showText.bachelor}
                         />
                         <Button onClick={() => handleShowText('bachelor', !showText.bachelor)}>
                           {showText?.level === 'bachelor' ? t('formView:hideAnswers') : t('formView:showAnswers')}
@@ -191,11 +191,11 @@ const Actions = ({
                       <Grid.Column width={5}>
                         <ProgrammeAnswerSummaryList
                           data={summaryData.master}
+                          handleShowSpecific={handleShowSpecific}
                           lang={lang}
                           onlyBc={onlyBc}
-                          showText={showText.master}
                           showSpecific={showSpecific}
-                          handleShowSpecific={handleShowSpecific}
+                          showText={showText.master}
                         />
                         <Button onClick={() => handleShowText('master', !showText.master)}>
                           {showText?.level === 'master' ? t('formView:hideAnswers') : t('formView:showAnswers')}
@@ -204,11 +204,11 @@ const Actions = ({
                       <Grid.Column width={5}>
                         <ProgrammeAnswerSummaryList
                           data={summaryData.doctoral}
+                          handleShowSpecific={handleShowSpecific}
                           lang={lang}
                           onlyBc={onlyBc}
-                          showText={showText.doctoral}
                           showSpecific={showSpecific}
-                          handleShowSpecific={handleShowSpecific}
+                          showText={showText.doctoral}
                         />
                         <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
                           {showText?.level === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
@@ -220,11 +220,11 @@ const Actions = ({
                     <Grid.Column width={5}>
                       <ProgrammeAnswerSummaryList
                         data={summaryData.faculty}
+                        handleShowSpecific={handleShowSpecific}
                         lang={lang}
                         onlyBc={onlyBc}
-                        showText={showText.faculty}
                         showSpecific={showSpecific}
-                        handleShowSpecific={handleShowSpecific}
+                        showText={showText.faculty}
                       />
                       <Button onClick={() => handleShowText('faculty', !showText.faculty)}>
                         {showText?.level === 'faculty' ? t('formView:hideAnswers') : t('formView:showAnswers')}
@@ -233,71 +233,72 @@ const Actions = ({
                   )}
                 </Grid.Row>
                 <Grid.Row className="row">
-                  {showText.level &&
-                    Object.keys(summaryData[showText.level]).map(programmeKey => {
-                      return (
-                        <div
-                          key={programmeKey}
-                          style={{ marginRight: '1em', marginTop: '1em', flex: 1, maxWidth: '15em' }}
-                        >
-                          <p
-                            style={{ height: '5em' }}
-                            key={`${summaryData[showText.level][programmeKey].programme[lang]}`}
+                  {showText.level
+                    ? Object.keys(summaryData[showText.level]).map(programmeKey => {
+                        return (
+                          <div
+                            key={programmeKey}
+                            style={{ marginRight: '1em', marginTop: '1em', flex: 1, maxWidth: '15em' }}
                           >
-                            <span className="answer-circle-blue" />{' '}
-                            <span
-                              className="programme-list-button"
-                              onClick={() => handleShowSpecific(programmeKey)}
-                              style={{ marginLeft: '0.5em', fontSize: 16 }}
+                            <p
+                              key={`${summaryData[showText.level][programmeKey].programme[lang]}`}
+                              style={{ height: '5em' }}
                             >
-                              {summaryData[showText.level][programmeKey].programme[lang]}
-                            </span>
-                          </p>
-                          {(showText || showSpecific[programmeKey]) && summaryData[showText.level][programmeKey] && (
-                            <>
-                              {summaryData[showText.level][programmeKey].text.map((answer, i) => {
-                                if (!(answer.title.length > 2) && !(answer.content?.length > 2)) {
-                                  // eslint-disable-next-line react/no-array-index-key
-                                  return <div key={`${id}-${programmeKey}-${i}`}> </div>
-                                }
-                                return (
-                                  // eslint-disable-next-line react/no-array-index-key
-                                  <Card key={`${id}-${programmeKey}-${i}`}>
-                                    <Card.Content>
-                                      <Card.Header style={{ fontSize: 15 }}>{answer.title}</Card.Header>
-                                      <Card.Description style={{ overflowWrap: 'anywhere' }}>
-                                        {answer.content}
-                                      </Card.Description>
-                                    </Card.Content>
-                                  </Card>
-                                )
-                              })}
-                            </>
-                          )}
-                        </div>
-                      )
-                    })}
+                              <span className="answer-circle-blue" />{' '}
+                              <span
+                                className="programme-list-button"
+                                onClick={() => handleShowSpecific(programmeKey)}
+                                style={{ marginLeft: '0.5em', fontSize: 16 }}
+                              >
+                                {summaryData[showText.level][programmeKey].programme[lang]}
+                              </span>
+                            </p>
+                            {(showText || showSpecific[programmeKey]) && summaryData[showText.level][programmeKey] ? (
+                              <>
+                                {summaryData[showText.level][programmeKey].text.map((answer, i) => {
+                                  if (!(answer.title.length > 2) && !(answer.content?.length > 2)) {
+                                    // eslint-disable-next-line react/no-array-index-key
+                                    return <div key={`${id}-${programmeKey}-${i}`}> </div>
+                                  }
+                                  return (
+                                    // eslint-disable-next-line react/no-array-index-key
+                                    <Card key={`${id}-${programmeKey}-${i}`}>
+                                      <Card.Content>
+                                        <Card.Header style={{ fontSize: 15 }}>{answer.title}</Card.Header>
+                                        <Card.Description style={{ overflowWrap: 'anywhere' }}>
+                                          {answer.content}
+                                        </Card.Description>
+                                      </Card.Content>
+                                    </Card>
+                                  )
+                                })}
+                              </>
+                            ) : null}
+                          </div>
+                        )
+                      })
+                    : null}
                 </Grid.Row>
               </>
             </Grid>
           </div>
         </div>
-      )}
-      {subTitle && <h3>{subTitle}</h3>}
+      ) : null}
+      {subTitle ? <h3>{subTitle}</h3> : null}
 
       {actionRenderList.map((action, index) => {
-        return <ActionElement key={`action-${index + 1}`} id={id} form={form} viewOnly={viewOnly} index={index + 1} />
+        return <ActionElement form={form} id={id} index={index + 1} key={`action-${index + 1}`} viewOnly={viewOnly} />
       })}
       <div style={{ display: 'flex' }}>
         {actionsCount < 5 && !viewOnly && (
           <Button
-            data-cy={`${id}-add-action-button`}
-            icon
             basic
-            labelPosition="left"
             color="blue"
-            onClick={handleAdd}
+            data-cy={`${id}-add-action-button`}
             disabled={!previousHasContent()}
+            icon
+            labelPosition="left"
+            onClick={handleAdd}
           >
             <Icon name="add" />
             {t('formView:addDevelopmentArea')}

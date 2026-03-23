@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-leaked-render */
 import { useState } from 'react'
 import { TableCell } from '../Generic/TableComponent'
 import { useTranslation } from 'react-i18next'
@@ -16,7 +17,15 @@ import { TextFieldCard } from '../Generic/TextFieldCard'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 
-const ActionsCell = ({ programmeData, metadata, reports }: { programmeData: KeyDataProgramme; metadata: KeyDataMetadata[]; reports: Record<string, ReportData | undefined> }) => {
+const ActionsCell = ({
+  programmeData,
+  metadata,
+  reports,
+}: {
+  programmeData: KeyDataProgramme
+  metadata: KeyDataMetadata[]
+  reports: Record<string, ReportData | undefined>
+}) => {
   const { renderActionsBadge } = useNotificationBadge()
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
@@ -37,20 +46,26 @@ const ActionsCell = ({ programmeData, metadata, reports }: { programmeData: KeyD
       {actionsBadgeData.showBadge && (
         <NotificationBadge
           data-cy={`actionsCellBadge-${programmeData.koulutusohjelmakoodi}`}
-          variant="medium"
           tooltip={t('keyData:missingMeasure')}
+          variant="medium"
         />
       )}
       {actionsBadgeData.showIcon && (
         <Button onClick={handleOpen}>
-          <ChatBubbleOutlineIcon sx={{ fontSize: '28px' }} color="secondary" />
+          <ChatBubbleOutlineIcon color="secondary" sx={{ fontSize: '28px' }} />
         </Button>
       )}
       <Modal open={open} setOpen={setOpen}>
         <Typography variant="h3">
           {programmeData.koulutusohjelma[lang]} {year}
         </Typography>
-        <TextFieldCard id={'Toimenpiteet'} t={t} type={'Measure'} studyprogrammeKey={programmeData.koulutusohjelmakoodi} year={year} />
+        <TextFieldCard
+          id={'Toimenpiteet'}
+          studyprogrammeKey={programmeData.koulutusohjelmakoodi}
+          t={t}
+          type={'Measure'}
+          year={year}
+        />
       </Modal>
     </TableCell>
   )

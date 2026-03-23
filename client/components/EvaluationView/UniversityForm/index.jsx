@@ -1,12 +1,11 @@
-import React, { useEffect, useMemo, useRef } from 'react'
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
-import { Redirect, useHistory } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Navigate, useNavigate, useParams, Link } from 'react-router'
 import { Button, Icon, Loader } from 'semantic-ui-react'
 import Downloads from '../../FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
-// import { Link } from 'react-router-dom'
-
 import { setViewOnly, getSingleProgrammesAnswers, getCommitteeAnswers } from '../../../redux/formReducer'
 import { getCommitteeFacultyAnswersAction } from '../../../redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
@@ -75,7 +74,7 @@ const findActionAnswers = (faculties, allAnswers, question) => {
     const text = []
     const actionNumbers = [1, 2, 3, 4, 5]
     actionNumbers.map((number, index) => {
-      if (answer?.data && answer.data[`${question}-${number}-text`]) {
+      if (answer?.data?.[`${question}-${number}-text`]) {
         text[index] = {
           title: answer.data[`${question}-${number}-text`].title,
           content: answer.data[`${question}-${number}-text`].actions,
@@ -117,8 +116,9 @@ const findTextAnswers = (faculties, allAnswers, question) => {
   return result
 }
 
-const CommitteeFormView = ({ room, formString }) => {
-  const history = useHistory()
+const CommitteeFormView = () => {
+  const { room, form: formString } = useParams()
+  const navigate = useNavigate()
   const form = parseInt(formString, 10) || null
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -169,7 +169,7 @@ const CommitteeFormView = ({ room, formString }) => {
   }, [committee, singleFacultyPending, draftYear, room, user])
 
   useEffect(() => {
-    if (window.location.href.match('((/UNI_EN)|(/UNI_SE))') && year) {
+    if (/((\/UNI_EN)|(\/UNI_SE))/.exec(window.location.href) && year) {
       dispatch(getCommitteeAnswers({ year }))
     }
   }, [year])
@@ -182,7 +182,7 @@ const CommitteeFormView = ({ room, formString }) => {
     ) {
       return {}
     }
-    const { faculties, answers } = facultyProgrammeData?.forCommittee || {}
+    const { faculties, answers } = facultyProgrammeData?.forCommittee ?? {}
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
@@ -212,10 +212,10 @@ const CommitteeFormView = ({ room, formString }) => {
     })
     return result
   }, [room, user, facultyProgrammeData.pending])
-  if (!room || !form) return <Redirect to="/" />
+  if (!room || !form) return <Navigate to="/" />
   if (!committee) return 'Error: Invalid url.'
   if (!user.access[committee.code] && !hasRights(user)) {
-    return <NoPermissions t={t} requestedForm={t('evaluation')} />
+    return <NoPermissions requestedForm={t('evaluation')} t={t} />
   }
   return (
     <div>
@@ -223,18 +223,18 @@ const CommitteeFormView = ({ room, formString }) => {
         <Loader active />
       ) : (
         <div className="form-container">
-          <NavigationSidebar programmeKey={room} formType="evaluation" formNumber={form} />
+          <NavigationSidebar formNumber={form} formType="evaluation" programmeKey={room} />
           <div className="the-form" ref={componentRef}>
             <div className="form-instructions">
               <div className="hide-in-print-mode">
                 <SaveIndicator />
                 <div style={{ marginBottom: '2em' }}>
-                  <Button onClick={() => history.push('/evaluation-university')} icon="arrow left" />
+                  <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation-university')} />
                 </div>
                 <img alt="form-header-calendar" className="img-responsive" src={postItImage} />
               </div>
               <h1 style={{ color: colors.blue }}>{committee?.name[lang]}</h1>
-              <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+              <h3 data-cy="formview-title" style={{ marginTop: '0' }}>
                 {t('evaluation')} {year}
               </h3>
 
@@ -274,25 +274,25 @@ const CommitteeFormView = ({ room, formString }) => {
               </div>
 
               <div className="info-container">
-                <a href={oodikoneURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
+                <a data-cy={`link-to-oodikone-faculty-${room}`} href={oodikoneURL} rel="noreferrer" target="_blank">
                   <h4>
                     {t('formView:oodikoneUniversity')} <Icon name="external" />{' '}
                   </h4>
                 </a>
-                <Link data-cy="link-to-old-answers" to={degreeReformUrl} target="_blank">
+                <Link data-cy="link-to-old-answers" target="_blank" to={degreeReformUrl}>
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
                     {t('formView:evaluationSummaryUniversity')} <Icon name="external" />{' '}
                   </h4>
                 </Link>
               </div>
             </div>
-            <Downloads programme={committee} componentRef={componentRef} form={form} />
+            <Downloads componentRef={componentRef} form={form} programme={committee} />
             <div id="university-form" style={{ paddingBottom: '6em' }}>
               <EvaluationForm
+                form={form}
                 key={lang}
                 programmeKey={committee.code}
                 questions={questions}
-                form={form}
                 summaryData={facultyAnswers}
               />
             </div>

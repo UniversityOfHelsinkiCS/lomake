@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getProgrammesUsersAction } from '../../redux/programmesUsersReducer'
 import ProgramControlsUsers from './ProgramControlsUsers'
@@ -31,8 +32,8 @@ const OwnerAccordionContent = ({ programKey, form }) => {
   return (
     <>
       <h4>{programJoryIam}</h4>
-      <FormLocker programme={programKey} form={form} />
-      <ProgramControlsUsers programme={programKey} joryIam={programJoryIam} />
+      <FormLocker form={form} programme={programKey} />
+      <ProgramControlsUsers joryIam={programJoryIam} programme={programKey} />
     </>
   )
 }

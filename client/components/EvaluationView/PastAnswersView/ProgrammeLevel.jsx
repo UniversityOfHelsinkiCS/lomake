@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router'
+import { Navigate, useParams } from 'react-router'
 import { Accordion } from 'semantic-ui-react'
 import sortBy from 'lodash/sortBy'
 
@@ -23,7 +24,8 @@ const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
   return mapped
 }
 
-const PastAnswersView = ({ programmeKey }) => {
+const PastAnswersView = () => {
+  const { programme: programmeKey } = useParams()
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -35,7 +37,7 @@ const PastAnswersView = ({ programmeKey }) => {
   const allProgrammes = useSelector(state => state.studyProgrammes.data)
   const programme = Object.values(allProgrammes).find(p => p.key === programmeKey)
 
-  const readAccess = (user.access[programmeKey] && user.access[programmeKey].read) || isAdmin(user)
+  const readAccess = user.access[programmeKey]?.read || isAdmin(user)
   const questionsList = modifiedQuestions(lang, filters.form)
 
   useEffect(() => {
@@ -74,22 +76,22 @@ const PastAnswersView = ({ programmeKey }) => {
     return result
   }, [forProgramme, pending, user, programmeKey])
 
-  if (!programmeKey || !readAccess) return <Redirect to="/" />
+  if (!programmeKey || !readAccess) return <Navigate to="/" />
 
   return (
     <>
       <h2>{programme.name[lang]}</h2>
       <h3>{t('formView:yearlyAnswers')}</h3>
-      <Accordion fluid className="comparison-container">
+      <Accordion className="comparison-container" fluid>
         {questionsList.map(question => (
           <Question
-            key={question.id}
             answers={getTotalWritten({ question, allAnswers, chosenKeys: [programmeKey] })}
-            question={question}
             chosenProgrammes={[programmeKey]}
-            showing={showingQuestion === question.id}
-            handleClick={() => setShowingQuestion(showingQuestion === question.id ? -1 : question.id)}
             form="evaluation"
+            handleClick={() => setShowingQuestion(showingQuestion === question.id ? -1 : question.id)}
+            key={question.id}
+            question={question}
+            showing={showingQuestion === question.id}
           />
         ))}
       </Accordion>

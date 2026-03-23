@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
@@ -11,6 +12,7 @@ import DeadlineSetting from './DeadlineSetting'
 import UpdateStudyprogrammes from './UpdateStudyprogrammes'
 import TempAccess from './TempAccess'
 import Debug from './Debug'
+// eslint-disable-next-line import-x/no-named-as-default
 import KeyData from './KeyData'
 
 export default () => {
@@ -102,13 +104,13 @@ export default () => {
 
   return (
     <Tab
-      style={{ maxWidth: '90%' }}
       menu={{
         className: 'attached',
         tabular: true,
         style: { display: 'flex', flexWrap: 'wrap', flexDirection: 'row' },
       }}
       panes={panes}
+      style={{ maxWidth: '90%' }}
     />
   )
 }

@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'

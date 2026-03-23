@@ -37,7 +37,7 @@ const getLevelFilter = ({ form }) => {
 
 const getFacultyFilter = ({ form, t }) => {
   if (form !== formKeys.EVALUATION_FACULTIES)
-    return <FacultyFilter size="small" label={t('comparison:filterFaculties')} />
+    return <FacultyFilter label={t('comparison:filterFaculties')} size="small" />
   return null
 }
 
@@ -45,9 +45,9 @@ const getProgrammeFilter = ({ form, filter, t, handleSearch, setFilter }) => {
   if (form !== formKeys.EVALUATION_FACULTIES)
     return (
       <ProgrammeFilter
+        filter={filter}
         handleChange={handleSearch}
         label={t('programmeFilter')}
-        filter={filter}
         onEmpty={() => setFilter('')}
         t={t}
       />
@@ -69,13 +69,13 @@ const FilterTray = ({ filter, setFilter }) => {
     <>
       <Menu secondary>
         <Menu.Item>
-          <YearSelector multiple size="small" label={t('comparison:selectYears')} />
+          <YearSelector label={t('comparison:selectYears')} multiple size="small" />
         </Menu.Item>
         <Menu.Item>
           <FormFilter comparison />
         </Menu.Item>
       </Menu>
-      {usersProgrammes && (
+      {usersProgrammes ? (
         <div style={{ paddingLeft: '1em' }}>
           {getFacultyFilter({ form, t })}
           {getLevelFilter({ form })}
@@ -83,7 +83,7 @@ const FilterTray = ({ filter, setFilter }) => {
           {getDoctoralSchoolFilter({ faculty, level })}
           {getProgrammeFilter({ form, filter, t, handleSearch, setFilter })}
         </div>
-      )}
+      ) : null}
     </>
   )
 }

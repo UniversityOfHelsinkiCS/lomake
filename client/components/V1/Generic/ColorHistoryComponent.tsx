@@ -7,22 +7,22 @@ import { useAppSelector } from '@/client/util/hooks'
 import { useFetchKeyDataQuery } from '@/client/redux/keyData'
 
 const ColorHistoryComponent = (props: any) => {
+  const { t } = useTranslation()
+  const lang = useAppSelector(state => state.language)
+  const selectedYear = useAppSelector(state => state.filters.keyDataYear)
   if (!props.programme || props.value == 'Ei dataa') {
     return null
   }
-  const { t } = useTranslation()
-  const lang = useAppSelector(state => state.language)
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data } = useFetchKeyDataQuery()
 
   const metadataItem = data.metadata.find(
-    (item: any) => item.avainluvunNimi[lang] === props.title && item.ohjelmanTaso === props.level,
+    (item: any) => item.avainluvunNimi[lang] === props.title && item.ohjelmanTaso === props.level
   )
 
   const dataKey = metadataItem ? metadataItem.avainluvunArvo : null
-
-  const selectedYear = useAppSelector(state => state.filters.keyDataYear)
-
-  const programList = props.level === ProgrammeLevel.Bachelor ? data[`kandiohjelmat`] : data[`maisteriohjelmat`]
+  const programList = props.level === ProgrammeLevel.Bachelor ? data.kandiohjelmat : data.maisteriohjelmat
 
   const history = programList
     .filter((programme: any) => {
@@ -51,7 +51,7 @@ const ColorHistoryComponent = (props: any) => {
                 <Typography variant="lightSmall">{t('keyData:value')}</Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="lightSmall" data-cy="history-trafficlight">
+                <Typography data-cy="history-trafficlight" variant="lightSmall">
                   {t('keyData:trafficLight')}
                 </Typography>
               </TableCell>
@@ -61,23 +61,23 @@ const ColorHistoryComponent = (props: any) => {
             {history.map((data: any) => {
               const color = calculateColor(data.value, props.thresholds, props.color, props.unit)
               const valueText = calculateValue(data.value, props?.unit)
-              const year = data.year
+              const { year } = data
               return (
                 <TableRow key={year}>
                   <TableCell align="center">
-                    <Typography variant="lightSmall" data-cy={`history-${metadataItem.avainluvunArvo}-${year}`}>
+                    <Typography data-cy={`history-${metadataItem.avainluvunArvo}-${year}`} variant="lightSmall">
                       {year}
                     </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography variant="lightSmall" data-cy={`history-${metadataItem.avainluvunArvo}-${year}-value`}>
+                    <Typography data-cy={`history-${metadataItem.avainluvunArvo}-${year}-value`} variant="lightSmall">
                       {valueText}
                     </Typography>
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ display: 'flex', justifyContent: 'center' }}
                     data-cy={`history-${metadataItem.avainluvunArvo}-${year}-${color}`}
+                    sx={{ display: 'flex', justifyContent: 'center' }}
                   >
                     <TrafficLight color={color} />
                   </TableCell>
@@ -88,10 +88,10 @@ const ColorHistoryComponent = (props: any) => {
         </Table>
       ) : (
         <Typography
-          variant="italic"
           color="secondary"
-          sx={{ mt: 4, justifyContent: 'center', display: 'flex' }}
           data-cy="no-history"
+          sx={{ mt: 4, justifyContent: 'center', display: 'flex' }}
+          variant="italic"
         >
           {t('keyData:noHistory')}
         </Typography>

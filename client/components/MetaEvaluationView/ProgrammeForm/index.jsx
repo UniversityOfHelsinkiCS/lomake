@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Navigate, useParams, Link } from 'react-router'
 import { getProgramme } from '../../../redux/studyProgrammesReducer'
 import { useTranslation } from 'react-i18next'
 import { Loader, Button, Icon } from 'semantic-ui-react'
@@ -20,7 +20,8 @@ import MetaEvaluationForm from './MetaEvaluationForm'
 import { metareviewQuestions as questions } from '../../../questionData'
 // tämä on samanlainen kuin Evaluationiew/EvaluationFormView/index.js
 
-const ProgrammeLevelForm = ({ room }) => {
+const ProgrammeLevelForm = () => {
+  const { room } = useParams()
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -32,7 +33,8 @@ const ProgrammeLevelForm = ({ room }) => {
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
-  const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
+
+  const writeAccess = user.access[room]?.write || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const answers = useSelector(state => state.tempAnswers)
 
@@ -64,7 +66,7 @@ const ProgrammeLevelForm = ({ room }) => {
     }
   }, [programme, writeAccess, viewingOldAnswers, year, draftYear, accessToTempAnswers, room, user])
 
-  if (!user || !room) return <Redirect to="/" />
+  if (!user || !room) return <Navigate to="/" />
   if (!programme || !answers) return <Loader active inline="centered" />
 
   const level = room.startsWith('T') ? 'doctoral' : 'kandimaisteri'
@@ -72,20 +74,20 @@ const ProgrammeLevelForm = ({ room }) => {
 
   return (
     <div className="form-container">
-      <NavigationSidebar programmeKey={room} formType="meta-evaluation" formNumber={form} questionData={questionData} />
+      <NavigationSidebar formNumber={form} formType="meta-evaluation" programmeKey={room} questionData={questionData} />
       <div className="the-form">
         <div className="hide-in-print-mode">
           <SaveIndicator />
           <div style={{ marginBottom: '2em' }}>
-            <Button as={Link} to="/meta-evaluation" icon="arrow left" />
+            <Button as={Link} icon="arrow left" to="/meta-evaluation" />
           </div>
           <img alt="form-header-calendar" className="img-responsive" src={powerlineImage} />
         </div>{' '}
         <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
-        <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+        <h3 data-cy="formview-title" style={{ marginTop: '0' }}>
           {t('evaluation')} {year}
         </h3>
-        <h5 style={{ marginTop: '0' }} data-cy="formview-subtitle">
+        <h5 data-cy="formview-subtitle" style={{ marginTop: '0' }}>
           {t('formView:metaSubtitle')}
         </h5>
         <div className="hide-in-print-mode">
@@ -111,7 +113,7 @@ const ProgrammeLevelForm = ({ room }) => {
           {t('irrelevant')}
         </div>
         <div className="info-container">
-          <a href={t('formView:metaPdfUrl')} target="_blank" rel="noreferrer">
+          <a href={t('formView:metaPdfUrl')} rel="noreferrer" target="_blank">
             <h4>
               {t('formView:metaPdfName')} <Icon name="external" />{' '}
             </h4>
@@ -119,10 +121,10 @@ const ProgrammeLevelForm = ({ room }) => {
         </div>
         <br />
         <MetaEvaluationForm
-          questions={questionData}
-          programmeKey={programme.key}
-          summaryData={answers}
           form={form}
+          programmeKey={programme.key}
+          questions={questionData}
+          summaryData={answers}
           summaryUrl={null}
         />
       </div>

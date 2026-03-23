@@ -1,3 +1,4 @@
+/* eslint-disable react/function-component-definition */
 import React from 'react'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
@@ -34,7 +35,8 @@ export default function ModalTemplateComponent({
   const handleClose = () => setOpen(false)
 
   return (
-    <Modal open={open} onClose={handleClose} {...rest}>
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Modal onClose={handleClose} open={open} {...rest}>
       <Box sx={style}>
         <Clear onClick={handleClose} style={{ position: 'absolute', top: '2rem', right: '2rem', cursor: 'pointer' }} />
         {children}

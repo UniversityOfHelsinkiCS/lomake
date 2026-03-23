@@ -54,7 +54,7 @@ const SummaryRowCommittee = ({ setStatsToShow, stats, selectedAnswers, tableIds,
         })
         return acc
       },
-      { bachelor: {}, master: {}, doctoral: {} },
+      { bachelor: {}, master: {}, doctoral: {} }
     )
   }
   return (
@@ -88,7 +88,6 @@ const SummaryRowCommittee = ({ setStatsToShow, stats, selectedAnswers, tableIds,
               return (
                 <div
                   key={`${idObject.id}_${level}`}
-                  style={{ maxHeight: '5em' }}
                   onClick={() =>
                     setStatsToShow({
                       stats: stats[idObject.id],
@@ -97,6 +96,7 @@ const SummaryRowCommittee = ({ setStatsToShow, stats, selectedAnswers, tableIds,
                       questionId: idObject.id,
                     })
                   }
+                  style={{ maxHeight: '5em' }}
                 >
                   <PieChart
                     animationDuration={500}
@@ -105,15 +105,15 @@ const SummaryRowCommittee = ({ setStatsToShow, stats, selectedAnswers, tableIds,
                     data={[
                       {
                         color: '#9dff9d',
-                        value: levelStats?.green || 0,
+                        value: levelStats?.green ?? 0,
                       },
                       {
                         color: '#ffffb1',
-                        value: levelStats?.yellow || 0,
+                        value: levelStats?.yellow ?? 0,
                       },
                       {
                         color: '#ff7f7f',
-                        value: levelStats?.red || 0,
+                        value: levelStats?.red ?? 0,
                       },
                     ]}
                     labelPosition={50}

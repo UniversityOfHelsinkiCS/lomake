@@ -10,9 +10,7 @@ export interface KeyDataCardData {
 
 export interface StudyProgramme {
   key: string
-  name: {
-    [lang: string]: string
-  }
+  name: Record<string, string>
   level: StudyLevel
   companionFaculties: string[]
   international: boolean
@@ -20,7 +18,8 @@ export interface StudyProgramme {
 }
 
 export interface Reason {
-  reason: string, additionalInfo: string
+  reason: string
+  additionalInfo: string
 }
 
 export interface DocumentType {
@@ -48,4 +47,9 @@ export interface InterventionProcedureType {
   endYear: number | null
 }
 
-export type ReportDataKey = 'Vetovoimaisuus' | 'Opintojen sujuvuus ja valmistuminen' | 'Resurssien käyttö' | 'Palaute ja työllistyminen' | 'Toimenpiteet'
+export type ReportDataKey =
+  | 'Vetovoimaisuus'
+  | 'Opintojen sujuvuus ja valmistuminen'
+  | 'Resurssien käyttö'
+  | 'Palaute ja työllistyminen'
+  | 'Toimenpiteet'

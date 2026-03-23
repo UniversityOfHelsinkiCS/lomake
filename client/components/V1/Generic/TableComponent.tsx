@@ -1,3 +1,4 @@
+/* eslint-disable import-x/no-named-as-default-member */
 import React, { useState } from 'react'
 
 /*
@@ -71,7 +72,7 @@ export const TableHead = ({ children, variant }: { children: React.ReactNode; va
         if (React.isValidElement<{ isHeader: boolean; variant: string }>(child)) {
           const existingProps = child.props as any
 
-          return React.cloneElement(child, { isHeader: true, variant: existingProps.variant || variant })
+          return React.cloneElement(child, { isHeader: true, variant: existingProps.variant ?? variant })
         }
         return child
       })}
@@ -86,7 +87,7 @@ export const TableBody = ({ children, variant }: { children: React.ReactNode; va
         if (React.isValidElement<{ isHeader: boolean; variant: string }>(child)) {
           const existingProps = child.props as any
 
-          return React.cloneElement(child, { isHeader: false, variant: existingProps.variant || variant })
+          return React.cloneElement(child, { isHeader: false, variant: existingProps.variant ?? variant })
         }
         return child
       })}
@@ -114,7 +115,7 @@ export const TableRow = ({
       {React.Children.map(children, (child, index) => {
         let frac
         let boxed
-        let rowLength = React.Children.count(children)
+        const rowLength = React.Children.count(children)
         let borderRadius = '0 0 0 0'
 
         switch (variant) {
@@ -154,9 +155,9 @@ export const TableRow = ({
           <div
             style={{
               flex: `${frac} 0 0%`,
-              boxShadow: boxed && '0px 1px 3px rgba(0,0,0,0.3)',
+              boxShadow: boxed ? boxed && '0px 1px 3px rgba(0,0,0,0.3)' : 'none',
               borderRight: index < rowLength - 1 && boxed ? '1px solid rgba(0,0,0,0.2)' : 'none',
-              borderRadius: borderRadius,
+              borderRadius,
               backgroundColor: 'white',
             }}
           >
@@ -213,6 +214,7 @@ export const TableCell = ({
               ? 'rgba(0,0,0,0.06)'
               : 'transparent',
       }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
     >
       {children}

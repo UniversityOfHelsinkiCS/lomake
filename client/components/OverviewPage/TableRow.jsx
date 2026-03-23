@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { Button } from 'semantic-ui-react'
 
 import { isAdmin } from '../../../config/common'
@@ -8,7 +8,7 @@ import ColorTableCell from './ColorTableCell'
 
 const ManageCell = ({ program, setProgramControlsToShow }) => (
   <div className="table-container-manage-cell">
-    <Button data-cy={`${program.key}-manage`} icon="user" circular onClick={() => setProgramControlsToShow(program)} />
+    <Button circular data-cy={`${program.key}-manage`} icon="user" onClick={() => setProgramControlsToShow(program)} />
   </div>
 )
 
@@ -20,7 +20,7 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
 
   const programme = selectedAnswers.find(a => a.programme === p.key && a.form === form)
 
-  let targetURL = `yearly/form/${form}/${p.key}`
+  let targetURL = `/yearly/form/${form}/${p.key}`
   if (formType === 'evaluation') {
     targetURL = `/evaluation/form/${form}/${p.key}`
   } else if (formType === 'degree-reform') {
@@ -31,10 +31,9 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
     targetURL = `/meta-evaluation/form/${form}/${p.key}`
   }
 
-  const lastYearsAnswers =
-    oldAnswers && oldAnswers.years && oldAnswers.years.includes(year - 1)
-      ? oldAnswers.data.filter(a => a.year === year - 1)
-      : null
+  const lastYearsAnswers = oldAnswers?.years?.includes(year - 1)
+    ? oldAnswers.data.filter(a => a.year === year - 1)
+    : null
 
   const programmeLastYear = lastYearsAnswers ? lastYearsAnswers.find(a => a.programme === p.key) : null
 
@@ -55,16 +54,16 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
       </div>
       {tableIds.map(idObject => (
         <ColorTableCell
+          acualQuestionId={idObject.acual_id}
+          form={form}
           key={`${p.key}-${idObject.id}`}
-          programmesName={p.name[lang]}
+          programmesAnswers={programme?.data ?? {}}
           programmesKey={p.key}
-          programmesAnswers={programme && programme.data ? programme.data : {}}
-          programmesOldAnswers={programmeLastYear && programmeLastYear.data ? programmeLastYear.data : null}
+          programmesName={p.name[lang]}
+          programmesOldAnswers={programmeLastYear?.data ?? null}
           questionId={idObject.id}
           questionType={idObject.type}
           setModalData={setModalData}
-          form={form}
-          acualQuestionId={idObject.acual_id}
         />
       ))}
       {hasManagementAccess(p.key) ? (

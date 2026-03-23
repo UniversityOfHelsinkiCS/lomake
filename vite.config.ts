@@ -1,12 +1,12 @@
-import react from '@vitejs/plugin-react-swc'
-import { AliasOptions, defineConfig } from 'vite'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
-import path from "path";
+import react from '@vitejs/plugin-react-swc'
+import path from 'path'
+import { AliasOptions, defineConfig } from 'vite'
 const root = path.resolve(__dirname, './');
 
+// eslint-disable-next-line import-x/no-default-export
 export default defineConfig({
-  plugins: [react(), sentryVitePlugin({})
-],
+  plugins: [react(), sentryVitePlugin({})],
   base: process.env.NODE_ENV === 'production' ? '/tilannekuva' : '/',
   resolve: {
     alias: {
@@ -39,5 +39,12 @@ export default defineConfig({
   define: {
     'process.env': process.env,
     global: {},
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      loader: {
+        '.js': 'jsx',
+      },
+    },
   },
 })

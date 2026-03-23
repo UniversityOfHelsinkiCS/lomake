@@ -1,4 +1,13 @@
-import { InferAttributes, InferCreationAttributes, Model, CreationOptional, INTEGER, DATE, JSONB, STRING } from 'sequelize'
+import {
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+  CreationOptional,
+  INTEGER,
+  DATE,
+  JSONB,
+  STRING,
+} from 'sequelize'
 import { sequelize } from '../database/connection'
 
 class Faculty extends Model<InferAttributes<Faculty>, InferCreationAttributes<Faculty>> {
@@ -24,7 +33,7 @@ Faculty.init(
   {
     sequelize,
     tableName: 'faculties',
-    underscored: true
+    underscored: true,
   }
 )
 

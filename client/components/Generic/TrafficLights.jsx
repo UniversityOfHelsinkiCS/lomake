@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { updateFormField } from '../../redux/formReducer'
@@ -14,7 +13,8 @@ const TrafficLights = ({ id, form }) => {
   const finnishUniFormData = useSelector(({ form }) => form.finnishUniFormData.data)
   const reduxViewOnly = useSelector(({ form }) => form.viewOnly)
 
-  const isUniFormLanguageVersion = window.location.href.match('((/UNI_EN)|(/UNI_SE))')
+  const isUniFormLanguageVersion = /((\/UNI_EN)|(\/UNI_SE))/.exec(window.location.href)
+
   const viewOnly = reduxViewOnly || isUniFormLanguageVersion
 
   const getClassName = color => {
@@ -32,22 +32,22 @@ const TrafficLights = ({ id, form }) => {
       <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
         <div title={`${t('positive')}`}>
           <div
-            data-cy={`color-positive-${id}`}
             className={getClassName('green')}
+            data-cy={`color-positive-${id}`}
             onClick={!viewOnly ? () => choose(fieldName, 'green') : undefined}
           />
         </div>
         <div title={`${t('neutral')}`}>
           <div
-            data-cy={`color-neutral-${id}`}
             className={getClassName('yellow')}
+            data-cy={`color-neutral-${id}`}
             onClick={!viewOnly ? () => choose(fieldName, 'yellow') : undefined}
           />
         </div>
         <div title={`${t('negative')}`}>
           <div
-            data-cy={`color-negative-${id}`}
             className={getClassName('red')}
+            data-cy={`color-negative-${id}`}
             onClick={!viewOnly ? () => choose(fieldName, 'red') : undefined}
           />
         </div>

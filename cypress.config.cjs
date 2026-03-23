@@ -1,3 +1,4 @@
+/* eslint-disable import-x/no-commonjs */
 // eslint-disable-next-line
 const { defineConfig } = require('cypress')
 

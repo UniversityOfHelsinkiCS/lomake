@@ -1,9 +1,16 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { isAdmin, isEvaluationUniversityUser, isKatselmusProjektiOrOhjausryhma, isBasicUser } from '../../../../config/common'
+import {
+  isAdmin,
+  isEvaluationUniversityUser,
+  isKatselmusProjektiOrOhjausryhma,
+  isBasicUser,
+  isEmployeeOnly,
+} from '../../../../config/common'
 import CustomModal from '../../Generic/CustomModal'
 import NoPermissions from '../../Generic/NoPermissions'
 import { setColorBlindMode } from '../../../redux/filterReducer'
@@ -25,23 +32,16 @@ export default () => {
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
-  const [selectedLevels, setSelectedLevels] = useState({ master: false, doctoral: false })
 
   const form = 6
-  const formType = 'evaluation'
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
   }, [lang])
 
   // all have rights!
-  const hasRights = currentUser => isBasicUser(currentUser) || isEvaluationUniversityUser(currentUser)
-
-  // eslint-disable-next-line no-unused-vars
-  const handleSelectedLevels = level => {
-    setSelectedLevels({ ...selectedLevels, [level]: !selectedLevels[level] })
-  }
-
+  const hasRights = currentUser =>
+    (isBasicUser(currentUser) || isEvaluationUniversityUser(currentUser)) && !isEmployeeOnly(currentUser)
   // show faculty overview to those that have access to some programmes in tilannekuvalomake
   const usersProgrammes = useMemo(() => {
     if (!hasRights(currentUser)) return []
@@ -58,28 +58,27 @@ export default () => {
 `
   return (
     <>
-      {modalData && (
+      {modalData ? (
         <CustomModal
-          title={modalData.header}
-          closeModal={() => setModalData(null)}
           borderColor={modalData.color.single}
+          closeModal={() => setModalData(null)}
+          title={modalData.header}
         >
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
               {modalData?.type === 'actions' ? (
                 <div>
-                  {modalData.content &&
-                    modalData.content.map(({ title, actions, index }) => {
-                      return (
-                        <div style={{ marginBottom: '1em' }} key={`${title}-${actions}`}>
-                          <h2 data-cy={`modal-title-action-${index}`}>{title}</h2>
-                          <div data-cy={`modal-content-action-${index}`}>
-                            <ReactMarkdown>{actions}</ReactMarkdown>
-                          </div>
+                  {modalData.content?.map(({ title, actions, index }) => {
+                    return (
+                      <div key={`${title}-${actions}`} style={{ marginBottom: '1em' }}>
+                        <h2 data-cy={`modal-title-action-${index}`}>{title}</h2>
+                        <div data-cy={`modal-content-action-${index}`}>
+                          <ReactMarkdown>{actions}</ReactMarkdown>
                         </div>
-                      )
-                    })}
+                      </div>
+                    )
+                  })}
                 </div>
               ) : (
                 <ReactMarkdown>{modalData.content}</ReactMarkdown>
@@ -87,32 +86,31 @@ export default () => {
             </div>
           </>
         </CustomModal>
-      )}
-      {programControlsToShow && (
+      ) : null}
+      {programControlsToShow ? (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
-            }`}
           closeModal={() => setProgramControlsToShow(null)}
+          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ?? programControlsToShow.name.en}`}
         >
           <ProgramControlsContent programKey={programControlsToShow.code} />
         </CustomModal>
-      )}
+      ) : null}
 
       {usersProgrammes.length > 0 ? (
         <>
           <div className="wide-header-committee">
             <h2>{t('evaluation').toUpperCase()}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', height: '8em', justifyContent: 'space-evenly' }}>
-              <Radio toggle label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} />
+              <Radio label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} toggle />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {(true || isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)) && (
+              {isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser) ? (
                 <>
                   <h4>{t(`overview:print`)}</h4>
-                  <PDFDownload linkName="uniBachelorMaster" componentRef={printingRefHyBachelorMaster} />
-                  <PDFDownload linkName="uniDoctoral" componentRef={printingRefHyDoctoral} />
-                  <PDFDownload linkName="arviointiBachelorMaster" componentRef={printingRefArviointiBachelorMaster} />
-                  <PDFDownload linkName="arviointiDoctoral" componentRef={printingRefArviointiDoctoral} />
+                  <PDFDownload componentRef={printingRefHyBachelorMaster} linkName="uniBachelorMaster" />
+                  <PDFDownload componentRef={printingRefHyDoctoral} linkName="uniDoctoral" />
+                  <PDFDownload componentRef={printingRefArviointiBachelorMaster} linkName="arviointiBachelorMaster" />
+                  <PDFDownload componentRef={printingRefArviointiDoctoral} linkName="arviointiDoctoral" />
                   <div className="testing-testing" ref={printingRefHyBachelorMaster}>
                     <style>{pageStyle}</style>
                     <CommitteePrinting type="uni-bachelor-master"> </CommitteePrinting>
@@ -130,23 +128,20 @@ export default () => {
                     <CommitteePrinting type="arviointi-doctoral"> </CommitteePrinting>
                   </div>
                 </>
-              )}
+              ) : null}
             </div>
           </div>
           <div className="committee-color-table-wrapper" style={{ marginTop: '1em' }}>
             <CommitteeColorTable
               committees={committeeList}
-              setModalData={setModalData}
-              setProgramControlsToShow={setProgramControlsToShow}
-              setStatsToShow={null}
               form={form}
-              formType={formType}
-              selectedLevels={selectedLevels}
+              setModalData={setModalData}
+              setStatsToShow={null}
             />
           </div>
         </>
       ) : (
-        <NoPermissions t={t} requestedForm={t('evaluation')} />
+        <NoPermissions requestedForm={t('evaluation')} t={t} />
       )}
     </>
   )

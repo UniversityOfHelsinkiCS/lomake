@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '../../../../config/data'
 import { Loader } from 'semantic-ui-react'
 import { isAdmin } from '../../../../config/common'
-import NoPermissions from '../../Generic/NoPermissions' 
+import NoPermissions from '../../Generic/NoPermissions'
 import MonitoringOverview from './MonitoringOverview'
 
 const FacultyMonitoringOverview = () => {
@@ -17,6 +17,7 @@ const FacultyMonitoringOverview = () => {
 
   const hasReadRights = (faculties, user) => {
     const readRights = faculties?.some(faculty => user.access[faculty.code]?.read)
+
     return readRights || user.specialGroup?.evaluationFaculty || isAdmin(user)
   }
 
@@ -25,12 +26,12 @@ const FacultyMonitoringOverview = () => {
   }, [lang, t])
 
   if (!hasReadRights(faculties, user)) {
-    return <NoPermissions t={t} requestedForm={t('facultymonitoring')} />
+    return <NoPermissions requestedForm={t('facultymonitoring')} t={t} />
   }
 
   if (faculties.pending) return <Loader active />
 
-  return <MonitoringOverview t={t} lang={lang} faculties={faculties} form={form} formType={formType} />
+  return <MonitoringOverview faculties={faculties} form={form} formType={formType} lang={lang} t={t} />
 }
 
 export default FacultyMonitoringOverview

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button, Modal, Message } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
@@ -11,7 +10,7 @@ const SendFormModal = ({ openButton, header, description, sendButton, open, setO
       {message ? (
         <Modal.Content>
           {' '}
-          <Message size="tiny" header={message} color="red" />
+          <Message color="red" header={message} size="tiny" />
         </Modal.Content>
       ) : null}
       <Modal.Content image>
@@ -19,10 +18,10 @@ const SendFormModal = ({ openButton, header, description, sendButton, open, setO
       </Modal.Content>
       <Modal.Actions style={{ display: 'flex' }}>
         <Button
-          data-cy="individual-form-send-form-button"
           content={t('send')}
-          labelPosition="right"
+          data-cy="individual-form-send-form-button"
           icon="checkmark"
+          labelPosition="right"
           onClick={sendButton}
           positive
         />

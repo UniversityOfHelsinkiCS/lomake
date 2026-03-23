@@ -1,4 +1,3 @@
-import React from 'react'
 import { Segment } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -36,11 +35,12 @@ const ColorLegend = () => {
     ],
   }
 
-  const selectedLegends = legends[form] || legends.default
+  const selectedLegends = legends[form] ?? legends.default
 
   return (
     <Segment compact={form !== formKeys.FACULTY_MONITORING && form !== formKeys.META_EVALUATION} textAlign="left">
       {selectedLegends.map(({ colorClass, text }) => (
+        // eslint-disable-next-line react/jsx-key
         <LegendItem colorClass={colorClass} text={text} />
       ))}
       {form === undefined && <p className="report-side-note">{t('noColors')}</p>}

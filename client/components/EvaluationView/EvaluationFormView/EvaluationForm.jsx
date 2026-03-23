@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { formKeys } from '../../../../config/data'
 
@@ -83,28 +82,28 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
     const gapSytle = form === formKeys.EVALUATION_COMMTTEES ? { marginBottom: 70 } : {}
-    const maxLength = part.maxLength ? part.maxLength : undefined
-    const noUniversityLevel = part.noUniversityLevel ? part.noUniversityLevel : undefined
+    const maxLength = part.maxLength ?? undefined
+    const noUniversityLevel = part.noUniversityLevel ?? undefined
 
     return (
       <div key={`${part.id}-container`} style={gapSytle}>
         <div key={`${part.id}-${part.index}`} style={divStyle}>
           <Component
-            id={part.id}
-            label={part.label[lang]}
             description={description}
-            required={part.required}
-            noColor={part.no_color}
-            number={number}
             extrainfo={extrainfo}
+            form={form}
+            id={part.id}
+            kludge={part.kludge}
+            label={part.label[lang]}
+            maxLength={maxLength}
+            noColor={part.no_color}
+            noUniversityLevel={noUniversityLevel}
+            number={number}
             previousYearsAnswers={null}
             programme={programmeKey}
-            summaryData={summaryData?.[part.id] || {}}
-            form={form}
-            summaryUrl={summaryUrl || null}
-            kludge={part.kludge}
-            maxLength={maxLength}
-            noUniversityLevel={noUniversityLevel}
+            required={part.required}
+            summaryData={summaryData?.[part.id] ?? {}}
+            summaryUrl={summaryUrl ?? null}
           />
         </div>
       </div>
@@ -116,11 +115,11 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
       {questions.map((section, index) => {
         return (
           <Section
-            title={section.title[lang]}
-            number={romanize(index + 1)}
-            key={`${section.title[lang]}`}
-            programmeKey={programmeKey}
             form={form}
+            key={`${section.title[lang]}`}
+            number={romanize(index + 1)}
+            programmeKey={programmeKey}
+            title={section.title[lang]}
           >
             {section.parts.map(partMap)}
           </Section>

@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Button, Icon, Dimmer, Segment, Header, Message } from 'semantic-ui-react'
@@ -52,6 +54,7 @@ const DegreeReformIndividual = () => {
     }
   }, [year, draftYear, user, formDeadline, currentRoom])
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   const handleFormReady = async () => {
     if (!requiredDegreeReformIds.every(id => formData.data[id])) {
       setMessage(t('formView:fillAllRequiredFields'))
@@ -74,27 +77,13 @@ const DegreeReformIndividual = () => {
               {t('formView:formReady')}
             </Header>
             <Button
-              primary
               onClick={() => {
                 dispatch(updateIndividualReady({ uid, ready: false }))
               }}
+              primary
             >
               {t('formView:modifyForm')}
             </Button>
-
-            {/* <SendFormModal
-              openButton={
-                <Button disabled={viewOnly} data-cy="individual-form-send-modal-button">
-                  {t('formView:sendNewForm')}
-                </Button>
-              }
-              header={t('formView:sendFormModalHeader')}
-              description={t('formView:sendFormModalDescription')}
-              open={modalOpen}
-              setOpen={setModalOpen}
-              message={message}
-              sendButton={handleSendingForm}
-            /> */}
           </div>
         </Dimmer>
 
@@ -103,27 +92,27 @@ const DegreeReformIndividual = () => {
             <div className="hide-in-print-mode">
               <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
             </div>
-            <h3 style={{ marginTop: 10, fontSize: 32, marginBottom: 30 }} data-cy="formview-title">
+            <h3 data-cy="formview-title" style={{ marginTop: 10, fontSize: 32, marginBottom: 30 }}>
               {t('degree-reform')}
             </h3>
             <StatusMessage form={formNumber} />
             <SaveIndicator />
           </div>
-          <DegreeReformForm questionData={questionData} formType={formType} />
+          <DegreeReformForm formType={formType} questionData={questionData} />
           <Button
-            style={{ maxWidth: '80em', marginTop: '1.5em' }}
-            labelPosition="left"
-            data-cy="individual-form-ready-button"
-            icon
-            disabled={viewOnly}
             color="green"
+            data-cy="individual-form-ready-button"
+            disabled={viewOnly}
+            icon
+            labelPosition="left"
             onClick={handleFormReady}
+            style={{ maxWidth: '80em', marginTop: '1.5em' }}
           >
             <Icon name="upload" />
             <span style={{ fontSize: '1.5em' }}>{t('formView:sendForm')}</span>
           </Button>
           <p style={{ fontSize: '15px', textAlign: 'center' }}>{t('formView:canChange')}</p>
-          {message ? <Message size="tiny" header={message} color="red" /> : null}
+          {message ? <Message color="red" header={message} size="tiny" /> : null}
         </div>
       </Dimmer.Dimmable>
     </div>

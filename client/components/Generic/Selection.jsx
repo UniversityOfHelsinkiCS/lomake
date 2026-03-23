@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox, Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -32,7 +31,7 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
       <Divider />
       <div className="selection-area">
         <h3>
-          {number}. {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
+          {number}. {label} {required ? <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span> : null}
         </h3>
         <div className="selection-description">
           <p>{description}</p>
@@ -43,25 +42,25 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
           {ids.map(optionId => {
             return (
               <Checkbox
-                key={optionId}
-                id={optionId}
-                label={options[optionId][lang]}
-                onChange={(e, data) => handleSelection(data)}
                 checked={selections ? selections[optionId] : false}
                 disabled={viewOnly}
+                id={optionId}
+                key={optionId}
+                label={options[optionId][lang]}
+                onChange={(e, data) => handleSelection(data)}
               />
             )
           })}
           <div className="form-textarea">
             <label>{t('otherTextBox')}</label>
             {viewOnly ? (
-              otherText || ''
+              (otherText ?? '')
             ) : (
               <textarea
                 id="other"
-                value={otherText || ''}
                 onChange={handleOther}
                 placeholder={t('formView:addMissing')}
+                value={otherText ?? ''}
               />
             )}
           </div>

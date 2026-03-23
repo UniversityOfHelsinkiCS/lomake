@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
 /// <reference types="cypress" />
-
 import { testProgrammeCode, defaultYears, testProgrammeName } from '../../config/common'
 import helpers from '../support/helpers'
 import '../support/commands'
@@ -29,9 +27,9 @@ describe('ComparisonPage tests', () => {
     cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
     cy.visit('/yearly')
-    cy.get('[data-cy=nav-comparison]').click()
+    cy.get('[data-cy=nav-comparison]').click({ force: true })
 
-    cy.selectYear(defaultYears[1])
+    cy.selectYear(defaultYears[1]).click({ force: true })
     // cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
     //   helpers.getTotalProgrammeCount(),
     // )
@@ -41,13 +39,13 @@ describe('ComparisonPage tests', () => {
     cy.login(adminUser)
     cy.visit('/yearly')
     cy.get('[data-cy=nav-comparison]').click()
-    cy.selectYear(defaultYears[1])
+    cy.selectYear(defaultYears[1]).click({ force: true })
 
     cy.get('[data-cy=doctoral-filter]').click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('a').contains('All faculties').click()
     cy.get('[data-cy=comparison-responses-faculty-programme_identity_text]').contains(
-      `/ ${helpers.getDoctoralProgrammeCount()}`,
+      `/ ${helpers.getDoctoralProgrammeCount()}`
     )
   })
 

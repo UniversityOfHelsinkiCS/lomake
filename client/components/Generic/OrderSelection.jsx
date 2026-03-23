@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Button, Grid, Header, Segment } from 'semantic-ui-react'
@@ -12,9 +11,9 @@ const OrderSelection = ({ id, label, description, extrainfo, lang, options, form
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const values = useSelector(({ form }) => form.data.used_systems_selection)
   const selections = values ? JSON.parse(values) : null
-  const otherText = useSelector(({ form }) => form.data.used_systems_text) || ''
+  const otherText = useSelector(({ form }) => form.data.used_systems_text) ?? ''
 
-  const orderFromD = useSelector(({ form }) => form.data.used_systems_usefullness_order) || ''
+  const orderFromD = useSelector(({ form }) => form.data.used_systems_usefullness_order) ?? ''
   const systemList = orderFromD ? orderFromD.split(';;') : []
 
   const getUsedSystems = () => {
@@ -92,7 +91,7 @@ const OrderSelection = ({ id, label, description, extrainfo, lang, options, form
                 {getUsedSystems().map(system => (
                   <div className="ordering-options" key={system}>
                     {!systemList.includes(system) && (
-                      <Button onClick={(e, data) => handleClick(data.id)} id={system} key={system} disabled={viewOnly}>
+                      <Button disabled={viewOnly} id={system} key={system} onClick={(e, data) => handleClick(data.id)}>
                         {getLabel(system)}
                       </Button>
                     )}

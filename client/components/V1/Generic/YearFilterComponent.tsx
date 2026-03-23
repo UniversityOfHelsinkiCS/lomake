@@ -19,7 +19,9 @@ const YearFilterComponent = () => {
   const handleChange = (event: SelectChangeEvent<string>) => {
     dispatch(clearLevelSpecificFilters())
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const value = event.target.value as string
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     allowedYears.includes(value) && dispatch(setKeyDataYear(value))
   }
 
@@ -28,13 +30,13 @@ const YearFilterComponent = () => {
       <FormControl sx={{ m: 1, width: 350 }}>
         <Select
           data-cy="year-filter"
-          value={selectedYear}
-          onChange={handleChange}
           displayEmpty
+          onChange={handleChange}
           renderValue={value => (allowedYears.includes(value) ? value : <span style={{ opacity: 0.4 }}>{value}</span>)}
+          value={selectedYear}
         >
           {allowedYears.map(option => (
-            <MenuItem key={option} value={option} data-cy="year-filter-option">
+            <MenuItem data-cy="year-filter-option" key={option} value={option}>
               {option}
             </MenuItem>
           ))}

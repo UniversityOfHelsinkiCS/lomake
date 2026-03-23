@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Radio, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -32,26 +32,26 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
             <p className="report side-note-small">{t('report:pdfNotification')}</p>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Column width={6} className="left" />
-        <Grid.Column width={6} className="center">
+        <Grid.Column className="left" width={6} />
+        <Grid.Column className="center" width={6}>
           {year} - {t('trafficLights')}
         </Grid.Column>
       </Grid>
       <div className="ui divider" />
       <Grid columns={2}>
-        <Grid.Row textAlign="left" style={{ display: 'flex', alignItems: 'center' }}>
+        <Grid.Row style={{ display: 'flex', alignItems: 'center' }} textAlign="left">
           <Grid.Column>
             <ColorLegend />
           </Grid.Column>
           <Grid.Column>
             <Radio
               checked={showEmpty}
-              onChange={() => setShowEmpty(!showEmpty)}
               label={
                 form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING
                   ? t('comparison:emptyFacultyAnswers')
                   : t('comparison:emptyAnswers')
               }
+              onChange={() => setShowEmpty(!showEmpty)}
               toggle
             />
           </Grid.Column>
@@ -71,32 +71,32 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
                       {['bachelor', 'master', 'doctoral'].map(level => {
                         return (
                           <PieChart
-                            key={`${question.id}-${level}`}
-                            question={question}
                             answers={allAnswers.get(question.id)}
-                            showEmpty={showEmpty}
                             chosenProgrammes={chosenProgrammes}
+                            form={form}
+                            key={`${question.id}-${level}`}
+                            level={level}
+                            question={question}
                             setActiveTab={setActiveTab}
                             setShowing={setShowing}
-                            level={level}
-                            form={form}
+                            showEmpty={showEmpty}
                           />
                         )
                       })}
                     </>
                   ) : (
                     <PieChart
-                      question={question}
                       answers={allAnswers.get(question.id)}
-                      showEmpty={showEmpty}
                       chosenProgrammes={chosenProgrammes}
+                      form={form}
+                      question={question}
                       setActiveTab={setActiveTab}
                       setShowing={setShowing}
-                      form={form}
+                      showEmpty={showEmpty}
                     />
                   )}
                 </div>
-              ),
+              )
           )}
         </Grid>
       </div>

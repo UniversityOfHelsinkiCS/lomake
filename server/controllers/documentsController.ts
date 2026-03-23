@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-return */
 import logger from '../util/logger.js'
 import Document from '../models/document.js'
 import { Request, Response } from 'express'
@@ -116,7 +117,7 @@ const getAllDocuments = async (req: Request, res: Response) => {
       },
       order: [['createdAt', 'ASC']],
     })
-    
+
     return res.status(200).json(documents)
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -127,7 +128,7 @@ const getAllDocuments = async (req: Request, res: Response) => {
 const createDocument = async (req: Request, res: Response) => {
   try {
     const { programme, status, error, documents } = await validateOperation(req)
-    if (!programme) return res.status(status).json({ error: error })
+    if (!programme) return res.status(status).json({ error })
 
     const calculateActiveYear = () => {
       const last = documents.length > 0 ? documents.length - 1 : 0
@@ -152,7 +153,7 @@ const createDocument = async (req: Request, res: Response) => {
 const updateDocument = async (req: Request, res: Response) => {
   try {
     const { documents, data, status, error } = await validateOperation(req)
-    if (documents.length === 0) return res.status(status).json({ error: error })
+    if (documents.length === 0) return res.status(status).json({ error })
 
     const document: Document = documents.pop()
     document.data = data
@@ -170,7 +171,7 @@ const closeInterventionProcedure = async (req: Request, res: Response) => {
 
   try {
     const { programme, documents, status, error, data } = await validateOperation(req)
-    if (documents.length === 0) return res.status(status).json({ error: error })
+    if (documents.length === 0) return res.status(status).json({ error })
 
     const updates = {
       active: false,
@@ -185,12 +186,15 @@ const closeInterventionProcedure = async (req: Request, res: Response) => {
       transaction,
     })
 
-    await InterventionProcedure.update({active:false, endYear: new Date().getFullYear()}, {
-      where: {
-        studyprogrammeKey: programme,
-        active: true,
-      },
-    })
+    await InterventionProcedure.update(
+      { active: false, endYear: new Date().getFullYear() },
+      {
+        where: {
+          studyprogrammeKey: programme,
+          active: true,
+        },
+      }
+    )
 
     await transaction.commit()
 
@@ -217,13 +221,19 @@ const deleteDocument = async (req: Request, res: Response) => {
       })
 
       return res.status(204).send()
-    } 
+    }
     return res.status(405).send({ error: 'Document not empty.' })
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    console.log()
     return res.status(500).json({ error: 'Database error' })
   }
 }
 
-export default { getDocuments, createDocument, updateDocument, closeInterventionProcedure, getAllDocuments, deleteDocument }
+export default {
+  getDocuments,
+  createDocument,
+  updateDocument,
+  closeInterventionProcedure,
+  getAllDocuments,
+  deleteDocument,
+}

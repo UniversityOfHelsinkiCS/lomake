@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { degreeReformBackgroundColor, reversedPointsInDegreeReform } from '../../util/common'
@@ -75,7 +74,7 @@ const DegreeReformCell = ({
     })
 
   return (
-    <div data-cy={`${programmesKey}-${questionId}`} className="square" style={{ background }} onClick={modalData}>
+    <div className="square" data-cy={`${programmesKey}-${questionId}`} onClick={modalData} style={{ background }}>
       {average}
     </div>
   )

@@ -95,7 +95,10 @@ export const MetadataSchema = z
     yksikko: z.literal('%').optional(),
     kynnysarvot: z
       .string()
-      .regex(/^\d+(?:\.\d+)?;\d+(?:\.\d+)?;\d+(?:\.\d+)?;\d+(?:\.\d+)?$/, 'Should be in format number;number;number;number. Use . as decimal separator')
+      .regex(
+        /^\d+(?:\.\d+)?;\d+(?:\.\d+)?;\d+(?:\.\d+)?;\d+(?:\.\d+)?$/,
+        'Should be in format number;number;number;number. Use . as decimal separator'
+      )
       .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
     ohjelmanTaso: z.enum(['bachelor', 'master', 'doctoral']),
     liikennevalo: z.boolean(),
@@ -141,37 +144,45 @@ export const MetadataRawSchema = z
   })
   .strict() // to disallow extra keys
 
-export const DocumentFormSchema = z.object({
-  title: z.string().min(3, 'title'),
-  date: z.string().date('date'),
-  participants: z.string().min(3, 'participants'),
-  matters: z.string().min(100, 'matters'),
-  schedule: z.string().min(3, 'schedule'),
-  followupDate: z.string().date('date'),
-}).strict()
+export const DocumentFormSchema = z
+  .object({
+    title: z.string().min(3, 'title'),
+    date: z.string().date('date'),
+    participants: z.string().min(3, 'participants'),
+    matters: z.string().min(100, 'matters'),
+    schedule: z.string().min(3, 'schedule'),
+    followupDate: z.string().date('date'),
+  })
+  .strict()
 
-export const QualityDocumentFormSchema = z.object({
-  title: z.string().min(3, 'title'),
-  curriculumProcess: z.string().min(100, 'curriculumProcess'),
-  guidancePolicies: z.string().min(100, 'guidancePolicies'),
-  feedbackUtilization: z.object({
-    norppa: z.boolean(),
-    bachelorFeedback: z.boolean(), 
-    careerMonitoring: z.boolean(), 
-    other: z.boolean(), 
-  }).strict(),
-  feedbackActions: z.string().min(50, 'feedbackActions'),
-  actionsRegularity: z.enum(['annually', 'everySemester', 'moreFrequently'])
-}).strict()
+export const QualityDocumentFormSchema = z
+  .object({
+    title: z.string().min(3, 'title'),
+    curriculumProcess: z.string().min(100, 'curriculumProcess'),
+    guidancePolicies: z.string().min(100, 'guidancePolicies'),
+    feedbackUtilization: z
+      .object({
+        norppa: z.boolean(),
+        bachelorFeedback: z.boolean(),
+        careerMonitoring: z.boolean(),
+        other: z.boolean(),
+      })
+      .strict(),
+    feedbackActions: z.string().min(50, 'feedbackActions'),
+    actionsRegularity: z.enum(['annually', 'everySemester', 'moreFrequently']),
+  })
+  .strict()
 
-export const InterventionProcedureCloseSchema = z.object({
-  reason: z.string(),
-  additionalInfo: z.string(),
-}).strict()
+export const InterventionProcedureCloseSchema = z
+  .object({
+    reason: z.string(),
+    additionalInfo: z.string(),
+  })
+  .strict()
 
 export const logZodError = (error: ZodError) => {
-  let parsedErrors: any[] = []
-  let typesOfErrors: { [key: string]: number } = {}
+  const parsedErrors: any[] = []
+  const typesOfErrors: Record<string, number> = {}
 
   error.errors.forEach(e => {
     parsedErrors.push(e)
@@ -184,6 +195,7 @@ export const logZodError = (error: ZodError) => {
   })
 
   // Pretty formatted log message
+  // eslint-disable-next-line no-console
   console.error(`
       ❌ Validation Error Report ❌
       --------------------------------
@@ -191,19 +203,19 @@ export const logZodError = (error: ZodError) => {
       
       🔹 Types of Errors:
       ${Object.entries(typesOfErrors)
-      .map(([type, count]) => `    - ${type}: ${count}`)
-      .join('\n')}
+        .map(([type, count]) => `    - ${type}: ${count}`)
+        .join('\n')}
   
       ${parsedErrors
-      .map(
-        (e, index) => `
-      ${index + 1}. 🔻 Path: ${e.path.join('.') || 'N/A'}
+        .map(
+          (e, index) => `
+      ${index + 1}. 🔻 Path: ${e.path.join('.') ?? 'N/A'}
           🔹 Error Type: ${e.code}
           🔹 Expected: ${JSON.stringify(e.expected, null, 2)}
           🔹 Received: ${JSON.stringify(e.received, null, 2)}
-          🔹 Error message: ${e.message}`,
-      )
-      .join('\n')}
+          🔹 Error message: ${e.message}`
+        )
+        .join('\n')}
     
       --------------------------------
       `)

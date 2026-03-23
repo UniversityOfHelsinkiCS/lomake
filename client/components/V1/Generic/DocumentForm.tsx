@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useEffect, useState, Fragment } from 'react'
+// eslint-disable-next-line import-x/no-extraneous-dependencies
 import dayjs from 'dayjs'
 import { Box, Typography, TextField, Button } from '@mui/material'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
@@ -8,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { DocumentFormSchema } from '@/shared/validators'
 import { useCreateDocumentMutation } from '@/client/redux/documents'
 import { TFunction } from 'i18next'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { useAppSelector } from '@/client/util/hooks'
 
 const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followupDate']
@@ -21,18 +23,14 @@ const initForm = (t: TFunction, error: boolean) => {
       else acc[field] = ''
       return acc
     },
-    {} as Record<string, string>,
+    {} as Record<string, string>
   )
 }
 
-const DocumentForm = ({
-  programmeKey,
-}: {
-  programmeKey: string
-}) => {
+const DocumentForm = ({ programmeKey }: { programmeKey: string }) => {
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const data = initForm(t, false)
   const [createDocument] = useCreateDocumentMutation()
@@ -74,12 +72,13 @@ const DocumentForm = ({
       setErrors(
         fields.reduce(
           (acc, field) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
             acc[field] = t(`error:${fieldErrors[field]?._errors?.[0]}`) || ''
             return acc
           },
-          {} as Record<string, string>,
-        ),
+          {} as Record<string, string>
+        )
       )
     }
     return res.success
@@ -91,13 +90,13 @@ const DocumentForm = ({
       createDocument({ studyprogrammeKey: programmeKey, data: formData })
       setFormData(initForm(t, false))
       setErrors(initForm(t, true))
-      history.push(`/v1/programmes/10/${programmeKey}`)
+      navigate(`/v1/programmes/10/${programmeKey}`)
     }
   }
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Typography variant="h3" sx={{ mb: '4rem' }}>
+      <Typography sx={{ mb: '4rem' }} variant="h3">
         {t('document:header')} - {`${new Date().toLocaleDateString('fi-FI')}`}
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -108,16 +107,14 @@ const DocumentForm = ({
             if (index === 1 || index === 5) {
               return (
                 <LocalizationProvider
-                  key={field}
                   dateAdapter={AdapterDayjs}
+                  key={field}
                   localeText={localeComponent.components.MuiLocalizationProvider.defaultProps.localeText}
                 >
                   <DatePicker
-                    label={t(`document:${field}`)}
-                    value={formData[field] ? dayjs(formData[field]) : null}
-                    onChange={value => handleDateChange(field, value)}
-                    sx={{ width: '50%' }}
                     format="DD/MM/YYYY"
+                    label={t(`document:${field}`)}
+                    onChange={value => handleDateChange(field, value)}
                     slotProps={{
                       textField: {
                         inputProps: {
@@ -128,6 +125,8 @@ const DocumentForm = ({
                       },
                       calendarHeader: { format: 'MM/YYYY' },
                     }}
+                    sx={{ width: '50%' }}
+                    value={formData[field] ? dayjs(formData[field]) : null}
                   />
                 </LocalizationProvider>
               )
@@ -138,16 +137,16 @@ const DocumentForm = ({
                   <Typography variant="light">{t('document:mattersDescription')}</Typography>
                   <TextField
                     data-cy={`editor-${field}`}
-                    name={field}
-                    label={t(`document:${field}`)}
-                    variant="outlined"
-                    margin="normal"
-                    value={formData[field]}
-                    onChange={handleChange}
                     error={!!errors[field]}
                     helperText={errors[field]}
+                    label={t(`document:${field}`)}
+                    margin="normal"
                     minRows={3}
                     multiline
+                    name={field}
+                    onChange={handleChange}
+                    value={formData[field]}
+                    variant="outlined"
                   />
                 </Fragment>
               )
@@ -158,16 +157,16 @@ const DocumentForm = ({
                   <Typography variant="light">{t('document:scheduleDescription')}</Typography>
                   <TextField
                     data-cy={`editor-${field}`}
-                    key={field}
-                    name={field}
-                    label={t(`document:${field}`)}
-                    variant="outlined"
-                    margin="normal"
-                    value={formData[field]}
-                    onChange={handleChange}
                     error={!!errors[field]}
                     helperText={errors[field]}
+                    key={field}
+                    label={t(`document:${field}`)}
+                    margin="normal"
                     multiline
+                    name={field}
+                    onChange={handleChange}
+                    value={formData[field]}
+                    variant="outlined"
                   />
                 </Fragment>
               )
@@ -176,28 +175,28 @@ const DocumentForm = ({
               <Fragment key={field}>
                 <TextField
                   data-cy={`editor-${field}`}
-                  key={field}
-                  name={field}
-                  label={t(`document:${field}`)}
-                  variant="outlined"
-                  margin="normal"
-                  value={formData[field]}
-                  onChange={handleChange}
                   error={!!errors[field]}
                   helperText={errors[field]}
-                  sx={{ width: '50%' }}
+                  key={field}
+                  label={t(`document:${field}`)}
+                  margin="normal"
                   multiline
+                  name={field}
+                  onChange={handleChange}
+                  sx={{ width: '50%' }}
+                  value={formData[field]}
+                  variant="outlined"
                 />
               </Fragment>
             )
           })}
           <Button
+            color="primary"
             data-cy="save-document"
             key="submit"
             sx={{ alignSelf: 'flex-end' }}
             type="submit"
             variant="contained"
-            color="primary"
           >
             {t('document:submit')}
           </Button>

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Button, Icon, Accordion } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -12,14 +12,14 @@ const Programme = ({ p, lang, selectedFaculties, form }) => {
     <Fragment key={p.key}>
       <span style={{ cursor: 'pointer' }}>{p.name[lang]}</span>
       {form &&
-        form !== formKeys.EVALUATION_FACULTIES &&
-        form !== formKeys.FACULTY_MONITORING &&
-        !selectedFaculties.includes(p.primaryFaculty.code) &&
-        !selectedFaculties.includes('allFaculties') && (
-          <span className="list-companion-icon">
-            <Icon name="handshake outline" />
-          </span>
-        )}
+      form !== formKeys.EVALUATION_FACULTIES &&
+      form !== formKeys.FACULTY_MONITORING &&
+      !selectedFaculties.includes(p.primaryFaculty.code) &&
+      !selectedFaculties.includes('allFaculties') ? (
+        <span className="list-companion-icon">
+          <Icon name="handshake outline" />
+        </span>
+      ) : null}
     </Fragment>
   )
 }
@@ -51,7 +51,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
     form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING ? facultyLabels : programmeLabels
 
   return (
-    <Accordion styled active fluid data-cy="report-programmes-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+    <Accordion active data-cy="report-programmes-list" fluid style={{ maxHeight: '400px', overflowY: 'auto' }} styled>
       <Accordion.Title data-cy="report-select-all-accordion" onClick={() => setIsOpen(!isOpen)}>
         {t(labels.nowShowing)}
         <span>
@@ -73,11 +73,11 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                   <p
                     className="list-included"
                     data-cy={`report-list-programme-${pKey}`}
-                    onClick={() => addToList(p)}
                     key={pKey}
+                    onClick={() => addToList(p)}
                     role="presentation"
                   >
-                    <Programme p={p} lang={lang} selectedFaculties={selectedFaculties} />
+                    <Programme lang={lang} p={p} selectedFaculties={selectedFaculties} />
                   </p>
                 )
               )
@@ -96,11 +96,11 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                   <p
                     className="list-excluded"
                     data-cy={`report-list-programme-${pKey}`}
-                    onClick={() => addToList(p)}
                     key={pKey}
+                    onClick={() => addToList(p)}
                     role="presentation"
                   >
-                    <Programme p={p} lang={lang} selectedFaculties={selectedFaculties} form={form} />
+                    <Programme form={form} lang={lang} p={p} selectedFaculties={selectedFaculties} />
                   </p>
                 )
               )
@@ -109,7 +109,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
         ) : (
           <h4>{t('noData')}</h4>
         )}
-        <Button color="blue" onClick={() => setPicked(programmes.all)} data-cy="report-select-all">
+        <Button color="blue" data-cy="report-select-all" onClick={() => setPicked(programmes.all)}>
           {t('selectAll')}
         </Button>
         <Button onClick={() => setPicked([])}>{t('clearSelection')}</Button>

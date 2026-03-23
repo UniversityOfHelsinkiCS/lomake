@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
 const ProgrammeAnswerSummaryList = ({ data, lang, onlyBc, showText, showSpecific, handleShowSpecific }) => {
@@ -18,7 +17,7 @@ const ProgrammeAnswerSummaryList = ({ data, lang, onlyBc, showText, showSpecific
             {p.name[lang]}
           </span>
         </p>
-        {(showText || showSpecific[p.key]) && data[p.key] && <ReactMarkdown>{data[p.key]}</ReactMarkdown>}
+        {(showText || showSpecific[p.key]) && data[p.key] ? <ReactMarkdown>{data[p.key]}</ReactMarkdown> : null}
       </div>
     )
   })

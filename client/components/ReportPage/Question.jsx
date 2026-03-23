@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Accordion, Grid, Icon, Label, Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { romanize } from '../../util/common'
@@ -27,15 +27,16 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing, m
   return (
     <>
       <Accordion.Title
-        index={question.id}
         active={showing === question.id}
-        onClick={handleClick}
         data-cy={`report-question-${question.id}`}
+        // eslint-disable-next-line react/jsx-sort-props
         className="question-header"
         id={question.labelIndex}
+        index={question.id}
+        onClick={handleClick}
       >
         <Grid>
-          <Grid.Column width={1} className="question-caret noprint">
+          <Grid.Column className="question-caret noprint" width={1}>
             {chosenProgrammes.length > 1 && <Icon name={`caret ${showing === question.id ? 'down' : 'right'}`} />}
           </Grid.Column>
           <Grid.Column width={11}>
@@ -52,21 +53,21 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing, m
             <p className="question-description">{question.description}</p>
             <p className="question-extrainfo">{question.extrainfo}</p>
           </Grid.Column>
-          <Grid.Column width={4} floated="right">
-            <Label data-cy={`answered-label-${question.id}`} className="question-answered-label" size="large">
+          <Grid.Column floated="right" width={4}>
+            <Label className="question-answered-label" data-cy={`answered-label-${question.id}`} size="large">
               {answers.length} / {chosenProgrammes.length}
             </Label>
           </Grid.Column>
         </Grid>
       </Accordion.Title>
-      {answers && (
+      {answers ? (
         <Accordion.Content active={showing === question.id} className="question-content">
           {chosenProgrammes.length > 1 && <div className="ui divider" />}
           <div className="color-buttons noprint" style={{ paddingBottom: '1em' }}>
             <Dropdown
               onChange={handleChange}
-              text={t(`colors_${chosenColor}`)}
               options={buttonColors}
+              text={t(`colors_${chosenColor}`)}
               value={chosenColor}
             />
           </div>
@@ -77,23 +78,21 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing, m
                 if (chosenColor === 'all' || programme.color === chosenColor) {
                   return (
                     <div key={`${question.id}-${programme.key}`}>
-                      <QuestionTitle id={programme.id} answerColors={programme.color} programmeName={programme.name} />
+                      <QuestionTitle answerColors={programme.color} id={programme.id} programmeName={programme.name} />
                       <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
-                        {programme.answer &&
-                          programme.answer.split('\n').map((row, index) => (
-                            // eslint-disable-next-line react/no-array-index-key
-                            <li key={index} className="answer-row">
-                              {row}
-                            </li>
-                          ))}
-                        {programme.comment &&
-                          programme.comment.split('\n').map((row, index) => (
-                            // eslint-disable-next-line react/no-array-index-key
-                            <li key={index} className="answer-row">
-                              {commentAppendix}
-                              {row}
-                            </li>
-                          ))}
+                        {programme.answer?.split('\n').map((row, index) => (
+                          // eslint-disable-next-line react/no-array-index-key
+                          <li className="answer-row" key={index}>
+                            {row}
+                          </li>
+                        ))}
+                        {programme.comment?.split('\n').map((row, index) => (
+                          // eslint-disable-next-line react/no-array-index-key
+                          <li className="answer-row" key={index}>
+                            {commentAppendix}
+                            {row}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   )
@@ -104,7 +103,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing, m
             <h4>{t('noData')}</h4>
           )}
         </Accordion.Content>
-      )}
+      ) : null}
     </>
   )
 }

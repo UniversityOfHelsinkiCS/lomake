@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /**
  * Insert common items here
  */
@@ -5,7 +6,6 @@ import capitalize from 'lodash/capitalize'
 import toscalogoColor from '../assets/toscalogo_color.svg'
 import toscalogoGrayscale from '../assets/toscalogo_grayscale.svg'
 import hy from '../assets/hy_logo.svg'
-
 import {
   yearlyQuestions,
   evaluationQuestions,
@@ -14,7 +14,6 @@ import {
   metareviewQuestions,
   facultyMonitoringQuestions,
 } from '../questionData'
-
 import { formKeys, facultyList } from '../../config/data'
 import { Sentry } from './sentry'
 
@@ -34,7 +33,7 @@ export const degreeReformBackgroundColor = value => {
   }
 
   let backgroundColor = '#f8f8f8'
-  // eslint-disable-next-line no-restricted-syntax
+
   for (const key of Object.keys(degreeReformAvgColors)) {
     if (value > key) {
       backgroundColor = degreeReformAvgColors[key]
@@ -80,8 +79,8 @@ export const sortedItems = (items, sorter, lang) => {
   if (!sorter) return items
   const sorted = [...items].sort((a, b) => {
     if (sorter === 'name') {
-      const aName = a.name[lang] ? a.name[lang] : a.name.en
-      const bName = b.name[lang] ? b.name[lang] : b.name.en
+      const aName = a.name[lang] || a.name.en
+      const bName = b.name[lang] || b.name.en
       if (!aName || !bName) return a
       return aName.localeCompare(bName)
     }
@@ -314,7 +313,7 @@ export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {
   if (!studyProgrammes) return ''
   const programme = studyProgrammes.find(a => a.key === programmeWithKey.programme)
   if (!programme) return ''
-  return programme.name[lang] ? programme.name[lang] : programme.name.en
+  return programme.name[lang] || programme.name.en
 }
 
 export const cleanText = string => {
@@ -440,7 +439,6 @@ export const getFacultyMonitoringAnswer = (data, questionId, t) => {
 
   const actionTextKey = `${questionId}_actions_text`
   if (data[actionTextKey]) {
-    // eslint-disable-next-line no-useless-concat
     answer = `${cleanText(data[actionTextKey])}\n` + `\n`
   }
 
@@ -474,13 +472,12 @@ export const getFacultyMonitoringAnswer = (data, questionId, t) => {
 }
 
 export const allYears = oldAnswers => {
-  let years = oldAnswers && oldAnswers.years ? [...oldAnswers.years] : []
+  let years = oldAnswers?.years ? [...oldAnswers.years] : []
   const currentYear = new Date().getFullYear()
   if (!years.includes(currentYear)) years = [...years, currentYear]
   return years
 }
 
-// eslint-disable-next-line no-unused-vars
 export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadline, form }) => {
   // Special case for faculty evaluation for the moment when showing to all
   if ((form === formKeys.EVALUATION_FACULTIES || form === formKeys.EVALUATION_PROGRAMMES) && draftYear === 2023) {
@@ -495,7 +492,7 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
   }
 
   // if viewing past years' answers
-  if (draftYear !== year && oldAnswers && oldAnswers.data) {
+  if (draftYear !== year && oldAnswers?.data) {
     return oldAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
   }
 
@@ -505,14 +502,14 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
     return tempAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
   }
   // current year but deadline gone
-  if (!deadline && draftYear === year && oldAnswers && oldAnswers.data) {
+  if (!deadline && draftYear === year && oldAnswers?.data) {
     if (form) {
       return oldAnswers.data.filter(a => a.year === year).filter(a => a.form === form)
     }
     return oldAnswers.data.filter(a => a.year === year)
   }
   // if there is no deadline and no tempAnswers, choose oldAnswers instead
-  if (!draftYear && !tempAnswers && oldAnswers && oldAnswers.data) {
+  if (!draftYear && !tempAnswers && oldAnswers?.data) {
     return oldAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
   }
 
@@ -703,7 +700,7 @@ export const translateDegreeReformBackground = ({ primaryRole, lang }) => {
       const firstCheck = degreeQuestionData[0].parts[1].radioOptions[lang].find(option => option.id === item)?.label
       if (!firstCheck) {
         return degreeQuestionData[0].parts[1].advancedOptions.teaching_or_other_research[lang].find(
-          option => option.id === item,
+          option => option.id === item
         )?.label
       }
       return firstCheck
@@ -766,7 +763,7 @@ export const answersByQuestions = ({
   }
   const answerMap = new Map()
   const chosenKeys = chosenProgrammes.map(
-    p => p.key || ((form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) && p.code),
+    p => p.key || ((form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) && p.code)
   )
   if (!selectedAnswers) return new Map()
   selectedAnswers.forEach(programme => {
@@ -776,15 +773,15 @@ export const answersByQuestions = ({
       questionsList.forEach(question => {
         let color = null
         if (form === formKeys.EVALUATION_FACULTIES) {
-          const bachelorColor = data[question.color[0]] ? data[question.color[0]] : 'emptyAnswer'
-          const masterColor = data[question.color[1]] ? data[question.color[1]] : 'emptyAnswer'
-          const doctoralColor = data[question.color[2]] ? data[question.color[2]] : 'emptyAnswer'
+          const bachelorColor = data[question.color[0]] || 'emptyAnswer'
+          const masterColor = data[question.color[1]] || 'emptyAnswer'
+          const doctoralColor = data[question.color[2]] || 'emptyAnswer'
           color = { bachelor: bachelorColor, master: masterColor, doctoral: doctoralColor }
         } else if (form === formKeys.FACULTY_MONITORING) {
           const facultyMonitoringAnswer = getFacultyMonitoringAnswer(data, question.id.replace('_text', ''), t)
           color = facultyMonitoringAnswer.color
         } else {
-          color = data[question.color] ? data[question.color] : 'emptyAnswer'
+          color = data[question.color] || 'emptyAnswer'
         }
         let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
         let name = programmeNameByKey(usersProgrammes, programme, lang)
@@ -813,7 +810,7 @@ export const answersByQuestions = ({
   // So empty answers need to be added.
   answerMap.forEach((value, key) => {
     const answeredProgrammes = value.map(p =>
-      form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING ? p.code : p.key,
+      form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING ? p.code : p.key
     )
     const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
     if (programmesMissing) {
@@ -833,7 +830,7 @@ export const filterUserProgrammes = (usersProgrammes, lang, debouncedFilter) => 
     prog =>
       prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
       prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-      prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
+      prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase())
   )
 }
 
@@ -843,8 +840,8 @@ export const getLabel = question => {
   return `${index}${question.label}`
 }
 
-export const alertSentry = (err, route, method, data) => {
-  Sentry.captureException(err, {
+export const alertSentry = (error, route, method, data) => {
+  Sentry.captureException(error, {
     tags: {
       route,
       method,

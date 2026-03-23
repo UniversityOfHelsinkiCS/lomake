@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable import-x/no-named-as-default-member */
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
@@ -52,14 +54,14 @@ const handleData = ({
             [questionId, ...acc[1]],
           ]
         },
-        [[], []],
+        [[], []]
       )
       return [
         [...newArray[0], ...acc[0]],
         [...newArray[1], ...acc[1]],
       ]
     },
-    [[], []],
+    [[], []]
   )
 
   if (form === formKeys.EVALUATION_PROGRAMMES) {
@@ -264,13 +266,13 @@ const CsvDownload = ({ wantedData, view, programme, form = 1 }) => {
       wantedData,
       view,
       programme,
-    ],
+    ]
   )
 
   const dataTitle = t(`generic:csvFile${view}${wantedData}`)
 
   return (
-    <CSVLink filename={`${year}_${dataTitle}_.csv`} data={data} separator=",">
+    <CSVLink data={data} filename={`${year}_${dataTitle}_.csv`} separator=",">
       {t(`generic:${wantedData}`)}
     </CSVLink>
   )

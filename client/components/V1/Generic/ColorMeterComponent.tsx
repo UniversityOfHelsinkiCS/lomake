@@ -84,6 +84,7 @@ const checkOrdering = (thresholds: number[]): 'asc' | 'desc' | 'error' => {
   return 'error'
 }
 
+// eslint-disable-next-line react/function-component-definition
 export default function ColorMeterComponent({ display, value, thresholds, limits, unit, year }: ColorMeterProps) {
   const { t } = useTranslation()
 
@@ -99,17 +100,20 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
 
     // TODO: CHECKS ARE REDUNDANT AFTER ZOD VALIDATION IMPLEMENTATION
     if (order === 'error') {
+      // eslint-disable-next-line no-console
       console.error('Thresholds are not in order')
       setError(true)
       return
     }
 
     if (thresholdSplit.length !== 4) {
+      // eslint-disable-next-line no-console
       console.error('Thresholds are not in correct format')
       setError(true)
       return
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const redThres = thresholdSplit[0]
     const yellowThres = thresholdSplit[1]
     const lightGreenThres = thresholdSplit[2]
@@ -136,12 +140,13 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
       darkGreenThres.toString() + (unit === '%' ? '%' : ''),
     ])
     setInterpolatedValue(meterValue)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [display, value, thresholds, unit])
 
   if (!display || value == 'Ei dataa')
     return (
       <div style={{ padding: '2.5rem 0', display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="italic" color="textSecondary" data-cy="no-colormeter">
+        <Typography color="textSecondary" data-cy="no-colormeter" variant="italic">
           {t('keyData:colormeterNoDisplay')}
         </Typography>
       </div>
@@ -150,7 +155,7 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
   if (error) {
     return (
       <div style={{ padding: '2.5rem 0', display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="lightSmall" color="error">
+        <Typography color="error" variant="lightSmall">
           {t('keyData:colormeterError')}
         </Typography>
       </div>
@@ -189,16 +194,16 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
             position: 'relative',
           }}
         >
-          <Tooltip placement="bottom" title={`${t('common:red')} `} arrow>
+          <Tooltip arrow placement="bottom" title={`${t('common:red')} `}>
             <div style={{ backgroundColor: customColors.redLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip placement="bottom" title={t('common:yellow')} arrow>
+          <Tooltip arrow placement="bottom" title={t('common:yellow')}>
             <div style={{ backgroundColor: customColors.yellowLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip placement="bottom" title={t('common:lightGreen')} arrow>
+          <Tooltip arrow placement="bottom" title={t('common:lightGreen')}>
             <div style={{ backgroundColor: customColors.lightGreenLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip placement="bottom" title={t('common:darkGreen')} arrow>
+          <Tooltip arrow placement="bottom" title={t('common:darkGreen')}>
             <div style={{ backgroundColor: customColors.darkGreenLight, flex: 1 }} />
           </Tooltip>
 
@@ -226,20 +231,20 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
           }}
         >
           <Typography
-            variant="lightSmall"
             sx={{ position: 'absolute', left: `calc(100%/4)`, transform: 'translateX(-50%)' }}
+            variant="lightSmall"
           >
             {thresholdValues[0]}
           </Typography>
           <Typography
-            variant="lightSmall"
             sx={{ position: 'absolute', left: `calc((100%/4)*2)`, transform: 'translateX(-50%)' }}
+            variant="lightSmall"
           >
             {thresholdValues[1]}
           </Typography>
           <Typography
-            variant="lightSmall"
             sx={{ position: 'absolute', left: `calc((100%/4)*3)`, transform: 'translateX(-50%)' }}
+            variant="lightSmall"
           >
             {thresholdValues[2]}
           </Typography>

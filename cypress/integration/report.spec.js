@@ -1,5 +1,5 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-/* eslint-disable no-undef */
+
 /// <reference types="cypress" />
 
 import { testProgrammeCode, defaultYears } from '../../config/common'
@@ -74,9 +74,9 @@ describe('ReportPage tests', () => {
 
     cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
-    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=report-select-all-accordion]').click()
     cy.get('[data-cy=report-select-all]').click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=report-question-content-teacher_skills_text]').contains(`Hello from ${defaultYears[1]}`)
   })
 

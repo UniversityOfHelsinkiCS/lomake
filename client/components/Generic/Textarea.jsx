@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Loader, Button, Message } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
-// import MDEditor from '@uiw/react-md-editor'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
 import ReactMarkdown from 'react-markdown'
@@ -33,12 +33,12 @@ const Accordion = ({ previousYearsAnswers, previousAnswerColor, previousAnswerTe
   if (previousAnswerText || previousAnswerColor)
     return (
       <LastYearsAnswersAccordion>
-        {previousAnswerColor && <div className={`circle-big-${previousAnswerColor}`} />}
+        {previousAnswerColor ? <div className={`circle-big-${previousAnswerColor}`} /> : null}
         <ReactMarkdown>{previousAnswerText}</ReactMarkdown>
       </LastYearsAnswersAccordion>
     )
 
-  if (previousYearsAnswers && previousYearsAnswers[`${id}_text`])
+  if (previousYearsAnswers?.[`${id}_text`])
     return (
       <LastYearsAnswersAccordion>
         <ReactMarkdown>{previousYearsAnswers[`${id}_text`]}</ReactMarkdown>
@@ -64,7 +64,7 @@ const Textarea = ({
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
-  const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
+  const dataFromRedux = useSelector(({ form }) => form.data[fieldName] ?? '')
   const room = useSelector(({ room }) => room)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const ref = useRef(null)
@@ -95,12 +95,12 @@ const Textarea = ({
   const someoneElseHasTheLock =
     currentEditors && currentUser && currentEditors[fieldName] && currentEditors[fieldName].uid !== currentUser.uid
 
-  const hasSummaryData = Object.keys(summaryData || {}).length > 0 && id.includes('-bachelor')
+  const hasSummaryData = Object.keys(summaryData ?? {}).length > 0 && id.includes('-bachelor')
 
   useEffect(() => {
     const gotTheLock =
       form === formKeys.DEGREE_REFORM_INDIVIDUALS ||
-      (currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid)
+      (currentEditors?.[fieldName] && currentEditors[fieldName].uid === currentUser.uid)
 
     setHasLock(gotTheLock)
 
@@ -233,23 +233,8 @@ const Textarea = ({
     }
   }
 
-  /* useEffect(() => { */
-  /* const handleClickOutside = event => { */
-  /* if (editorContainerRef.current && !editorContainerRef.current.contains(event.target)) { */
-  /* handleSave() */
-  /* } */
-  /* } */
-
-  /* // Bind the event listener to the document */
-  /* document.addEventListener('mousedown', handleClickOutside) */
-  /* return () => { */
-  /* // Cleanup the event listener on component unmount */
-  /* document.removeEventListener('mousedown', handleClickOutside) */
-  /* } */
-  /* }, [editorContainerRef, handleSave]) */
-
   return (
-    <div data-cy={`textarea-${id}`} style={{ marginTop: 0 }} /* ref={editorContainerRef} */>
+    <div data-cy={`textarea-${id}`} style={{ marginTop: 0 }}>
       <div
         className="form-text-area"
         style={{
@@ -258,7 +243,7 @@ const Textarea = ({
           alignItems: 'flex-end',
         }}
       >
-        {!editorError && !editorLockError && label && (
+        {!editorError && !editorLockError && label ? (
           <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth }}>
             <label
               style={{
@@ -269,50 +254,46 @@ const Textarea = ({
               }}
             >
               {label}
-              {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
+              {required ? <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span> : null}
               <Loader
+                active
+                inline
+                size="small"
                 style={{
                   marginLeft: '1em',
                   visibility: !hasLock && gettingLock ? undefined : 'hidden',
                 }}
-                size="small"
-                active
-                inline
               />
             </label>
           </div>
-        )}
-        {(editorError || editorLockError) && !hasLock && (
+        ) : null}
+        {(editorError || editorLockError) && !hasLock ? (
           <Message negative>
             <Message.Header>{t('formView:formError')}</Message.Header>
-            <Button style={{ marginTop: 10 }} onClick={refreshPage}>
+            <Button onClick={refreshPage} style={{ marginTop: 10 }}>
               {t('formView:formErrorButton')}
             </Button>
           </Message>
-        )}
+        ) : null}
         <Accordion
-          previousYearsAnswers={previousYearsAnswers}
+          id={id}
           previousAnswerColor={previousAnswerColor}
           previousAnswerText={previousAnswerText}
-          id={id}
+          previousYearsAnswers={previousYearsAnswers}
         />
       </div>
-      {hasSummaryData && <ProgrammeTextAnswerSummary questionId={id} summaryData={summaryData} form={form} />}
-      {subTitle && <h3> {subTitle}</h3>}
+      {hasSummaryData ? <ProgrammeTextAnswerSummary form={form} questionId={id} summaryData={summaryData} /> : null}
+      {subTitle ? <h3> {subTitle}</h3> : null}
       {viewOnly ? (
         <ReactMarkdown>{dataFromRedux}</ReactMarkdown>
       ) : (
         <>
-          <div style={{ marginTop: marginTop || '1em' }}>
+          <div style={{ marginTop: marginTop ?? '1em' }}>
             <div data-cy={`editing-area-${id}`} onClick={askForLock}>
               <Editor
-                editorStyle={{ wordBreak: 'break-word', width: '100%' }}
-                ref={ref}
-                wrapperClassName="wrapper-class"
                 editorClassName={!someoneElseHasTheLock ? 'editor-class' : 'editor-class disabled'}
-                toolbarClassName={!someoneElseHasTheLock ? 'toolbar-class' : 'toolbar-class disabled'}
                 editorState={editorState}
-                onEditorStateChange={handleChange}
+                editorStyle={{ wordBreak: 'break-word', width: '100%' }}
                 handleBeforeInput={val => {
                   const textLength = editorState.getCurrentContent().getPlainText().length
                   if (val && textLength >= MAX_LENGTH) {
@@ -321,6 +302,9 @@ const Textarea = ({
                   return 'not-handled'
                 }}
                 handlePastedText={handlePaste}
+                onEditorStateChange={handleChange}
+                readOnly={!hasLock}
+                ref={ref}
                 toolbar={{
                   options: ['inline', 'list', 'history'],
                   inline: {
@@ -330,20 +314,21 @@ const Textarea = ({
                     options: ['unordered', 'ordered'],
                   },
                 }}
-                readOnly={!hasLock}
+                toolbarClassName={!someoneElseHasTheLock ? 'toolbar-class' : 'toolbar-class disabled'}
+                wrapperClassName="wrapper-class"
               />
             </div>
             <Button
-              onClick={handleSave}
-              disabled={!changes}
-              style={{ marginTop: 20, marginBottom: 10 }}
               data-cy={`save-button-${id}`}
+              disabled={!changes}
+              onClick={handleSave}
+              style={{ marginTop: 20, marginBottom: 10 }}
             >
               {saveButtonLabel}
             </Button>
-            {changes && (
+            {changes ? (
               <span style={{ marginLeft: '1em', color: unsavedContent ? 'red' : '' }}>{notSavedInfoText}</span>
-            )}
+            ) : null}
           </div>
           <span style={{ color: length > MAX_LENGTH - 100 ? colors.red : undefined }}>
             {length}/{MAX_LENGTH - 100}

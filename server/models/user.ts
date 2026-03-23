@@ -1,4 +1,14 @@
-import { InferAttributes, InferCreationAttributes, Model, CreationOptional, DATE, INTEGER, JSONB, STRING, ARRAY } from 'sequelize'
+import {
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+  CreationOptional,
+  DATE,
+  INTEGER,
+  JSONB,
+  STRING,
+  ARRAY,
+} from 'sequelize'
 import { sequelize } from '../database/connection'
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
@@ -39,7 +49,7 @@ User.init(
     sequelize,
     underscored: true,
     tableName: 'users',
-  },
+  }
 )
 
 export default User

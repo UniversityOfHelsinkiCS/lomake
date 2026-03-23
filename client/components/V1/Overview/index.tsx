@@ -1,4 +1,6 @@
-import { useLocation, useHistory } from 'react-router'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { useLocation, useNavigate } from 'react-router'
 import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../../util/hooks'
 import { useTranslation } from 'react-i18next'
@@ -18,7 +20,7 @@ const OverviewPage = () => {
   const lang = useAppSelector(state => state.language)
 
   const location = useLocation()
-  const history = useHistory()
+  const navigate = useNavigate()
   const searchParams = new URLSearchParams(location.search)
 
   const dispatch = useAppDispatch()
@@ -27,10 +29,10 @@ const OverviewPage = () => {
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
 
-  const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user) 
+  const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user)
   useEffect(() => {
     // This checks the URL for query parameters and updates the redux store accordingly
-    const facultyParams = searchParams.get('faculties')?.split(',') || []
+    const facultyParams = searchParams.get('faculties')?.split(',') ?? []
     const levelParam = searchParams.get('levels')
     const yearParam = searchParams.get('year')
 
@@ -42,7 +44,7 @@ const OverviewPage = () => {
   useEffect(() => {
     // This is called whenever the filters change and sets the URL accordingly
     if (selectedFaculties.length > 0 || selectedLevel || selectedYear) {
-      history.push({
+      navigate({
         pathname: location.pathname,
         search: `?faculties=${selectedFaculties.join(',')}&levels=${selectedLevel}&year=${selectedYear}`,
       })
@@ -54,20 +56,20 @@ const OverviewPage = () => {
   }, [lang])
 
   if (!readAccess) {
-    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
+    return <NoPermissions requestedForm={t('overview:overviewPage')} t={t} />
   }
 
   return (
     <>
       <Alert
-        severity="info"
         icon={false}
-        variant="standard"
+        severity="info"
         sx={{
           width: '97%',
           margin: 0,
           justifyContent: 'center',
         }}
+        variant="standard"
       >
         <div
           style={{
@@ -79,11 +81,11 @@ const OverviewPage = () => {
         >
           <Typography variant="light">{t('keyData:feedbackForm')}</Typography>
           <Button
-            variant="text"
-            startIcon={<ArrowForward />}
             href="https://www.lyyti.fi/questions/793407eccc"
-            target="_blank"
             rel="noopener noreferrer"
+            startIcon={<ArrowForward />}
+            target="_blank"
+            variant="text"
           >
             {t('keyData:feedbackFormButton')}
           </Button>
@@ -91,7 +93,7 @@ const OverviewPage = () => {
       </Alert>
       <div style={{ padding: '2rem', width: '100%' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', width: '100%', marginBottom: '2.5rem' }}>
-          <Typography variant="h1" style={{ margin: 0 }}>
+          <Typography style={{ margin: 0 }} variant="h1">
             {t('landingPage:yearlyAssessmentTitle').toUpperCase()}
           </Typography>
 
@@ -103,9 +105,9 @@ const OverviewPage = () => {
         </div>
 
         <KeyDataTableComponent
-          yearFilter={selectedYear}
           facultyFilter={selectedFaculties}
           programmeLevelFilter={selectedLevel}
+          yearFilter={selectedYear}
         />
       </div>
     </>

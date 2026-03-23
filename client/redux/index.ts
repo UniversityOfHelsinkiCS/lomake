@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { configureStore } from '@reduxjs/toolkit'
 import { handleRequest, RTKApi } from '../util/apiConnection'
 import webSocketMiddleware from '../util/webSocket'
@@ -56,4 +57,5 @@ export type AppStore = typeof store
 export type RootState = ReturnType<AppStore['getState']>
 export type AppDispatch = AppStore['dispatch']
 
+ 
 export default store

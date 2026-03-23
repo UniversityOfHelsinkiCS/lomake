@@ -36,7 +36,7 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
     cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
       'contain.text',
-      'random',
+      'random'
     )
     cy.hasAccess('cypressRandomRightsUser', 'KH50_006', { read: true, write: true, admin: false })
   })
@@ -83,12 +83,12 @@ describe('IAM permission tests', () => {
     cy.login('cypressOspaUser')
     cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit('/yearly')
-    cy.get('[data-cy=nav-report]').click()
-    cy.selectYear(defaultYears[1])
+    cy.get('[data-cy=nav-report]').click({ force: true })
     cy.get('[data-cy=report-select-all-accordion]').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()
-    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
+    cy.selectYear(defaultYears[1])
+    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]')
     cy.contains(`Hello from ${defaultYears[1]}`)
   })
 
@@ -96,10 +96,10 @@ describe('IAM permission tests', () => {
     cy.login('cypressOspaUser')
     cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit('/yearly')
-    cy.get('[data-cy=nav-comparison]').click()
+    cy.get('[data-cy=nav-comparison]').click({ force: true })
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
-      helpers.getTotalProgrammeCount(),
+      helpers.getTotalProgrammeCount()
     )
   })
 

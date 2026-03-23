@@ -7,7 +7,7 @@ export default (sequelize, DataTypes) => {
     {
       underscored: true,
       tableName: 'draft_years',
-    },
+    }
   )
 
   return draftYears

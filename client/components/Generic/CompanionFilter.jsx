@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
 
@@ -22,10 +21,10 @@ const CompanionFilter = () => {
         <Form.Group inline>
           <Form.Field>
             <Radio
+              checked={companion}
               data-cy="companion-filter"
               label={t('generic:companionFilter')}
               name="companion"
-              checked={companion}
               onChange={handleChange}
               toggle
             />

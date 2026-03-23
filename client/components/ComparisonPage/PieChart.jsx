@@ -105,13 +105,13 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
         </p>
       </div>
       <div className="color-pie-chart" data-cy={`comparison-chart-${name}-${question.id}`}>
-        {toolTipData && (
+        {toolTipData ? (
           <div className="color-pie-tip" data-cy={`comparison-tip-${question.id}`}>
             <p>
               <b>
                 {question.labelIndex} - {question.label}
               </b>
-              <Button color="red" size="mini" className="color-pie-tip-close" onClick={() => setToolTipData(null)}>
+              <Button className="color-pie-tip-close" color="red" onClick={() => setToolTipData(null)} size="mini">
                 <b>X</b>
               </Button>
             </p>
@@ -124,20 +124,20 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
               <p key={p}>{p}</p>
             ))}
           </div>
-        )}
+        ) : null}
         <Chart
           center={[72, 68]}
           data={data()}
+          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
+          labelPosition={112}
+          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
           lengthAngle={360}
           lineWidth={100}
-          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
+          onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
           paddingAngle={0}
           radius={50}
           startAngle={270}
           viewBoxSize={[143, 143]}
-          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
-          labelPosition={112}
-          onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
         />
       </div>
     </div>

@@ -1,8 +1,7 @@
 /* eslint-disable camelcase */
 import { Message, Icon } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
-import { HashLink as Link } from 'react-router-hash-link'
-import { useLocation } from 'react-router'
+import { useLocation, Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { romanize, colors, getProgramAnswerLevels } from '../../util/common'
 import { formKeys } from '../../../config/data'
@@ -57,7 +56,7 @@ const getIsCompleted = ({ formData, questionId, getFieldValue }) => {
   const fromJson = questionId.endsWith('_selection')
 
   if (fromJson) {
-    const json = JSON.parse(questionData || 'false')
+    const json = JSON.parse(questionData ?? 'false')
     return json && Object.values(json).some(value => value)
   }
 
@@ -70,7 +69,7 @@ const getIsCompleted = ({ formData, questionId, getFieldValue }) => {
 
 const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData }) => {
   const lang = useSelector(state => state.language)
-  const form = useSelector(({ form }) => form || {})
+  const form = useSelector(({ form }) => form ?? {})
   const location = useLocation()
   const { t } = useTranslation()
   let questionsToShow = questions
@@ -116,8 +115,8 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     <div className="navigation-sidebar">
       <Message style={{ padding: 0 }}>
         <div
-          key={`navigation-sidebar-list-${formType}-${lang}}`}
           data-cy="navigation-sidebar-list"
+          key={`navigation-sidebar-list-${formType}-${lang}}`}
           style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}
         >
           {questionsToShow.map((section, index) => {
@@ -125,10 +124,10 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
               partNumber = 0
             }
             const titleFromJson = section.title[lang]
-            const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
+            const title = replaceTitle[titleFromJson] || titleFromJson
             const romanNumeral = getCorrectRomanNumeral(index, formType)
             const active = location.hash === `#${romanNumeral}`
-            if (formDataFilter && formDataFilter.find(f => f === section.id)) {
+            if (formDataFilter?.find(f => f === section.id)) {
               return null
             }
             const link =
@@ -137,6 +136,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                 : `${linkBase}${programmeKey}#${romanNumeral}`
             return (
               <div
+                data-cy={`navigation-sidebar-section-${section.id}`}
                 key={`${section.id}-${title}`}
                 style={{
                   fontWeight: active ? 'bold' : undefined,
@@ -145,10 +145,9 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                   borderRadius: '5px',
                   margin: '1px',
                 }}
-                data-cy={`navigation-sidebar-section-${section.id}`}
               >
                 <div style={{ margin: '1em 0' }}>
-                  <Link to={link} style={{ color: colors.black }}>
+                  <Link style={{ color: colors.black }} to={link}>
                     {title}
                   </Link>
                 </div>
@@ -181,7 +180,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                           `${id}_contact_person_text`,
                           `${id}_resources_text`,
                           `${id}_start_date_text`,
-                          `${id}_end_date_text`,
+                          `${id}_end_date_text`
                         )
                       } else if (type === 'META_ENTITY') {
                         idsToCheck.push(`${id}_light`)
@@ -222,7 +221,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                         getIsCompleted({
                           formData: form.data,
                           questionId: id,
-                        }),
+                        })
                       )
 
                       return (

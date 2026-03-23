@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Dropdown, MenuItem } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
@@ -10,7 +10,7 @@ const FacultyDropdown = ({ faculties, debouncedFilter, lang, handleFilterChange 
     setDropdownText(
       faculties?.data.find(f => f.code === debouncedFilter)?.name[lang]
         ? faculties?.data.find(f => f.code === debouncedFilter)?.name[lang]
-        : t('chooseFaculty'),
+        : t('chooseFaculty')
     )
   }, [debouncedFilter, lang, faculties, t])
 
@@ -28,11 +28,11 @@ const FacultyDropdown = ({ faculties, debouncedFilter, lang, handleFilterChange 
   return (
     <MenuItem>
       <Dropdown
-        data-cy="faculty-dropdown"
-        text={dropdownText}
         className="button basic gray csv-download"
+        data-cy="faculty-dropdown"
         direction="left"
         style={{ whiteSpace: 'nowrap', minWidth: 'max-content' }}
+        text={dropdownText}
       >
         <Dropdown.Menu>
           <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>

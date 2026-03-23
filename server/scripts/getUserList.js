@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import fs from 'fs'
 import logger from '../util/logger.js'
 import Studyprogramme from '../models/studyprogramme.js'
@@ -32,7 +34,7 @@ const getUserList = async () => {
       if (programmeKeys) {
         programmeKeys.forEach(key => {
           data = data.concat(
-            `${programmeKeyMap.get(key)};${key};${firstname} ${lastname};${formatRights(access[key])}\n`,
+            `${programmeKeyMap.get(key)};${key};${firstname} ${lastname};${formatRights(access[key])}\n`
           )
         })
       }

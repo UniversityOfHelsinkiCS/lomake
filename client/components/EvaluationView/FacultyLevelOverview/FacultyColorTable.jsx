@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable import-x/no-named-as-default-member */
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Input } from 'semantic-ui-react'
@@ -36,6 +38,7 @@ const FacultyColorTable = React.memo(
     const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
     const filterYear = useSelector(({ filters }) => filters.year)
+
     const year = filterYear || new Date().getFullYear()
 
     useEffect(() => {
@@ -51,7 +54,7 @@ const FacultyColorTable = React.memo(
       year,
       tempAnswers: answers,
       oldAnswers,
-      draftYear: draftYear && draftYear.year,
+      draftYear: draftYear?.year,
       deadline: nextDeadline?.find(d => d.form === form),
       form,
     })
@@ -67,11 +70,13 @@ const FacultyColorTable = React.memo(
       if (!selectedAnswers) return {}
       return sortedFaculties.reduce((statObject, { code }) => {
         const faculty = selectedAnswers.find(a => a.programme === code && a.form === form)
-        const answers = faculty && faculty.data ? faculty.data : {}
+
+        const answers = faculty?.data || {}
         Object.keys(answers).forEach(answerKey => {
           if (answerKey.includes('_light')) {
             const color = answers[answerKey] // "red", "yellow", "green" or ""
             const baseKey = answerKey.replace('_light', '')
+
             if (!statObject[baseKey]) statObject[baseKey] = {}
 
             statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
@@ -106,44 +111,44 @@ const FacultyColorTable = React.memo(
     }, [])
     return (
       <div className="overview-color-grid-faculty">
-        <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} showStudyLevel />
+        <TableHeader showStudyLevel sort={sort} tableIds={tableIds} title={t('faculty')} />
         <div className="table-container">
           <Input
             data-cy="overviewpage-filter"
             icon="search"
-            size="small"
-            placeholder={t('facultyFilter')}
             onChange={handleFilterChange}
+            placeholder={t('facultyFilter')}
+            size="small"
             value={filterValue}
           />
         </div>
         <div />
         <SummaryRowFaculty
-          setStatsToShow={setStatsToShow}
-          stats={stats}
           selectedAnswers={selectedAnswers}
-          tableIds={tableIds}
+          setStatsToShow={setStatsToShow}
           showDataByProgramme={showDataByProgramme}
+          stats={stats}
+          tableIds={tableIds}
         />
         <div className="sticky-header" />
         {sortedFaculties.map(f => {
           return (
             <TableRow
               faculty={f}
+              form={form}
+              formType={formType}
+              key={f.code}
               selectedAnswers={selectedAnswers}
-              tableIds={tableIds}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
-              key={f.code}
-              formType={formType}
-              form={form}
               showDataByProgramme={showDataByProgramme}
+              tableIds={tableIds}
             />
           )
         })}
       </div>
     )
-  },
+  }
 )
 
 export default FacultyColorTable

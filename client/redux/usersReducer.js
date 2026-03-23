@@ -24,6 +24,7 @@ export const deleteTempAccessAction = (uid, programme) => {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
+
 export default (state = { data: [] }, action) => {
   switch (action.type) {
     case 'GET_ALL_USERS_SUCCESS':

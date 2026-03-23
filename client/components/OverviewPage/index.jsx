@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-no-leaked-render */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown, Button, Menu, MenuItem } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import { filterFromUrl } from '../../util/common'
 import { useVisibleOverviewProgrammes } from '../../util/overview'
@@ -17,6 +18,7 @@ import StatsContent from './StatsContent'
 import ColorTable from './ColorTable'
 import ProgramControlsContent from './ProgramControlsContent'
 import './OverviewPage.scss'
+import { Link } from '../Link'
 
 export default () => {
   const { t } = useTranslation()
@@ -72,11 +74,10 @@ export default () => {
     if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
     return false
   }, [currentUser])
-
   return (
     <>
       {modalData && (
-        <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
+        <CustomModal borderColor={modalData.color} closeModal={() => setModalData(null)} title={modalData.header}>
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
@@ -88,35 +89,33 @@ export default () => {
 
       {programControlsToShow && (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${
-            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
-          }`}
           closeModal={() => setProgramControlsToShow(null)}
+          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] || programControlsToShow.name.en}`}
         >
           <ProgramControlsContent programKey={programControlsToShow.key} />
         </CustomModal>
       )}
 
       {statsToShow && (
-        <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
+        <CustomModal closeModal={() => setStatsToShow(null)} title={statsToShow.title}>
           <StatsContent stats={statsToShow.stats} />
         </CustomModal>
       )}
 
       {usersProgrammes.length > 0 ? (
         <>
-          <Menu size="large" className="filter-row" secondary>
+          <Menu className="filter-row" secondary size="large">
             <MenuItem>
               <h2>{t('yearlyAssessment').toUpperCase()}</h2>
             </MenuItem>
             <MenuItem>
-              <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
+              <Button as={Link} data-cy="nav-report" secondary size="big" to={'/report'}>
                 {t('overview:readAnswers')}
               </Button>
             </MenuItem>
             <MenuItem>
               {moreThanFiveProgrammes && (
-                <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
+                <Button as={Link} data-cy="nav-comparison" size="big" to={'/comparison'}>
                   {t('overview:compareAnswers')}
                 </Button>
               )}
@@ -126,19 +125,19 @@ export default () => {
             </MenuItem>
             <MenuItem position="right">
               <Dropdown
-                data-cy="csv-download"
                 className="button basic gray csv-download"
+                data-cy="csv-download"
                 direction="left"
-                text={t('overview:csvDownload')}
                 onClick={() => setShowCsv(true)}
+                text={t('overview:csvDownload')}
               >
                 {showCsv ? (
                   <Dropdown.Menu>
                     <Dropdown.Item>
-                      <CsvDownload wantedData="written" view="overview" form={form} />
+                      <CsvDownload form={form} view="overview" wantedData="written" />
                     </Dropdown.Item>
                     <Dropdown.Item>
-                      <CsvDownload wantedData="colors" view="overview" form={form} />
+                      <CsvDownload form={form} view="overview" wantedData="colors" />
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 ) : null}
@@ -147,23 +146,23 @@ export default () => {
           </Menu>
           <div>
             <ColorTable
+              filterValue={filter}
               filteredProgrammes={filteredProgrammes}
+              form={form}
+              formType={formType}
+              handleFilterChange={handleFilterChange}
+              handleShowProgrammes={handleShowProgrammes}
+              isBeingFiltered={debouncedFilter !== ''}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
-              isBeingFiltered={debouncedFilter !== ''}
-              handleFilterChange={handleFilterChange}
-              filterValue={filter}
-              form={form}
-              formType={formType}
-              handleShowProgrammes={handleShowProgrammes}
               showAllProgrammes={showAllProgrammes}
             />
           </div>
         </>
       ) : (
         <>
-          <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
+          <NoPermissions requestedForm={t('overview:overviewPage')} t={t} />
           <div data-cy="no-permissions-message">
             <a href="https://opetushallinto.cs.helsinki.fi/tilannekuva/evaluation-university/">
               {t('overview:toKatselmus')}

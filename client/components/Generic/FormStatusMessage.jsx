@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -15,9 +15,10 @@ const FormStatusMessage = ({ programme, form }) => {
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
 
-  const deadlineDate = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
+  const deadlineDate = formDeadline?.date ? new Date(formDeadline.date) : undefined
   const locale = lang !== 'se' ? lang : 'sv'
-  const writeAccess = (user.access[programme] && user.access[programme].write) || isAdmin(user)
+
+  const writeAccess = user.access[programme]?.write || isAdmin(user)
 
   useEffect(() => {
     if (formDeadline && draftYear && draftYear.year !== year && writeAccess) {
@@ -32,10 +33,10 @@ const FormStatusMessage = ({ programme, form }) => {
   return (
     <div className="form-status-message-sticky hide-in-print-mode">
       <Message
-        onDismiss={() => setVisible(false)}
         color="teal"
-        header={t('generic:statusHeader', { year: draftYear ? draftYear.year : '' })}
         content={`${t('generic:statusMessage')}${deadlineDate.toLocaleDateString(locale)}.`}
+        header={t('generic:statusHeader', { year: draftYear ? draftYear.year : '' })}
+        onDismiss={() => setVisible(false)}
       />
     </div>
   )

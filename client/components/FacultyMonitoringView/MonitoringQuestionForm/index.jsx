@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Form, FormGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '../../../../config/data'
@@ -35,43 +35,43 @@ const MonitoringQuestionForm = ({ question }) => {
         <p>{t('facultyTracking:formInfo3')}</p>
       </div>
       <Form>
-        <TrackingTrafficLight id={id} form={form} />
-        <TrackingRadioButton id={id} form={form} />
-        <FormGroup widths="equal" style={{ marginTop: '28px' }}>
+        <TrackingTrafficLight form={form} id={id} />
+        <TrackingRadioButton form={form} id={id} />
+        <FormGroup style={{ marginTop: '28px' }} widths="equal">
           <MonitoringTextarea
+            className="textarea"
+            form={form}
             id={`${id}_actions`}
             label={t('formView:facultyActionsLabel')}
-            form={form}
-            className="textarea"
             maxLength={1500}
           />
         </FormGroup>
         <FormGroup widths="equal">
           <MonitoringTextarea
+            form={form}
             id={`${id}_responsible_entities`}
             label={t('formView:facultyEntitiesLabel')}
-            form={form}
             maxLength={150}
           />
         </FormGroup>
         <FormGroup widths="equal">
           <MonitoringTextarea
+            form={form}
             id={`${id}_contact_person`}
             label={t('formView:facultyContactLabel')}
-            required
-            form={form}
             maxLength={100}
+            required
           />
           <MonitoringTextarea
+            form={form}
             id={`${id}_resources`}
             label={t('formView:facultyResourcesLabel')}
-            form={form}
             maxLength={100}
           />
         </FormGroup>
-        {error && <p style={{ color: 'red' }}>{t(error)}</p>}
+        {error ? <p style={{ color: 'red' }}>{t(error)}</p> : null}
         <FormGroup widths="equal">
-          <DatePickerField id={id} form={form} error={error} setError={setError} />
+          <DatePickerField error={error} form={form} id={id} setError={setError} />
         </FormGroup>
       </Form>
     </>

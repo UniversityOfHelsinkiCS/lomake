@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useRef } from 'react'
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
-import { Redirect, useHistory } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Navigate, useNavigate, useParams, Link } from 'react-router'
 import { Button, Icon, Loader } from 'semantic-ui-react'
 import Downloads from '../..//FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
-// import { Link } from 'react-router-dom'
 
 import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
 import { getFacultyProgrammeAnswersAction } from '../../../redux/summaryReducer'
@@ -69,7 +69,7 @@ const findActionAnswers = (programmes, allAnswers, question) => {
     const actionNumbers = [1, 2, 3, 4, 5]
 
     actionNumbers.map((number, index) => {
-      if (answer?.data && answer.data[`${question}-${number}-text`]) {
+      if (answer?.data?.[`${question}-${number}-text`]) {
         text[index] = {
           title: answer.data[`${question}-${number}-text`].title,
           content: answer.data[`${question}-${number}-text`].actions,
@@ -115,8 +115,9 @@ const findTextAnswers = (programmes, allAnswers, question) => {
   return result
 }
 
-const FacultyFormView = ({ room, formString }) => {
-  const history = useHistory()
+const FacultyFormView = () => {
+  const { room, form: formString } = useParams()
+  const navigate = useNavigate()
   const form = parseInt(formString, 10) || null
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -144,6 +145,7 @@ const FacultyFormView = ({ room, formString }) => {
     user.specialGroup.evaluationFaculty ||
     isKatselmusProjektiOrOhjausryhma(user) ||
     Object.keys(user.access).length > 0
+
   const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
@@ -193,7 +195,7 @@ const FacultyFormView = ({ room, formString }) => {
     ) {
       return {}
     }
-    const { programmes, answers } = facultyProgrammeData?.forFaculty || {}
+    const { programmes, answers } = facultyProgrammeData?.forFaculty ?? {}
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
@@ -213,12 +215,12 @@ const FacultyFormView = ({ room, formString }) => {
     return result
   }, [room, user, facultyProgrammeData.pending])
 
-  if (!room || !form) return <Redirect to="/" />
+  if (!room || !form) return <Navigate to="/" />
 
   if (!faculty) return 'Error: Invalid url.'
 
   if (!hasReadRights) {
-    return <NoPermissions t={t} requestedForm={t('evaluation')} />
+    return <NoPermissions requestedForm={t('evaluation')} t={t} />
   }
 
   return (
@@ -227,18 +229,18 @@ const FacultyFormView = ({ room, formString }) => {
         <Loader active />
       ) : (
         <div className="form-container">
-          <NavigationSidebar programmeKey={room} formType="evaluation" formNumber={form} />
+          <NavigationSidebar formNumber={form} formType="evaluation" programmeKey={room} />
           <div className="the-form" ref={componentRef}>
             <div className="form-instructions">
               <div className="hide-in-print-mode">
                 <SaveIndicator />
                 <div style={{ marginBottom: '2em' }}>
-                  <Button onClick={() => history.push('/evaluation-faculty')} icon="arrow left" />
+                  <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation-faculty')} />
                 </div>
                 <img alt="form-header-calendar" className="img-responsive" src={postItImage} />
               </div>
               <h1 style={{ color: colors.blue }}>{faculty?.name[lang]}</h1>
-              <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+              <h3 data-cy="formview-title" style={{ marginTop: '0' }}>
                 {t('evaluation')} {year}
               </h3>
 
@@ -272,24 +274,24 @@ const FacultyFormView = ({ room, formString }) => {
               </div>
 
               <div className="info-container">
-                <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
+                <a data-cy={`link-to-oodikone-faculty-${room}`} href={oodiFacultyURL} rel="noreferrer" target="_blank">
                   <h4>
                     {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
                   </h4>
                 </a>
-                <Link data-cy="link-to-old-answers" to={degreeReformUrl} target="_blank">
+                <Link data-cy="link-to-old-answers" target="_blank" to={degreeReformUrl}>
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
                     {t('formView:evaluationSummaryByProgramme')} <Icon name="external" />{' '}
                   </h4>
                 </Link>
               </div>
             </div>
-            <Downloads programme={faculty} componentRef={componentRef} form={form} />
+            <Downloads componentRef={componentRef} form={form} programme={faculty} />
             <div style={{ paddingBottom: '6em' }}>
               <EvaluationForm
+                form={form}
                 programmeKey={faculty.code}
                 questions={questions}
-                form={form}
                 summaryData={facultyProgrammeAnswers}
               />
             </div>

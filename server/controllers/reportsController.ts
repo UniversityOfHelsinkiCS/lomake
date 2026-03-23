@@ -147,7 +147,7 @@ const updateReport = async (req: Request, res: Response) => {
           [Op.and]: [{ studyprogrammeId }, { year }],
         },
         returning: true,
-      },
+      }
     )
 
     const updatedData = updatedReport[0].data

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import ColorTableCell from '../../OverviewPage/ColorTableCell'
@@ -9,7 +9,7 @@ import PieForFaculty from './PieForFaculty'
 
 const ManageCell = ({ faculty, setProgramControlsToShow }) => (
   <div className="table-container-manage-cell">
-    <Button data-cy={`${faculty.code}-manage`} icon="user" circular onClick={() => setProgramControlsToShow(faculty)} />
+    <Button circular data-cy={`${faculty.code}-manage`} icon="user" onClick={() => setProgramControlsToShow(faculty)} />
   </div>
 )
 
@@ -64,27 +64,27 @@ const TableRow = ({
       {showDataByProgramme
         ? tableIds.map(idObject => (
             <PieForFaculty
+              facultyKey={faculty.code}
+              facultyName={faculty.name[lang]}
+              form={form}
               key={`${faculty.code}-${idObject.id}`}
+              programmesAnswers={answers}
               questionId={idObject.id}
               selectedAnswers={selectedAnswers}
-              facultyName={faculty.name[lang]}
-              facultyKey={faculty.code}
-              programmesAnswers={answers}
-              form={form}
               setModalData={setModalData}
             />
           ))
         : tableIds.map(idObject => (
             <ColorTableCell
+              form={form}
               key={`${faculty.code}-${idObject.id}`}
-              programmesName={faculty.name[lang]}
-              programmesKey={faculty.code}
               programmesAnswers={answers}
+              programmesKey={faculty.code}
+              programmesName={faculty.name[lang]}
               programmesOldAnswers={null}
               questionId={idObject.id}
               questionType={idObject.type}
               setModalData={setModalData}
-              form={form}
             />
           ))}
 

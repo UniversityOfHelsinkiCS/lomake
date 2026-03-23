@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import axios from 'axios'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { getHeaders } from '../../config/mockHeaders'
@@ -27,6 +28,7 @@ export const callApi = async (url, method = 'get', data) => {
 }
 
 // @ts-expect-error
+
 export default (route, prefix, method = 'get', data, query) => ({
   type: `${prefix}_ATTEMPT`,
   requestSettings: {
@@ -51,8 +53,8 @@ export const handleRequest = store => next => async action => {
     try {
       const res = await callApi(route, method, data)
       store.dispatch({ type: `${prefix}_SUCCESS`, response: res.data, query })
-    } catch (err) {
-      Sentry.captureException(err, {
+    } catch (error) {
+      Sentry.captureException(error, {
         tags: {
           route,
           method,
@@ -61,7 +63,7 @@ export const handleRequest = store => next => async action => {
           query,
         },
       })
-      store.dispatch({ type: `${prefix}_FAILURE`, response: err, query })
+      store.dispatch({ type: `${prefix}_FAILURE`, response: error, query })
     }
   }
 }
@@ -75,8 +77,9 @@ export const RTKApi = createApi({
     'Lock',
     'KeyData',
     'KeyDataMeta',
+    'InterventionProcedures',
     'Auth',
-    'QualityDocuments'
+    'QualityDocuments',
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${basePath}api`,

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { Faculty } from '@/shared/lib/types'
@@ -81,12 +82,12 @@ const FacultyFilterComponent = () => {
         <Select
           data-cy="faculty-filter"
           multiple
-          value={selectedFaculties}
           onChange={handleChange}
           renderValue={selected => getFacultyName(selected).join(', ')}
+          value={selectedFaculties}
         >
           {options?.map(option => (
-            <MenuItem key={option.key} value={option.value} data-cy="faculty-filter-option">
+            <MenuItem data-cy="faculty-filter-option" key={option.key} value={option.value}>
               <Checkbox checked={selectedFaculties.includes(option.value)} />
               <ListItemText primary={option.text} />
             </MenuItem>

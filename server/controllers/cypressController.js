@@ -1,4 +1,6 @@
-/* eslint-disable no-restricted-syntax */
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable no-redeclare */
 import { Op } from 'sequelize'
 import moment from 'moment'
 import db from '../models/index.js'
@@ -139,7 +141,7 @@ const resetDeadlines = async () => {
         locked: false,
         lockedForms: { evaluation: false, yearly: false, 'degree-reform': false, 'evaluation-faculty': false },
       },
-      { where: {} },
+      { where: {} }
     )
 
     // Close all deadlines and create new for yearly form
@@ -1184,8 +1186,8 @@ const initKeyData = async (_req, res) => {
     })
 
     return res.status(200).json({ message: 'Keydata initialized' })
-  } catch (err) {
-    return res.status(500).json({ error: `Datatbase error: ${err}` })
+  } catch (error) {
+    return res.status(500).json({ error: `Datatbase error: ${error.error}` })
   }
 }
 
@@ -1197,7 +1199,6 @@ const initReports = async (_req, res) => {
 
     for (const currentYear of years) {
       for (const { id, key } of programmes) {
-        // eslint-disable-next-line no-await-in-loop
         const report = await Report.findOne({
           where: {
             [Op.and]: [{ studyprogrammeId: id }, { year: currentYear }],
@@ -1205,7 +1206,6 @@ const initReports = async (_req, res) => {
         })
 
         if (!report) {
-          // eslint-disable-next-line no-await-in-loop
           await Report.create({
             studyprogrammeId: id,
             studyprogrammeKey: key,
@@ -1217,9 +1217,9 @@ const initReports = async (_req, res) => {
     }
 
     return res.status(200).json({ message: 'Reports initialized' })
-  } catch (err) {
-    logger.error(`Database error: ${err}`)
-    return res.status(500).json({ error: `Database error: ${err}` })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: `Database error: ${error.error}` })
   }
 }
 

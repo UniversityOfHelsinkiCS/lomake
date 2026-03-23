@@ -1,4 +1,3 @@
-import React from 'react'
 import { Table } from 'semantic-ui-react'
 import uniq from 'lodash/uniq'
 import {
@@ -38,7 +37,7 @@ const IamTable = () => {
         {getRowsForAccessGroup(
           isUniversityWideWritingGroups,
           'Kirjoitusoikeudet kaikkiin ohjelmiin',
-          'Koulutussuunnittelijat ja opintoasiainpäälliköt',
+          'Koulutussuunnittelijat ja opintoasiainpäälliköt'
         )}
         {getRowsForAccessGroup(
           uniq([
@@ -53,37 +52,37 @@ const IamTable = () => {
             'grp-koordinaatioryhma',
           ]),
           'Lukuoikeudet kaikkiin ohjelmiin',
-          'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö, oppimisympäristöjen palvelut ja katselmustyöryhmä',
+          'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö, oppimisympäristöjen palvelut ja katselmustyöryhmä'
         )}
         {getRowsForAccessGroup(
           doctoralWritingIams,
           'Kirjoitusoikeudet kaikkiin tohtoriohjelmiin',
-          'Tohtoriohjelmien suunnittelijat',
+          'Tohtoriohjelmien suunnittelijat'
         )}
         {getRowsForAccessGroup(
           doctoralIams,
           'Lukuoikeudet kaikkiin tohtoriohjelmiin',
-          'Tohtoriohjelmien johtajat ja tieteellinen neuvosto',
+          'Tohtoriohjelmien johtajat ja tieteellinen neuvosto'
         )}
         {getRowsForAccessGroup(
           Object.keys(doctoralSchoolMap),
           'Lukuoikeudet kyseiseen tutkijakouluun',
-          'Tutkijakoulun johtoryhmä',
+          'Tutkijakoulun johtoryhmä'
         )}
         {getRowsForAccessGroup(
           ['hy-[tiedekunta]-[koulutusohjelma]-jory & hy-[tiedekunta]-maisteri/kandi-kojot & hy-employees'],
           'Admin-oikeudet kyseiseen koulutusohjelmaan',
-          'Koulutusohjelmien johtajat',
+          'Koulutusohjelmien johtajat'
         )}
         {getRowsForAccessGroup(
           ['hy-[tiedekunta]-[koulutusohjelma]-jory & hy-employees'],
           'Kirjoitusoikeudet kyseiseen koulutusohjelmaan',
-          'Koulutusohjelman johtoryhmän työsuhteessa olevat jäsenet',
+          'Koulutusohjelman johtoryhmän työsuhteessa olevat jäsenet'
         )}
         {getRowsForAccessGroup(
           ['hy-[tiedekunta]-[koulutusohjelma]-jory'],
           'Lukuoikeudet kyseiseen koulutusohjelmaan',
-          'Koulutusohjelman johtoryhmän opiskelijajäsenet',
+          'Koulutusohjelman johtoryhmän opiskelijajäsenet'
         )}
       </Table.Body>
     </Table>

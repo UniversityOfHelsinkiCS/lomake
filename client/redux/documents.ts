@@ -38,7 +38,7 @@ const documentsApi = RTKApi.injectEndpoints({
         url: `/documents/${studyprogrammeKey}`,
         method: 'get',
       }),
-      providesTags: [{ type: 'Documents', id: 'DOCS' }]
+      providesTags: [{ type: 'Documents', id: 'DOCS' }],
     }),
     getAllDocuments: builder.query<DocumentType[], GetAllDocumentsArgs>({
       query: ({ activeYear }) => ({
@@ -52,7 +52,7 @@ const documentsApi = RTKApi.injectEndpoints({
         method: 'post',
         body: { data },
       }),
-      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
+      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }],
     }),
     updateDocument: builder.mutation<DocumentType[], UpdateDocumentArgs>({
       query: ({ studyprogrammeKey, id, data }) => ({
@@ -60,7 +60,7 @@ const documentsApi = RTKApi.injectEndpoints({
         method: 'put',
         body: { data },
       }),
-      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
+      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }],
     }),
     closeInterventionProcedure: builder.mutation<DocumentType[], CloseInterventionProcedureArgs>({
       query: ({ studyprogrammeKey, data }) => ({
@@ -68,23 +68,23 @@ const documentsApi = RTKApi.injectEndpoints({
         method: 'put',
         body: { data },
       }),
-      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
+      invalidatesTags: ['Documents', 'InterventionProcedures'],
     }),
     deleteDocument: builder.mutation<void, DeleteDocumentArgs>({
       query: ({ studyprogrammeKey, id }) => ({
         url: `documents/${studyprogrammeKey}/${id}`,
         method: 'delete',
       }),
-      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }]
+      invalidatesTags: [{ type: 'Documents', id: 'DOCS' }],
     }),
-  })
+  }),
 })
 
-export const { 
-  useGetDocumentsQuery, 
+export const {
+  useGetDocumentsQuery,
   useGetAllDocumentsQuery,
   useCreateDocumentMutation,
   useUpdateDocumentMutation,
-  useCloseInterventionProcedureMutation, 
-  useDeleteDocumentMutation } 
-= documentsApi
+  useCloseInterventionProcedureMutation,
+  useDeleteDocumentMutation,
+} = documentsApi

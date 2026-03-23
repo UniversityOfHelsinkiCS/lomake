@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Op } from 'sequelize'
 import db from '../models/index.js'
 import logger from '../util/logger.js'

@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-sort-props */
 /* eslint-disable prettier/prettier */
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import ColorTableCell from '../../OverviewPage/ColorTableCell'
 import { useTranslation } from 'react-i18next'
 
@@ -60,7 +61,6 @@ const TableRow = ({
   } else if (lang === 'se') {
     formCode = `${committee.code}_SE`
   }
-
   const targetURL = `/evaluation-university/form/${form}/${formCode}#${question.id}`
 
   let questionLabel = question.label[lang]
@@ -89,7 +89,7 @@ const TableRow = ({
             return (
               <>
                 <div key={`${question.id}-${upperLevel.title}-${level}`} />
-                {isGap && <div className="committee-table-square-gap" />}
+                {isGap ? <div className="committee-table-square-gap" /> : null }
               </>
             )
           }
@@ -116,7 +116,7 @@ const TableRow = ({
                 uniFormTrafficLights={finnishFormForTrafficLights}
                 acualQuestionId={acualQuestionId}
               />
-              {isGap && <div className="committee-table-square-gap" />}
+              {isGap ? <div className="committee-table-square-gap" /> : null}
             </Fragment>
           )
         })
@@ -125,4 +125,5 @@ const TableRow = ({
   )
 }
 
+ 
 export default TableRow

@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router'
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router'
 import { Button, Menu, Tab } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import NoPermissions from '../Generic/NoPermissions'
@@ -40,7 +40,7 @@ const answersForFaculty = ({
     year,
     tempAnswers: answers,
     oldAnswers,
-    draftYear: draftYear && draftYear.year,
+    draftYear: draftYear?.year,
     deadline,
     form,
   })
@@ -59,7 +59,7 @@ const answersForFaculty = ({
 export default () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
   const [filter, setFilter] = useState('')
@@ -111,7 +111,7 @@ export default () => {
         year,
         tempAnswers: answers,
         oldAnswers,
-        draftYear: draftYear && draftYear.year,
+        draftYear: draftYear?.year,
         deadline: nextDeadline,
         form: filters.form,
       })
@@ -154,10 +154,10 @@ export default () => {
       render: () => (
         <Tab.Pane>
           <CompareByFaculty
-            year={filters.year}
+            allAnswers={compareByFacultyAnswers}
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
-            allAnswers={compareByFacultyAnswers}
+            year={filters.year}
           />
         </Tab.Pane>
       ),
@@ -168,15 +168,15 @@ export default () => {
       render: () => (
         <Tab.Pane>
           <CompareByYear
-            questionsList={questionsList.filter(q => !q.no_color)}
-            usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
             allAnswers={usersProgrammes ? answersForYears() : []}
             faculties={faculties}
-            programmes={programmes}
-            setPicked={setPicked}
-            picked={picked}
-            setFilter={setFilter}
             filter={debouncedFilter}
+            picked={picked}
+            programmes={programmes}
+            questionsList={questionsList.filter(q => !q.no_color)}
+            setFilter={setFilter}
+            setPicked={setPicked}
+            usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
           />
         </Tab.Pane>
       ),
@@ -184,8 +184,9 @@ export default () => {
   ]
 
   if (!user || !usersProgrammes) return null
-  if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/yearly')
-  if (usersProgrammes.length < 1) return <NoPermissions t={t} requestedForm={t('comparison:compare')} />
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
+  if (!isAdmin(user) && usersProgrammes.length <= 5) navigate('/yearly')
+  if (usersProgrammes.length < 1) return <NoPermissions requestedForm={t('comparison:compare')} t={t} />
 
   if (filters.form === formKeys.EVALUATION_FACULTIES) {
     const paneOptions = panes.filter(pane => pane.index === 1)
@@ -193,11 +194,11 @@ export default () => {
   }
 
   return (
-    <div key={filters.form} className="comparison">
+    <div className="comparison" key={filters.form}>
       <div className="info-header noprint" />
       <Menu secondary>
         <Menu.Item>
-          <Button as={Link} to="/yearly" icon="arrow left" size="small" />
+          <Button as={Link} icon="arrow left" size="small" to="/yearly" />
         </Menu.Item>
         <Menu.Item>
           <h1>{t('comparison:compare')}</h1>

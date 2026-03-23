@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Grid, Icon } from 'semantic-ui-react'
 
 const colorCircle = color => {
-  return <span className={`answer-circle-${color || 'gray'}`} />
+  return <span className={`answer-circle-${color ?? 'gray'}`} />
 }
 
 const measuresCount = count => {
@@ -20,7 +20,7 @@ const SummaryRow = ({ answer, lang, k, years, t }) => {
         <Grid.Column width={3}>{answer.details.shortLabel[lang]}</Grid.Column>
         {years.map(year => {
           return (
-            <Grid.Column width={4} key={year}>
+            <Grid.Column key={year} width={4}>
               {answer[year]?.count ? measuresCount(answer[year].count) : colorCircle(answer[year]?.light)}
             </Grid.Column>
           )
@@ -29,7 +29,7 @@ const SummaryRow = ({ answer, lang, k, years, t }) => {
           <Icon name={`angle ${showText ? 'up' : 'down'}`} onClick={() => setShowText(!showText)} />
         </Grid.Column>
       </Grid.Row>
-      {showText && (
+      {showText ? (
         <Grid.Row className="row" key={`${k}-text`}>
           <Grid.Column width={3}>
             <p style={{ paddingBottom: '1em' }}>
@@ -41,14 +41,14 @@ const SummaryRow = ({ answer, lang, k, years, t }) => {
           </Grid.Column>
           {years.map(year => {
             return (
-              <Grid.Column width={4} className="old-answer-text" key={year}>
-                {answer[year].text || t('empty')}
+              <Grid.Column className="old-answer-text" key={year} width={4}>
+                {answer[year].text ?? t('empty')}
               </Grid.Column>
             )
           })}
           <Grid.Column width={1} />
         </Grid.Row>
-      )}
+      ) : null}
     </>
   )
 }
@@ -72,7 +72,7 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
             <Grid.Column width={3}> </Grid.Column>
             {years.map(year => {
               return (
-                <Grid.Column width={4} key={year}>
+                <Grid.Column key={year} width={4}>
                   {year}
                 </Grid.Column>
               )
@@ -80,7 +80,7 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
             <Grid.Column width={1} />
           </Grid.Row>
           {keys.map(k => {
-            return <SummaryRow answer={relatedYearlyAnswers[k]} lang={lang} k={k} years={years} t={t} key={k} />
+            return <SummaryRow answer={relatedYearlyAnswers[k]} k={k} key={k} lang={lang} t={t} years={years} />
           })}
         </Grid>
       </div>

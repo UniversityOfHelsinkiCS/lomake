@@ -21,26 +21,26 @@ const reportsApi = RTKApi.injectEndpoints({
       query: ({ studyprogrammeKey, year, id, content }) => ({
         url: `/reports/${studyprogrammeKey}/${year}`,
         method: 'put',
-        body: { [id]: content }
+        body: { [id]: content },
       }),
-      invalidatesTags: [{ type: 'Reports', id: 'REPS' }]
+      invalidatesTags: [{ type: 'Reports', id: 'REPS' }],
     }),
     getReport: builder.query<ReportData, GetReportRequest>({
       query: ({ studyprogrammeKey, year }) => ({
         url: `/reports/${studyprogrammeKey}/${year}`,
-        method: 'get'
+        method: 'get',
       }),
-      providesTags: [{ type: 'Reports', id: 'REPS' }]
+      providesTags: [{ type: 'Reports', id: 'REPS' }],
     }),
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
     getReports: builder.query<Record<string, ReportData | never>, GetReportsRequest>({
       query: ({ year }) => ({
         url: `/reports/${year}`,
         method: 'get',
       }),
-      providesTags: [{ type: 'Reports', id: 'REPS' }]
-    })
-  })
+      providesTags: [{ type: 'Reports', id: 'REPS' }],
+    }),
+  }),
 })
 
 export const { useUpdateReportMutation, useGetReportQuery, useGetReportsQuery } = reportsApi
-

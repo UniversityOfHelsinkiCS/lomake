@@ -1,8 +1,9 @@
+/* eslint-disable import-x/no-named-as-default */
+
 import io from 'socket.io-client'
 import Cookies from 'js-cookie'
 import { basePath, inProduction } from './common'
 import { getHeaders } from '../../config/mockHeaders'
-// eslint-disable-next-line import/no-cycle
 import store from '../redux'
 
 const connect = () => {

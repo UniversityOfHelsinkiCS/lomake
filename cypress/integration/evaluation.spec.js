@@ -88,11 +88,11 @@ describe('Evaluation forms tests', () => {
       cy.contains('Faculty level').click()
       cy.get(`[data-cy=colortable-link-to-H50]`).click()
       cy.get(`[data-cy="saving-answers-notice"]`).contains(
-        'Answers are saved automatically except for text fields. Final day for answering the form:',
+        'Answers are saved automatically except for text fields. Final day for answering the form:'
       )
       cy.typeInEditor(
         'student_admittance_faculty',
-        'Bachelor is kinda okay \n Master is doing okay \n Doctoral is not doing so good',
+        'Bachelor is kinda okay \n Master is doing okay \n Doctoral is not doing so good'
       )
       cy.get("[data-cy='color-neutral-student_admittance_faculty_bachelor']").click()
       cy.get("[data-cy='color-neutral-student_admittance_faculty_master']").click()
@@ -105,17 +105,17 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=H50-student_admittance_faculty-bachelor]').should(
         'have.css',
         'background-color',
-        'rgb(255, 255, 177)',
+        'rgb(255, 255, 177)'
       )
       cy.get('[data-cy=H50-student_admittance_faculty-master]').should(
         'have.css',
         'background-color',
-        'rgb(255, 255, 177)',
+        'rgb(255, 255, 177)'
       )
       cy.get('[data-cy=H50-student_admittance_faculty-doctoral]').should(
         'have.css',
         'background-color',
-        'rgb(255, 127, 127)',
+        'rgb(255, 127, 127)'
       )
     })
   })
@@ -156,25 +156,25 @@ describe('Evaluation forms tests', () => {
 
       cy.get("[data-cy='color-positive-student_admittance_university-university-bachelor']").should(
         'have.class',
-        'selected-animated',
+        'selected-animated'
       )
       cy.get("[data-cy='color-neutral-student_admittance_university-university-master']").should(
         'have.class',
-        'selected-animated',
+        'selected-animated'
       )
       cy.get("[data-cy='color-negative-student_admittance_university-university-doctoral']").should(
         'have.class',
-        'selected-animated',
+        'selected-animated'
       )
 
       cy.get("[data-cy='editing-area-student_admittance_university-university-bachelor']").contains(
-        'ONE: Bachelor is really good',
+        'ONE: Bachelor is really good'
       )
       cy.get("[data-cy='editing-area-student_admittance_university-university-master']").contains(
-        'ONE: Master is doing okay',
+        'ONE: Master is doing okay'
       )
       cy.get("[data-cy='editing-area-student_admittance_university-university-doctoral']").contains(
-        'TINE: Doctoral is not doing so good',
+        'TINE: Doctoral is not doing so good'
       )
       cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
@@ -183,12 +183,12 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should(
         'have.css',
         'background-color',
-        'rgb(255, 255, 177)',
+        'rgb(255, 255, 177)'
       )
       cy.get('[data-cy=UNI-student_admittance_university-university-doctoral-single]').should(
         'have.css',
         'background-color',
-        'rgb(255, 127, 127)',
+        'rgb(255, 127, 127)'
       )
     })
 
@@ -278,18 +278,18 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=nav-university]').click()
       cy.wait(100)
       cy.get("[data-cy='university_ease_of_study_actions-university-master-development-area-1']").type(
-        'Master: This is a development area',
+        'Master: This is a development area'
       )
       cy.wait(100)
       cy.get("[data-cy='university_ease_of_study_actions-university-master-action-1']").type('Master: This is action')
       cy.wait(100)
       cy.get('[data-cy=university_ease_of_study_actions-university-master-add-action-button]').click()
       cy.get("[data-cy='university_ease_of_study_actions-university-master-development-area-2']").type(
-        'Master: This is also development area',
+        'Master: This is also development area'
       )
       cy.wait(100)
       cy.get("[data-cy='university_ease_of_study_actions-university-master-action-2']").type(
-        'Master: This is second action',
+        'Master: This is second action'
       )
       cy.wait(100)
 

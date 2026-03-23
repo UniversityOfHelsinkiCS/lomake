@@ -1,14 +1,23 @@
-import { InferAttributes, InferCreationAttributes, Model, CreationOptional, INTEGER, JSONB, DATE, BOOLEAN } from 'sequelize'
-import { sequelize } from '../database/connection.js'
+import {
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+  CreationOptional,
+  INTEGER,
+  JSONB,
+  DATE,
+  BOOLEAN,
+} from 'sequelize'
 import { KeyData as KeyDataType } from '@/shared/lib/types.js'
+import { sequelize } from '../database/connection.js'
 
 class KeyData extends Model<InferAttributes<KeyData>, InferCreationAttributes<KeyData>> {
   declare id: CreationOptional<number>
   declare data: KeyDataType
   declare year: number | null
   declare active: boolean
-  declare createdAt: Date
-  declare updatedAt: Date
+  declare createdAt: CreationOptional<Date>
+  declare updatedAt: CreationOptional<Date>
 }
 
 KeyData.init(

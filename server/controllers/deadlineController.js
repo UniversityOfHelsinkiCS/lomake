@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/await-thenable */
 import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { getFormType } from '../util/common.js'
@@ -87,7 +89,7 @@ const remove = async (req, res) => {
     if (remainingDeadlines.length === 0) {
       await Studyprogramme.update(
         { lockedForms: { evaluation: true, yearly: true, 'degree-reform': true } },
-        { where: {} },
+        { where: {} }
       )
       await db.draftYear.destroy({
         truncate: true,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Menu, Header, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +12,7 @@ const TrackingTrafficLight = ({ id, form }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const fieldName = `${id}_lights_history`
-  const lightsHistory = useSelector(({ form }) => form.data[fieldName]) || []
+  const lightsHistory = useSelector(({ form }) => form.data[fieldName]) ?? []
   const displayedHistory = lightsHistory
   const reduxViewOnly = useSelector(({ form }) => form.viewOnly)
   const value = useSelector(({ form }) => form.data[fieldName])
@@ -70,7 +70,7 @@ const TrackingTrafficLight = ({ id, form }) => {
       <Header as="h5">{t('tracking')}</Header>
       <Menu secondary style={{ display: 'flex', flexWrap: 'wrap' }}>
         <Menu.Item>
-          <Button data-cy="toggle-chooser" onClick={toggleChooser} disabled={reduxViewOnly}>
+          <Button data-cy="toggle-chooser" disabled={reduxViewOnly} onClick={toggleChooser}>
             {t('chooseTrafficLight')}
           </Button>
         </Menu.Item>
@@ -88,15 +88,15 @@ const TrackingTrafficLight = ({ id, form }) => {
                   .split('/')
                   .join('.')}
               </i>
-              {modify && (
+              {modify ? (
                 <Button
-                  icon="trash"
-                  size="mini"
-                  onClick={() => removeLight(index)}
                   disabled={reduxViewOnly}
+                  icon="trash"
+                  onClick={() => removeLight(index)}
+                  size="mini"
                   style={{ marginLeft: '0.5em' }} // Add some spacing
                 />
-              )}
+              ) : null}
             </Menu.Item>
           ))
         ) : (
@@ -104,47 +104,47 @@ const TrackingTrafficLight = ({ id, form }) => {
         )}
       </Menu>
 
-      {showChooser && (
+      {showChooser ? (
         <Grid columns={4} style={{ margin: '1em 0' }}>
           <b>{t('chooseTrafficLight')}</b>
           <Grid.Row>
             <Grid.Column data-cy="date-picker">
               <DatePicker
                 dateFormat="dd.MM.yyyy"
+                disabled={!form}
+                fixedHeight
+                locale={lang}
                 onChange={setCustomDate}
                 selected={customDate}
-                disabled={!form}
-                locale={lang}
-                showYearDropdown
                 showMonthDropdown
-                fixedHeight
+                showYearDropdown
               />
             </Grid.Column>
             <Grid.Column>
-              <div title={t('facultyTracking:green')} style={{ display: 'flex' }}>
+              <div style={{ display: 'flex' }} title={t('facultyTracking:green')}>
                 <div
-                  data-cy={`color-positive-${id}`}
                   className={getClassName('green')}
+                  data-cy={`color-positive-${id}`}
                   onClick={!reduxViewOnly ? () => chooseLight('green') : undefined}
                 />
                 <p style={{ margin: '1em' }}>{t('facultyTracking:green')}</p>
               </div>
             </Grid.Column>
             <Grid.Column>
-              <div title={t('facultyTracking:yellow')} style={{ display: 'flex' }}>
+              <div style={{ display: 'flex' }} title={t('facultyTracking:yellow')}>
                 <div
-                  data-cy={`color-neutral-${id}`}
                   className={getClassName('yellow')}
+                  data-cy={`color-neutral-${id}`}
                   onClick={!reduxViewOnly ? () => chooseLight('yellow') : undefined}
                 />
                 <p style={{ margin: '1em' }}>{t('facultyTracking:yellow')}</p>
               </div>
             </Grid.Column>
             <Grid.Column>
-              <div title={t('facultyTracking:red')} style={{ display: 'flex' }}>
+              <div style={{ display: 'flex' }} title={t('facultyTracking:red')}>
                 <div
-                  data-cy={`color-negative-${id}`}
                   className={getClassName('red')}
+                  data-cy={`color-negative-${id}`}
                   onClick={!reduxViewOnly ? () => chooseLight('red') : undefined}
                 />
                 <p style={{ margin: '1em' }}>{t('facultyTracking:red')}</p>
@@ -152,7 +152,7 @@ const TrackingTrafficLight = ({ id, form }) => {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      )}
+      ) : null}
     </>
   )
 }

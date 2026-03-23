@@ -1,7 +1,6 @@
-import React from 'react'
 import { Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { colors } from '../../util/common'
 import { formKeys } from '../../../config/data'
 import Textarea from './Textarea'
@@ -32,7 +31,7 @@ const Entity = ({
   const { t } = useTranslation()
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
-  if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
+  if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].includes(previousAnswerColor)) {
     previousAnswerColor = mapColorToValid[previousAnswerColor]
   }
   const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
@@ -52,10 +51,10 @@ const Entity = ({
         <div style={{ maxWidth: '1000px' }}>
           <h3>
             {number}. {label}{' '}
-            {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            {required ? <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span> : null}
           </h3>
         </div>
-        {!noColor && <TrafficLights id={id} form={form} />}
+        {!noColor && <TrafficLights form={form} id={id} />}
       </div>
       <div className="entity-description">
         {description}
@@ -64,18 +63,18 @@ const Entity = ({
       {!kludge && form === formKeys.EVALUATION_PROGRAMMES && (
         <>
           <OldAnswersSummary partId={id} relatedYearlyAnswers={summaryData} />
-          <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
+          <Link data-cy="link-to-old-answers" target="_blank" to={summaryUrl}>
             <p style={{ marginTop: '1em' }}>{t('formView:allYearlyAnswerYears')}</p>
           </Link>
         </>
       )}
       <Textarea
-        id={id}
-        label={textAreaLabel}
-        previousAnswerText={previousAnswerText}
-        previousAnswerColor={previousAnswerColor}
         form={form}
+        id={id}
         kludge={kludge}
+        label={textAreaLabel}
+        previousAnswerColor={previousAnswerColor}
+        previousAnswerText={previousAnswerText}
       />
     </div>
   )

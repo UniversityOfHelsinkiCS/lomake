@@ -55,8 +55,8 @@ const BasicRadio = ({
                     position="bottom center"
                     trigger={
                       <Form.Field
-                        key={`basic-radio-${id}-${o.id}`}
                         disabled={viewOnly}
+                        key={`basic-radio-${id}-${o.id}`}
                         style={
                           direction !== 'horizontal'
                             ? { display: 'flex', marginBottom: '0.2em' }
@@ -64,9 +64,7 @@ const BasicRadio = ({
                         }
                       >
                         <Radio
-                          name="basic-radio"
-                          style={{ display: 'flex', alignItems: 'center' }}
-                          value={o.label}
+                          checked={isChecked(o.id)}
                           disabled={viewOnly}
                           label={
                             <label
@@ -76,16 +74,18 @@ const BasicRadio = ({
                               {o.label}
                             </label>
                           }
-                          checked={isChecked(o.id)}
+                          name="basic-radio"
                           onClick={() => handleChange(o.id)}
+                          style={{ display: 'flex', alignItems: 'center' }}
+                          value={o.label}
                         />
                       </Form.Field>
                     }
                   />
                 ) : (
                   <Form.Field
-                    key={`basic-radio-${id}-${o.id}`}
                     disabled={viewOnly}
+                    key={`basic-radio-${id}-${o.id}`}
                     style={
                       direction !== 'horizontal'
                         ? { display: 'flex', marginBottom: '0.2em' }
@@ -93,9 +93,7 @@ const BasicRadio = ({
                     }
                   >
                     <Radio
-                      name="basic-radio"
-                      style={{ display: 'flex', alignItems: 'center' }}
-                      value={o.label}
+                      checked={isChecked(o.id)}
                       disabled={viewOnly}
                       label={
                         <label
@@ -105,8 +103,10 @@ const BasicRadio = ({
                           {o.label}
                         </label>
                       }
-                      checked={isChecked(o.id)}
+                      name="basic-radio"
                       onClick={() => handleChange(o.id)}
+                      style={{ display: 'flex', alignItems: 'center' }}
+                      value={o.label}
                     />
                   </Form.Field>
                 )}
@@ -118,12 +118,12 @@ const BasicRadio = ({
               <Input
                 data-cy={`${type}-basic-input-other-field`}
                 disabled={viewOnly}
+                onChange={value => handleOtherField({ input: value, level: 2 })}
+                placeholder={t('what')}
+                size="small"
                 style={{ width: '60%' }}
                 value={checked.thirdValue}
-                onChange={value => handleOtherField({ input: value, level: 2 })}
                 version="degree-reform"
-                size="small"
-                placeholder={t('what')}
               />
             </Form.Field>
           ) : null}

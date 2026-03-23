@@ -19,7 +19,7 @@ describe('Tracking page tests', () => {
     cy.get('[data-cy=questions-list-0]').click()
 
     cy.contains(
-      '1. Degree programmes include model schedules in curricula that support understanding of the education system, study paths, and course offerings',
+      '1. Degree programmes include model schedules in curricula that support understanding of the education system, study paths, and course offerings'
     ).click()
     cy.get('[data-cy=send-selection-button]').click()
   })
@@ -30,7 +30,7 @@ describe('Tracking page tests', () => {
     cy.get('[data-cy=questions-list-0]').click()
 
     cy.contains(
-      '1. Degree programmes include model schedules in curricula that support understanding of the education system, study paths, and course offerings',
+      '1. Degree programmes include model schedules in curricula that support understanding of the education system, study paths, and course offerings'
     ).click()
     cy.get('[data-cy=send-selection-button]').click()
 
@@ -38,7 +38,7 @@ describe('Tracking page tests', () => {
     cy.get('[data-cy=modify-plan-1]').click()
 
     cy.get('[id=1_contact_person_text]').type('contact person')
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
+
     cy.get('[data-cy=close-modal]').click()
   })
 
@@ -56,7 +56,7 @@ describe('Tracking page tests', () => {
     cy.get('[data-cy=toggle-chooser]').click()
     cy.get('[data-cy=color-positive-1]').click()
     cy.get('[id=1_contact_person_text]').type('contact person')
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
+
     cy.get('[data-cy=close-modal]').click()
 
     cy.get('[data-cy=modify-plan-2]').click()

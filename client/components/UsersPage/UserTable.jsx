@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 
 import User from './User'
 import useDebounce from '../../util/useDebounce'
@@ -24,11 +25,11 @@ export default () => {
   const users = useSelector(state => state.users)
   const user = useSelector(({ currentUser }) => currentUser.data)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const history = useHistory()
+  const navigate = useNavigate()
   const { data, isFetching } = useGetOrganisationDataQuery()
 
   if (!isAdmin(user)) {
-    history.push('/')
+    navigate('/')
   }
 
   if (users.pending || !users.data || !usersProgrammes || isFetching) return <Loader active inline="centered" />
@@ -64,7 +65,7 @@ export default () => {
         .join(', ')
         .toString()
         .toLocaleLowerCase()
-        .includes(accessFilter.toLocaleLowerCase()),
+        .includes(accessFilter.toLocaleLowerCase())
     )
     return byAccess
   }
@@ -83,7 +84,7 @@ export default () => {
 
     return (
       <Table.HeaderCell onClick={sortHandler} style={sortable ? { cursor: 'pointer' } : {}} width={width}>
-        {name} {sortable && <Icon name="sort" />}
+        {name} {sortable ? <Icon name="sort" /> : null}
       </Table.HeaderCell>
     )
   }
@@ -93,19 +94,19 @@ export default () => {
       <div className="user-filter-container">
         <Input
           className="user-filter"
-          value={nameFilter}
-          onChange={(e, { value }) => setNameFilter(value)}
           icon="search"
           iconPosition="left"
+          onChange={(e, { value }) => setNameFilter(value)}
           placeholder={t('users:searchByName')}
+          value={nameFilter}
         />
         <Input
           className="user-filter"
-          value={accessFilter}
-          onChange={(e, { value }) => setAccessFilter(value)}
           icon="users"
           iconPosition="left"
+          onChange={(e, { value }) => setAccessFilter(value)}
           placeholder={t('users:filterByAccess')}
+          value={accessFilter}
         />
       </div>
       <Table celled compact stackable>
@@ -129,12 +130,12 @@ export default () => {
         <Table.Body>
           {filteredUsers().map(u => (
             <User
-              data-cy={`user-${u.uid}`}
-              lang={lang}
-              user={u}
-              key={u.id}
-              programmeCodesAndNames={programmeCodesAndNames}
               data={data}
+              data-cy={`user-${u.uid}`}
+              key={u.id}
+              lang={lang}
+              programmeCodesAndNames={programmeCodesAndNames}
+              user={u}
             />
           ))}
         </Table.Body>

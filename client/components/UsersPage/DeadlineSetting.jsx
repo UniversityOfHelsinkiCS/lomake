@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable react/jsx-no-leaked-render */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import { Button, Divider, Header, Select, Segment } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -31,8 +33,8 @@ const DeadlineSetting = () => {
   registerLocale('se', sv)
 
   useEffect(() => {
-    const years = [];
-    for (let i = new Date().getFullYear(); i >= LOMAKE_SINCE_YEAR; i--) years.push(i);
+    const years = []
+    for (let i = new Date().getFullYear(); i >= LOMAKE_SINCE_YEAR; i--) years.push(i)
     const options = years.map(y => {
       return {
         key: y,
@@ -114,53 +116,53 @@ const DeadlineSetting = () => {
         <Header as="h4">{t('users:selectDraftYear')}</Header>
         <Select
           data-cy="draft-year-selector"
-          placeholder="Select year"
-          options={yearOptions}
-          value={newDraftYear}
           onChange={(e, { value }) => setNewDraftYear(value)}
+          options={yearOptions}
+          placeholder="Select year"
+          value={newDraftYear}
         />
         <Header as="h4">{t('users:selectForm')}</Header>
         <Select
-          fluid
           data-cy="form-selector"
-          placeholder="Select form"
-          options={formOptions}
-          value={form}
           disabled={!newDraftYear}
+          fluid
           onChange={(e, { value }) => setForm(value)}
+          options={formOptions}
+          placeholder="Select form"
+          value={form}
         />
         <Header as="h4">{t('users:selectNewDeadline')}</Header>
         <DatePicker
           dateFormat="dd.MM.yyyy"
-          placeholderText={t('users:selectNewDeadline')}
-          selected={newDate}
-          onChange={setNewDate}
           disabled={!form}
           locale={lang}
+          onChange={setNewDate}
+          placeholderText={t('users:selectNewDeadline')}
+          selected={newDate}
           showYearDropdown
         />
       </div>
       {warning && (
         <p>
           <b>
-            <span data-cy="previousDeadline-warning" className="deadline-warning">
+            <span className="deadline-warning" data-cy="previousDeadline-warning">
               {t('users:deadlineWarning')}
             </span>
           </b>
         </p>
       )}
       <Button
-        data-cy="updateDeadline"
-        primary
         compact
-        size="mini"
+        data-cy="updateDeadline"
         disabled={warning || !newDate || !newDraftYear || !form}
         onClick={handleDeadlineSave}
+        primary
+        size="mini"
       >
         {formDeadline ? t('users:updateDeadline') : `${t('users:updateDeadline')} and draft year`}
       </Button>
       {formDeadline && form && (
-        <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
+        <Button compact data-cy="deleteDeadline" negative onClick={handleDelete} size="mini">
           {t('users:deleteThisDeadline')}
         </Button>
       )}
@@ -168,16 +170,16 @@ const DeadlineSetting = () => {
         <p>
           <b>
             {t('users:nextDeadline')}
-            <span style={{ color: formDeadline ? colors.blue : colors.red }} data-cy="nextDeadline">
-              {form && formDeadline && formatDate(formDeadline.date)}
-              {form && !formDeadline && <span data-cy="noNextDeadline">{t('users:noDeadlineSet')}</span>}
+            <span data-cy="nextDeadline" style={{ color: formDeadline ? colors.blue : colors.red }}>
+              {form && formDeadline ? formatDate(formDeadline.date) : null}
+              {form && !formDeadline ? <span data-cy="noNextDeadline">{t('users:noDeadlineSet')}</span> : null}
             </span>
           </b>
         </p>
         <div>
           <h3>
             {t('users:answersSavedForYear')}
-            <span style={{ color: draftYear ? colors.blue : colors.red }} data-cy="draftYear">
+            <span data-cy="draftYear" style={{ color: draftYear ? colors.blue : colors.red }}>
               {draftYear ? draftYear.year : t('users:noDraftYear')}
             </span>
           </h3>

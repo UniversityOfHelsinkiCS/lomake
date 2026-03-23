@@ -27,7 +27,7 @@ export default (state = {}, action) => {
       if (state.currentUser === action.value.uid) {
         return state
       }
-      // eslint-disable-next-line no-console
+
       return {
         ...state,
         data: action.value.data,

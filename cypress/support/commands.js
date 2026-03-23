@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable cypress/unsafe-to-chain-command */
 /// <reference types="cypress" />
 
@@ -37,7 +36,6 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
 })
 
 Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.get(editorName).click().type(`{moveToEnd}${textToBeTyped}`)
 })
 
@@ -61,11 +59,11 @@ Cypress.Commands.add('getYearSelector', () => {
 })
 
 Cypress.Commands.add('selectYear', year => {
-  cy.get('[data-cy=yearSelector]').click()
+  cy.get('[data-cy=yearSelector]').click({ force: true })
   cy.get('[data-cy=yearSelector]').then(newEl => {
     expect(newEl.find('.item')).to.have.length(ARCHIVE_LAST_YEAR - 2018)
   })
-  cy.get('[data-cy=yearSelector]').contains(year).click()
+  cy.get('[data-cy=yearSelector]').contains(year).click({ force: true })
 })
 
 Cypress.Commands.add('hasAccess', (uid, programCode, access) => {
@@ -124,7 +122,7 @@ Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
 
 Cypress.Commands.add('typeInEditor', (questionId, textToBeTyped, flakyness = 24) => {
   // focus to aquire lock
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
+
   const attempt = Cypress.currentRetry + 1
   cy.get(`[data-cy=textarea-${questionId}]`)
     .find('.editor-class')

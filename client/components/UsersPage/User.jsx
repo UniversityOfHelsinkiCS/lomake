@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import moment from 'moment'
 import { Table, Icon, Label, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -53,6 +54,15 @@ const FormattedAccess = ({ user, programmeCodesAndNames }) => {
   }
   return (
     <Popup
+      content={
+        <div className="user-programme-list-popup">
+          {programmeKeys.map(p => (
+            <p key={p}>
+              {programmeCodesAndNames.get(p)}: {formatRights(user.access[p])}
+            </p>
+          ))}
+        </div>
+      }
       position="bottom center"
       trigger={
         <div>
@@ -64,15 +74,6 @@ const FormattedAccess = ({ user, programmeCodesAndNames }) => {
           )}
         </div>
       }
-      content={
-        <div className="user-programme-list-popup">
-          {programmeKeys.map(p => (
-            <p key={p}>
-              {programmeCodesAndNames.get(p)}: {formatRights(user.access[p])}
-            </p>
-          ))}
-        </div>
-      }
     />
   )
 }
@@ -80,11 +81,11 @@ const FormattedAccess = ({ user, programmeCodesAndNames }) => {
 export default ({ user, lang, programmeCodesAndNames, data }) => {
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const logInAs = () => {
     localStorage.setItem('adminLoggedInAs', user.uid)
-    history.push('/')
+    navigate('/')
     window.location.reload()
   }
 
@@ -95,7 +96,7 @@ export default ({ user, lang, programmeCodesAndNames, data }) => {
       </Table.Cell>
       <Table.Cell width={1}>{user.uid}</Table.Cell>
       <Table.Cell data-cy={`${user.uid}-userAccess`} style={{ display: 'flex' }}>
-        <FormattedAccess user={user} programmeCodesAndNames={programmeCodesAndNames} />
+        <FormattedAccess programmeCodesAndNames={programmeCodesAndNames} user={user} />
       </Table.Cell>
       <Table.Cell data-cy={`${user.uid}-userGroup`}>{getUserType(user, t)}</Table.Cell>
       <Table.Cell>
@@ -106,12 +107,14 @@ export default ({ user, lang, programmeCodesAndNames, data }) => {
         )}
       </Table.Cell>
       <Table.Cell data-cy="user-access-groups">
-        {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(user, group, lang, t, data))}
+        {user.specialGroup
+          ? Object.keys(user.specialGroup).map(group => getSpecialGroup(user, group, lang, t, data))
+          : null}
       </Table.Cell>
       <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
       {isAdmin(currentUser) && (
         <Table.Cell>
-          {mayHijack(currentUser, user) && <Icon onClick={logInAs} size="large" name="sign-in" />}
+          {mayHijack(currentUser, user) && <Icon name="sign-in" onClick={logInAs} size="large" />}
         </Table.Cell>
       )}
     </Table.Row>

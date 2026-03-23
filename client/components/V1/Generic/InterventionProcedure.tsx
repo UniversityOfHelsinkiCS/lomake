@@ -1,19 +1,18 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
   IconButton,
   Typography,
-  Link,
   Alert,
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Button,
   CircularProgress,
 } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
-import type { DocumentType, ReportDataKey  } from '@/client/lib/types'
+import type { DocumentType, ReportDataKey } from '@/client/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack, ExpandMore } from '@mui/icons-material'
 import { basePath, isAdmin } from '@/config/common'
@@ -27,6 +26,7 @@ import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import { Loader } from 'semantic-ui-react'
 import EditDocument from './EditDocument'
+import { Link } from '../../Link'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -39,12 +39,13 @@ export const calculateInterventionAreas = ({
   t: TFunction
   selectedYear: string | number
 }) => {
-  let res: string[] = []
+  const res: string[] = []
   if (!metadata || !programme) return res
   const keyDataPoints = getKeyDataPoints(t)
   Object.values(keyDataPoints).map((point: any) => {
     if (`${selectedYear}` === '2025' && point.groupKey === GroupKey.RESURSSIT) return
     const color = calculateKeyDataColor(metadata, programme, point.groupKey, programme.level as ProgrammeLevel)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     if (color === 'Punainen') res.push(point.groupKey)
   })
   return res
@@ -58,7 +59,8 @@ const InterventionProcedure = () => {
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
   const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
-  const document = (documents.length > 0 || !isFetching) ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
+  const document =
+    documents.length > 0 || !isFetching ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
 
@@ -66,8 +68,9 @@ const InterventionProcedure = () => {
   // For this function the year variable is not needed cuz
   // intervention procedure is independent from years.
   const programmeData = programme.find(
-    (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey,
+    (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey
   )
+  if (!programmeData) return null
 
   const year = `${programmeData.year + 1}`
 
@@ -77,19 +80,16 @@ const InterventionProcedure = () => {
 
   if (isFetching) return <CircularProgress />
 
-
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '1rem' }}>
-        <IconButton component={Link} href={`${basePath}v1/programmes/10/${programmeKey}`} sx={{ marginRight: 2 }}>
+        <IconButton component={Link} sx={{ marginRight: 2 }} to={`${basePath}v1/programmes/10/${programmeKey}`}>
           <ArrowBack />
         </IconButton>
-        <Typography variant="h2">
-          {programmeData.koulutusohjelma[lang]} 
-        </Typography>
+        <Typography variant="h2">{programmeData.koulutusohjelma[lang]}</Typography>
       </Box>
       <Alert severity="info">
-        <Typography variant="light" style={{ gap: 1 }}>
+        <Typography style={{ gap: 1 }} variant="light">
           {t('document:infobox')}
         </Typography>
       </Alert>
@@ -115,7 +115,13 @@ const InterventionProcedure = () => {
                 programme={programmeData}
                 {...props}
               />
-              <TextFieldCard id={groupKey as ReportDataKey} t={t} type="Comment" studyprogrammeKey={programmeKey} year={year} />
+              <TextFieldCard
+                id={groupKey as ReportDataKey}
+                studyprogrammeKey={programmeKey}
+                t={t}
+                type="Comment"
+                year={year}
+              />
             </AccordionDetails>
           )
         })}
@@ -126,21 +132,23 @@ const InterventionProcedure = () => {
             <Typography variant="h4">{t('keyData:actions')}</Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ display: 'flex', flexDirection: 'column' }}>
-            <TextFieldCard id="Toimenpiteet" t={t} type="Measure" studyprogrammeKey={programmeKey} year={year} />
-            <Button
+            <TextFieldCard id="Toimenpiteet" studyprogrammeKey={programmeKey} t={t} type="Measure" year={year} />
+            <Link
               sx={{ alignSelf: 'flex-end', mt: '1rem' }}
-              variant="outlined"
-              component={Link}
-              href={`${basePath}v1/programmes/10/${programmeKey}/${year}?tab=1`}
+              to={`${basePath}v1/programmes/10/${programmeKey}/${year}?tab=1`}
             >
               {t('keyData:moveToAction')}
-            </Button>
+            </Link>
           </AccordionDetails>
         </Accordion>
       )}
       <br />
       <br />
-      {!id ? (<DocumentForm programmeKey={programmeData.koulutusohjelmakoodi}/>) : (<EditDocument programmeKey={programmeData.koulutusohjelmakoodi} id={id} document={document}/>)}
+      {!id ? (
+        <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} />
+      ) : (
+        <EditDocument document={document} id={id} programmeKey={programmeData.koulutusohjelmakoodi} />
+      )}
     </Box>
   )
 }

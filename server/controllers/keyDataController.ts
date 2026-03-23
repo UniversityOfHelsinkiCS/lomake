@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable import-x/no-named-as-default-member */
 import type { Request, Response } from 'express'
 import multer from 'multer'
 import xlsx from 'xlsx'
@@ -17,12 +19,8 @@ import { CanonicalSheetName, KeyData as KeyDataType } from '@/shared/lib/types.j
 import Studyprogramme from '../models/studyprogramme.js'
 import logger from '../util/logger.js'
 
-
 const deactivateExistingKeyData = async () => {
-  await KeyData.update(
-    { active: false },
-    { where: { active: true } }
-  )
+  await KeyData.update({ active: false }, { where: { active: true } })
 }
 
 const fetchProgrammeData = async () => {
@@ -32,6 +30,7 @@ const fetchProgrammeData = async () => {
   })
 }
 
+// eslint-disable-next-line @typescript-eslint/require-await
 const validateKeyData = async (keyData: any) => {
   try {
     KeyDataProgrammeSchema.extend({
@@ -67,7 +66,7 @@ const parseYearValue = (value: unknown): number | null => {
 }
 
 const getYear = (keyData: Partial<Record<CanonicalSheetName, any[]>>) => {
-  const rows = [...(keyData.kandiohjelmat ?? []), ...(keyData.maisteriohjelmat ?? [])]
+  const rows = [...(keyData.kandiohjelmat || []), ...(keyData.maisteriohjelmat || [])]
 
   const years = rows
     .map(row => {
@@ -75,8 +74,8 @@ const getYear = (keyData: Partial<Record<CanonicalSheetName, any[]>>) => {
         return null
       }
 
-      const yearEntry = Object.entries(row as Record<string, unknown>).find(
-        ([columnName]) => ['year', 'vuosi'].includes(columnName.trim().toLowerCase())
+      const yearEntry = Object.entries(row as Record<string, unknown>).find(([columnName]) =>
+        ['year', 'vuosi'].includes(columnName.trim().toLowerCase())
       )
 
       return parseYearValue(yearEntry?.[1])
@@ -97,7 +96,6 @@ const getKeyData = async (_req: Request, res: Response) => {
         active: true,
       },
     })
-
     await validateKeyData(data)
 
     return res.status(200).json(data)
@@ -111,7 +109,7 @@ const getKeyDataForYear = async (req: Request, res: Response) => {
     const { year } = req.params
     const { data } = await KeyData.findOne({
       where: {
-        year: year,
+        year,
       },
     })
 
@@ -127,9 +125,9 @@ const upload = multer({ storage: multer.memoryStorage() }).single('file')
 
 const uploadKeyData = async (req: Request, res: Response) => {
   return new Promise(resolve => {
-    upload(req, res, async (err: any) => {
-      if (err) {
-        resolve(res.status(500).json({ error: err.message }))
+    upload(req, res, async (error: any) => {
+      if (error) {
+        resolve(res.status(500).json({ error: error.message }))
         return
       }
 
@@ -143,7 +141,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
       try {
         const workbook = xlsx.read(file.buffer, { type: 'buffer' })
 
-        if (!workbook || !workbook.SheetNames?.length) {
+        if (!workbook?.SheetNames?.length) {
           logger.error('Workbook is invalid or has no sheets')
           throw new Error('Invalid workbook: no sheets found')
         }
@@ -165,7 +163,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
             throw new Error(`Worksheet at index ${idx} (${rawName}) is missing`)
           }
 
-          const sheetAsJson = xlsx.utils.sheet_to_json(ws) as any[]
+          const sheetAsJson = xlsx.utils.sheet_to_json(ws)
           data[canonicalName] = Array.isArray(sheetAsJson) ? sheetAsJson : []
         })
 

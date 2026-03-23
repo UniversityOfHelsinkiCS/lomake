@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -42,26 +43,26 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
       <Dropdown
         className="comparison-questions-list-selector"
         data-cy="questions-list"
-        name="questions-list"
         fluid
-        placeholder={label}
-        options={options}
-        onChange={addToList}
-        value={questions.selected}
         multiple
+        name="questions-list"
+        onChange={addToList}
+        options={options}
+        placeholder={label}
         selection
+        value={questions.selected}
       />
       <Button
         className="questions-list-button"
         color="blue"
-        onClick={() => dispatch(setQuestions({ selected: questionLabels, open: [] }))}
         data-cy="questions-list-select-all"
+        onClick={() => dispatch(setQuestions({ selected: questionLabels, open: [] }))}
       >
         {t('selectAll')}
       </Button>
       <Button
-        onClick={() => dispatch(setQuestions({ selected: [], open: [] }))}
         className="comparison-questions-list-button"
+        onClick={() => dispatch(setQuestions({ selected: [], open: [] }))}
       >
         {t('clearSelection')}
       </Button>

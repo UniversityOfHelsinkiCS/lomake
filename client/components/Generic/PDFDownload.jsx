@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import ReactToPrint from 'react-to-print'
@@ -48,12 +48,7 @@ const PDFDownload = ({ componentRef, linkName = null }) => {
     <ReactToPrint
       content={() => componentRef.current}
       documentTitle={title}
-      // eslint-disable-next-line react/no-unstable-nested-components
-      trigger={() => (
-        <span style={{ cursor: 'pointer', color: colors.blue, fontSize: '0.9em' }}>
-          {linkName ? t(`overview:printingPDF:${linkName}`) : t('generic:downloadPDF')}
-        </span>
-      )}
+      onAfterPrint={handleReady}
       onBeforeGetContent={() =>
         new Promise(resolve => {
           promiseResolveRef.current = resolve
@@ -62,7 +57,12 @@ const PDFDownload = ({ componentRef, linkName = null }) => {
           setIsPrinting(true)
         })
       }
-      onAfterPrint={handleReady}
+      // eslint-disable-next-line react/no-unstable-nested-components
+      trigger={() => (
+        <span style={{ cursor: 'pointer', color: colors.blue, fontSize: '0.9em' }}>
+          {linkName ? t(`overview:printingPDF:${linkName}`) : t('generic:downloadPDF')}
+        </span>
+      )}
     />
   )
 }

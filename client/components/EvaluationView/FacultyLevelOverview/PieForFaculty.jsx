@@ -1,4 +1,3 @@
-import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { useSelector } from 'react-redux'
 import { evaluationQuestions } from '../../../questionData/index'
@@ -6,7 +5,7 @@ import { evaluationQuestions } from '../../../questionData/index'
 const PieForFaculty = ({ facultyKey, programmesAnswers, questionId, setModalData, facultyName }) => {
   const lang = useSelector(state => state.language)
 
-  const answers = programmesAnswers || []
+  const answers = programmesAnswers ?? []
   const modifiedQuestionId = questionId.replace('_faculty', '')
   const colorId = `${modifiedQuestionId}_light`
   const textId = `${modifiedQuestionId}_text`
@@ -37,12 +36,11 @@ const PieForFaculty = ({ facultyKey, programmesAnswers, questionId, setModalData
 
       return acc
     },
-    { colors: {}, text: [] },
+    { colors: {}, text: [] }
   )
   return (
     <div
       key={facultyKey}
-      style={{ cursor: 'pointer' }}
       onClick={() =>
         setModalData({
           header: evaluationQuestions.reduce((acc, cur) => {
@@ -66,6 +64,7 @@ const PieForFaculty = ({ facultyKey, programmesAnswers, questionId, setModalData
           color: answersCounted.colors,
         })
       }
+      style={{ cursor: 'pointer' }}
     >
       <PieChart
         animationDuration={500}
@@ -74,15 +73,15 @@ const PieForFaculty = ({ facultyKey, programmesAnswers, questionId, setModalData
         data={[
           {
             color: '#9dff9d',
-            value: answersCounted.colors.green || 0,
+            value: answersCounted.colors.green ?? 0,
           },
           {
             color: '#ffffb1',
-            value: answersCounted.colors.yellow || 0,
+            value: answersCounted.colors.yellow ?? 0,
           },
           {
             color: '#ff7f7f',
-            value: answersCounted.colors.red || 0,
+            value: answersCounted.colors.red ?? 0,
           },
         ]}
         labelPosition={50}

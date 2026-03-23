@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import Textarea from '../../Generic/Textarea'
 import Entity from '../../Generic/Entity'
@@ -56,35 +55,35 @@ const Part = ({ part, programAnswerLevels, formData, lang, formType, programmeKe
   const Component = partComponentMap[part.type]
   const description = part.description ? part.description[lang] : undefined
   const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
-  const image = part.image ? part.image : undefined
-  const direction = part.direction ? part.direction : 'vertical'
-  const maxLength = part.maxLength ? part.maxLength : undefined
-  const accordion = part.accordion ? part.accordion : undefined
-  const version = part.version ? part.version : undefined
+  const image = part.image ?? undefined
+  const direction = part.direction ?? 'vertical'
+  const maxLength = part.maxLength ?? undefined
+  const accordion = part.accordion ?? undefined
+  const version = part.version ?? undefined
 
   return (
     <div style={divStyle}>
       <Component
-        id={part.id}
-        label={part.label[lang]}
+        accordion={accordion}
+        advancedOptions={part?.advancedOptions}
         description={description}
-        required={part.required}
+        direction={direction}
+        extrainfo={extrainfo}
+        form={form}
+        formType={formType}
+        hidePopup={part.hidePopup}
+        id={part.id}
+        image={image}
+        label={part.label[lang]}
+        marginTop={part.marginTop}
+        maxLength={maxLength}
         noColor={part.no_color}
         number={number}
-        extrainfo={extrainfo}
         previousYearsAnswers={null}
-        formType={formType}
         programme={programmeKey}
         radioOptions={part?.radioOptions}
-        advancedOptions={part?.advancedOptions}
-        image={image}
-        direction={direction}
-        maxLength={maxLength}
-        accordion={accordion}
-        form={form}
+        required={part.required}
         version={version}
-        hidePopup={part.hidePopup}
-        marginTop={part.marginTop}
       />
     </div>
   )
@@ -92,7 +91,7 @@ const Part = ({ part, programAnswerLevels, formData, lang, formType, programmeKe
 
 const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
   const lang = useSelector(state => state.language)
-  const formData = useSelector(state => state.form || {})
+  const formData = useSelector(state => state.form ?? {})
   const form = getForm(formType)
 
   let number = -1
@@ -116,12 +115,12 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
 
         return (
           <Section
-            key={`section-${section.id}-${formType}-${lang}`}
+            formType={formType}
             id={section.id}
-            title={section.title[lang]}
+            key={`section-${section.id}-${formType}-${lang}`}
             number={romanize(index)}
             programmeKey={programmeKey}
-            formType={formType}
+            title={section.title[lang]}
           >
             {parts.map(part => {
               if (
@@ -136,15 +135,15 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
 
               return (
                 <Part
+                  form={form}
+                  formData={formData}
+                  formType={formType}
                   key={`${part.type}-${part.id}-${formType}-${lang}`}
+                  lang={lang}
+                  number={number}
                   part={part}
                   programAnswerLevels={programAnswerLevels}
-                  formData={formData}
-                  lang={lang}
-                  formType={formType}
                   programmeKey={programmeKey}
-                  form={form}
-                  number={number}
                 />
               )
             })}

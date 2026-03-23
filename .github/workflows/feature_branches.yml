@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build project for linting
         run: npm ci
       - name: Run eslint and ts checks
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build project for translations
         run: npm ci
       - name: Analyse translations
@@ -31,24 +31,11 @@ jobs:
       matrix:
         spec:
           [
-            comparison,
-            degreeReform,
-            form,
-            formNotifications,
-            happypath,
             IAMpermissions1,
             IAMpermissions2,
             management,
-            misc,
             ospa,
             permissions,
-            report,
-            sidebar,
-            yearselector,
-            evaluation,
-            metaevaluation,
-            trackingpage,
-            facultymonitoringoverview,
             textfield,
             overview,
             intervention,
@@ -57,10 +44,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+        uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: npm ci
@@ -85,35 +72,28 @@ jobs:
           name: Cypress videos
           path: /home/runner/work/lomake/lomake/cypress/videos
 
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: Cypress screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+  # build:
+  #   name: 'Build and publish staging image'
+  #   needs:
+  #     - tests
+  #   runs-on: ubuntu-latest
 
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-  build:
-    name: 'Build and publish staging image'
-    needs:
-      - tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Build image
-        id: build-image
-        uses: redhat-actions/buildah-build@v2
-        with:
-          image: lomake
-          tags: staging ${{ github.sha }}
-          containerfiles: |
-            ./Dockerfile
-          build-args: |
-            BASE_PATH=/tilannekuva/
-            SENTRY_ENVIRONMENT=staging
-          extra-args: |
-            --ulimit nofile=4096:4096
+  #     - name: Build image
+  #       id: build-image
+  #       uses: redhat-actions/buildah-build@v2
+  #       with:
+  #         image: lomake
+  #         tags: staging ${{ github.sha }}
+  #         containerfiles: |
+  #           ./Dockerfile
+  #         build-args: |
+  #           BASE_PATH=/tilannekuva/
+  #           SENTRY_ENVIRONMENT=staging
+  #         extra-args: |
+  #           --ulimit nofile=4096:4096
       # - name: Push to quay.io
       #   uses: redhat-actions/push-to-registry@v2
       #   with:

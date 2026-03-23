@@ -1,12 +1,12 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
+// eslint-disable-next-line import-x/no-named-as-default
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import { useTranslation } from 'react-i18next'
 import { colors } from '../../util/common'
 
 const checkSize = seriesData => {
-  const questionAmount = (seriesData[0] && seriesData[0].data.length) || 0
+  const questionAmount = seriesData[0]?.data.length ?? 0
   if (questionAmount < 9) return '14px'
   if (questionAmount < 13) return '9px'
   return '7px'
@@ -216,8 +216,8 @@ const BarChart = ({ data, questions, unit }) => {
   return (
     <HighchartsReact
       className="bar-chart"
-      highcharts={Highcharts}
       constructorType="chart"
+      highcharts={Highcharts}
       options={unit === 'percentage' ? percentageOptions : normalOptions}
     />
   )

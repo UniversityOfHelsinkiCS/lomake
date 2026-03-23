@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { Badge, Tooltip } from '@mui/material'
 import React from 'react'
 
@@ -23,13 +24,12 @@ const NotificationBadge = ({ variant = 'small', children, style, tooltip, ...res
   const badgeComponent =
     variant === 'small' ? (
       <Badge
-        overlap="circular"
-        color="info"
-        variant="dot"
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'right',
         }}
+        color="info"
+        overlap="circular"
         sx={{
           ...style,
           marginLeft: '0.25rem',
@@ -37,6 +37,7 @@ const NotificationBadge = ({ variant = 'small', children, style, tooltip, ...res
           position: 'relative',
           '&::before': increasedSpacing,
         }}
+        variant="dot"
         {...rest}
       >
         {children}
@@ -49,7 +50,7 @@ const NotificationBadge = ({ variant = 'small', children, style, tooltip, ...res
 
   if (tooltip) {
     return (
-      <Tooltip title={tooltip} placement="top" arrow>
+      <Tooltip arrow placement="top" title={tooltip}>
         {badgeComponent}
       </Tooltip>
     )

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Textarea from '../Generic/Textarea'
@@ -70,21 +71,19 @@ const Form = ({ questions, programmeKey, form }) => {
     return (
       <div key={part.id} style={divStyle}>
         <Component
-          id={part.id}
-          label={part.label[lang]}
           description={description}
-          required={part.required}
-          noColor={part.no_color}
-          number={number}
           extrainfo={extrainfo}
-          options={part.options}
-          lang={lang}
-          previousYearsAnswers={
-            previousYearsAnswers.data && previousYearsAnswers.data.data ? previousYearsAnswers.data.data : null
-          }
-          radioOptions={part.radioOptions}
           form={form}
           hidePopup={part.hidePopup}
+          id={part.id}
+          label={part.label[lang]}
+          lang={lang}
+          noColor={part.no_color}
+          number={number}
+          options={part.options}
+          previousYearsAnswers={previousYearsAnswers.data?.data ?? null}
+          radioOptions={part.radioOptions}
+          required={part.required}
         />
       </div>
     )
@@ -95,16 +94,16 @@ const Form = ({ questions, programmeKey, form }) => {
       {questions.map((section, index) => {
         return (
           <Section
-            title={section.title[lang]}
-            number={romanize(index)}
             key={section.title[lang]}
+            number={romanize(index)}
             programmeKey={programmeKey}
+            title={section.title[lang]}
           >
-            {section.link_title && section.link_url && (
-              <a className="hide-in-print-mode" target="_blank" href={section.link_url} rel="noreferrer">
+            {section.link_title && section.link_url ? (
+              <a className="hide-in-print-mode" href={section.link_url} rel="noreferrer" target="_blank">
                 {section.link_title[lang]}
               </a>
-            )}
+            ) : null}
             {section.parts.map(partMap)}
           </Section>
         )

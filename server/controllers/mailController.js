@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { inProduction } from '../util/common.js'
 
-const pateToken = process.env.PATE_API_TOKEN || ''
-const pateUrl = process.env.PATE_URL || ''
+const pateToken = process.env.PATE_API_TOKEN ?? ''
+const pateUrl = process.env.PATE_URL ?? ''
 
 const pateClient = axios.create({
   baseURL: pateUrl,
@@ -30,11 +30,11 @@ const sendEmail = async (options = {}) => {
 
 const accessMessageText = (user, programme) => {
   return `<p>Käyttäjä  ${user} on saanut väliaikaisen käyttöoikeuden koulutusohjelmaan ${
-    programme.fi ?? programme.en
+    programme.fi || programme.en
   } <a href="https://opetushallinto.cs.helsinki.fi/tilannekuva">tilannekuvalomakkeella</a>.</p>
     <p>Tämä on automaattinen tiedote, tiedustelut: ospa@helsinki.fi</p>
     <p>User ${user} has been granted temporary access to the study programme ${
-      programme.en ?? programme.fi
+      programme.en || programme.fi
     } in the <a href="https://opetushallinto.cs.helsinki.fi/tilannekuva">self-assessment form</a>.</p>
     <p>This is an automated notification, inquiries: ospa@helsinki.fi</p>`
 }
