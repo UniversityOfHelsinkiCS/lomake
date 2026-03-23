@@ -104,7 +104,7 @@
     "concurrently": "9.0.0",
     "cross-env": "7.0.3",
     "cypress": "15.9.0",
-    "eslint": "9.28.0",
+    "eslint": "10.1.0",
     "eslint-config-prettier": "10.1.5",
     "eslint-import-resolver-typescript": "^4.4.3",
     "eslint-plugin-cypress": "5.1.1",
