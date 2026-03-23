@@ -40,6 +40,9 @@ export default defineConfig({
     'process.env': process.env,
     global: {},
   },
+  esbuild: {
+    loader: 'jsx'
+  },
   optimizeDeps: {
     esbuildOptions: {
       loader: {
