@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "moduleDetection": "force",
-    "types": ["vite/client"],
+    "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["./*"]
     },
@@ -22,13 +22,20 @@
     "target": "esnext",
     "useDefineForClassFields": true,
     "strictNullChecks": true,
-    "baseUrl": "."
+    /* Bundler mode */
+    "allowImportingTsExtensions": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
   },
+
   "include": [
     "server/**/*",
     "client/**/*",
     "scripts/*",
-    "shared/**/*"
+    "shared/**/*",
+    "theme.ts"
   ],
   "exclude": ["node_modules", "build"],
   "references": [{ "path": "./tsconfig.node.json" }],

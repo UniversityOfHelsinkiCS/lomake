@@ -2,7 +2,7 @@
 /* eslint-disable import-x/no-named-as-default-member */
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { CSVLink } from 'react-csv'
+import CsvDownloader from 'react-csv-downloader'
 import { facultyList, formKeys } from '../../../config/data'
 
 import { useTranslation } from 'react-i18next'
@@ -272,9 +272,9 @@ const CsvDownload = ({ wantedData, view, programme, form = 1 }) => {
   const dataTitle = t(`generic:csvFile${view}${wantedData}`)
 
   return (
-    <CSVLink data={data} filename={`${year}_${dataTitle}_.csv`} separator=",">
+    <CsvDownloader datas={data} filename={`${year}_${dataTitle}_.csv`} separator=",">
       {t(`generic:${wantedData}`)}
-    </CSVLink>
+    </CsvDownloader>
   )
 }
 

@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/nodejs-22
+FROM node:22-alpine
 
 ENV TZ=Europe/Helsinki
 

@@ -1,6 +1,4 @@
-import { createTheme, ThemeOptions } from '@mui/material/styles'
-// eslint-disable-next-line import-x/no-unresolved
-import { CSSProperties } from '@mui/material/styles/createTypography'
+import { createTheme, ThemeOptions, CSSProperties } from '@mui/material/styles'
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
