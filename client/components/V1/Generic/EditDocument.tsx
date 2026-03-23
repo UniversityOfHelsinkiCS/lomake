@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useEffect, useState, Fragment } from 'react'
-// eslint-disable-next-line import-x/no-extraneous-dependencies
+
 import dayjs from 'dayjs'
 import { Box, Typography, TextField, Button, CircularProgress } from '@mui/material'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
