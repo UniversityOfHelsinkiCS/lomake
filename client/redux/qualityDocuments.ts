@@ -13,7 +13,7 @@ interface CreateDocumentArgs {
 }
 
 interface GetAllQualityDocumentsArgs {
-  selectedYear: string
+  selectedYear: number
 }
 
 interface UpdateDocumentArgs {

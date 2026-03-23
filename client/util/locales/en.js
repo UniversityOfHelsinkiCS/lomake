@@ -703,8 +703,8 @@ export default {
   },
   qualitydocument: {
     header: 'Quality Management Form',
-    curriculumProcessHeader: 'Curriculum process',
-    curriculumProcess: 'Effectiveness of the curriculum process',
+    curriculumDevelopmentHeader: 'Curriculum process',
+    curriculumDevelopment: 'Effectiveness of the curriculum process',
     guidancePoliciesHeader: 'Guidance Policies',
     guidancePolicies: 'Effectiveness of guidance policies',
     feedbackHeader: 'Student feedback',
