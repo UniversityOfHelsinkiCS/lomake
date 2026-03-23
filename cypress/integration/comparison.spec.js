@@ -7,6 +7,8 @@ const adminUser = 'cypressOspaUser'
 const form = 1 // yearly assessment
 
 describe('ComparisonPage tests', () => {
+  // Cypress.stop()
+  // return
   it('Changes in traffic lights are reflected to the single programme piecharts', () => {
     cy.login(adminUser)
     cy.visit('/yearly')

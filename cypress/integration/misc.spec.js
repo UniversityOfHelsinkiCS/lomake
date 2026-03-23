@@ -4,6 +4,8 @@ import { testProgrammeCode } from '../../config/common'
 import '../support/commands'
 
 describe('Misc tests', () => {
+  // Cypress.stop()
+  // return
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)

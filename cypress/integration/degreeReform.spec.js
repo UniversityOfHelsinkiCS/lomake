@@ -17,7 +17,8 @@ describe('Degree reform form tests', () => {
   // * ADJUST beforeEach seeding IN BACKEND as well!! *
   // * now cleans admin's answers                     *
   // **************************************************
-
+  // Cypress.stop()
+  // return
   it('Reform form for programmes is accessible through links and loads', () => {
     cy.login(cypressUser)
     cy.visit('/yearly')

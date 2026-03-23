@@ -6,6 +6,8 @@ import '../support/commands'
 const form = 1 // yearly assessment
 
 describe("Previous year's answers", () => {
+  // Cypress.stop()
+  // return
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)

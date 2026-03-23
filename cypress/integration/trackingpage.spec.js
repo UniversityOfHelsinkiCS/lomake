@@ -1,6 +1,8 @@
 import { testFacultyCode, testFacultyName, defaultYears } from '../../config/common'
 
 describe('Tracking page tests', () => {
+  // Cypress.stop()
+  // return
   const cypressSuperAdmin = 'cypressSuperAdminUser'
 
   beforeEach(() => {

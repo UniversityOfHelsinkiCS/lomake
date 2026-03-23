@@ -10,6 +10,8 @@ const adminUser = 'cypressOspaUser'
 const form = 1 // yearly assessment
 
 describe('ReportPage tests', () => {
+  // Cypress.stop()
+  // return
   /* it('Piecharts are not shown if there are no answers', () => {
     cy.login(adminUser)
     cy.visit('/yearly')

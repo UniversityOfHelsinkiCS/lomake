@@ -6,6 +6,8 @@ import '../support/commands'
 const user = 'cypressUser'
 
 describe('Sidebar tests', () => {
+  // Cypress.stop()
+  // return
   beforeEach(() => {
     cy.login(user)
     cy.visit('/yearly')

@@ -11,6 +11,8 @@ import {
 import '../support/commands'
 
 describe('Evaluation forms tests', () => {
+  // Cypress.stop()
+  // return
   const cypressSuperAdmin = 'cypressSuperAdminUser'
 
   beforeEach(() => {

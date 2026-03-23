@@ -9,6 +9,8 @@ import {
 } from '../../config/common'
 
 describe('Meta evaluation form & overview tests', () => {
+  // Cypress.stop()
+  // return
   const cypressSuperAdmin = 'cypressSuperAdminUser'
 
   beforeEach(() => {

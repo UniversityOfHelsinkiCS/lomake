@@ -4,6 +4,8 @@ import { defaultYears, testProgrammeCode } from '../../config/common'
 import '../support/commands'
 
 describe('Form Notification tests', () => {
+  // Cypress.stop()
+  // return
   it('Save message is shown by default', () => {
     cy.login('cypressUser')
     cy.visit('/yearly')

@@ -16,14 +16,10 @@ The project is split into 2 parts: client and server while index.js in root work
 4. run `docker exec -it lomake_dev bash -c "npm run seed"` OR obtain a database dump by running `./script/get_prod.sh` (Access needed)
 5. go to http://localhost:8000
 
-### Changing logged in user while developing
-
-Use setHeaders() to select user for development purposes.
 
 ### Accessing the database while developing
 
-1. run `docker exec -it lomake_db bash`
-2. enter with `psql -U postgres` 
+1. run `docker exec -it lomake_db psql -U postgres` 
 
 ### Seeding the database for production
 
@@ -39,12 +35,39 @@ The seeding should be performed only **once** by executing `docker exec -it loma
 
 There's quite a lot of end-to-end tests in the cypress/integration folder.
 
-To run these tests, simply execute `npm run cypress:open` and select _Run all specs_ from the GUI.
+To run these tests with GUI:  
+`npm run cypress:open`
+To run test on command line
+`npm run cypress:run`
 
-### ApiConnection
+##### Cypress tests in CI
+Test for archived features are removed from staging.yaml and feature_branches.yml files
+The removed test specs are:
 
-ApiConnection is a custom redux middleware that is used in most toska software. It is used to simplify redux usage by wrapping axios.
+comparison,  
+degreeReform,  
+form,  
+formNotifications,  
+happypath,  
+misc,  
+report,  
+sidebar,  
+yearselector,  
+evaluation,  
+metaevaluation,  
+trackingpage,  
+facultymonitoringoverview,  
 
+To disable the files when running the cypress tests on your computer uncomment lines
+
+```
+Cypress.stop()
+return
+```
+so that no code after these lines are executed.
+
+
+# Deprecated (includes the functionality in archive)
 
 ### Form types
 

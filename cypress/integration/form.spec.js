@@ -7,6 +7,8 @@ import { testProgrammeCode, defaultYears } from '../../config/common'
 import '../support/commands'
 
 describe('Yearly assessment form tests', () => {
+  // Cypress.stop()
+  // return
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)

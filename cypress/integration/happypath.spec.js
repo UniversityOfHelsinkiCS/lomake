@@ -2,6 +2,8 @@
 import '../support/commands'
 
 describe('Core tests', () => {
+  // Cypress.stop()
+  // return
   beforeEach(() => {
     cy.login('cypressNoRightsUser')
     cy.visit('/yearly')
