@@ -111,9 +111,72 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     const payload: Record<string, any> = {
-      ...formData,
+      title: formData.title,
       feedbackUtilization: feedbackSources,
-      learningObjectivesAssessmentRegularity,
+      curriculumDevelopment: {
+        example1: {
+          name: formData['curriculumDevelopmentName-example1'],
+          changes: formData['curriculumDevelopmentChanges-example1'],
+          feedbackSource: formData['curriculumDevelopmentFeedbackSource-example1'],
+          communication: formData['curriculumDevelopmentCommunication-example1'],
+        },
+        example2: {
+          name: formData['curriculumDevelopmentName-example2'],
+          changes: formData['curriculumDevelopmentChanges-example2'],
+          feedbackSource: formData['curriculumDevelopmentFeedbackSource-example2'],
+          communication: formData['curriculumDevelopmentCommunication-example2'],
+        },
+        example3: {
+          name: formData['curriculumDevelopmentName-example3'],
+          changes: formData['curriculumDevelopmentChanges-example3'],
+          feedbackSource: formData['curriculumDevelopmentFeedbackSource-example3'],
+          communication: formData['curriculumDevelopmentCommunication-example3'],
+        },
+      },
+      guidancePolicies: {
+        example1: {
+          name: formData['guidancePoliciesName-example1'],
+          changes: formData['guidancePoliciesChanges-example1'],
+          feedbackSource: formData['guidancePoliciesFeedbackSource-example1'],
+          communication: formData['guidancePoliciesCommunication-example1'],
+        },
+        example2: {
+          name: formData['guidancePoliciesName-example2'],
+          changes: formData['guidancePoliciesChanges-example2'],
+          feedbackSource: formData['guidancePoliciesFeedbackSource-example2'],
+          communication: formData['guidancePoliciesCommunication-example2'],
+        },
+        example3: {
+          name: formData['guidancePoliciesName-example3'],
+          changes: formData['guidancePoliciesChanges-example3'],
+          feedbackSource: formData['guidancePoliciesFeedbackSource-example3'],
+          communication: formData['guidancePoliciesCommunication-example3'],
+        },
+      },
+      learningObjectivesAssessment: {
+        description: formData.learningObjectivesAssessment,
+        regularity: learningObjectivesAssessmentRegularity,
+        realization: learningObjectivesAssessmentRegularity == 'lessFrequently' ? formData.realization : undefined,
+
+        example1: {
+          name: formData['learningObjectivesAssessmentName-example1'],
+          changes: formData['learningObjectivesAssessmentChanges-example1'],
+          feedbackSource: formData['learningObjectivesAssessmentFeedbackSource-example1'],
+          communication: formData['learningObjectivesAssessmentCommunication-example1'],
+        },
+        example2: {
+          name: formData['learningObjectivesAssessmentName-example2'],
+          changes: formData['learningObjectivesAssessmentChanges-example2'],
+          feedbackSource: formData['learningObjectivesAssessmentFeedbackSource-example2'],
+          communication: formData['learningObjectivesAssessmentCommunication-example2'],
+        },
+        example3: {
+          name: formData['learningObjectivesAssessmentName-example3'],
+          changes: formData['learningObjectivesAssessmentChanges-example3'],
+          feedbackSource: formData['learningObjectivesAssessmentFeedbackSource-example3'],
+          communication: formData['learningObjectivesAssessmentCommunication-example3'],
+        },
+      },
     }
     if (validateForm(payload)) {
       createDocument({ studyprogrammeKey: programmeKey, data: payload as any, year: selectedYear })
@@ -193,7 +256,11 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                       <Fragment key={source}>
                         <Checkbox
                           checked={isChecked}
-                          label={t(`qualitydocument:${source}`)}
+                          label={
+                            !t(`qualitydocument:${source}`).startsWith('qualitydocument:')
+                              ? t(`qualitydocument:${source}`)
+                              : source
+                          }
                           onChange={(e, data) => handleCheck(source, e, data)}
                           style={{ fontSize: '1.2rem' }}
                         />
@@ -375,6 +442,19 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                       label={t('qualitydocument:lessFrequently')}
                       value="lessFrequently"
                     />
+                    {learningObjectivesAssessmentRegularity === 'lessFrequently' && (
+                      <TextField
+                        data-cy={`editor-realization`}
+                        error={!!errors.realization}
+                        helperText={errors.realization}
+                        label="Miten käsittely toteutetaan käytännössä?"
+                        margin="normal"
+                        name="realization"
+                        onChange={handleChange}
+                        value={formData.realization}
+                        variant="outlined"
+                      />
+                    )}
                     <FormControlLabel
                       control={<Radio />}
                       label={t('qualitydocument:perCurriculumCycle')}
