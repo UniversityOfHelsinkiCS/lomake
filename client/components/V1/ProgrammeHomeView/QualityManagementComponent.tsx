@@ -16,11 +16,12 @@ import {
   AccordionDetails,
   Alert,
 } from '@mui/material'
-import { ExpandMore, Add, Edit, Delete } from '@mui/icons-material'
-import { basePath, isAdmin } from '@/config/common'
+import { ExpandMore, Add, Delete } from '@mui/icons-material'
+import { isAdmin } from '@/config/common'
 import { useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
+import QualityDocumentInfo from '../Generic/QualityDocumentComponent'
 
 const QualityManagementComponent = () => {
   const { t } = useTranslation()
@@ -32,7 +33,7 @@ const QualityManagementComponent = () => {
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
   const { isLoading } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
 
-  const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
+  const hasWriteRights = (programmeKey ? user.access?.[programmeKey]?.write : false) || isAdmin(user)
 
   const [deleteDocument] = useDeleteQualityDocumentMutation()
 
@@ -78,61 +79,9 @@ const QualityManagementComponent = () => {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                    <Typography variant="h4">{t('qualitydocument:curriculumProcessHeader')}</Typography>
-                    <Typography variant="h5">{t('qualitydocument:curriculumProcess')}:</Typography>
-                    <Typography color={doc.data.curriculumProcess ? 'default' : 'secondary'}>
-                      {doc.data.curriculumProcess || t('common:empty')}
-                    </Typography>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                    <Typography variant="h4">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
-                    <Typography variant="h5">{t('qualitydocument:guidancePolicies')}:</Typography>
-                    <Typography color={doc.data.guidancePolicies ? 'default' : 'secondary'}>
-                      {doc.data.guidancePolicies || t('common:empty')}
-                    </Typography>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                    <Typography variant="h4">{t('qualitydocument:feedbackHeader')}</Typography>
-                    <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}:</Typography>
-                    <Typography
-                      color={
-                        Object.entries(doc.data.feedbackUtilization ?? {}).filter(([, value]) => value).length > 0
-                          ? 'default'
-                          : 'secondary'
-                      }
-                    >
-                      {Object.entries(doc.data.feedbackUtilization ?? {}).filter(([, value]) => value).length > 0
-                        ? Object.entries(doc.data.feedbackUtilization)
-                            .filter(([, value]) => value)
-                            .map(([key]) => (
-                              <li key={key} style={{ listStyle: 'none' }}>
-                                {t(`qualitydocument:${key.charAt(0) + key.slice(1)}`)}
-                              </li>
-                            ))
-                        : t('common:empty')}
-                    </Typography>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                    <Typography sx={{ whiteSpace: 'nowrap' }} variant="h5">
-                      {t('qualitydocument:feedbackActions')}:
-                    </Typography>
-                    <Typography color={doc.data.feedbackActions ? 'default' : 'secondary'}>
-                      {doc.data.feedbackActions ?? t('common:empty')}
-                    </Typography>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                    <Typography sx={{ whiteSpace: 'nowrap' }} variant="h5">
-                      {t('qualitydocument:feedbackRegularityHeader')}:
-                    </Typography>
-                    <Typography color={doc.data.actionsRegularity ? 'default' : 'secondary'}>
-                      {t(`qualitydocument:${doc.data.actionsRegularity}`) || t('common:empty')}
-                    </Typography>
-                  </div>
-                </div>
+                <QualityDocumentInfo doc={doc} />
                 <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right', gap: '1rem' }}>
-                  {hasWriteRights && (
+                  {/* {hasWriteRights && (
                     <Button
                       data-cy={`accordion-${index}-edit-qualitydocument-button`}
                       onClick={() => navigate(`${basePath}v1/programmes/10/${programmeKey}/qualitydocument/${doc.id}`)}
@@ -141,7 +90,7 @@ const QualityManagementComponent = () => {
                     >
                       {t('document:edit')}
                     </Button>
-                  )}
+                  )}*/}
                   {isAdmin(user) && (
                     <Button
                       color="error"

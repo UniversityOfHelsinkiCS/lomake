@@ -8,7 +8,7 @@ import Modal from '../Generic/ModalTemplateComponent'
 import { Box, Card, CardContent, Typography, Button } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 import { useGetAllQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
-import ReactMarkdown from 'react-markdown'
+import QualityDocumentInfo from './QualityDocumentComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
 
 const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
@@ -22,14 +22,14 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
 
   const { data: qualityDocuments = [] } = useGetAllQualityDocumentsQuery({ selectedYear })
 
-  const document = qualityDocuments.find(doc => doc.studyprogrammeKey === programmeData.koulutusohjelmakoodi)
+  const doc = qualityDocuments.find(doc => doc.studyprogrammeKey === programmeData.koulutusohjelmakoodi)
 
   const handleOpen = () => {
     dispatch(setViewOnly(true))
     return setOpen(true)
   }
 
-  if (!document) {
+  if (!doc) {
     return (
       <TableCell>
         <NotificationBadge
@@ -71,46 +71,13 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
                 alignSelf: 'center',
               }}
             >
-              {document ? (
-                <Typography variant="regular">
-                  <ReactMarkdown>{document.data.title}</ReactMarkdown>
-                  <Typography variant="h5">{t('qualitydocument:curriculumProcessHeader')}</Typography>
-                  <ReactMarkdown>{document.data.curriculumProcess || t('common:empty')}</ReactMarkdown>
-                  <Typography variant="h5">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
-                  <ReactMarkdown>{document.data.guidancePolicies || t('common:empty')}</ReactMarkdown>
-                  <Typography variant="h5">{t('qualitydocument:feedbackHeader')}</Typography>
-                  <br />
-                  <Typography variant="h6">{t('qualitydocument:feedbackUtilizationHeader')}:</Typography>
-                  <Typography
-                    color={
-                      Object.entries(document.data.feedbackUtilization || {}).filter(([, value]) => value).length > 0
-                        ? 'default'
-                        : 'secondary'
-                    }
-                  >
-                    {Object.entries(document.data.feedbackUtilization || {}).filter(([, value]) => value).length > 0
-                      ? Object.entries(document.data.feedbackUtilization)
-                          .filter(([, value]) => value)
-                          .map(([key]) => (
-                            <li key={key} style={{ listStyle: 'none' }}>
-                              {t(`qualitydocument:${key.charAt(0) + key.slice(1)}`)}
-                            </li>
-                          ))
-                      : t('common:empty')}
-                  </Typography>
-                  <br />
-                  <Typography sx={{ whiteSpace: 'nowrap' }} variant="h6">
-                    {t('qualitydocument:feedbackActions')}:
-                  </Typography>
-                  <ReactMarkdown>{document.data.feedbackActions || t('common:empty')}</ReactMarkdown>
-                  <br />
-                  <Typography sx={{ whiteSpace: 'nowrap' }} variant="h6">
-                    {t('qualitydocument:feedbackRegularityHeader')}:
-                  </Typography>
-                  <ReactMarkdown>
-                    {t(`qualitydocument:${document.data.actionsRegularity}`) || t('common:empty')}
-                  </ReactMarkdown>
-                </Typography>
+              {doc ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <Typography variant="h3">{doc.data.title}</Typography>
+                    <QualityDocumentInfo doc={doc} />
+                  </div>
+                </div>
               ) : (
                 <Typography variant="italic">{t(`keyData:noQuality`)}</Typography>
               )}
