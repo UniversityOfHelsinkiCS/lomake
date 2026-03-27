@@ -707,41 +707,38 @@ export default {
   qualitydocument: {
     header: 'Laadunhallintalomake',
     feedbackHeader: 'Palautteiden hyödyntäminen koulutusohjelman kehittämisessä',
-    feedbackSource: 'Palautejärjestelmä tai palautteen lähde',
-    feedbackUtilizationDescription:
-      'Miten palautetta käsitellään koulutusohjelman johtoryhmässä? Kuinka säännöllistä käsittely on?  Mitä kehittämiskohteita palautteiden perusteella on tunnistettu? Mitä toimenpiteitä on tehty?',
-    feedbackSourceDescription: 'Valitse palautejärjestelmä tai palautteen lähde',
+    feedbackSource: 'Valitse tai lisää vähintään yksi palautejärjestelmä tai palautteen lähde',
     norppa: 'Norppa',
     howULearn: 'HowULearn',
     careerMonitoring: 'Uraseuranta',
     bachelorFeedback: 'Kandipalaute',
     feedbackFromEmployers: 'Työelämäpalaute',
     otherFeedbackSource: 'Muu palaute, mikä?',
+    otherFeedbackSourceDescription: 'Kuvaile lisäämääsi palautejärjestelmää tai palautteen lähdettä',
     feedbackUtilizationHeader: 'Palautteiden hyödyntäminen',
     feedbackRegularityHeader: 'Miten usein tätä palautetta käsitellään?',
     feedbackUtilizationExamples:
-      'Miten palautetta käsitellään koulutusohjelman johtoryhmässä? Mitä kehittämiskohteita palautteiden perusteella on tunnistettu? Mitä toimenpiteitä on tehty? Miten toimenpiteistä on tiedotettu palautetta antaneille tahoille?',
+      'Miten palautteita käsitellään koulutusohjelman johtoryhmässä? Mitä kehittämiskohteita palautteiden perusteella on tunnistettu?',
     examples: 'Kertokaa 1-3 esimerkkiä',
     perCurriculumCycle: 'Opetussuunnitelmakausittain / 4 vuoden välein',
     annually: 'Vuosittain / kerran vuodessa',
     everySemester: 'Lukukausittain / 2 kertaa vuodessa',
     moreFrequently: 'Useammin kuin 2 kertaa vuodessa',
     lessFrequently: 'Harvemmin kuin 4 vuoden välein',
-    curriculumDevelopmentHeader: 'Opetussuunnitelmien kehittäminen palautteiden perustella',
+    curriculumDevelopmentHeader: 'Opetussuunnitelmien kehittäminen',
     curriculumDevelopmentDescription:
-      'Kertokaa esimerkkejä (1-3 kpl) kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.  Mitä muutoksia opetussuunnitelmassa on tehty palautteiden perusteella? Miten palautteen perusteella tehdyistä muutoksista on tiedotettu palautetta antaneille tahoille?',
+      'Kertokaa esimerkkejä (1-3 kpl) opetussuunnitelman kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',
     example1: 'Esimerkki 1:',
     example2: 'Esimerkki 2:',
     example3: 'Esimerkki 3:',
     developmentGoal: 'Kehittämiskohde:',
-    guidancePoliciesHeader: 'Ohjauskäytäntöjen kehittäminen palautteiden perusteella',
+    guidancePoliciesHeader: 'Ohjauskäytäntöjen kehittäminen',
     guidancePoliciesDescription:
-      'Kertokaa esimerkkejä (1-3 kpl) kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.  Mitä muutoksia ohjauskäytännöissä on tehty palautteiden perusteella? Miten palautteen perusteella tehdyistä muutoksista on tiedotettu palautetta antaneille tahoille? ',
+      'Kertokaa esimerkkejä (1-3 kpl) ohjauskäytöntöjen kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',
     learningObjectivesAssessmentHeader: 'Koulutusohjelman osaamistavoitteiden toteutumisen seuranta ja kehittäminen',
     learningObjectivesAssessmentDescription:
       'Miten koulutusohjelma seuraa ohjelman osaamistavoitteiden saavuttamista? Kertokaa esimerkkejä (1-3 kpl) osaamistavoitteiden kehittämisestä.',
-    learningObjectivesAssessmentExamples:
-      'Kertokaa esimerkkejä osaamistavoitteiden muuttamisesta. Mitä kehittämistarve koski ja mihin tietoon ja/tai palautteeseen se perustui?',
+    learningObjectivesAssessmentExamples: 'Kertokaa esimerkkejä (1-3 kpl) osaamistavoitteiden muuttamisesta',
     learningObjectivesAssessmentRegularity:
       'Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
     submit: 'Tallenna dokumentti',
@@ -749,6 +746,7 @@ export default {
     documentingDescription:
       'Tämä vuosiseurannan osio sisältää kysymyksiä koulutusohjelman opetussuunnitelman, ohjauksen, osaamistavoitteiden ja palautekäytäntöjen kehittämisestä.',
     addNew: 'Lisää',
+    remove: 'Poista',
     addNewExample: 'Lisää uusi esimerkki',
     example2Remove: 'Poista esimerkki 2',
     example3Remove: 'Poista esimerkki 3',
@@ -759,8 +757,7 @@ export default {
     participants: 'Osallistujat-kentän merkkien määrä täytyy olla yli 3 merkkiä',
     matters: 'Sovitut asiat-kentän minimi merkkimäärä on 100 merkkiä',
     schedule: 'Aikataulu-kentän minimi pituus on 3 merkkiä',
-    curriculumProcess: 'Opetussuunnitelmaprosessin toimivuuden kuvauksen täytyy olla yli 100 merkkiä',
-    guidancePolicies: 'Ohjauskäytäntöjen toimivuuden kuvauksen täytyy olla yli 100 merkkiä',
-    feedbackActions: 'Opiskelijapalautteen käsittelyn ja toimenpiteiden kuvauksen täytyy olla yli 50 merkkiä',
+    feedbackSourcesRequired: 'Valitse vähintään yksi palautejärjestelmä tai palautteen lähde',
+    regularityRequired: 'Valitse käsittelyn säännöllisyys',
   },
 }

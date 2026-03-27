@@ -5,20 +5,28 @@ const FeedbackUtilization = ({
   feedbackSource,
   regularity,
   setRegularity,
-  modalText,
-  setModalText,
   errors,
+  setDescription,
+  description,
 }: {
   feedbackSource: string
   regularity: 'lessFrequently' | 'perCurriculumCycle' | 'annually' | 'everySemester' | 'moreFrequently' | ''
   setRegularity: (
     value: 'lessFrequently' | 'perCurriculumCycle' | 'annually' | 'everySemester' | 'moreFrequently' | ''
   ) => void
-  modalText: string
-  setModalText: (value: string) => void
   errors: Record<string, string>
+  setDescription: (value: string) => void
+  description?: string
 }) => {
   const { t } = useTranslation()
+
+  const defaultFeedbackSourceOptions = [
+    'norppa',
+    'howULearn',
+    'careerMonitoring',
+    'bachelorFeedback',
+    'feedbackFromEmployers',
+  ]
 
   return (
     <Box
@@ -31,6 +39,21 @@ const FeedbackUtilization = ({
         gap: '1rem',
       }}
     >
+      {!defaultFeedbackSourceOptions.includes(feedbackSource) && (
+        <TextField
+          data-cy={`${feedbackSource}-description`}
+          error={!!errors[`${feedbackSource}Description`]}
+          fullWidth
+          helperText={errors[`${feedbackSource}Description`]}
+          label={t(`qualitydocument:otherFeedbackSourceDescription`)}
+          margin="normal"
+          minRows={1}
+          multiline
+          name={`${feedbackSource}Description`}
+          onChange={e => setDescription(e.target.value)}
+          value={description}
+        />
+      )}
       <Typography variant="h5">{t('qualitydocument:feedbackRegularityHeader')}</Typography>
       <RadioGroup
         aria-label={`${feedbackSource}Regularity`}
@@ -59,26 +82,10 @@ const FeedbackUtilization = ({
         <FormControlLabel control={<Radio />} label={t('qualitydocument:everySemester')} value="everySemester" />
         <FormControlLabel control={<Radio />} label={t('qualitydocument:moreFrequently')} value="moreFrequently" />
       </RadioGroup>
-
-      <br />
-      {regularity ? (
-        <>
-          <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}</Typography>
-          <Typography variant="light">{t('qualitydocument:feedbackUtilizationExamples')}</Typography>
-          <TextField
-            data-cy={`examples-${feedbackSource}`}
-            error={!!errors[feedbackSource]}
-            fullWidth
-            helperText={errors[feedbackSource]}
-            label={t(`qualitydocument:examples`)}
-            margin="normal"
-            minRows={3}
-            multiline
-            name={`${feedbackSource}Examples`}
-            onChange={e => setModalText(e.target.value)}
-            value={modalText}
-          />
-        </>
+      {errors[`${feedbackSource}Regularity`] ? (
+        <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
+          {errors[`${feedbackSource}Regularity`]}
+        </Typography>
       ) : null}
     </Box>
   )
