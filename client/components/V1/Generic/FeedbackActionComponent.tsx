@@ -43,7 +43,7 @@ const FeedbackActionForm = ({
         data-cy={`editor-${field}-${example}-name`}
         error={!!errors[`${field}Name-${example}`]}
         helperText={errors[`${field}Name-${example}`]}
-        label="Kehittämiskohde (nimi)"
+        label={t(`qualitydocument:developmentGoalName`)}
         margin="normal"
         name={`${field}Name-${example}`}
         onChange={handleChange}
@@ -54,7 +54,7 @@ const FeedbackActionForm = ({
         data-cy={`editor-${field}-${example}-changes`}
         error={!!errors[`${field}Changes-${example}`]}
         helperText={errors[`${field}Changes-${example}`]}
-        label="Mitkä muutokset palautteiden perusteella tehtiin?"
+        label={t(`qualitydocument:changes`)}
         margin="normal"
         minRows={3}
         multiline
@@ -67,7 +67,7 @@ const FeedbackActionForm = ({
         data-cy={`editor-${field}-${example}-feedbackSource`}
         error={!!errors[`${field}FeedbackSource-${example}`]}
         helperText={errors[`${field}FeedbackSource-${example}`]}
-        label="Mihin kaikkiin palautteisiin nämä muutokset perustuivat?"
+        label={t(`qualitydocument:developmentBasis`)}
         margin="normal"
         minRows={3}
         multiline
@@ -80,7 +80,7 @@ const FeedbackActionForm = ({
         data-cy={`editor-${field}-${example}-communication`}
         error={!!errors[`${field}Communication-${example}`]}
         helperText={errors[`${field}Communication-${example}`]}
-        label="Miten muutoksista tiedotettiin palautetta antaneille tahoille?"
+        label={t(`qualitydocument:communication`)}
         margin="normal"
         minRows={3}
         multiline

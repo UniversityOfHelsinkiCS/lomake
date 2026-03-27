@@ -422,7 +422,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                       error={!!errors.feedbackutilizationExamples}
                       fullWidth
                       helperText={errors.feedbackutilizationExamples}
-                      label={t(`qualitydocument:examples`)}
+                      label={t(`qualitydocument:examplesDescription`)}
                       margin="normal"
                       minRows={3}
                       multiline
@@ -527,7 +527,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                     data-cy={`editor-${field}`}
                     error={!!errors[`${field}`]}
                     helperText={errors[`${field}`]}
-                    label="Miten osaamistavoitteiden saavuttamista arvioidaan koulutusohjelman johtoryhmässä?"
+                    label={t(`qualitydocument:learningObjectivesAssessment`)}
                     margin="normal"
                     name={`${field}`}
                     onChange={handleChange}
