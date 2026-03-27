@@ -133,7 +133,9 @@ const updateQualityDocument = async (req: Request, res: Response<QualityDocument
     const { qualityDocuments, data, status, error } = await validationOperation(req)
     if (qualityDocuments.length === 0) return res.status(status).json({ error })
 
-    const qualityDocument: QualityDocument = qualityDocuments.pop()
+    const qualityDocument: QualityDocument | undefined = qualityDocuments.pop()
+    if (!qualityDocument) return res.status(404).json({ error: 'Quality document not found' })
+    if (!data) return res.status(400).json({ error: 'Invalid data' })
     qualityDocument.data = data
 
     const updated: QualityDocument = await qualityDocument.save()

@@ -3,7 +3,7 @@ import type { QualityDocumentForm } from '@/shared/lib/types'
 import type { QualityDocumentType } from '../lib/types'
 
 interface GetDocumentsArgs {
-  studyprogrammeKey: string
+  studyprogrammeKey: string | undefined
 }
 
 interface CreateDocumentArgs {
@@ -17,13 +17,13 @@ interface GetAllQualityDocumentsArgs {
 }
 
 interface UpdateDocumentArgs {
-  studyprogrammeKey: string
+  studyprogrammeKey: string | undefined
   id: string
   data: QualityDocumentForm
 }
 
 interface DeleteDocumentArgs {
-  studyprogrammeKey: string
+  studyprogrammeKey: string | undefined
   id: string
 }
 
