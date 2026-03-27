@@ -1,3 +1,4 @@
+import { de } from 'date-fns/locale'
 import { z, ZodError } from 'zod'
 
 // const LiikennevalotEnum = z.enum(['Ei arviota', 'Punainen', 'Keltainen', 'Vaaleanvihreä', 'Tummanvihreä'])
@@ -158,18 +159,39 @@ export const DocumentFormSchema = z
 export const QualityDocumentFormSchema = z
   .object({
     title: z.string().min(3, 'title'),
-    curriculumProcess: z.string().min(100, 'curriculumProcess'),
-    guidancePolicies: z.string().min(100, 'guidancePolicies'),
+    curriculumDevelopment: z.array(z.object({
+      name: z.string().optional(),
+      changes: z.string().optional(),
+      feedbackSource: z.string().optional(),
+      communication: z.string().optional()
+    }).strict()),
+    guidancePolicies: z.array(z.object({
+      name: z.string().optional(),
+      changes: z.string().optional(),
+      feedbackSource: z.string().optional(),
+      communication: z.string().optional()
+    }).strict()),
     feedbackUtilization: z
       .object({
-        norppa: z.boolean(),
-        bachelorFeedback: z.boolean(),
-        careerMonitoring: z.boolean(),
-        other: z.boolean(),
+        examples: z.string().optional(),
+        feedbackSources: z.array(z.object({
+          name: z.string(),
+          regularity: z.enum(['lessFrequently', 'perCurriculumCycle', 'annually', 'everySemester', 'moreFrequently']),
+          description: z.string().optional(),
+        }).strict()).min(1, 'feedbackSources'),
       })
       .strict(),
-    feedbackActions: z.string().min(50, 'feedbackActions'),
-    actionsRegularity: z.enum(['annually', 'everySemester', 'moreFrequently']),
+    learningObjectivesAssessment: z.object({
+        description: z.string().optional(),
+        regularity: z.enum(['lessFrequently', 'perCurriculumCycle', 'annually', 'everySemester', 'moreFrequently']),
+        learningObjectivesAssessmentExamples: z.array(z.object({
+          name: z.string().optional(),
+          changes: z.string().optional(),
+          feedbackSource: z.string().optional(),
+          communication: z.string().optional()
+        }).strict()).optional(),
+
+    }).strict(),
   })
   .strict()
 
