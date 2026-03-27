@@ -719,7 +719,7 @@ export default {
     feedbackRegularityHeader: 'Miten usein tätä palautetta käsitellään?',
     feedbackUtilizationExamples:
       'Miten palautteita käsitellään koulutusohjelman johtoryhmässä? Mitä kehittämiskohteita palautteiden perusteella on tunnistettu?',
-    examples: 'Kertokaa 1-3 esimerkkiä',
+    examplesDescription: 'Kertokaa 1-3 esimerkkiä',
     perCurriculumCycle: 'Opetussuunnitelmakausittain / 4 vuoden välein',
     annually: 'Vuosittain / kerran vuodessa',
     everySemester: 'Lukukausittain / 2 kertaa vuodessa',
@@ -732,12 +732,15 @@ export default {
     example2: 'Esimerkki 2:',
     example3: 'Esimerkki 3:',
     developmentGoal: 'Kehittämiskohde:',
+    developmentGoalName: 'Kehittämiskohde (nimi)',
+    changes: 'Mitkä muutokset palautteiden perusteella tehtiin?',
+    developmentBasis: 'Mihin kaikkiin palautteisiin nämä muutokset perustuivat?',
+    communication: 'Miten muutoksista tiedotettiin palautetta antaneille tahoille?',
+    learningObjectivesAssessment: 'Miten osaamistavoitteiden saavuttamista arvioidaan koulutusohjelman johtoryhmässä?',
     guidancePoliciesHeader: 'Ohjauskäytäntöjen kehittäminen',
     guidancePoliciesDescription:
       'Kertokaa esimerkkejä (1-3 kpl) ohjauskäytöntöjen kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',
     learningObjectivesAssessmentHeader: 'Koulutusohjelman osaamistavoitteiden toteutumisen seuranta ja kehittäminen',
-    learningObjectivesAssessmentDescription:
-      'Miten koulutusohjelma seuraa ohjelman osaamistavoitteiden saavuttamista? Kertokaa esimerkkejä (1-3 kpl) osaamistavoitteiden kehittämisestä.',
     learningObjectivesAssessmentExamples: 'Kertokaa esimerkkejä (1-3 kpl) osaamistavoitteiden muuttamisesta',
     learningObjectivesAssessmentRegularity:
       'Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
@@ -750,6 +753,10 @@ export default {
     addNewExample: 'Lisää uusi esimerkki',
     example2Remove: 'Poista esimerkki 2',
     example3Remove: 'Poista esimerkki 3',
+    feedbackSources: 'Palautejärjestelmät ja palautteen lähteet',
+    description: 'Kuvaus:',
+    regularity: 'Käsittelyn säännöllisyys:',
+    examples: 'Esimerkit:',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',
