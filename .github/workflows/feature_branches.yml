@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Build project for linting
         run: npm ci
       - name: Run eslint and ts checks
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Build project for translations
         run: npm ci
       - name: Analyse translations
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - uses: actions/setup-node@v5
         with:
           node-version: 22
@@ -79,7 +79,7 @@ jobs:
   #   runs-on: ubuntu-latest
 
   #   steps:
-  #     - uses: actions/checkout@v4
+  #     - uses: actions/checkout@v6
 
   #     - name: Build image
   #       id: build-image
@@ -94,11 +94,3 @@ jobs:
   #           SENTRY_ENVIRONMENT=staging
   #         extra-args: |
   #           --ulimit nofile=4096:4096
-      # - name: Push to quay.io
-      #   uses: redhat-actions/push-to-registry@v2
-      #   with:
-      #     image: ${{ steps.build-image.outputs.image }}
-      #     tags: ${{ steps.build-image.outputs.tags }}
-      #     registry: quay.io/toska
-      #     username: toska+github
-      #     password: ${{ secrets.QUAY_IO_TOKEN }}
