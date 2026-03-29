@@ -18,8 +18,8 @@ class Document extends Model<InferAttributes<Document>, InferCreationAttributes<
   declare active: boolean
   declare activeYear: number
   declare reason: Record<string, any>
-  declare createdAt: Date
-  declare updatedAt: Date
+  declare createdAt: CreationOptional<Date>
+  declare updatedAt: CreationOptional<Date>
 }
 
 Document.init(
