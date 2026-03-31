@@ -16,8 +16,8 @@ import {
   AccordionDetails,
   Alert,
 } from '@mui/material'
-import { ExpandMore, Add, Delete } from '@mui/icons-material'
-import { isAdmin } from '@/config/common'
+import { ExpandMore, Add, Delete, Edit } from '@mui/icons-material'
+import { basePath, isAdmin } from '@/config/common'
 import { useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
@@ -82,7 +82,7 @@ const QualityManagementComponent = () => {
               <AccordionDetails>
                 <QualityDocumentInfo doc={doc} />
                 <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right', gap: '1rem' }}>
-                  {/* {hasWriteRights && (
+                  {hasWriteRights && (
                     <Button
                       data-cy={`accordion-${index}-edit-qualitydocument-button`}
                       onClick={() => navigate(`${basePath}v1/programmes/10/${programmeKey}/qualitydocument/${doc.id}`)}
@@ -91,7 +91,7 @@ const QualityManagementComponent = () => {
                     >
                       {t('document:edit')}
                     </Button>
-                  )}*/}
+                  )}
                   {isAdmin(user) && (
                     <Button
                       color="error"

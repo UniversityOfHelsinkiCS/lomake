@@ -56,7 +56,7 @@ const QualityManagement = () => {
 
   if (!programme || !hasWriteRights) return null
 
-  if (isFetching || hasDocumentForYear) return <CircularProgress />
+  if (isFetching || (!id && hasDocumentForYear)) return <CircularProgress />
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>

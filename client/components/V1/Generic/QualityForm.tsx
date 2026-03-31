@@ -394,6 +394,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
         regularity: formData.learningObjectivesAssessmentRegularity,
         learningObjectivesAssessmentExamples,
       },
+      formData,
     }
     if (validateForm(payload)) {
       createDocument({ studyprogrammeKey: programmeKey, data: payload as any, year: selectedYear })

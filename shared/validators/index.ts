@@ -218,6 +218,7 @@ export const QualityDocumentFormSchema = z
           .optional(),
       })
       .strict(),
+    formData: z.object({}).passthrough(),
   })
   .strict()
 
