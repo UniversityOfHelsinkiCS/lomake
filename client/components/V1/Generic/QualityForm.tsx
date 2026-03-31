@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect } from 'react'
 import {
   Box,
   Typography,
@@ -44,46 +44,166 @@ const defaultFeedbackSourceOptions = [
 type FeedbackSource = string
 type FeedbackSourceState = Array<{ name: FeedbackSource; description?: string; regularity: FeedbackRegularity }>
 
-const initForm = (t: TFunction, error: boolean) => {
+interface FormDataState {
+  title: string
+  feedbackUtilization: string
+  curriculumDevelopment: string
+  guidancePolicies: string
+  learningObjectivesAssessment: string
+  otherFeedbackSource: string
+  feedbackutilizationExamples: string
+  feedbackSources: FeedbackSourceState
+  learningObjectivesAssessmentRegularity: FeedbackRegularity
+  [key: string]: any
+}
+
+const initFormData = (t: TFunction): FormDataState => {
+  return {
+    title: `${t('qualitydocument:header')} - ${new Date().toLocaleDateString('fi-FI')}`,
+    feedbackUtilization: '',
+    curriculumDevelopment: '',
+    guidancePolicies: '',
+    learningObjectivesAssessment: '',
+    otherFeedbackSource: '',
+    feedbackutilizationExamples: '',
+    feedbackSources: [] as FeedbackSourceState,
+    learningObjectivesAssessmentRegularity: '' as FeedbackRegularity,
+  }
+}
+
+const initErrors = (): Record<string, string> => {
   return fields.reduce(
     (acc, field) => {
-      if (field === 'title' && !error)
-        acc[field] = `${t('qualitydocument:header')} - ${new Date().toLocaleDateString('fi-FI')}`
-      else if (field === 'feedbackActions') acc[field] = ''
-      else acc[field] = ''
+      acc[field] = ''
       return acc
     },
     {} as Record<string, string>
   )
 }
 
+interface UIState {
+  secondGuidancePoliciesExample: boolean
+  thirdGuidancePoliciesExample: boolean
+  secondCurriculumDevelopmentExample: boolean
+  thirdCurriculumDevelopmentExample: boolean
+  secondLearningObjectivesAssessmentExample: boolean
+  thirdLearningObjectivesAssessmentExample: boolean
+}
+
+interface CachedFormState {
+  formData: FormDataState
+  feedbackSourceOptions: FeedbackSource[]
+  uiState: UIState
+}
+
 const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
-  const data = initForm(t, false)
+  const STORAGE_KEY = `qualityForm_${programmeKey}`
 
   const [createDocument] = useCreateQualityDocumentMutation()
-  const [formData, setFormData] = useState(data)
-  const [errors, setErrors] = useState(initForm(t, true))
-  const [feedbackSources, setFeedbackSources] = useState<FeedbackSourceState>([])
-  const [feedbackSourceOptions, setFeedbackSourceOptions] = useState<FeedbackSource[]>(defaultFeedbackSourceOptions)
-  const [secondGuidancePoliciesExample, setSecondGuidancePoliciesExample] = useState(false)
-  const [thirdGuidancePoliciesExample, setThirdGuidancePoliciesExample] = useState(false)
-  const [secondCurriculumDevelopmentExample, setSecondCurriculumDevelopmentExample] = useState(false)
-  const [thirdCurriculumDevelopmentExample, setThirdCurriculumDevelopmentExample] = useState(false)
-  const [secondLearningObjectivesAssessmentExample, setSecondLearningObjectivesAssessmentExample] = useState(false)
-  const [thirdLearningObjectivesAssessmentExample, setThirdLearningObjectivesAssessmentExample] = useState(false)
-  const [learningObjectivesAssessmentRegularity, setLearningObjectivesAssessmentRegularity] =
-    useState<FeedbackRegularity>('')
+
+  const loadCachedData = (): CachedFormState => {
+    try {
+      const savedData = localStorage.getItem(STORAGE_KEY)
+      if (savedData) {
+        const parsed = JSON.parse(savedData)
+        return {
+          formData: parsed.formData ?? initFormData(t),
+          feedbackSourceOptions: parsed.feedbackSourceOptions ?? defaultFeedbackSourceOptions,
+          uiState: parsed.uiState ?? {
+            secondGuidancePoliciesExample: false,
+            thirdGuidancePoliciesExample: false,
+            secondCurriculumDevelopmentExample: false,
+            thirdCurriculumDevelopmentExample: false,
+            secondLearningObjectivesAssessmentExample: false,
+            thirdLearningObjectivesAssessmentExample: false,
+          },
+        }
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to load form data from localStorage:', error)
+    }
+    return {
+      formData: initFormData(t),
+      feedbackSourceOptions: defaultFeedbackSourceOptions,
+      uiState: {
+        secondGuidancePoliciesExample: false,
+        thirdGuidancePoliciesExample: false,
+        secondCurriculumDevelopmentExample: false,
+        thirdCurriculumDevelopmentExample: false,
+        secondLearningObjectivesAssessmentExample: false,
+        thirdLearningObjectivesAssessmentExample: false,
+      },
+    }
+  }
+
+  const cached = loadCachedData()
+
+  const [formData, setFormData] = useState<FormDataState>(cached.formData)
+  const [errors, setErrors] = useState<Record<string, string>>(initErrors())
+  const [feedbackSourceOptions, setFeedbackSourceOptions] = useState<FeedbackSource[]>(cached.feedbackSourceOptions)
+  const [secondGuidancePoliciesExample, setSecondGuidancePoliciesExample] = useState(
+    cached.uiState.secondGuidancePoliciesExample
+  )
+  const [thirdGuidancePoliciesExample, setThirdGuidancePoliciesExample] = useState(
+    cached.uiState.thirdGuidancePoliciesExample
+  )
+  const [secondCurriculumDevelopmentExample, setSecondCurriculumDevelopmentExample] = useState(
+    cached.uiState.secondCurriculumDevelopmentExample
+  )
+  const [thirdCurriculumDevelopmentExample, setThirdCurriculumDevelopmentExample] = useState(
+    cached.uiState.thirdCurriculumDevelopmentExample
+  )
+  const [secondLearningObjectivesAssessmentExample, setSecondLearningObjectivesAssessmentExample] = useState(
+    cached.uiState.secondLearningObjectivesAssessmentExample
+  )
+  const [thirdLearningObjectivesAssessmentExample, setThirdLearningObjectivesAssessmentExample] = useState(
+    cached.uiState.thirdLearningObjectivesAssessmentExample
+  )
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
+
+  useEffect(() => {
+    try {
+      const dataToSave: CachedFormState = {
+        formData,
+        feedbackSourceOptions,
+        uiState: {
+          secondGuidancePoliciesExample,
+          thirdGuidancePoliciesExample,
+          secondCurriculumDevelopmentExample,
+          thirdCurriculumDevelopmentExample,
+          secondLearningObjectivesAssessmentExample,
+          thirdLearningObjectivesAssessmentExample,
+        },
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave))
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to save form data to localStorage:', error)
+    }
+  }, [
+    formData,
+    feedbackSourceOptions,
+    secondGuidancePoliciesExample,
+    thirdGuidancePoliciesExample,
+    secondCurriculumDevelopmentExample,
+    thirdCurriculumDevelopmentExample,
+    secondLearningObjectivesAssessmentExample,
+    thirdLearningObjectivesAssessmentExample,
+    STORAGE_KEY,
+  ])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData((prevData: Record<string, any>) => ({
-      ...prevData,
-      [name]: value,
-    }))
+    setFormData(
+      prevData =>
+        ({
+          ...prevData,
+          [name]: value,
+        }) as FormDataState
+    )
   }
 
   const addNewFeedbackSource = () => {
@@ -95,21 +215,26 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
       return [...prev, newSource]
     })
 
-    setFormData((prevData: Record<string, any>) => ({
-      ...prevData,
-      otherFeedbackSource: '',
-    }))
+    setFormData(
+      prevData =>
+        ({
+          ...prevData,
+          otherFeedbackSource: '',
+        }) as FormDataState
+    )
   }
 
   const removeFeedbackSource = (source: FeedbackSource) => {
     setFeedbackSourceOptions(prev => prev.filter(s => s.toLowerCase() !== source.toLowerCase()))
 
-    setFeedbackSources(prev => prev.filter(f => f.name.toLowerCase() !== source.toLowerCase()))
-
-    setFormData((prevData: Record<string, any>) => ({
-      ...prevData,
-      otherFeedbackSource: '',
-    }))
+    setFormData(
+      prevData =>
+        ({
+          ...prevData,
+          feedbackSources: prevData.feedbackSources.filter(f => f.name.toLowerCase() !== source.toLowerCase()),
+          otherFeedbackSource: '',
+        }) as FormDataState
+    )
   }
 
   const validateForm = (payload: Record<string, any> = formData) => {
@@ -254,7 +379,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
     const payload: Record<string, any> = {
       title: formData.title,
       feedbackUtilization: {
-        feedbackSources: feedbackSources.map(({ name, regularity, description }) => ({
+        feedbackSources: formData.feedbackSources.map(({ name, regularity, description }) => ({
           name,
           regularity,
           description,
@@ -266,15 +391,27 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
 
       learningObjectivesAssessment: {
         description: formData.learningObjectivesAssessment,
-        regularity: learningObjectivesAssessmentRegularity,
+        regularity: formData.learningObjectivesAssessmentRegularity,
         learningObjectivesAssessmentExamples,
       },
     }
     if (validateForm(payload)) {
       createDocument({ studyprogrammeKey: programmeKey, data: payload as any, year: selectedYear })
-      setFormData(initForm(t, false))
-      setErrors(initForm(t, true))
-      setFeedbackSources([])
+      setFormData(initFormData(t))
+      setErrors(initErrors())
+      setFeedbackSourceOptions(defaultFeedbackSourceOptions)
+      setSecondGuidancePoliciesExample(false)
+      setThirdGuidancePoliciesExample(false)
+      setSecondCurriculumDevelopmentExample(false)
+      setThirdCurriculumDevelopmentExample(false)
+      setSecondLearningObjectivesAssessmentExample(false)
+      setThirdLearningObjectivesAssessmentExample(false)
+      try {
+        localStorage.removeItem(STORAGE_KEY)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to clear form data from localStorage:', error)
+      }
       navigate(`/v1/programmes/10/${programmeKey}`)
     }
   }
@@ -282,35 +419,50 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
   const handleCheck = (feedbacksource: FeedbackSource, _e: any, data: any) => {
     const checked = Boolean(data.checked)
 
-    setFeedbackSources(prev => {
+    setFormData(prevData => {
+      const { feedbackSources } = prevData
       if (checked) {
-        if (prev.some(f => f.name === feedbacksource)) return prev
-        return [...prev, { name: feedbacksource, regularity: '', description: '' }]
+        if (feedbackSources.some(f => f.name === feedbacksource)) return prevData
+        return {
+          ...prevData,
+          feedbackSources: [...feedbackSources, { name: feedbacksource, regularity: '', description: '' }],
+        } as FormDataState
       }
 
-      return prev.filter(f => f.name !== feedbacksource)
+      return {
+        ...prevData,
+        feedbackSources: feedbackSources.filter(f => f.name !== feedbacksource),
+      } as FormDataState
     })
   }
 
   const setSourceRegularity = (feedbacksource: FeedbackSource, regularity: FeedbackRegularity) => {
-    setFeedbackSources(prev => {
-      const index = prev.findIndex(f => f.name === feedbacksource)
-      if (index === -1) return prev
+    setFormData(prevData => {
+      const { feedbackSources } = prevData
+      const index = feedbackSources.findIndex(f => f.name === feedbacksource)
+      if (index === -1) return prevData
 
-      const updated = [...prev]
+      const updated = [...feedbackSources]
       updated[index] = { ...updated[index], regularity }
-      return updated
+      return {
+        ...prevData,
+        feedbackSources: updated,
+      } as FormDataState
     })
   }
 
   const setSourceDescription = (feedbacksource: FeedbackSource, description: string) => {
-    setFeedbackSources(prev => {
-      const index = prev.findIndex(f => f.name === feedbacksource)
-      if (index === -1) return prev
+    setFormData(prevData => {
+      const { feedbackSources } = prevData
+      const index = feedbackSources.findIndex(f => f.name === feedbacksource)
+      if (index === -1) return prevData
 
-      const updated = [...prev]
+      const updated = [...feedbackSources]
       updated[index] = { ...updated[index], description }
-      return updated
+      return {
+        ...prevData,
+        feedbackSources: updated,
+      } as FormDataState
     })
   }
 
@@ -352,7 +504,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   <Typography variant="h3">{t('qualitydocument:feedbackHeader')}</Typography>
                   <Typography variant="light">{t('qualitydocument:feedbackSource')}</Typography>
                   {feedbackSourceOptions.map(source => {
-                    const sourceState = feedbackSources.find(f => f.name === source)
+                    const sourceState = formData.feedbackSources.find(f => f.name === source)
                     const isChecked = Boolean(sourceState)
 
                     return (
@@ -536,21 +688,19 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   />
                   <Typography variant="light">{t('qualitydocument:learningObjectivesAssessmentRegularity')}</Typography>
                   <RadioGroup
-                    aria-label={`learningObjectivesAssessmentRegularity`}
-                    data-cy={`regularity-learningObjectivesAssessment`}
-                    name={`learningObjectivesAssessmentRegularity`}
+                    aria-label="learningObjectivesAssessmentRegularity"
+                    data-cy="regularity-learningObjectivesAssessment"
+                    name="learningObjectivesAssessmentRegularity"
                     onChange={e =>
-                      setLearningObjectivesAssessmentRegularity(
-                        e.target.value as
-                          | 'lessFrequently'
-                          | 'perCurriculumCycle'
-                          | 'annually'
-                          | 'everySemester'
-                          | 'moreFrequently'
-                          | ''
+                      setFormData(
+                        prevData =>
+                          ({
+                            ...prevData,
+                            learningObjectivesAssessmentRegularity: e.target.value as FeedbackRegularity,
+                          }) as FormDataState
                       )
                     }
-                    value={learningObjectivesAssessmentRegularity}
+                    value={formData.learningObjectivesAssessmentRegularity}
                   >
                     <FormControlLabel
                       control={<Radio />}
