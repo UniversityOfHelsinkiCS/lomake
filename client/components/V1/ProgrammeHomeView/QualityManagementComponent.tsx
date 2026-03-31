@@ -22,6 +22,7 @@ import { useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '@
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import QualityDocumentInfo from '../Generic/QualityDocumentComponent'
+import { QualityDocumentType } from '@/client/lib/types'
 
 const QualityManagementComponent = () => {
   const { t } = useTranslation()
@@ -32,7 +33,7 @@ const QualityManagementComponent = () => {
   const form = 10
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
   const { isLoading } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
-
+  const hasDocumentForYear = documents.some((doc: QualityDocumentType) => doc.year == activeYear)
   const hasWriteRights = (programmeKey ? user.access?.[programmeKey]?.write : false) || isAdmin(user)
 
   const [deleteDocument] = useDeleteQualityDocumentMutation()
@@ -107,7 +108,7 @@ const QualityManagementComponent = () => {
             </Accordion>
           ))}
 
-        {hasWriteRights && documents.length === 0 && activeYear > 2025 && (
+        {hasWriteRights && !hasDocumentForYear && activeYear > 2025 && (
           <Box>
             <Button
               data-cy="create-new-qualitydocument"

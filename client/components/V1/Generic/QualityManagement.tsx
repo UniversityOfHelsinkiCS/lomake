@@ -43,8 +43,9 @@ const QualityManagement = () => {
   const { data: documents = [], isFetching } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
   const document =
     documents.length > 0 || !isFetching ? documents.find((doc: QualityDocumentType) => doc.id.toString() === id) : null
-
+  const activeYear = useAppSelector(state => state.filters.keyDataYear)
   const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
+  const hasDocumentForYear = documents.some((doc: QualityDocumentType) => doc.year == activeYear)
 
   if (isLoading) return <Loader active />
   // For this function the year variable is not needed cuz
@@ -55,7 +56,7 @@ const QualityManagement = () => {
 
   if (!programme || !hasWriteRights) return null
 
-  if (isFetching) return <CircularProgress />
+  if (isFetching || hasDocumentForYear) return <CircularProgress />
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
