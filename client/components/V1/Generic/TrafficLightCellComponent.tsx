@@ -26,8 +26,7 @@ const TrafficLightCell = ({
   const { t } = useTranslation()
   const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
   const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
-  const shouldRenderBadge =
-    groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color, reports)
+  const shouldRenderBadge = renderTrafficLightBadge(programmeData, groupKey, color, reports)
   return (
     <TableCell
       data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}-${activeYear}`}
