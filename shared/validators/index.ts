@@ -158,67 +158,62 @@ export const DocumentFormSchema = z
 export const QualityDocumentFormSchema = z
   .object({
     title: z.string().min(3, 'title'),
-    curriculumDevelopment: z.array(
-      z
-        .object({
-          name: z.string().optional(),
-          changes: z.string().optional(),
-          feedbackSource: z.string().optional(),
-          communication: z.string().optional(),
-        })
-        .strict()
-    ),
-    guidancePolicies: z.array(
-      z
-        .object({
-          name: z.string().optional(),
-          changes: z.string().optional(),
-          feedbackSource: z.string().optional(),
-          communication: z.string().optional(),
-        })
-        .strict()
-    ),
-    feedbackUtilization: z
-      .object({
-        examples: z.string().optional(),
-        feedbackSources: z
-          .array(
-            z
-              .object({
-                name: z.string(),
-                regularity: z.enum([
-                  'lessFrequently',
-                  'perCurriculumCycle',
-                  'annually',
-                  'everySemester',
-                  'moreFrequently',
-                ]),
-                description: z.string().optional(),
-              })
-              .strict()
-          )
-          .min(1, 'feedbackSources'),
-      })
-      .strict(),
-    learningObjectivesAssessment: z
-      .object({
-        description: z.string().optional(),
-        regularity: z.enum(['lessFrequently', 'perCurriculumCycle', 'annually', 'everySemester', 'moreFrequently']),
-        learningObjectivesAssessmentExamples: z
-          .array(
-            z
-              .object({
-                name: z.string().optional(),
-                changes: z.string().optional(),
-                feedbackSource: z.string().optional(),
-                communication: z.string().optional(),
-              })
-              .strict()
-          )
-          .optional(),
-      })
-      .strict(),
-    formData: z.object({}).passthrough(),
+    curriculumDevelopmentChangesExample1: z.string().optional(),
+    curriculumDevelopmentCommunicationExample1: z.string().optional(),
+    curriculumDevelopmentFeedbackSourceExample1: z.string().optional(),
+    curriculumDevelopmentNameExample1: z.string().optional(),
+    curriculumDevelopmentChangesExample2: z.string().optional(),
+    curriculumDevelopmentCommunicationExample2: z.string().optional(),
+    curriculumDevelopmentFeedbackSourceExample2: z.string().optional(),
+    curriculumDevelopmentNameExample2: z.string().optional(),
+    curriculumDevelopmentChangesExample3: z.string().optional(),
+    curriculumDevelopmentCommunicationExample3: z.string().optional(),
+    curriculumDevelopmentFeedbackSourceExample3: z.string().optional(),
+    curriculumDevelopmentNameExample3: z.string().optional(),
+    guidancePoliciesChangesExample1: z.string().optional(),
+    guidancePoliciesCommunicationExample1: z.string().optional(),
+    guidancePoliciesFeedbackSourceExample1: z.string().optional(),
+    guidancePoliciesNameExample1: z.string().optional(),
+    guidancePoliciesChangesExample2: z.string().optional(),
+    guidancePoliciesCommunicationExample2: z.string().optional(),
+    guidancePoliciesFeedbackSourceExample2: z.string().optional(),
+    guidancePoliciesNameExample2: z.string().optional(),
+    guidancePoliciesChangesExample3: z.string().optional(),
+    guidancePoliciesCommunicationExample3: z.string().optional(),
+    guidancePoliciesFeedbackSourceExample3: z.string().optional(),
+    guidancePoliciesNameExample3: z.string().optional(),
+    learningObjectivesAssessment: z.string().optional(),
+    learningObjectivesAssessmentChangesExample1: z.string().optional(),
+    learningObjectivesAssessmentCommunicationExample1: z.string().optional(),
+    learningObjectivesAssessmentFeedbackSourceExample1: z.string().optional(),
+    learningObjectivesAssessmentNameExample1: z.string().optional(),
+    learningObjectivesAssessmentChangesExample2: z.string().optional(),
+    learningObjectivesAssessmentCommunicationExample2: z.string().optional(),
+    learningObjectivesAssessmentFeedbackSourceExample2: z.string().optional(),
+    learningObjectivesAssessmentNameExample2: z.string().optional(),
+    learningObjectivesAssessmentChangesExample3: z.string().optional(),
+    learningObjectivesAssessmentCommunicationExample3: z.string().optional(),
+    learningObjectivesAssessmentFeedbackSourceExample3: z.string().optional(),
+    learningObjectivesAssessmentNameExample3: z.string().optional(),
+    learningObjectivesAssessmentRegularity: z.enum([
+      'lessFrequently',
+      'perCurriculumCycle',
+      'annually',
+      'everySemester',
+      'moreFrequently',
+    ]),
+    feedbackSources: z
+      .array(
+        z
+          .object({
+            name: z.string(),
+            regularity: z.enum(['lessFrequently', 'perCurriculumCycle', 'annually', 'everySemester', 'moreFrequently']),
+            description: z.string().optional(),
+          })
+          .strict()
+      )
+      .min(1, 'feedbackSources'),
+    feedbackutilizationExamples: z.string().optional(),
   })
   .strict()
 

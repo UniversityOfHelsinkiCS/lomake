@@ -21,10 +21,10 @@ const FeedbackActionForm = ({
 
   const handleCancelClick = () => {
     setExample(false)
-    formData[`${field}Name-${example}`] = ''
-    formData[`${field}Changes-${example}`] = ''
-    formData[`${field}FeedbackSource-${example}`] = ''
-    formData[`${field}Communication-${example}`] = ''
+    formData[`${field}NameExample${example}`] = ''
+    formData[`${field}ChangesExample${example}`] = ''
+    formData[`${field}FeedbackSourceExample${example}`] = ''
+    formData[`${field}CommunicationExample${example}`] = ''
   }
 
   return (
@@ -38,60 +38,60 @@ const FeedbackActionForm = ({
         gap: '1rem',
       }}
     >
-      <Typography variant="h4">{t(`qualitydocument:${example}`)}</Typography>
+      <Typography variant="h4">{t(`qualitydocument:example${example}`)}</Typography>
       <TextField
-        data-cy={`editor-${field}-${example}-name`}
-        error={!!errors[`${field}Name-${example}`]}
-        helperText={errors[`${field}Name-${example}`]}
+        data-cy={`editor-${field}-example${example}-name`}
+        error={!!errors[`${field}NameExample${example}`]}
+        helperText={errors[`${field}NameExample${example}`]}
         label={t(`qualitydocument:developmentGoalName`)}
         margin="normal"
-        name={`${field}Name-${example}`}
+        name={`${field}NameExample${example}`}
         onChange={handleChange}
-        value={formData[`${field}Name-${example}`] ?? ''}
+        value={formData[`${field}NameExample${example}`] ?? ''}
         variant="outlined"
       />
       <TextField
-        data-cy={`editor-${field}-${example}-changes`}
-        error={!!errors[`${field}Changes-${example}`]}
-        helperText={errors[`${field}Changes-${example}`]}
+        data-cy={`editor-${field}-example${example}-changes`}
+        error={!!errors[`${field}ChangesExample${example}`]}
+        helperText={errors[`${field}ChangesExample${example}`]}
         label={t(`qualitydocument:changes`)}
         margin="normal"
         minRows={3}
         multiline
-        name={`${field}Changes-${example}`}
+        name={`${field}ChangesExample${example}`}
         onChange={handleChange}
-        value={formData[`${field}Changes-${example}`] ?? ''}
+        value={formData[`${field}ChangesExample${example}`] ?? ''}
         variant="outlined"
       />
       <TextField
-        data-cy={`editor-${field}-${example}-feedbackSource`}
-        error={!!errors[`${field}FeedbackSource-${example}`]}
-        helperText={errors[`${field}FeedbackSource-${example}`]}
+        data-cy={`editor-${field}-example${example}-feedbackSource`}
+        error={!!errors[`${field}FeedbackSourceExample${example}`]}
+        helperText={errors[`${field}FeedbackSourceExample${example}`]}
         label={t(`qualitydocument:developmentBasis`)}
         margin="normal"
         minRows={3}
         multiline
-        name={`${field}FeedbackSource-${example}`}
+        name={`${field}FeedbackSourceExample${example}`}
         onChange={handleChange}
-        value={formData[`${field}FeedbackSource-${example}`] ?? ''}
+        value={formData[`${field}FeedbackSourceExample${example}`] ?? ''}
         variant="outlined"
       />
       <TextField
-        data-cy={`editor-${field}-${example}-communication`}
-        error={!!errors[`${field}Communication-${example}`]}
-        helperText={errors[`${field}Communication-${example}`]}
+        data-cy={`editor-${field}-example${example}-communication`}
+        error={!!errors[`${field}CommunicationExample${example}`]}
+        helperText={errors[`${field}CommunicationExample${example}`]}
         label={t(`qualitydocument:communication`)}
         margin="normal"
         minRows={3}
         multiline
-        name={`${field}Communication-${example}`}
+        name={`${field}CommunicationExample${example}`}
         onChange={handleChange}
-        value={formData[`${field}Communication-${example}`] ?? ''}
+        value={formData[`${field}CommunicationExample${example}`] ?? ''}
         variant="outlined"
       />
-      {example != 'example1' && (
+      {example != '1' && (
         <Button onClick={handleCancelClick} type="button" variant="outlined">
-          {t(`qualitydocument:${example}Remove`)}
+          {t(`qualitydocument:example${example}Remove`)}
         </Button>
       )}
     </Box>

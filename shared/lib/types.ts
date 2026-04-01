@@ -63,3 +63,28 @@ export type Lock = {
 }
 
 export type CanonicalSheetName = 'kandiohjelmat' | 'maisteriohjelmat' | 'tohtoriohjelmat' | 'metadata'
+
+export type FeedbackSource = string
+
+export type FeedbackRegularity =
+  | 'lessFrequently'
+  | 'perCurriculumCycle'
+  | 'annually'
+  | 'everySemester'
+  | 'moreFrequently'
+  | ''
+
+export type FeedbackSourceState = Array<{ name: FeedbackSource; description?: string; regularity: FeedbackRegularity }>
+
+export interface FormDataState {
+  title: string
+  feedbackUtilization: string
+  curriculumDevelopment: string
+  guidancePolicies: string
+  learningObjectivesAssessment: string
+  otherFeedbackSource: string
+  feedbackutilizationExamples: string
+  feedbackSources: FeedbackSourceState
+  learningObjectivesAssessmentRegularity: FeedbackRegularity
+  [key: string]: any
+}

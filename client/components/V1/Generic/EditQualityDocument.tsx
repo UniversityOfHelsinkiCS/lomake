@@ -25,6 +25,7 @@ import { TFunction } from 'i18next'
 import { useNavigate } from 'react-router'
 import FeedbackUtilization from './FeedbackUtilizationComponent'
 import FeedbackActionForm from './FeedbackActionComponent'
+import { FeedbackSource, FormDataState, FeedbackSourceState, FeedbackRegularity } from '@/shared/lib/types'
 
 const fields = [
   'title',
@@ -34,7 +35,6 @@ const fields = [
   'learningObjectivesAssessment',
 ]
 
-type FeedbackRegularity = 'lessFrequently' | 'perCurriculumCycle' | 'annually' | 'everySemester' | 'moreFrequently' | ''
 const defaultFeedbackSourceOptions = [
   'norppa',
   'howULearn',
@@ -42,21 +42,6 @@ const defaultFeedbackSourceOptions = [
   'bachelorFeedback',
   'feedbackFromEmployers',
 ]
-type FeedbackSource = string
-type FeedbackSourceState = Array<{ name: FeedbackSource; description?: string; regularity: FeedbackRegularity }>
-
-interface FormDataState {
-  title: string
-  feedbackUtilization: string
-  curriculumDevelopment: string
-  guidancePolicies: string
-  learningObjectivesAssessment: string
-  otherFeedbackSource: string
-  feedbackutilizationExamples: string
-  feedbackSources: FeedbackSourceState
-  learningObjectivesAssessmentRegularity: FeedbackRegularity
-  [key: string]: any
-}
 
 const initFormData = (t: TFunction): FormDataState => {
   return {
@@ -95,7 +80,33 @@ const EditQualityDocument = ({
   const navigate = useNavigate()
   const STORAGE_KEY = `qualityForm_${programmeKey}`
 
-  const data = document.data.formData ? document.data.formData : initFormData(t)
+  const normalizeFormData = (backendData: Record<string, any>): FormDataState => {
+    const normalized = { ...backendData } as FormDataState
+
+    // Ensure feedbackSources is an array
+    if (!Array.isArray(normalized.feedbackSources)) {
+      normalized.feedbackSources = []
+    }
+    if (!normalized.title) normalized.title = initFormData(t).title
+    if (!normalized.feedbackutilizationExamples) normalized.feedbackutilizationExamples = ''
+    if (!normalized.learningObjectivesAssessmentRegularity)
+      normalized.learningObjectivesAssessmentRegularity = '' as FeedbackRegularity
+    if (!normalized.otherFeedbackSource) normalized.otherFeedbackSource = ''
+
+    return normalized
+  }
+
+  const hasExample = (field: string, exampleNum: number): boolean => {
+    const backendData = document.data
+    return !!(
+      backendData?.[`${field}NameExample${exampleNum}`] ||
+      backendData?.[`${field}ChangesExample${exampleNum}`] ||
+      backendData?.[`${field}FeedbackSourceExample${exampleNum}`] ||
+      backendData?.[`${field}CommunicationExample${exampleNum}`]
+    )
+  }
+
+  const data = document.data ? normalizeFormData(document.data) : initFormData(t)
 
   const [updateDocument] = useUpdateQualityDocumentMutation()
 
@@ -110,12 +121,20 @@ const EditQualityDocument = ({
         .filter((name: FeedbackSource) => !defaultFeedbackSourceOptions.includes(name)) ?? []
     )
   )
-  const [secondGuidancePoliciesExample, setSecondGuidancePoliciesExample] = useState(true)
-  const [thirdGuidancePoliciesExample, setThirdGuidancePoliciesExample] = useState(true)
-  const [secondCurriculumDevelopmentExample, setSecondCurriculumDevelopmentExample] = useState(true)
-  const [thirdCurriculumDevelopmentExample, setThirdCurriculumDevelopmentExample] = useState(true)
-  const [secondLearningObjectivesAssessmentExample, setSecondLearningObjectivesAssessmentExample] = useState(true)
-  const [thirdLearningObjectivesAssessmentExample, setThirdLearningObjectivesAssessmentExample] = useState(true)
+  const [secondGuidancePoliciesExample, setSecondGuidancePoliciesExample] = useState(hasExample('guidancePolicies', 2))
+  const [thirdGuidancePoliciesExample, setThirdGuidancePoliciesExample] = useState(hasExample('guidancePolicies', 3))
+  const [secondCurriculumDevelopmentExample, setSecondCurriculumDevelopmentExample] = useState(
+    hasExample('curriculumDevelopment', 2)
+  )
+  const [thirdCurriculumDevelopmentExample, setThirdCurriculumDevelopmentExample] = useState(
+    hasExample('curriculumDevelopment', 3)
+  )
+  const [secondLearningObjectivesAssessmentExample, setSecondLearningObjectivesAssessmentExample] = useState(
+    hasExample('learningObjectivesAssessment', 2)
+  )
+  const [thirdLearningObjectivesAssessmentExample, setThirdLearningObjectivesAssessmentExample] = useState(
+    hasExample('learningObjectivesAssessment', 3)
+  )
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -176,35 +195,35 @@ const EditQualityDocument = ({
       }
 
       res.error.issues.forEach(issue => {
-        const [root, second, third] = issue.path
+        const [root, second] = issue.path
 
         if (typeof root === 'string' && fields.includes(root) && issue.path.length === 1) {
           setErrorOnce(root, issue.message)
           return
         }
 
-        if (root === 'feedbackUtilization' && second === 'feedbackSources') {
-          if (issue.path.length === 2) {
+        if (root === 'feedbackSources') {
+          if (issue.path.length === 1) {
             setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
             setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
             return
           }
 
-          if (typeof third === 'number') {
-            const sourceName = payload.feedbackUtilization?.feedbackSources?.[third]?.name
+          if (typeof second === 'number') {
+            const sourceName = payload.feedbackSources?.[second]?.name
             if (!sourceName || typeof sourceName !== 'string') return
 
-            if (issue.path[3] === 'regularity') {
+            if (issue.path[2] === 'regularity') {
               setErrorOnce(`${sourceName}Regularity`, 'regularityRequired')
             }
-            if (issue.path[3] === 'description') {
+            if (issue.path[2] === 'description') {
               setErrorOnce(`${sourceName}Description`, issue.message)
             }
           }
           return
         }
 
-        if (root === 'learningObjectivesAssessment' && second === 'regularity') {
+        if (root === 'learningObjectivesAssessmentRegularity') {
           setErrorOnce('learningObjectivesAssessmentRegularity', 'regularityRequired')
         }
       })
@@ -217,106 +236,21 @@ const EditQualityDocument = ({
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
-    const curriculumDevelopment = [
-      {
-        name: formData['curriculumDevelopmentName-example1'],
-        changes: formData['curriculumDevelopmentChanges-example1'],
-        feedbackSource: formData['curriculumDevelopmentFeedbackSource-example1'],
-        communication: formData['curriculumDevelopmentCommunication-example1'],
-      },
-      {
-        name: formData['curriculumDevelopmentName-example2'],
-        changes: formData['curriculumDevelopmentChanges-example2'],
-        feedbackSource: formData['curriculumDevelopmentFeedbackSource-example2'],
-        communication: formData['curriculumDevelopmentCommunication-example2'],
-      },
-      {
-        name: formData['curriculumDevelopmentName-example3'],
-        changes: formData['curriculumDevelopmentChanges-example3'],
-        feedbackSource: formData['curriculumDevelopmentFeedbackSource-example3'],
-        communication: formData['curriculumDevelopmentCommunication-example3'],
-      },
-    ].filter(
-      example =>
-        example.name?.length > 0 ||
-        example.changes?.length > 0 ||
-        example.feedbackSource?.length > 0 ||
-        example.communication?.length > 0
-    )
-
-    const guidancePolicies = [
-      {
-        name: formData['guidancePoliciesName-example1'],
-        changes: formData['guidancePoliciesChanges-example1'],
-        feedbackSource: formData['guidancePoliciesFeedbackSource-example1'],
-        communication: formData['guidancePoliciesCommunication-example1'],
-      },
-      {
-        name: formData['guidancePoliciesName-example2'],
-        changes: formData['guidancePoliciesChanges-example2'],
-        feedbackSource: formData['guidancePoliciesFeedbackSource-example2'],
-        communication: formData['guidancePoliciesCommunication-example2'],
-      },
-      {
-        name: formData['guidancePoliciesName-example3'],
-        changes: formData['guidancePoliciesChanges-example3'],
-        feedbackSource: formData['guidancePoliciesFeedbackSource-example3'],
-        communication: formData['guidancePoliciesCommunication-example3'],
-      },
-    ].filter(
-      example =>
-        example.name?.length > 0 ||
-        example.changes?.length > 0 ||
-        example.feedbackSource?.length > 0 ||
-        example.communication?.length > 0
-    )
-
-    const learningObjectivesAssessmentExamples = [
-      {
-        name: formData['learningObjectivesAssessmentName-example1'],
-        changes: formData['learningObjectivesAssessmentChanges-example1'],
-        feedbackSource: formData['learningObjectivesAssessmentFeedbackSource-example1'],
-        communication: formData['learningObjectivesAssessmentCommunication-example1'],
-      },
-      {
-        name: formData['learningObjectivesAssessmentName-example2'],
-        changes: formData['learningObjectivesAssessmentChanges-example2'],
-        feedbackSource: formData['learningObjectivesAssessmentFeedbackSource-example2'],
-        communication: formData['learningObjectivesAssessmentCommunication-example2'],
-      },
-      {
-        name: formData['learningObjectivesAssessmentName-example3'],
-        changes: formData['learningObjectivesAssessmentChanges-example3'],
-        feedbackSource: formData['learningObjectivesAssessmentFeedbackSource-example3'],
-        communication: formData['learningObjectivesAssessmentCommunication-example3'],
-      },
-    ].filter(
-      example =>
-        example.name?.length > 0 ||
-        example.changes?.length > 0 ||
-        example.feedbackSource?.length > 0 ||
-        example.communication?.length > 0
-    )
+    const {
+      curriculumDevelopment: _curriculumDevelopment,
+      guidancePolicies: _guidancePolicies,
+      feedbackUtilization: _feedbackUtilization,
+      otherFeedbackSource: _otherFeedbackSource,
+      ...restFormData
+    } = formData
 
     const payload: Record<string, any> = {
-      title: formData.title,
-      feedbackUtilization: {
-        feedbackSources: formData.feedbackSources.map(({ name, regularity, description }) => ({
-          name,
-          regularity,
-          description,
-        })),
-        examples: formData.feedbackutilizationExamples,
-      },
-      curriculumDevelopment,
-      guidancePolicies,
-
-      learningObjectivesAssessment: {
-        description: formData.learningObjectivesAssessment,
-        regularity: formData.learningObjectivesAssessmentRegularity,
-        learningObjectivesAssessmentExamples,
-      },
-      formData,
+      ...restFormData,
+      feedbackSources: formData.feedbackSources.map(({ name, regularity, description }) => ({
+        name,
+        regularity,
+        description,
+      })),
     }
     if (validateForm(payload)) {
       updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
@@ -413,7 +347,7 @@ const EditQualityDocument = ({
     }
   }
 
-  if (!document.data.formData) return <CircularProgress />
+  if (!document.data) return <CircularProgress />
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -518,7 +452,7 @@ const EditQualityDocument = ({
                   <Typography variant="light">{t('qualitydocument:curriculumDevelopmentDescription')}</Typography>
                   <FeedbackActionForm
                     errors={errors}
-                    example="example1"
+                    example="1"
                     field={field}
                     formData={formData}
                     handleChange={handleChange}
@@ -527,7 +461,7 @@ const EditQualityDocument = ({
                   {secondCurriculumDevelopmentExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example2"
+                      example="2"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -538,7 +472,7 @@ const EditQualityDocument = ({
                   {thirdCurriculumDevelopmentExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example3"
+                      example="3"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -560,7 +494,7 @@ const EditQualityDocument = ({
                   <Typography variant="light">{t('qualitydocument:guidancePoliciesDescription')}</Typography>
                   <FeedbackActionForm
                     errors={errors}
-                    example="example1"
+                    example="1"
                     field={field}
                     formData={formData}
                     handleChange={handleChange}
@@ -569,7 +503,7 @@ const EditQualityDocument = ({
                   {secondGuidancePoliciesExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example2"
+                      example="2"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -580,7 +514,7 @@ const EditQualityDocument = ({
                   {thirdGuidancePoliciesExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example3"
+                      example="3"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -657,7 +591,7 @@ const EditQualityDocument = ({
                   <Typography variant="light">{t('qualitydocument:learningObjectivesAssessmentExamples')}</Typography>
                   <FeedbackActionForm
                     errors={errors}
-                    example="example1"
+                    example="1"
                     field={field}
                     formData={formData}
                     handleChange={handleChange}
@@ -666,7 +600,7 @@ const EditQualityDocument = ({
                   {secondLearningObjectivesAssessmentExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example2"
+                      example="2"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -676,7 +610,7 @@ const EditQualityDocument = ({
                   {thirdLearningObjectivesAssessmentExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example3"
+                      example="3"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}

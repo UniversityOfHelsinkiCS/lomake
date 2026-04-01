@@ -25,6 +25,7 @@ import { useCreateQualityDocumentMutation } from '@/client/redux/qualityDocument
 import { useAppSelector } from '@/client/util/hooks'
 import FeedbackUtilization from './FeedbackUtilizationComponent'
 import FeedbackActionForm from './FeedbackActionComponent'
+import { FeedbackSource, FormDataState, FeedbackSourceState, FeedbackRegularity } from '@/shared/lib/types'
 
 const fields = [
   'title',
@@ -33,7 +34,7 @@ const fields = [
   'guidancePolicies',
   'learningObjectivesAssessment',
 ]
-type FeedbackRegularity = 'lessFrequently' | 'perCurriculumCycle' | 'annually' | 'everySemester' | 'moreFrequently' | ''
+
 const defaultFeedbackSourceOptions = [
   'norppa',
   'howULearn',
@@ -41,21 +42,6 @@ const defaultFeedbackSourceOptions = [
   'bachelorFeedback',
   'feedbackFromEmployers',
 ]
-type FeedbackSource = string
-type FeedbackSourceState = Array<{ name: FeedbackSource; description?: string; regularity: FeedbackRegularity }>
-
-interface FormDataState {
-  title: string
-  feedbackUtilization: string
-  curriculumDevelopment: string
-  guidancePolicies: string
-  learningObjectivesAssessment: string
-  otherFeedbackSource: string
-  feedbackutilizationExamples: string
-  feedbackSources: FeedbackSourceState
-  learningObjectivesAssessmentRegularity: FeedbackRegularity
-  [key: string]: any
-}
 
 const initFormData = (t: TFunction): FormDataState => {
   return {
@@ -254,35 +240,35 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
       }
 
       res.error.issues.forEach(issue => {
-        const [root, second, third] = issue.path
+        const [root, second] = issue.path
 
         if (typeof root === 'string' && fields.includes(root) && issue.path.length === 1) {
           setErrorOnce(root, issue.message)
           return
         }
 
-        if (root === 'feedbackUtilization' && second === 'feedbackSources') {
-          if (issue.path.length === 2) {
+        if (root === 'feedbackSources') {
+          if (issue.path.length === 1) {
             setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
             setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
             return
           }
 
-          if (typeof third === 'number') {
-            const sourceName = payload.feedbackUtilization?.feedbackSources?.[third]?.name
+          if (typeof second === 'number') {
+            const sourceName = payload.feedbackSources?.[second]?.name
             if (!sourceName || typeof sourceName !== 'string') return
 
-            if (issue.path[3] === 'regularity') {
+            if (issue.path[2] === 'regularity') {
               setErrorOnce(`${sourceName}Regularity`, 'regularityRequired')
             }
-            if (issue.path[3] === 'description') {
+            if (issue.path[2] === 'description') {
               setErrorOnce(`${sourceName}Description`, issue.message)
             }
           }
           return
         }
 
-        if (root === 'learningObjectivesAssessment' && second === 'regularity') {
+        if (root === 'learningObjectivesAssessmentRegularity') {
           setErrorOnce('learningObjectivesAssessmentRegularity', 'regularityRequired')
         }
       })
@@ -295,106 +281,21 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
-    const curriculumDevelopment = [
-      {
-        name: formData['curriculumDevelopmentName-example1'],
-        changes: formData['curriculumDevelopmentChanges-example1'],
-        feedbackSource: formData['curriculumDevelopmentFeedbackSource-example1'],
-        communication: formData['curriculumDevelopmentCommunication-example1'],
-      },
-      {
-        name: formData['curriculumDevelopmentName-example2'],
-        changes: formData['curriculumDevelopmentChanges-example2'],
-        feedbackSource: formData['curriculumDevelopmentFeedbackSource-example2'],
-        communication: formData['curriculumDevelopmentCommunication-example2'],
-      },
-      {
-        name: formData['curriculumDevelopmentName-example3'],
-        changes: formData['curriculumDevelopmentChanges-example3'],
-        feedbackSource: formData['curriculumDevelopmentFeedbackSource-example3'],
-        communication: formData['curriculumDevelopmentCommunication-example3'],
-      },
-    ].filter(
-      example =>
-        example.name?.length > 0 ||
-        example.changes?.length > 0 ||
-        example.feedbackSource?.length > 0 ||
-        example.communication?.length > 0
-    )
-
-    const guidancePolicies = [
-      {
-        name: formData['guidancePoliciesName-example1'],
-        changes: formData['guidancePoliciesChanges-example1'],
-        feedbackSource: formData['guidancePoliciesFeedbackSource-example1'],
-        communication: formData['guidancePoliciesCommunication-example1'],
-      },
-      {
-        name: formData['guidancePoliciesName-example2'],
-        changes: formData['guidancePoliciesChanges-example2'],
-        feedbackSource: formData['guidancePoliciesFeedbackSource-example2'],
-        communication: formData['guidancePoliciesCommunication-example2'],
-      },
-      {
-        name: formData['guidancePoliciesName-example3'],
-        changes: formData['guidancePoliciesChanges-example3'],
-        feedbackSource: formData['guidancePoliciesFeedbackSource-example3'],
-        communication: formData['guidancePoliciesCommunication-example3'],
-      },
-    ].filter(
-      example =>
-        example.name?.length > 0 ||
-        example.changes?.length > 0 ||
-        example.feedbackSource?.length > 0 ||
-        example.communication?.length > 0
-    )
-
-    const learningObjectivesAssessmentExamples = [
-      {
-        name: formData['learningObjectivesAssessmentName-example1'],
-        changes: formData['learningObjectivesAssessmentChanges-example1'],
-        feedbackSource: formData['learningObjectivesAssessmentFeedbackSource-example1'],
-        communication: formData['learningObjectivesAssessmentCommunication-example1'],
-      },
-      {
-        name: formData['learningObjectivesAssessmentName-example2'],
-        changes: formData['learningObjectivesAssessmentChanges-example2'],
-        feedbackSource: formData['learningObjectivesAssessmentFeedbackSource-example2'],
-        communication: formData['learningObjectivesAssessmentCommunication-example2'],
-      },
-      {
-        name: formData['learningObjectivesAssessmentName-example3'],
-        changes: formData['learningObjectivesAssessmentChanges-example3'],
-        feedbackSource: formData['learningObjectivesAssessmentFeedbackSource-example3'],
-        communication: formData['learningObjectivesAssessmentCommunication-example3'],
-      },
-    ].filter(
-      example =>
-        example.name?.length > 0 ||
-        example.changes?.length > 0 ||
-        example.feedbackSource?.length > 0 ||
-        example.communication?.length > 0
-    )
+    const {
+      curriculumDevelopment: _curriculumDevelopment,
+      guidancePolicies: _guidancePolicies,
+      feedbackUtilization: _feedbackUtilization,
+      otherFeedbackSource: _otherFeedbackSource,
+      ...restFormData
+    } = formData
 
     const payload: Record<string, any> = {
-      title: formData.title,
-      feedbackUtilization: {
-        feedbackSources: formData.feedbackSources.map(({ name, regularity, description }) => ({
-          name,
-          regularity,
-          description,
-        })),
-        examples: formData.feedbackutilizationExamples,
-      },
-      curriculumDevelopment,
-      guidancePolicies,
-
-      learningObjectivesAssessment: {
-        description: formData.learningObjectivesAssessment,
-        regularity: formData.learningObjectivesAssessmentRegularity,
-        learningObjectivesAssessmentExamples,
-      },
-      formData,
+      ...restFormData,
+      feedbackSources: formData.feedbackSources.map(({ name, regularity, description }) => ({
+        name,
+        regularity,
+        description,
+      })),
     }
     if (validateForm(payload)) {
       createDocument({ studyprogrammeKey: programmeKey, data: payload as any, year: selectedYear })
@@ -594,7 +495,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   <Typography variant="light">{t('qualitydocument:curriculumDevelopmentDescription')}</Typography>
                   <FeedbackActionForm
                     errors={errors}
-                    example="example1"
+                    example="1"
                     field={field}
                     formData={formData}
                     handleChange={handleChange}
@@ -603,7 +504,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   {secondCurriculumDevelopmentExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example2"
+                      example="2"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -614,7 +515,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   {thirdCurriculumDevelopmentExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example3"
+                      example="3"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -636,7 +537,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   <Typography variant="light">{t('qualitydocument:guidancePoliciesDescription')}</Typography>
                   <FeedbackActionForm
                     errors={errors}
-                    example="example1"
+                    example="1"
                     field={field}
                     formData={formData}
                     handleChange={handleChange}
@@ -645,7 +546,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   {secondGuidancePoliciesExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example2"
+                      example="2"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -656,7 +557,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   {thirdGuidancePoliciesExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example3"
+                      example="3"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -733,7 +634,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   <Typography variant="light">{t('qualitydocument:learningObjectivesAssessmentExamples')}</Typography>
                   <FeedbackActionForm
                     errors={errors}
-                    example="example1"
+                    example="1"
                     field={field}
                     formData={formData}
                     handleChange={handleChange}
@@ -742,7 +643,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   {secondLearningObjectivesAssessmentExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example2"
+                      example="2"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
@@ -752,7 +653,7 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   {thirdLearningObjectivesAssessmentExample ? (
                     <FeedbackActionForm
                       errors={errors}
-                      example="example3"
+                      example="3"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
