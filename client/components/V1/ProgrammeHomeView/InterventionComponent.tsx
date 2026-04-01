@@ -120,7 +120,7 @@ const InterventionComponent = () => {
   }
   const hasAccessToCloseInterventionProcedure = () => {
     const isUserInDekanaattiGroup = user.iamGroups.some((group: string) => dekanaattiIamGroup.includes(group))
-    return isAdmin(user) || isUserInDekanaattiGroup
+    return isUserInDekanaattiGroup
   }
 
   return (
@@ -136,12 +136,6 @@ const InterventionComponent = () => {
             {activeProcedure() ? t('document:warningTextDescription') : t('document:successText')}
           </Typography>
         </Alert>
-        {documents.length > 0 && documents.at(-1).reason ? (
-          <Alert severity="info">
-            <Typography variant="h6">{t('document:terminated')}</Typography>
-            <Typography>{t(`document:option${documents.at(-1).reason.reason}`)}</Typography>
-          </Alert>
-        ) : null}
         <Typography sx={{ mt: 4 }} variant="h4">
           {t('keyData:documentingHeader')}
         </Typography>
@@ -239,59 +233,75 @@ const InterventionComponent = () => {
           </Box>
         ) : null}
       </Box>
-      <br />
       {hasAccessToCloseInterventionProcedure() && activeProcedure() && (
-        <Alert data-cy="closeInterventionProcedureAlertBox" severity="warning" variant="outlined">
-          <Typography sx={{ mb: 2 }} variant="h5">
-            {t('document:closeInterventionProcedureHeader')}
-          </Typography>
-          <Typography variant="light">{t('document:closeInterventionProcedureDescription')}</Typography>
-          <FormControl
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              gap: '2rem',
-              mb: '2rem',
-              mt: '2rem',
-            }}
-          >
-            <InputLabel data-cy="reasonDropdown" sx={{ width: '50%' }}>
-              {t('document:dropdownReason')}
-            </InputLabel>
-            <Select
-              data-cy="reasonDropdown"
-              label={t('document:dropdownReason')}
-              onChange={event => setReason(event.target.value)}
-              sx={{ width: '50%' }}
-              value={reason}
+        <>
+          <br />
+          <Alert data-cy="closeInterventionProcedureAlertBox" severity="warning" variant="outlined">
+            <Typography sx={{ mb: 2 }} variant="h5">
+              {t('document:closeInterventionProcedureHeader')}
+            </Typography>
+            <Typography variant="light">{t('document:closeInterventionProcedureDescription')}</Typography>
+            <FormControl
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                gap: '2rem',
+                mb: '2rem',
+                mt: '2rem',
+              }}
             >
-              <MenuItem value={'1'}>{t('document:option1')}</MenuItem>
-              <MenuItem value={'2'}>{t('document:option2')}</MenuItem>
-              <MenuItem value={'3'}>{t('document:option3')}</MenuItem>
-            </Select>
-            {reason === '3' && (
-              <TextField
-                label={t('document:textfieldReason')}
-                onChange={event => setAdditionalInfo(event.target.value)}
-                sx={{ width: '65%' }}
-                value={additionalInfo}
-              />
-            )}
-          </FormControl>
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
-            <Button
-              color="error"
-              data-cy="closeInterventionProcedureButton"
-              disabled={!reason}
-              onClick={handleCloseProcedure}
-              variant="contained"
-            >
-              {t('document:closeButton')}
-            </Button>
-          </div>
-        </Alert>
+              <InputLabel data-cy="reasonDropdown" sx={{ width: '50%' }}>
+                {t('document:dropdownReason')}
+              </InputLabel>
+              <Select
+                data-cy="reasonDropdown"
+                label={t('document:dropdownReason')}
+                onChange={event => setReason(event.target.value)}
+                sx={{ width: '50%' }}
+                value={reason}
+              >
+                <MenuItem value={'1'}>{t('document:option1')}</MenuItem>
+                <MenuItem value={'2'}>{t('document:option2')}</MenuItem>
+                <MenuItem value={'3'}>{t('document:option3')}</MenuItem>
+              </Select>
+              {reason === '3' && (
+                <TextField
+                  label={t('document:textfieldReason')}
+                  onChange={event => setAdditionalInfo(event.target.value)}
+                  sx={{ width: '65%' }}
+                  value={additionalInfo}
+                />
+              )}
+            </FormControl>
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+              <Button
+                color="error"
+                data-cy="closeInterventionProcedureButton"
+                disabled={!reason}
+                onClick={handleCloseProcedure}
+                variant="contained"
+              >
+                {t('document:closeButton')}
+              </Button>
+            </div>
+          </Alert>
+        </>
       )}
+      {documents.length > 0 && documents.at(-1).reason ? (
+        <Alert severity="info">
+          <Typography variant="h6">{t('document:terminated')}</Typography>
+          <Typography>{t(`document:option${documents.at(-1).reason.reason}`)}</Typography>
+          {documents.at(-1).reason.reason === '3' && documents.at(-1).reason.additionalInfo ? (
+            <>
+              <br />
+              <Typography>
+                {t('document:otherReason')} {documents.at(-1).reason.additionalInfo}
+              </Typography>
+            </>
+          ) : null}
+        </Alert>
+      ) : null}
     </Box>
   )
 }

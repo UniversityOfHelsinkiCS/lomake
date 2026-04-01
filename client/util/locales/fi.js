@@ -703,6 +703,8 @@ export default {
     confirm: 'Haluatko varmasti sulkea toimenpidemenettelyn?',
     confirmDelete: 'Haluatko varmasti poistaa dokumentin?',
     terminated: 'Edellinen toimenpidemenettely on lopetettu perusteella:',
+    interventionProcedureClosed: 'Toimenpidemenettely on suljettu',
+    otherReason: 'Peruste:',
   },
   qualitydocument: {
     header: 'Laadunhallintalomake',
