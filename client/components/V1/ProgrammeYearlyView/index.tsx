@@ -210,7 +210,7 @@ const ProgrammeYearlyView = () => {
   }
 
   const KeyDataPoints = getKeyDataPoints(t)
-  if (!programmeData || (year === '2026' && !isAdmin(user))) return null
+  if (!programmeData) return null
 
   return (
     <Box sx={{ width: '75%' }}>
