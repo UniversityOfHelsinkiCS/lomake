@@ -145,7 +145,7 @@ export const getKeyDataPoints = (t: TFunction) => {
           title: t(`keyData:${lowerKey}`),
           groupKey: GroupKey[key as keyof typeof GroupKey],
           description: t(`keyData:${lowerKey}Info`),
-          textField: lowerKey !== 'resurssit', // resurssit section not active in 2025 pilot, this should be removed later
+          textField: true,
         },
       ]
     })

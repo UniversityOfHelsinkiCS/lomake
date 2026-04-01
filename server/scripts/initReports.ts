@@ -6,7 +6,7 @@ import logger from '../util/logger.js'
 
 const initReports = async () => {
   const programmes = await Studyprogramme.findAll({})
-  const years = [2024, 2025]
+  const years = [2024, 2025, 2026]
 
   // eslint-disable-next-line @typescript-eslint/require-await
   years.forEach(async (currentYear: number) => {

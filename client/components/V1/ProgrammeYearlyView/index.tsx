@@ -70,7 +70,7 @@ const TextFieldBadge = ({
   )
 
   const shouldRenderBadge = () => {
-    return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color, reports)
+    return renderTrafficLightBadge(programmeData, groupKey, color, reports)
   }
 
   return shouldRenderBadge() && <NotificationBadge data-cy={`textfieldBadge-${groupKey}`} variant={'small'} />
@@ -210,7 +210,7 @@ const ProgrammeYearlyView = () => {
   }
 
   const KeyDataPoints = getKeyDataPoints(t)
-  if (!programmeData) return null
+  if (!programmeData || (year === '2026' && !isAdmin(user))) return null
 
   return (
     <Box sx={{ width: '75%' }}>
