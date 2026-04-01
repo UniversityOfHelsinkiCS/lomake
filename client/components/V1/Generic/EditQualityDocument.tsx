@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect, useCallback } from 'react'
 import {
   Box,
   Typography,
@@ -80,29 +80,41 @@ const EditQualityDocument = ({
   const navigate = useNavigate()
   const STORAGE_KEY = `qualityForm_${programmeKey}`
 
-  const normalizeFormData = (backendData: Record<string, any>): FormDataState => {
-    const normalized = { ...backendData } as FormDataState
+  const normalizeFormData = useCallback(
+    (backendData: Record<string, any>): FormDataState => {
+      const normalized = { ...backendData } as FormDataState
+      if (!Array.isArray(normalized.feedbackSources)) {
+        normalized.feedbackSources = []
+      }
+      if (!normalized.title) normalized.title = initFormData(t).title
+      if (!normalized.feedbackutilizationExamples) normalized.feedbackutilizationExamples = ''
+      if (!normalized.learningObjectivesAssessmentRegularity)
+        normalized.learningObjectivesAssessmentRegularity = '' as FeedbackRegularity
+      if (!normalized.otherFeedbackSource) normalized.otherFeedbackSource = ''
 
-    // Ensure feedbackSources is an array
-    if (!Array.isArray(normalized.feedbackSources)) {
-      normalized.feedbackSources = []
+      return normalized
+    },
+    [t]
+  )
+
+  const getCachedFormData = useCallback((): FormDataState | null => {
+    try {
+      const cachedRaw = localStorage.getItem(STORAGE_KEY)
+      if (!cachedRaw) return null
+      return normalizeFormData(JSON.parse(cachedRaw) as Record<string, any>)
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to read form data from localStorage:', error)
+      return null
     }
-    if (!normalized.title) normalized.title = initFormData(t).title
-    if (!normalized.feedbackutilizationExamples) normalized.feedbackutilizationExamples = ''
-    if (!normalized.learningObjectivesAssessmentRegularity)
-      normalized.learningObjectivesAssessmentRegularity = '' as FeedbackRegularity
-    if (!normalized.otherFeedbackSource) normalized.otherFeedbackSource = ''
+  }, [normalizeFormData, STORAGE_KEY])
 
-    return normalized
-  }
-
-  const hasExample = (field: string, exampleNum: number): boolean => {
-    const backendData = document.data
+  const hasExample = (sourceData: Record<string, any>, field: string, exampleNum: number): boolean => {
     return !!(
-      backendData?.[`${field}NameExample${exampleNum}`] ||
-      backendData?.[`${field}ChangesExample${exampleNum}`] ||
-      backendData?.[`${field}FeedbackSourceExample${exampleNum}`] ||
-      backendData?.[`${field}CommunicationExample${exampleNum}`]
+      sourceData?.[`${field}NameExample${exampleNum}`] ||
+      sourceData?.[`${field}ChangesExample${exampleNum}`] ||
+      sourceData?.[`${field}FeedbackSourceExample${exampleNum}`] ||
+      sourceData?.[`${field}CommunicationExample${exampleNum}`]
     )
   }
 
@@ -121,20 +133,59 @@ const EditQualityDocument = ({
         .filter((name: FeedbackSource) => !defaultFeedbackSourceOptions.includes(name)) ?? []
     )
   )
-  const [secondGuidancePoliciesExample, setSecondGuidancePoliciesExample] = useState(hasExample('guidancePolicies', 2))
-  const [thirdGuidancePoliciesExample, setThirdGuidancePoliciesExample] = useState(hasExample('guidancePolicies', 3))
+  const [secondGuidancePoliciesExample, setSecondGuidancePoliciesExample] = useState(
+    hasExample(data, 'guidancePolicies', 2)
+  )
+  const [thirdGuidancePoliciesExample, setThirdGuidancePoliciesExample] = useState(
+    hasExample(data, 'guidancePolicies', 3)
+  )
   const [secondCurriculumDevelopmentExample, setSecondCurriculumDevelopmentExample] = useState(
-    hasExample('curriculumDevelopment', 2)
+    hasExample(data, 'curriculumDevelopment', 2)
   )
   const [thirdCurriculumDevelopmentExample, setThirdCurriculumDevelopmentExample] = useState(
-    hasExample('curriculumDevelopment', 3)
+    hasExample(data, 'curriculumDevelopment', 3)
   )
   const [secondLearningObjectivesAssessmentExample, setSecondLearningObjectivesAssessmentExample] = useState(
-    hasExample('learningObjectivesAssessment', 2)
+    hasExample(data, 'learningObjectivesAssessment', 2)
   )
   const [thirdLearningObjectivesAssessmentExample, setThirdLearningObjectivesAssessmentExample] = useState(
-    hasExample('learningObjectivesAssessment', 3)
+    hasExample(data, 'learningObjectivesAssessment', 3)
   )
+
+  useEffect(() => {
+    if (!document.data) return
+
+    const nextData = getCachedFormData() ?? normalizeFormData(document.data)
+    setFormData(nextData)
+    setFeedbackSourceOptions(
+      defaultFeedbackSourceOptions.concat(
+        nextData.feedbackSources
+          ?.map((option: { name: FeedbackSource }) => option.name)
+          .filter((name: FeedbackSource) => !defaultFeedbackSourceOptions.includes(name)) ?? []
+      )
+    )
+    setSecondGuidancePoliciesExample(hasExample(nextData, 'guidancePolicies', 2))
+    setThirdGuidancePoliciesExample(hasExample(nextData, 'guidancePolicies', 3))
+    setSecondCurriculumDevelopmentExample(hasExample(nextData, 'curriculumDevelopment', 2))
+    setThirdCurriculumDevelopmentExample(hasExample(nextData, 'curriculumDevelopment', 3))
+    setSecondLearningObjectivesAssessmentExample(hasExample(nextData, 'learningObjectivesAssessment', 2))
+    setThirdLearningObjectivesAssessmentExample(hasExample(nextData, 'learningObjectivesAssessment', 3))
+  }, [document.data, getCachedFormData, normalizeFormData])
+
+  useEffect(() => {
+    if (!document.data) return
+
+    try {
+      if (JSON.stringify(formData) === JSON.stringify(data)) {
+        localStorage.removeItem(STORAGE_KEY)
+      } else {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to save form data to localStorage:', error)
+    }
+  }, [formData, data, document.data, STORAGE_KEY])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -254,15 +305,6 @@ const EditQualityDocument = ({
     }
     if (validateForm(payload)) {
       updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
-      setFormData(initFormData(t))
-      setErrors(initErrors())
-      setFeedbackSourceOptions(defaultFeedbackSourceOptions)
-      setSecondGuidancePoliciesExample(false)
-      setThirdGuidancePoliciesExample(false)
-      setSecondCurriculumDevelopmentExample(false)
-      setThirdCurriculumDevelopmentExample(false)
-      setSecondLearningObjectivesAssessmentExample(false)
-      setThirdLearningObjectivesAssessmentExample(false)
       try {
         localStorage.removeItem(STORAGE_KEY)
       } catch (error) {
@@ -351,9 +393,7 @@ const EditQualityDocument = ({
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Typography sx={{ mb: '4rem' }} variant="h3">
-        {`${data.title}`}
-      </Typography>
+      <Typography sx={{ mb: '4rem' }} variant="h3">{`${formData.title}`}</Typography>
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           {fields.map((field, index) => {
