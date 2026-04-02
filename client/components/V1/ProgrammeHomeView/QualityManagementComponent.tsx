@@ -5,6 +5,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
+import { isAdmin } from '@/config/common'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
