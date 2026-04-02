@@ -21,7 +21,7 @@ import {
   TextField,
 } from '@mui/material'
 import { ExpandMore, Add, Edit, Delete } from '@mui/icons-material'
-import { dekanaattiIamGroup, isAdmin } from '@/config/common'
+import { basePath, dekanaattiIamGroup, isAdmin } from '@/config/common'
 import { KeyDataProgramme } from '@/shared/lib/types'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import { useGetProgrammesInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
@@ -196,7 +196,7 @@ const InterventionComponent = () => {
                     <Button
                       component={Link}
                       data-cy={`accordion-${index}-edit-button`}
-                      href={`/v1/programmes/10/${programmeKey}/document/${doc.id}`}
+                      href={`${basePath}v1/programmes/10/${programmeKey}/document/${doc.id}`}
                       startIcon={<Edit />}
                       variant="contained"
                     >
