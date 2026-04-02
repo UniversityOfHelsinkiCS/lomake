@@ -49,6 +49,13 @@ const QualityManagementComponent = () => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
     if (isConfirmed) {
       deleteDocument({ studyprogrammeKey: programmeKey, id })
+      try {
+        localStorage.removeItem(`qualityFormCreate_${programmeKey}`)
+        localStorage.removeItem(`qualityFormEdit_${programmeKey}_${id}`)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to clear form data from localStorage:', error)
+      }
     }
   }
 
