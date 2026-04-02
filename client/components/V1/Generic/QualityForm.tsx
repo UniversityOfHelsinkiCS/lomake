@@ -85,7 +85,7 @@ interface CachedFormState {
 const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const STORAGE_KEY = `qualityForm_${programmeKey}`
+  const STORAGE_KEY = `qualityFormCreate_${programmeKey}`
 
   const [createDocument] = useCreateQualityDocumentMutation()
 

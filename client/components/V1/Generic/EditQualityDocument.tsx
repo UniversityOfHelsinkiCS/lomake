@@ -78,7 +78,7 @@ const EditQualityDocument = ({
 }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const STORAGE_KEY = `qualityForm_${programmeKey}`
+  const STORAGE_KEY = `qualityFormEdit_${programmeKey}_${id}`
 
   const normalizeFormData = useCallback(
     (backendData: Record<string, any>): FormDataState => {
@@ -170,7 +170,7 @@ const EditQualityDocument = ({
     setThirdCurriculumDevelopmentExample(hasExample(nextData, 'curriculumDevelopment', 3))
     setSecondLearningObjectivesAssessmentExample(hasExample(nextData, 'learningObjectivesAssessment', 2))
     setThirdLearningObjectivesAssessmentExample(hasExample(nextData, 'learningObjectivesAssessment', 3))
-  }, [document.data, getCachedFormData, normalizeFormData])
+  }, [document.data, getCachedFormData, normalizeFormData, t, STORAGE_KEY])
 
   useEffect(() => {
     if (!document.data) return
