@@ -3,7 +3,7 @@ import { Box, IconButton, Typography, Link, CircularProgress } from '@mui/materi
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack } from '@mui/icons-material'
-import { basePath, isAdmin } from '@/config/common'
+import { isAdmin } from '@/config/common'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
 import QualityForm from './QualityForm'
@@ -64,7 +64,7 @@ const QualityManagement = () => {
         <IconButton
           component={Link}
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onClick={() => navigate(`${basePath}v1/programmes/10/${programmeKey}`)}
+          onClick={() => navigate(`/v1/programmes/10/${programmeKey}`)}
           sx={{ marginRight: 2 }}
         >
           <ArrowBack />

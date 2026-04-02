@@ -17,7 +17,6 @@ import {
   Alert,
 } from '@mui/material'
 import { ExpandMore, Add, Delete, Edit } from '@mui/icons-material'
-import { basePath, isAdmin } from '@/config/common'
 import { useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
@@ -85,7 +84,7 @@ const QualityManagementComponent = () => {
                   {hasWriteRights && (
                     <Button
                       data-cy={`accordion-${index}-edit-qualitydocument-button`}
-                      onClick={() => navigate(`${basePath}v1/programmes/10/${programmeKey}/qualitydocument/${doc.id}`)}
+                      onClick={() => navigate(`/v1/programmes/10/${programmeKey}/qualitydocument/${doc.id}`)}
                       startIcon={<Edit />}
                       variant="contained"
                     >
