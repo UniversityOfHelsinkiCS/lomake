@@ -731,5 +731,8 @@ export default {
     participants: 'The Participants field must contain more than 3 characters',
     matters: 'The Agreed Matters field must contain a minimum of 100 characters',
     schedule: 'The Schedule field must be at least 3 characters long',
+    feedbackSourcesRequired: 'Select at least one feedback system or feedback source',
+    regularityRequired: 'Select the regularity of feedback handling',
+    maxLength: `Character limit {{maxLength}} reached`,
   },
 }

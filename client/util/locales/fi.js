@@ -569,7 +569,7 @@ export default {
     info1:
       'Koulutusohjelman elinvoimaisuutta kuvaavat <strong>arviointialueet</strong> ovat: <i>a) vetovoimaisuus, b) opintojen sujuvuus ja valmistuminen, c) palaute ja työllistyminen sekä d) resurssien käyttö.</i> Arviointialueet ovat samat kandi-, maisteri- ja tohtoriohjelmille.',
     info2:
-      'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
+      'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot opintoasiainneuvostossa, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
     info3: 'Värimerkintöjen selitteet ovat: ',
     darkGreenInfo: 'Vihreä – koulutusohjelman tilanne on erinomainen',
     lightGreenInfo: 'Vaaleanvihreä – koulutusohjelman tilanne on hyvä',
@@ -766,5 +766,6 @@ export default {
     schedule: 'Aikataulu-kentän minimi pituus on 3 merkkiä',
     feedbackSourcesRequired: 'Valitse vähintään yksi palautejärjestelmä tai palautteen lähde',
     regularityRequired: 'Valitse käsittelyn säännöllisyys',
+    maxLength: `Merkkiraja {{maxLength}} täynnä`,
   },
 }

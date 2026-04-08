@@ -26,6 +26,7 @@ import { useAppSelector } from '@/client/util/hooks'
 import FeedbackUtilization from './FeedbackUtilizationComponent'
 import FeedbackActionForm from './FeedbackActionComponent'
 import { FeedbackSource, FormDataState, FeedbackSourceState, FeedbackRegularity } from '@/shared/lib/types'
+import CharacterCounter from './Charactercounter'
 
 const fields = [
   'title',
@@ -51,7 +52,7 @@ const initFormData = (t: TFunction): FormDataState => {
     guidancePolicies: '',
     learningObjectivesAssessment: '',
     otherFeedbackSource: '',
-    feedbackutilizationExamples: '',
+    feedbackUtilizationExamples: '',
     feedbackSources: [] as FeedbackSourceState,
     learningObjectivesAssessmentRegularity: '' as FeedbackRegularity,
   }
@@ -242,11 +243,6 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
       res.error.issues.forEach(issue => {
         const [root, second] = issue.path
 
-        if (typeof root === 'string' && fields.includes(root) && issue.path.length === 1) {
-          setErrorOnce(root, issue.message)
-          return
-        }
-
         if (root === 'feedbackSources') {
           if (issue.path.length === 1) {
             setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
@@ -270,6 +266,11 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
 
         if (root === 'learningObjectivesAssessmentRegularity') {
           setErrorOnce('learningObjectivesAssessmentRegularity', 'regularityRequired')
+          return
+        }
+
+        if (typeof root === 'string' && issue.path.length === 1) {
+          setErrorOnce(root, issue.message)
         }
       })
 
@@ -456,11 +457,10 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                   <Box sx={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
                     <TextField
                       data-cy={`editor-otherFeedbackSource`}
-                      error={!!errors.otherFeedbackSource}
-                      helperText={errors.otherFeedbackSource}
                       label={t(`qualitydocument:otherFeedbackSource`)}
                       name={'otherFeedbackSource'}
                       onChange={handleChange}
+                      slotProps={{ htmlInput: { maxLength: 50 } }}
                       value={formData.otherFeedbackSource ?? ''}
                       variant="outlined"
                     />
@@ -472,17 +472,20 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                     <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}</Typography>
                     <Typography variant="light">{t('qualitydocument:feedbackUtilizationExamples')}</Typography>
                     <TextField
-                      data-cy={`feedbackutilization-examples`}
-                      error={!!errors.feedbackutilizationExamples}
+                      data-cy={`feedbackUtilization-examples`}
+                      error={!!errors.feedbackUtilizationExamples}
                       fullWidth
-                      helperText={errors.feedbackutilizationExamples}
+                      helperText={
+                        <CharacterCounter count={formData.feedbackUtilizationExamples.length} maxLength={1500} />
+                      }
                       label={t(`qualitydocument:examplesDescription`)}
                       margin="normal"
                       minRows={3}
                       multiline
-                      name={`feedbackutilizationExamples`}
+                      name={`feedbackUtilizationExamples`}
                       onChange={handleChange}
-                      value={formData.feedbackutilizationExamples}
+                      slotProps={{ htmlInput: { maxLength: 1500 } }}
+                      value={formData.feedbackUtilizationExamples}
                     />
                   </Box>
                 </Fragment>
@@ -583,6 +586,8 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
                     helperText={errors[`${field}`]}
                     label={t(`qualitydocument:learningObjectivesAssessment`)}
                     margin="normal"
+                    minRows={2}
+                    multiline
                     name={`${field}`}
                     onChange={handleChange}
                     value={formData[`${field}`]}

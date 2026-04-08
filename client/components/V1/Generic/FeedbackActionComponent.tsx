@@ -1,6 +1,7 @@
 import { Box, Typography, TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Button } from 'semantic-ui-react'
+import CharacterCounter from './Charactercounter'
 
 const FeedbackActionForm = ({
   example,
@@ -41,8 +42,6 @@ const FeedbackActionForm = ({
       <Typography variant="h4">{t(`qualitydocument:example${example}`)}</Typography>
       <TextField
         data-cy={`editor-${field}-example${example}-name`}
-        error={!!errors[`${field}NameExample${example}`]}
-        helperText={errors[`${field}NameExample${example}`]}
         label={t(`qualitydocument:developmentGoalName`)}
         margin="normal"
         name={`${field}NameExample${example}`}
@@ -53,39 +52,48 @@ const FeedbackActionForm = ({
       <TextField
         data-cy={`editor-${field}-example${example}-changes`}
         error={!!errors[`${field}ChangesExample${example}`]}
-        helperText={errors[`${field}ChangesExample${example}`]}
+        helperText={
+          <CharacterCounter count={formData[`${field}ChangesExample${example}`]?.length || 0} maxLength={1500} />
+        }
         label={t(`qualitydocument:changes`)}
         margin="normal"
         minRows={3}
         multiline
         name={`${field}ChangesExample${example}`}
         onChange={handleChange}
+        slotProps={{ htmlInput: { maxLength: 1500 } }}
         value={formData[`${field}ChangesExample${example}`] ?? ''}
         variant="outlined"
       />
       <TextField
         data-cy={`editor-${field}-example${example}-feedbackSource`}
         error={!!errors[`${field}FeedbackSourceExample${example}`]}
-        helperText={errors[`${field}FeedbackSourceExample${example}`]}
+        helperText={
+          <CharacterCounter count={formData[`${field}FeedbackSourceExample${example}`]?.length || 0} maxLength={1500} />
+        }
         label={t(`qualitydocument:developmentBasis`)}
         margin="normal"
         minRows={3}
         multiline
         name={`${field}FeedbackSourceExample${example}`}
         onChange={handleChange}
+        slotProps={{ htmlInput: { maxLength: 1500 } }}
         value={formData[`${field}FeedbackSourceExample${example}`] ?? ''}
         variant="outlined"
       />
       <TextField
         data-cy={`editor-${field}-example${example}-communication`}
         error={!!errors[`${field}CommunicationExample${example}`]}
-        helperText={errors[`${field}CommunicationExample${example}`]}
+        helperText={
+          <CharacterCounter count={formData[`${field}CommunicationExample${example}`]?.length || 0} maxLength={1500} />
+        }
         label={t(`qualitydocument:communication`)}
         margin="normal"
         minRows={3}
         multiline
         name={`${field}CommunicationExample${example}`}
         onChange={handleChange}
+        slotProps={{ htmlInput: { maxLength: 1500 } }}
         value={formData[`${field}CommunicationExample${example}`] ?? ''}
         variant="outlined"
       />

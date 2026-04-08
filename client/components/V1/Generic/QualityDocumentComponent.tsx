@@ -12,7 +12,7 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
       : []
 
   const feedbackUtilizationExamples =
-    doc?.data?.feedbackutilizationExamples ?? doc?.data?.feedbackUtilization?.examples ?? ''
+    doc?.data?.feedbackUtilizationExamples ?? doc?.data?.feedbackUtilization?.examples ?? ''
 
   const curriculumDevelopment = [
     {

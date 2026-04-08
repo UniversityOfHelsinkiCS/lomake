@@ -83,7 +83,7 @@ export interface FormDataState {
   guidancePolicies: string
   learningObjectivesAssessment: string
   otherFeedbackSource: string
-  feedbackutilizationExamples: string
+  feedbackUtilizationExamples: string
   feedbackSources: FeedbackSourceState
   learningObjectivesAssessmentRegularity: FeedbackRegularity
   [key: string]: any

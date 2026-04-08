@@ -42,9 +42,7 @@ const FeedbackUtilization = ({
       {!defaultFeedbackSourceOptions.includes(feedbackSource) && (
         <TextField
           data-cy={`${feedbackSource}-description`}
-          error={!!errors[`${feedbackSource}Description`]}
           fullWidth
-          helperText={errors[`${feedbackSource}Description`]}
           label={t(`qualitydocument:otherFeedbackSourceDescription`)}
           margin="normal"
           minRows={1}
