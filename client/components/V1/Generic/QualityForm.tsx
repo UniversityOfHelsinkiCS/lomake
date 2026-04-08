@@ -9,6 +9,7 @@ import {
   Typography,
   TextField,
   Button,
+  Paper,
   RadioGroup,
   Radio,
   FormControlLabel,
@@ -27,6 +28,7 @@ import FeedbackUtilization from './FeedbackUtilizationComponent'
 import FeedbackActionForm from './FeedbackActionComponent'
 import { FeedbackSource, FormDataState, FeedbackSourceState, FeedbackRegularity } from '@/shared/lib/types'
 import CharacterCounter from './Charactercounter'
+import { customColors } from '@/theme'
 
 const fields = [
   'title',
@@ -43,6 +45,28 @@ const defaultFeedbackSourceOptions = [
   'bachelorFeedback',
   'feedbackFromEmployers',
 ]
+
+const sectionCardSx = {
+  border: `1px solid ${customColors.grayLight}`,
+  borderRadius: 2,
+  overflow: 'hidden',
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+}
+
+const sectionHeaderSx = {
+  display: 'flex',
+  alignItems: 'center',
+  backgroundColor: customColors.grayLight,
+  borderLeft: `8px solid ${customColors.lightGreenLight}`,
+  padding: '1.25rem 2rem',
+}
+
+const sectionContentSx = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.25rem',
+  padding: '2rem',
+}
 
 const initFormData = (t: TFunction): FormDataState => {
   return {
@@ -403,278 +427,292 @@ const QualityForm = ({ programmeKey }: { programmeKey: string }) => {
           {fields.map((field, index) => {
             if (index === 1) {
               return (
-                <Fragment key={field}>
-                  <Typography variant="h3">{t('qualitydocument:feedbackHeader')}</Typography>
-                  <Typography variant="light">{t('qualitydocument:feedbackSource')}</Typography>
-                  {feedbackSourceOptions.map(source => {
-                    const sourceState = formData.feedbackSources.find(f => f.name === source)
-                    const isChecked = Boolean(sourceState)
-
-                    return (
-                      <Fragment key={source}>
-                        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                          <Checkbox
-                            checked={isChecked}
-                            label={
-                              !t(`qualitydocument:${source}`).startsWith('qualitydocument:')
-                                ? t(`qualitydocument:${source}`)
-                                : source
-                            }
-                            onChange={(e, data) => handleCheck(source, e, data)}
-                            style={{ fontSize: '1.2rem' }}
-                          />
-                          {!defaultFeedbackSourceOptions.includes(source) && (
-                            <Tooltip arrow placement="right" title={t('qualitydocument:remove')}>
-                              <IconButton
-                                aria-label={t('qualitydocument:remove')}
-                                onClick={() => removeFeedbackSource(source)}
-                                type="button"
-                              >
-                                <DeleteOutlineIcon />
-                              </IconButton>
-                            </Tooltip>
-                          )}
-                        </Box>
-                        {isChecked && sourceState ? (
-                          <FeedbackUtilization
-                            description={sourceState.description}
-                            errors={errors}
-                            feedbackSource={source}
-                            regularity={sourceState.regularity}
-                            setDescription={(value: string) => setSourceDescription(source, value)}
-                            setRegularity={(value: FeedbackRegularity) => setSourceRegularity(source, value)}
-                          />
-                        ) : null}
-                      </Fragment>
-                    )
-                  })}
-                  {errors.feedbackUtilizationFeedbackSources ? (
-                    <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
-                      {errors.feedbackUtilizationFeedbackSources}
-                    </Typography>
-                  ) : null}
-
-                  <Box sx={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-                    <TextField
-                      data-cy={`editor-otherFeedbackSource`}
-                      label={t(`qualitydocument:otherFeedbackSource`)}
-                      name={'otherFeedbackSource'}
-                      onChange={handleChange}
-                      slotProps={{ htmlInput: { maxLength: 50 } }}
-                      value={formData.otherFeedbackSource ?? ''}
-                      variant="outlined"
-                    />
-                    <Button onClick={addNewFeedbackSource} type="button" variant="outlined">
-                      {t('qualitydocument:addNew')}
-                    </Button>
+                <Paper key={field} sx={sectionCardSx}>
+                  <Box sx={sectionHeaderSx}>
+                    <Typography variant="h3">{t('qualitydocument:feedbackHeader')}</Typography>
                   </Box>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}</Typography>
-                    <Typography variant="light">{t('qualitydocument:feedbackUtilizationExamples')}</Typography>
-                    <TextField
-                      data-cy={`feedbackUtilization-examples`}
-                      error={!!errors.feedbackUtilizationExamples}
-                      fullWidth
-                      helperText={
-                        <CharacterCounter count={formData.feedbackUtilizationExamples.length} maxLength={1500} />
-                      }
-                      label={t(`qualitydocument:examplesDescription`)}
-                      margin="normal"
-                      minRows={3}
-                      multiline
-                      name={`feedbackUtilizationExamples`}
-                      onChange={handleChange}
-                      slotProps={{ htmlInput: { maxLength: 1500 } }}
-                      value={formData.feedbackUtilizationExamples}
-                    />
+                  <Box sx={sectionContentSx}>
+                    <Typography variant="light">{t('qualitydocument:feedbackSource')}</Typography>
+                    {feedbackSourceOptions.map(source => {
+                      const sourceState = formData.feedbackSources.find(f => f.name === source)
+                      const isChecked = Boolean(sourceState)
+
+                      return (
+                        <Fragment key={source}>
+                          <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                            <Checkbox
+                              checked={isChecked}
+                              label={
+                                !t(`qualitydocument:${source}`).startsWith('qualitydocument:')
+                                  ? t(`qualitydocument:${source}`)
+                                  : source
+                              }
+                              onChange={(e, data) => handleCheck(source, e, data)}
+                              style={{ fontSize: '1.2rem' }}
+                            />
+                            {!defaultFeedbackSourceOptions.includes(source) && (
+                              <Tooltip arrow placement="right" title={t('qualitydocument:remove')}>
+                                <IconButton
+                                  aria-label={t('qualitydocument:remove')}
+                                  onClick={() => removeFeedbackSource(source)}
+                                  type="button"
+                                >
+                                  <DeleteOutlineIcon />
+                                </IconButton>
+                              </Tooltip>
+                            )}
+                          </Box>
+                          {isChecked && sourceState ? (
+                            <FeedbackUtilization
+                              description={sourceState.description}
+                              errors={errors}
+                              feedbackSource={source}
+                              regularity={sourceState.regularity}
+                              setDescription={(value: string) => setSourceDescription(source, value)}
+                              setRegularity={(value: FeedbackRegularity) => setSourceRegularity(source, value)}
+                            />
+                          ) : null}
+                        </Fragment>
+                      )
+                    })}
+                    {errors.feedbackUtilizationFeedbackSources ? (
+                      <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
+                        {errors.feedbackUtilizationFeedbackSources}
+                      </Typography>
+                    ) : null}
+
+                    <Box sx={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                      <TextField
+                        data-cy={`editor-otherFeedbackSource`}
+                        label={t(`qualitydocument:otherFeedbackSource`)}
+                        name={'otherFeedbackSource'}
+                        onChange={handleChange}
+                        slotProps={{ htmlInput: { maxLength: 50 } }}
+                        value={formData.otherFeedbackSource ?? ''}
+                        variant="outlined"
+                      />
+                      <Button onClick={addNewFeedbackSource} type="button" variant="outlined">
+                        {t('qualitydocument:addNew')}
+                      </Button>
+                    </Box>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                      <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}</Typography>
+                      <Typography variant="light">{t('qualitydocument:feedbackUtilizationExamples')}</Typography>
+                      <TextField
+                        data-cy={`feedbackUtilization-examples`}
+                        error={!!errors.feedbackUtilizationExamples}
+                        fullWidth
+                        helperText={
+                          <CharacterCounter count={formData.feedbackUtilizationExamples.length} maxLength={1500} />
+                        }
+                        label={t(`qualitydocument:examplesDescription`)}
+                        margin="normal"
+                        minRows={3}
+                        multiline
+                        name={`feedbackUtilizationExamples`}
+                        onChange={handleChange}
+                        slotProps={{ htmlInput: { maxLength: 1500 } }}
+                        value={formData.feedbackUtilizationExamples}
+                      />
+                    </Box>
                   </Box>
-                </Fragment>
+                </Paper>
               )
             } else if (index === 2) {
               return (
-                <Fragment key={field}>
-                  <br />
-                  <Typography variant="h3">{t('qualitydocument:curriculumDevelopmentHeader')}</Typography>
-                  <Typography variant="light">{t('qualitydocument:curriculumDevelopmentDescription')}</Typography>
-                  <FeedbackActionForm
-                    errors={errors}
-                    example="1"
-                    field={field}
-                    formData={formData}
-                    handleChange={handleChange}
-                    setExample={setSecondCurriculumDevelopmentExample}
-                  />
-                  {secondCurriculumDevelopmentExample ? (
+                <Paper key={field} sx={sectionCardSx}>
+                  <Box sx={sectionHeaderSx}>
+                    <Typography variant="h3">{t('qualitydocument:curriculumDevelopmentHeader')}</Typography>
+                  </Box>
+                  <Box sx={sectionContentSx}>
+                    <Typography variant="light">{t('qualitydocument:curriculumDevelopmentDescription')}</Typography>
                     <FeedbackActionForm
                       errors={errors}
-                      example="2"
+                      example="1"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
                       setExample={setSecondCurriculumDevelopmentExample}
                     />
-                  ) : null}
+                    {secondCurriculumDevelopmentExample ? (
+                      <FeedbackActionForm
+                        errors={errors}
+                        example="2"
+                        field={field}
+                        formData={formData}
+                        handleChange={handleChange}
+                        setExample={setSecondCurriculumDevelopmentExample}
+                      />
+                    ) : null}
 
-                  {thirdCurriculumDevelopmentExample ? (
-                    <FeedbackActionForm
-                      errors={errors}
-                      example="3"
-                      field={field}
-                      formData={formData}
-                      handleChange={handleChange}
-                      setExample={setThirdCurriculumDevelopmentExample}
-                    />
-                  ) : null}
-                  {!thirdCurriculumDevelopmentExample || !secondCurriculumDevelopmentExample ? (
-                    <Button onClick={handleAddCurriculumExampleClick} type="button" variant="outlined">
-                      {t('qualitydocument:addNewExample')}
-                    </Button>
-                  ) : null}
-                </Fragment>
+                    {thirdCurriculumDevelopmentExample ? (
+                      <FeedbackActionForm
+                        errors={errors}
+                        example="3"
+                        field={field}
+                        formData={formData}
+                        handleChange={handleChange}
+                        setExample={setThirdCurriculumDevelopmentExample}
+                      />
+                    ) : null}
+                    {!thirdCurriculumDevelopmentExample || !secondCurriculumDevelopmentExample ? (
+                      <Button onClick={handleAddCurriculumExampleClick} type="button" variant="outlined">
+                        {t('qualitydocument:addNewExample')}
+                      </Button>
+                    ) : null}
+                  </Box>
+                </Paper>
               )
             } else if (index === 3) {
               return (
-                <Fragment key={field}>
-                  <br />
-                  <Typography variant="h3">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
-                  <Typography variant="light">{t('qualitydocument:guidancePoliciesDescription')}</Typography>
-                  <FeedbackActionForm
-                    errors={errors}
-                    example="1"
-                    field={field}
-                    formData={formData}
-                    handleChange={handleChange}
-                    setExample={setSecondGuidancePoliciesExample}
-                  />
-                  {secondGuidancePoliciesExample ? (
+                <Paper key={field} sx={sectionCardSx}>
+                  <Box sx={sectionHeaderSx}>
+                    <Typography variant="h3">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
+                  </Box>
+                  <Box sx={sectionContentSx}>
+                    <Typography variant="light">{t('qualitydocument:guidancePoliciesDescription')}</Typography>
                     <FeedbackActionForm
                       errors={errors}
-                      example="2"
+                      example="1"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
                       setExample={setSecondGuidancePoliciesExample}
                     />
-                  ) : null}
+                    {secondGuidancePoliciesExample ? (
+                      <FeedbackActionForm
+                        errors={errors}
+                        example="2"
+                        field={field}
+                        formData={formData}
+                        handleChange={handleChange}
+                        setExample={setSecondGuidancePoliciesExample}
+                      />
+                    ) : null}
 
-                  {thirdGuidancePoliciesExample ? (
-                    <FeedbackActionForm
-                      errors={errors}
-                      example="3"
-                      field={field}
-                      formData={formData}
-                      handleChange={handleChange}
-                      setExample={setThirdGuidancePoliciesExample}
-                    />
-                  ) : null}
-                  {!thirdGuidancePoliciesExample || !secondGuidancePoliciesExample ? (
-                    <Button onClick={handleAddGuidanceExampleClick} type="button" variant="outlined">
-                      {t('qualitydocument:addNewExample')}
-                    </Button>
-                  ) : null}
-                </Fragment>
+                    {thirdGuidancePoliciesExample ? (
+                      <FeedbackActionForm
+                        errors={errors}
+                        example="3"
+                        field={field}
+                        formData={formData}
+                        handleChange={handleChange}
+                        setExample={setThirdGuidancePoliciesExample}
+                      />
+                    ) : null}
+                    {!thirdGuidancePoliciesExample || !secondGuidancePoliciesExample ? (
+                      <Button onClick={handleAddGuidanceExampleClick} type="button" variant="outlined">
+                        {t('qualitydocument:addNewExample')}
+                      </Button>
+                    ) : null}
+                  </Box>
+                </Paper>
               )
             } else if (index === 4) {
               return (
-                <Fragment key={field}>
-                  <br />
-                  <Typography variant="h3">{t('qualitydocument:learningObjectivesAssessmentHeader')}</Typography>
-
-                  <TextField
-                    data-cy={`editor-${field}`}
-                    error={!!errors[`${field}`]}
-                    helperText={errors[`${field}`]}
-                    label={t(`qualitydocument:learningObjectivesAssessment`)}
-                    margin="normal"
-                    minRows={2}
-                    multiline
-                    name={`${field}`}
-                    onChange={handleChange}
-                    value={formData[`${field}`]}
-                    variant="outlined"
-                  />
-                  <Typography variant="light">{t('qualitydocument:learningObjectivesAssessmentRegularity')}</Typography>
-                  <RadioGroup
-                    aria-label="learningObjectivesAssessmentRegularity"
-                    data-cy="regularity-learningObjectivesAssessment"
-                    name="learningObjectivesAssessmentRegularity"
-                    onChange={e =>
-                      setFormData(
-                        prevData =>
-                          ({
-                            ...prevData,
-                            learningObjectivesAssessmentRegularity: e.target.value as FeedbackRegularity,
-                          }) as FormDataState
-                      )
-                    }
-                    value={formData.learningObjectivesAssessmentRegularity}
-                  >
-                    <FormControlLabel
-                      control={<Radio />}
-                      label={t('qualitydocument:lessFrequently')}
-                      value="lessFrequently"
+                <Paper key={field} sx={sectionCardSx}>
+                  <Box sx={sectionHeaderSx}>
+                    <Typography variant="h3">{t('qualitydocument:learningObjectivesAssessmentHeader')}</Typography>
+                  </Box>
+                  <Box sx={sectionContentSx}>
+                    <TextField
+                      data-cy={`editor-${field}`}
+                      error={!!errors[`${field}`]}
+                      helperText={errors[`${field}`]}
+                      label={t(`qualitydocument:learningObjectivesAssessment`)}
+                      margin="normal"
+                      minRows={2}
+                      multiline
+                      name={`${field}`}
+                      onChange={handleChange}
+                      value={formData[`${field}`]}
+                      variant="outlined"
                     />
-                    <FormControlLabel
-                      control={<Radio />}
-                      label={t('qualitydocument:perCurriculumCycle')}
-                      value="perCurriculumCycle"
-                    />
-                    <FormControlLabel control={<Radio />} label={t('qualitydocument:annually')} value="annually" />
-                    <FormControlLabel
-                      control={<Radio />}
-                      label={t('qualitydocument:everySemester')}
-                      value="everySemester"
-                    />
-                    <FormControlLabel
-                      control={<Radio />}
-                      label={t('qualitydocument:moreFrequently')}
-                      value="moreFrequently"
-                    />
-                  </RadioGroup>
-                  {errors.learningObjectivesAssessmentRegularity ? (
-                    <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
-                      {errors.learningObjectivesAssessmentRegularity}
+                    <Typography variant="light">
+                      {t('qualitydocument:learningObjectivesAssessmentRegularity')}
                     </Typography>
-                  ) : null}
-                  <Typography variant="light">{t('qualitydocument:learningObjectivesAssessmentExamples')}</Typography>
-                  <FeedbackActionForm
-                    errors={errors}
-                    example="1"
-                    field={field}
-                    formData={formData}
-                    handleChange={handleChange}
-                    setExample={setSecondLearningObjectivesAssessmentExample}
-                  />
-                  {secondLearningObjectivesAssessmentExample ? (
+                    <RadioGroup
+                      aria-label="learningObjectivesAssessmentRegularity"
+                      data-cy="regularity-learningObjectivesAssessment"
+                      name="learningObjectivesAssessmentRegularity"
+                      onChange={e =>
+                        setFormData(
+                          prevData =>
+                            ({
+                              ...prevData,
+                              learningObjectivesAssessmentRegularity: e.target.value as FeedbackRegularity,
+                            }) as FormDataState
+                        )
+                      }
+                      value={formData.learningObjectivesAssessmentRegularity}
+                    >
+                      <FormControlLabel
+                        control={<Radio />}
+                        label={t('qualitydocument:lessFrequently')}
+                        value="lessFrequently"
+                      />
+                      <FormControlLabel
+                        control={<Radio />}
+                        label={t('qualitydocument:perCurriculumCycle')}
+                        value="perCurriculumCycle"
+                      />
+                      <FormControlLabel control={<Radio />} label={t('qualitydocument:annually')} value="annually" />
+                      <FormControlLabel
+                        control={<Radio />}
+                        label={t('qualitydocument:everySemester')}
+                        value="everySemester"
+                      />
+                      <FormControlLabel
+                        control={<Radio />}
+                        label={t('qualitydocument:moreFrequently')}
+                        value="moreFrequently"
+                      />
+                    </RadioGroup>
+                    {errors.learningObjectivesAssessmentRegularity ? (
+                      <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
+                        {errors.learningObjectivesAssessmentRegularity}
+                      </Typography>
+                    ) : null}
+                    <Typography variant="light">{t('qualitydocument:learningObjectivesAssessmentExamples')}</Typography>
                     <FeedbackActionForm
                       errors={errors}
-                      example="2"
+                      example="1"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
                       setExample={setSecondLearningObjectivesAssessmentExample}
                     />
-                  ) : null}
-                  {thirdLearningObjectivesAssessmentExample ? (
-                    <FeedbackActionForm
-                      errors={errors}
-                      example="3"
-                      field={field}
-                      formData={formData}
-                      handleChange={handleChange}
-                      setExample={setThirdLearningObjectivesAssessmentExample}
-                    />
-                  ) : null}
-                  {!thirdLearningObjectivesAssessmentExample || !secondLearningObjectivesAssessmentExample ? (
-                    <Button
-                      onClick={handleAddLearningObjectivesAssessmentExampleClick}
-                      type="button"
-                      variant="outlined"
-                    >
-                      {t('qualitydocument:addNewExample')}
-                    </Button>
-                  ) : null}
-                </Fragment>
+                    {secondLearningObjectivesAssessmentExample ? (
+                      <FeedbackActionForm
+                        errors={errors}
+                        example="2"
+                        field={field}
+                        formData={formData}
+                        handleChange={handleChange}
+                        setExample={setSecondLearningObjectivesAssessmentExample}
+                      />
+                    ) : null}
+                    {thirdLearningObjectivesAssessmentExample ? (
+                      <FeedbackActionForm
+                        errors={errors}
+                        example="3"
+                        field={field}
+                        formData={formData}
+                        handleChange={handleChange}
+                        setExample={setThirdLearningObjectivesAssessmentExample}
+                      />
+                    ) : null}
+                    {!thirdLearningObjectivesAssessmentExample || !secondLearningObjectivesAssessmentExample ? (
+                      <Button
+                        onClick={handleAddLearningObjectivesAssessmentExampleClick}
+                        type="button"
+                        variant="outlined"
+                      >
+                        {t('qualitydocument:addNewExample')}
+                      </Button>
+                    ) : null}
+                  </Box>
+                </Paper>
               )
             }
           })}

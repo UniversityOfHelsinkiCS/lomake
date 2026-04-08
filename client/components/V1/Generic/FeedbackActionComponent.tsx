@@ -98,7 +98,12 @@ const FeedbackActionForm = ({
         variant="outlined"
       />
       {example != '1' && (
-        <Button onClick={handleCancelClick} type="button" variant="outlined">
+        <Button
+          onClick={handleCancelClick}
+          style={{ alignSelf: 'flex-start', marginTop: '1rem' }}
+          type="button"
+          variant="outlined"
+        >
           {t(`qualitydocument:example${example}Remove`)}
         </Button>
       )}

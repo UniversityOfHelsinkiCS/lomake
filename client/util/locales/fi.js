@@ -706,7 +706,7 @@ export default {
   },
   qualitydocument: {
     header: 'Laadunhallintalomake',
-    feedbackHeader: 'Palautteiden hyödyntäminen koulutusohjelman kehittämisessä',
+    feedbackHeader: '1. Palautteiden hyödyntäminen koulutusohjelman kehittämisessä',
     feedbackSource: 'Valitse tai lisää vähintään yksi palautejärjestelmä tai palautteen lähde',
     norppa: 'Norppa',
     howULearn: 'HowULearn',
@@ -725,7 +725,7 @@ export default {
     everySemester: 'Lukukausittain / 2 kertaa vuodessa',
     moreFrequently: 'Useammin kuin 2 kertaa vuodessa',
     lessFrequently: 'Harvemmin kuin 4 vuoden välein',
-    curriculumDevelopmentHeader: 'Opetussuunnitelmien kehittäminen',
+    curriculumDevelopmentHeader: '2. Opetussuunnitelmien kehittäminen',
     curriculumDevelopmentDescription:
       'Kertokaa esimerkkejä (1-3 kpl) opetussuunnitelman kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',
     example1: 'Esimerkki 1:',
@@ -737,10 +737,10 @@ export default {
     developmentBasis: 'Mihin kaikkiin palautteisiin nämä muutokset perustuivat?',
     communication: 'Miten muutoksista tiedotettiin palautetta antaneille tahoille?',
     learningObjectivesAssessment: 'Miten osaamistavoitteiden saavuttamista arvioidaan koulutusohjelman johtoryhmässä?',
-    guidancePoliciesHeader: 'Ohjauskäytäntöjen kehittäminen',
+    guidancePoliciesHeader: '3. Ohjauskäytäntöjen kehittäminen',
     guidancePoliciesDescription:
       'Kertokaa esimerkkejä (1-3 kpl) ohjauskäytöntöjen kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',
-    learningObjectivesAssessmentHeader: 'Koulutusohjelman osaamistavoitteiden toteutumisen seuranta ja kehittäminen',
+    learningObjectivesAssessmentHeader: '4. Koulutusohjelman osaamistavoitteiden toteutumisen seuranta ja kehittäminen',
     learningObjectivesAssessmentExamples: 'Kertokaa esimerkkejä (1-3 kpl) osaamistavoitteiden muuttamisesta',
     learningObjectivesAssessmentRegularity:
       'Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
