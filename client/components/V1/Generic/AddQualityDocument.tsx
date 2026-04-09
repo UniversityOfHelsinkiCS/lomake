@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router'
 
 import { useCreateQualityDocumentMutation } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
+import { useLockDocument } from '@/client/hooks/useLockDocument'
 
 import { FeedbackSource, FormDataState } from '@/shared/lib/types'
 
@@ -36,8 +37,21 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const STORAGE_KEY = `qualityFormCreate_${programmeKey}`
+  const LOCK_FIELD = `${programmeKey}-quality-draft`
   const [errors, setErrors] = useState<Record<string, string>>(initErrors())
   const [createDocument] = useCreateQualityDocumentMutation()
+
+  const { componentRef, handleReleaseLock, isLockedByOther } = useLockDocument({
+    room: programmeKey,
+    field: LOCK_FIELD,
+  })
+
+  useEffect(() => {
+    if (isLockedByOther) {
+      handleReleaseLock()
+      navigate(`/v1/programmes/10/${programmeKey}`)
+    }
+  }, [isLockedByOther, programmeKey, navigate, handleReleaseLock])
 
   const loadCachedData = (): CachedFormState => {
     try {
@@ -161,6 +175,7 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
     }
     if (validateForm(payload)) {
       createDocument({ studyprogrammeKey: programmeKey, data: payload as any, year: selectedYear })
+      handleReleaseLock()
       setFormData(initFormData(t))
       setErrors(initErrors())
       setFeedbackSourceOptions(defaultFeedbackSourceOptions)
@@ -181,7 +196,7 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column' }}>
       <Typography sx={{ mb: '4rem' }} variant="h2">
         {t('qualitydocument:header')} - {`${new Date().toLocaleDateString('fi-FI')}`}
       </Typography>

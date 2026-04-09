@@ -6,6 +6,7 @@ import { Box, Typography, CircularProgress } from '@mui/material'
 
 import { useTranslation } from 'react-i18next'
 import { useUpdateQualityDocumentMutation } from '@/client/redux/qualityDocuments'
+import { useLockDocument } from '@/client/hooks/useLockDocument'
 import { useNavigate } from 'react-router'
 
 import { FeedbackSource, FormDataState, FeedbackRegularity } from '@/shared/lib/types'
@@ -25,6 +26,18 @@ const EditQualityDocument = ({
   const { t } = useTranslation()
   const navigate = useNavigate()
   const STORAGE_KEY = `qualityFormEdit_${programmeKey}_${id}`
+
+  const { componentRef, handleReleaseLock, isLockedByOther } = useLockDocument({
+    room: programmeKey,
+    field: id,
+  })
+
+  useEffect(() => {
+    if (isLockedByOther) {
+      handleReleaseLock()
+      navigate(`/v1/programmes/10/${programmeKey}`)
+    }
+  }, [isLockedByOther, programmeKey, navigate, handleReleaseLock])
 
   const normalizeFormData = useCallback(
     (backendData: Record<string, any>): FormDataState => {
@@ -163,6 +176,7 @@ const EditQualityDocument = ({
     }
     if (validateForm(payload)) {
       updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
+      handleReleaseLock()
       try {
         localStorage.removeItem(STORAGE_KEY)
       } catch (error) {
@@ -176,7 +190,7 @@ const EditQualityDocument = ({
   if (!document.data) return <CircularProgress />
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column' }}>
       <Typography sx={{ mb: '4rem' }} variant="h3">{`${formData.title}`}</Typography>
       <QualityForm
         errors={errors}

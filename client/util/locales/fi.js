@@ -757,6 +757,15 @@ export default {
     description: 'Kuvaus:',
     regularity: 'Käsittelyn säännöllisyys:',
     examples: 'Esimerkit:',
+    unsavedChangesWarning1:
+      'Sinulla on tallentamattomia muutoksia. Paina "OK" poistuaksesi tallentamatta muutoksia ja vapauttaaksesi lomakkeen muiden täytettäväksi. Paina "Peruuta" jatkaaksesi muokkausta. ',
+    unsavedChangesWarning2:
+      'Lomake on lukittu muilta käyttäjiltä käsittelyäsi varten. Tallenna muutokset ja vapauta lomake muiden käyttöön ennen sivulta poistumista.',
+    documentLockedWarning:
+      'Lomake on lukittu muilta käyttäjiltä käsittelyäsi varten. Avaa lomake ja tallenna muutokset vapauttaaksesi lomakkeen muiden käyttöön.',
+    documentLocked:
+      'Lomake lukittu toisen käyttäjän toimesta. Odota, että käyttäjä on valmis, tai ota yhteyttä järjestelmän ylläpitäjään, jos lukko vaikuttaa olevan virheellinen.',
+    documentUnsavedRelease: 'Vapauta lomake muiden muokattavaksi tallentamalla muutokset!',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',

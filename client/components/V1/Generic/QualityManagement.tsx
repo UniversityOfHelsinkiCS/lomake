@@ -1,5 +1,7 @@
+/* eslint-disable no-alert */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useNavigate, useParams } from 'react-router'
-import { Box, IconButton, Typography, Link, CircularProgress } from '@mui/material'
+import { Box, IconButton, Typography, CircularProgress } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack } from '@mui/icons-material'
@@ -13,6 +15,7 @@ import { Loader } from 'semantic-ui-react'
 import { useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import type { QualityDocumentType } from '@/client/lib/types'
 import EditQualityDocument from './EditQualityDocument'
+import { useTranslation } from 'react-i18next'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -38,6 +41,7 @@ const QualityManagement = () => {
   const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { isLoading, programme } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const user = useAppSelector(state => state.currentUser.data)
   const { data: documents = [], isFetching } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
@@ -54,6 +58,22 @@ const QualityManagement = () => {
     (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey
   )
 
+  const handleBack = () => {
+    const shouldRelease = window.confirm(t('qualitydocument:unsavedChangesWarning1'))
+    if (shouldRelease) {
+      try {
+        localStorage.removeItem(`qualityFormCreate_${programmeKey}`)
+        localStorage.removeItem(`qualityFormEdit_${programmeKey}_${String(id)}`)
+        navigate(`/v1/programmes/10/${programmeKey}`)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to clear form data from localStorage:', error)
+      }
+    } else {
+      return
+    }
+  }
+
   if (!programme || !hasWriteRights) return null
 
   if (isFetching || (!id && hasDocumentForYear)) return <CircularProgress />
@@ -61,12 +81,7 @@ const QualityManagement = () => {
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '1rem' }}>
-        <IconButton
-          component={Link}
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onClick={() => navigate(`/v1/programmes/10/${programmeKey}`)}
-          sx={{ marginRight: 2 }}
-        >
+        <IconButton onClick={handleBack} onMouseDown={event => event.stopPropagation()} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
         <Typography variant="h2">{programmeData.koulutusohjelma[lang]}</Typography>

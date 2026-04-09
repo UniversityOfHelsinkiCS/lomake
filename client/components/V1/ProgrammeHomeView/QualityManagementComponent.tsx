@@ -2,7 +2,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable no-alert */
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { isAdmin } from '@/config/common'
@@ -21,22 +20,61 @@ import { ExpandMore, Add, Delete, Edit } from '@mui/icons-material'
 import { useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '@/client/redux/qualityDocuments'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
+import { useFetchLockQuery, useDeleteLockMutation } from '@/client/redux/lock'
 import QualityDocumentInfo from '../Generic/QualityDocumentComponent'
 import { QualityDocumentType } from '@/client/lib/types'
 
 const QualityManagementComponent = () => {
   const { t } = useTranslation()
-  const { programme: programmeKey } = useParams<{ programme: string }>()
+  const { programme: programmeKey = '' } = useParams<{ programme: string }>()
   const navigate = useNavigate()
-  const { data: documents = [] } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
+  const { data: documents = [] } = useGetQualityDocumentsQuery(
+    { studyprogrammeKey: programmeKey },
+    {
+      pollingInterval: 1000,
+    }
+  )
   const user = useAppSelector(state => state.currentUser.data)
+  const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser?.data)
   const form = 10
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
   const { isLoading } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
+  const { data: lockMap } = useFetchLockQuery(
+    { room: programmeKey },
+    {
+      pollingInterval: 1000,
+    }
+  )
   const hasDocumentForYear = documents.some((doc: QualityDocumentType) => doc.year == activeYear)
   const hasWriteRights = (programmeKey ? user.access?.[programmeKey]?.write : false) || isAdmin(user)
 
+  const draftLockField = `${programmeKey}-quality-draft`
+  const someoneElseEditingDraft = !!(
+    lockMap?.[draftLockField] &&
+    lockMap[draftLockField].uid !== currentUser?.uid &&
+    currentUser?.uid
+  )
+
+  const currentUserEditingDraft = !!(
+    lockMap?.[draftLockField] &&
+    lockMap[draftLockField].uid === currentUser?.uid &&
+    currentUser?.uid
+  )
+
+  const isSomeoneElseEditing = (docId: number | string) => {
+    if (!currentUser?.uid) return false
+    const docIdStr = String(docId)
+    return !!(lockMap?.[docIdStr] && lockMap[docIdStr].uid !== currentUser.uid)
+  }
+
+  const isCurrentUserEditing = (docId: number | string) => {
+    if (!currentUser?.uid) return false
+    const docIdStr = String(docId)
+    return !!(lockMap?.[docIdStr] && lockMap[docIdStr].uid === currentUser.uid)
+  }
+
   const [deleteDocument] = useDeleteQualityDocumentMutation()
+  const [deleteLock] = useDeleteLockMutation()
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
@@ -46,13 +84,15 @@ const QualityManagementComponent = () => {
     return <CircularProgress />
   }
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number | string) => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
     if (isConfirmed) {
-      deleteDocument({ studyprogrammeKey: programmeKey, id })
+      const idStr = String(id)
+      deleteDocument({ studyprogrammeKey: programmeKey, id: idStr })
+      deleteLock({ room: programmeKey, field: idStr })
       try {
         localStorage.removeItem(`qualityFormCreate_${programmeKey}`)
-        localStorage.removeItem(`qualityFormEdit_${programmeKey}_${id}`)
+        localStorage.removeItem(`qualityFormEdit_${programmeKey}_${idStr}`)
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Failed to clear form data from localStorage:', error)
@@ -78,6 +118,11 @@ const QualityManagementComponent = () => {
             <Typography variant="light">{t('qualitydocument:documentingDescription')}</Typography>
           </Alert>
         )}
+        {currentUserEditingDraft ? (
+          <Typography style={{ color: 'red' }} variant="regular">
+            {t('qualitydocument:documentLockedWarning')}
+          </Typography>
+        ) : null}
         {Array.isArray(documents) &&
           documents.map((doc: Record<string, any>, index) => (
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
@@ -92,7 +137,12 @@ const QualityManagementComponent = () => {
                   {hasWriteRights && (
                     <Button
                       data-cy={`accordion-${index}-edit-qualitydocument-button`}
-                      onClick={() => navigate(`/v1/programmes/10/${programmeKey}/qualitydocument/${doc.id}`)}
+                      disabled={isSomeoneElseEditing(doc.id)}
+                      onClick={() => {
+                        if (!isSomeoneElseEditing(doc.id)) {
+                          navigate(`/v1/programmes/10/${programmeKey}/qualitydocument/${doc.id}`)
+                        }
+                      }}
                       startIcon={<Edit />}
                       variant="contained"
                     >
@@ -103,12 +153,29 @@ const QualityManagementComponent = () => {
                     <Button
                       color="error"
                       data-cy={`accordion-${index}-delete-qualitydocument-button`}
-                      onClick={() => handleDelete(doc.id)}
+                      disabled={isSomeoneElseEditing(doc.id)}
+                      onClick={() => {
+                        if (!isSomeoneElseEditing(doc.id)) {
+                          handleDelete(doc.id)
+                        }
+                      }}
                       startIcon={<Delete />}
                       variant="contained"
                     >
                       {t('document:delete')}
                     </Button>
+                  )}
+                </div>
+                <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right', gap: '1rem' }}>
+                  {isSomeoneElseEditing(doc.id) && (
+                    <Typography style={{ color: 'red' }} variant="regular">
+                      {t('qualitydocument:documentLocked')}
+                    </Typography>
+                  )}
+                  {isCurrentUserEditing(doc.id) && (
+                    <Typography style={{ color: 'red' }} variant="regular">
+                      {t('qualitydocument:documentLockedWarning')}
+                    </Typography>
                   )}
                 </div>
               </AccordionDetails>
@@ -119,12 +186,24 @@ const QualityManagementComponent = () => {
           <Box>
             <Button
               data-cy="create-new-qualitydocument"
-              onClick={() => navigate(`/v1/programmes/${form}/${programmeKey}/qualitydocument/new`)}
+              disabled={someoneElseEditingDraft}
+              onClick={() => {
+                if (!someoneElseEditingDraft) {
+                  navigate(`/v1/programmes/${form}/${programmeKey}/qualitydocument/new`)
+                }
+              }}
               startIcon={<Add />}
               variant="outlined"
             >
               {t('document:newDocument')}
             </Button>
+            <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right', gap: '1rem' }}>
+              {someoneElseEditingDraft && (
+                <Typography style={{ color: 'red' }} variant="regular">
+                  {t('qualitydocument:documentLocked')}
+                </Typography>
+              )}
+            </div>
           </Box>
         )}
       </Box>

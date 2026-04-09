@@ -245,6 +245,9 @@ const QualityForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
+      <Typography style={{ color: 'red' }} variant="regular">
+        {t('qualitydocument:unsavedChangesWarning2')}
+      </Typography>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         {fields.map((field, index) => {
           if (index === 1) {
@@ -536,16 +539,24 @@ const QualityForm = ({
             )
           }
         })}
-        <Button
-          color="primary"
-          data-cy="save-document"
-          key="submit"
-          sx={{ alignSelf: 'flex-end' }}
-          type="submit"
-          variant="contained"
-        >
-          {t('qualitydocument:submit')}
-        </Button>
+        <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'right' }}>
+          <Box sx={{ mt: '1rem' }}>
+            <Button
+              color="primary"
+              data-cy="save-document"
+              key="submit"
+              sx={{ alignSelf: 'flex-end' }}
+              type="submit"
+              variant="contained"
+            >
+              {t('qualitydocument:submit')}
+            </Button>
+            <br />
+            <Typography style={{ color: 'red' }} variant="regular">
+              {t('qualitydocument:documentUnsavedRelease')}
+            </Typography>
+          </Box>
+        </div>
       </div>
     </form>
   )
