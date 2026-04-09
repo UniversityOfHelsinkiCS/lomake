@@ -2,6 +2,8 @@ import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
 import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
+import { QualityDocumentFormSchema } from '@/shared/validators'
+import { fields } from '../components/V1/Generic/QualityForm'
 
 export const calculateColor = (value: number, threshold: string, liikennevalo: boolean, unit?: string) => {
   if (!liikennevalo) {
@@ -162,4 +164,58 @@ export const getKeyDataPoints = (t: TFunction) => {
 
 export const formatURLFragment = (fragment: string) => {
   return fragment.toLowerCase().replace(/ /g, '-').replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/å/g, 'a')
+}
+
+export const validateQualityDocument = (payload: Record<string, any>, t: TFunction): Record<string, string> | null => {
+  const res = QualityDocumentFormSchema.safeParse(payload)
+  if (res.success) return null
+
+  const nextErrors = fields.reduce(
+    (acc, field) => {
+      acc[field] = ''
+      return acc
+    },
+    {} as Record<string, string>
+  )
+
+  const setErrorOnce = (key: string, messageKey: string) => {
+    if (!key || nextErrors[key]) return
+    nextErrors[key] = t(`error:${messageKey}`)
+  }
+
+  res.error.issues.forEach(issue => {
+    const [root, second] = issue.path
+
+    if (root === 'feedbackSources') {
+      if (issue.path.length === 1) {
+        setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
+        setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
+        return
+      }
+
+      if (typeof second === 'number') {
+        const sourceName = payload.feedbackSources?.[second]?.name
+        if (!sourceName || typeof sourceName !== 'string') return
+
+        if (issue.path[2] === 'regularity') {
+          setErrorOnce(`${sourceName}Regularity`, 'regularityRequired')
+        }
+        if (issue.path[2] === 'description') {
+          setErrorOnce(`${sourceName}Description`, issue.message)
+        }
+      }
+      return
+    }
+
+    if (root === 'learningObjectivesAssessmentRegularity') {
+      setErrorOnce('learningObjectivesAssessmentRegularity', 'regularityRequired')
+      return
+    }
+
+    if (typeof root === 'string' && issue.path.length === 1) {
+      setErrorOnce(root, issue.message)
+    }
+  })
+
+  return nextErrors
 }

@@ -6,7 +6,7 @@ import { ArrowBack } from '@mui/icons-material'
 import { isAdmin } from '@/config/common'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
-import QualityForm from './QualityForm'
+import AddQualityDocument from './AddQualityDocument'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import { Loader } from 'semantic-ui-react'
@@ -74,7 +74,7 @@ const QualityManagement = () => {
       <br />
       <br />
       {!id ? (
-        <QualityForm programmeKey={programmeData.koulutusohjelmakoodi} />
+        <AddQualityDocument programmeKey={programmeData.koulutusohjelmakoodi} />
       ) : (
         <EditQualityDocument document={document} id={id} programmeKey={programmeData.koulutusohjelmakoodi} />
       )}
