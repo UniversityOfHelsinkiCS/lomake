@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { CircularProgress, Tooltip, Typography } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
 import { GroupKey } from '@/client/lib/enums'
 import { KeyDataProgramme } from '@/shared/lib/types'
@@ -34,20 +35,34 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
   const color = additionalInfo.fi === 'Lakkautettu ohjelma' ? 'secondary' : ''
+  const hasAdditionalInfo = Boolean(additionalInfo[lang])
 
   return (
     <TableCell data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`} hoverEffect itemAlign="left">
       <Link style={{ width: '100%' }} to={`/v1/programmes/10/${koulutusohjelmakoodi}`}>
-        <Tooltip arrow placement="top" title={additionalInfo[lang]}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <Typography color={color} variant="regular">
-              {koulutusohjelma[lang]}
-            </Typography>
-            <Typography color={color} variant="regular">
-              {koulutusohjelmakoodi}
+              {koulutusohjelma[lang]}{' '}
+              {hasAdditionalInfo ? (
+                <Tooltip arrow placement="top" title={additionalInfo[lang]}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <InfoOutlinedIcon
+                      color="secondary"
+                      fontSize="small"
+                      sx={{
+                        verticalAlign: 'middle',
+                      }}
+                    />
+                  </span>
+                </Tooltip>
+              ) : null}
             </Typography>
           </div>
-        </Tooltip>
+          <Typography color={color} variant="regular">
+            {koulutusohjelmakoodi}
+          </Typography>
+        </div>
       </Link>
     </TableCell>
   )
