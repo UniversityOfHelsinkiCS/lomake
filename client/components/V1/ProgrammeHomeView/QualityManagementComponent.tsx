@@ -109,7 +109,7 @@ const QualityManagementComponent = ({ programmeData }) => {
         <Typography sx={{ mt: 4 }} variant="h4">
           {t('keyData:qualitydocumentingHeader')}
         </Typography>
-        {activeYear < 2026 ? (
+        {!isAdmin(user) ? (
           <Alert severity="info" sx={{ gap: 1 }}>
             <Typography variant="light">{t('keyData:notUsed2025')}</Typography>
           </Alert>
@@ -124,6 +124,7 @@ const QualityManagementComponent = ({ programmeData }) => {
           </Typography>
         ) : null}
         {Array.isArray(documents) &&
+          isAdmin(user) &&
           documents.map((doc: Record<string, any>, index) => (
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
               <AccordionSummary expandIcon={<ExpandMore />}>
