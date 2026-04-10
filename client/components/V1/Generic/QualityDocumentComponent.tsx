@@ -117,8 +117,12 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                 
               ) : null}
               <Typography color={'default'} sx={{ ml: 2 }}>
-                {t(`qualitydocument:regularity`)} {t(`qualitydocument:${source.regularity}`)}
+                {t(`qualitydocument:feedbackRegularityHeader`)}
               </Typography>
+              <Typography color={'default'} sx={{ ml: 3 }}>
+                    {t(`qualitydocument:${source.regularity}`)}
+                  </Typography>
+              
             </Box>
           ))
         ) : (
@@ -193,8 +197,11 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
         <Typography color={doc.data.learningObjectivesAssessment ? 'default' : 'secondary'} sx={{ ml: 2 }}>
           {doc.data.learningObjectivesAssessment || t('common:empty')}
         </Typography>
-        <Typography color={doc.data.learningObjectivesAssessmentRegularity ? 'default' : 'secondary'}>
-          {t(`qualitydocument:regularity`)} {t(`qualitydocument:${doc.data.learningObjectivesAssessmentRegularity}`) || t('common:empty')}
+        <Typography color={'default'}>
+          {t(`qualitydocument:learningObjectivesAssessmentRegularity`)} 
+        </Typography>
+        <Typography color={doc.data.learningObjectivesAssessmentRegularity  ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+          {t(`qualitydocument:${doc.data.learningObjectivesAssessmentRegularity}`) || t('common:empty')}
         </Typography>
         <Typography variant="h5">{t('qualitydocument:examples')}</Typography>
         {(Array.isArray(learningObjectivesAssessmentExamples) ? learningObjectivesAssessmentExamples : []).length >

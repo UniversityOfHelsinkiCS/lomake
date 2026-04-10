@@ -313,6 +313,7 @@ const QualityForm = ({
                       name={'otherFeedbackSource'}
                       onChange={handleChange}
                       slotProps={{ htmlInput: { maxLength: 50 } }}
+                      sx={{ minWidth: '300px' }}
                       value={formData.otherFeedbackSource ?? ''}
                       variant="outlined"
                     />
@@ -549,7 +550,7 @@ const QualityForm = ({
               type="submit"
               variant="contained"
             >
-              {t('qualitydocument:submit')}
+              {t('document:submit')}
             </Button>
             <br />
             <Typography style={{ color: 'red' }} variant="regular">

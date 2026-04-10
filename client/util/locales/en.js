@@ -581,9 +581,10 @@ export default {
     pilotInfo1: `The redesigned annual follow-up of degree programmes will be piloted in spring 2025 in all bachelor's and master's programmes. Doctoral programmes are not yet included in the pilot stage.`,
     pilotInfo2:
       'From 15 April to 30 May 2025, degree programme steering groups will review their evaluation areas and draw up their development plans. The degree programmes that initiate the intervention procedure will discuss the matter with the Vice-Dean by 30 October 2025.',
-    year2026Header: 'Year 2026 Annual Follow-up',
+    year2026Header: '2026 Annual Follow-up',
     year2026Info1:
-      'Degree programme steering groups will review their evaluation areas and draw up their development plans. The degree programmes that initiate the intervention procedure will discuss the matter with the Vice-Dean.',
+      'The steering groups of the degree programmes will discuss their revaluation areas and key figures. If an evaluation area is marked in yellow, the degree programme must provide a comment on the situation in the comment field below that evaluation area. All degree programmes with one or more evaluation areas marked with a red color code are required to prepare a development plan by the deadline specified by the Vice Dean. The Vice Dean may also request a development plan from other degree programmes.',
+    noDoctoral2026: 'Doctoral programmes will not participate in the 2026 annual follow-up.',
     notUsed2025: 'Not available in 2025',
     keyFigure: 'Evaluation areas and Key figures',
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
@@ -702,27 +703,66 @@ export default {
   },
   qualitydocument: {
     header: 'Quality Management Form',
-    curriculumDevelopmentHeader: 'Curriculum process',
-    curriculumDevelopment: 'Effectiveness of the curriculum process',
-    guidancePoliciesHeader: 'Guidance Policies',
-    guidancePolicies: 'Effectiveness of guidance policies',
-    feedbackHeader: 'Student feedback',
-    feedbackActions: 'Student feedback processing and follow-upactions',
-    feedbackDescription:
-      'How has student feedback been processed, what measures have been taken on the basis of the feedback, and how have these measures been communicated?',
-    feedbackUtilizationHeader: 'Student feedback utilization',
-    norppa: 'Utilization of Norppa course feedback',
-    careerMonitoring: 'Utilization of the career monitoring survey',
-    bachelorFeedback: 'Utilization of Bachelor’s Graduate Survey feedback',
-    other: 'Utilization of other student feedback',
-    feedbackRegularityHeader: 'Regularity of student feedback handling',
-    annually: 'Student feedback processing and actions are carried out annually',
-    everySemester: 'Student feedback processing and actions are carried out each semester',
-    moreFrequently: 'Student feedback processing and actions are carried out more frequently than each semester',
-    submit: 'Save Document',
+    feedbackHeader: '1. Using Feedback to Develop the Degree Programme',
+    feedbackSource: 'Select or add at least one feedback system or source of feedback',
+    norppa: 'Norppa',
+    howULearn: 'HowULearn',
+    careerMonitoring: 'Career monitoring',
+    bachelorFeedback: 'Bachelor’s Graduate Survey',
+    feedbackFromEmployers: 'Feedback from employers',
+    otherFeedbackSource: 'Other feedback — please specify',
+    otherFeedbackSourceDescription: 'Describe the feedback system or source you have added',
+    feedbackUtilizationHeader: 'Utilizing feedback',
+    feedbackRegularityHeader: 'How often is this feedback handled?',
+    feedbackUtilizationExamples:
+      'How is feedback handled by the degree programme’s steering group? What areas for improvement have been identified based on the feedback?',
+    examplesDescription: 'Please provide 1–3 examples',
+    perCurriculumCycle: 'Per curriculum cycle / every 4 years',
+    annually: 'Annually / once a year',
+    everySemester: 'Per semester / twice a year',
+    moreFrequently: 'More than twice a year',
+    lessFrequently: 'Less than once every 4 years',
+    curriculumDevelopmentHeader: '2. Curriculum Development',
+    curriculumDevelopmentDescription:
+      'Please provide 1–3 examples of areas for curriculum development that have been identified based on feedback received by the degree programme.',
+    example1: 'Example 1:',
+    example2: 'Example 2:',
+    example3: 'Example 3:',
+    developmentGoal: 'Area for development:',
+    developmentGoalName: 'Area for development (name)',
+    changes: 'What changes were made based on the feedback?',
+    developmentBasis: 'Which specific feedback did these changes address?',
+    communication: 'How were those who provided feedback informed about the changes?',
+    learningObjectivesAssessment:
+      'How is the achievement of learning outcomes assessed by the degree programme steering group?',
+    guidancePoliciesHeader: '3. Development of Guidance Practices',
+    guidancePoliciesDescription:
+      'Please provide examples (1–3) of areas for improvement in guidance practices that have been identified based on feedback received by the degree programme.',
+    learningObjectivesAssessmentHeader:
+      '4. Monitoring and Developing the Achievement of Learning Outcomes of the Degree Programme',
+    learningObjectivesAssessmentExamples: 'Please provide examples (1–3) of changes made to learning outcomes',
+    learningObjectivesAssessmentRegularity:
+      'How often is the achievement of learning outcomes discussed by the programme steering group?',
     undefined: 'Not defined',
     documentingDescription:
-      'This annual report section contains questions about the development of the study programme’s curriculum, guidance, learning objectives and feedback practices.',
+      'This section of the annual follow-up includes questions on the development of the degree programme’s curriculum, guidance practices, learning outcomes and feedback practices.',
+    addNew: 'Add',
+    remove: 'Remove',
+    addNewExample: 'Add new example',
+    example2Remove: 'Remove example 2',
+    example3Remove: 'Remove example 3',
+    feedbackSources: 'Feedback systems and feedback sources',
+    description: 'Description:',
+    examples: 'Examples:',
+    unsavedChangesWarning1:
+      'You have unsaved changes. Press “OK” to leave without saving and release the form for others to fill in. Press “Cancel” to continue editing.',
+    unsavedChangesWarning2:
+      'The form is locked for your processing. Save your changes and release the form for others before leaving the page.',
+    documentLockedWarning:
+      'The form is locked for your processing. Open the form and save your changes to release it for others.',
+    documentLocked:
+      'The form is locked by another user. Wait until the user is finished, or contact the system administrator if the lock seems to be invalid.',
+    documentUnsavedRelease: 'Release the form for others to edit by saving your changes',
   },
 
   error: {

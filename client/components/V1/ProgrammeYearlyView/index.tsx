@@ -308,6 +308,7 @@ const ProgrammeYearlyView = () => {
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                   <Typography variant="h5">{t('keyData:year2026Header')}</Typography>
                   <Typography variant="light">{t('keyData:year2026Info1')}</Typography>
+                  <Typography variant="light">{t('keyData:noDoctoral2026')}</Typography>
                 </Box>
               )}
             </Box>

@@ -569,7 +569,7 @@ export default {
     info1:
       'Koulutusohjelman elinvoimaisuutta kuvaavat <strong>arviointialueet</strong> ovat: <i>a) vetovoimaisuus, b) opintojen sujuvuus ja valmistuminen, c) palaute ja työllistyminen sekä d) resurssien käyttö.</i> Arviointialueet ovat samat kandi-, maisteri- ja tohtoriohjelmille.',
     info2:
-      'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot opintoasiainneuvostossa, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
+      'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
     info3: 'Värimerkintöjen selitteet ovat: ',
     darkGreenInfo: 'Vihreä – koulutusohjelman tilanne on erinomainen',
     lightGreenInfo: 'Vaaleanvihreä – koulutusohjelman tilanne on hyvä',
@@ -582,7 +582,8 @@ export default {
       '15.4.-30.5.2025 Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa ja laativat kehittämissuunnitelmansa. Ne koulutusohjelmat, joissa käynnistyy toimenpidemenettely, käyvät keskustelun opetusvaradekaanin kanssa 30.10.2025 mennessä.',
     year2026Header: 'Vuoden 2026 vuosiseuranta',
     year2026Info1:
-      'Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa ja laativat kehittämissuunnitelmansa. Ne koulutusohjelmat, joissa käynnistyy toimenpidemenettely, käyvät keskustelun opetusvaradekaanin kanssa.',
+      'Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa avainlukuineen. Mikäli arviointialue on keltainen, koulutusohjelman tulee antaa kommentti tilanteesta arviointialueen alla olevaan kommenttikenttään. Kaikkien koulutusohjelmien, joilla yksi tai useampi arviointialue on merkitty punaisella värikoodilla, edellytetään laativan kehittämissuunnitelma varadekaanin ilmoittamassa määräajassa. Varadekaani voi pyytää myös muilta koulutusohjelmilta kehittämissuunnitelman.',
+    noDoctoral2026: 'Tohtoriohjelmat eivät osallistu vuonna 2026 vuosiseurantaan.',
     notUsed2025: 'Ei käytössä vuonna 2025',
     keyFigure: 'Arviointialueet ja avainluvut',
     keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
@@ -744,7 +745,6 @@ export default {
     learningObjectivesAssessmentExamples: 'Kertokaa esimerkkejä (1-3 kpl) osaamistavoitteiden muuttamisesta',
     learningObjectivesAssessmentRegularity:
       'Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
-    submit: 'Tallenna dokumentti',
     undefined: 'Ei määritelty',
     documentingDescription:
       'Tämä vuosiseurannan osio sisältää kysymyksiä koulutusohjelman opetussuunnitelman, ohjauksen, osaamistavoitteiden ja palautekäytäntöjen kehittämisestä.',
@@ -755,7 +755,6 @@ export default {
     example3Remove: 'Poista esimerkki 3',
     feedbackSources: 'Palautejärjestelmät ja palautteen lähteet',
     description: 'Kuvaus:',
-    regularity: 'Käsittelyn säännöllisyys:',
     examples: 'Esimerkit:',
     unsavedChangesWarning1:
       'Sinulla on tallentamattomia muutoksia. Paina "OK" poistuaksesi tallentamatta muutoksia ja vapauttaaksesi lomakkeen muiden täytettäväksi. Paina "Peruuta" jatkaaksesi muokkausta. ',
@@ -765,7 +764,7 @@ export default {
       'Lomake on lukittu muilta käyttäjiltä käsittelyäsi varten. Avaa lomake ja tallenna muutokset vapauttaaksesi lomakkeen muiden käyttöön.',
     documentLocked:
       'Lomake lukittu toisen käyttäjän toimesta. Odota, että käyttäjä on valmis, tai ota yhteyttä järjestelmän ylläpitäjään, jos lukko vaikuttaa olevan virheellinen.',
-    documentUnsavedRelease: 'Vapauta lomake muiden muokattavaksi tallentamalla muutokset!',
+    documentUnsavedRelease: 'Vapauta lomake muiden muokattavaksi tallentamalla muutokset',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',

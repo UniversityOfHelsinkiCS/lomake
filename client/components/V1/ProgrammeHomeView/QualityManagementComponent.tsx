@@ -197,7 +197,7 @@ const QualityManagementComponent = () => {
             >
               {t('document:newDocument')}
             </Button>
-            <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right', gap: '1rem' }}>
+            <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'left', gap: '1rem' }}>
               {someoneElseEditingDraft && (
                 <Typography style={{ color: 'red' }} variant="regular">
                   {t('qualitydocument:documentLocked')}
