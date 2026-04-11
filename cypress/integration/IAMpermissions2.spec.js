@@ -62,11 +62,11 @@ describe('IAM permission tests', () => {
   it('Jory group who has also writing rights to Faculty Evaluation works', () => {
     cy.login('cypressFacultyKatselmusUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 32)
     cy.visit('/evaluation')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 32)
     cy.visit('/degree-reform')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 32)
     cy.visit('/evaluation-faculty')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
 

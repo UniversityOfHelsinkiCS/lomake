@@ -104,7 +104,7 @@ describe('IAM permission tests', () => {
   it('Kosu user gets wide writing access', () => {
     cy.login('cypressKosuUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 35)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 40)
 
     cy.hasAccess('cypressKosuUser', 'KH57_001', { read: true, write: true, admin: false })
     cy.hasAccess('cypressKosuUser', 'MH80_003', { read: true, write: true, admin: false })
@@ -123,7 +123,7 @@ describe('IAM permission tests', () => {
   it('Kosu who is also a jory-member gets writing rights to all programmes', () => {
     cy.login('cypressKosuJoryUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 32)
     cy.hasAccess('cypressKosuJoryUser', 'MH50_002', { read: true, write: true, admin: false })
     cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: true, admin: false })
   })
