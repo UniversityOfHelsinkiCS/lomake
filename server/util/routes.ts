@@ -112,7 +112,7 @@ router.get('/keydata/:year', requireRead, async (req, res) => {
 router.post('/keydata', checkAdmin, async (req, res) => {
   await keyData.uploadKeyData(req, res)
 })
-router.get('/keydata/meta', requireRead, async (req, res) => {
+router.get('/keymetadata', requireRead, async (req, res) => {
   await keyData.getKeyDataMeta(req, res)
 })
 router.delete('/keydata/:id', checkAdmin, async (req, res) => {
@@ -158,11 +158,11 @@ router.delete('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) =
   await qualityDocuments.deleteQualityDocument(req, res)
 })
 
-router.get('/interventionprocedures/active', requireRead, async (req, res) => {
-  await interventionProcedures.getActiveInterventionProcedures(req, res)
-})
 router.get('/interventionprocedures/:programme', requireRead, async (req, res) => {
   await interventionProcedures.getProgrammesInterventionProcedures(req, res)
+})
+router.get('/interventionprocedures', requireRead, async (req, res) => {
+  await interventionProcedures.getActiveInterventionProcedures(req, res)
 })
 
 router.get('/organisation-data', async (_, res) => {
@@ -173,13 +173,6 @@ router.get('/organisation-data', async (_, res) => {
 router.get('/jory-map', async (_, res) => {
   const joryMap = await getJoryMapFromJami()
   res.send(joryMap)
-})
-
-router.get('/interventionprocedures', requireRead, async (req, res) => {
-  await interventionProcedures.getActiveInterventionProcedures(req, res)
-})
-router.get('/interventionprocedures/:programme', requireRead, async (req, res) => {
-  await interventionProcedures.getProgrammesInterventionProcedures(req, res)
 })
 
 // Not used in production
