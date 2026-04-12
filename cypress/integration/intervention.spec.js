@@ -60,13 +60,16 @@ describe('Textfield tests', () => {
     cy.get('.MuiSelect-select').click()
 
     cy.get('[data-value="2"]').click({ force: true })
+    const data = {
+      data: {
+        reason: '2',
+        additionalInfo: '',
+      },
+    }
     cy.request({
       method: 'PUT',
       url: '/api/documents/KH50_005/close/all',
-      body: {
-        reason: '2',
-        additonalInformation: '',
-      },
+      body: data,
       headers: {
         'Content-Type': 'application/json',
         ...possibleUsers[20],
