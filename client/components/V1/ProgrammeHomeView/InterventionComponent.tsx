@@ -292,7 +292,7 @@ const InterventionComponent = () => {
           </Alert>
         </>
       )}
-      {documents.length > 0 && documents.at(-1)?.reason ? (
+      {documents.length > 0 && documents.at(-1)?.reason?.reason ? (
         <Alert severity="info">
           <Typography variant="h6">{t('document:terminated')}</Typography>
           <Typography>{t(`document:option${documents.at(-1)?.reason?.reason}`)}</Typography>
