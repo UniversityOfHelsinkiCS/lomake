@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } from '@/shared/lib/types'
 import { ProgrammeLevel } from '../../shared/lib/enums'
 
@@ -70,6 +69,6 @@ export const formatKeyData = (data: any, programmeData: any) => {
     kandiohjelmat: bachelorProgrammes,
     maisteriohjelmat: masterProgrammes,
     metadata: metadata.map(restructureMetadata),
-    programmesEnding: [...programmesEndingMaster, ...programmesEndingBachelor]
+    programmesEnding: [...programmesEndingMaster, ...programmesEndingBachelor],
   }
 }
