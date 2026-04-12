@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } from '@/shared/lib/types'
 import { ProgrammeLevel } from '../../shared/lib/enums'
 
@@ -55,9 +56,20 @@ export const formatKeyData = (data: any, programmeData: any) => {
 
   const programmes = programmeData.map(transformProgramme)
 
+  const bachelorProgrammes = kandiohjelmat.map((k: KandiohjelmatValues) => restructureProgramme(k, programmes))
+  const masterProgrammes = maisteriohjelmat.map((m: MaisteriohjelmatValues) => restructureProgramme(m, programmes))
+
+  const programmesEndingMaster = masterProgrammes
+    .filter(prog => prog.additionalInfo.fi !== undefined && prog.additionalInfo.fi.includes('Lakkautettu ohjelma'))
+    .map(prog => prog?.koulutusohjelmakoodi)
+  const programmesEndingBachelor = bachelorProgrammes
+    .filter(prog => prog.additionalInfo.fi !== undefined && prog.additionalInfo.fi.includes('Lakkautettu ohjelma'))
+    .map(prog => prog?.koulutusohjelmakoodi)
+
   return {
-    kandiohjelmat: kandiohjelmat.map((k: KandiohjelmatValues) => restructureProgramme(k, programmes)),
-    maisteriohjelmat: maisteriohjelmat.map((m: MaisteriohjelmatValues) => restructureProgramme(m, programmes)),
+    kandiohjelmat: bachelorProgrammes,
+    maisteriohjelmat: masterProgrammes,
     metadata: metadata.map(restructureMetadata),
+    programmesEnding: [...programmesEndingMaster, ...programmesEndingBachelor]
   }
 }

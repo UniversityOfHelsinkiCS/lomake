@@ -82,7 +82,8 @@ const notInProduction = (req, res, next) => {
 }
 
 const requireDekanaatti = (req, res, next) => {
-  if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
+  // Allow only real admins and dekanaatti to cloe intervention Procedure
+  if (isAdmin(req.user)) next()
   else if (req.user.iamGroups.some(group => dekanaattiIamGroup.includes(group))) next()
   else res.status(401).json({ error: 'Unautorized access.' }).end()
 }

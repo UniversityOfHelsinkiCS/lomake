@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { useEffect, useState } from 'react'
+import { useEffect, useState, } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import {
   Box,
   CircularProgress,
@@ -21,7 +22,7 @@ import {
   TextField,
 } from '@mui/material'
 import { ExpandMore, Add, Edit, Delete } from '@mui/icons-material'
-import { basePath, dekanaattiIamGroup, isAdmin } from '@/config/common'
+import { basePath, dekanaattiIamGroup, isAdmin, isKopaAdmin } from '@/config/common'
 import { KeyDataProgramme } from '@/shared/lib/types'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import { useGetProgrammesInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
@@ -36,6 +37,7 @@ import { InterventionProcedureType } from '@/client/lib/types'
 
 const InterventionComponent = () => {
   const { t } = useTranslation()
+  const lang = useSelector(state => state.language)
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const navigate = useNavigate()
   const { data: documents = [] } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey ?? '' })
@@ -112,6 +114,9 @@ const InterventionComponent = () => {
     }
     const lastDocument = documents.at(-1)
 
+    if (lastDocument === undefined) {
+      return true
+    }
     if (!lastDocument.active && lastDocument.activeYear !== new Date().getFullYear()) {
       return true
     }
@@ -120,7 +125,7 @@ const InterventionComponent = () => {
   }
   const hasAccessToCloseInterventionProcedure = () => {
     const isUserInDekanaattiGroup = user.iamGroups.some((group: string) => dekanaattiIamGroup.includes(group))
-    return isUserInDekanaattiGroup
+    return isUserInDekanaattiGroup || isKopaAdmin(user)
   }
 
   return (
@@ -288,18 +293,23 @@ const InterventionComponent = () => {
           </Alert>
         </>
       )}
-      {documents.length > 0 && documents.at(-1).reason ? (
+      {documents.length > 0 && documents.at(-1)?.reason ? (
         <Alert severity="info">
           <Typography variant="h6">{t('document:terminated')}</Typography>
-          <Typography>{t(`document:option${documents.at(-1).reason.reason}`)}</Typography>
-          {documents.at(-1).reason.reason === '3' && documents.at(-1).reason.additionalInfo ? (
+          <Typography>{t(`document:option${documents.at(-1)?.reason?.reason}`)}</Typography>
+          {documents.at(-1)?.reason?.reason === '3' && documents.at(-1)?.reason?.additionalInfo ? (
             <>
               <br />
               <Typography>
-                {t('document:otherReason')} {documents.at(-1).reason.additionalInfo}
+                {t('document:otherReason')} {documents.at(-1)?.reason?.additionalInfo}
               </Typography>
             </>
           ) : null}
+        </Alert>
+      ) : null}
+      {programmeData[0].additionalInfo.fi?.includes('Lakkautettu ohjelma') ? (
+        <Alert severity="info">
+          <Typography>{programmeData[0].additionalInfo[lang]}</Typography>
         </Alert>
       ) : null}
     </Box>

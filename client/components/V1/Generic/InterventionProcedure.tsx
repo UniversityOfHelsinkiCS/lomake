@@ -54,15 +54,15 @@ export const calculateInterventionAreas = ({
 const InterventionProcedure = () => {
   const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { t } = useTranslation()
-  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
+  const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey ?? '' })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
   const user = useAppSelector(state => state.currentUser.data)
-  const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey })
+  const { data: documents = [], isFetching } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey ?? '' })
   const document =
     documents.length > 0 || !isFetching ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
-  const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
+  const hasWriteRights = user.access[programmeKey ?? '']?.write || isAdmin(user)
 
   if (isLoading) return <Loader active />
   // For this function the year variable is not needed cuz
@@ -76,7 +76,7 @@ const InterventionProcedure = () => {
 
   const areas = calculateInterventionAreas({ metadata, programme: programmeData, t, selectedYear })
 
-  if (!programme || !hasWriteRights) return null
+  if (!programme || !hasWriteRights || !programmeKey) return null
 
   if (isFetching) return <CircularProgress />
 
@@ -147,7 +147,7 @@ const InterventionProcedure = () => {
       {!id ? (
         <DocumentForm programmeKey={programmeData.koulutusohjelmakoodi} />
       ) : (
-        <EditDocument document={document} id={id} programmeKey={programmeData.koulutusohjelmakoodi} />
+        document && <EditDocument document={document} id={id} programmeKey={programmeData.koulutusohjelmakoodi} />
       )}
     </Box>
   )

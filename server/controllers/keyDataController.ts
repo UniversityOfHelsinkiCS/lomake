@@ -18,6 +18,8 @@ import {
 import { CanonicalSheetName, KeyData as KeyDataType } from '@/shared/lib/types.js'
 import Studyprogramme from '../models/studyprogramme.js'
 import logger from '../util/logger.js'
+import InterventionProcedure from '../models/interventionProcedure.js'
+import { Op } from 'sequelize'
 
 const deactivateExistingKeyData = async () => {
   await KeyData.update({ active: false }, { where: { active: true } })
@@ -170,14 +172,36 @@ const uploadKeyData = async (req: Request, res: Response) => {
         await deactivateExistingKeyData()
         const programmeData = await fetchProgrammeData()
         const formattedData: KeyDataType = formatKeyData(data, programmeData)
-        await validateKeyData(formattedData)
 
+        await validateKeyData(formattedData)
         await KeyData.create({
-          data: formattedData,
+          data: {
+            kandiohjelmat: formattedData.kandiohjelmat,
+            maisteriohjelmat: formattedData.maisteriohjelmat,
+            metadata: formattedData.metadata,
+          },
           active: true,
           year: getYear(data),
         })
-
+        // close the existing actiev interventionProcedudes
+        await InterventionProcedure.update(
+          {
+            active: false,
+            reason: {
+              reason: '4',
+              additionalInfo: '',
+            },
+            endYear: new Date().getFullYear(),
+          },
+          {
+            where: {
+              studyprogrammeKey: {
+                [Op.in]: formattedData.programmesEnding,
+              },
+              active: true,
+            },
+          }
+        )
         resolve(res.status(201).json({ message: 'Key data uploaded' }))
       } catch (error) {
         resolve(res.status(500).json({ error: (error as Error).message }))

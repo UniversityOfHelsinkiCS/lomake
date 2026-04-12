@@ -17,6 +17,12 @@ interface ValidateOperationResponse {
   data: typeof DocumentFormSchema | null
 }
 
+const calculateActiveYear = (documents: Document[]) => {
+  const last = documents.length > 0 ? documents.length - 1 : 0
+  if (documents.length === 0 || documents?.[last].active === false) return new Date().getFullYear()
+  return documents[last].activeYear
+}
+
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
   const { programme, id } = req.params
   const { data } = req.body
@@ -130,17 +136,12 @@ const createDocument = async (req: Request, res: Response) => {
     const { programme, status, error, documents } = await validateOperation(req)
     if (!programme) return res.status(status).json({ error })
 
-    const calculateActiveYear = () => {
-      const last = documents.length > 0 ? documents.length - 1 : 0
-      if (documents.length === 0 || documents?.[last].active === false) return new Date().getFullYear()
-      return documents[last].activeYear
-    }
-
     const document: Document = await Document.create({
       data: req.body.data,
       studyprogrammeKey: programme,
       active: true,
-      activeYear: calculateActiveYear(),
+      activeYear: calculateActiveYear(documents),
+      reason: {},
     })
 
     res.status(201).json([...documents, document])
@@ -155,7 +156,10 @@ const updateDocument = async (req: Request, res: Response) => {
     const { documents, data, status, error } = await validateOperation(req)
     if (documents.length === 0) return res.status(status).json({ error })
 
-    const document: Document = documents.pop()
+    const document: Document | undefined = documents.pop()
+    if (!document) return res.status(404).json({ error: 'Intervention document not found' })
+    if (!data) return res.status(400).json({ error: 'Invalid data' })
+
     document.data = data
     const updated: Document = await document.save()
 
@@ -170,24 +174,26 @@ const closeInterventionProcedure = async (req: Request, res: Response) => {
   const transaction = await sequelize.transaction()
 
   try {
-    const { programme, documents, status, error, data } = await validateOperation(req)
-    if (documents.length === 0) return res.status(status).json({ error })
+    const { programme, documents, data } = await validateOperation(req)
+    if (!data) return res.status(400).json({ error: 'Invalid data' })
+    if (!programme) return res.status(400).json({ error: 'Programme code not available' })
+    if (documents.length > 0) {
+      const updates = {
+        active: false,
+        reason: data,
+      }
 
-    const updates = {
-      active: false,
-      reason: data,
+      await Document.update(updates, {
+        where: {
+          studyprogrammeKey: programme,
+          active: true,
+        },
+        transaction,
+      })
     }
 
-    await Document.update(updates, {
-      where: {
-        studyprogrammeKey: programme,
-        active: true,
-      },
-      transaction,
-    })
-
     await InterventionProcedure.update(
-      { active: false, endYear: new Date().getFullYear() },
+      { active: false, endYear: new Date().getFullYear(), reason: data },
       {
         where: {
           studyprogrammeKey: programme,
@@ -208,10 +214,10 @@ const closeInterventionProcedure = async (req: Request, res: Response) => {
 // Only admins allowed, checked in routes file
 const deleteDocument = async (req: Request, res: Response) => {
   const { id, programme } = req.params
-
+  if (!id || !programme) return res.status(400).json({ error: 'Id or programme code missing' })
   try {
     // Allow deletion only for empty documents.
-    const docToBeDestroyed = await Document.findByPk(id)
+    const docToBeDestroyed = await Document.findByPk(id as string)
     if (!docToBeDestroyed?.data?.date) {
       await Document.destroy({
         where: {

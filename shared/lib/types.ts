@@ -19,6 +19,7 @@ export type DocumentForm = z.infer<typeof DocumentFormSchema>
 export type QualityDocumentForm = z.infer<typeof QualityDocumentFormSchema>
 
 export interface KeyData {
+  programmesEnding?: string[]
   kandiohjelmat: KeyDataProgramme[]
   maisteriohjelmat: KeyDataProgramme[]
   metadata: KeyDataMetadata[]

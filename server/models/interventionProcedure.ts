@@ -7,6 +7,7 @@ import {
   DATE,
   STRING,
   BOOLEAN,
+  JSONB,
 } from 'sequelize'
 import { sequelize } from '../database/connection.js'
 
@@ -17,6 +18,7 @@ class InterventionProcedure extends Model<
   declare id: CreationOptional<number>
   declare studyprogrammeKey: string
   declare active: boolean
+  declare reason: object
   declare startYear: number
   declare endYear: number | null
   declare createdAt: CreationOptional<Date>
@@ -44,6 +46,10 @@ InterventionProcedure.init(
     },
     endYear: {
       type: INTEGER,
+      allowNull: true,
+    },
+    reason: {
+      type: JSONB,
       allowNull: true,
     },
     createdAt: DATE,
