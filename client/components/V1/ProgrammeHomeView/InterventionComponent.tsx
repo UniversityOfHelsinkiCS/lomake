@@ -4,7 +4,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 import {
   Box,
   CircularProgress,
@@ -37,7 +36,7 @@ import { InterventionProcedureType } from '@/client/lib/types'
 
 const InterventionComponent = () => {
   const { t } = useTranslation()
-  const lang = useSelector(state => state.language)
+  const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const navigate = useNavigate()
   const { data: documents = [] } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey ?? '' })
