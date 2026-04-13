@@ -63,6 +63,7 @@ export const defaultFeedbackSourceOptions = [
 ]
 
 const feedbackRegularityOptions: FeedbackRegularity[] = [
+  'notUsed',
   'lessFrequently',
   'perCurriculumCycle',
   'annually',
@@ -299,10 +300,14 @@ const QualityForm = ({
                               {feedbackRegularityOptions.map(option => (
                                 <TableCell align="center" key={`${source}-${option}`}>
                                   <Radio
-                                    checked={sourceState?.regularity === option}
-                                    inputProps={{ 'aria-label': `${source}-${option}` }}
+                                    checked={
+                                      sourceState?.regularity
+                                        ? sourceState?.regularity === option
+                                        : option === 'notUsed'
+                                    }
                                     onChange={() => setSourceRegularity(source, option)}
                                     size="small"
+                                    slotProps={{ input: { 'aria-label': `${source}-${option}` } }}
                                   />
                                 </TableCell>
                               ))}

@@ -764,6 +764,7 @@ export default {
     everySemester: 'Vid varje termin / två gånger om året',
     moreFrequently: 'Ofta än två gånger om året',
     lessFrequently: 'Sällan, mindre än vart fjärde år',
+    notUsed: 'Inte i bruk',
     curriculumDevelopmentHeader: '2. Utveckling av läroplaner',
     curriculumDevelopmentDescription:
       'Ge 1–3 exempel på utvecklingsområden för läroplanen som har identifierats utifrån den feedback som utbildningsprogrammet har fått.',

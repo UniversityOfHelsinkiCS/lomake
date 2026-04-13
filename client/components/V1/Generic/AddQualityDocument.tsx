@@ -168,7 +168,7 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
     const payload: Record<string, any> = {
       ...restFormData,
       feedbackSources: formData.feedbackSources
-        .filter(({ regularity }) => Boolean(regularity))
+        .filter(({ regularity }) => regularity && regularity !== 'notUsed')
         .map(({ name, regularity, description }) => ({
           name,
           regularity,

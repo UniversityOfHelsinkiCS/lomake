@@ -724,6 +724,7 @@ export default {
     everySemester: 'Per semester / twice a year',
     moreFrequently: 'More than twice a year',
     lessFrequently: 'Less than once every 4 years',
+    notUsed: 'Not in use',
     curriculumDevelopmentHeader: '2. Curriculum Development',
     curriculumDevelopmentDescription:
       'Please provide 1–3 examples of areas for curriculum development that have been identified based on feedback received by the degree programme.',

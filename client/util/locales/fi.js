@@ -728,6 +728,7 @@ export default {
     everySemester: 'Lukukausittain / 2 kertaa vuodessa',
     moreFrequently: 'Useammin kuin 2 kertaa vuodessa',
     lessFrequently: 'Harvemmin kuin 4 vuoden välein',
+    notUsed: 'Ei käytössä',
     curriculumDevelopmentHeader: '2. Opetussuunnitelmien kehittäminen',
     curriculumDevelopmentDescription:
       'Kertokaa esimerkkejä (1-3 kpl) opetussuunnitelman kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',

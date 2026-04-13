@@ -68,6 +68,7 @@ export type CanonicalSheetName = 'kandiohjelmat' | 'maisteriohjelmat' | 'tohtori
 export type FeedbackSource = string
 
 export type FeedbackRegularity =
+  | 'notUsed'
   | 'lessFrequently'
   | 'perCurriculumCycle'
   | 'annually'
