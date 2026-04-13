@@ -89,7 +89,7 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
     // eslint-disable-next-line prefer-const
     let { specialGroup, ...access } = iamAccess
 
-    if (iamGroups.includes('hy-ypa-opa-ospa')) specialGroup = { admin: true, ...specialGroup }
+    if (iamGroups.includes('grp-ko-laadunhallinta')) specialGroup = { admin: true, ...specialGroup }
 
     return { specialGroup, access: { ...lomakeAccess, ...access } }
   } catch (error: any) {
