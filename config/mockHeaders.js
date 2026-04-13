@@ -79,7 +79,7 @@ const possibleUsers = [
     givenName: 'ospaUser',
     mail: 'cypress-ospa-user@helsinki.fi',
     schacDateOfBirth: 19990101,
-    hyGroupCn: 'hy-employees;hy-ypa-opa-ospa',
+    hyGroupCn: 'hy-employees;grp-ko-laadunhallinta',
     sn: 'nah',
   },
   {
