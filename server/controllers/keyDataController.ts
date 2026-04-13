@@ -19,6 +19,7 @@ import { CanonicalSheetName, KeyData as KeyDataType } from '@/shared/lib/types.j
 import Studyprogramme from '../models/studyprogramme.js'
 import logger from '../util/logger.js'
 import InterventionProcedure from '../models/interventionProcedure.js'
+import Document from '../models/document.js'
 import { Op } from 'sequelize'
 
 const deactivateExistingKeyData = async () => {
@@ -183,7 +184,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
           active: true,
           year: getYear(data),
         })
-        // close the existing actiev interventionProcedudes
+        // close the existing active interventionProcedudes and documents
         await InterventionProcedure.update(
           {
             active: false,
@@ -192,6 +193,23 @@ const uploadKeyData = async (req: Request, res: Response) => {
               additionalInfo: '',
             },
             endYear: new Date().getFullYear(),
+          },
+          {
+            where: {
+              studyprogrammeKey: {
+                [Op.in]: formattedData.programmesEnding,
+              },
+              active: true,
+            },
+          }
+        )
+        await Document.update(
+          {
+            active: false,
+            reason: {
+              reason: '4',
+              additionalInfo: '',
+            },
           },
           {
             where: {
@@ -229,7 +247,7 @@ const getKeyDataMeta = async (_req: Request, res: Response) => {
 const deleteKeyData = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
-    const keyData = await KeyData.findByPk(id)
+    const keyData = await KeyData.findByPk(id as string)
 
     if (!keyData) {
       return res.status(404).json({ error: 'Key data not found' })
@@ -245,7 +263,8 @@ const deleteKeyData = async (req: Request, res: Response) => {
 const updateKeyData = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
-    const keyData = await KeyData.findByPk(id)
+
+    const keyData = await KeyData.findByPk(id as string)
 
     if (!keyData) {
       return res.status(404).json({ error: 'Key data not found' })
