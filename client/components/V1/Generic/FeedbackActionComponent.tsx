@@ -2,6 +2,7 @@ import { Box, Typography, TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Button } from 'semantic-ui-react'
 import CharacterCounter from './Charactercounter'
+import { FormDataState } from '@/shared/lib/types'
 
 const FeedbackActionForm = ({
   example,
@@ -9,23 +10,31 @@ const FeedbackActionForm = ({
   handleChange,
   errors,
   formData,
+  setFormData,
   setExample,
 }: {
   example: string
   field: string
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
   errors: Record<string, string>
-  formData: Record<string, any>
+  formData: FormDataState
+  setFormData: React.Dispatch<React.SetStateAction<FormDataState>>
   setExample: (value: boolean) => void
 }) => {
   const { t } = useTranslation()
 
   const handleCancelClick = () => {
     setExample(false)
-    formData[`${field}NameExample${example}`] = ''
-    formData[`${field}ChangesExample${example}`] = ''
-    formData[`${field}FeedbackSourceExample${example}`] = ''
-    formData[`${field}CommunicationExample${example}`] = ''
+    setFormData(
+      prevData =>
+        ({
+          ...prevData,
+          [`${field}NameExample${example}`]: '',
+          [`${field}ChangesExample${example}`]: '',
+          [`${field}FeedbackSourceExample${example}`]: '',
+          [`${field}CommunicationExample${example}`]: '',
+        }) as FormDataState
+    )
   }
 
   return (
@@ -97,7 +106,7 @@ const FeedbackActionForm = ({
         value={formData[`${field}CommunicationExample${example}`] ?? ''}
         variant="outlined"
       />
-      {example != '1' && (
+      {example !== '1' && (
         <Button
           onClick={handleCancelClick}
           style={{ alignSelf: 'flex-start', marginTop: '1rem' }}

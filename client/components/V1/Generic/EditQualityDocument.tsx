@@ -114,7 +114,19 @@ const EditQualityDocument = ({
   useEffect(() => {
     if (!document.data) return
 
-    const nextData = getCachedFormData() ?? normalizeFormData(document.data)
+    const backendData = normalizeFormData(document.data)
+    const cachedData = getCachedFormData()
+
+    if (!cachedData) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(backendData))
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to initialize form data in localStorage:', error)
+      }
+    }
+
+    const nextData = cachedData ?? backendData
     setFormData(nextData)
     setFeedbackSourceOptions(
       defaultFeedbackSourceOptions.concat(
@@ -135,16 +147,12 @@ const EditQualityDocument = ({
     if (!document.data) return
 
     try {
-      if (JSON.stringify(formData) === JSON.stringify(data)) {
-        localStorage.removeItem(STORAGE_KEY)
-      } else {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
-      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Failed to save form data to localStorage:', error)
     }
-  }, [formData, data, document.data, STORAGE_KEY])
+  }, [formData, document.data, STORAGE_KEY])
 
   const validateForm = (payload: Record<string, any> = formData) => {
     const validationErrors = validateQualityDocument(payload, t)
