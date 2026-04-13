@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/consistent-return */
 
-import { Fragment } from 'react'
 import {
   Box,
   Typography,
   TextField,
   Button,
   Paper,
-  RadioGroup,
-  Radio,
   FormControlLabel,
-  IconButton,
-  Tooltip,
+  Radio,
+  RadioGroup,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from '@mui/material'
-
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import { Checkbox } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import FeedbackUtilization from './FeedbackUtilizationComponent'
 import FeedbackActionForm from './FeedbackActionComponent'
@@ -61,6 +61,22 @@ export const defaultFeedbackSourceOptions = [
   'bachelorFeedback',
   'feedbackFromEmployers',
 ]
+
+const feedbackRegularityOptions: FeedbackRegularity[] = [
+  'lessFrequently',
+  'perCurriculumCycle',
+  'annually',
+  'everySemester',
+  'moreFrequently',
+]
+
+const isDefaultFeedbackSource = (source: FeedbackSource) =>
+  defaultFeedbackSourceOptions.some(defaultSource => defaultSource.toLowerCase() === source.toLowerCase())
+
+const getFeedbackSourceLabel = (t: TFunction, source: FeedbackSource) => {
+  const translatedLabel = t(`qualitydocument:${source}`)
+  return translatedLabel.startsWith('qualitydocument:') ? source : translatedLabel
+}
 
 export const initFormData = (t: TFunction): FormDataState => {
   return {
@@ -138,26 +154,6 @@ const QualityForm = ({
     )
   }
 
-  const handleCheck = (feedbacksource: FeedbackSource, _e: any, data: any) => {
-    const checked = Boolean(data.checked)
-
-    setFormData(prevData => {
-      const { feedbackSources } = prevData
-      if (checked) {
-        if (feedbackSources.some(f => f.name === feedbacksource)) return prevData
-        return {
-          ...prevData,
-          feedbackSources: [...feedbackSources, { name: feedbacksource, regularity: '', description: '' }],
-        } as FormDataState
-      }
-
-      return {
-        ...prevData,
-        feedbackSources: feedbackSources.filter(f => f.name !== feedbacksource),
-      } as FormDataState
-    })
-  }
-
   const addNewFeedbackSource = () => {
     const newSource = (formData.otherFeedbackSource ?? '').trim()
     if (!newSource) return
@@ -167,13 +163,20 @@ const QualityForm = ({
       return [...prev, newSource]
     })
 
-    setFormData(
-      prevData =>
-        ({
+    setFormData(prevData => {
+      if (prevData.feedbackSources.some(source => source.name.toLowerCase() === newSource.toLowerCase())) {
+        return {
           ...prevData,
           otherFeedbackSource: '',
-        }) as FormDataState
-    )
+        } as FormDataState
+      }
+
+      return {
+        ...prevData,
+        feedbackSources: [...prevData.feedbackSources, { name: newSource, regularity: '', description: '' }],
+        otherFeedbackSource: '',
+      } as FormDataState
+    })
   }
 
   const removeFeedbackSource = (source: FeedbackSource) => {
@@ -192,8 +195,14 @@ const QualityForm = ({
   const setSourceRegularity = (feedbacksource: FeedbackSource, regularity: FeedbackRegularity) => {
     setFormData(prevData => {
       const { feedbackSources } = prevData
-      const index = feedbackSources.findIndex(f => f.name === feedbacksource)
-      if (index === -1) return prevData
+      const index = feedbackSources.findIndex(f => f.name.toLowerCase() === feedbacksource.toLowerCase())
+
+      if (index === -1) {
+        return {
+          ...prevData,
+          feedbackSources: [...feedbackSources, { name: feedbacksource, regularity, description: '' }],
+        } as FormDataState
+      }
 
       const updated = [...feedbackSources]
       updated[index] = { ...updated[index], regularity }
@@ -207,8 +216,14 @@ const QualityForm = ({
   const setSourceDescription = (feedbacksource: FeedbackSource, description: string) => {
     setFormData(prevData => {
       const { feedbackSources } = prevData
-      const index = feedbackSources.findIndex(f => f.name === feedbacksource)
-      if (index === -1) return prevData
+      const index = feedbackSources.findIndex(f => f.name.toLowerCase() === feedbacksource.toLowerCase())
+
+      if (index === -1) {
+        return {
+          ...prevData,
+          feedbackSources: [...feedbackSources, { name: feedbacksource, regularity: '', description }],
+        } as FormDataState
+      }
 
       const updated = [...feedbackSources]
       updated[index] = { ...updated[index], description }
@@ -258,48 +273,45 @@ const QualityForm = ({
                 </Box>
                 <Box sx={sectionContentSx}>
                   <Typography variant="light">{t('qualitydocument:feedbackSource')}</Typography>
-                  {feedbackSourceOptions.map(source => {
-                    const sourceState = formData.feedbackSources.find(f => f.name === source)
-                    const isChecked = Boolean(sourceState)
+                  <TableContainer sx={{ border: `1px solid ${customColors.grayLight}`, borderRadius: 2 }}>
+                    <Table size="small" sx={{ minWidth: 900 }}>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell sx={{ fontWeight: 700 }}>{t('qualitydocument:feedbackSources')}</TableCell>
+                          {feedbackRegularityOptions.map(option => (
+                            <TableCell align="center" key={option} sx={{ fontWeight: 700 }}>
+                              {t(`qualitydocument:${option}`)}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {feedbackSourceOptions.map(source => {
+                          const sourceState = formData.feedbackSources.find(
+                            f => f.name.toLowerCase() === source.toLowerCase()
+                          )
 
-                    return (
-                      <Fragment key={source}>
-                        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                          <Checkbox
-                            checked={isChecked}
-                            label={
-                              !t(`qualitydocument:${source}`).startsWith('qualitydocument:')
-                                ? t(`qualitydocument:${source}`)
-                                : source
-                            }
-                            onChange={(e, data) => handleCheck(source, e, data)}
-                            style={{ fontSize: '1.2rem' }}
-                          />
-                          {!defaultFeedbackSourceOptions.includes(source) && (
-                            <Tooltip arrow placement="right" title={t('qualitydocument:remove')}>
-                              <IconButton
-                                aria-label={t('qualitydocument:remove')}
-                                onClick={() => removeFeedbackSource(source)}
-                                type="button"
-                              >
-                                <DeleteOutlineIcon />
-                              </IconButton>
-                            </Tooltip>
-                          )}
-                        </Box>
-                        {isChecked && sourceState ? (
-                          <FeedbackUtilization
-                            description={sourceState.description}
-                            errors={errors}
-                            feedbackSource={source}
-                            regularity={sourceState.regularity}
-                            setDescription={(value: string) => setSourceDescription(source, value)}
-                            setRegularity={(value: FeedbackRegularity) => setSourceRegularity(source, value)}
-                          />
-                        ) : null}
-                      </Fragment>
-                    )
-                  })}
+                          return (
+                            <TableRow hover key={source}>
+                              <TableCell component="th" scope="row" sx={{ fontWeight: 600, whiteSpace: 'nowrap' }}>
+                                {getFeedbackSourceLabel(t, source)}
+                              </TableCell>
+                              {feedbackRegularityOptions.map(option => (
+                                <TableCell align="center" key={`${source}-${option}`}>
+                                  <Radio
+                                    checked={sourceState?.regularity === option}
+                                    inputProps={{ 'aria-label': `${source}-${option}` }}
+                                    onChange={() => setSourceRegularity(source, option)}
+                                    size="small"
+                                  />
+                                </TableCell>
+                              ))}
+                            </TableRow>
+                          )
+                        })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                   {errors.feedbackUtilizationFeedbackSources ? (
                     <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
                       {errors.feedbackUtilizationFeedbackSources}
@@ -321,6 +333,28 @@ const QualityForm = ({
                       {t('qualitydocument:addNew')}
                     </Button>
                   </Box>
+                  {feedbackSourceOptions.filter(source => !isDefaultFeedbackSource(source)).length > 0 ? (
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                      {feedbackSourceOptions
+                        .filter(source => !isDefaultFeedbackSource(source))
+                        .map(source => {
+                          const sourceState = formData.feedbackSources.find(
+                            f => f.name.toLowerCase() === source.toLowerCase()
+                          )
+
+                          return (
+                            <FeedbackUtilization
+                              description={sourceState?.description ?? ''}
+                              errors={errors}
+                              feedbackSource={source}
+                              key={source}
+                              onRemove={() => removeFeedbackSource(source)}
+                              setDescription={(value: string) => setSourceDescription(source, value)}
+                            />
+                          )
+                        })}
+                    </Box>
+                  ) : null}
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}</Typography>
                     <Typography variant="light">{t('qualitydocument:feedbackUtilizationExamples')}</Typography>

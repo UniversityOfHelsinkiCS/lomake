@@ -167,11 +167,13 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
 
     const payload: Record<string, any> = {
       ...restFormData,
-      feedbackSources: formData.feedbackSources.map(({ name, regularity, description }) => ({
-        name,
-        regularity,
-        description,
-      })),
+      feedbackSources: formData.feedbackSources
+        .filter(({ regularity }) => Boolean(regularity))
+        .map(({ name, regularity, description }) => ({
+          name,
+          regularity,
+          description,
+        })),
     }
     if (validateForm(payload)) {
       createDocument({ studyprogrammeKey: programmeKey, data: payload as any, year: selectedYear })

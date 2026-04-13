@@ -109,19 +109,22 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                   : source.name}
               </Typography>
               {source.description ? (
-                <><Typography color={'default'} sx={{ ml: 2 }}>
-                  {t(`qualitydocument:description`)}
-                </Typography><Typography color={'default'} sx={{ ml: 3 }}>
+                <>
+                  <Typography color={'default'} sx={{ ml: 2 }}>
+                    {t('qualitydocument:description')}
+                  </Typography>
+                  <Typography color={'default'} sx={{ ml: 3 }}>
                     {source.description}
-                  </Typography></>
-                
+                  </Typography>
+                </>
               ) : null}
               <Typography color={'default'} sx={{ ml: 2 }}>
                 {t(`qualitydocument:feedbackRegularityHeader`)}
               </Typography>
+              <Typography color={source.regularity ? 'default' : 'secondary'} sx={{ ml: 3 }}></Typography>
               <Typography color={'default'} sx={{ ml: 3 }}>
-                    {t(`qualitydocument:${source.regularity}`)}
-                  </Typography>
+                    {t(`qualitydocument:${source.regularity}`) || t('common:empty')}
+              </Typography>
               
             </Box>
           ))

@@ -197,9 +197,6 @@ export const validateQualityDocument = (payload: Record<string, any>, t: TFuncti
         const sourceName = payload.feedbackSources?.[second]?.name
         if (!sourceName || typeof sourceName !== 'string') return
 
-        if (issue.path[2] === 'regularity') {
-          setErrorOnce(`${sourceName}Regularity`, 'regularityRequired')
-        }
         if (issue.path[2] === 'description') {
           setErrorOnce(`${sourceName}Description`, issue.message)
         }
@@ -216,6 +213,19 @@ export const validateQualityDocument = (payload: Record<string, any>, t: TFuncti
       setErrorOnce(root, issue.message)
     }
   })
+
+  const hasSelectedFeedbackSource = Array.isArray(payload.feedbackSources)
+    ? payload.feedbackSources.some(
+        (source: { regularity?: string }) => typeof source?.regularity === 'string' && source.regularity.length > 0
+      )
+    : false
+
+  if (!hasSelectedFeedbackSource) {
+    setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
+    setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
+  }
+
+  if (Object.values(nextErrors).every(error => !error)) return null
 
   return nextErrors
 }

@@ -168,11 +168,13 @@ const EditQualityDocument = ({
 
     const payload: Record<string, any> = {
       ...restFormData,
-      feedbackSources: formData.feedbackSources.map(({ name, regularity, description }) => ({
-        name,
-        regularity,
-        description,
-      })),
+      feedbackSources: formData.feedbackSources
+        .filter(({ regularity }) => Boolean(regularity))
+        .map(({ name, regularity, description }) => ({
+          name,
+          regularity,
+          description,
+        })),
     }
     if (validateForm(payload)) {
       updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
