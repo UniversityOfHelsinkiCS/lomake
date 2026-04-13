@@ -563,7 +563,7 @@ export const getUserRole = userIams => {
   if (userIams.length === 0) return ''
   let role = ''
 
-  if (userIams.includes('hy-ypa-opa-ospa')) return 'Ospa-ryhmä'
+  if (userIams.includes('grp-ko-laadunhallinta')) return 'Ospa-ryhmä'
   if (userIams.includes('grp-toska')) return 'Toska-ryhmä'
   if (userIams.includes('hy-ypa-opa-opintoasiainpaallikot')) return 'Opintoasiainpäällikkö'
   if (userIams.includes('hy-ypa-toimi-helsinki')) return 'Toiminnanohjausyksikkö'
