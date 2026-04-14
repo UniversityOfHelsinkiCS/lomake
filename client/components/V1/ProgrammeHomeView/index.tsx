@@ -37,6 +37,7 @@ const ProgrammeHomeView = () => {
     (programmeData: KeyDataProgramme) =>
       programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear
   )
+
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
       <div style={{ marginTop: '4rem' }}>
@@ -69,7 +70,7 @@ const ProgrammeHomeView = () => {
         <Typography variant="light">{t('keyData:homeDescription')}</Typography>
         <ProgrammeKeyDataTable metadata={metadata} metadata2025={metadata2025} programmeData={programmeData} />
       </Box>
-      <QualityManagementComponent />
+      <QualityManagementComponent programmeData={programmeData[programmeData.length - 1]} />
       <InterventionComponent />
     </Box>
   )
