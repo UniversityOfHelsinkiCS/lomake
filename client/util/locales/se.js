@@ -2,7 +2,7 @@
 
 export default {
   common: {
-    adminPage: 'OSPA',
+    adminPage: 'Admin',
     about: 'Om blanketten',
     admin: 'Administration',
     logOut: 'Logga ut',
@@ -607,6 +607,8 @@ export default {
       'Inom varje utvärderingsområde används tre till fem <strong>nyckeltal</strong>, som definieras separat för olika examensnivåer. Varje nyckeltal tilldelas en färgkod baserat på individuellt överenskomna tröskelvärden. Färgkoden för hela utvärderingsområdet bestäms av nyckeltalens färgkod.',
     info3: 'Förklaringarna till färgkoderna är följande: ',
     darkGreenInfo: 'Grön - utbildningsprogrammets status är utmärkt',
+    discontinuedProgrammeInfo:
+      'OBS!\n Även för nedlagda utbildningsprogram visas nyckeltal. När rektorn har beslutat att ett utbildningsprogram ska avvecklas behöver utbildningsprogrammets ledningsgrupp inte vidta några åtgärder inom ramen för den årliga uppföljningen eller upprätta någon utvecklingsplan. Åtgärdsförfarandet inleds inte heller, även om ett eller flera utvärderingsområden för det utbildningsprogram som ska avvecklas är röda.',
     lightGreenInfo: 'Ljusgrön - utbildningsprogrammets status är god',
     yellowInfo: 'Gul - utbildningsprogrammet står inför vissa utmaningar',
     redInfo: 'Röd - utbildningsprogrammet har utmaningar som behöver åtgärdas',

@@ -4,7 +4,7 @@ export default {
   // default namespace, can be used without prefix, ie. t('logOut')
   common: {
     // all use Finnish fallback for following
-    adminPage: 'OSPA',
+    adminPage: 'Admin',
     about: 'About',
     admin: 'Admin',
     // end
@@ -572,6 +572,8 @@ export default {
       'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
     info3: 'Värimerkintöjen selitteet ovat: ',
     darkGreenInfo: 'Vihreä – koulutusohjelman tilanne on erinomainen',
+    discontinuedProgrammeInfo:
+      'HUOM!\n Myös lakkautetuille koulutusohjelmille tulee näkyviin avainlukutiedot. Kun koulutusohjelman lakkauttamisesta on rehtorin päätös, koulutusohjelman johtoryhmän ei tarvitse tehdä vuosiseurannan toimenpiteitä tai kehittämissuunnitelmaa. Toimenpidemenettely ei myöskään käynnisty, vaikka lakkautettavalla koulutusohjelmalla yksi tai useampi arviointialue olisi punainen.',
     lightGreenInfo: 'Vaaleanvihreä – koulutusohjelman tilanne on hyvä',
     yellowInfo: 'Keltainen – koulutusohjelman tilanteessa on havaittavissa joitakin haasteita',
     redInfo: 'Punainen – koulutusohjelman tilanteessa on ratkaisuja vaativia haasteita',

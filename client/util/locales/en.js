@@ -2,7 +2,7 @@
 
 export default {
   common: {
-    adminPage: 'OSPA',
+    adminPage: 'Admin',
     about: 'About',
     admin: 'Admin',
     logOut: 'Log out',
@@ -574,6 +574,8 @@ export default {
       'Each evaluation area uses three to five <strong>key figures</strong>, which are separately defined for different degree levels. Each key figure is assigned a colour code based on individually agreed thresholds. The colour code of the whole evaluation area is determined by the colour code of the key figures.',
     info3: 'The explanations of the colour codes are: ',
     darkGreenInfo: 'Green - the status of the degree programme is excellent',
+    discontinuedProgrammeInfo:
+      "NOTE!\n Key figures are also displayed for discontinued degree programs. Once the rector has decided to discontinue a degree programme, the programme's steering group is not required to carry out annual follow-up measures or prepare a development plan. The intervention procedure will also not be initiated, even if one or more evaluation areas for the programme are marked red.",
     lightGreenInfo: 'Light green - the status of the degree programme is good',
     yellowInfo: 'Yellow - the degree programme is facing some challenges',
     redInfo: 'Red - the degree programme presents challenges that need to be addressed',
