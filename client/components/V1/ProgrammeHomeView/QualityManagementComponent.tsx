@@ -183,32 +183,32 @@ const QualityManagementComponent = ({ programmeData }) => {
           ))}
 
         {hasWriteRights &&
-          !hasDocumentForYear &&
-          activeYear > 2025 &&
-          !programmeData?.additionalinfo?.fi.includes('Lakkautettu Ohjelma')(
-            <Box>
-              <Button
-                data-cy="create-new-qualitydocument"
-                disabled={someoneElseEditingDraft}
-                onClick={() => {
-                  if (!someoneElseEditingDraft) {
-                    navigate(`/v1/programmes/${form}/${programmeKey}/qualitydocument/new`)
-                  }
-                }}
-                startIcon={<Add />}
-                variant="outlined"
-              >
-                {t('document:newDocument')}
-              </Button>
-              <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'left', gap: '1rem' }}>
-                {someoneElseEditingDraft && (
-                  <Typography style={{ color: 'red' }} variant="regular">
-                    {t('qualitydocument:documentLocked')}
-                  </Typography>
-                )}
-              </div>
-            </Box>
-          )}
+        !hasDocumentForYear &&
+        activeYear > 2025 &&
+        !programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? (
+          <Box>
+            <Button
+              data-cy="create-new-qualitydocument"
+              disabled={someoneElseEditingDraft}
+              onClick={() => {
+                if (!someoneElseEditingDraft) {
+                  navigate(`/v1/programmes/${form}/${programmeKey}/qualitydocument/new`)
+                }
+              }}
+              startIcon={<Add />}
+              variant="outlined"
+            >
+              {t('document:newDocument')}
+            </Button>
+            <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'left', gap: '1rem' }}>
+              {someoneElseEditingDraft && (
+                <Typography style={{ color: 'red' }} variant="regular">
+                  {t('qualitydocument:documentLocked')}
+                </Typography>
+              )}
+            </div>
+          </Box>
+        ) : null}
       </Box>
     </Box>
   )
