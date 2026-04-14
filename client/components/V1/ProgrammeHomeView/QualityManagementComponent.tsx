@@ -24,7 +24,7 @@ import { useFetchLockQuery, useDeleteLockMutation } from '@/client/redux/lock'
 import QualityDocumentInfo from '../Generic/QualityDocumentComponent'
 import { QualityDocumentType } from '@/client/lib/types'
 
-const QualityManagementComponent = () => {
+const QualityManagementComponent = ({ programmeData }) => {
   const { t } = useTranslation()
   const { programme: programmeKey = '' } = useParams<{ programme: string }>()
   const navigate = useNavigate()
@@ -182,30 +182,33 @@ const QualityManagementComponent = () => {
             </Accordion>
           ))}
 
-        {hasWriteRights && !hasDocumentForYear && activeYear > 2025 && (
-          <Box>
-            <Button
-              data-cy="create-new-qualitydocument"
-              disabled={someoneElseEditingDraft}
-              onClick={() => {
-                if (!someoneElseEditingDraft) {
-                  navigate(`/v1/programmes/${form}/${programmeKey}/qualitydocument/new`)
-                }
-              }}
-              startIcon={<Add />}
-              variant="outlined"
-            >
-              {t('document:newDocument')}
-            </Button>
-            <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'left', gap: '1rem' }}>
-              {someoneElseEditingDraft && (
-                <Typography style={{ color: 'red' }} variant="regular">
-                  {t('qualitydocument:documentLocked')}
-                </Typography>
-              )}
-            </div>
-          </Box>
-        )}
+        {hasWriteRights &&
+          !hasDocumentForYear &&
+          activeYear > 2025 &&
+          !programmeData?.additionalinfo?.fi.includes('Lakkautettu Ohjelma')(
+            <Box>
+              <Button
+                data-cy="create-new-qualitydocument"
+                disabled={someoneElseEditingDraft}
+                onClick={() => {
+                  if (!someoneElseEditingDraft) {
+                    navigate(`/v1/programmes/${form}/${programmeKey}/qualitydocument/new`)
+                  }
+                }}
+                startIcon={<Add />}
+                variant="outlined"
+              >
+                {t('document:newDocument')}
+              </Button>
+              <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'left', gap: '1rem' }}>
+                {someoneElseEditingDraft && (
+                  <Typography style={{ color: 'red' }} variant="regular">
+                    {t('qualitydocument:documentLocked')}
+                  </Typography>
+                )}
+              </div>
+            </Box>
+          )}
       </Box>
     </Box>
   )

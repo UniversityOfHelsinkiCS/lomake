@@ -29,7 +29,7 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
     return setOpen(true)
   }
 
-  if (!doc) {
+  if (!doc && !programmeData.additionalInfo.fi?.includes('Lakkautettu')) {
     return (
       <TableCell>
         <NotificationBadge
@@ -44,7 +44,7 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
   return (
     <TableCell>
       <Button onClick={handleOpen}>
-        <ChatBubbleOutlineIcon color="secondary" sx={{ fontSize: '28px' }} />
+        {doc ? <ChatBubbleOutlineIcon color="secondary" sx={{ fontSize: '28px' }} /> : null}
       </Button>
       <Modal open={open} setOpen={setOpen}>
         <Typography variant="h3">
