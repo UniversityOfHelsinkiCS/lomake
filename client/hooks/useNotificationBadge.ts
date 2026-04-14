@@ -37,7 +37,10 @@ export const useNotificationBadge = () => {
     color: LightColors,
     reports: Record<string, ReportData | undefined>
   ) => {
-    if (programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+    if (
+      programmeData.additionalInfo?.fi?.includes('Lakkautettu') ||
+      programmeData.additionalInfo?.fi?.includes('Uusi')
+    ) {
       return false
     }
 
@@ -53,7 +56,10 @@ export const useNotificationBadge = () => {
   ) => {
     const redLights = []
 
-    if (programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+    if (
+      programmeData.additionalInfo?.fi?.includes('Lakkautettu') ||
+      programmeData.additionalInfo?.fi?.includes('Uusi')
+    ) {
       return {
         showBadge: false,
         showIcon: false,
@@ -84,7 +90,10 @@ export const useNotificationBadge = () => {
     documents: DocumentType[],
     interventionProcedures: InterventionProcedureType[]
   ) => {
-    if (programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+    if (
+      programmeData.additionalInfo?.fi?.includes('Lakkautettu') ||
+      programmeData.additionalInfo?.fi?.includes('Uusi')
+    ) {
       return { interventionStatus: false, showBadge: false }
     }
     const redLights = calculateInterventionAreas({ selectedYear, metadata, programme: programmeData, t }).length > 0
