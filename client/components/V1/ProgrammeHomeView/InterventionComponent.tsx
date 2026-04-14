@@ -36,7 +36,6 @@ import { InterventionProcedureType } from '@/client/lib/types'
 
 const InterventionComponent = () => {
   const { t } = useTranslation()
-  const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const navigate = useNavigate()
   const { data: documents = [] } = useGetDocumentsQuery({ studyprogrammeKey: programmeKey ?? '' })
@@ -304,11 +303,6 @@ const InterventionComponent = () => {
               </Typography>
             </>
           ) : null}
-        </Alert>
-      ) : null}
-      {programmeData[0].additionalInfo.fi?.includes('Lakkautettu ohjelma') ? (
-        <Alert severity="info">
-          <Typography>{programmeData[0].additionalInfo[lang]}</Typography>
         </Alert>
       ) : null}
     </Box>
