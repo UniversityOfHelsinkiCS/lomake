@@ -608,7 +608,7 @@ export default {
     info3: 'Förklaringarna till färgkoderna är följande: ',
     darkGreenInfo: 'Grön - utbildningsprogrammets status är utmärkt',
     discontinuedProgrammeInfo:
-      'OBS!\n Även för nedlagda utbildningsprogram visas nyckeltal. När rektorn har beslutat att ett utbildningsprogram ska avvecklas behöver utbildningsprogrammets ledningsgrupp inte vidta några åtgärder inom ramen för den årliga uppföljningen eller upprätta någon utvecklingsplan. Åtgärdsförfarandet inleds inte heller, även om ett eller flera utvärderingsområden för det utbildningsprogram som ska avvecklas är röda.',
+      '<strong>OBS!</strong><br /> Även för nedlagda utbildningsprogram visas nyckeltal. När rektorn har beslutat att ett utbildningsprogram ska avvecklas behöver utbildningsprogrammets ledningsgrupp inte vidta några åtgärder inom ramen för den årliga uppföljningen eller upprätta någon utvecklingsplan. Åtgärdsförfarandet inleds inte heller, även om ett eller flera utvärderingsområden för det utbildningsprogram som ska avvecklas är röda.<br />',
     lightGreenInfo: 'Ljusgrön - utbildningsprogrammets status är god',
     yellowInfo: 'Gul - utbildningsprogrammet står inför vissa utmaningar',
     redInfo: 'Röd - utbildningsprogrammet har utmaningar som behöver åtgärdas',

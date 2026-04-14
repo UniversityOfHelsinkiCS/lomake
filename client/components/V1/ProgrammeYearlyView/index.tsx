@@ -108,18 +108,22 @@ const ProgrammeYearlyView = () => {
   const { t } = useTranslation()
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  const { programme: studyprogrammeKey, year } = useParams<{ programme: string; year: string }>()
+  const { programme: programmeCode, year } = useParams<{ programme: string; year: string }>()
   const [activeTab, setActiveTab] = useState(0)
-  const { isLoading, programme, metadata: metadata2026 } = useFetchSingleKeyDataQuery({ studyprogrammeKey })
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isLoading: isMetadata2025Loading, metadata: metadata2025 } = useFetchKeyDataMetadataForYearQuery({
+  const {
+    isLoading,
+    programme,
+    metadata: metadata2026,
+  } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeCode ?? '' })
+
+  const { metadata: metadata2025 } = useFetchKeyDataMetadataForYearQuery({
     year: '2025',
   })
   const metadata = year === '2025' && metadata2025.length > 0 ? metadata2025 : metadata2026
   const form = 10
-  const { data: reports = {} } = useGetReportsQuery({ year })
+  const { data: reports = {} } = useGetReportsQuery({ year: year ?? '2025' })
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
-
+  const studyprogrammeKey = programmeCode ?? ''
   const level = studyprogrammeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
 
   const { nextDeadline } = useAppSelector(state => state.deadlines)
@@ -148,7 +152,7 @@ const ProgrammeYearlyView = () => {
     setActiveTab(parseInt(tabParam ?? '0') || 0)
 
     return () => {
-      // dispatch(wsLeaveRoom(form))
+      //dispatch(wsLeaveRoom(form))
     }
   }, [])
 
@@ -173,10 +177,11 @@ const ProgrammeYearlyView = () => {
     if (programme) {
       return programme.find(
         (programmeData: KeyDataProgramme) =>
-          programmeData.koulutusohjelmakoodi === studyprogrammeKey && programmeData.year === parseInt(year) - 1
+          programmeData.koulutusohjelmakoodi === studyprogrammeKey &&
+          programmeData.year === parseInt(year ?? '2025') - 1
       )
     }
-    return {}
+    return null
   }, [programme, year])
 
   useEffect(() => {
@@ -197,11 +202,11 @@ const ProgrammeYearlyView = () => {
     return <CircularProgress />
   }
 
-  if (!isValidYear(parseInt(year), programme)) {
+  if (!isValidYear(parseInt(year ?? '2025'), programme)) {
     navigate('/404')
   }
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue)
     navigate({
       pathname: location.pathname,
@@ -255,14 +260,25 @@ const ProgrammeYearlyView = () => {
           label={t('keyData:actions')}
         />
       </Tabs>
-
+      <Box sx={{ mt: 4 }}>
+        {programmeData.additionalInfo?.[lang]?.length &&
+        !programmeData.additionalInfo?.fi?.includes('Lakkautettu ohjelma') ? (
+          <Alert severity="warning" sx={{ mb: 4 }}>
+            <Typography variant="light">{programmeData.additionalInfo[lang]}</Typography>
+          </Alert>
+        ) : null}
+        {programmeData.additionalInfo?.fi?.includes('Lakkautettu ohjelma') ? (
+          <Alert severity="warning" sx={{ mb: 4 }}>
+            <Typography variant="light">
+              <Trans i18nKey={'keyData:discontinuedProgrammeInfo'} />{' '}
+            </Typography>
+            <br />
+            <Typography variant="light">{programmeData.additionalInfo[lang]}</Typography>
+          </Alert>
+        ) : null}
+      </Box>
       {activeTab === 0 && (
-        <Box sx={{ mt: 4 }}>
-          {programmeData.additionalInfo?.[lang]?.length ? (
-            <Alert severity="warning" sx={{ mb: 4 }}>
-              <Typography variant="light">{programmeData.additionalInfo[lang]}</Typography>
-            </Alert>
-          ) : null}
+        <Box>
           <Alert severity="info">
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Typography variant="h5">{t('keyData:title')}</Typography>

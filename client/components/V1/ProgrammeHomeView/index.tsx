@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router'
-import { useTranslation } from 'react-i18next'
-import { Box, CircularProgress, IconButton, Link, Typography } from '@mui/material'
+import { Trans, useTranslation } from 'react-i18next'
+import { Box, CircularProgress, IconButton, Link, Typography, Alert } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material'
 import { basePath } from '@/config/common'
 import { KeyDataProgramme } from '@/shared/lib/types'
@@ -37,7 +37,6 @@ const ProgrammeHomeView = () => {
     (programmeData: KeyDataProgramme) =>
       programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year >= startYear
   )
-
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
       <div style={{ marginTop: '4rem' }}>
@@ -58,6 +57,15 @@ const ProgrammeHomeView = () => {
         <Typography sx={{ mb: 2 }} variant="h3">
           {t('keyData:homeHeader').toUpperCase()}
         </Typography>
+        {programmeData[programmeData.length - 1].additionalInfo?.fi?.includes('Lakkautettu ohjelma') ? (
+          <Alert severity="warning" sx={{ mb: 4 }}>
+            <Typography variant="light">
+              <Trans i18nKey={'keyData:discontinuedProgrammeInfo'} />{' '}
+            </Typography>
+            <br />
+            <Typography variant="light">{programmeData[programmeData.length - 1].additionalInfo[lang]}</Typography>
+          </Alert>
+        ) : null}
         <Typography variant="light">{t('keyData:homeDescription')}</Typography>
         <ProgrammeKeyDataTable metadata={metadata} metadata2025={metadata2025} programmeData={programmeData} />
       </Box>
