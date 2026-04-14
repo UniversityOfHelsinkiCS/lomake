@@ -178,7 +178,7 @@ const ProgrammeYearlyView = () => {
       return programme.find(
         (programmeData: KeyDataProgramme) =>
           programmeData.koulutusohjelmakoodi === studyprogrammeKey &&
-          programmeData.year === parseInt(year ?? '2025') - 1
+          programmeData.year === parseInt(year || '2025') - 1
       )
     }
     return null
@@ -346,7 +346,7 @@ const ProgrammeYearlyView = () => {
               >
                 <KeyDataCard level={level} metadata={metadata} programme={programmeData} {...data} />
                 <Box sx={{ alignItems: 'center' }}>
-                  {data.textField ? (
+                  {data.textField && !programmeData.additionalInfo?.fi?.includes('Lakkautettu ohjelma') ? (
                     <div style={{ minHeight: 200 }}>
                       <TextFieldComponent id={data.groupKey} type="Comment">
                         <TextFieldBadge
@@ -387,9 +387,11 @@ const ProgrammeYearlyView = () => {
               <Typography variant="light">{t('keyData:actionsInfo3')}</Typography>
             </Box>
           </Alert>
-          <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
-            <ActionsBadge metadata={metadata} programmeData={programmeData} reports={reports} />{' '}
-          </TextFieldComponent>
+          {!programmeData.additionalInfo?.fi?.includes('Lakkautettu ohjelma') ? (
+            <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
+              <ActionsBadge metadata={metadata} programmeData={programmeData} reports={reports} />{' '}
+            </TextFieldComponent>
+          ) : null}
         </Box>
       )}
     </Box>
