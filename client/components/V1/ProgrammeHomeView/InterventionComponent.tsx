@@ -96,6 +96,9 @@ const InterventionComponent = () => {
   }
 
   const activeProcedure = () => {
+    if (programmeData[programmeData.length - 1].additionalInfo?.fi?.includes('Uusi ohjelma')) {
+      return false
+    }
     if (hasActiveInterventionProceduresForSameOrEarlierYears) {
       return true
     }

@@ -136,7 +136,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   let keyData
 
   if (activeYear !== new Date().getFullYear()) {
-    keyData = keyDataForYear ?? currentKeyData
+    keyData = keyDataForYear || currentKeyData
   } else {
     keyData = currentKeyData
   }
