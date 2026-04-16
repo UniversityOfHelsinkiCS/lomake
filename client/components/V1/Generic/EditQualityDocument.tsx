@@ -26,10 +26,11 @@ const EditQualityDocument = ({
   const { t } = useTranslation()
   const navigate = useNavigate()
   const STORAGE_KEY = `qualityFormEdit_${programmeKey}_${id}`
+  const LOCK_FIELD = `${programmeKey}-quality-edit_${id}`
 
-  const { componentRef, handleReleaseLock, isLockedByOther } = useLockDocument({
+  const { componentRef, handleReleaseLock, isLockedByOther, isLockedByCurrentUser } = useLockDocument({
     room: programmeKey,
-    field: id,
+    field: LOCK_FIELD,
   })
 
   useEffect(() => {
@@ -198,6 +199,8 @@ const EditQualityDocument = ({
   }
 
   if (!document.data) return <CircularProgress />
+
+  if (!isLockedByCurrentUser) return null
 
   return (
     <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column' }}>

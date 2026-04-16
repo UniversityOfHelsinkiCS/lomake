@@ -60,17 +60,18 @@ const QualityManagementComponent = ({ programmeData }) => {
     lockMap[draftLockField].uid === currentUser?.uid &&
     currentUser?.uid
   )
+  const getEditLockField = (docId: number | string) => `${programmeKey}-quality-edit_${String(docId)}`
 
   const isSomeoneElseEditing = (docId: number | string) => {
     if (!currentUser?.uid) return false
-    const docIdStr = String(docId)
-    return !!(lockMap?.[docIdStr] && lockMap[docIdStr].uid !== currentUser.uid)
+    const lockField = getEditLockField(docId)
+    return !!(lockMap?.[lockField] && lockMap[lockField].uid !== currentUser.uid)
   }
 
   const isCurrentUserEditing = (docId: number | string) => {
     if (!currentUser?.uid) return false
-    const docIdStr = String(docId)
-    return !!(lockMap?.[docIdStr] && lockMap[docIdStr].uid === currentUser.uid)
+    const lockField = getEditLockField(docId)
+    return !!(lockMap?.[lockField] && lockMap[lockField].uid === currentUser.uid)
   }
 
   const [deleteDocument] = useDeleteQualityDocumentMutation()
@@ -88,8 +89,9 @@ const QualityManagementComponent = ({ programmeData }) => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
     if (isConfirmed) {
       const idStr = String(id)
+      const lockField = getEditLockField(id)
       deleteDocument({ studyprogrammeKey: programmeKey, id: idStr })
-      deleteLock({ room: programmeKey, field: idStr })
+      deleteLock({ room: programmeKey, field: lockField })
       try {
         localStorage.removeItem(`qualityFormCreate_${programmeKey}`)
         localStorage.removeItem(`qualityFormEdit_${programmeKey}_${idStr}`)

@@ -41,7 +41,7 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
   const [errors, setErrors] = useState<Record<string, string>>(initErrors())
   const [createDocument] = useCreateQualityDocumentMutation()
 
-  const { componentRef, handleReleaseLock, isLockedByOther } = useLockDocument({
+  const { componentRef, handleReleaseLock, isLockedByOther, isLockedByCurrentUser } = useLockDocument({
     room: programmeKey,
     field: LOCK_FIELD,
   })
@@ -196,6 +196,8 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
       navigate(`/v1/programmes/10/${programmeKey}`)
     }
   }
+
+  if (!isLockedByCurrentUser) return null
 
   return (
     <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column' }}>

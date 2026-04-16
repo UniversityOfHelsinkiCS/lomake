@@ -91,19 +91,24 @@ const setLock = async (req: Request & { user: User }, res: Response) => {
   try {
     const { room, field } = req.body
     const currentUser = await getCurrentUser(req)
+    let lockTimeout = 5 * 60 * 1000
+
+    if (typeof field === 'string' && field.includes('quality')) {
+      lockTimeout = 12 * 60 * 60 * 1000
+    }
 
     if (LOCKMAP[room]?.[field] && LOCKMAP[room][field].uid !== currentUser.uid) {
       return res.status(401).json({ error: 'Field locked....' })
     }
 
-    // force release lock after 5 mins if no save:
+    // Force release lock if there is no save before timeout.
     const timeoutId = setTimeout(() => {
       LOCKMAP = {
         ...LOCKMAP,
         [room]: { ...LOCKMAP[room], [field]: undefined },
       }
       stripTimeouts(LOCKMAP[room])
-    }, 300 * 1000)
+    }, lockTimeout)
 
     LOCKMAP = {
       ...LOCKMAP,

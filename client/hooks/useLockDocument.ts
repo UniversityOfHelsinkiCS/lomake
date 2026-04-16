@@ -29,6 +29,7 @@ export function useLockDocument({ room, field, onRelease }: UseLockDocumentProps
 
   const fieldStr = String(field)
   const isLockedByOther = !!(lockMap?.[fieldStr] && lockMap[fieldStr].uid !== currentUser?.uid && currentUser?.uid)
+  const isLockedByCurrentUser = !!(lockMap?.[fieldStr] && lockMap[fieldStr].uid === currentUser?.uid)
 
   useEffect(() => {
     if (!currentUser?.uid) return
@@ -100,6 +101,7 @@ export function useLockDocument({ room, field, onRelease }: UseLockDocumentProps
     hasLock,
     gettingLock,
     isLockedByOther,
+    isLockedByCurrentUser,
     componentRef,
     handleReleaseLock,
   }
