@@ -29,6 +29,7 @@ const restructureProgramme = <T extends KandiohjelmatValues | MaisteriohjelmatVa
     international: matchedProgramme?.international,
     level: matchedProgramme?.level,
     additionalInfo: extractMultilingualField(programme, 'Lisätietoja'),
+    additionalInfo2: extractMultilingualField(programme, 'Lisätietoja_2'),
   }
 }
 

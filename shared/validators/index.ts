@@ -93,6 +93,13 @@ export const KeyDataProgrammeSchema = z
         en: z.string().optional(),
       })
       .strict(),
+    additionalInfo2: z
+      .object({
+        fi: z.string().optional(),
+        se: z.string().optional(),
+        en: z.string().optional(),
+      })
+      .optional(),
   })
   .strict() // to disallow extra keys
 
