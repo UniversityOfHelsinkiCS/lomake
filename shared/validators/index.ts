@@ -23,7 +23,7 @@ export const KandiohjelmatValuesSchema = z
     Palauteaktiivisuus: z.number().optional(),
     'Opetusresurssien määrä': z.number().optional(),
     'Opetuksen tuottavuus': z.number().optional(),
-    'Tilojen tehokas käyttö': z.number().optional(),
+    'Tilojen käyttö': z.number().optional(),
     'Jatkuvan oppimisen tulos': z.number().optional(),
 
     // Muut
@@ -31,6 +31,9 @@ export const KandiohjelmatValuesSchema = z
     Lisätietoja_fi: z.string().optional(),
     Lisätietoja_en: z.string().optional(),
     Lisätietoja_se: z.string().optional(),
+    Lisätietoja_2_fi: z.string().optional(),
+    Lisätietoja_2_en: z.string().optional(),
+    Lisätietoja_2_se: z.string().optional(),
   })
   .strict() // to disallow extra keys,
 
@@ -55,14 +58,18 @@ export const MaisteriohjelmatValuesSchema = z
     Työllistyminen: z.number().optional(),
     'Opetusresurssien määrä': z.number().optional(),
     'Opetuksen tuottavuus': z.number().optional(),
-    'Tilojen tehokas käyttö': z.number().optional(),
+    'Tilojen käyttö': z.number().optional(),
     'Jatkuvan oppimisen tulos': z.number().optional(),
+
 
     // Muut
     Vuosi: z.number().int(),
     Lisätietoja_fi: z.string().optional(),
     Lisätietoja_en: z.string().optional(),
     Lisätietoja_se: z.string().optional(),
+    Lisätietoja_2_fi: z.string().optional(),
+    Lisätietoja_2_en: z.string().optional(),
+    Lisätietoja_2_se: z.string().optional(),
   })
   .strict() // to disallow extra keys,
 
