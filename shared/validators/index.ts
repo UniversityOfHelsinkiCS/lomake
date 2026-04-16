@@ -61,7 +61,6 @@ export const MaisteriohjelmatValuesSchema = z
     'Tilojen käyttö': z.number().optional(),
     'Jatkuvan oppimisen tulos': z.number().optional(),
 
-
     // Muut
     Vuosi: z.number().int(),
     Lisätietoja_fi: z.string().optional(),
