@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-return */
-
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import {
   Box,
   Typography,
@@ -9,12 +9,14 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  Tooltip,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  IconButton,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import FeedbackUtilization from './FeedbackUtilizationComponent'
@@ -35,14 +37,15 @@ const sectionHeaderSx = {
   display: 'flex',
   alignItems: 'center',
   backgroundColor: customColors.grayLight,
-  borderLeft: `8px solid ${customColors.lightGreenLight}`,
+  borderLeft: `8px solid`,
   padding: '1.25rem 2rem',
+  borderLeftColor: 'primary.main',
 }
 
 const sectionContentSx = {
   display: 'flex',
   flexDirection: 'column',
-  gap: '1.25rem',
+  gap: '4rem',
   padding: '2rem',
 }
 
@@ -278,12 +281,35 @@ const QualityForm = ({
                     <Table size="small" sx={{ minWidth: 900 }}>
                       <TableHead>
                         <TableRow>
-                          <TableCell sx={{ fontWeight: 700 }}>{t('qualitydocument:feedbackSources')}</TableCell>
-                          {feedbackRegularityOptions.map(option => (
-                            <TableCell align="center" key={option} sx={{ fontWeight: 700 }}>
-                              {t(`qualitydocument:${option}`)}
-                            </TableCell>
-                          ))}
+                          <TableCell sx={{ fontWeight: 700 }}></TableCell>
+                          {feedbackRegularityOptions.map(option => {
+                            const regularityLabel = t(`qualitydocument:${option}`)
+
+                            return (
+                              <TableCell align="center" key={option} sx={{ fontWeight: 700 }}>
+                                <Tooltip
+                                  arrow
+                                  placement="top"
+                                  title={<span style={{ whiteSpace: 'pre-line' }}>{regularityLabel}</span>}
+                                >
+                                  <span
+                                    style={{
+                                      whiteSpace: 'pre-line',
+                                      display: '-webkit-box',
+                                      WebkitLineClamp: 2,
+                                      WebkitBoxOrient: 'vertical',
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      lineHeight: 1.2,
+                                      cursor: 'help',
+                                    }}
+                                  >
+                                    {regularityLabel}
+                                  </span>
+                                </Tooltip>
+                              </TableCell>
+                            )
+                          })}
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -294,8 +320,22 @@ const QualityForm = ({
 
                           return (
                             <TableRow hover key={source}>
-                              <TableCell component="th" scope="row" sx={{ fontWeight: 600, whiteSpace: 'nowrap' }}>
-                                {getFeedbackSourceLabel(t, source)}
+                              <TableCell component="th" scope="row" sx={{ fontWeight: 600 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, whiteSpace: 'nowrap' }}>
+                                  {getFeedbackSourceLabel(t, source)}
+                                  {!isDefaultFeedbackSource(source) ? (
+                                    <Tooltip arrow placement="right" title={t('qualitydocument:remove')}>
+                                      <IconButton
+                                        aria-label={t('qualitydocument:remove')}
+                                        onClick={() => removeFeedbackSource(source)}
+                                        size="small"
+                                        type="button"
+                                      >
+                                        <DeleteOutlineIcon fontSize="small" />
+                                      </IconButton>
+                                    </Tooltip>
+                                  ) : null}
+                                </Box>
                               </TableCell>
                               {feedbackRegularityOptions.map(option => (
                                 <TableCell align="center" key={`${source}-${option}`}>
@@ -339,10 +379,11 @@ const QualityForm = ({
                     </Button>
                   </Box>
                   {feedbackSourceOptions.filter(source => !isDefaultFeedbackSource(source)).length > 0 ? (
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      <Typography variant="h5">{t(`qualitydocument:otherFeedbackSourceDescription`)}</Typography>
                       {feedbackSourceOptions
                         .filter(source => !isDefaultFeedbackSource(source))
-                        .map(source => {
+                        .map((source, index) => {
                           const sourceState = formData.feedbackSources.find(
                             f => f.name.toLowerCase() === source.toLowerCase()
                           )
@@ -352,8 +393,8 @@ const QualityForm = ({
                               description={sourceState?.description ?? ''}
                               errors={errors}
                               feedbackSource={source}
+                              index={index}
                               key={source}
-                              onRemove={() => removeFeedbackSource(source)}
                               setDescription={(value: string) => setSourceDescription(source, value)}
                             />
                           )
@@ -398,6 +439,7 @@ const QualityForm = ({
                     formData={formData}
                     handleChange={handleChange}
                     setExample={setSecondCurriculumDevelopmentExample}
+                    setFormData={setFormData}
                   />
                   {secondCurriculumDevelopmentExample ? (
                     <FeedbackActionForm
@@ -407,6 +449,7 @@ const QualityForm = ({
                       formData={formData}
                       handleChange={handleChange}
                       setExample={setSecondCurriculumDevelopmentExample}
+                      setFormData={setFormData}
                     />
                   ) : null}
 
@@ -418,6 +461,7 @@ const QualityForm = ({
                       formData={formData}
                       handleChange={handleChange}
                       setExample={setThirdCurriculumDevelopmentExample}
+                      setFormData={setFormData}
                     />
                   ) : null}
                   {!thirdCurriculumDevelopmentExample || !secondCurriculumDevelopmentExample ? (
@@ -443,6 +487,7 @@ const QualityForm = ({
                     formData={formData}
                     handleChange={handleChange}
                     setExample={setSecondGuidancePoliciesExample}
+                    setFormData={setFormData}
                   />
                   {secondGuidancePoliciesExample ? (
                     <FeedbackActionForm
@@ -452,6 +497,7 @@ const QualityForm = ({
                       formData={formData}
                       handleChange={handleChange}
                       setExample={setSecondGuidancePoliciesExample}
+                      setFormData={setFormData}
                     />
                   ) : null}
 
@@ -463,6 +509,7 @@ const QualityForm = ({
                       formData={formData}
                       handleChange={handleChange}
                       setExample={setThirdGuidancePoliciesExample}
+                      setFormData={setFormData}
                     />
                   ) : null}
                   {!thirdGuidancePoliciesExample || !secondGuidancePoliciesExample ? (
@@ -544,6 +591,7 @@ const QualityForm = ({
                     formData={formData}
                     handleChange={handleChange}
                     setExample={setSecondLearningObjectivesAssessmentExample}
+                    setFormData={setFormData}
                   />
                   {secondLearningObjectivesAssessmentExample ? (
                     <FeedbackActionForm
@@ -553,6 +601,7 @@ const QualityForm = ({
                       formData={formData}
                       handleChange={handleChange}
                       setExample={setSecondLearningObjectivesAssessmentExample}
+                      setFormData={setFormData}
                     />
                   ) : null}
                   {thirdLearningObjectivesAssessmentExample ? (
@@ -563,6 +612,7 @@ const QualityForm = ({
                       formData={formData}
                       handleChange={handleChange}
                       setExample={setThirdLearningObjectivesAssessmentExample}
+                      setFormData={setFormData}
                     />
                   ) : null}
                   {!thirdLearningObjectivesAssessmentExample || !secondLearningObjectivesAssessmentExample ? (
