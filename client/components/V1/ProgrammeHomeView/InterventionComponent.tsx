@@ -130,7 +130,7 @@ const InterventionComponent = () => {
   }
 
   return (
-    <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+    <Box sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Typography variant="h3">{t('keyData:interventionProcedure').toUpperCase()} </Typography>
         <Typography variant="light">{t('document:homeDescription')}</Typography>

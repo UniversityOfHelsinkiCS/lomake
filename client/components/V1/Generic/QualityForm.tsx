@@ -65,7 +65,7 @@ export const defaultFeedbackSourceOptions = [
   'feedbackFromEmployers',
 ]
 
-const feedbackRegularityOptions: FeedbackRegularity[] = [
+export const feedbackRegularityOptions: FeedbackRegularity[] = [
   'notUsed',
   'lessFrequently',
   'perCurriculumCycle',
