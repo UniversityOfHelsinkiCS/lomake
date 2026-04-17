@@ -82,10 +82,7 @@ const EvaluationFormView = () => {
 
   const year = getYearToShow({ draftYear, nextDeadline, form }) || new Date().getFullYear()
 
-  const faculty = programme?.primaryFaculty?.code || ''
   const summaryURL = `/evaluation/previous-years/${room}`
-  const oodiProgURL = `https://oodikone.helsinki.fi/evaluationoverview/programme/${room}`
-  const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${faculty}`
   const rapoLink = `https://rapocloud.it.helsinki.fi/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FHelsingin%20yliopiston%20dashboardit%2F_portal%2FTohtorikoulutus&Page=Tohtoriohjelman%20vuosiseuranta%20%2F%20Annual%20review%20by%20doctoral%20programme`
 
   const writeAccess = user.access[room]?.write || isAdmin(user)
@@ -241,20 +238,6 @@ const EvaluationFormView = () => {
                 {t('formView:summaryLinkProg')} <Icon name="external" />{' '}
               </h4>
             </Link>
-            {!room.startsWith('T') && (
-              <>
-                <a data-cy={`link-to-oodikone-programme-${room}`} href={oodiProgURL} rel="noreferrer" target="_blank">
-                  <h4 style={{ marginBottom: '0.5em' }}>
-                    {t('formView:oodikoneProg')} <Icon name="external" />{' '}
-                  </h4>
-                </a>
-                <a data-cy={`link-to-oodikone-faculty-${room}`} href={oodiFacultyURL} rel="noreferrer" target="_blank">
-                  <h4>
-                    {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
-                  </h4>
-                </a>
-              </>
-            )}
             {room.startsWith('T') && (
               <div style={{ marginTop: '1em' }}>
                 <a data-cy={`link-to-rapo-${room}`} href={rapoLink} rel="noreferrer" target="_blank">

@@ -136,7 +136,6 @@ const CommitteeFormView = () => {
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const facultyProgrammeData = useSelector(state => state.summaries)
 
-  const oodikoneURL = `https://oodikone.helsinki.fi/evaluationoverview/university`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
   useEffect(() => {
@@ -274,11 +273,6 @@ const CommitteeFormView = () => {
               </div>
 
               <div className="info-container">
-                <a data-cy={`link-to-oodikone-faculty-${room}`} href={oodikoneURL} rel="noreferrer" target="_blank">
-                  <h4>
-                    {t('formView:oodikoneUniversity')} <Icon name="external" />{' '}
-                  </h4>
-                </a>
                 <Link data-cy="link-to-old-answers" target="_blank" to={degreeReformUrl}>
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
                     {t('formView:evaluationSummaryUniversity')} <Icon name="external" />{' '}

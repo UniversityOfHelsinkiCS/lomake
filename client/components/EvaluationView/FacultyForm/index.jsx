@@ -132,7 +132,6 @@ const FacultyFormView = () => {
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const facultyProgrammeData = useSelector(state => state.summaries)
 
-  const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
   const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
@@ -274,11 +273,6 @@ const FacultyFormView = () => {
               </div>
 
               <div className="info-container">
-                <a data-cy={`link-to-oodikone-faculty-${room}`} href={oodiFacultyURL} rel="noreferrer" target="_blank">
-                  <h4>
-                    {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
-                  </h4>
-                </a>
                 <Link data-cy="link-to-old-answers" target="_blank" to={degreeReformUrl}>
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
                     {t('formView:evaluationSummaryByProgramme')} <Icon name="external" />{' '}
