@@ -1,12 +1,6 @@
 import { Table } from 'semantic-ui-react'
 import uniq from 'lodash/uniq'
-import {
-  doctoralIams,
-  doctoralWritingIams,
-  isUniversityWideWritingGroups,
-  superAdminGroups,
-  adminGroups,
-} from '../../../config/IAMConfig'
+import { doctoralIams, doctoralWritingIams, superAdminGroups, adminGroups } from '../../../config/IAMConfig'
 
 const IamTable = () => {
   const getTableRow = (iamGroup, accessGroup, workPosition) => {
@@ -34,7 +28,7 @@ const IamTable = () => {
         {getRowsForAccessGroup(superAdminGroups, 'Super-admin-oikeudet', 'Toska-ryhmä')}
         {getRowsForAccessGroup(adminGroups, 'Admin-oikeudet', 'Ospa-ryhmä')}
         {getRowsForAccessGroup(
-          isUniversityWideWritingGroups,
+          ['hy-op-kopa-[keskusta/kruununhaka/kumpula/meilahti/viikki]-[1/2]', 'hy-kopa-koulutusasiantuntijat'],
           'Kirjoitusoikeudet kaikkiin ohjelmiin',
           'Koulutussuunnittelijat ja opintoasiainpäälliköt'
         )}

@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { colors, getUserRole } from '../../util/common'
 import './UsersPage.scss'
 import { isSuperAdmin, isBasicUser, isAdmin } from '../../../config/common'
+import { IAMsToTable } from '../../../config/IAMConfig'
 
 const getSpecialGroup = (user, group, lang, t, data) => {
   const specialGroups = [
@@ -112,6 +113,13 @@ export default ({ user, lang, programmeCodesAndNames, data }) => {
           : null}
       </Table.Cell>
       <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
+      <Table.Cell data-cy="user-iam_groups">
+        {user.iamGroups
+          ? user.iamGroups
+              .filter(group => IAMsToTable.includes(group) || group.includes('student') || group.includes('jory'))
+              .join('; ')
+          : null}
+      </Table.Cell>
       {isAdmin(currentUser) && (
         <Table.Cell>
           {mayHijack(currentUser, user) && <Icon name="sign-in" onClick={logInAs} size="large" />}

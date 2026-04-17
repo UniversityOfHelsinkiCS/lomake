@@ -124,6 +124,7 @@ export default () => {
               sortable: true,
             })}
             {getCustomHeader({ name: t('users:role'), width: 2, field: 'role', sortable: false })}
+            {getCustomHeader({ name: 'IAM access', width: 5, field: 'IAMs', sortable: false })}
             {isAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'hijackUser', sortable: false })}
           </Table.Row>
         </Table.Header>

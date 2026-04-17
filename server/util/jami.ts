@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/node'
 import { JAMI_URL, API_TOKEN, inProduction } from './common.js'
 import { ProgrammeLevel } from '@/shared/lib/enums.js'
 import logger from './logger.js'
+import { lomakeKatselmus } from '../../config/IAMConfig'
 
 interface Faculty {
   readonly code: string
@@ -48,27 +49,6 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
       userId: '',
       iamGroups,
     })
-
-    const lomakeKatselmus = [
-      'hy-ttdk-dekanaatti',
-      'hy-oiktdk-dekanaatti',
-      'hy-ltdk-dekanaatti',
-      'hy-humtdk-dekanaatti',
-      'hy-mltdk-dekanaatti',
-      'hy-ftdk-dekanaatti',
-      'hy-bytdk-dekanaatti',
-      'hy-ktdk-dekanaatti',
-      'hy-valttdk-dekanaatti',
-      'hy-sskh-rehtoraatti',
-      'hy-mmtdk-dekanaatti',
-      'hy-eltdk-dekanaatti',
-      'hy-ypa-toimi-helsinki',
-      'hy-ypa-opa-oymp-jory',
-      'grp-a01807-svenskaarenden',
-      'grp-koordinaatioryhma',
-      'hy-ypa-hr-henkilostopaallikot',
-      'hy-ypa-hr-kestavahyvinvointi',
-    ]
 
     // eslint-disable-next-line prefer-const
     let lomakeAccess: Record<string, OrganisationAccess> = {}

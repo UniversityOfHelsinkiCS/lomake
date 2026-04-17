@@ -19,8 +19,47 @@ const isUniversityWideWritingGroups = [
   'hy-kopa-koulutusasiantuntijat',
 ]
 
+const lomakeKatselmus = [
+  'hy-ttdk-dekanaatti',
+  'hy-oiktdk-dekanaatti',
+  'hy-ltdk-dekanaatti',
+  'hy-humtdk-dekanaatti',
+  'hy-mltdk-dekanaatti',
+  'hy-ftdk-dekanaatti',
+  'hy-bytdk-dekanaatti',
+  'hy-ktdk-dekanaatti',
+  'hy-valttdk-dekanaatti',
+  'hy-sskh-rehtoraatti',
+  'hy-mmtdk-dekanaatti',
+  'hy-eltdk-dekanaatti',
+  'hy-ypa-toimi-helsinki',
+  'hy-ypa-opa-oymp-jory',
+  'grp-a01807-svenskaarenden',
+  'grp-koordinaatioryhma',
+  'hy-ypa-hr-henkilostopaallikot',
+  'hy-ypa-hr-kestavahyvinvointi',
+]
+
 const superAdminGroups = ['grp-toska']
 
 const adminGroups = ['grp-ko-laadunhallinta']
 
-export { doctoralIams, doctoralWritingIams, isUniversityWideWritingGroups, superAdminGroups, adminGroups }
+const IAMsToTable = [
+  ...doctoralIams,
+  ...doctoralWritingIams,
+  ...isUniversityWideWritingGroups,
+  ...adminGroups,
+  ...superAdminGroups,
+  ...lomakeKatselmus,
+  'hy-employee',
+]
+
+export {
+  doctoralIams,
+  doctoralWritingIams,
+  isUniversityWideWritingGroups,
+  superAdminGroups,
+  adminGroups,
+  IAMsToTable,
+  lomakeKatselmus,
+}
