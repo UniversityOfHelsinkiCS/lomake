@@ -1,57 +1,26 @@
-const doctoralIams = ['hy-tohtorikoulutus-johtoryhma', 'hy-tine']
+const doctoralIams = ['hy-tine']
 
+// expired hy-tutkijakoulut-dshealth-jory
 const doctoralWritingIams = ['hy-ypa-tutto-toht', 'hy-tutkijakoulu-johtokunta']
 
-const doctoralSchoolMap = {
-  'hy-tutkijakoulut-hymy-jory': [
-    'T920101',
-    'T920102',
-    'T920103',
-    'T920104',
-    'T920105',
-    'T920106',
-    'T920107',
-    'T920108',
-    'T920109',
-    'T920110',
-    'T920111',
-  ],
-  'hy-tutkijakoulut-dshealth-jory': [
-    'T921101',
-    'T921102',
-    'T921103',
-    'T921104',
-    'T921105',
-    'T921106',
-    'T921107',
-    'T921108',
-    'T921109',
-  ],
-  'hy-tutkijakoulut-yeb-jory': ['T922101', 'T922102', 'T922103', 'T922104', 'T922105', 'T922106'],
-  'hy-tutkijakoulut-donasci-jory': ['T923101', 'T923102', 'T923103', 'T923104', 'T923105', 'T923106', 'T923107'],
-}
-
 const isUniversityWideWritingGroups = [
-  'hy-ypa-opa-opintoasiainpaallikot',
-  'hy-ypa-opa-kosu-kumpula',
-  'hy-ypa-opa-kosu-meilahti',
-  'hy-ypa-opa-kosu-kruununhaka',
-  'hy-ypa-opa-kosu-metsatalo',
-  'hy-ypa-opa-kosu-porthania',
-  'hy-ypa-opa-kosu-siltavuori',
-  'hy-ypa-opa-kosu-viikki',
-  'grp-vuosiseuranta-hype-pedaleht',
+  'hy-ypa-kopa-keskusta-1',
+  'hy-ypa-kopa-keskusta-2',
+  'hy-ypa-kopa-keskusta-3',
+  'hy-ypa-kopa-kruununhaka-1',
+  'hy-ypa-kopa-kruununhaka-2',
+  'hy-ypa-kopa-kruununhaka-3',
+  'hy-ypa-kopa-kumpula-1',
+  'hy-ypa-kopa-kumpula-2',
+  'hy-ypa-kopa-meilahti-1',
+  'hy-ypa-kopa-meilahti-2',
+  'hy-ypa-kopa-viikki-1',
+  'hy-ypa-kopa-viikki-2',
+  'hy-kopa-koulutusasiantuntijat',
 ]
 
 const superAdminGroups = ['grp-toska']
 
-const adminGroups = ['hy-ypa-opa-ospa']
+const adminGroups = ['grp-ko-laadunhallinta']
 
-export {
-  doctoralIams,
-  doctoralWritingIams,
-  doctoralSchoolMap,
-  isUniversityWideWritingGroups,
-  superAdminGroups,
-  adminGroups,
-}
+export { doctoralIams, doctoralWritingIams, isUniversityWideWritingGroups, superAdminGroups, adminGroups }

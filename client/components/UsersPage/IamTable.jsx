@@ -3,7 +3,6 @@ import uniq from 'lodash/uniq'
 import {
   doctoralIams,
   doctoralWritingIams,
-  doctoralSchoolMap,
   isUniversityWideWritingGroups,
   superAdminGroups,
   adminGroups,
@@ -46,12 +45,15 @@ const IamTable = () => {
             'hy-rehtoraatti',
             'hy-ypa-toimi-helsinki',
             'hy-ypa-opa-oymp-jory',
-            'grp-katselmus-projektiryhma/ohjausryhmä',
             'grp-a01807-svenskaarenden',
-            'grp-tilannekuvaoymp',
             'grp-koordinaatioryhma',
           ]),
-          'Lukuoikeudet kaikkiin ohjelmiin',
+          'Lukuoikeudet kaikkiin ohjelmiin: uusi vuosiseuranta + archive',
+          'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö, oppimisympäristöjen palvelut ja katselmustyöryhmä'
+        )}
+        {getRowsForAccessGroup(
+          ['hy-[tiedekunta]-students', 'hy-employees'],
+          'Lukuoikeudet kaikkiin ohjelmiin: uusi vuosiseuranta',
           'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö, oppimisympäristöjen palvelut ja katselmustyöryhmä'
         )}
         {getRowsForAccessGroup(
@@ -64,11 +66,7 @@ const IamTable = () => {
           'Lukuoikeudet kaikkiin tohtoriohjelmiin',
           'Tohtoriohjelmien johtajat ja tieteellinen neuvosto'
         )}
-        {getRowsForAccessGroup(
-          Object.keys(doctoralSchoolMap),
-          'Lukuoikeudet kyseiseen tutkijakouluun',
-          'Tutkijakoulun johtoryhmä'
-        )}
+        {getRowsForAccessGroup([], 'Lukuoikeudet kyseiseen tutkijakouluun', 'Tutkijakoulun johtoryhmä')}
         {getRowsForAccessGroup(
           ['hy-[tiedekunta]-[koulutusohjelma]-jory & hy-[tiedekunta]-maisteri/kandi-kojot & hy-employees'],
           'Admin-oikeudet kyseiseen koulutusohjelmaan',

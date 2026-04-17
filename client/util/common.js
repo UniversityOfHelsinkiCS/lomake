@@ -587,9 +587,6 @@ export const getUserRole = userIams => {
   if (userIams.includes('hy-tohtorikoulutus-johtoryhma')) return 'Tohtorikoulutuksen johtoryhmä'
   if (userIams.includes('hy-tine')) return 'HY:n tieteellinen neuvosto'
 
-  role = userIams.find(iam => /hy-tutkijakoulut-[a-z]+-jory/.test(iam))
-  if (role) return `Tutkijakoulun johtoryhmä - ${role.split('-')[2]}`
-
   role = userIams.find(iam => /hy-[a-z-]+-jory/.test(iam))
   if (role) return `Johtoryhmän jäsen`
 
