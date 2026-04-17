@@ -45,6 +45,7 @@ export default {
     programmeFilter: 'Etsi koulutusohjelmia',
     facultyFilter: 'Etsi tiedekuntia',
     find: 'Etsi',
+    showDiscontinued: 'Näytä lakkautetut ohjelmat',
 
     noData: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
     noDataForFaculty: 'Yhtään tiedekuntaa tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',

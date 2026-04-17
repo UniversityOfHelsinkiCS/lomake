@@ -41,6 +41,7 @@ export default {
     programmeFilter: 'Search for degree programmes',
     facultyFilter: 'Search for faculties',
     find: 'Find',
+    showDiscontinued: 'Show discontinued programmes',
 
     noData: 'No programmes or answers were found. Try changing your search.',
     noDataForFaculty: 'No data available for this faculty',

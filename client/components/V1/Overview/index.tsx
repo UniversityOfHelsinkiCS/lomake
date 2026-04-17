@@ -27,6 +27,7 @@ const OverviewPage = () => {
   const selectedFaculties = useAppSelector(state => state.filters.faculty)
   const selectedLevel = useAppSelector(state => state.filters.level)
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
+  const showDiscontinued = useAppSelector(state => state.filters.showDiscontinued)
   const user = useAppSelector(state => state.currentUser.data)
 
   const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user)
@@ -107,6 +108,7 @@ const OverviewPage = () => {
         <KeyDataTableComponent
           facultyFilter={selectedFaculties}
           programmeLevelFilter={selectedLevel}
+          showDiscontinued={showDiscontinued}
           yearFilter={selectedYear}
         />
       </div>

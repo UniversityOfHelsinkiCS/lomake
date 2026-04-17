@@ -51,11 +51,16 @@ export const setColorBlindMode = () => ({
   type: 'SET_COLOR_BLIND_MODE',
 })
 
+export const setShowDiscontinued = () => ({
+  type: 'SET_SHOW_DISCONTINUED',
+})
+
 const initialState = {
   companion: false,
   doctoralSchool: 'allSchools',
   faculty: ['allFaculties'],
   level: 'allProgrammes',
+  showDiscontinued: true,
   year: '',
   multipleYears: [],
   keyDataYear: '',
@@ -133,6 +138,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         colorBlindMode: !state.colorBlindMode,
+      }
+    }
+    case 'SET_SHOW_DISCONTINUED': {
+      return {
+        ...state,
+        showDiscontinued: !state.showDiscontinued,
       }
     }
     default:

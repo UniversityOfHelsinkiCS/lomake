@@ -24,11 +24,13 @@ import { useGetReportsQuery } from '@/client/redux/reports'
 import { useFetchKeyDataForYearQuery, useFetchKeyDataQuery } from '@/client/redux/keyData'
 import { useGetActiveInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
 import { InterventionProcedureType } from '@/client/lib/types'
+import DiscontinuedProgramFilter from '../Generic/DiscontinuedFilterComponent'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
   programmeLevelFilter: string
   yearFilter: string
+  showDiscontinued: boolean
 }
 
 const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
@@ -118,7 +120,12 @@ const InterventionCell = ({
   return null
 }
 
-const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
+const KeyDataTableComponent = ({
+  facultyFilter = [],
+  programmeLevelFilter = '',
+  yearFilter,
+  showDiscontinued = true,
+}: KeyDataTableProps) => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { t } = useTranslation()
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
@@ -167,7 +174,8 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
       const yearMatches = programmeData.year === parseInt(yearFilter) - 1 // Always fetch previous year results
       const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
       const levelMatches = programmeData.level === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
-      return yearMatches && facultyMatches && levelMatches
+      const isDiscontinued = programmeData.additionalInfo.fi?.includes('Lakkautettu')
+      return yearMatches && facultyMatches && levelMatches && (showDiscontinued ? true : !isDiscontinued)
     })
 
     // Sort by programme name or code
@@ -184,7 +192,17 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     })
 
     return searchedData
-  }, [facultyFilter, programmeLevelFilter, yearFilter, programmeData, searchValue, sortIdentity, sortDirection, lang])
+  }, [
+    facultyFilter,
+    programmeLevelFilter,
+    yearFilter,
+    showDiscontinued,
+    programmeData,
+    searchValue,
+    sortIdentity,
+    sortDirection,
+    lang,
+  ])
 
   const sortByProgrammeName = () => {
     if (sortIdentity !== 'koulutusohjelma') {
@@ -225,12 +243,18 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
 
   return (
     <div style={{ width: '100%' }}>
-      {/* Search input */}
-      <div style={{ margin: '3rem 1rem 1rem 1rem' }}>
+      <div
+        style={{
+          margin: '3rem 1rem 1rem 1rem',
+          alignItems: 'center',
+          flexDirection: 'row',
+          display: 'flex',
+          gap: '2rem',
+        }}
+      >
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
+        <DiscontinuedProgramFilter />
       </div>
-
-      {/* Key Figure Data Table */}
       <div style={{ width: '100%', overflowX: 'auto', padding: '1rem' }}>
         <div style={{ minWidth: 1750 }}>
           <Table variant="overview">

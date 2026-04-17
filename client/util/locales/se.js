@@ -42,6 +42,7 @@ export default {
     facultyFilter: 'Hitta fakulteter',
     find: 'Sök',
     facultymonitoringText: 'Svar finns tillgängliga / Sista dagen för att fylla i formuläret var 30.10.2024',
+    showDiscontinued: 'Visa avvecklade program',
 
     noData: 'Inga program eller svar hittades. Försök att ändra din sökning.',
     noDataForFaculty: 'Ingen data tillgänglig för vald fakultet',
