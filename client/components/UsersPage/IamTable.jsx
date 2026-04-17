@@ -28,7 +28,7 @@ const IamTable = () => {
         {getRowsForAccessGroup(superAdminGroups, 'Super-admin-oikeudet', 'Toska-ryhmä')}
         {getRowsForAccessGroup(adminGroups, 'Admin-oikeudet', 'Ospa-ryhmä')}
         {getRowsForAccessGroup(
-          ['hy-op-kopa-[keskusta/kruununhaka/kumpula/meilahti/viikki]-[1/2]', 'hy-kopa-koulutusasiantuntijat'],
+          ['hy-op-kopa-[keskusta|kruununhaka|kumpula|meilahti|viikki]-(1|2|3) & hy-kopa-koulutusasiantuntijat'],
           'Kirjoitusoikeudet kaikkiin ohjelmiin',
           'Koulutussuunnittelijat ja opintoasiainpäälliköt'
         )}

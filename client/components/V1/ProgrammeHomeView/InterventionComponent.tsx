@@ -21,7 +21,7 @@ import {
   TextField,
 } from '@mui/material'
 import { ExpandMore, Add, Edit, Delete } from '@mui/icons-material'
-import { basePath, dekanaattiIamGroup, isAdmin, isKopaAdmin } from '@/config/common'
+import { basePath, dekanaattiIamGroup, hasProgrammeWriteAccess, isAdmin, isKopaAdmin } from '@/config/common'
 import { KeyDataProgramme } from '@/shared/lib/types'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
 import { useGetProgrammesInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
@@ -44,7 +44,7 @@ const InterventionComponent = () => {
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey ?? '' })
-  const hasWriteRights = (programmeKey && user.access[programmeKey]?.write) || isAdmin(user)
+  const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
 
   const [reason, setReason] = useState('')
   const [additionalInfo, setAdditionalInfo] = useState('')

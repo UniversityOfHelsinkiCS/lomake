@@ -5,7 +5,7 @@ import { Box, IconButton, Typography, CircularProgress } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack } from '@mui/icons-material'
-import { isAdmin } from '@/config/common'
+import { hasProgrammeWriteAccess } from '@/config/common'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
 import AddQualityDocument from './AddQualityDocument'
@@ -48,7 +48,7 @@ const QualityManagement = () => {
   const document =
     documents.length > 0 || !isFetching ? documents.find((doc: QualityDocumentType) => doc.id.toString() === id) : null
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
-  const hasWriteRights = user.access[programmeKey]?.write || isAdmin(user)
+  const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
   const hasDocumentForYear = documents.some((doc: QualityDocumentType) => doc.year == activeYear)
 
   if (isLoading) return <Loader active />
@@ -74,7 +74,7 @@ const QualityManagement = () => {
     }
   }
 
-  if (!programme || !hasWriteRights) return null
+  if (!programme || !programmeData || !hasWriteRights) return null
 
   if (isFetching || (!id && hasDocumentForYear)) return <CircularProgress />
 
@@ -84,7 +84,7 @@ const QualityManagement = () => {
         <IconButton onClick={handleBack} onMouseDown={event => event.stopPropagation()} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
-        <Typography variant="h2">{programmeData.koulutusohjelma[lang]}</Typography>
+        <Typography variant="h2">{programmeData?.koulutusohjelma[lang]}</Typography>
       </Box>
       <br />
       <br />

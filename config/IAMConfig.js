@@ -16,8 +16,8 @@ const isUniversityWideWritingGroups = [
   'hy-ypa-kopa-meilahti-2',
   'hy-ypa-kopa-viikki-1',
   'hy-ypa-kopa-viikki-2',
-  'hy-kopa-koulutusasiantuntijat',
 ]
+const kopa = 'hy-kopa-koulutusasiantuntijat'
 
 const lomakeKatselmus = [
   'hy-ttdk-dekanaatti',
@@ -51,15 +51,8 @@ const IAMsToTable = [
   ...adminGroups,
   ...superAdminGroups,
   ...lomakeKatselmus,
-  'hy-employee',
+  'hy-employees',
+  kopa,
 ]
 
-export {
-  doctoralIams,
-  doctoralWritingIams,
-  isUniversityWideWritingGroups,
-  superAdminGroups,
-  adminGroups,
-  IAMsToTable,
-  lomakeKatselmus,
-}
+export { doctoralIams, doctoralWritingIams, superAdminGroups, adminGroups, IAMsToTable, lomakeKatselmus, kopa }

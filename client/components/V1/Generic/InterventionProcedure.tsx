@@ -15,7 +15,7 @@ import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import type { DocumentType, ReportDataKey } from '@/client/lib/types'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack, ExpandMore } from '@mui/icons-material'
-import { basePath, isAdmin } from '@/config/common'
+import { basePath, hasProgrammeWriteAccess } from '@/config/common'
 import KeyDataCard from './KeyDataCardComponent'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
@@ -62,7 +62,7 @@ const InterventionProcedure = () => {
   const document =
     documents.length > 0 || !isFetching ? documents.find((doc: DocumentType) => doc.id.toString() === id) : null
 
-  const hasWriteRights = user.access[programmeKey ?? '']?.write || isAdmin(user)
+  const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
 
   if (isLoading) return <Loader active />
   // For this function the year variable is not needed cuz

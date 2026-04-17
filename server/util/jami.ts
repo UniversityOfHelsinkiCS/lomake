@@ -63,6 +63,28 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
       })
     }
 
+    if (iamGroups.find(iam => /hy-[a-z-]+-jory/.test(iam)) && !iamGroups.includes('hy-employees')) {
+      const organisation = await getOrganisationData()
+
+      organisation.forEach((faculty: Faculty) => {
+        faculty.programmes.forEach((program: Programme) => {
+          lomakeAccess[program.key] = { read: true, write: false, admin: false }
+        })
+      })
+    }
+
+    if (
+      iamGroups.find(iam => /hy-ypa-kopa-[a-z]+-(1|2|3)/.test(iam)) &&
+      !iamGroups.includes('hy-kopa-koulutusasiantuntijat')
+    ) {
+      const organisation = await getOrganisationData()
+
+      organisation.forEach((faculty: Faculty) => {
+        faculty.programmes.forEach((program: Programme) => {
+          lomakeAccess[program.key] = { read: true, write: false, admin: false }
+        })
+      })
+    }
     // eslint-disable-next-line prefer-const
     let { specialGroup, ...access } = iamAccess
 

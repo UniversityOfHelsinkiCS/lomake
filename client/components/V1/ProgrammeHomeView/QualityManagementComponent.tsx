@@ -4,7 +4,7 @@
 /* eslint-disable no-alert */
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
-import { isAdmin } from '@/config/common'
+import { hasProgrammeWriteAccess, isAdmin } from '@/config/common'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -46,7 +46,7 @@ const QualityManagementComponent = ({ programmeData }) => {
     }
   )
   const hasDocumentForYear = documents.some((doc: QualityDocumentType) => doc.year == activeYear)
-  const hasWriteRights = (programmeKey ? user.access?.[programmeKey]?.write : false) || isAdmin(user)
+  const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
 
   const draftLockField = `${programmeKey}-quality-draft`
   const someoneElseEditingDraft = !!(

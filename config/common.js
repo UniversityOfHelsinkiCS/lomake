@@ -156,6 +156,12 @@ const isEvaluationUniversityUser = user => {
   return false
 }
 
+const hasProgrammeWriteAccess = (user, programmeKey) => {
+  if (isAdmin(user) || isSuperAdmin(user)) return true
+  if (user.access[programmeKey]?.write) return true
+  return false
+}
+
 const studentIams = [
   'hy-mltdk-students',
   'hy-eltdk-students',
@@ -279,6 +285,7 @@ export {
   organisationCodeToIam,
   isEvaluationFacultyUser,
   hasSomeReadAccess,
+  hasProgrammeWriteAccess,
   testProgrammeCode,
   testProgrammeName,
   testFacultyCode,

@@ -569,8 +569,9 @@ export const getUserRole = userIams => {
   if (userIams.includes('hy-ypa-toimi-helsinki')) return 'Toiminnanohjausyksikkö'
   if (userIams.includes('hy-ypa-opa-oymp-jory')) return 'Oppimisympäristöjen palvelut'
 
-  role = userIams.find(iam => /hy-ypa-opa-.+/.test(iam))
-  if (role) return `Koulutussuunnittelija - ${role.split('-')[4]}`
+  role = userIams.find(iam => /hy-ypa-kopa-[a-z]+-(1|2|3)/.test(iam))
+  const roleKopa = userIams.includes('hy-kopa-koulutusasiantuntijat')
+  if (role && roleKopa) return `Koulutussuunnittelija - ${role.split('-')[3]}`
 
   role = userIams.find(iam => /hy-[a-z-]+-kojot/.test(iam))
   if (role) return `Koulutusohjelman johtaja - ${role.split('-')[1]} - ${role.split('-')[2]}`
