@@ -99,7 +99,7 @@ export const KeyDataProgrammeSchema = z
         se: z.string().optional(),
         en: z.string().optional(),
       })
-      .optional(),
+      .strict(),
   })
   .strict() // to disallow extra keys
 

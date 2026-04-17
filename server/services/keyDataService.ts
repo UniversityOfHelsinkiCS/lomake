@@ -10,9 +10,9 @@ const transformProgramme = (programme: any) => ({
 })
 
 const extractMultilingualField = (obj: any, fieldPrefix: string) => ({
-  fi: obj[`${fieldPrefix}_fi`],
-  se: obj[`${fieldPrefix}_se`],
-  en: obj[`${fieldPrefix}_en`],
+  fi: obj[`${fieldPrefix}_fi`] || '',
+  se: obj[`${fieldPrefix}_se`] || '',
+  en: obj[`${fieldPrefix}_en`] || '',
 })
 
 const restructureProgramme = <T extends KandiohjelmatValues | MaisteriohjelmatValues>(

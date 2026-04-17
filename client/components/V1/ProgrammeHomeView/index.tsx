@@ -64,7 +64,7 @@ const ProgrammeHomeView = () => {
               <Trans i18nKey={'keyData:discontinuedProgrammeInfo'} />{' '}
             </Typography>
             <br />
-            <Typography variant="light">{programmeData[programmeData.length - 1].additionalInfo2[lang]}</Typography>
+            <Typography variant="light">{programmeData[programmeData.length - 1]?.additionalInfo2[lang]}</Typography>
           </Alert>
         ) : null}
         <Typography variant="light">{t('keyData:homeDescription')}</Typography>
