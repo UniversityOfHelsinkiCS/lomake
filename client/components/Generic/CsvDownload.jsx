@@ -273,7 +273,7 @@ const CsvDownload = ({ wantedData, view, programme, form = 1 }) => {
 
   return (
     <CsvDownloader datas={data} filename={`${year}_${dataTitle}_.csv`} separator=",">
-      {t(`generic:${wantedData}`)}
+      <a>{t(`generic:${wantedData}`)}</a>
     </CsvDownloader>
   )
 }
