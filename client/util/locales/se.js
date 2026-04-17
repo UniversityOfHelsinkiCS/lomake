@@ -610,6 +610,8 @@ export default {
     darkGreenInfo: 'Grön - utbildningsprogrammets status är utmärkt',
     discontinuedProgrammeInfo:
       '<strong>OBS!</strong><br /> Även för nedlagda utbildningsprogram visas nyckeltal. När rektorn har beslutat att ett utbildningsprogram ska avvecklas behöver utbildningsprogrammets ledningsgrupp inte vidta några åtgärder inom ramen för den årliga uppföljningen eller upprätta någon utvecklingsplan. Åtgärdsförfarandet inleds inte heller, även om ett eller flera utvärderingsområden för det utbildningsprogram som ska avvecklas är röda.<br />',
+    discontinuedProgrammeInfoIcon:
+      'Även för nedlagda utbildningsprogram visas nyckeltal. När rektorn har beslutat att ett utbildningsprogram ska avvecklas behöver utbildningsprogrammets ledningsgrupp inte vidta några åtgärder inom ramen för den årliga uppföljningen eller upprätta någon utvecklingsplan. Åtgärdsförfarandet inleds inte heller, även om ett eller flera utvärderingsområden för det utbildningsprogram som ska avvecklas är röda.',
     lightGreenInfo: 'Ljusgrön - utbildningsprogrammets status är god',
     yellowInfo: 'Gul - utbildningsprogrammet står inför vissa utmaningar',
     redInfo: 'Röd - utbildningsprogrammet har utmaningar som behöver åtgärdas',
