@@ -273,7 +273,7 @@ const ProgrammeYearlyView = () => {
               <Trans i18nKey={'keyData:discontinuedProgrammeInfo'} />{' '}
             </Typography>
             <br />
-            <Typography variant="light">{programmeData.additionalInfo[lang]}</Typography>
+            <Typography variant="light">{programmeData.additionalInfo2?.[lang] || ''}</Typography>
           </Alert>
         ) : null}
       </Box>
