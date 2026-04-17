@@ -64,12 +64,9 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
       'hy-eltdk-dekanaatti',
       'hy-ypa-toimi-helsinki',
       'hy-ypa-opa-oymp-jory',
-      'grp-katselmus-projektiryhma',
-      'grp-katselmus-ohjausryhma',
       'grp-a01807-svenskaarenden',
-      'grp-tilannekuvaoymp',
       'grp-koordinaatioryhma',
-      'yhy-ypa-hr-henkilostopaallikot',
+      'hy-ypa-hr-henkilostopaallikot',
       'hy-ypa-hr-kestavahyvinvointi',
     ]
 
