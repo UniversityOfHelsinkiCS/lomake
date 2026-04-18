@@ -45,6 +45,7 @@ export interface InterventionProcedureType {
   active: boolean
   startYear: number
   endYear: number | null
+  reason: Reason | null
 }
 
 export type ReportDataKey =

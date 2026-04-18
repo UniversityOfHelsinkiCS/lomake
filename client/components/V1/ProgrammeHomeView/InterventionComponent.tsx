@@ -308,6 +308,23 @@ const InterventionComponent = () => {
           ) : null}
         </Alert>
       ) : null}
+      {documents.length === 0 &&
+      !activeProcedure() &&
+      interventionProcedures.at(-1)?.reason?.reason &&
+      interventionProcedures.at(-1)?.reason?.reason !== '4' ? (
+        <Alert severity="info">
+          <Typography variant="h6">{t('document:terminated')}</Typography>
+          {interventionProcedures.at(-1)?.reason?.reason !== '4' &&
+          interventionProcedures.at(-1)?.reason?.additionalInfo ? (
+            <>
+              <br />
+              <Typography>
+                {t('document:otherReason')} {documents.at(-1)?.reason?.additionalInfo}
+              </Typography>
+            </>
+          ) : null}
+        </Alert>
+      ) : null}
     </Box>
   )
 }
