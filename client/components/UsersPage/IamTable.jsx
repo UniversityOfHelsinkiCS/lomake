@@ -48,7 +48,7 @@ const IamTable = () => {
         {getRowsForAccessGroup(
           ['hy-[tiedekunta]-students', 'hy-employees'],
           'Lukuoikeudet kaikkiin ohjelmiin: uusi vuosiseuranta',
-          'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö, oppimisympäristöjen palvelut ja katselmustyöryhmä'
+          'Tutkinto-opiskelijat, Helsingin yliopiston työntekijä'
         )}
         {getRowsForAccessGroup(
           doctoralWritingIams,
