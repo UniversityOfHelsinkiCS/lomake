@@ -2,7 +2,6 @@ import { inProduction } from '../util/common.js'
 import {
   isAdmin,
   isSuperAdmin,
-  isKatselmusProjektiOrOhjausryhma,
   dekanaattiIamGroup,
   isDegreeStudentOrEmployee,
   isEmployee,
@@ -64,14 +63,6 @@ const checkAdmin = (req, res, next) => {
   }
 }
 
-const checkAdminOrKatselmusryhma = (req, res, next) => {
-  if (isAdmin(req.user) || isSuperAdmin(req.user) || isKatselmusProjektiOrOhjausryhma(req.user)) {
-    next()
-  } else {
-    res.status(401).json({ error: 'Unauthorized access.' }).end()
-  }
-}
-
 const notInProduction = (req, res, next) => {
   if (!inProduction) {
     next()
@@ -107,7 +98,6 @@ export {
   requireProgrammeWrite,
   requireProgrammeOwner,
   checkAdmin,
-  checkAdminOrKatselmusryhma,
   requireUniFormRight,
   requireDekanaatti,
   requireRead,

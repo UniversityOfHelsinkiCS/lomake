@@ -107,10 +107,6 @@ const hasSpecialGroup = (user, group) => {
   return false
 }
 
-const isKatselmusProjektiOrOhjausryhma = user => {
-  return user.iamGroups.includes('grp-katselmus-ohjausryhma') || user.iamGroups.includes('grp-katselmus-projektiryhma')
-}
-
 const isDevSuperAdminUid = uid => {
   return DEV_SUPERADMINS.includes(uid)
 }
@@ -152,7 +148,7 @@ const isEvaluationFacultyUser = user => {
 }
 
 const isEvaluationUniversityUser = user => {
-  if (user?.specialGroup?.universityForm || isKatselmusProjektiOrOhjausryhma(user) || isAdmin(user)) return true
+  if (user?.specialGroup?.universityForm || isAdmin(user)) return true
   return false
 }
 
@@ -298,7 +294,6 @@ export {
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
-  isKatselmusProjektiOrOhjausryhma,
   isEvaluationUniversityUser,
   dekanaattiIamGroup,
 }

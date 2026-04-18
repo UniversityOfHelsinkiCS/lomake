@@ -4,13 +4,7 @@ import { Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import {
-  isAdmin,
-  isEvaluationUniversityUser,
-  isKatselmusProjektiOrOhjausryhma,
-  isBasicUser,
-  isEmployeeOnly,
-} from '../../../../config/common'
+import { isAdmin, isEvaluationUniversityUser, isBasicUser, isEmployeeOnly } from '../../../../config/common'
 import CustomModal from '../../Generic/CustomModal'
 import NoPermissions from '../../Generic/NoPermissions'
 import { setColorBlindMode } from '../../../redux/filterReducer'
@@ -43,6 +37,7 @@ export default () => {
   const hasRights = currentUser =>
     (isBasicUser(currentUser) || isEvaluationUniversityUser(currentUser)) && !isEmployeeOnly(currentUser)
   // show faculty overview to those that have access to some programmes in tilannekuvalomake
+
   const usersProgrammes = useMemo(() => {
     if (!hasRights(currentUser)) return []
     return ['UNI']
@@ -104,7 +99,7 @@ export default () => {
               <Radio label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} toggle />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser) ? (
+              {isAdmin(currentUser) ? (
                 <>
                   <h4>{t(`overview:print`)}</h4>
                   <PDFDownload componentRef={printingRefHyBachelorMaster} linkName="uniBachelorMaster" />

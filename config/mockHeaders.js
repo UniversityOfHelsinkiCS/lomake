@@ -178,7 +178,7 @@ const possibleUsers = [
     givenName: 'kosuUser',
     mail: 'cypress-kosu-user@helsinki.fi',
     schacDateOfBirth: 19990108,
-    hyGroupCn: 'hy-ypa-opa-kosu-viikki;hy-employees', // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
+    hyGroupCn: 'hy-ypa-kopa-viikki-1;hy-employees;hy-kopa-koulutusasiantuntijat', // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
     sn: 'nah',
   },
   {
@@ -196,7 +196,7 @@ const possibleUsers = [
     givenName: 'kosuJoryUser',
     mail: 'cypress-kosu-jory-user@helsinki.fi',
     schacDateOfBirth: 19990110,
-    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula;hy-employees',
+    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-kopa-kumpula-1;hy-kopa-koulutusasiantuntijat;hy-employees',
     sn: 'nah',
   },
   {
@@ -205,7 +205,7 @@ const possibleUsers = [
     givenName: 'doctoralUser',
     mail: 'cypress-doctoral-kosu-regular-kosu-user@helsinki.fi',
     schacDateOfBirth: 19990111,
-    hyGroupCn: 'hy-ypa-tutto-toht;hy-ypa-opa-kosu-kumpula;hy-employees',
+    hyGroupCn: 'hy-ypa-tutto-toht;hy-ypa-kopa-kumpula-1;hy-employees;hy-kopa-koulutusasiantuntijat',
     sn: 'nah',
   },
   {
@@ -242,7 +242,7 @@ const possibleUsers = [
     givenName: 'Acual projektiryhma, fake user',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'grp-katselmus-projektiryhma;grp-katselmus-mltdk;hy-employees',
+    hyGroupCn: 'grp-katselmus-mltdk;hy-employees',
     sn: 'AcualFakePerson',
   },
   {
@@ -252,7 +252,7 @@ const possibleUsers = [
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
     hyGroupCn:
-      'hy-employees;grp-katselmus-valttdk;grp-koordinaatioryhma;hy-ypa-tutto-toht;grp-katselmus-projektiryhma;hy-tutkijakoulu-johtokunta;hy-employees',
+      'hy-employees;grp-katselmus-valttdk;grp-koordinaatioryhma;hy-ypa-tutto-toht;hy-tutkijakoulu-johtokunta;hy-employees',
     sn: 'AcualFakePerson',
   },
   {

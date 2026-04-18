@@ -5,18 +5,12 @@ import '../support/commands'
 
 describe('IAM permission tests', () => {
   it('Katselmus Projektiryhma user, who has rights to mltdk faculty also', () => {
-    const user = 'cypressKatselmusProjektiryhmaUser'
+    const user = 'cypressKatselmusProjektiryhmaUser' // There are no katselmus projektiryhmäIam anymore
     cy.login(user)
     cy.visit('/yearly')
-    // cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 132)
     cy.visit('/evaluation')
-    // cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 132)
     cy.visit('/degree-reform')
-    // cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 132)
     cy.visit('/evaluation-faculty')
-    // cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 12)
-    cy.visit('/evaluation-university')
-    cy.contains('University level')
 
     cy.hasAccess(user, 'KH50_006', { read: true, write: false, admin: false })
     cy.hasAccessEvaluation(user, 'KH50_006', { read: true, write: false, admin: false })

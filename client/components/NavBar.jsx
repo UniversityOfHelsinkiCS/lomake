@@ -7,13 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { images } from '../util/common'
 import { logoutAction } from '../redux/currentUserReducer'
 import { setLanguage } from '../redux/languageReducer'
-import {
-  isAdmin,
-  isSuperAdmin,
-  isEvaluationFacultyUser,
-  isKatselmusProjektiOrOhjausryhma,
-  isEvaluationUniversityUser,
-} from '../../config/common'
+import { isAdmin, isSuperAdmin, isEvaluationFacultyUser, isEvaluationUniversityUser } from '../../config/common'
 
 const NavBarItems = {
   yearly: {
@@ -92,26 +86,19 @@ const NavBarItems = {
             key: 'individual',
             label: 'degree-reform-individual',
             path: '/individual',
-            access: ['admin', 'katselmusProjektiOrOhjausryhma', 'universityForm'],
+            access: ['admin', 'universityForm'],
           },
           {
             key: 'individual-answers',
             label: 'generic:degreeReformIndividualAnswers',
             path: '/reform-answers',
-            access: ['admin', 'katselmusProjektiOrOhjausryhma', 'universityForm'],
+            access: ['admin', 'universityForm'],
           },
         ],
         access: ['programme'],
       },
     ],
-    access: [
-      'admin',
-      'evaluationUniversity',
-      'special',
-      'programme',
-      'katselmusProjektiOrOhjausryhma',
-      'universityForm',
-    ],
+    access: ['admin', 'evaluationUniversity', 'special', 'programme', 'universityForm'],
   },
   admin: { key: 'admin', label: 'adminPage', path: '/admin', access: ['admin'] },
 }
@@ -266,8 +253,6 @@ const NavBar = () => {
           return isEvaluationUniversityUser(user)
         case 'employee':
           return user.iamGroups?.includes('hy-employees')
-        case 'katselmusProjektiOrOhjausryhma':
-          return isKatselmusProjektiOrOhjausryhma(user)
         case 'universityForm':
           return user.specialGroup?.universityForm
         default:

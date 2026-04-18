@@ -20,7 +20,6 @@ import {
   requireProgrammeOwner,
   notInProduction,
   requireFacultyRead,
-  checkAdminOrKatselmusryhma,
   requireUniFormRight,
   requireDekanaatti,
   requireRead,
@@ -46,7 +45,7 @@ router.delete('/lock', async (req, res) => {
   await locks.deleteLock(req, res)
 })
 
-router.get('/reform/temp', checkAdminOrKatselmusryhma, degreeReform.getAllTemp)
+router.get('/reform/temp', checkAdmin, degreeReform.getAllTemp)
 router.get('/reform/faculties/:faculty', requireFacultyRead, degreeReform.getForFaculty)
 router.get('/reform/university/:dropdownFilter', requireUniFormRight, degreeReform.getForUniversity)
 

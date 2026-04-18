@@ -28,7 +28,6 @@ import {
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
-  isKatselmusProjektiOrOhjausryhma,
   isEvaluationUniversityUser,
 } from '../../config/common.js'
 import { formKeys } from '../../config/data.js'
@@ -104,6 +103,5 @@ export {
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
-  isKatselmusProjektiOrOhjausryhma,
   isEvaluationUniversityUser,
 }

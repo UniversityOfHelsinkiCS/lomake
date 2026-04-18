@@ -16,7 +16,7 @@ import SaveIndicator from '../..//FormView/SaveIndicator'
 
 import postItImage from '../../../assets/post_it.jpg'
 import './EvaluationFacultyForm.scss'
-import { colors, getYearToShow, isAdmin, isKatselmusProjektiOrOhjausryhma } from '../../../util/common'
+import { colors, getYearToShow, isAdmin } from '../../../util/common'
 import NoPermissions from '../..//Generic/NoPermissions'
 import { setYear } from '../../../redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
@@ -142,7 +142,6 @@ const FacultyFormView = () => {
     user.access[faculty.code] ||
     isAdmin(user) ||
     user.specialGroup.evaluationFaculty ||
-    isKatselmusProjektiOrOhjausryhma(user) ||
     Object.keys(user.access).length > 0
 
   const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
