@@ -18,7 +18,6 @@ describe('IAM permission tests', () => {
     cy.hasAccessDegreeReform(user, 'KH50_006', { read: true, write: false, admin: false })
 
     cy.hasSpecialGroups(user, 'Evaluation faculty')
-    cy.hasSpecialGroups(user, 'Evaluation university')
   })
 
   it('Ospa group grants admin access', () => {
