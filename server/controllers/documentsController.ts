@@ -201,7 +201,7 @@ const closeInterventionProcedure = async (req: Request, res: Response) => {
         },
       }
     )
-    if (documents.length > 0) await transaction.commit()
+    await transaction.commit()
 
     return res.status(204).json({ documents: [] })
   } catch (error) {
