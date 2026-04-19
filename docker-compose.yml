@@ -13,6 +13,9 @@ services:
     ports:
       - 8000:8000
     container_name: lomake_dev
+    depends_on:
+      - db
+      - jami
   db:
     image: postgres:13.20
     container_name: lomake_db
@@ -40,6 +43,8 @@ services:
     ports:
       - 3003:3003
     container_name: jami
+    depends_on:
+      - jami-db
   jami-db:
     image: postgres:15.8
     environment:
