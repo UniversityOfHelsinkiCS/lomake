@@ -319,7 +319,7 @@ const InterventionComponent = () => {
             <>
               <br />
               <Typography>
-                {t('document:otherReason')} {documents.at(-1)?.reason?.additionalInfo}
+                {t('document:otherReason')} {interventionProcedures.at(-1)?.reason?.additionalInfo}
               </Typography>
             </>
           ) : null}
