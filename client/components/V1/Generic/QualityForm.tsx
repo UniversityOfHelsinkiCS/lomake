@@ -39,7 +39,7 @@ const sectionHeaderSx = {
   backgroundColor: customColors.grayLight,
   borderLeft: `8px solid`,
   padding: '1.25rem 2rem',
-  borderLeftColor: 'primary.main',
+  borderLeftColor: 'lightblue',
 }
 
 const sectionContentSx = {

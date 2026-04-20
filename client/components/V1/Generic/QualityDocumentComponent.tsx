@@ -203,7 +203,9 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                             <TableRow hover key={`${source.name}`}>
                               <TableCell component="th" scope="row" sx={{ fontWeight: 600 }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, whiteSpace: 'nowrap' }}>
-                                  {t(`qualitydocument:${source.name}`) || source.name }
+                                  {!t(`qualitydocument:${source.name}`).startsWith('qualitydocument:')
+                                    ? t(`qualitydocument:${source.name}`)
+                                    : source.name}
                                 </Box>
                               </TableCell>
                               {feedbackRegularityOptions.map(option => (
