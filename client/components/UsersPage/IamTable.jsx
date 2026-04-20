@@ -46,9 +46,14 @@ const IamTable = () => {
           'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö, oppimisympäristöjen palvelut ja katselmustyöryhmä'
         )}
         {getRowsForAccessGroup(
-          ['hy-[tiedekunta]-students', 'hy-employees'],
+          ['hy-[tiedekunta]-students'],
           'Lukuoikeudet kaikkiin ohjelmiin: uusi vuosiseuranta',
-          'Tutkinto-opiskelijat, Helsingin yliopiston työntekijä'
+          'Tutkinto-opiskelijat'
+        )}
+        {getRowsForAccessGroup(
+          ['hy-employees'],
+          'Lukuoikeudet kaikkiin ohjelmiin: uusi vuosiseuranta',
+          'Helsingin yliopiston työntekijä'
         )}
         {getRowsForAccessGroup(
           doctoralWritingIams,
