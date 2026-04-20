@@ -171,7 +171,15 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                             const regularityLabel = t(`qualitydocument:${option}`)
 
                             return (
-                              <TableCell align="center" key={`document-${option}`} sx={{ fontWeight: 700, fontSize: '0.8rem' }}>
+                              <TableCell
+                                align="center"
+                                key={`document-${option}`}
+                                sx={{
+                                  fontWeight: 700,
+                                  fontSize: '0.8rem',
+                                  borderLeft: `1px solid ${customColors.grayLight}`,
+                                }}
+                              >
                                 <Tooltip
                                   arrow
                                   placement="top"
@@ -209,7 +217,11 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                                 </Box>
                               </TableCell>
                               {feedbackRegularityOptions.map(option => (
-                                <TableCell align="center" key={`${source.name}-${option}`}>
+                                <TableCell
+                                  align="center"
+                                  key={`${source.name}-${option}`}
+                                  sx={{ borderLeft: `1px solid ${customColors.grayLight}` }}
+                                >
                                   <Typography sx={{fontSize: '1.5rem'}}>
                                     {source.regularity === option ? '✓' : ''}
                                   </Typography>
@@ -236,8 +248,9 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                     ))}
                     </Box>
                   ) : null}
-        <Typography variant="h6">{t('qualitydocument:feedbackUtilizationHeader')}:</Typography>
-        <Typography color={feedbackUtilizationExamples ? 'default' : 'secondary'}>
+        <Typography variant="h6">{t('qualitydocument:feedbackUtilizationHeader')}</Typography>
+        <Typography>{t('qualitydocument:feedbackUtilizationExamples')}</Typography>
+        <Typography color={feedbackUtilizationExamples ? 'default' : 'secondary'} sx={{ ml: 2 }}>
           {feedbackUtilizationExamples || t('common:empty')}
         </Typography>
       </div>
@@ -245,24 +258,24 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
         <Box sx={sectionHeaderSx}>
         <Typography variant="h5">{t('qualitydocument:curriculumDevelopmentHeader')}</Typography>
         </Box>
-        <Typography variant="h6">{t('qualitydocument:examples')}</Typography>
+        <Typography>{t('qualitydocument:curriculumDevelopmentDescription')}</Typography>
         {(Array.isArray(curriculumDevelopment) ? curriculumDevelopment : []).length > 0 ? (
           (curriculumDevelopment as Array<Record<string, string>>).map((example, exampleIndex) => (
-            <Box key={`curriculum-${exampleIndex}`} sx={{ ml: 1 }}>
+            <Box key={`curriculum-${exampleIndex}`} >
               <Typography variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
-              <Typography>{t('qualitydocument:developmentGoal')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentGoal')}</Typography>
               <Typography color={example.name ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.name || t('common:empty')}
               </Typography>
-              <Typography>{t('qualitydocument:changes')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:changes')}</Typography>
               <Typography color={example.changes ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.changes || t('common:empty')}
               </Typography>
-              <Typography>{t('qualitydocument:developmentBasis')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentBasis')}</Typography>
               <Typography color={example.feedbackSource ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.feedbackSource || t('common:empty')}
               </Typography>
-              <Typography>{t('qualitydocument:communication')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:communication')}</Typography>
               <Typography color={example.communication ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.communication || t('common:empty')}
               </Typography>
@@ -276,24 +289,24 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
         <Box sx={sectionHeaderSx}>
         <Typography variant="h5">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
         </Box>
-        <Typography variant="h6">{t('qualitydocument:examples')}</Typography>
+        <Typography>{t('qualitydocument:guidancePoliciesDescription')}</Typography>
         {(Array.isArray(guidancePolicies) ? guidancePolicies : []).length > 0 ? (
           (guidancePolicies as Array<Record<string, string>>).map((example, exampleIndex) => (
-            <Box key={`guidance-policy-${exampleIndex}`} sx={{ ml: 1 }}>
+            <Box key={`guidance-policy-${exampleIndex}`}>
               <Typography variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
-              <Typography>{t('qualitydocument:developmentGoal')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentGoal')}</Typography>
               <Typography color={example.name ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.name || t('common:empty')}
               </Typography>
-              <Typography>{t('qualitydocument:changes')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:changes')}</Typography>
               <Typography color={example.changes ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.changes || t('common:empty')}
               </Typography>
-              <Typography>{t('qualitydocument:developmentBasis')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentBasis')}</Typography>
               <Typography color={example.feedbackSource ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.feedbackSource || t('common:empty')}
               </Typography>
-              <Typography>{t('qualitydocument:communication')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:communication')}</Typography>
               <Typography color={example.communication ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.communication || t('common:empty')}
               </Typography>
@@ -307,35 +320,35 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
         <Box sx={sectionHeaderSx}>
           <Typography variant="h4">{t('qualitydocument:learningObjectivesAssessmentHeader')}</Typography>
         </Box>
-        <Typography color={'default'}>{t('qualitydocument:learningObjectivesAssessment')}</Typography>
+        <Typography>{t('qualitydocument:learningObjectivesAssessment')}</Typography>
         <Typography color={doc.data.learningObjectivesAssessment ? 'default' : 'secondary'} sx={{ ml: 2 }}>
           {doc.data.learningObjectivesAssessment || t('common:empty')}
         </Typography>
-        <Typography color={'default'}>
+        <Typography>
           {t(`qualitydocument:learningObjectivesAssessmentRegularity`)} 
         </Typography>
         <Typography color={doc.data.learningObjectivesAssessmentRegularity  ? 'default' : 'secondary'} sx={{ ml: 2 }}>
           {t(`qualitydocument:${doc.data.learningObjectivesAssessmentRegularity}`) || t('common:empty')}
         </Typography>
-        <Typography variant="h6">{t('qualitydocument:examples')}</Typography>
+        <Typography>{t('qualitydocument:learningObjectivesAssessmentExamples')}</Typography>
         {(Array.isArray(learningObjectivesAssessmentExamples) ? learningObjectivesAssessmentExamples : []).length >
         0 ? (
           (learningObjectivesAssessmentExamples as Array<Record<string, string>>).map((example, exampleIndex) => (
-            <Box key={`learning-objective-${exampleIndex}`} sx={{ ml: 1 }}>
+            <Box key={`learning-objective-${exampleIndex}`} >
               <Typography variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
-              <Typography>{t('qualitydocument:developmentGoal')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentGoal')}</Typography>
               <Typography color={example.name ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.name || t('common:empty')}
               </Typography>
-              <Typography>{t('qualitydocument:changes')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:changes')}</Typography>
               <Typography color={example.changes ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.changes || t('common:empty')}
               </Typography>
-              <Typography>{t('qualitydocument:developmentBasis')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentBasis')}</Typography>
               <Typography color={example.feedbackSource ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.feedbackSource || t('common:empty')}
               </Typography>
-              <Typography>{t('qualitydocument:communication')}</Typography>
+              <Typography sx={{ ml: 1 }}>{t('qualitydocument:communication')}</Typography>
               <Typography color={example.communication ? 'default' : 'secondary'} sx={{ ml: 2 }}>
                 {example.communication || t('common:empty')}
               </Typography>
