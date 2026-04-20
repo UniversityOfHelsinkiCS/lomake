@@ -14,8 +14,11 @@ services:
       - 8000:8000
     container_name: lomake_dev
     depends_on:
-      - db
-      - jami
+      db:
+        condition: service_started
+      jami:
+        condition: service_healthy
+        restart: true
   db:
     image: postgres:13.20
     container_name: lomake_db
@@ -44,7 +47,14 @@ services:
       - 3003:3003
     container_name: jami
     depends_on:
-      - jami-db
+      jami-db:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/ping"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
   jami-db:
     image: postgres:15.8
     environment:
