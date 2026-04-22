@@ -40,6 +40,9 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
       </TableCell>
     )
   }
+  if (programmeData.additionalInfo.fi?.includes('Lakkautettu')) {
+    return <TableCell style={{ backgroundColor: '#f3f3f6' }}></TableCell>
+  }
 
   return (
     <TableCell>

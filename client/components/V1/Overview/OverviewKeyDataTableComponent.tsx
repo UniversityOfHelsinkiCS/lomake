@@ -38,9 +38,15 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
   const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
   const color = additionalInfo.fi === 'Lakkautettu ohjelma' ? 'secondary' : ''
   const hasAdditionalInfo = Boolean(additionalInfo[lang])
+  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? '#f3f3f6' : ''
 
   return (
-    <TableCell data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`} hoverEffect itemAlign="left">
+    <TableCell
+      data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
+      hoverEffect
+      itemAlign="left"
+      style={{ backgroundColor: backRoundColor }}
+    >
       <Link style={{ width: '100%' }} to={`/v1/programmes/10/${koulutusohjelmakoodi}`}>
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -368,7 +374,11 @@ const KeyDataTableComponent = ({
                       ) : (
                         <QualityCell programmeData={programmeData} />
                       )}
-                      <TableCell>
+                      <TableCell
+                        style={{
+                          backgroundColor: programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? '#f3f3f6' : '',
+                        }}
+                      >
                         <InterventionCell
                           activeYear={activeYear}
                           interventionProcedures={interventionProcedures}

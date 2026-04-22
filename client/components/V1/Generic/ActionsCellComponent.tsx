@@ -35,6 +35,7 @@ const ActionsCell = ({
   const dispatch = useAppDispatch()
 
   const actionsBadgeData = renderActionsBadge(programmeData, metadata, true, reports)
+  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? '#f3f3f6' : ''
 
   const handleOpen = () => {
     dispatch(setViewOnly(true))
@@ -42,7 +43,7 @@ const ActionsCell = ({
   }
 
   return (
-    <TableCell>
+    <TableCell style={{ backgroundColor: backRoundColor }}>
       {actionsBadgeData.showBadge && (
         <NotificationBadge
           data-cy={`actionsCellBadge-${programmeData.koulutusohjelmakoodi}`}

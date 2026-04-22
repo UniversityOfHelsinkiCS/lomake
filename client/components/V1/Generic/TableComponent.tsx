@@ -189,6 +189,7 @@ export const TableCell = ({
   rest?: any
 }) => {
   const [isHovering, setIsHovering] = useState(false)
+  const customBackgroundColor = style?.backgroundColor
 
   return (
     <div
@@ -210,9 +211,11 @@ export const TableCell = ({
         backgroundColor:
           !isHeader && disabled
             ? 'rgba(0,0,0,0.06)'
-            : (hoverEffect || onClick) && isHovering
-              ? 'rgba(0,0,0,0.06)'
-              : 'transparent',
+            : customBackgroundColor
+              ? customBackgroundColor
+              : (hoverEffect || onClick) && isHovering
+                ? 'rgba(0,0,0,0.06)'
+                : 'transparent',
       }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
