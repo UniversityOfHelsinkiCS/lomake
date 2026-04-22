@@ -151,7 +151,6 @@ const KeyDataTableComponent = ({
   const selectedKeyDataRow = yearMatches.find(keyData => keyData.active) ?? yearMatches[0]
   const keyData = selectedKeyDataRow?.data
 
-
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
   }, [keyData])
