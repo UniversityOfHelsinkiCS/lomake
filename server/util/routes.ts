@@ -105,8 +105,8 @@ router.put('/reports/:programme/:year', requireProgrammeWrite, async (req, res) 
 router.get('/keydata', requireRead, async (req, res) => {
   await keyData.getKeyData(req, res)
 })
-router.get('/keydata/:year', requireRead, async (req, res) => {
-  await keyData.getKeyDataForYear(req, res)
+router.get('/keydata/all', requireRead, async (req, res) => {
+  await keyData.getAllKeyData(req, res)
 })
 router.post('/keydata', checkAdmin, async (req, res) => {
   await keyData.uploadKeyData(req, res)

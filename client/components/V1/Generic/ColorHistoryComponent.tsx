@@ -9,13 +9,16 @@ import { useFetchKeyDataQuery } from '@/client/redux/keyData'
 const ColorHistoryComponent = (props: any) => {
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language)
-  const selectedYear = useAppSelector(state => state.filters.keyDataYear)
   if (!props.programme || props.value == 'Ei dataa') {
     return null
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { data } = useFetchKeyDataQuery()
+  const { data, isLoading } = useFetchKeyDataQuery()
+
+  if (isLoading || !data) {
+    return null
+  }
 
   const metadataItem = data.metadata.find(
     (item: any) => item.avainluvunNimi[lang] === props.title && item.ohjelmanTaso === props.level
@@ -28,7 +31,7 @@ const ColorHistoryComponent = (props: any) => {
     .filter((programme: any) => {
       const isMatchingProgram = programme.koulutusohjelmakoodi === props.programme.koulutusohjelmakoodi
       const hasValue = dataKey && programme.values[dataKey] !== undefined
-      const isDifferentYear = programme.year < selectedYear - 1
+      const isDifferentYear = programme.year < props.programme.year
 
       return isMatchingProgram && hasValue && isDifferentYear
     })

@@ -30,6 +30,19 @@ export interface KeyDataByCode {
   metadata: KeyDataMetadata[]
 }
 
+export interface KeyDataRow {
+  id: number
+  data: KeyData
+  active: boolean
+  year: number | null
+  createdAt: string
+}
+
+export interface KeyDataByCodeWithYearAndActive extends KeyDataByCode {
+  active: boolean
+  year: number | null
+}
+
 export interface Faculty {
   id: number
   name: {

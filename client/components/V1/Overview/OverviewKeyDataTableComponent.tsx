@@ -21,7 +21,7 @@ import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppSelector } from '@/client/util/hooks'
 import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 import { useGetReportsQuery } from '@/client/redux/reports'
-import { useFetchKeyDataForYearQuery, useFetchKeyDataQuery } from '@/client/redux/keyData'
+import { useFetchAllKeyDataQuery } from '@/client/redux/keyData'
 import { useGetActiveInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
 import { InterventionProcedureType } from '@/client/lib/types'
 import DiscontinuedProgramFilter from '../Generic/DiscontinuedFilterComponent'
@@ -144,15 +144,13 @@ const KeyDataTableComponent = ({
   const { data: reports = {} } = useGetReportsQuery({ year: activeYear })
   const user = useAppSelector(state => state.currentUser.data)
   const { data: interventionProcedures = [] } = useGetActiveInterventionProceduresQuery()
-  const { data: keyDataForYear } = useFetchKeyDataForYearQuery(activeYear)
-  const { data: currentKeyData } = useFetchKeyDataQuery()
-  let keyData
 
-  if (activeYear !== new Date().getFullYear()) {
-    keyData = keyDataForYear || currentKeyData
-  } else {
-    keyData = currentKeyData
-  }
+  const { data: allKeyData } = useFetchAllKeyDataQuery()
+  const selectedYear = Number.parseInt(yearFilter, 10)
+  const yearMatches = allKeyData?.filter(keyData => keyData.year === selectedYear) ?? []
+  const selectedKeyDataRow = yearMatches.find(keyData => keyData.active) ?? yearMatches[0]
+  const keyData = selectedKeyDataRow?.data
+
 
   const metadata = useMemo(() => {
     return keyData ? keyData.metadata : []
@@ -407,7 +405,9 @@ const KeyDataTableComponent = ({
             )}
           </Table>
 
-          <KeyDataModal data={selectedKeyFigureData} open={modalOpen} setOpen={setModalOpen} />
+          {selectedKeyFigureData ? (
+            <KeyDataModal data={selectedKeyFigureData} open={modalOpen} setOpen={setModalOpen} />
+          ) : null}
         </div>
       </div>
     </div>

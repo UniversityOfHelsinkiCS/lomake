@@ -14,15 +14,14 @@ import { AppDispatch } from '@/client/redux'
 import { setKeyDataYear } from '@/client/redux/filterReducer'
 import { useGetReportsQuery } from '@/client/redux/reports'
 import { useAppSelector } from '@/client/util/hooks'
+import { useFetchAllKeyData } from '@/client/redux/keyData'
 
 const ProgrammeKeyDataTableComponent = ({
   programmeData,
-  metadata,
-  metadata2025,
+  programmeKey,
 }: {
   programmeData: KeyDataProgramme[]
-  metadata: KeyDataMetadata[]
-  metadata2025: KeyDataMetadata[]
+  programmeKey: string
 }) => {
   const { t } = useTranslation()
   const dispatch: AppDispatch = useDispatch()
@@ -30,11 +29,13 @@ const ProgrammeKeyDataTableComponent = ({
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
   const user = useAppSelector(state => state.currentUser.data)
 
-  const handleModalOpen = (programme: KeyDataProgramme, type: GroupKey) => {
+  const { keyData } = useFetchAllKeyData({ studyprogrammeKey: programmeKey })
+
+  const handleModalOpen = (programme: KeyDataProgramme, metadata: KeyDataMetadata[], type: GroupKey) => {
     setModalOpen(true)
     setSelecteKeyFigureData({
       programme,
-      metadata: programme.year + 1 === 2025 && metadata2025.length > 0 ? metadata2025 : metadata,
+      metadata,
       type,
     })
   }
@@ -77,72 +78,76 @@ const ProgrammeKeyDataTableComponent = ({
 
         {programmeData.length > 0 ? (
           <TableBody>
-            {programmeData.map((programmeData: KeyDataProgramme, index) => {
-              if (annualFollowUpYear(programmeData.year) === 2026 && !isAdmin(user)) {
+            {programmeData.map((programmeRow: KeyDataProgramme, index) => {
+              const matchingKeyData = keyData.filter(item => item.year === annualFollowUpYear(programmeRow.year))
+              const selectedKeyData = matchingKeyData.find(item => item.active) ?? matchingKeyData[0]
+              const selectedProgrammeData =
+                selectedKeyData?.programme.find(programme => programme.year === programmeRow.year) ?? programmeRow
+              const selectedMetadata = selectedKeyData?.metadata ?? []
+
+              if (annualFollowUpYear(selectedProgrammeData.year) === 2026 && !isAdmin(user)) {
                 return null
               }
-              const selectedMetadata =
-                annualFollowUpYear(programmeData.year) === 2025 && metadata2025.length > 0 ? metadata2025 : metadata
               // eslint-disable-next-line react-hooks/rules-of-hooks
               const { data: reports = {} } = useGetReportsQuery({
-                year: annualFollowUpYear(programmeData.year).toString(),
+                year: annualFollowUpYear(selectedProgrammeData.year).toString(),
               })
               return (
                 // eslint-disable-next-line react/no-array-index-key
-                <TableRow key={programmeData.koulutusohjelmakoodi + index}>
+                <TableRow key={selectedProgrammeData.koulutusohjelmakoodi + index}>
                   <TableCell
-                    data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}-${programmeData.year}`}
+                    data-cy={`keydatatable-programme-${selectedProgrammeData.koulutusohjelmakoodi}-${selectedProgrammeData.year}`}
                     style={{ borderRadius: '0.5rem 0 0 0.5rem' }}
                   >
                     <Link
-                      onClick={() => dispatch(setKeyDataYear(annualFollowUpYear(programmeData.year)))}
+                      onClick={() => dispatch(setKeyDataYear(annualFollowUpYear(selectedProgrammeData.year)))}
                       style={{ width: '100%', textAlign: 'left' }}
-                      to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${annualFollowUpYear(programmeData.year)}`}
+                      to={`/v1/programmes/10/${selectedProgrammeData.koulutusohjelmakoodi}/${annualFollowUpYear(selectedProgrammeData.year)}`}
                     >
-                      <Typography variant="h5">{annualFollowUpYear(programmeData.year)}</Typography>
+                      <Typography variant="h5">{annualFollowUpYear(selectedProgrammeData.year)}</Typography>
                     </Link>
                   </TableCell>
 
                   <TrafficLightCell
-                    activeYear={annualFollowUpYear(programmeData.year)}
+                    activeYear={annualFollowUpYear(selectedProgrammeData.year)}
                     groupKey={GroupKey.VETOVOIMAISUUS}
-                    handleModalOpen={handleModalOpen}
+                    handleModalOpen={(programme, type) => handleModalOpen(programme, selectedMetadata, type)}
                     metadata={selectedMetadata}
-                    programmeData={programmeData}
+                    programmeData={selectedProgrammeData}
                     reports={reports}
                   />
 
                   <TrafficLightCell
-                    activeYear={annualFollowUpYear(programmeData.year)}
+                    activeYear={annualFollowUpYear(selectedProgrammeData.year)}
                     groupKey={GroupKey.LAPIVIRTAUS}
-                    handleModalOpen={handleModalOpen}
+                    handleModalOpen={(programme, type) => handleModalOpen(programme, selectedMetadata, type)}
                     metadata={selectedMetadata}
-                    programmeData={programmeData}
+                    programmeData={selectedProgrammeData}
                     reports={reports}
                   />
 
                   <TrafficLightCell
-                    activeYear={annualFollowUpYear(programmeData.year)}
+                    activeYear={annualFollowUpYear(selectedProgrammeData.year)}
                     groupKey={GroupKey.OPISKELIJAPALAUTE}
-                    handleModalOpen={handleModalOpen}
+                    handleModalOpen={(programme, type) => handleModalOpen(programme, selectedMetadata, type)}
                     metadata={selectedMetadata}
-                    programmeData={programmeData}
+                    programmeData={selectedProgrammeData}
                     reports={reports}
                   />
-                  {programmeData.year < 2026 && !isAdmin(user) ? (
+                  {selectedProgrammeData.year < 2026 && !isAdmin(user) ? (
                     <TableCell disabled></TableCell>
                   ) : (
                     <TrafficLightCell
-                      activeYear={annualFollowUpYear(programmeData.year)}
+                      activeYear={annualFollowUpYear(selectedProgrammeData.year)}
                       groupKey={GroupKey.RESURSSIT}
-                      handleModalOpen={handleModalOpen}
+                      handleModalOpen={(programme, type) => handleModalOpen(programme, selectedMetadata, type)}
                       metadata={selectedMetadata}
-                      programmeData={programmeData}
+                      programmeData={selectedProgrammeData}
                       reports={reports}
                     />
                   )}
 
-                  <ActionsCell metadata={metadata} programmeData={programmeData} reports={reports} />
+                  <ActionsCell metadata={selectedMetadata} programmeData={selectedProgrammeData} reports={reports} />
                 </TableRow>
               )
             })}
@@ -158,7 +163,9 @@ const ProgrammeKeyDataTableComponent = ({
         )}
       </Table>
 
-      <KeyDataModal data={selectedKeyFigureData} open={modalOpen} setOpen={setModalOpen} />
+      {selectedKeyFigureData ? (
+        <KeyDataModal data={selectedKeyFigureData} open={modalOpen} setOpen={setModalOpen} />
+      ) : null}
     </div>
   )
 }

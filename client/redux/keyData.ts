@@ -1,5 +1,7 @@
 import { RTKApi } from '../util/apiConnection'
-import { KeyDataProgramme, KeyData } from '@/shared/lib/types'
+import { KeyDataProgramme, KeyData, KeyDataRow, KeyDataByCodeWithYearAndActive } from '@/shared/lib/types'
+
+const normalizeProgrammeCode = (value: unknown) => (typeof value === 'string' ? value.trim() : '')
 
 export const keyDataApi = RTKApi.injectEndpoints({
   endpoints: builder => ({
@@ -7,8 +9,8 @@ export const keyDataApi = RTKApi.injectEndpoints({
       query: () => '/keyData',
       providesTags: ['KeyData'],
     }),
-    fetchKeyDataForYear: builder.query<KeyData, string>({
-      query: year => `/keyData/${year}`,
+    fetchAllKeyData: builder.query<KeyDataRow[], void>({
+      query: () => '/keydata/all',
       providesTags: ['KeyData'],
     }),
     uploadKeyData: builder.mutation<void, any>({
@@ -46,7 +48,7 @@ export const keyDataApi = RTKApi.injectEndpoints({
 
 export const {
   useFetchKeyDataQuery,
-  useFetchKeyDataForYearQuery,
+  useFetchAllKeyDataQuery,
   useUploadKeyDataMutation,
   useGetKeyDataMetaQuery,
   useDeleteKeyDataMutation,
@@ -57,15 +59,34 @@ export const useFetchSingleKeyDataQuery = ({ studyprogrammeKey }: { studyprogram
   const { data, isLoading, error } = useFetchKeyDataQuery()
   const { kandiohjelmat = [], maisteriohjelmat = [], metadata = [] } = data ?? {}
   const programmes = [...kandiohjelmat, ...maisteriohjelmat]
+  const normalizedStudyProgrammeKey = normalizeProgrammeCode(studyprogrammeKey)
   const programme: KeyDataProgramme[] = programmes.filter(
-    p => p.koulutusohjelmakoodi.trim() === studyprogrammeKey.trim()
+    p => normalizeProgrammeCode(p.koulutusohjelmakoodi) === normalizedStudyProgrammeKey
   )
   return { isLoading, error, programme, metadata }
 }
 
-export const useFetchKeyDataMetadataForYearQuery = ({ year }: { year: string }) => {
-  const { data, isLoading, error } = useFetchKeyDataForYearQuery(year)
-  const { metadata = [] } = data ?? {}
+export const useFetchAllKeyData = ({ studyprogrammeKey }: { studyprogrammeKey: string }) => {
+  const { data, isLoading, error } = useFetchAllKeyDataQuery()
+  const normalizedStudyProgrammeKey = normalizeProgrammeCode(studyprogrammeKey)
 
-  return { isLoading, error, metadata }
+  const keyData =
+    data?.map(({ data: keyDataRow, active, year }) => {
+      const { kandiohjelmat = [], maisteriohjelmat = [], metadata = [] } = keyDataRow ?? {}
+      const programmes = [...kandiohjelmat, ...maisteriohjelmat]
+      const programme: KeyDataProgramme[] = programmes.filter(
+        p => normalizeProgrammeCode(p.koulutusohjelmakoodi) === normalizedStudyProgrammeKey
+      )
+
+      return {
+        programme,
+        metadata,
+        active,
+        year,
+      }
+    }) ?? []
+
+  const filteredKeyData: KeyDataByCodeWithYearAndActive[] = keyData.filter(({ programme }) => programme.length > 0)
+
+  return { isLoading, error, keyData: filteredKeyData }
 }

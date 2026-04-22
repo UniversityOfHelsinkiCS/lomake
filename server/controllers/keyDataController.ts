@@ -94,28 +94,17 @@ const getYear = (keyData: Partial<Record<CanonicalSheetName, any[]>>) => {
 
 const getKeyData = async (_req: Request, res: Response) => {
   try {
-    const { data } = await KeyData.findOne({
+    const keyData = await KeyData.findOne({
       where: {
         active: true,
       },
     })
-    await validateKeyData(data)
 
-    return res.status(200).json(data)
-  } catch (error) {
-    return res.status(500).json({ error: (error as Error).message })
-  }
-}
+    if (!keyData) {
+      return res.status(404).json({ error: 'No key data found' })
+    }
 
-const getKeyDataForYear = async (req: Request, res: Response) => {
-  try {
-    const { year } = req.params
-    const { data } = await KeyData.findOne({
-      where: {
-        year,
-      },
-    })
-
+    const { data } = keyData
     await validateKeyData(data)
 
     return res.status(200).json(data)
@@ -244,6 +233,33 @@ const getKeyDataMeta = async (_req: Request, res: Response) => {
   }
 }
 
+const getAllKeyData = async (_req: Request, res: Response) => {
+  try {
+    const keyData = await KeyData.findAll({
+      attributes: ['id', 'data', 'active', 'year', 'createdAt'],
+      order: [['createdAt', 'DESC']],
+    })
+
+    if (!keyData.length) {
+      return res.status(404).json({ error: 'No key data found' })
+    }
+
+    await Promise.all(keyData.map(async ({ data }) => validateKeyData(data)))
+
+    const parsedKeyData = keyData.map(({ id, data, active, year, createdAt }) => ({
+      id,
+      data,
+      active,
+      year,
+      createdAt,
+    }))
+
+    return res.status(200).json(parsedKeyData)
+  } catch (error) {
+    return res.status(500).json({ error: (error as Error).message })
+  }
+}
+
 const deleteKeyData = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
@@ -282,4 +298,11 @@ const updateKeyData = async (req: Request, res: Response) => {
   }
 }
 
-export default { getKeyData, getKeyDataForYear, uploadKeyData, getKeyDataMeta, deleteKeyData, updateKeyData }
+export default {
+  getKeyData,
+  uploadKeyData,
+  getKeyDataMeta,
+  getAllKeyData,
+  deleteKeyData,
+  updateKeyData,
+}
