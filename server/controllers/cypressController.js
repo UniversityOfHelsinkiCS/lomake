@@ -1182,7 +1182,20 @@ const initKeyData = async (_req, res) => {
 
     await KeyData.create({
       data: formattedData,
+      active: false,
+      year: 2024,
+    })
+
+    await KeyData.create({
+      data: formattedData,
+      active: false,
+      year: 2025,
+    })
+
+    await KeyData.create({
+      data: formattedData,
       active: true,
+      year: 2026,
     })
 
     return res.status(200).json({ message: 'Keydata initialized' })
