@@ -290,7 +290,9 @@ const QualityForm = ({
                                 <Tooltip
                                   arrow
                                   placement="top"
-                                  title={<span style={{ whiteSpace: 'pre-line' }}>{regularityLabel}</span>}
+                                  title={
+                                    <span style={{ whiteSpace: 'pre-line', fontSize: '15px' }}>{regularityLabel}</span>
+                                  }
                                 >
                                   <span
                                     style={{
@@ -301,7 +303,6 @@ const QualityForm = ({
                                       overflow: 'hidden',
                                       textOverflow: 'ellipsis',
                                       lineHeight: 1.2,
-                                      cursor: 'help',
                                     }}
                                   >
                                     {regularityLabel}
@@ -324,7 +325,11 @@ const QualityForm = ({
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, whiteSpace: 'nowrap' }}>
                                   {getFeedbackSourceLabel(t, source)}
                                   {!isDefaultFeedbackSource(source) ? (
-                                    <Tooltip arrow placement="right" title={t('qualitydocument:remove')}>
+                                    <Tooltip
+                                      arrow
+                                      placement="right"
+                                      title={<div style={{ fontSize: '15px' }}>{t('qualitydocument:remove')}</div>}
+                                    >
                                       <IconButton
                                         aria-label={t('qualitydocument:remove')}
                                         onClick={() => removeFeedbackSource(source)}

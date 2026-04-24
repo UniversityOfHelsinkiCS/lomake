@@ -50,7 +50,7 @@ const NotificationBadge = ({ variant = 'small', children, style, tooltip, ...res
 
   if (tooltip) {
     return (
-      <Tooltip arrow placement="top" title={tooltip}>
+      <Tooltip arrow placement="top" title={<div style={{ fontSize: '15px' }}>{tooltip}</div>}>
         {badgeComponent}
       </Tooltip>
     )

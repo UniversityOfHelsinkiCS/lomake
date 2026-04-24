@@ -24,7 +24,7 @@ const DiscontinuedProgramFilter = () => {
         arrow
         placement="right"
         slotProps={{ popper: { sx: { '& .MuiTooltip-tooltip': { maxWidth: '700px' } } } }}
-        title={t('keyData:discontinuedProgrammeInfoIcon')}
+        title={<div style={{ fontSize: '15px' }}>{t('keyData:discontinuedProgrammeInfoIcon')}</div>}
       >
         <span style={{ display: 'inline-flex', alignItems: 'center' }}>
           <InfoOutlinedIcon

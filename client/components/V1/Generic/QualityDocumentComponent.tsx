@@ -183,7 +183,7 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                                 <Tooltip
                                   arrow
                                   placement="top"
-                                  title={<span style={{ whiteSpace: 'pre-line' }}>{regularityLabel}</span>}
+                                  title={<span style={{ whiteSpace: 'pre-line', fontSize: '15px' }}>{regularityLabel}</span>}
                                 >
                                   <span
                                     style={{
@@ -194,7 +194,6 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                                       overflow: 'hidden',
                                       textOverflow: 'ellipsis',
                                       lineHeight: 1.2,
-                                      cursor: 'help',
                                     }}
                                   >
                                     {regularityLabel}

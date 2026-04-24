@@ -129,7 +129,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
   return showDescription ? (
     cardContent
   ) : (
-    <Tooltip arrow placement="top" title={t('keyData:seeMore')}>
+    <Tooltip arrow placement="top" title={<div style={{ fontSize: '15px' }}>{t('keyData:seeMore')}</div>}>
       {cardContent}
     </Tooltip>
   )
