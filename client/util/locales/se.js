@@ -612,6 +612,8 @@ export default {
       '<strong>OBS!</strong><br /> Även för nedlagda utbildningsprogram visas nyckeltal. När rektorn har beslutat att ett utbildningsprogram ska avvecklas behöver utbildningsprogrammets ledningsgrupp inte vidta några åtgärder inom ramen för den årliga uppföljningen eller upprätta någon utvecklingsplan. Åtgärdsförfarandet inleds inte heller, även om ett eller flera utvärderingsområden för det utbildningsprogram som ska avvecklas är röda.<br />',
     discontinuedProgrammeInfoIcon:
       'Även för nedlagda utbildningsprogram visas nyckeltal. När rektorn har beslutat att ett utbildningsprogram ska avvecklas behöver utbildningsprogrammets ledningsgrupp inte vidta några åtgärder inom ramen för den årliga uppföljningen eller upprätta någon utvecklingsplan. Åtgärdsförfarandet inleds inte heller, även om ett eller flera utvärderingsområden för det utbildningsprogram som ska avvecklas är röda.',
+    newProgrammeInfo:
+      '<strong>OBS!</strong> <br /> Nyckeltal för nya utbildningsprogram sammanställs redan från start. Nyckeltalen som beskriver verksamheten inom ett nytt utbildningsprogram byggs upp gradvis under 3–4 år. Nya utbildningsprogram behöver inte vidta några åtgärder baserat på färgmarkeringarna (gul/röd) i utvärderingsområdet.<br />',
     lightGreenInfo: 'Ljusgrön - utbildningsprogrammets status är god',
     yellowInfo: 'Gul - utbildningsprogrammet står inför vissa utmaningar',
     redInfo: 'Röd - utbildningsprogrammet har utmaningar som behöver åtgärdas',

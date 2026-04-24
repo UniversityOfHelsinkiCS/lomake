@@ -579,6 +579,8 @@ export default {
       "<strong>NOTE!</strong><br /> Key figures are also displayed for discontinued degree programmes. Once the rector has decided to discontinue a degree programme, the programme's steering group is not required to carry out annual follow-up measures or prepare a development plan. The intervention procedure will also not be initiated, even if one or more evaluation areas for the programme are marked red. <br />",
     discontinuedProgrammeInfoIcon:
       "Key figures are also displayed for discontinued degree programmes. Once the rector has decided to discontinue a degree programme, the programme's steering group is not required to carry out annual follow-up measures or prepare a development plan. The intervention procedure will also not be initiated, even if one or more evaluation areas for the programme are marked red.",
+    newProgrammeInfo:
+      '<strong>NOTE!</strong> <br /> Key figures for new degree programs are generated from the very start. The key figures describing the performance of a new degree program are accumulated gradually over a period of 3–4 years. New degree programmes are not required to take action based on the color codes (yellow/red) in the evaluation area.<br />',
     lightGreenInfo: 'Light green - the status of the degree programme is good',
     yellowInfo: 'Yellow - the degree programme is facing some challenges',
     redInfo: 'Red - the degree programme presents challenges that need to be addressed',

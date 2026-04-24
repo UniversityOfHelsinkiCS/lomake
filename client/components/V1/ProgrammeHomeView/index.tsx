@@ -66,6 +66,17 @@ const ProgrammeHomeView = () => {
             </Typography>
           </Alert>
         ) : null}
+        {programmeData[programmeData.length - 1].additionalInfo?.fi?.includes('Uusi ohjelma') ? (
+          <Alert severity="warning" sx={{ mb: 4 }}>
+            <Typography variant="light">
+              <Trans i18nKey={'keyData:newProgrammeInfo'} />{' '}
+            </Typography>
+            <br />
+            <Typography variant="light">
+              {programmeData[programmeData.length - 1]?.additionalInfo2?.[lang] || ''}
+            </Typography>
+          </Alert>
+        ) : null}
         <Typography variant="light">{t('keyData:homeDescription')}</Typography>
         {programmeKey ? <ProgrammeKeyDataTable programmeData={programmeData} programmeKey={programmeKey} /> : null}
       </Box>

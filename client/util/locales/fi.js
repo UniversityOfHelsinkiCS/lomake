@@ -577,6 +577,8 @@ export default {
       '<strong>HUOM!</strong> <br /> Myös lakkautetuille koulutusohjelmille tulee näkyviin avainlukutiedot. Kun koulutusohjelman lakkauttamisesta on rehtorin päätös, koulutusohjelman johtoryhmän ei tarvitse tehdä vuosiseurannan toimenpiteitä tai kehittämissuunnitelmaa. Toimenpidemenettely ei myöskään käynnisty, vaikka lakkautettavalla koulutusohjelmalla yksi tai useampi arviointialue olisi punainen.<br />',
     discontinuedProgrammeInfoIcon:
       'Myös lakkautetuille koulutusohjelmille tulee näkyviin avainlukutiedot. Kun koulutusohjelman lakkauttamisesta on rehtorin päätös, koulutusohjelman johtoryhmän ei tarvitse tehdä vuosiseurannan toimenpiteitä tai kehittämissuunnitelmaa. Toimenpidemenettely ei myöskään käynnisty, vaikka lakkautettavalla koulutusohjelmalla yksi tai useampi arviointialue olisi punainen.',
+    newProgrammeInfo:
+      '<strong>HUOM!</strong> <br /> Uusille koulutusohjelmille tuotetaan avainlukutiedot heti käynnistymisestä lähtien. Uuden koulutusohjelman toimintaa kuvaavat avainluvut kertyvät vähitellen 3-4 vuodessa. Uusilta koulutusohjelmilta ei edellytetä toimenpiteitä arviointialueen värimerkintöjen (keltainen/punainen) perusteella.<br />',
     lightGreenInfo: 'Vaaleanvihreä – koulutusohjelman tilanne on hyvä',
     yellowInfo: 'Keltainen – koulutusohjelman tilanteessa on havaittavissa joitakin haasteita',
     redInfo: 'Punainen – koulutusohjelman tilanteessa on ratkaisuja vaativia haasteita',

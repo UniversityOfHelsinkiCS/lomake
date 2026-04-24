@@ -260,7 +260,8 @@ const ProgrammeYearlyView = () => {
       </Tabs>
       <Box sx={{ mt: 4 }}>
         {programmeData.additionalInfo?.[lang]?.length &&
-        !programmeData.additionalInfo?.fi?.includes('Lakkautettu ohjelma') ? (
+        !programmeData.additionalInfo?.fi?.includes('Lakkautettu ohjelma') &&
+        !programmeData.additionalInfo?.fi?.includes('Uusi ohjelma') ? (
           <Alert severity="warning" sx={{ mb: 4 }}>
             <Typography variant="light">{programmeData.additionalInfo[lang]}</Typography>
           </Alert>
@@ -271,7 +272,20 @@ const ProgrammeYearlyView = () => {
               <Trans i18nKey={'keyData:discontinuedProgrammeInfo'} />{' '}
             </Typography>
             <br />
-            <Typography variant="light">{programmeData.additionalInfo2?.[lang] || ''}</Typography>
+            <Typography variant="light">
+              {programmeData.additionalInfo2?.[lang] || programmeData.additionalInfo?.[lang] || ''}
+            </Typography>
+          </Alert>
+        ) : null}
+        {programmeData.additionalInfo?.fi?.includes('Uusi ohjelma') ? (
+          <Alert severity="warning" sx={{ mb: 4 }}>
+            <Typography variant="light">
+              <Trans i18nKey={'keyData:newProgrammeInfo'} />{' '}
+            </Typography>
+            <br />
+            <Typography variant="light">
+              {programmeData.additionalInfo2?.[lang] || programmeData.additionalInfo?.[lang] || ''}
+            </Typography>
           </Alert>
         ) : null}
       </Box>
