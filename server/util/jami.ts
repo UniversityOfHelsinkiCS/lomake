@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/node'
 import { JAMI_URL, API_TOKEN, inProduction } from './common.js'
 import { ProgrammeLevel } from '@/shared/lib/enums.js'
 import logger from './logger.js'
-import { lomakeKatselmus } from '../../config/IAMConfig'
+import { lomakeKatselmus, universityWideWritingGroups } from '../../config/IAMConfig'
 
 interface Faculty {
   readonly code: string
@@ -62,29 +62,16 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
         })
       })
     }
-
-    if (iamGroups.find(iam => /hy-[a-z-]+-jory/.test(iam)) && !iamGroups.includes('hy-employees')) {
+    if (iamGroups.some(group => universityWideWritingGroups.includes(group))) {
       const organisation = await getOrganisationData()
 
       organisation.forEach((faculty: Faculty) => {
         faculty.programmes.forEach((program: Programme) => {
-          lomakeAccess[program.key] = { read: true, write: false, admin: false }
+          lomakeAccess[program.key] = { read: true, write: true, admin: false }
         })
       })
     }
 
-    if (
-      iamGroups.find(iam => /hy-ypa-kopa-[a-z]+-(1|2|3)/.test(iam)) &&
-      !iamGroups.includes('hy-kopa-koulutusasiantuntijat')
-    ) {
-      const organisation = await getOrganisationData()
-
-      organisation.forEach((faculty: Faculty) => {
-        faculty.programmes.forEach((program: Programme) => {
-          lomakeAccess[program.key] = { read: true, write: false, admin: false }
-        })
-      })
-    }
     // eslint-disable-next-line prefer-const
     let { specialGroup, ...access } = iamAccess
 

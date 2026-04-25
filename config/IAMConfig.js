@@ -3,21 +3,11 @@ const doctoralIams = ['hy-tine']
 // expired hy-tutkijakoulut-dshealth-jory
 const doctoralWritingIams = ['hy-ypa-tutto-toht', 'hy-tutkijakoulu-johtokunta']
 
-const isUniversityWideWritingGroups = [
-  'hy-ypa-kopa-keskusta-1',
-  'hy-ypa-kopa-keskusta-2',
-  'hy-ypa-kopa-keskusta-3',
-  'hy-ypa-kopa-kruununhaka-1',
-  'hy-ypa-kopa-kruununhaka-2',
-  'hy-ypa-kopa-kruununhaka-3',
-  'hy-ypa-kopa-kumpula-1',
-  'hy-ypa-kopa-kumpula-2',
-  'hy-ypa-kopa-meilahti-1',
-  'hy-ypa-kopa-meilahti-2',
-  'hy-ypa-kopa-viikki-1',
-  'hy-ypa-kopa-viikki-2',
+const universityWideWritingGroups = [
+  'hy-ypa-kopa-koulutuspaallikot',
+  'hy-kopa-koulutusasiantuntijat',
+  'hy-ypa-kopa-johtoryhma',
 ]
-const kopa = 'hy-kopa-koulutusasiantuntijat'
 
 const lomakeKatselmus = [
   'hy-ttdk-dekanaatti',
@@ -47,12 +37,19 @@ const adminGroups = ['grp-ko-laadunhallinta']
 const IAMsToTable = [
   ...doctoralIams,
   ...doctoralWritingIams,
-  ...isUniversityWideWritingGroups,
+  ...universityWideWritingGroups,
   ...adminGroups,
   ...superAdminGroups,
   ...lomakeKatselmus,
   'hy-employees',
-  kopa,
 ]
 
-export { doctoralIams, doctoralWritingIams, superAdminGroups, adminGroups, IAMsToTable, lomakeKatselmus, kopa }
+export {
+  doctoralIams,
+  doctoralWritingIams,
+  superAdminGroups,
+  adminGroups,
+  IAMsToTable,
+  lomakeKatselmus,
+  universityWideWritingGroups,
+}

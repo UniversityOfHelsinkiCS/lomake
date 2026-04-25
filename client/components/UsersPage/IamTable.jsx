@@ -28,13 +28,18 @@ const IamTable = () => {
         {getRowsForAccessGroup(superAdminGroups, 'Super-admin-oikeudet', 'Toska-ryhmä')}
         {getRowsForAccessGroup(adminGroups, 'Admin-oikeudet', 'Ospa-ryhmä')}
         {getRowsForAccessGroup(
-          ['hy-op-kopa-[keskusta|kruununhaka|kumpula|meilahti|viikki]-(1|2|3) & hy-kopa-koulutusasiantuntijat'],
+          ['hy-kopa-koulutusasiantuntijat'],
           'Kirjoitusoikeudet kaikkiin ohjelmiin',
-          'Koulutussuunnittelijat ja opintoasiainpäälliköt'
+          'Koulutustasiantuntijat'
         )}
         {getRowsForAccessGroup(
+          ['hy-kopa-koulutuspaallikot'],
+          'Kirjoitusoikeudet kaikkiin ohjelmiin',
+          'Koulutuspäälliköt'
+        )}
+        {getRowsForAccessGroup(['hy-ypa-kopa-johtoryhma'], 'Kirjoitusoikeudet kaikkiin ohjelmiin', 'Johtoryhmä')}
+        {getRowsForAccessGroup(
           uniq([
-            'hy-[tiedekunta]-maisteri/kandi-kojot',
             'hy-[tiedekunta]-dekanaatti',
             'hy-rehtoraatti',
             'hy-ypa-toimi-helsinki',
@@ -72,14 +77,9 @@ const IamTable = () => {
           'Koulutusohjelmien johtajat'
         )}
         {getRowsForAccessGroup(
-          ['hy-[tiedekunta]-[koulutusohjelma]-jory & hy-employees'],
+          ['hy-[tiedekunta]-[koulutusohjelma]-jory'],
           'Kirjoitusoikeudet kyseiseen koulutusohjelmaan',
           'Koulutusohjelman johtoryhmän työsuhteessa olevat jäsenet'
-        )}
-        {getRowsForAccessGroup(
-          ['hy-[tiedekunta]-[koulutusohjelma]-jory'],
-          'Lukuoikeudet kyseiseen koulutusohjelmaan',
-          'Koulutusohjelman johtoryhmän opiskelijajäsenet'
         )}
       </Table.Body>
     </Table>
