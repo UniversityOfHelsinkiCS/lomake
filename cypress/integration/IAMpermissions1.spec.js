@@ -4,22 +4,6 @@ import helpers from '../support/helpers'
 import '../support/commands'
 
 describe('IAM permission tests', () => {
-  it('Katselmus Projektiryhma user, who has rights to mltdk faculty also', () => {
-    const user = 'cypressKatselmusProjektiryhmaUser' // There are no katselmus projektiryhmäIam anymore
-    cy.login(user)
-    cy.visit('/yearly')
-    cy.visit('/evaluation')
-    cy.visit('/degree-reform')
-    cy.visit('/evaluation-faculty')
-
-    cy.hasAccess(user, 'KH50_006', { read: true, write: false, admin: false })
-    cy.hasAccessEvaluation(user, 'KH50_006', { read: true, write: false, admin: false })
-    cy.hasAccessEvaluationFaculty(user, 'H50', { read: true, write: true, admin: false })
-    cy.hasAccessDegreeReform(user, 'KH50_006', { read: true, write: false, admin: false })
-
-    cy.hasSpecialGroups(user, 'Evaluation faculty')
-  })
-
   it('Ospa group grants admin access', () => {
     cy.login('cypressOspaUser')
     cy.visit('/yearly')
@@ -97,7 +81,7 @@ describe('IAM permission tests', () => {
   it('Kosu user gets wide writing access', () => {
     cy.login('cypressKosuUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 40)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 148)
 
     cy.hasAccess('cypressKosuUser', 'KH57_001', { read: true, write: true, admin: false })
     cy.hasAccess('cypressKosuUser', 'MH80_003', { read: true, write: true, admin: false })
@@ -116,7 +100,7 @@ describe('IAM permission tests', () => {
   it('Kosu who is also a jory-member gets writing rights to all programmes', () => {
     cy.login('cypressKosuJoryUser')
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 32)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 148)
     cy.hasAccess('cypressKosuJoryUser', 'MH50_002', { read: true, write: true, admin: false })
     cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: true, admin: false })
   })

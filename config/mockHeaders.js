@@ -16,7 +16,7 @@ const possibleUsers = [
     givenName: 'Acual kojo fake user',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees;grp-katselmus-mltdk;grp-katselmus-humtdk',
+    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees;grp-katselmus-humtdk',
     sn: 'AcualKojo',
   },
   {
@@ -178,7 +178,7 @@ const possibleUsers = [
     givenName: 'kosuUser',
     mail: 'cypress-kosu-user@helsinki.fi',
     schacDateOfBirth: 19990108,
-    hyGroupCn: 'hy-ypa-kopa-viikki-1;hy-employees;hy-kopa-koulutusasiantuntijat', // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
+    hyGroupCn: 'hy-employees;hy-kopa-koulutusasiantuntijat',
     sn: 'nah',
   },
   {
@@ -196,7 +196,7 @@ const possibleUsers = [
     givenName: 'kosuJoryUser',
     mail: 'cypress-kosu-jory-user@helsinki.fi',
     schacDateOfBirth: 19990110,
-    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-kopa-kumpula-1;hy-kopa-koulutusasiantuntijat;hy-employees',
+    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-kopa-koulutusasiantuntijat;hy-employees',
     sn: 'nah',
   },
   {
@@ -205,7 +205,7 @@ const possibleUsers = [
     givenName: 'doctoralUser',
     mail: 'cypress-doctoral-kosu-regular-kosu-user@helsinki.fi',
     schacDateOfBirth: 19990111,
-    hyGroupCn: 'hy-ypa-tutto-toht;hy-ypa-kopa-kumpula-1;hy-employees;hy-kopa-koulutusasiantuntijat',
+    hyGroupCn: 'hy-ypa-tutto-toht;hy-employees;hy-kopa-koulutusasiantuntijat',
     sn: 'nah',
   },
   {
@@ -224,7 +224,7 @@ const possibleUsers = [
     givenName: 'facultyKatselmusUser',
     mail: 'cypress-faculty-katselmus-rights-user@helsinki.fi',
     schacDateOfBirth: 19970112,
-    hyGroupCn: 'hy-mltdk-geok-jory;grp-katselmus-mltdk;hy-employees',
+    hyGroupCn: 'hy-mltdk-geok-jory;hy-employees',
     sn: 'nah',
   },
   {
@@ -234,15 +234,6 @@ const possibleUsers = [
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
     hyGroupCn: 'hy-employees;grp-katselmus-humtdk;hy-humtdk-dekanaatti',
-    sn: 'AcualFakePerson',
-  },
-  {
-    uid: 'cypressKatselmusProjektiryhmaUser',
-    employeeNumber: 223344,
-    givenName: 'Acual projektiryhma, fake user',
-    mail: 'grp-toska+mockadmin@helsinki.fi',
-    schacDateOfBirth: undefined,
-    hyGroupCn: 'grp-katselmus-mltdk;hy-employees',
     sn: 'AcualFakePerson',
   },
   {
