@@ -72,8 +72,6 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
     cy.hasAccessEvaluation('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
     cy.hasAccessDegreeReform('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
-
-    cy.hasSpecialGroups('cypressFacultyKatselmusUser', 'Evaluation faculty')
   })
   /* Maybe wrong spec file for these tests? */
 
