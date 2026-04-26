@@ -15,7 +15,7 @@ import SaveIndicator from '../../FormView/SaveIndicator'
 
 import postItImage from '../../../assets/post_it.jpg'
 import './index.scss'
-import { colors, getYearToShow, isEvaluationUniversityUser } from '../../../util/common'
+import { colors, getYearToShow, isAdmin } from '../../../util/common'
 import NoPermissions from '../../Generic/NoPermissions'
 import { setYear } from '../../../redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
@@ -33,7 +33,7 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form
 }
 
 const hasRights = currentUser => {
-  return isEvaluationUniversityUser(currentUser)
+  return isAdmin(currentUser)
 }
 
 const findEntityLevelAnswers = (faculties, allAnswers, question) => {

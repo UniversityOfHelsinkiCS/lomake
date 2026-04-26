@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { images } from '../util/common'
 import { logoutAction } from '../redux/currentUserReducer'
 import { setLanguage } from '../redux/languageReducer'
-import { isAdmin, isSuperAdmin, isEvaluationFacultyUser, isEvaluationUniversityUser } from '../../config/common'
+import { isAdmin, isSuperAdmin } from '../../config/common'
 
 const NavBarItems = {
   yearly: {
@@ -42,25 +42,25 @@ const NavBarItems = {
             key: 'programme',
             label: 'generic:level:programmes',
             path: '/evaluation',
-            access: ['programme', 'admin', 'evaluationFaculty'],
+            access: ['programme', 'admin'],
           },
           {
             key: 'faculty',
             label: 'generic:level:faculties',
             path: '/evaluation-faculty',
-            access: ['programme', 'admin', 'evaluationFaculty'],
+            access: ['programme', 'admin'],
           },
           {
             key: 'university',
             label: 'generic:level:university',
             path: '/evaluation-university/form/6/UNI',
-            access: ['admin', 'evaluationUniversity'],
+            access: ['admin'],
           },
           {
             key: 'university-overview',
             label: 'overview:universityOverview',
             path: '/evaluation-university',
-            access: ['admin', 'evaluationUniversity', 'special', 'programme'],
+            access: ['admin', 'special', 'programme'],
           },
           {
             key: 'meta-evaluation',
@@ -72,10 +72,10 @@ const NavBarItems = {
             key: 'faculty-monitoring',
             label: 'facultymonitoring',
             path: '/faculty-monitoring',
-            access: ['admin', 'evaluationFaculty'],
+            access: ['admin'],
           },
         ],
-        access: ['admin', 'evaluationUniversity', 'special', 'programme', 'evaluationFaculty'],
+        access: ['admin', 'special', 'programme'],
       },
       {
         key: 'degreeReform',
@@ -86,19 +86,19 @@ const NavBarItems = {
             key: 'individual',
             label: 'degree-reform-individual',
             path: '/individual',
-            access: ['admin', 'universityForm'],
+            access: ['admin'],
           },
           {
             key: 'individual-answers',
             label: 'generic:degreeReformIndividualAnswers',
             path: '/reform-answers',
-            access: ['admin', 'universityForm'],
+            access: ['admin'],
           },
         ],
         access: ['programme'],
       },
     ],
-    access: ['admin', 'evaluationUniversity', 'special', 'programme', 'universityForm'],
+    access: ['admin', 'special', 'programme'],
   },
   admin: { key: 'admin', label: 'adminPage', path: '/admin', access: ['admin'] },
 }
@@ -247,14 +247,8 @@ const NavBar = () => {
           return user.specialGroup && Object.keys(user.specialGroup).length > 0
         case 'admin':
           return isAdmin(user)
-        case 'evaluationFaculty':
-          return isEvaluationFacultyUser(user)
-        case 'evaluationUniversity':
-          return isEvaluationUniversityUser(user)
         case 'employee':
           return user.iamGroups?.includes('hy-employees')
-        case 'universityForm':
-          return user.specialGroup?.universityForm
         default:
           return false
       }

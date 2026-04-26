@@ -15,7 +15,6 @@ import {
   isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
-  isEvaluationFacultyUser,
   hasSomeReadAccess,
   testProgrammeCode,
   testProgrammeName,
@@ -28,7 +27,6 @@ import {
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
-  isEvaluationUniversityUser,
 } from '../../config/common.js'
 import { formKeys } from '../../config/data.js'
 
@@ -90,7 +88,6 @@ export {
   isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
-  isEvaluationFacultyUser,
   hasSomeReadAccess,
   testProgrammeCode,
   testProgrammeName,
@@ -103,5 +100,4 @@ export {
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
-  isEvaluationUniversityUser,
 }

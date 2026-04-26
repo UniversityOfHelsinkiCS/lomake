@@ -142,16 +142,6 @@ const isInternationalUser = user => {
   return false
 }
 
-const isEvaluationFacultyUser = user => {
-  if (user.specialGroup && Object.keys(user.specialGroup) && user.specialGroup.evaluationFaculty) return true
-  return false
-}
-
-const isEvaluationUniversityUser = user => {
-  if (user?.specialGroup?.universityForm || isAdmin(user)) return true
-  return false
-}
-
 const hasProgrammeWriteAccess = (user, programmeKey) => {
   if (isAdmin(user) || isSuperAdmin(user)) return true
   if (user.access[programmeKey]?.write) return true
@@ -279,7 +269,6 @@ export {
   isEmployee,
   isEmployeeOnly,
   organisationCodeToIam,
-  isEvaluationFacultyUser,
   hasSomeReadAccess,
   hasProgrammeWriteAccess,
   testProgrammeCode,
@@ -294,6 +283,5 @@ export {
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
-  isEvaluationUniversityUser,
   dekanaattiIamGroup,
 }

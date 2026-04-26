@@ -4,7 +4,7 @@ import { Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { isAdmin, isEvaluationUniversityUser, isBasicUser, isEmployeeOnly } from '../../../../config/common'
+import { isAdmin, isBasicUser, isEmployee } from '../../../../config/common'
 import CustomModal from '../../Generic/CustomModal'
 import NoPermissions from '../../Generic/NoPermissions'
 import { setColorBlindMode } from '../../../redux/filterReducer'
@@ -34,8 +34,7 @@ export default () => {
   }, [lang])
 
   // all have rights!
-  const hasRights = currentUser =>
-    (isBasicUser(currentUser) || isEvaluationUniversityUser(currentUser)) && !isEmployeeOnly(currentUser)
+  const hasRights = currentUser => isBasicUser(currentUser) && isEmployee(currentUser)
   // show faculty overview to those that have access to some programmes in tilannekuvalomake
 
   const usersProgrammes = useMemo(() => {

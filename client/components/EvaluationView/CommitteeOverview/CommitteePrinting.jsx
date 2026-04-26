@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { formKeys } from '../../../../config/data'
 import { Loader } from 'semantic-ui-react'
-import { answersByYear, getYearToShow, isEvaluationUniversityUser } from '../../../util/common'
+import { answersByYear, getYearToShow, isAdmin } from '../../../util/common'
 import { useTranslation } from 'react-i18next'
 import { getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
 import ReactMarkdown from 'react-markdown'
@@ -184,7 +184,7 @@ const CommitteePrinting = ({ type = null }) => {
   const { t } = useTranslation()
   const componentRef = useRef()
 
-  const hasRights = currentUser => isEvaluationUniversityUser(currentUser)
+  const hasRights = currentUser => isAdmin(currentUser)
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
