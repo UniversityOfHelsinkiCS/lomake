@@ -59,14 +59,7 @@ const QualityManagement = () => {
   const handleBack = () => {
     const shouldRelease = window.confirm(t('qualitydocument:unsavedChangesWarning1'))
     if (shouldRelease) {
-      try {
-        localStorage.removeItem(`qualityFormCreate_${programmeKey}`)
-        localStorage.removeItem(`qualityFormEdit_${programmeKey}_${id}`)
-        navigate(`/v1/programmes/10/${programmeKey}`)
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Failed to clear form data from localStorage:', error)
-      }
+      navigate(`/v1/programmes/10/${programmeKey}`)
     } else {
       return
     }

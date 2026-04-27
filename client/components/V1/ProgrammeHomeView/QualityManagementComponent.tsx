@@ -92,13 +92,6 @@ const QualityManagementComponent = ({ programmeData }) => {
       const lockField = getEditLockField(id)
       deleteDocument({ studyprogrammeKey: programmeKey, id: idStr })
       deleteLock({ room: programmeKey, field: lockField })
-      try {
-        localStorage.removeItem(`qualityFormCreate_${programmeKey}`)
-        localStorage.removeItem(`qualityFormEdit_${programmeKey}_${idStr}`)
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Failed to clear form data from localStorage:', error)
-      }
     }
   }
 
