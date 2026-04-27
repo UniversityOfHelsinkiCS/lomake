@@ -168,7 +168,6 @@ export const formatURLFragment = (fragment: string) => {
 
 export const validateQualityDocument = (payload: Record<string, any>, t: TFunction): Record<string, string> | null => {
   const res = QualityDocumentFormSchema.safeParse(payload)
-  if (res.success) return null
 
   const nextErrors = fields.reduce(
     (acc, field) => {
@@ -183,36 +182,47 @@ export const validateQualityDocument = (payload: Record<string, any>, t: TFuncti
     nextErrors[key] = t(`error:${messageKey}`)
   }
 
-  res.error.issues.forEach(issue => {
-    const [root, second] = issue.path
+  if (Array.isArray(payload.feedbackSources) && payload.feedbackSources.length === 0) {
+    setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
+    setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
+  }
 
-    if (root === 'feedbackSources') {
-      if (issue.path.length === 1) {
-        setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
-        setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
+  if (payload.learningObjectivesAssessmentRegularity === '') {
+    setErrorOnce('learningObjectivesAssessmentRegularity', 'regularityRequired')
+  }
+
+  if (!res.success) {
+    res.error.issues.forEach(issue => {
+      const [root, second] = issue.path
+
+      if (root === 'feedbackSources') {
+        if (issue.path.length === 1) {
+          setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
+          setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
+          return
+        }
+
+        if (typeof second === 'number') {
+          const sourceName = payload.feedbackSources?.[second]?.name
+          if (!sourceName || typeof sourceName !== 'string') return
+
+          if (issue.path[2] === 'description') {
+            setErrorOnce(`${sourceName}Description`, issue.message)
+          }
+        }
         return
       }
 
-      if (typeof second === 'number') {
-        const sourceName = payload.feedbackSources?.[second]?.name
-        if (!sourceName || typeof sourceName !== 'string') return
-
-        if (issue.path[2] === 'description') {
-          setErrorOnce(`${sourceName}Description`, issue.message)
-        }
+      if (root === 'learningObjectivesAssessmentRegularity') {
+        setErrorOnce('learningObjectivesAssessmentRegularity', 'regularityRequired')
+        return
       }
-      return
-    }
 
-    if (root === 'learningObjectivesAssessmentRegularity') {
-      setErrorOnce('learningObjectivesAssessmentRegularity', 'regularityRequired')
-      return
-    }
-
-    if (typeof root === 'string' && issue.path.length === 1) {
-      setErrorOnce(root, issue.message)
-    }
-  })
+      if (typeof root === 'string' && issue.path.length === 1) {
+        setErrorOnce(root, issue.message)
+      }
+    })
+  }
 
   const hasSelectedFeedbackSource = Array.isArray(payload.feedbackSources)
     ? payload.feedbackSources.some(
