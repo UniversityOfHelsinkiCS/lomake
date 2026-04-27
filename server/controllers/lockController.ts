@@ -94,8 +94,7 @@ const setLock = async (req: Request & { user: User }, res: Response) => {
     let lockTimeout = 5 * 60 * 1000
 
     if (typeof field === 'string' && field.includes('quality')) {
-      //lockTimeout = 12 * 60 * 60 * 1000
-      lockTimeout = 40 * 1000
+      lockTimeout = 6 * 60 * 60 * 1000
     }
 
     if (LOCKMAP[room]?.[field] && LOCKMAP[room][field].uid !== currentUser.uid) {
