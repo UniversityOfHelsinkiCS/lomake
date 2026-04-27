@@ -74,6 +74,9 @@ const QualityManagementComponent = ({ programmeData }) => {
     return !!(lockMap?.[lockField] && lockMap[lockField].uid === currentUser.uid)
   }
 
+  const hasSomeoneElseEditingAnyDoc = documents.some((doc: QualityDocumentType) => isSomeoneElseEditing(doc.id))
+  const hasCurrentUserEditingAnyDoc = documents.some((doc: QualityDocumentType) => isCurrentUserEditing(doc.id))
+
   const [deleteDocument] = useDeleteQualityDocumentMutation()
   const [deleteLock] = useDeleteLockMutation()
 
@@ -120,64 +123,60 @@ const QualityManagementComponent = ({ programmeData }) => {
         ) : null}
         {Array.isArray(documents) &&
           isAdmin(user) &&
-          documents.map((doc: Record<string, any>, index) => (
-            <Accordion key={doc.id} sx={{ padding: '2rem' }}>
-              <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography data-cy={`accordion-${index}-quality-document`} variant="h4">
-                  {doc.data.title}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <QualityDocumentInfo doc={doc} />
-                <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right', gap: '1rem' }}>
-                  {hasWriteRights && (
-                    <Button
-                      data-cy={`accordion-${index}-edit-qualitydocument-button`}
-                      disabled={isSomeoneElseEditing(doc.id)}
-                      onClick={() => {
-                        if (!isSomeoneElseEditing(doc.id)) {
-                          navigate(`/v1/programmes/10/${programmeKey}/qualitydocument/${doc.id}`)
-                        }
-                      }}
-                      startIcon={<Edit />}
-                      variant="contained"
-                    >
-                      {t('document:edit')}
-                    </Button>
-                  )}
-                  {isAdmin(user) && (
-                    <Button
-                      color="error"
-                      data-cy={`accordion-${index}-delete-qualitydocument-button`}
-                      disabled={isSomeoneElseEditing(doc.id)}
-                      onClick={() => {
-                        if (!isSomeoneElseEditing(doc.id)) {
-                          handleDelete(doc.id)
-                        }
-                      }}
-                      startIcon={<Delete />}
-                      variant="contained"
-                    >
-                      {t('document:delete')}
-                    </Button>
-                  )}
-                </div>
-                <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right', gap: '1rem' }}>
-                  {isSomeoneElseEditing(doc.id) && (
-                    <Typography style={{ color: 'red' }} variant="regular">
-                      {t('qualitydocument:documentLocked')}
-                    </Typography>
-                  )}
-                  {isCurrentUserEditing(doc.id) && (
-                    <Typography style={{ color: 'red' }} variant="regular">
-                      {t('qualitydocument:documentLockedWarning')}
-                    </Typography>
-                  )}
-                </div>
-              </AccordionDetails>
-            </Accordion>
-          ))}
+          documents.map((doc: Record<string, any>, index) => {
+            const someoneElseEditing = isSomeoneElseEditing(doc.id)
+            const isAccordionLocked = someoneElseEditingDraft || someoneElseEditing
 
+            return (
+              <Accordion
+                disabled={isAccordionLocked}
+                key={`${doc.id}-${isAccordionLocked ? 'locked' : 'unlocked'}`}
+                sx={{ padding: '2rem' }}
+              >
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                  <Typography data-cy={`accordion-${index}-quality-document`} variant="h4">
+                    {doc.data.title}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <QualityDocumentInfo doc={doc} />
+                  <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'right', gap: '1rem' }}>
+                    {hasWriteRights && (
+                      <Button
+                        data-cy={`accordion-${index}-edit-qualitydocument-button`}
+                        disabled={someoneElseEditing}
+                        onClick={() => {
+                          if (!someoneElseEditing) {
+                            navigate(`/v1/programmes/10/${programmeKey}/qualitydocument/${doc.id}`)
+                          }
+                        }}
+                        startIcon={<Edit />}
+                        variant="contained"
+                      >
+                        {t('document:edit')}
+                      </Button>
+                    )}
+                    {isAdmin(user) && (
+                      <Button
+                        color="error"
+                        data-cy={`accordion-${index}-delete-qualitydocument-button`}
+                        disabled={someoneElseEditing}
+                        onClick={() => {
+                          if (!someoneElseEditing) {
+                            handleDelete(doc.id)
+                          }
+                        }}
+                        startIcon={<Delete />}
+                        variant="contained"
+                      >
+                        {t('document:delete')}
+                      </Button>
+                    )}
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+            )
+          })}
         {hasWriteRights &&
         !hasDocumentForYear &&
         activeYear > 2025 &&
@@ -196,15 +195,17 @@ const QualityManagementComponent = ({ programmeData }) => {
             >
               {t('document:newDocument')}
             </Button>
-            <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'left', gap: '1rem' }}>
-              {someoneElseEditingDraft && (
-                <Typography style={{ color: 'red' }} variant="regular">
-                  {t('qualitydocument:documentLocked')}
-                </Typography>
-              )}
-            </div>
           </Box>
         ) : null}
+        <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'left', gap: '1rem' }}>
+          {(someoneElseEditingDraft || hasSomeoneElseEditingAnyDoc || hasCurrentUserEditingAnyDoc) && (
+            <Typography style={{ color: 'red' }} variant="regular">
+              {currentUserEditingDraft || hasCurrentUserEditingAnyDoc
+                ? t('qualitydocument:documentLockedWarning')
+                : t('qualitydocument:documentLocked')}
+            </Typography>
+          )}
+        </div>
       </Box>
     </Box>
   )
