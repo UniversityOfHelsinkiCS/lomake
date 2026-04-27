@@ -40,6 +40,7 @@ const IamTable = () => {
         {getRowsForAccessGroup(['hy-ypa-kopa-johtoryhma'], 'Kirjoitusoikeudet kaikkiin ohjelmiin', 'Johtoryhmä')}
         {getRowsForAccessGroup(
           uniq([
+            'hy-[tiedekunta]-maisteri/kandi-kojot',
             'hy-[tiedekunta]-dekanaatti',
             'hy-rehtoraatti',
             'hy-ypa-toimi-helsinki',
