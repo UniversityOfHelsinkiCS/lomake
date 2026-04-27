@@ -412,6 +412,9 @@ export default {
       arviointi: 'Utvärderingsgrupp',
     },
     textUnsaved: '',
+    autosave: 'Senaste automatiska sparning: {{time}}',
+    saving: 'Sparar...',
+    autosaveError: 'Automatisk sparning misslyckades.',
   },
 
   overview: {

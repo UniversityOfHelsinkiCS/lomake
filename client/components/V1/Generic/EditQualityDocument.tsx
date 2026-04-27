@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { useState, useEffect, useCallback, useRef } from 'react'
-import { Box, Typography, CircularProgress } from '@mui/material'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import { Box, Typography, CircularProgress, Alert } from '@mui/material'
 
 import { useTranslation } from 'react-i18next'
 import { useUpdateQualityDocumentMutation } from '@/client/redux/qualityDocuments'
@@ -23,11 +23,11 @@ const EditQualityDocument = ({
   id: string
   document: Record<string, any>
 }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const LOCK_FIELD = `${programmeKey}-quality-edit_${id}`
   // const AUTOSAVE_INTERVAL_MS = 5 * 60 * 1000
-  const AUTOSAVE_INTERVAL_MS = 15 * 1000
+  const AUTOSAVE_INTERVAL_MS = 10 * 1000
 
   const { componentRef, handleReleaseLock, isLockedByOther, isLockedByCurrentUser } = useLockDocument({
     room: programmeKey,
@@ -72,6 +72,9 @@ const EditQualityDocument = ({
   const [updateDocument] = useUpdateQualityDocumentMutation()
 
   const [errors, setErrors] = useState<Record<string, string>>(initErrors())
+  const [lastAutosaveAt, setLastAutosaveAt] = useState<Date | null>(null)
+  const [isAutosaving, setIsAutosaving] = useState(false)
+  const [autosaveError, setAutosaveError] = useState<string | null>(null)
 
   const [formData, setFormData] = useState<FormDataState>(data)
   const latestFormDataRef = useRef<FormDataState>(data)
@@ -109,7 +112,18 @@ const EditQualityDocument = ({
 
   useEffect(() => {
     isInitializedFromBackendRef.current = false
+    setLastAutosaveAt(null)
+    setAutosaveError(null)
+    setIsAutosaving(false)
   }, [id])
+
+  const formattedLastAutosave = useMemo(() => {
+    if (!lastAutosaveAt) return null
+
+    return new Intl.DateTimeFormat(i18n.language, {
+      timeStyle: 'medium',
+    }).format(lastAutosaveAt)
+  }, [lastAutosaveAt, i18n.language])
 
   useEffect(() => {
     if (!document.data) return
@@ -190,7 +204,19 @@ const EditQualityDocument = ({
       intervalId = window.setInterval(() => {
         const payload = formatPayload(latestFormDataRef.current)
         if (validateForm(payload)) {
-          updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
+          setIsAutosaving(true)
+          void updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
+            .unwrap()
+            .then(() => {
+              setLastAutosaveAt(new Date())
+              setAutosaveError(null)
+            })
+            .catch(() => {
+              setAutosaveError(t('generic:autosaveError'))
+            })
+            .finally(() => {
+              setIsAutosaving(false)
+            })
         }
       }, AUTOSAVE_INTERVAL_MS)
     }
@@ -210,6 +236,13 @@ const EditQualityDocument = ({
   return (
     <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column' }}>
       <Typography sx={{ mb: '4rem' }} variant="h3">{`${formData.title}`}</Typography>
+      <Box sx={{ alignSelf: 'flex-end', position: 'sticky', top: 16, zIndex: 1, mb: '1.5rem', minHeight: '3.5rem' }}>
+        {isAutosaving ? <Alert severity="info">{t('generic:saving')}</Alert> : null}
+        {!isAutosaving && Boolean(autosaveError) ? <Alert severity="warning">{autosaveError}</Alert> : null}
+        {!isAutosaving && !autosaveError && Boolean(formattedLastAutosave) ? (
+          <Alert severity="success">{t(`generic:autosave`, { time: formattedLastAutosave })}</Alert>
+        ) : null}
+      </Box>
       <QualityForm
         errors={errors}
         feedbackSourceOptions={feedbackSourceOptions}

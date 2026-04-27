@@ -402,6 +402,9 @@ export default {
     },
     textUnsaved: 'Text not saved!',
     textUnsavedRelease: 'Press the button to release the field for others to edit!',
+    autosave: 'Last automatic save: {{time}}',
+    saving: 'Saving...',
+    autosaveError: 'Automatic save failed.',
   },
 
   overview: {

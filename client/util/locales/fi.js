@@ -401,6 +401,9 @@ export default {
     },
     textUnsaved: 'Tekstiä on tallentamatta!',
     textUnsavedRelease: 'Vapauta kenttä muiden muokattavaksi painamalla nappia!',
+    autosave: 'Viimeisin automaattitallennus: {{time}}',
+    saving: 'Tallennetaan...',
+    autosaveError: 'Automaattitallennus ei onnistunut.',
   },
 
   overview: {
