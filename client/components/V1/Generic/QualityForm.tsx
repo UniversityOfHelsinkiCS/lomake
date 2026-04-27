@@ -385,24 +385,33 @@ const QualityForm = ({
                   </Box>
                   {feedbackSourceOptions.filter(source => !isDefaultFeedbackSource(source)).length > 0 ? (
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                      <Typography variant="h5">{t(`qualitydocument:otherFeedbackSourceDescription`)}</Typography>
                       {feedbackSourceOptions
                         .filter(source => !isDefaultFeedbackSource(source))
-                        .map((source, index) => {
+                        .some(source => {
+                          const sourceState = formData.feedbackSources.find(
+                            f => f.name.toLowerCase() === source.toLowerCase()
+                          )
+                          return sourceState?.regularity !== '' && sourceState?.regularity !== 'notUsed'
+                        }) && (
+                        <Typography variant="h5">{t(`qualitydocument:otherFeedbackSourceDescription`)}</Typography>
+                      )}
+
+                      {feedbackSourceOptions
+                        .filter(source => !isDefaultFeedbackSource(source))
+                        .map(source => {
                           const sourceState = formData.feedbackSources.find(
                             f => f.name.toLowerCase() === source.toLowerCase()
                           )
 
-                          return (
+                          return sourceState?.regularity !== '' && sourceState?.regularity !== 'notUsed' ? (
                             <FeedbackUtilization
                               description={sourceState?.description ?? ''}
                               errors={errors}
                               feedbackSource={source}
-                              index={index}
                               key={source}
                               setDescription={(value: string) => setSourceDescription(source, value)}
                             />
-                          )
+                          ) : null
                         })}
                     </Box>
                   ) : null}
