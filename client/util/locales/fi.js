@@ -766,7 +766,7 @@ export default {
     description: 'Kuvaus:',
     examples: 'Esimerkit:',
     unsavedChangesWarning1:
-      'Sinulla on tallentamattomia muutoksia. Paina "OK" poistuaksesi tallentamatta muutoksia ja vapauttaaksesi lomakkeen muiden täytettäväksi. Paina "Peruuta" jatkaaksesi muokkausta. ',
+      'Sinulla voi olla tallentamattomia muutoksia. Paina "OK" poistuaksesi tallentamatta muutoksia ja vapauttaaksesi lomakkeen muiden täytettäväksi. Paina "Peruuta" jatkaaksesi muokkausta. ',
     unsavedChangesWarning2:
       'Lomake on lukittu muilta käyttäjiltä käsittelyäsi varten. Tallenna muutokset ja vapauta lomake muiden käyttöön ennen sivulta poistumista.',
     documentLockedWarning:

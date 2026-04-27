@@ -99,7 +99,7 @@ const getQualityDocuments = async (req: Request, res: Response<QualityDocument[]
   }
 }
 
-const getAllQualityDocuments = async (req: Request, res: Response) => {
+const getAllQualityDocuments = async (_req: Request, res: Response) => {
   try {
     const documents = await QualityDocument.findAll({})
 
@@ -110,9 +110,17 @@ const getAllQualityDocuments = async (req: Request, res: Response) => {
   }
 }
 
-const createQualityDocument = async (req: Request, res: Response<QualityDocument[] | ErrorObject>) => {
+type CreateQualityDocumentResponse = {
+  id: number
+  data: unknown
+  year: number
+  studyprogrammeKey: string
+  createdAt: Date
+}
+
+const createQualityDocument = async (req: Request, res: Response<CreateQualityDocumentResponse | ErrorObject>) => {
   try {
-    const { programme, status, error, qualityDocuments } = await validationOperation(req)
+    const { programme, status, error } = await validationOperation(req)
     if (!programme) return res.status(status).json({ error })
 
     const qualityDocument: QualityDocument = await QualityDocument.create({
@@ -121,7 +129,13 @@ const createQualityDocument = async (req: Request, res: Response<QualityDocument
       year: req.body.year,
     })
 
-    return res.status(201).json([...qualityDocuments, qualityDocument])
+    return res.status(201).json({
+      id: qualityDocument.id,
+      data: qualityDocument.data,
+      year: qualityDocument.year,
+      studyprogrammeKey: qualityDocument.studyprogrammeKey,
+      createdAt: qualityDocument.createdAt,
+    })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

@@ -42,7 +42,7 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
         method: 'get',
       }),
     }),
-    createQualityDocument: builder.mutation<QualityDocumentType[], CreateDocumentArgs>({
+    createQualityDocument: builder.mutation<QualityDocumentType, CreateDocumentArgs>({
       query: ({ studyprogrammeKey, data, year }) => ({
         url: `/qualitydocuments/${studyprogrammeKey}`,
         method: 'post',
@@ -56,7 +56,23 @@ const qualityDocumentsApi = RTKApi.injectEndpoints({
         method: 'put',
         body: { data },
       }),
-      invalidatesTags: [{ type: 'QualityDocuments', id: 'QDOCS' }],
+      async onQueryStarted({ studyprogrammeKey, id, data }, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled
+          // Update the cache after successful response, don't invalidate to avoid refetch
+          dispatch(
+            qualityDocumentsApi.util.updateQueryData('getQualityDocuments', { studyprogrammeKey }, draft => {
+              const index = draft.findIndex((doc: any) => doc.id === id)
+              if (index !== -1) {
+                draft[index].data = data
+              }
+            })
+          )
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Failed to update quality document:', error)
+        }
+      },
     }),
     deleteQualityDocument: builder.mutation<void, DeleteDocumentArgs>({
       query: ({ studyprogrammeKey, id }) => ({

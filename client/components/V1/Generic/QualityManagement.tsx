@@ -38,7 +38,7 @@ export const calculateInterventionAreas = ({
 }
 
 const QualityManagement = () => {
-  const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
+  const { programme: programmeKey = '', id } = useParams<{ programme: string; id: string }>()
   const { isLoading, programme } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
   const navigate = useNavigate()
   const { t } = useTranslation()
@@ -47,9 +47,7 @@ const QualityManagement = () => {
   const { data: documents = [], isFetching } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
   const document =
     documents.length > 0 || !isFetching ? documents.find((doc: QualityDocumentType) => doc.id.toString() === id) : null
-  const activeYear = useAppSelector(state => state.filters.keyDataYear)
   const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
-  const hasDocumentForYear = documents.some((doc: QualityDocumentType) => doc.year == activeYear)
 
   if (isLoading) return <Loader active />
   // For this function the year variable is not needed cuz
@@ -76,7 +74,7 @@ const QualityManagement = () => {
 
   if (!programme || !programmeData || !hasWriteRights) return null
 
-  if (isFetching || (!id && hasDocumentForYear)) return <CircularProgress />
+  if (isFetching && id) return <CircularProgress />
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -91,7 +89,7 @@ const QualityManagement = () => {
       {!id ? (
         <AddQualityDocument programmeKey={programmeData.koulutusohjelmakoodi} />
       ) : (
-        <EditQualityDocument document={document} id={id} programmeKey={programmeData.koulutusohjelmakoodi} />
+        <EditQualityDocument document={document ?? {}} id={id} programmeKey={programmeData.koulutusohjelmakoodi} />
       )}
     </Box>
   )

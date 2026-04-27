@@ -764,7 +764,7 @@ export default {
     description: 'Description:',
     examples: 'Examples:',
     unsavedChangesWarning1:
-      'You have unsaved changes. Press “OK” to leave without saving and release the form for others to fill in. Press “Cancel” to continue editing.',
+      'You might have unsaved changes. Press “OK” to leave without saving and release the form for others to fill in. Press “Cancel” to continue editing.',
     unsavedChangesWarning2:
       'The form is locked for your processing. Save your changes and release the form for others before leaving the page.',
     documentLockedWarning:

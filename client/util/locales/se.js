@@ -802,7 +802,7 @@ export default {
     description: 'Beskrivning:',
     examples: 'Exempel:',
     unsavedChangesWarning1:
-      'Du har osparade ändringar. Tryck på ”OK” för att lämna utan att spara och frigöra formuläret för andra att fylla i. Tryck på ”Avbryt” för att fortsätta redigera.',
+      'Du kan ha osparade ändringar. Tryck på ”OK” för att lämna utan att spara och frigöra formuläret för andra att fylla i. Tryck på ”Avbryt” för att fortsätta redigera.',
     unsavedChangesWarning2:
       'Formuläret är låst för din handläggning. Spara dina ändringar och frigör formuläret för andra innan du lämnar sidan.',
     documentLockedWarning:

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { Box, Typography, CircularProgress } from '@mui/material'
 
 import { useTranslation } from 'react-i18next'
@@ -25,8 +25,9 @@ const EditQualityDocument = ({
 }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const STORAGE_KEY = `qualityFormEdit_${programmeKey}_${id}`
   const LOCK_FIELD = `${programmeKey}-quality-edit_${id}`
+  // const AUTOSAVE_INTERVAL_MS = 5 * 60 * 1000
+  const AUTOSAVE_INTERVAL_MS = 15 * 1000
 
   const { componentRef, handleReleaseLock, isLockedByOther, isLockedByCurrentUser } = useLockDocument({
     room: programmeKey,
@@ -57,18 +58,6 @@ const EditQualityDocument = ({
     [t]
   )
 
-  const getCachedFormData = useCallback((): FormDataState | null => {
-    try {
-      const cachedRaw = localStorage.getItem(STORAGE_KEY)
-      if (!cachedRaw) return null
-      return normalizeFormData(JSON.parse(cachedRaw) as Record<string, any>)
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to read form data from localStorage:', error)
-      return null
-    }
-  }, [normalizeFormData, STORAGE_KEY])
-
   const hasExample = (sourceData: Record<string, any>, field: string, exampleNum: number): boolean => {
     return !!(
       sourceData?.[`${field}NameExample${exampleNum}`] ||
@@ -85,6 +74,8 @@ const EditQualityDocument = ({
   const [errors, setErrors] = useState<Record<string, string>>(initErrors())
 
   const [formData, setFormData] = useState<FormDataState>(data)
+  const latestFormDataRef = useRef<FormDataState>(data)
+  const isInitializedFromBackendRef = useRef(false)
 
   const [feedbackSourceOptions, setFeedbackSourceOptions] = useState<FeedbackSource[]>(
     defaultFeedbackSourceOptions.concat(
@@ -113,21 +104,22 @@ const EditQualityDocument = ({
   )
 
   useEffect(() => {
+    latestFormDataRef.current = formData
+  }, [formData])
+
+  useEffect(() => {
+    isInitializedFromBackendRef.current = false
+  }, [id])
+
+  useEffect(() => {
     if (!document.data) return
-
-    const backendData = normalizeFormData(document.data)
-    const cachedData = getCachedFormData()
-
-    if (!cachedData) {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(backendData))
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Failed to initialize form data in localStorage:', error)
-      }
+    if (isInitializedFromBackendRef.current) {
+      return
     }
 
-    const nextData = cachedData ?? backendData
+    const backendData = normalizeFormData(document.data)
+    const nextData = backendData
+    latestFormDataRef.current = nextData
     setFormData(nextData)
     setFeedbackSourceOptions(
       defaultFeedbackSourceOptions.concat(
@@ -142,42 +134,34 @@ const EditQualityDocument = ({
     setThirdCurriculumDevelopmentExample(hasExample(nextData, 'curriculumDevelopment', 3))
     setSecondLearningObjectivesAssessmentExample(hasExample(nextData, 'learningObjectivesAssessment', 2))
     setThirdLearningObjectivesAssessmentExample(hasExample(nextData, 'learningObjectivesAssessment', 3))
-  }, [document.data, getCachedFormData, normalizeFormData, t, STORAGE_KEY])
+    isInitializedFromBackendRef.current = true
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, normalizeFormData, t])
 
-  useEffect(() => {
-    if (!document.data) return
+  const validateForm = useCallback(
+    (payload: Record<string, any>) => {
+      const validationErrors = validateQualityDocument(payload, t)
+      if (validationErrors) {
+        setErrors(validationErrors)
+        return false
+      }
+      return true
+    },
+    [t]
+  )
 
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to save form data to localStorage:', error)
-    }
-  }, [formData, document.data, STORAGE_KEY])
-
-  const validateForm = (payload: Record<string, any> = formData) => {
-    const validationErrors = validateQualityDocument(payload, t)
-    if (validationErrors) {
-      setErrors(validationErrors)
-      return false
-    }
-    return true
-  }
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-
+  const formatPayload = useCallback((sourceFormData: FormDataState = latestFormDataRef.current) => {
     const {
       curriculumDevelopment: _curriculumDevelopment,
       guidancePolicies: _guidancePolicies,
       feedbackUtilization: _feedbackUtilization,
       otherFeedbackSource: _otherFeedbackSource,
       ...restFormData
-    } = formData
+    } = sourceFormData
 
     const payload: Record<string, any> = {
       ...restFormData,
-      feedbackSources: formData.feedbackSources
+      feedbackSources: sourceFormData.feedbackSources
         .filter(({ regularity }) => regularity && regularity !== 'notUsed')
         .map(({ name, regularity, description }) => ({
           name,
@@ -185,18 +169,39 @@ const EditQualityDocument = ({
           description,
         })),
     }
+    return payload
+  }, [])
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+
+    const payload = formatPayload()
     if (validateForm(payload)) {
       updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
       handleReleaseLock()
-      try {
-        localStorage.removeItem(STORAGE_KEY)
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Failed to clear form data from localStorage:', error)
-      }
       navigate(`/v1/programmes/10/${programmeKey}`)
     }
   }
+
+  useEffect(() => {
+    let intervalId: number | null = null
+
+    if (isLockedByCurrentUser) {
+      intervalId = window.setInterval(() => {
+        const payload = formatPayload(latestFormDataRef.current)
+        if (validateForm(payload)) {
+          updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
+        }
+      }, AUTOSAVE_INTERVAL_MS)
+    }
+
+    return () => {
+      if (intervalId !== null) {
+        window.clearInterval(intervalId)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLockedByCurrentUser])
 
   if (!document.data) return <CircularProgress />
 

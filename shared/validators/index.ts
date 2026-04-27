@@ -214,18 +214,17 @@ export const QualityDocumentFormSchema = z
       'annually',
       'everySemester',
       'moreFrequently',
+      '',
     ]),
-    feedbackSources: z
-      .array(
-        z
-          .object({
-            name: z.string().max(50),
-            regularity: z.enum(['lessFrequently', 'perCurriculumCycle', 'annually', 'everySemester', 'moreFrequently']),
-            description: z.string().optional(),
-          })
-          .strict()
-      )
-      .min(1, 'feedbackSources'),
+    feedbackSources: z.array(
+      z
+        .object({
+          name: z.string().max(50),
+          regularity: z.enum(['lessFrequently', 'perCurriculumCycle', 'annually', 'everySemester', 'moreFrequently']),
+          description: z.string().optional(),
+        })
+        .strict()
+    ),
     feedbackUtilizationExamples: z.string().max(1500).optional(),
   })
   .strict()
