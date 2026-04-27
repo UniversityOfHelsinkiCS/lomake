@@ -284,4 +284,5 @@ export {
   mapToDegreeCode,
   requiredDegreeReformIds,
   dekanaattiIamGroup,
+  studentIams,
 }
