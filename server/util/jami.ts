@@ -54,15 +54,21 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
     // eslint-disable-next-line prefer-const
     let lomakeAccess: Record<string, OrganisationAccess> = {}
 
-    if (
-      iamGroups.some(group => lomakeKatselmus.includes(group)) ||
-      iamGroups.some(group => universityWideWritingGroups.includes(group))
-    ) {
+    if (iamGroups.some(group => lomakeKatselmus.includes(group))) {
       const organisation = await getOrganisationData()
 
       organisation.forEach((faculty: Faculty) => {
         faculty.programmes.forEach((program: Programme) => {
           lomakeAccess[program.key] = { read: true, write: false, admin: false }
+        })
+      })
+    }
+
+    if (iamGroups.some(group => universityWideWritingGroups.includes(group))) {
+      const organisation = await getOrganisationData()
+      organisation.forEach((faculty: Faculty) => {
+        faculty.programmes.forEach((program: Programme) => {
+          lomakeAccess[program.key] = { read: true, write: true, admin: false }
         })
       })
     }
