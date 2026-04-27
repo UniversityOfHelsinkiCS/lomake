@@ -110,6 +110,7 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
   )
 
   const saveDraft = useCallback(async () => {
+    if (!isLockedByCurrentUser) return
     if (autosaveInFlightRef.current) return
 
     autosaveInFlightRef.current = true
@@ -118,7 +119,7 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
       const payload = formatPayload(latestFormDataRef.current)
       const documentExistsForYear = await hasExistingDocumentForSelectedYear()
 
-      if (validateForm(payload) && !documentExistsForYear) {
+      if (!documentExistsForYear) {
         const createdDocument = await createDocument({
           studyprogrammeKey: programmeKey,
           data: payload as any,
@@ -134,13 +135,13 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
       autosaveInFlightRef.current = false
     }
   }, [
+    isLockedByCurrentUser,
     createDocument,
     formatPayload,
     hasExistingDocumentForSelectedYear,
     navigate,
     programmeKey,
     selectedYear,
-    validateForm,
   ])
 
   useEffect(() => {
@@ -161,6 +162,7 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
+    if (!isLockedByCurrentUser) return
 
     const payload = formatPayload(formData)
 

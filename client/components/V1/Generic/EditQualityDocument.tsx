@@ -188,6 +188,7 @@ const EditQualityDocument = ({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
+    if (!isLockedByCurrentUser) return
 
     const payload = formatPayload()
     if (validateForm(payload)) {
@@ -203,21 +204,20 @@ const EditQualityDocument = ({
     if (isLockedByCurrentUser) {
       intervalId = window.setInterval(() => {
         const payload = formatPayload(latestFormDataRef.current)
-        if (validateForm(payload)) {
-          setIsAutosaving(true)
-          void updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
-            .unwrap()
-            .then(() => {
-              setLastAutosaveAt(new Date())
-              setAutosaveError(null)
-            })
-            .catch(() => {
-              setAutosaveError(t('generic:autosaveError'))
-            })
-            .finally(() => {
-              setIsAutosaving(false)
-            })
-        }
+
+        setIsAutosaving(true)
+        void updateDocument({ studyprogrammeKey: programmeKey, id, data: payload as any })
+          .unwrap()
+          .then(() => {
+            setLastAutosaveAt(new Date())
+            setAutosaveError(null)
+          })
+          .catch(() => {
+            setAutosaveError(t('generic:autosaveError'))
+          })
+          .finally(() => {
+            setIsAutosaving(false)
+          })
       }, AUTOSAVE_INTERVAL_MS)
     }
 
