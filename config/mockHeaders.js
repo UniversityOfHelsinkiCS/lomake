@@ -110,6 +110,15 @@ const possibleUsers = [
     sn: 'nah',
   },
   {
+    uid: 'cypressJoryStudentUser',
+    employeeNumber: '',
+    givenName: 'joryStudentUser',
+    mail: 'cypress-joryStudent-user@helsinki.fi',
+    schacDateOfBirth: 19990111,
+    hyGroupCn: 'hy-mltdk-students;hy-mltdk-tkt-jory;hy-kandiohjelma-joryt;hy-mltdk-kandi-joryt',
+    sn: 'nah',
+  },
+  {
     uid: 'cypressDoctoralUser',
     employeeNumber: 127,
     givenName: 'doctoralUser',
