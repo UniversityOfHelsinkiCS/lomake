@@ -1,11 +1,16 @@
-/* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 import type { Request, Response } from 'express'
 import type { Lock } from '../../shared/lib/types.js'
 import getUserByUid from '../services/userService.js'
 import logger from '../util/logger.js'
 import { getLockForHttp } from '../websocket.js'
-import { inProduction, isDevSuperAdminUid } from '../../config/common.js'
+import {
+  hasProgrammeWriteAccess,
+  inProduction,
+  isAdmin,
+  isDegreeStudentOrEmployee,
+  isDevSuperAdminUid,
+} from '../../config/common.js'
 
 type User = any
 
@@ -74,7 +79,10 @@ const getLock = async (req: Request & { user: User }, res: Response) => {
   try {
     const { field } = req.body
     const { room } = req.params
-
+    const currentUser = await getCurrentUser(req)
+    if (!isDegreeStudentOrEmployee(currentUser) && !isAdmin(currentUser)) {
+      return res.status(401).json({ error: 'Unauthorized' })
+    }
     const data = getLockForHttp(req.user, { field, room })
     if (!data) {
       return res.status(401).json({ error: 'Field locked....' })
@@ -91,6 +99,9 @@ const setLock = async (req: Request & { user: User }, res: Response) => {
   try {
     const { room, field } = req.body
     const currentUser = await getCurrentUser(req)
+    if (!hasProgrammeWriteAccess(currentUser, room)) {
+      return res.status(401).json({ error: 'Unauthorized' })
+    }
     let lockTimeout = 5 * 60 * 1000
 
     if (typeof field === 'string' && field.includes('quality')) {
@@ -136,6 +147,10 @@ const setLock = async (req: Request & { user: User }, res: Response) => {
 const fetchLocks = async (req: Request & { user: User }, res: Response) => {
   try {
     const { room } = req.params
+    const currentUser = await getCurrentUser(req)
+    if (!isDegreeStudentOrEmployee(currentUser) && !isAdmin(currentUser)) {
+      return res.status(401).json({ error: 'Unauthorized' })
+    }
     return res.json(serializeLockMap(room))
   } catch (error: Error) {
     logger.error(error)
@@ -147,7 +162,9 @@ const deleteLock = async (req: Request & { user: User }, res: Response) => {
   try {
     const { room, field } = req.body
     const currentUser = await getCurrentUser(req)
-
+    if (!hasProgrammeWriteAccess(currentUser, room)) {
+      return res.status(401).json({ error: 'Unauthorized' })
+    }
     if (LOCKMAP[room]?.[field] && LOCKMAP[room][field].uid === currentUser.uid) {
       LOCKMAP = {
         ...LOCKMAP,
