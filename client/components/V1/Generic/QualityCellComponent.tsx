@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 import { useGetAllQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import QualityDocumentInfo from './QualityDocumentComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
+import { colors } from '@/client/util/common'
 
 const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const { t } = useTranslation()
@@ -41,7 +42,7 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
     )
   }
   if (programmeData.additionalInfo.fi?.includes('Lakkautettu')) {
-    return <TableCell style={{ backgroundColor: '#f3f3f6' }}></TableCell>
+    return <TableCell style={{ backgroundColor: colors.background_gray }}></TableCell>
   }
 
   return (

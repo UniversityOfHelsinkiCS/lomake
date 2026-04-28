@@ -16,6 +16,7 @@ import Modal from '../Generic/ModalTemplateComponent'
 import { TextFieldCard } from '../Generic/TextFieldCard'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { colors } from '@/client/util/common'
 
 const ActionsCell = ({
   programmeData,
@@ -35,7 +36,7 @@ const ActionsCell = ({
   const dispatch = useAppDispatch()
 
   const actionsBadgeData = renderActionsBadge(programmeData, metadata, true, reports)
-  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? '#f3f3f6' : ''
+  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? colors.background_gray : ''
 
   const handleOpen = () => {
     dispatch(setViewOnly(true))

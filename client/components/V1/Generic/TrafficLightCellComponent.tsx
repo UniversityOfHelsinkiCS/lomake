@@ -6,6 +6,7 @@ import { calculateKeyDataColor } from '@/client/util/v1'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
+import { colors } from '@/client/util/common'
 
 const TrafficLightCell = ({
   metadata,
@@ -27,7 +28,7 @@ const TrafficLightCell = ({
   const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
   const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
   const shouldRenderBadge = renderTrafficLightBadge(programmeData, groupKey, color, reports)
-  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? '#f3f3f6' : ''
+  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? colors.background_gray : ''
   return (
     <TableCell
       data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}-${activeYear}`}
