@@ -86,6 +86,10 @@ const ProgrammeKeyDataTableComponent = ({
               const { data: reports = {} } = useGetReportsQuery({
                 year: annualFollowUpYear(selectedProgrammeData.year).toString(),
               })
+              const filteredKeyData = Object.fromEntries(
+                Object.entries(selectedProgrammeData.values).filter(([key]) => !key.startsWith('Lisätietoja'))
+              )
+
               return (
                 // eslint-disable-next-line react/no-array-index-key
                 <TableRow key={selectedProgrammeData.koulutusohjelmakoodi + index}>
@@ -93,13 +97,27 @@ const ProgrammeKeyDataTableComponent = ({
                     data-cy={`keydatatable-programme-${selectedProgrammeData.koulutusohjelmakoodi}-${selectedProgrammeData.year}`}
                     style={{ borderRadius: '0.5rem 0 0 0.5rem' }}
                   >
-                    <Link
-                      onClick={() => dispatch(setKeyDataYear(annualFollowUpYear(selectedProgrammeData.year)))}
-                      style={{ width: '100%', textAlign: 'left' }}
-                      to={`/v1/programmes/10/${selectedProgrammeData.koulutusohjelmakoodi}/${annualFollowUpYear(selectedProgrammeData.year)}`}
-                    >
-                      <Typography variant="h5">{annualFollowUpYear(selectedProgrammeData.year)}</Typography>
-                    </Link>
+                    {Object.keys(filteredKeyData).length <= 3 ? (
+                      <span
+                        style={{
+                          width: '100%',
+                          textAlign: 'left',
+                          display: 'inline-block',
+                          opacity: 0.5,
+                          cursor: 'default',
+                        }}
+                      >
+                        <Typography variant="h5">{annualFollowUpYear(selectedProgrammeData.year)}</Typography>
+                      </span>
+                    ) : (
+                      <Link
+                        onClick={() => dispatch(setKeyDataYear(annualFollowUpYear(selectedProgrammeData.year)))}
+                        style={{ width: '100%', textAlign: 'left' }}
+                        to={`/v1/programmes/10/${selectedProgrammeData.koulutusohjelmakoodi}/${annualFollowUpYear(selectedProgrammeData.year)}`}
+                      >
+                        <Typography variant="h5">{annualFollowUpYear(selectedProgrammeData.year)}</Typography>
+                      </Link>
+                    )}
                   </TableCell>
 
                   <TrafficLightCell
