@@ -26,8 +26,7 @@ const EditQualityDocument = ({
   const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const LOCK_FIELD = `${programmeKey}-quality-edit_${id}`
-  // const AUTOSAVE_INTERVAL_MS = 5 * 60 * 1000
-  const AUTOSAVE_INTERVAL_MS = 10 * 1000
+  const AUTOSAVE_INTERVAL_MS = 5 * 60 * 1000
 
   const { componentRef, handleReleaseLock, isLockedByOther, isLockedByCurrentUser } = useLockDocument({
     room: programmeKey,

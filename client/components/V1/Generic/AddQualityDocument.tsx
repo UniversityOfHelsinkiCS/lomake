@@ -27,8 +27,8 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const LOCK_FIELD = `${programmeKey}-quality-draft`
-  //const AUTOSAVE_INTERVAL_MS = 5 * 60 * 1000
-  const AUTOSAVE_INTERVAL_MS = 15 * 1000
+  const AUTOSAVE_INTERVAL_MS = 5 * 60 * 1000
+
   const [errors, setErrors] = useState<Record<string, string>>(initErrors())
   const [createDocument] = useCreateQualityDocumentMutation()
   const [updateDocument] = useUpdateQualityDocumentMutation()
