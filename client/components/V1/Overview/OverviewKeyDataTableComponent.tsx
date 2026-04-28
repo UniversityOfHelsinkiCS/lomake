@@ -8,7 +8,6 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
 import { GroupKey } from '@/client/lib/enums'
 import { KeyDataProgramme } from '@/shared/lib/types'
-import { isAdmin } from '@/config/common'
 import ActionsCell from '../Generic/ActionsCellComponent'
 import QualityCell from '../Generic/QualityCellComponent'
 import TrafficLightCell from '../Generic/TrafficLightCellComponent'
@@ -25,6 +24,7 @@ import { useFetchAllKeyDataQuery } from '@/client/redux/keyData'
 import { useGetActiveInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
 import { InterventionProcedureType } from '@/client/lib/types'
 import DiscontinuedProgramFilter from '../Generic/DiscontinuedFilterComponent'
+import { colors } from '@/client/util/common'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -38,7 +38,7 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
   const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
   const color = additionalInfo.fi === 'Lakkautettu ohjelma' ? 'secondary' : ''
   const hasAdditionalInfo = Boolean(additionalInfo[lang])
-  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? '#f3f3f6' : ''
+  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? colors.background_gray : ''
 
   return (
     <TableCell
@@ -142,7 +142,6 @@ const KeyDataTableComponent = ({
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
   const { data: reports = {} } = useGetReportsQuery({ year: activeYear })
-  const user = useAppSelector(state => state.currentUser.data)
   const { data: interventionProcedures = [] } = useGetActiveInterventionProceduresQuery()
 
   const { data: allKeyData } = useFetchAllKeyDataQuery()
@@ -290,7 +289,7 @@ const KeyDataTableComponent = ({
                 <TableCell>
                   <Typography variant="regularSmall">{t('keyData:opiskelijapalaute')}</Typography>
                 </TableCell>
-                {activeYear < 2026 && !isAdmin(user) ? (
+                {activeYear < 2026 ? (
                   <TableCell disabled isHeader>
                     <Tooltip
                       arrow
@@ -328,88 +327,82 @@ const KeyDataTableComponent = ({
                 </TableCell>
               </TableRow>
             </TableHead>
-            {activeYear < 2026 || (isAdmin(user) && activeYear == 2026) ? (
-              <TableBody>
-                {keyFigureData.length > 0 ? (
-                  keyFigureData.map((programmeData: KeyDataProgramme) => (
-                    <TableRow key={programmeData.koulutusohjelmakoodi}>
-                      <ProgrammeInfoCell programmeData={programmeData} />
+            <TableBody>
+              {keyFigureData.length > 0 ? (
+                keyFigureData.map((programmeData: KeyDataProgramme) => (
+                  <TableRow key={programmeData.koulutusohjelmakoodi}>
+                    <ProgrammeInfoCell programmeData={programmeData} />
+                    <TrafficLightCell
+                      activeYear={activeYear}
+                      groupKey={GroupKey.VETOVOIMAISUUS}
+                      handleModalOpen={handleModalOpen}
+                      metadata={metadata}
+                      programmeData={programmeData}
+                      reports={reports}
+                    />
+
+                    <TrafficLightCell
+                      activeYear={activeYear}
+                      groupKey={GroupKey.LAPIVIRTAUS}
+                      handleModalOpen={handleModalOpen}
+                      metadata={metadata}
+                      programmeData={programmeData}
+                      reports={reports}
+                    />
+
+                    <TrafficLightCell
+                      activeYear={activeYear}
+                      groupKey={GroupKey.OPISKELIJAPALAUTE}
+                      handleModalOpen={handleModalOpen}
+                      metadata={metadata}
+                      programmeData={programmeData}
+                      reports={reports}
+                    />
+                    {activeYear < 2026 ? (
+                      <TableCell disabled></TableCell>
+                    ) : (
                       <TrafficLightCell
                         activeYear={activeYear}
-                        groupKey={GroupKey.VETOVOIMAISUUS}
+                        groupKey={GroupKey.RESURSSIT}
                         handleModalOpen={handleModalOpen}
                         metadata={metadata}
                         programmeData={programmeData}
                         reports={reports}
                       />
+                    )}
 
-                      <TrafficLightCell
+                    <ActionsCell metadata={metadata} programmeData={programmeData} reports={reports} />
+                    {activeYear < 2026 ? (
+                      <TableCell disabled></TableCell>
+                    ) : (
+                      <QualityCell programmeData={programmeData} />
+                    )}
+                    <TableCell
+                      style={{
+                        backgroundColor: programmeData?.additionalInfo?.fi?.includes('Lakkautettu')
+                          ? colors.background_gray
+                          : '',
+                      }}
+                    >
+                      <InterventionCell
                         activeYear={activeYear}
-                        groupKey={GroupKey.LAPIVIRTAUS}
-                        handleModalOpen={handleModalOpen}
+                        interventionProcedures={interventionProcedures}
                         metadata={metadata}
                         programmeData={programmeData}
-                        reports={reports}
+                        selectedYear={yearFilter}
+                        t={t}
                       />
-
-                      <TrafficLightCell
-                        activeYear={activeYear}
-                        groupKey={GroupKey.OPISKELIJAPALAUTE}
-                        handleModalOpen={handleModalOpen}
-                        metadata={metadata}
-                        programmeData={programmeData}
-                        reports={reports}
-                      />
-                      {activeYear < 2026 && !isAdmin(user) ? (
-                        <TableCell disabled></TableCell>
-                      ) : (
-                        <TrafficLightCell
-                          activeYear={activeYear}
-                          groupKey={GroupKey.RESURSSIT}
-                          handleModalOpen={handleModalOpen}
-                          metadata={metadata}
-                          programmeData={programmeData}
-                          reports={reports}
-                        />
-                      )}
-
-                      <ActionsCell metadata={metadata} programmeData={programmeData} reports={reports} />
-                      {activeYear < 2026 ? (
-                        <TableCell disabled></TableCell>
-                      ) : (
-                        <QualityCell programmeData={programmeData} />
-                      )}
-                      <TableCell
-                        style={{
-                          backgroundColor: programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? '#f3f3f6' : '',
-                        }}
-                      >
-                        <InterventionCell
-                          activeYear={activeYear}
-                          interventionProcedures={interventionProcedures}
-                          metadata={metadata}
-                          programmeData={programmeData}
-                          selectedYear={yearFilter}
-                          t={t}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow variant="single-cell">
-                    <TableCell>
-                      <Typography variant="light">{t('common:noData')}</Typography>
                     </TableCell>
                   </TableRow>
-                )}
-              </TableBody>
-            ) : (
-              <TableRow variant="single-cell">
-                <TableCell>
-                  <Typography variant="light">{t('common:noData')}</Typography>
-                </TableCell>
-              </TableRow>
-            )}
+                ))
+              ) : (
+                <TableRow variant="single-cell">
+                  <TableCell>
+                    <Typography variant="light">{t('common:noData')}</Typography>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
           </Table>
 
           {selectedKeyFigureData ? (

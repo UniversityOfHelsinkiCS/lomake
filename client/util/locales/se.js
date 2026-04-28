@@ -811,6 +811,8 @@ export default {
       'Formuläret är låst för din handläggning. Öppna formuläret och spara dina ändringar för att frigöra det för andra.',
     documentLocked:
       'Formuläret är låst av en annan användare. Vänta tills användaren är klar, eller kontakta systemadministratören om låsningen verkar vara ogiltig.',
+    documentLockedFor:
+      'Formuläret är låst av användare {{user}}. Vänta tills användaren är klar, eller kontakta systemadministratören om låsningen verkar vara ogiltig.',
     documentUnsavedRelease: 'Frigör formuläret för andra att redigera genom att spara dina ändringar',
   },
   error: {

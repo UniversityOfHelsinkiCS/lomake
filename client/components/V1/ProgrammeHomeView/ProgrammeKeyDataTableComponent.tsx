@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { Typography } from '@mui/material'
-import { isAdmin } from '@/config/common'
 import { GroupKey } from '@/client/lib/enums'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import ActionsCell from '../Generic/ActionsCellComponent'
@@ -13,7 +12,6 @@ import KeyDataModal, { type selectedKeyFigureData } from '../Overview/KeyDataMod
 import { AppDispatch } from '@/client/redux'
 import { setKeyDataYear } from '@/client/redux/filterReducer'
 import { useGetReportsQuery } from '@/client/redux/reports'
-import { useAppSelector } from '@/client/util/hooks'
 import { useFetchAllKeyData } from '@/client/redux/keyData'
 
 const ProgrammeKeyDataTableComponent = ({
@@ -27,7 +25,6 @@ const ProgrammeKeyDataTableComponent = ({
   const dispatch: AppDispatch = useDispatch()
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
-  const user = useAppSelector(state => state.currentUser.data)
 
   const { keyData } = useFetchAllKeyData({ studyprogrammeKey: programmeKey })
 
@@ -85,9 +82,6 @@ const ProgrammeKeyDataTableComponent = ({
                 selectedKeyData?.programme.find(programme => programme.year === programmeRow.year) ?? programmeRow
               const selectedMetadata = selectedKeyData?.metadata ?? []
 
-              if (annualFollowUpYear(selectedProgrammeData.year) === 2026 && !isAdmin(user)) {
-                return null
-              }
               // eslint-disable-next-line react-hooks/rules-of-hooks
               const { data: reports = {} } = useGetReportsQuery({
                 year: annualFollowUpYear(selectedProgrammeData.year).toString(),
@@ -134,18 +128,14 @@ const ProgrammeKeyDataTableComponent = ({
                     programmeData={selectedProgrammeData}
                     reports={reports}
                   />
-                  {selectedProgrammeData.year < 2026 && !isAdmin(user) ? (
-                    <TableCell disabled></TableCell>
-                  ) : (
-                    <TrafficLightCell
-                      activeYear={annualFollowUpYear(selectedProgrammeData.year)}
-                      groupKey={GroupKey.RESURSSIT}
-                      handleModalOpen={(programme, type) => handleModalOpen(programme, selectedMetadata, type)}
-                      metadata={selectedMetadata}
-                      programmeData={selectedProgrammeData}
-                      reports={reports}
-                    />
-                  )}
+                  <TrafficLightCell
+                    activeYear={annualFollowUpYear(selectedProgrammeData.year)}
+                    groupKey={GroupKey.RESURSSIT}
+                    handleModalOpen={(programme, type) => handleModalOpen(programme, selectedMetadata, type)}
+                    metadata={selectedMetadata}
+                    programmeData={selectedProgrammeData}
+                    reports={reports}
+                  />
 
                   <ActionsCell metadata={selectedMetadata} programmeData={selectedProgrammeData} reports={reports} />
                 </TableRow>

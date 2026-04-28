@@ -343,9 +343,6 @@ const ProgrammeYearlyView = () => {
           </Alert>
 
           {Object.values(KeyDataPoints).map((data: KeyDataCardData) => {
-            if (data.title === 'Resurssien käyttö' && activeYear < 2026 && !isAdmin(user)) {
-              return null
-            }
             const anchor = formatURLFragment(data.groupKey)
             return (
               <Box

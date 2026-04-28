@@ -774,7 +774,9 @@ export default {
     documentLockedWarning:
       'Lomake on lukittu muilta käyttäjiltä käsittelyäsi varten. Avaa lomake ja tallenna muutokset vapauttaaksesi lomakkeen muiden käyttöön.',
     documentLocked:
-      'Lomake lukittu toisen käyttäjän toimesta. Odota, että käyttäjä on valmis, tai ota yhteyttä järjestelmän ylläpitäjään, jos lukko vaikuttaa olevan virheellinen.',
+      'Lomake lukittu toisen käyttäjän toimesta. Odota, että käyttäjä on valmis tarkastellaksesi dokumenttia. Ota yhteyttä järjestelmän ylläpitäjään, jos lukko vaikuttaa olevan virheellinen.',
+    documentLockedFor:
+      'Lomake lukittu käyttäjän {{user}} toimesta. Odota, että käyttäjä on valmis, tai ota yhteyttä järjestelmän ylläpitäjään, jos lukko vaikuttaa olevan virheellinen.',
     documentUnsavedRelease: 'Vapauta lomake muiden muokattavaksi tallentamalla muutokset',
   },
   error: {

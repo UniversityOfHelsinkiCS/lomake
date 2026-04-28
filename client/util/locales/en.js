@@ -770,7 +770,9 @@ export default {
     documentLockedWarning:
       'The form is locked for your processing. Open the form and save your changes to release it for others.',
     documentLocked:
-      'The form is locked by another user. Wait until the user is finished, or contact the system administrator if the lock seems to be invalid.',
+      'Document is locked by another user. Wait until the user is finished, or contact the system administrator if the lock seems to be invalid.',
+    documentLockedFor:
+      'Document is locked by user {{user}}. Wait until the user is finished, or contact the system administrator if the lock seems to be invalid.',
     documentUnsavedRelease: 'Release the form for others to edit by saving your changes',
   },
 

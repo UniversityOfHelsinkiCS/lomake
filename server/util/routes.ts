@@ -140,17 +140,16 @@ router.delete('/documents/:programme/:id', checkAdmin, async (req, res) => {
   await documents.deleteDocument(req, res)
 })
 
-// TODO: open the routes for correct access before katselmus starts
-router.get('/qualitydocuments/all/:selectedYear', checkAdmin, async (req, res) => {
+router.get('/qualitydocuments/all/:selectedYear', requireRead, async (req, res) => {
   await qualityDocuments.getAllQualityDocuments(req, res)
 })
-router.get('/qualitydocuments/:programme', checkAdmin, async (req, res) => {
+router.get('/qualitydocuments/:programme', requireRead, async (req, res) => {
   await qualityDocuments.getQualityDocuments(req, res)
 })
-router.post('/qualitydocuments/:programme', checkAdmin, async (req, res) => {
+router.post('/qualitydocuments/:programme', requireProgrammeWrite, async (req, res) => {
   await qualityDocuments.createQualityDocument(req, res)
 })
-router.put('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) => {
+router.put('/qualitydocuments/:programme/:id', requireProgrammeWrite, async (req, res) => {
   await qualityDocuments.updateQualityDocument(req, res)
 })
 router.delete('/qualitydocuments/:programme/:id', checkAdmin, async (req, res) => {
