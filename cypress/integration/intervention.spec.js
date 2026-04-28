@@ -72,7 +72,7 @@ describe('Textfield tests', () => {
       body: data,
       headers: {
         'Content-Type': 'application/json',
-        ...possibleUsers[20],
+        ...possibleUsers[21],
       },
     })
     cy.get('[data-cy="closeInterventionProcedureButton"]').click()
