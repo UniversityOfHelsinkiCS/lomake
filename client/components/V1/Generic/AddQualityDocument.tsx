@@ -46,12 +46,12 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
   const hasDocumentForYear = documents.some((doc: QualityDocumentType) => doc.year == selectedYear)
 
   const [feedbackSourceOptions, setFeedbackSourceOptions] = useState<FeedbackSource[]>(defaultFeedbackSourceOptions)
-  const [secondGuidancePoliciesExample, setSecondGuidancePoliciesExample] = useState(false)
-  const [thirdGuidancePoliciesExample, setThirdGuidancePoliciesExample] = useState(false)
-  const [secondCurriculumDevelopmentExample, setSecondCurriculumDevelopmentExample] = useState(false)
-  const [thirdCurriculumDevelopmentExample, setThirdCurriculumDevelopmentExample] = useState(false)
-  const [secondLearningObjectivesAssessmentExample, setSecondLearningObjectivesAssessmentExample] = useState(false)
-  const [thirdLearningObjectivesAssessmentExample, setThirdLearningObjectivesAssessmentExample] = useState(false)
+  const [secondGuidanceExample, setSecondGuidanceExample] = useState(false)
+  const [thirdGuidanceExample, setThirdGuidanceExample] = useState(false)
+  const [secondCurriculumExample, setSecondCurriculumExample] = useState(false)
+  const [thirdCurriculumExample, setThirdCurriculumExample] = useState(false)
+  const [secondLearningExample, setSecondLearningExample] = useState(false)
+  const [thirdLearningExample, setThirdLearningExample] = useState(false)
 
   const { componentRef, handleReleaseLock, isLockedByOther, isLockedByCurrentUser } = useLockDocument({
     room: programmeKey,
@@ -71,9 +71,9 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
 
   const formatPayload = useCallback((sourceFormData: FormDataState = latestFormDataRef.current) => {
     const {
-      curriculumDevelopment: _curriculumDevelopment,
-      guidancePolicies: _guidancePolicies,
-      feedbackUtilization: _feedbackUtilization,
+      curriculum: _curriculum,
+      guidance: _guidance,
+      feedback: _feedback,
       otherFeedbackSource: _otherFeedbackSource,
       ...restFormData
     } = sourceFormData
@@ -194,12 +194,12 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
       setFormData(initFormData(t))
       setErrors(initErrors())
       setFeedbackSourceOptions(defaultFeedbackSourceOptions)
-      setSecondGuidancePoliciesExample(false)
-      setThirdGuidancePoliciesExample(false)
-      setSecondCurriculumDevelopmentExample(false)
-      setThirdCurriculumDevelopmentExample(false)
-      setSecondLearningObjectivesAssessmentExample(false)
-      setThirdLearningObjectivesAssessmentExample(false)
+      setSecondGuidanceExample(false)
+      setThirdGuidanceExample(false)
+      setSecondCurriculumExample(false)
+      setThirdCurriculumExample(false)
+      setSecondLearningExample(false)
+      setThirdLearningExample(false)
       setId(null)
 
       navigate(`/v1/programmes/10/${programmeKey}`)
@@ -220,20 +220,20 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
         feedbackSourceOptions={feedbackSourceOptions}
         formData={formData}
         handleSubmit={handleSubmit}
-        secondCurriculumDevelopmentExample={secondCurriculumDevelopmentExample}
-        secondGuidancePoliciesExample={secondGuidancePoliciesExample}
-        secondLearningObjectivesAssessmentExample={secondLearningObjectivesAssessmentExample}
+        secondCurriculumExample={secondCurriculumExample}
+        secondGuidanceExample={secondGuidanceExample}
+        secondLearningExample={secondLearningExample}
         setFeedbackSourceOptions={setFeedbackSourceOptions}
         setFormData={setFormData}
-        setSecondCurriculumDevelopmentExample={setSecondCurriculumDevelopmentExample}
-        setSecondGuidancePoliciesExample={setSecondGuidancePoliciesExample}
-        setSecondLearningObjectivesAssessmentExample={setSecondLearningObjectivesAssessmentExample}
-        setThirdCurriculumDevelopmentExample={setThirdCurriculumDevelopmentExample}
-        setThirdGuidancePoliciesExample={setThirdGuidancePoliciesExample}
-        setThirdLearningObjectivesAssessmentExample={setThirdLearningObjectivesAssessmentExample}
-        thirdCurriculumDevelopmentExample={thirdCurriculumDevelopmentExample}
-        thirdGuidancePoliciesExample={thirdGuidancePoliciesExample}
-        thirdLearningObjectivesAssessmentExample={thirdLearningObjectivesAssessmentExample}
+        setSecondCurriculumExample={setSecondCurriculumExample}
+        setSecondGuidanceExample={setSecondGuidanceExample}
+        setSecondLearningExample={setSecondLearningExample}
+        setThirdCurriculumExample={setThirdCurriculumExample}
+        setThirdGuidanceExample={setThirdGuidanceExample}
+        setThirdLearningExample={setThirdLearningExample}
+        thirdCurriculumExample={thirdCurriculumExample}
+        thirdGuidanceExample={thirdGuidanceExample}
+        thirdLearningExample={thirdLearningExample}
       />
     </Box>
   )

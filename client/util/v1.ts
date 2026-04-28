@@ -183,12 +183,12 @@ export const validateQualityDocument = (payload: Record<string, any>, t: TFuncti
   }
 
   if (Array.isArray(payload.feedbackSources) && payload.feedbackSources.length === 0) {
-    setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
-    setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
+    setErrorOnce('feedback', 'feedbackSourcesRequired')
+    setErrorOnce('feedbackFeedbackSources', 'feedbackSourcesRequired')
   }
 
-  if (payload.learningObjectivesAssessmentRegularity === '') {
-    setErrorOnce('learningObjectivesAssessmentRegularity', 'regularityRequired')
+  if (payload.learningRegularity === '') {
+    setErrorOnce('learningRegularity', 'regularityRequired')
   }
 
   if (!res.success) {
@@ -197,8 +197,8 @@ export const validateQualityDocument = (payload: Record<string, any>, t: TFuncti
 
       if (root === 'feedbackSources') {
         if (issue.path.length === 1) {
-          setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
-          setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
+          setErrorOnce('feedback', 'feedbackSourcesRequired')
+          setErrorOnce('feedbackFeedbackSources', 'feedbackSourcesRequired')
           return
         }
 
@@ -213,8 +213,8 @@ export const validateQualityDocument = (payload: Record<string, any>, t: TFuncti
         return
       }
 
-      if (root === 'learningObjectivesAssessmentRegularity') {
-        setErrorOnce('learningObjectivesAssessmentRegularity', 'regularityRequired')
+      if (root === 'learningRegularity') {
+        setErrorOnce('learningRegularity', 'regularityRequired')
         return
       }
 
@@ -231,8 +231,8 @@ export const validateQualityDocument = (payload: Record<string, any>, t: TFuncti
     : false
 
   if (!hasSelectedFeedbackSource) {
-    setErrorOnce('feedbackUtilization', 'feedbackSourcesRequired')
-    setErrorOnce('feedbackUtilizationFeedbackSources', 'feedbackSourcesRequired')
+    setErrorOnce('feedback', 'feedbackSourcesRequired')
+    setErrorOnce('feedbacFeedbackSources', 'feedbackSourcesRequired')
   }
 
   if (Object.values(nextErrors).every(error => !error)) return null

@@ -729,7 +729,7 @@ export default {
     addFeedbackSourceDescription: 'Lisää kuvaus ({{feedbackSource}})',
     feedbackUtilizationHeader: 'Palautteiden hyödyntäminen',
     feedbackRegularityHeader: 'Miten usein tätä palautetta käsitellään?',
-    feedbackUtilizationExamples:
+    feedbackExamples:
       'Miten palautteita käsitellään koulutusohjelman johtoryhmässä? Mitä kehittämiskohteita palautteiden perusteella on tunnistettu?',
     examplesDescription: 'Kertokaa 1-3 esimerkkiä',
     perCurriculumCycle: 'Opetussuunnitelmakausittain /\n4 vuoden välein',
@@ -738,8 +738,8 @@ export default {
     moreFrequently: 'Useammin kuin \n2 kertaa vuodessa',
     lessFrequently: 'Harvemmin kuin \n4 vuoden välein',
     notUsed: 'Ei käytössä',
-    curriculumDevelopmentHeader: '2. Opetussuunnitelmien kehittäminen',
-    curriculumDevelopmentDescription:
+    curriculumHeader: '2. Opetussuunnitelmien kehittäminen',
+    curriculumDescription:
       'Kertokaa esimerkkejä (1-3 kpl) opetussuunnitelman kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',
     example1: 'Esimerkki 1:',
     example2: 'Esimerkki 2:',
@@ -749,14 +749,13 @@ export default {
     changes: 'Mitkä muutokset palautteiden perusteella tehtiin?',
     developmentBasis: 'Mihin kaikkiin palautteisiin nämä muutokset perustuivat?',
     communication: 'Miten muutoksista tiedotettiin palautetta antaneille tahoille?',
-    learningObjectivesAssessment: 'Miten osaamistavoitteiden saavuttamista arvioidaan koulutusohjelman johtoryhmässä?',
-    guidancePoliciesHeader: '3. Ohjauskäytäntöjen kehittäminen',
-    guidancePoliciesDescription:
+    learning: 'Miten osaamistavoitteiden saavuttamista arvioidaan koulutusohjelman johtoryhmässä?',
+    guidanceHeader: '3. Ohjauskäytäntöjen kehittäminen',
+    guidanceDescription:
       'Kertokaa esimerkkejä (1-3 kpl) ohjauskäytöntöjen kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',
-    learningObjectivesAssessmentHeader: '4. Koulutusohjelman osaamistavoitteiden toteutumisen seuranta ja kehittäminen',
-    learningObjectivesAssessmentExamples: 'Kertokaa esimerkkejä (1-3 kpl) osaamistavoitteiden muuttamisesta',
-    learningObjectivesAssessmentRegularity:
-      'Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
+    learningHeader: '4. Koulutusohjelman osaamistavoitteiden toteutumisen seuranta ja kehittäminen',
+    learningExamples: 'Kertokaa esimerkkejä (1-3 kpl) osaamistavoitteiden muuttamisesta',
+    learningRegularity: 'Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
     undefined: 'Ei määritelty',
     documentingDescription:
       'Tämä vuosiseurannan osio sisältää kysymyksiä koulutusohjelman opetussuunnitelman, ohjauksen, osaamistavoitteiden ja palautekäytäntöjen kehittämisestä.',

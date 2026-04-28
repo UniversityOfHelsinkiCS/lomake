@@ -49,13 +49,7 @@ const sectionContentSx = {
   padding: '2rem',
 }
 
-export const fields = [
-  'title',
-  'feedbackUtilization',
-  'curriculumDevelopment',
-  'guidancePolicies',
-  'learningObjectivesAssessment',
-]
+export const fields = ['title', 'feedback', 'curriculum', 'guidance', 'learning']
 
 export const defaultFeedbackSourceOptions = [
   'norppa',
@@ -85,14 +79,14 @@ const getFeedbackSourceLabel = (t: TFunction, source: FeedbackSource) => {
 export const initFormData = (t: TFunction): FormDataState => {
   return {
     title: `${t('qualitydocument:header')} - ${new Date().toLocaleDateString('fi-FI')}`,
-    feedbackUtilization: '',
-    curriculumDevelopment: '',
-    guidancePolicies: '',
-    learningObjectivesAssessment: '',
+    feedback: '',
+    curriculum: '',
+    guidance: '',
+    learning: '',
     otherFeedbackSource: '',
-    feedbackUtilizationExamples: '',
+    feedbackExamples: '',
     feedbackSources: [] as FeedbackSourceState,
-    learningObjectivesAssessmentRegularity: '' as FeedbackRegularity,
+    learningRegularity: '' as FeedbackRegularity,
   }
 }
 
@@ -113,18 +107,18 @@ const QualityForm = ({
   formData,
   setFeedbackSourceOptions,
   setFormData,
-  secondCurriculumDevelopmentExample,
-  setSecondCurriculumDevelopmentExample,
-  thirdCurriculumDevelopmentExample,
-  setThirdCurriculumDevelopmentExample,
-  secondGuidancePoliciesExample,
-  setSecondGuidancePoliciesExample,
-  thirdGuidancePoliciesExample,
-  setThirdGuidancePoliciesExample,
-  secondLearningObjectivesAssessmentExample,
-  setSecondLearningObjectivesAssessmentExample,
-  thirdLearningObjectivesAssessmentExample,
-  setThirdLearningObjectivesAssessmentExample,
+  secondCurriculumExample,
+  setSecondCurriculumExample,
+  thirdCurriculumExample,
+  setThirdCurriculumExample,
+  secondGuidanceExample,
+  setSecondGuidanceExample,
+  thirdGuidanceExample,
+  setThirdGuidanceExample,
+  secondLearningExample,
+  setSecondLearningExample,
+  thirdLearningExample,
+  setThirdLearningExample,
 }: {
   errors: Record<string, string>
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
@@ -132,18 +126,18 @@ const QualityForm = ({
   formData: FormDataState
   setFeedbackSourceOptions: React.Dispatch<React.SetStateAction<FeedbackSource[]>>
   setFormData: React.Dispatch<React.SetStateAction<FormDataState>>
-  secondCurriculumDevelopmentExample: boolean
-  setSecondCurriculumDevelopmentExample: React.Dispatch<React.SetStateAction<boolean>>
-  thirdCurriculumDevelopmentExample: boolean
-  setThirdCurriculumDevelopmentExample: React.Dispatch<React.SetStateAction<boolean>>
-  secondGuidancePoliciesExample: boolean
-  setSecondGuidancePoliciesExample: React.Dispatch<React.SetStateAction<boolean>>
-  thirdGuidancePoliciesExample: boolean
-  setThirdGuidancePoliciesExample: React.Dispatch<React.SetStateAction<boolean>>
-  secondLearningObjectivesAssessmentExample: boolean
-  setSecondLearningObjectivesAssessmentExample: React.Dispatch<React.SetStateAction<boolean>>
-  thirdLearningObjectivesAssessmentExample: boolean
-  setThirdLearningObjectivesAssessmentExample: React.Dispatch<React.SetStateAction<boolean>>
+  secondCurriculumExample: boolean
+  setSecondCurriculumExample: React.Dispatch<React.SetStateAction<boolean>>
+  thirdCurriculumExample: boolean
+  setThirdCurriculumExample: React.Dispatch<React.SetStateAction<boolean>>
+  secondGuidanceExample: boolean
+  setSecondGuidanceExample: React.Dispatch<React.SetStateAction<boolean>>
+  thirdGuidanceExample: boolean
+  setThirdGuidanceExample: React.Dispatch<React.SetStateAction<boolean>>
+  secondLearningExample: boolean
+  setSecondLearningExample: React.Dispatch<React.SetStateAction<boolean>>
+  thirdLearningExample: boolean
+  setThirdLearningExample: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const { t } = useTranslation()
 
@@ -239,26 +233,26 @@ const QualityForm = ({
   }
 
   const handleAddCurriculumExampleClick = () => {
-    if (!secondCurriculumDevelopmentExample) {
-      setSecondCurriculumDevelopmentExample(true)
-    } else if (!thirdCurriculumDevelopmentExample) {
-      setThirdCurriculumDevelopmentExample(true)
+    if (!secondCurriculumExample) {
+      setSecondCurriculumExample(true)
+    } else if (!thirdCurriculumExample) {
+      setThirdCurriculumExample(true)
     }
   }
 
   const handleAddGuidanceExampleClick = () => {
-    if (!secondGuidancePoliciesExample) {
-      setSecondGuidancePoliciesExample(true)
-    } else if (!thirdGuidancePoliciesExample) {
-      setThirdGuidancePoliciesExample(true)
+    if (!secondGuidanceExample) {
+      setSecondGuidanceExample(true)
+    } else if (!thirdGuidanceExample) {
+      setThirdGuidanceExample(true)
     }
   }
 
-  const handleAddLearningObjectivesAssessmentExampleClick = () => {
-    if (!secondLearningObjectivesAssessmentExample) {
-      setSecondLearningObjectivesAssessmentExample(true)
-    } else if (!thirdLearningObjectivesAssessmentExample) {
-      setThirdLearningObjectivesAssessmentExample(true)
+  const handleAddLearningExampleClick = () => {
+    if (!secondLearningExample) {
+      setSecondLearningExample(true)
+    } else if (!thirdLearningExample) {
+      setThirdLearningExample(true)
     }
   }
 
@@ -362,9 +356,9 @@ const QualityForm = ({
                       </TableBody>
                     </Table>
                   </TableContainer>
-                  {errors.feedbackUtilizationFeedbackSources ? (
+                  {errors.feedbackFeedbackSources ? (
                     <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
-                      {errors.feedbackUtilizationFeedbackSources}
+                      {errors.feedbackFeedbackSources}
                     </Typography>
                   ) : null}
 
@@ -417,22 +411,20 @@ const QualityForm = ({
                   ) : null}
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <Typography variant="h5">{t('qualitydocument:feedbackUtilizationHeader')}</Typography>
-                    <Typography variant="light">{t('qualitydocument:feedbackUtilizationExamples')}</Typography>
+                    <Typography variant="light">{t('qualitydocument:feedbackExamples')}</Typography>
                     <TextField
-                      data-cy={`feedbackUtilization-examples`}
-                      error={!!errors.feedbackUtilizationExamples}
+                      data-cy={`feedback-examples`}
+                      error={!!errors.feedbackExamples}
                       fullWidth
-                      helperText={
-                        <CharacterCounter count={formData.feedbackUtilizationExamples.length} maxLength={1500} />
-                      }
+                      helperText={<CharacterCounter count={formData.feedbackExamples.length} maxLength={1500} />}
                       label={t(`qualitydocument:examplesDescription`)}
                       margin="normal"
                       minRows={3}
                       multiline
-                      name={`feedbackUtilizationExamples`}
+                      name={`feedbackExamples`}
                       onChange={handleChange}
                       slotProps={{ htmlInput: { maxLength: 1500 } }}
-                      value={formData.feedbackUtilizationExamples}
+                      value={formData.feedbackExamples}
                     />
                   </Box>
                 </Box>
@@ -442,43 +434,43 @@ const QualityForm = ({
             return (
               <Paper key={field} sx={sectionCardSx}>
                 <Box sx={sectionHeaderSx}>
-                  <Typography variant="h3">{t('qualitydocument:curriculumDevelopmentHeader')}</Typography>
+                  <Typography variant="h3">{t('qualitydocument:curriculumHeader')}</Typography>
                 </Box>
                 <Box sx={sectionContentSx}>
-                  <Typography variant="light">{t('qualitydocument:curriculumDevelopmentDescription')}</Typography>
+                  <Typography variant="light">{t('qualitydocument:curriculumDescription')}</Typography>
                   <FeedbackActionForm
                     errors={errors}
                     example="1"
                     field={field}
                     formData={formData}
                     handleChange={handleChange}
-                    setExample={setSecondCurriculumDevelopmentExample}
+                    setExample={setSecondCurriculumExample}
                     setFormData={setFormData}
                   />
-                  {secondCurriculumDevelopmentExample ? (
+                  {secondCurriculumExample ? (
                     <FeedbackActionForm
                       errors={errors}
                       example="2"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
-                      setExample={setSecondCurriculumDevelopmentExample}
+                      setExample={setSecondCurriculumExample}
                       setFormData={setFormData}
                     />
                   ) : null}
 
-                  {thirdCurriculumDevelopmentExample ? (
+                  {thirdCurriculumExample ? (
                     <FeedbackActionForm
                       errors={errors}
                       example="3"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
-                      setExample={setThirdCurriculumDevelopmentExample}
+                      setExample={setThirdCurriculumExample}
                       setFormData={setFormData}
                     />
                   ) : null}
-                  {!thirdCurriculumDevelopmentExample || !secondCurriculumDevelopmentExample ? (
+                  {!thirdCurriculumExample || !secondCurriculumExample ? (
                     <Button onClick={handleAddCurriculumExampleClick} type="button" variant="outlined">
                       {t('qualitydocument:addNewExample')}
                     </Button>
@@ -490,43 +482,43 @@ const QualityForm = ({
             return (
               <Paper key={field} sx={sectionCardSx}>
                 <Box sx={sectionHeaderSx}>
-                  <Typography variant="h3">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
+                  <Typography variant="h3">{t('qualitydocument:guidanceHeader')}</Typography>
                 </Box>
                 <Box sx={sectionContentSx}>
-                  <Typography variant="light">{t('qualitydocument:guidancePoliciesDescription')}</Typography>
+                  <Typography variant="light">{t('qualitydocument:guidanceDescription')}</Typography>
                   <FeedbackActionForm
                     errors={errors}
                     example="1"
                     field={field}
                     formData={formData}
                     handleChange={handleChange}
-                    setExample={setSecondGuidancePoliciesExample}
+                    setExample={setSecondGuidanceExample}
                     setFormData={setFormData}
                   />
-                  {secondGuidancePoliciesExample ? (
+                  {secondGuidanceExample ? (
                     <FeedbackActionForm
                       errors={errors}
                       example="2"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
-                      setExample={setSecondGuidancePoliciesExample}
+                      setExample={setSecondGuidanceExample}
                       setFormData={setFormData}
                     />
                   ) : null}
 
-                  {thirdGuidancePoliciesExample ? (
+                  {thirdGuidanceExample ? (
                     <FeedbackActionForm
                       errors={errors}
                       example="3"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
-                      setExample={setThirdGuidancePoliciesExample}
+                      setExample={setThirdGuidanceExample}
                       setFormData={setFormData}
                     />
                   ) : null}
-                  {!thirdGuidancePoliciesExample || !secondGuidancePoliciesExample ? (
+                  {!thirdGuidanceExample || !secondGuidanceExample ? (
                     <Button onClick={handleAddGuidanceExampleClick} type="button" variant="outlined">
                       {t('qualitydocument:addNewExample')}
                     </Button>
@@ -538,14 +530,14 @@ const QualityForm = ({
             return (
               <Paper key={field} sx={sectionCardSx}>
                 <Box sx={sectionHeaderSx}>
-                  <Typography variant="h3">{t('qualitydocument:learningObjectivesAssessmentHeader')}</Typography>
+                  <Typography variant="h3">{t('qualitydocument:learningHeader')}</Typography>
                 </Box>
                 <Box sx={sectionContentSx}>
                   <TextField
                     data-cy={`editor-${field}`}
                     error={!!errors[`${field}`]}
                     helperText={errors[`${field}`]}
-                    label={t(`qualitydocument:learningObjectivesAssessment`)}
+                    label={t(`qualitydocument:learning`)}
                     margin="normal"
                     minRows={2}
                     multiline
@@ -554,21 +546,21 @@ const QualityForm = ({
                     value={formData[`${field}`]}
                     variant="outlined"
                   />
-                  <Typography variant="light">{t('qualitydocument:learningObjectivesAssessmentRegularity')}</Typography>
+                  <Typography variant="light">{t('qualitydocument:learningRegularity')}</Typography>
                   <RadioGroup
-                    aria-label="learningObjectivesAssessmentRegularity"
-                    data-cy="regularity-learningObjectivesAssessment"
-                    name="learningObjectivesAssessmentRegularity"
+                    aria-label="learningRegularity"
+                    data-cy="regularity-learning"
+                    name="learningRegularity"
                     onChange={e =>
                       setFormData(
                         prevData =>
                           ({
                             ...prevData,
-                            learningObjectivesAssessmentRegularity: e.target.value as FeedbackRegularity,
+                            learningRegularity: e.target.value as FeedbackRegularity,
                           }) as FormDataState
                       )
                     }
-                    value={formData.learningObjectivesAssessmentRegularity}
+                    value={formData.learningRegularity}
                   >
                     <FormControlLabel
                       control={<Radio />}
@@ -592,49 +584,45 @@ const QualityForm = ({
                       value="moreFrequently"
                     />
                   </RadioGroup>
-                  {errors.learningObjectivesAssessmentRegularity ? (
+                  {errors.learningRegularity ? (
                     <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
-                      {errors.learningObjectivesAssessmentRegularity}
+                      {errors.learningRegularity}
                     </Typography>
                   ) : null}
-                  <Typography variant="light">{t('qualitydocument:learningObjectivesAssessmentExamples')}</Typography>
+                  <Typography variant="light">{t('qualitydocument:learningExamples')}</Typography>
                   <FeedbackActionForm
                     errors={errors}
                     example="1"
                     field={field}
                     formData={formData}
                     handleChange={handleChange}
-                    setExample={setSecondLearningObjectivesAssessmentExample}
+                    setExample={setSecondLearningExample}
                     setFormData={setFormData}
                   />
-                  {secondLearningObjectivesAssessmentExample ? (
+                  {secondLearningExample ? (
                     <FeedbackActionForm
                       errors={errors}
                       example="2"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
-                      setExample={setSecondLearningObjectivesAssessmentExample}
+                      setExample={setSecondLearningExample}
                       setFormData={setFormData}
                     />
                   ) : null}
-                  {thirdLearningObjectivesAssessmentExample ? (
+                  {thirdLearningExample ? (
                     <FeedbackActionForm
                       errors={errors}
                       example="3"
                       field={field}
                       formData={formData}
                       handleChange={handleChange}
-                      setExample={setThirdLearningObjectivesAssessmentExample}
+                      setExample={setThirdLearningExample}
                       setFormData={setFormData}
                     />
                   ) : null}
-                  {!thirdLearningObjectivesAssessmentExample || !secondLearningObjectivesAssessmentExample ? (
-                    <Button
-                      onClick={handleAddLearningObjectivesAssessmentExampleClick}
-                      type="button"
-                      variant="outlined"
-                    >
+                  {!thirdLearningExample || !secondLearningExample ? (
+                    <Button onClick={handleAddLearningExampleClick} type="button" variant="outlined">
                       {t('qualitydocument:addNewExample')}
                     </Button>
                   ) : null}

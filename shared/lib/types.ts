@@ -93,13 +93,13 @@ export type FeedbackSourceState = Array<{ name: FeedbackSource; description?: st
 
 export interface FormDataState {
   title: string
-  feedbackUtilization: string
-  curriculumDevelopment: string
-  guidancePolicies: string
-  learningObjectivesAssessment: string
+  feedback: string
+  curriculum: string
+  guidance: string
+  learning: string
   otherFeedbackSource: string
-  feedbackUtilizationExamples: string
+  feedbackExamples: string
   feedbackSources: FeedbackSourceState
-  learningObjectivesAssessmentRegularity: FeedbackRegularity
+  learningRegularity: FeedbackRegularity
   [key: string]: any
 }

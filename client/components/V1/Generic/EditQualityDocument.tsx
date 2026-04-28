@@ -47,9 +47,8 @@ const EditQualityDocument = ({
         normalized.feedbackSources = []
       }
       if (!normalized.title) normalized.title = initFormData(t).title
-      if (!normalized.feedbackUtilizationExamples) normalized.feedbackUtilizationExamples = ''
-      if (!normalized.learningObjectivesAssessmentRegularity)
-        normalized.learningObjectivesAssessmentRegularity = '' as FeedbackRegularity
+      if (!normalized.feedbackExamples) normalized.feedbackExamples = ''
+      if (!normalized.learningRegularity) normalized.learningRegularity = '' as FeedbackRegularity
       if (!normalized.otherFeedbackSource) normalized.otherFeedbackSource = ''
 
       return normalized
@@ -86,24 +85,12 @@ const EditQualityDocument = ({
         .filter((name: FeedbackSource) => !defaultFeedbackSourceOptions.includes(name)) ?? []
     )
   )
-  const [secondGuidancePoliciesExample, setSecondGuidancePoliciesExample] = useState(
-    hasExample(data, 'guidancePolicies', 2)
-  )
-  const [thirdGuidancePoliciesExample, setThirdGuidancePoliciesExample] = useState(
-    hasExample(data, 'guidancePolicies', 3)
-  )
-  const [secondCurriculumDevelopmentExample, setSecondCurriculumDevelopmentExample] = useState(
-    hasExample(data, 'curriculumDevelopment', 2)
-  )
-  const [thirdCurriculumDevelopmentExample, setThirdCurriculumDevelopmentExample] = useState(
-    hasExample(data, 'curriculumDevelopment', 3)
-  )
-  const [secondLearningObjectivesAssessmentExample, setSecondLearningObjectivesAssessmentExample] = useState(
-    hasExample(data, 'learningObjectivesAssessment', 2)
-  )
-  const [thirdLearningObjectivesAssessmentExample, setThirdLearningObjectivesAssessmentExample] = useState(
-    hasExample(data, 'learningObjectivesAssessment', 3)
-  )
+  const [secondGuidanceExample, setSecondGuidanceExample] = useState(hasExample(data, 'guidance', 2))
+  const [thirdGuidanceExample, setThirdGuidanceExample] = useState(hasExample(data, 'guidance', 3))
+  const [secondCurriculumExample, setSecondCurriculumExample] = useState(hasExample(data, 'curriculum', 2))
+  const [thirdCurriculumExample, setThirdCurriculumExample] = useState(hasExample(data, 'curriculum', 3))
+  const [secondLearningExample, setSecondLearningExample] = useState(hasExample(data, 'learning', 2))
+  const [thirdLearningExample, setThirdLearningExample] = useState(hasExample(data, 'learning', 3))
 
   useEffect(() => {
     latestFormDataRef.current = formData
@@ -141,12 +128,12 @@ const EditQualityDocument = ({
           .filter((name: FeedbackSource) => !defaultFeedbackSourceOptions.includes(name)) ?? []
       )
     )
-    setSecondGuidancePoliciesExample(hasExample(nextData, 'guidancePolicies', 2))
-    setThirdGuidancePoliciesExample(hasExample(nextData, 'guidancePolicies', 3))
-    setSecondCurriculumDevelopmentExample(hasExample(nextData, 'curriculumDevelopment', 2))
-    setThirdCurriculumDevelopmentExample(hasExample(nextData, 'curriculumDevelopment', 3))
-    setSecondLearningObjectivesAssessmentExample(hasExample(nextData, 'learningObjectivesAssessment', 2))
-    setThirdLearningObjectivesAssessmentExample(hasExample(nextData, 'learningObjectivesAssessment', 3))
+    setSecondGuidanceExample(hasExample(nextData, 'guidance', 2))
+    setThirdGuidanceExample(hasExample(nextData, 'guidance', 3))
+    setSecondCurriculumExample(hasExample(nextData, 'curriculum', 2))
+    setThirdCurriculumExample(hasExample(nextData, 'curriculum', 3))
+    setSecondLearningExample(hasExample(nextData, 'learning', 2))
+    setThirdLearningExample(hasExample(nextData, 'learning', 3))
     isInitializedFromBackendRef.current = true
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, normalizeFormData, t])
@@ -165,9 +152,9 @@ const EditQualityDocument = ({
 
   const formatPayload = useCallback((sourceFormData: FormDataState = latestFormDataRef.current) => {
     const {
-      curriculumDevelopment: _curriculumDevelopment,
-      guidancePolicies: _guidancePolicies,
-      feedbackUtilization: _feedbackUtilization,
+      curriculum: _curriculum,
+      guidance: _guidance,
+      feedback: _feedback,
       otherFeedbackSource: _otherFeedbackSource,
       ...restFormData
     } = sourceFormData
@@ -247,20 +234,20 @@ const EditQualityDocument = ({
         feedbackSourceOptions={feedbackSourceOptions}
         formData={formData}
         handleSubmit={handleSubmit}
-        secondCurriculumDevelopmentExample={secondCurriculumDevelopmentExample}
-        secondGuidancePoliciesExample={secondGuidancePoliciesExample}
-        secondLearningObjectivesAssessmentExample={secondLearningObjectivesAssessmentExample}
+        secondCurriculumExample={secondCurriculumExample}
+        secondGuidanceExample={secondGuidanceExample}
+        secondLearningExample={secondLearningExample}
         setFeedbackSourceOptions={setFeedbackSourceOptions}
         setFormData={setFormData}
-        setSecondCurriculumDevelopmentExample={setSecondCurriculumDevelopmentExample}
-        setSecondGuidancePoliciesExample={setSecondGuidancePoliciesExample}
-        setSecondLearningObjectivesAssessmentExample={setSecondLearningObjectivesAssessmentExample}
-        setThirdCurriculumDevelopmentExample={setThirdCurriculumDevelopmentExample}
-        setThirdGuidancePoliciesExample={setThirdGuidancePoliciesExample}
-        setThirdLearningObjectivesAssessmentExample={setThirdLearningObjectivesAssessmentExample}
-        thirdCurriculumDevelopmentExample={thirdCurriculumDevelopmentExample}
-        thirdGuidancePoliciesExample={thirdGuidancePoliciesExample}
-        thirdLearningObjectivesAssessmentExample={thirdLearningObjectivesAssessmentExample}
+        setSecondCurriculumExample={setSecondCurriculumExample}
+        setSecondGuidanceExample={setSecondGuidanceExample}
+        setSecondLearningExample={setSecondLearningExample}
+        setThirdCurriculumExample={setThirdCurriculumExample}
+        setThirdGuidanceExample={setThirdGuidanceExample}
+        setThirdLearningExample={setThirdLearningExample}
+        thirdCurriculumExample={thirdCurriculumExample}
+        thirdGuidanceExample={thirdGuidanceExample}
+        thirdLearningExample={thirdLearningExample}
       />
     </Box>
   )

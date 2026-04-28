@@ -765,7 +765,7 @@ export default {
     addFeedbackSourceDescription: 'Lägg till beskrivning ({{feedbackSource}})',
     feedbackUtilizationHeader: 'Utnyttjande av feedback',
     feedbackRegularityHeader: 'Hur ofta behandlas denna feedback?',
-    feedbackUtilizationExamples:
+    feedbackExamples:
       'Hur hanteras feedbacken i utbildningsprogrammets ledningsgrupp? Vilka utvecklingsområden har identifierats utifrån feedbacken?',
     examplesDescription: 'Ange 1–3 exempel',
     perCurriculumCycle: 'Vid varje läroplansperiod /\n vart fjärde år',
@@ -774,8 +774,8 @@ export default {
     moreFrequently: 'Ofta än två gånger om året',
     lessFrequently: 'Sällan,\n mindre än vart fjärde år',
     notUsed: 'Inte i bruk',
-    curriculumDevelopmentHeader: '2. Utveckling av läroplaner',
-    curriculumDevelopmentDescription:
+    curriculumHeader: '2. Utveckling av läroplaner',
+    curriculumDescription:
       'Ge 1–3 exempel på utvecklingsområden för läroplanen som har identifierats utifrån den feedback som utbildningsprogrammet har fått.',
     example1: 'Exempel 1:',
     example2: 'Exempel 2:',
@@ -785,14 +785,13 @@ export default {
     changes: 'Vilka förändringar gjordes utifrån återkopplingen?',
     developmentBasis: 'Vilka återkopplingar låg till grund för dessa förändringar?',
     communication: 'Hur informerades de som lämnat feedback om ändringarna?',
-    learningObjectivesAssessment: 'Hur utvärderas uppnåendet av kompetensmålen i utbildningsprogrammets ledningsgrupp?',
-    guidancePoliciesHeader: '3. Utveckling av vägledningsrutinerna',
-    guidancePoliciesDescription:
+    learning: 'Hur utvärderas uppnåendet av kompetensmålen i utbildningsprogrammets ledningsgrupp?',
+    guidanceHeader: '3. Utveckling av vägledningsrutinerna',
+    guidanceDescription:
       'Ange 1–3 exempel på områden för utveckling av vägledningsrutinerna som har identifierats utifrån den feedback som utbildningsprogrammet har fått.',
-    learningObjectivesAssessmentHeader: '4. Uppföljning och utveckling av kompetensmålen för utbildningsprogrammet',
-    learningObjectivesAssessmentExamples: 'Ge exempel (1–3 stycken) på ändringar av kompetensmålen',
-    learningObjectivesAssessmentRegularity:
-      'Hur ofta behandlas uppnåendet av kompetensmålen i utbildningsprogrammets ledningsgrupp?',
+    learningHeader: '4. Uppföljning och utveckling av kompetensmålen för utbildningsprogrammet',
+    learningExamples: 'Ge exempel (1–3 stycken) på ändringar av kompetensmålen',
+    learningRegularity: 'Hur ofta behandlas uppnåendet av kompetensmålen i utbildningsprogrammets ledningsgrupp?',
     undefined: 'Odefinierat',
     documentingDescription:
       'Denna del av årsuppföljningen innehåller frågor om utvecklingen av utbildningsprogrammets läroplan, vägledning, kompetensmål och feedbackpraxis.',

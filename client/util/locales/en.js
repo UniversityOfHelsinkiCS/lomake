@@ -725,7 +725,7 @@ export default {
     addFeedbackSourceDescription: 'Add description ({{feedbackSource}})',
     feedbackUtilizationHeader: 'Utilizing feedback',
     feedbackRegularityHeader: 'How often is this feedback handled?',
-    feedbackUtilizationExamples:
+    feedbackExamples:
       'How is feedback handled by the degree programme’s steering group? What areas for improvement have been identified based on the feedback?',
     examplesDescription: 'Please provide 1–3 examples',
     perCurriculumCycle: 'Per curriculum cycle /\n every 4 years',
@@ -734,8 +734,8 @@ export default {
     moreFrequently: 'More than twice a year',
     lessFrequently: 'Less than once every 4 years',
     notUsed: 'Not in use',
-    curriculumDevelopmentHeader: '2. Curriculum Development',
-    curriculumDevelopmentDescription:
+    curriculumHeader: '2. Curriculum Development',
+    curriculumDescription:
       'Please provide 1–3 examples of areas for curriculum development that have been identified based on feedback received by the degree programme.',
     example1: 'Example 1:',
     example2: 'Example 2:',
@@ -745,16 +745,13 @@ export default {
     changes: 'What changes were made based on the feedback?',
     developmentBasis: 'Which specific feedback did these changes address?',
     communication: 'How were those who provided feedback informed about the changes?',
-    learningObjectivesAssessment:
-      'How is the achievement of learning outcomes assessed by the degree programme steering group?',
-    guidancePoliciesHeader: '3. Development of Guidance Practices',
-    guidancePoliciesDescription:
+    learning: 'How is the achievement of learning outcomes assessed by the degree programme steering group?',
+    guidanceHeader: '3. Development of Guidance Practices',
+    guidanceDescription:
       'Please provide examples (1–3) of areas for improvement in guidance practices that have been identified based on feedback received by the degree programme.',
-    learningObjectivesAssessmentHeader:
-      '4. Monitoring and Developing the Achievement of Learning Outcomes of the Degree Programme',
-    learningObjectivesAssessmentExamples: 'Please provide examples (1–3) of changes made to learning outcomes',
-    learningObjectivesAssessmentRegularity:
-      'How often is the achievement of learning outcomes discussed by the programme steering group?',
+    learningHeader: '4. Monitoring and Developing the Achievement of Learning Outcomes of the Degree Programme',
+    learningExamples: 'Please provide examples (1–3) of changes made to learning outcomes',
+    learningRegularity: 'How often is the achievement of learning outcomes discussed by the programme steering group?',
     undefined: 'Not defined',
     documentingDescription:
       'This section of the annual follow-up includes questions on the development of the degree programme’s curriculum, guidance practices, learning outcomes and feedback practices.',

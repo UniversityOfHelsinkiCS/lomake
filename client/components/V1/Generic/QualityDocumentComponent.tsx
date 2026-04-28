@@ -29,8 +29,8 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
   const { t } = useTranslation()
   const feedbackSources = Array.isArray(doc?.data?.feedbackSources)
     ? doc.data.feedbackSources
-    : Array.isArray(doc?.data?.feedbackUtilization?.feedbackSources)
-      ? doc.data.feedbackUtilization.feedbackSources
+    : Array.isArray(doc?.data?.feedback?.feedbackSources)
+      ? doc.data.feedback.feedbackSources
       : []
 
 
@@ -47,8 +47,8 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
 
   const addedFeedbackSources = feedbackSources.filter(source => !defaultFeedbackSourceOptions.includes(source.name))
 
-  const feedbackUtilizationExamples =
-    doc?.data?.feedbackUtilizationExamples ?? doc?.data?.feedbackUtilization?.examples ?? ''
+  const feedbackExamples =
+    doc?.data?.feedbackExamples ?? doc?.data?.feedback?.examples ?? ''
 
   const defaultFeedbackSourceOrder = new Map(
     defaultFeedbackSourceOptions.map((option, index) => [option.toLowerCase(), index])
@@ -74,51 +74,24 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
   })
     
 
-  const curriculumDevelopment = [
+  const curriculum = [
     {
-      name: doc?.data?.curriculumDevelopmentNameExample1,
-      changes: doc?.data?.curriculumDevelopmentChangesExample1,
-      feedbackSource: doc?.data?.curriculumDevelopmentFeedbackSourceExample1,
-      communication: doc?.data?.curriculumDevelopmentCommunicationExample1,
+      name: doc?.data?.curriculumNameExample1,
+      changes: doc?.data?.curriculumChangesExample1,
+      feedbackSource: doc?.data?.curriculumFeedbackSourceExample1,
+      communication: doc?.data?.curriculumCommunicationExample1,
     },
     {
-      name: doc?.data?.curriculumDevelopmentNameExample2,
-      changes: doc?.data?.curriculumDevelopmentChangesExample2,
-      feedbackSource: doc?.data?.curriculumDevelopmentFeedbackSourceExample2,
-      communication: doc?.data?.curriculumDevelopmentCommunicationExample2,
+      name: doc?.data?.curriculumNameExample2,
+      changes: doc?.data?.curriculumChangesExample2,
+      feedbackSource: doc?.data?.curriculumFeedbackSourceExample2,
+      communication: doc?.data?.curriculumCommunicationExample2,
     },
     {
-      name: doc?.data?.curriculumDevelopmentNameExample3,
-      changes: doc?.data?.curriculumDevelopmentChangesExample3,
-      feedbackSource: doc?.data?.curriculumDevelopmentFeedbackSourceExample3,
-      communication: doc?.data?.curriculumDevelopmentCommunicationExample3,
-    },
-  ].filter(
-    example =>
-      example.name?.length > 0 ||
-      example.changes?.length > 0 ||
-      example.feedbackSource?.length > 0 ||
-      example.communication?.length > 0
-  )
-
-  const guidancePolicies = [
-    {
-      name: doc?.data?.guidancePoliciesNameExample1,
-      changes: doc?.data?.guidancePoliciesChangesExample1,
-      feedbackSource: doc?.data?.guidancePoliciesFeedbackSourceExample1,
-      communication: doc?.data?.guidancePoliciesCommunicationExample1,
-    },
-    {
-      name: doc?.data?.guidancePoliciesNameExample2,
-      changes: doc?.data?.guidancePoliciesChangesExample2,
-      feedbackSource: doc?.data?.guidancePoliciesFeedbackSourceExample2,
-      communication: doc?.data?.guidancePoliciesCommunicationExample2,
-    },
-    {
-      name: doc?.data?.guidancePoliciesNameExample3,
-      changes: doc?.data?.guidancePoliciesChangesExample3,
-      feedbackSource: doc?.data?.guidancePoliciesFeedbackSourceExample3,
-      communication: doc?.data?.guidancePoliciesCommunicationExample3,
+      name: doc?.data?.curriculumNameExample3,
+      changes: doc?.data?.curriculumChangesExample3,
+      feedbackSource: doc?.data?.curriculumFeedbackSourceExample3,
+      communication: doc?.data?.curriculumCommunicationExample3,
     },
   ].filter(
     example =>
@@ -128,24 +101,51 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
       example.communication?.length > 0
   )
 
-  const learningObjectivesAssessmentExamples = [
+  const guidance = [
     {
-      name: doc?.data?.learningObjectivesAssessmentNameExample1,
-      changes: doc?.data?.learningObjectivesAssessmentChangesExample1,
-      feedbackSource: doc?.data?.learningObjectivesAssessmentFeedbackSourceExample1,
-      communication: doc?.data?.learningObjectivesAssessmentCommunicationExample1,
+      name: doc?.data?.guidanceNameExample1,
+      changes: doc?.data?.guidanceChangesExample1,
+      feedbackSource: doc?.data?.guidanceFeedbackSourceExample1,
+      communication: doc?.data?.guidanceCommunicationExample1,
     },
     {
-      name: doc?.data?.learningObjectivesAssessmentNameExample2,
-      changes: doc?.data?.learningObjectivesAssessmentChangesExample2,
-      feedbackSource: doc?.data?.learningObjectivesAssessmentFeedbackSourceExample2,
-      communication: doc?.data?.learningObjectivesAssessmentCommunicationExample2,
+      name: doc?.data?.guidanceNameExample2,
+      changes: doc?.data?.guidanceChangesExample2,
+      feedbackSource: doc?.data?.guidanceFeedbackSourceExample2,
+      communication: doc?.data?.guidanceCommunicationExample2,
     },
     {
-      name: doc?.data?.learningObjectivesAssessmentNameExample3,
-      changes: doc?.data?.learningObjectivesAssessmentChangesExample3,
-      feedbackSource: doc?.data?.learningObjectivesAssessmentFeedbackSourceExample3,
-      communication: doc?.data?.learningObjectivesAssessmentCommunicationExample3,
+      name: doc?.data?.guidanceNameExample3,
+      changes: doc?.data?.guidanceChangesExample3,
+      feedbackSource: doc?.data?.guidanceFeedbackSourceExample3,
+      communication: doc?.data?.guidanceCommunicationExample3,
+    },
+  ].filter(
+    example =>
+      example.name?.length > 0 ||
+      example.changes?.length > 0 ||
+      example.feedbackSource?.length > 0 ||
+      example.communication?.length > 0
+  )
+
+  const learningExamples = [
+    {
+      name: doc?.data?.learningNameExample1,
+      changes: doc?.data?.learningAChangesExample1,
+      feedbackSource: doc?.data?.learningFeedbackSourceExample1,
+      communication: doc?.data?.learningCommunicationExample1,
+    },
+    {
+      name: doc?.data?.learningNameExample2,
+      changes: doc?.data?.learningChangesExample2,
+      feedbackSource: doc?.data?.learningFeedbackSourceExample2,
+      communication: doc?.data?.learningCommunicationExample2,
+    },
+    {
+      name: doc?.data?.learningNameExample3,
+      changes: doc?.data?.learningChangesExample3,
+      feedbackSource: doc?.data?.learningFeedbackSourceExample3,
+      communication: doc?.data?.learningCommunicationExample3,
     },
   ].filter(
     example =>
@@ -248,18 +248,18 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                     </Box>
                   ) : null}
         <Typography variant="h6">{t('qualitydocument:feedbackUtilizationHeader')}</Typography>
-        <Typography>{t('qualitydocument:feedbackUtilizationExamples')}</Typography>
-        <Typography color={feedbackUtilizationExamples ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-          {feedbackUtilizationExamples || t('common:empty')}
+        <Typography>{t('qualitydocument:feedbackExamples')}</Typography>
+        <Typography color={feedbackExamples ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+          {feedbackExamples || t('common:empty')}
         </Typography>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Box sx={sectionHeaderSx}>
-        <Typography variant="h5">{t('qualitydocument:curriculumDevelopmentHeader')}</Typography>
+        <Typography variant="h5">{t('qualitydocument:curriculumHeader')}</Typography>
         </Box>
-        <Typography>{t('qualitydocument:curriculumDevelopmentDescription')}</Typography>
-        {(Array.isArray(curriculumDevelopment) ? curriculumDevelopment : []).length > 0 ? (
-          (curriculumDevelopment as Array<Record<string, string>>).map((example, exampleIndex) => (
+        <Typography>{t('qualitydocument:curriculumDescription')}</Typography>
+        {(Array.isArray(curriculum) ? curriculum : []).length > 0 ? (
+          (curriculum as Array<Record<string, string>>).map((example, exampleIndex) => (
             <Box key={`curriculum-${exampleIndex}`} >
               <Typography variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
               <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentGoal')}</Typography>
@@ -286,11 +286,11 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Box sx={sectionHeaderSx}>
-        <Typography variant="h5">{t('qualitydocument:guidancePoliciesHeader')}</Typography>
+        <Typography variant="h5">{t('qualitydocument:guidanceHeader')}</Typography>
         </Box>
-        <Typography>{t('qualitydocument:guidancePoliciesDescription')}</Typography>
-        {(Array.isArray(guidancePolicies) ? guidancePolicies : []).length > 0 ? (
-          (guidancePolicies as Array<Record<string, string>>).map((example, exampleIndex) => (
+        <Typography>{t('qualitydocument:guidanceDescription')}</Typography>
+        {(Array.isArray(guidance) ? guidance : []).length > 0 ? (
+          (guidance as Array<Record<string, string>>).map((example, exampleIndex) => (
             <Box key={`guidance-policy-${exampleIndex}`}>
               <Typography variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
               <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentGoal')}</Typography>
@@ -317,22 +317,22 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <Box sx={sectionHeaderSx}>
-          <Typography variant="h4">{t('qualitydocument:learningObjectivesAssessmentHeader')}</Typography>
+          <Typography variant="h4">{t('qualitydocument:learningHeader')}</Typography>
         </Box>
-        <Typography>{t('qualitydocument:learningObjectivesAssessment')}</Typography>
-        <Typography color={doc.data.learningObjectivesAssessment ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-          {doc.data.learningObjectivesAssessment || t('common:empty')}
+        <Typography>{t('qualitydocument:learning')}</Typography>
+        <Typography color={doc.data.learning ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+          {doc.data.learning || t('common:empty')}
         </Typography>
         <Typography>
-          {t(`qualitydocument:learningObjectivesAssessmentRegularity`)} 
+          {t(`qualitydocument:learningRegularity`)} 
         </Typography>
-        <Typography color={doc.data.learningObjectivesAssessmentRegularity  ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-          {t(`qualitydocument:${doc.data.learningObjectivesAssessmentRegularity}`) || t('common:empty')}
+        <Typography color={doc.data.learningRegularity  ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+          {t(`qualitydocument:${doc.data.learningRegularity}`) || t('common:empty')}
         </Typography>
-        <Typography>{t('qualitydocument:learningObjectivesAssessmentExamples')}</Typography>
-        {(Array.isArray(learningObjectivesAssessmentExamples) ? learningObjectivesAssessmentExamples : []).length >
+        <Typography>{t('qualitydocument:learningExamples')}</Typography>
+        {(Array.isArray(learningExamples) ? learningExamples : []).length >
         0 ? (
-          (learningObjectivesAssessmentExamples as Array<Record<string, string>>).map((example, exampleIndex) => (
+          (learningExamples as Array<Record<string, string>>).map((example, exampleIndex) => (
             <Box key={`learning-objective-${exampleIndex}`} >
               <Typography variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
               <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentGoal')}</Typography>
