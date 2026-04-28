@@ -76,11 +76,13 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
     // eslint-disable-next-line prefer-const
     let { specialGroup, ...access } = iamAccess
 
-    // If user has jory and student access allow write to the programmes specified for the user
+    // If user has jory and student access, allow write to the programmes specified for the user in Jami
     if (iamGroups.find(iam => /hy-[a-z-]+-jory/.test(iam)) && iamGroups.some(group => studentIams.includes(group))) {
-      access.forEach((code: string) => {
-        access[code] = { read: true, write: true, admin: false }
-      })
+      if (access) {
+        Object.keys(access).forEach((code: string) => {
+          access[code] = { read: true, write: true, admin: false }
+        })
+      }
     }
 
     if (iamGroups.includes('grp-ko-laadunhallinta')) specialGroup = { admin: true, ...specialGroup }
