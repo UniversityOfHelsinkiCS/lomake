@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
 import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
@@ -13,8 +14,9 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
   }
 
   if (unit) {
-    // eslint-disable-next-line no-param-reassign
     value = Number((value * 100).toFixed(0))
+  } else if (!isInteger(value)) {
+    value = Number(value.toFixed(1))
   }
 
   const [first, second, third, fourth] = threshold
