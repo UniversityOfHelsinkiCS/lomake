@@ -130,6 +130,15 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontFamily: 'Lato',
+          fontSize: '15px',
+          fontWeight: 600,
+        },
+      },
+    },
   },
 }
 
