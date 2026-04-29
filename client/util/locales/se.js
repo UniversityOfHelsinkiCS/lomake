@@ -725,12 +725,13 @@ export default {
     scheduleDescription:
       'Den överenskomna utvecklingen av åtgärden registreras och nästa datum för uppföljning fastställs. ',
     submit: 'Spara dokument',
+    successText:
+      'Utbildningsprogrammet omfattas inte av interventionsförfarandet och inga åtgärder krävs. Om utbildningsprogrammet tidigare har varit föremål för ett interventionsförfarande, finns dokumentationen för detta listad nedan.',
     keyFigureDescription: 'Utbildningsprogrammet är under den lägsta gränsvärdet på följande utvärderingsområden',
     keyFigure: 'Utvärderingsområden',
     edit: 'Redigera dokumentet',
     delete: 'Radera dokumentet',
     newDocument: 'Skapa ett nytt dokument',
-
     closeInterventionProcedureHeader:
       'Avslutande av interventionsförfarandet (endast synligt för fakultetens prodekan)',
     closeInterventionProcedureDescription:

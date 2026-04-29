@@ -688,6 +688,8 @@ export default {
     scheduleDescription:
       'The agreed timetables for the measures on the intervention procedure are documented and the next date for follow-up is also agreed.',
     submit: 'Save Document',
+    successText:
+      'The degree program is not currently subject to an active intervention procedure, and no action is required. If the degree program has previously been subject to an intervention procedure, the relevant documentation is listed below.',
     backgroundInfoHeader: 'Background information',
     backgroundInfoDescription:
       'The background material for the intervention procedure are the views documented in the annual follow-up of the degree programme on evaluation areas that led to the intervention procedure, as well as the development plan.',
