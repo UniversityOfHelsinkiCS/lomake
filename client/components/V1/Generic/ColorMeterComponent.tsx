@@ -32,8 +32,7 @@ const linScale = (value: number, a1: number, a2: number, b1: number, b2: number)
  * @returns number between 0-100, a position in the color meter
  */
 const interpolateToMeter = (value: number, thresholds: number[], order: 'asc' | 'desc'): number => {
-  let meterValue: number | null = null
-
+  let meterValue = 0
   const min = thresholds[0]
   const max = thresholds[thresholds.length - 1]
 
@@ -58,7 +57,8 @@ const interpolateToMeter = (value: number, thresholds: number[], order: 'asc' | 
       }
     }
   }
-
+  // Hack to get zero value to the right, if order is descending
+  meterValue = order === 'desc' && meterValue === 0 ? 100 : meterValue
   return meterValue
 }
 
@@ -113,8 +113,6 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
       return
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const redThres = thresholdSplit[0]
     const yellowThres = thresholdSplit[1]
     const lightGreenThres = thresholdSplit[2]
     const darkGreenThres = thresholdSplit[3]
@@ -194,16 +192,16 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
             position: 'relative',
           }}
         >
-          <Tooltip arrow placement="bottom" title={<div style={{ fontSize: '15px' }}>{`${t('common:red')} `}</div>}>
+          <Tooltip arrow placement="bottom" title={`${t('common:red')} `}>
             <div style={{ backgroundColor: customColors.redLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip arrow placement="bottom" title={<div style={{ fontSize: '15px' }}>{t('common:yellow')}</div>}>
+          <Tooltip arrow placement="bottom" title={t('common:yellow')}>
             <div style={{ backgroundColor: customColors.yellowLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip arrow placement="bottom" title={<div style={{ fontSize: '15px' }}>{t('common:lightGreen')}</div>}>
+          <Tooltip arrow placement="bottom" title={t('common:lightGreen')}>
             <div style={{ backgroundColor: customColors.lightGreenLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip arrow placement="bottom" title={<div style={{ fontSize: '15px' }}>{t('common:darkGreen')}</div>}>
+          <Tooltip arrow placement="bottom" title={t('common:darkGreen')}>
             <div style={{ backgroundColor: customColors.darkGreenLight, flex: 1 }} />
           </Tooltip>
 
