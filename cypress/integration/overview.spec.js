@@ -75,7 +75,6 @@ describe('Overview page test', () => {
           'Faculty of Theology',
           'Faculty of Veterinary Medicine',
           'Swedish School of Social Science',
-          'Language Centre',
         ].sort()
 
         cy.get('[data-cy="faculty-filter-option"]')
