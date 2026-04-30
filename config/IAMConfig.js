@@ -10,6 +10,16 @@ const universityWideWritingGroups = [
 ]
 
 const lomakeKatselmus = [
+  'hy-sskh-rehtoraatti',
+  'hy-ypa-toimi-helsinki',
+  'hy-ypa-opa-oymp-jory',
+  'grp-a01807-svenskaarenden',
+  'grp-koordinaatioryhma',
+  'hy-ypa-hr-henkilostopaallikot',
+  'hy-ypa-hr-kestavahyvinvointi',
+]
+
+const dekanaatti = [
   'hy-ttdk-dekanaatti',
   'hy-oiktdk-dekanaatti',
   'hy-ltdk-dekanaatti',
@@ -22,12 +32,6 @@ const lomakeKatselmus = [
   'hy-sskh-rehtoraatti',
   'hy-mmtdk-dekanaatti',
   'hy-eltdk-dekanaatti',
-  'hy-ypa-toimi-helsinki',
-  'hy-ypa-opa-oymp-jory',
-  'grp-a01807-svenskaarenden',
-  'grp-koordinaatioryhma',
-  'hy-ypa-hr-henkilostopaallikot',
-  'hy-ypa-hr-kestavahyvinvointi',
 ]
 
 const superAdminGroups = ['grp-toska']
@@ -41,6 +45,7 @@ const IAMsToTable = [
   ...adminGroups,
   ...superAdminGroups,
   ...lomakeKatselmus,
+  ...dekanaatti,
   'hy-employees',
 ]
 
