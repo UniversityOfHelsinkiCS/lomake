@@ -737,7 +737,7 @@ export default {
     lessFrequently: 'Less than once every 4 years',
     notUsed: 'Not in use',
     curriculumHeader: '2. Curriculum Development',
-    curriculumDescription:
+    curriculumExamples:
       'Please provide 1–3 examples of areas for curriculum development that have been identified based on feedback received by the degree programme.',
     example1: 'Example 1:',
     example2: 'Example 2:',
@@ -749,7 +749,7 @@ export default {
     communication: 'How were those who provided feedback informed about the changes?',
     learning: 'How is the achievement of learning outcomes assessed by the degree programme steering group?',
     guidanceHeader: '3. Development of Guidance Practices',
-    guidanceDescription:
+    guidanceExamples:
       'Please provide examples (1–3) of areas for improvement in guidance practices that have been identified based on feedback received by the degree programme.',
     learningHeader: '4. Monitoring and Developing the Achievement of Learning Outcomes of the Degree Programme',
     learningExamples: 'Please provide examples (1–3) of changes made to learning outcomes',

@@ -53,7 +53,7 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
             <Typography color={color} variant="regular">
               {koulutusohjelma[lang]}{' '}
               {hasAdditionalInfo ? (
-                <Tooltip arrow placement="top" title={<div style={{ fontSize: '15px' }}>{additionalInfo[lang]}</div>}>
+                <Tooltip arrow placement="top" title={<div>{additionalInfo[lang]}</div>}>
                   <span style={{ display: 'inline-flex', alignItems: 'center' }}>
                     <InfoOutlinedIcon
                       color="secondary"
@@ -291,11 +291,7 @@ const KeyDataTableComponent = ({
                 </TableCell>
                 {activeYear < 2026 ? (
                   <TableCell disabled isHeader>
-                    <Tooltip
-                      arrow
-                      placement="top"
-                      title={<div style={{ fontSize: '15px' }}>{t('keyData:notUsed2025')}</div>}
-                    >
+                    <Tooltip arrow placement="top" title={<div>{t('keyData:notUsed2025')}</div>}>
                       <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
                     </Tooltip>
                   </TableCell>
@@ -309,11 +305,7 @@ const KeyDataTableComponent = ({
                 </TableCell>
                 {activeYear < 2026 ? (
                   <TableCell disabled isHeader>
-                    <Tooltip
-                      arrow
-                      placement="top"
-                      title={<div style={{ fontSize: '15px' }}>{t('keyData:notUsed2025')}</div>}
-                    >
+                    <Tooltip arrow placement="top" title={<div>{t('keyData:notUsed2025')}</div>}>
                       <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
                     </Tooltip>
                   </TableCell>

@@ -46,12 +46,6 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
   const hasDocumentForYear = documents.some((doc: QualityDocumentType) => doc.year == selectedYear)
 
   const [feedbackSourceOptions, setFeedbackSourceOptions] = useState<FeedbackSource[]>(defaultFeedbackSourceOptions)
-  const [secondGuidanceExample, setSecondGuidanceExample] = useState(false)
-  const [thirdGuidanceExample, setThirdGuidanceExample] = useState(false)
-  const [secondCurriculumExample, setSecondCurriculumExample] = useState(false)
-  const [thirdCurriculumExample, setThirdCurriculumExample] = useState(false)
-  const [secondLearningExample, setSecondLearningExample] = useState(false)
-  const [thirdLearningExample, setThirdLearningExample] = useState(false)
 
   const { componentRef, handleReleaseLock, isLockedByOther, isLockedByCurrentUser } = useLockDocument({
     room: programmeKey,
@@ -167,9 +161,7 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
     const payload = formatPayload(formData)
 
     if (validateForm(payload)) {
-      const currentId = id
-
-      if (!currentId) {
+      if (!id) {
         const documentExistsForYear = await hasExistingDocumentForSelectedYear()
         if (documentExistsForYear) {
           return
@@ -185,7 +177,7 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
       } else {
         await updateDocument({
           studyprogrammeKey: programmeKey,
-          id: currentId,
+          id,
           data: payload as any,
         })
       }
@@ -194,12 +186,6 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
       setFormData(initFormData(t))
       setErrors(initErrors())
       setFeedbackSourceOptions(defaultFeedbackSourceOptions)
-      setSecondGuidanceExample(false)
-      setThirdGuidanceExample(false)
-      setSecondCurriculumExample(false)
-      setThirdCurriculumExample(false)
-      setSecondLearningExample(false)
-      setThirdLearningExample(false)
       setId(null)
 
       navigate(`/v1/programmes/10/${programmeKey}`)
@@ -220,20 +206,8 @@ const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
         feedbackSourceOptions={feedbackSourceOptions}
         formData={formData}
         handleSubmit={handleSubmit}
-        secondCurriculumExample={secondCurriculumExample}
-        secondGuidanceExample={secondGuidanceExample}
-        secondLearningExample={secondLearningExample}
         setFeedbackSourceOptions={setFeedbackSourceOptions}
         setFormData={setFormData}
-        setSecondCurriculumExample={setSecondCurriculumExample}
-        setSecondGuidanceExample={setSecondGuidanceExample}
-        setSecondLearningExample={setSecondLearningExample}
-        setThirdCurriculumExample={setThirdCurriculumExample}
-        setThirdGuidanceExample={setThirdGuidanceExample}
-        setThirdLearningExample={setThirdLearningExample}
-        thirdCurriculumExample={thirdCurriculumExample}
-        thirdGuidanceExample={thirdGuidanceExample}
-        thirdLearningExample={thirdLearningExample}
       />
     </Box>
   )

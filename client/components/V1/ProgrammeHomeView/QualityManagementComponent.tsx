@@ -138,7 +138,7 @@ const QualityManagementComponent = ({ programmeData }) => {
                 key={`${doc.id}-${isAccordionLocked ? 'locked' : 'unlocked'}`}
                 placement="top"
                 slotProps={{ popper: { sx: { '& .MuiTooltip-tooltip': { maxWidth: '700px' } } } }}
-                title={<div style={{ fontSize: '15px' }}>{isAccordionLocked ? tooltipTitle : null}</div>}
+                title={<div>{isAccordionLocked ? tooltipTitle : null}</div>}
               >
                 <span>
                   <Accordion disabled={isAccordionLocked} sx={{ padding: '2rem' }}>

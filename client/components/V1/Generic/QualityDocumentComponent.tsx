@@ -24,9 +24,11 @@ export const sectionHeaderSx = {
   borderLeftColor: 'lightblue',
 }
 
-
+const fields = ['curriculum', 'guidance', 'learning'] as const
 const QualityDocumentInfo = ({ doc }: { doc: any }) => {
   const { t } = useTranslation()
+  const hasText = (value?: string) => typeof value === 'string' && value.trim().length > 0
+
   const feedbackSources = Array.isArray(doc?.data?.feedbackSources)
     ? doc.data.feedbackSources
     : Array.isArray(doc?.data?.feedback?.feedbackSources)
@@ -74,86 +76,35 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
   })
     
 
-  const curriculum = [
-    {
-      name: doc?.data?.curriculumNameExample1,
-      changes: doc?.data?.curriculumChangesExample1,
-      feedbackSource: doc?.data?.curriculumFeedbackSourceExample1,
-      communication: doc?.data?.curriculumCommunicationExample1,
-    },
-    {
-      name: doc?.data?.curriculumNameExample2,
-      changes: doc?.data?.curriculumChangesExample2,
-      feedbackSource: doc?.data?.curriculumFeedbackSourceExample2,
-      communication: doc?.data?.curriculumCommunicationExample2,
-    },
-    {
-      name: doc?.data?.curriculumNameExample3,
-      changes: doc?.data?.curriculumChangesExample3,
-      feedbackSource: doc?.data?.curriculumFeedbackSourceExample3,
-      communication: doc?.data?.curriculumCommunicationExample3,
-    },
-  ].filter(
-    example =>
-      example.name?.length > 0 ||
-      example.changes?.length > 0 ||
-      example.feedbackSource?.length > 0 ||
-      example.communication?.length > 0
-  )
+  type Field = (typeof fields)[number]
+  type Example = {
+    name?: string
+    changes?: string
+    feedbackSource?: string
+    communication?: string
+  }
 
-  const guidance = [
-    {
-      name: doc?.data?.guidanceNameExample1,
-      changes: doc?.data?.guidanceChangesExample1,
-      feedbackSource: doc?.data?.guidanceFeedbackSourceExample1,
-      communication: doc?.data?.guidanceCommunicationExample1,
-    },
-    {
-      name: doc?.data?.guidanceNameExample2,
-      changes: doc?.data?.guidanceChangesExample2,
-      feedbackSource: doc?.data?.guidanceFeedbackSourceExample2,
-      communication: doc?.data?.guidanceCommunicationExample2,
-    },
-    {
-      name: doc?.data?.guidanceNameExample3,
-      changes: doc?.data?.guidanceChangesExample3,
-      feedbackSource: doc?.data?.guidanceFeedbackSourceExample3,
-      communication: doc?.data?.guidanceCommunicationExample3,
-    },
-  ].filter(
-    example =>
-      example.name?.length > 0 ||
-      example.changes?.length > 0 ||
-      example.feedbackSource?.length > 0 ||
-      example.communication?.length > 0
-  )
+  const examplesByField = fields.reduce((acc, field) => {
+    acc[field] = [1, 2, 3]
+      .map(exampleNumber => {
 
-  const learningExamples = [
-    {
-      name: doc?.data?.learningNameExample1,
-      changes: doc?.data?.learningAChangesExample1,
-      feedbackSource: doc?.data?.learningFeedbackSourceExample1,
-      communication: doc?.data?.learningCommunicationExample1,
-    },
-    {
-      name: doc?.data?.learningNameExample2,
-      changes: doc?.data?.learningChangesExample2,
-      feedbackSource: doc?.data?.learningFeedbackSourceExample2,
-      communication: doc?.data?.learningCommunicationExample2,
-    },
-    {
-      name: doc?.data?.learningNameExample3,
-      changes: doc?.data?.learningChangesExample3,
-      feedbackSource: doc?.data?.learningFeedbackSourceExample3,
-      communication: doc?.data?.learningCommunicationExample3,
-    },
-  ].filter(
-    example =>
-      example.name?.length > 0 ||
-      example.changes?.length > 0 ||
-      example.feedbackSource?.length > 0 ||
-      example.communication?.length > 0
-  )
+        return {
+          name: doc?.data?.[`${field}NameExample${exampleNumber}`],
+          changes: doc?.data?.[`${field}ChangesExample${exampleNumber}`],
+          feedbackSource: doc?.data?.[`${field}FeedbackSourceExample${exampleNumber}`],
+          communication: doc?.data?.[`${field}CommunicationExample${exampleNumber}`],
+        }
+      })
+      .filter(
+        example =>
+          hasText(example.name) ||
+          hasText(example.changes) ||
+          hasText(example.feedbackSource) ||
+          hasText(example.communication)
+      )
+
+    return acc
+  }, {} as Record<Field, Example[]>)
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -183,7 +134,7 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                                 <Tooltip
                                   arrow
                                   placement="top"
-                                  title={<span style={{ whiteSpace: 'pre-line', fontSize: '15px' }}>{regularityLabel}</span>}
+                                  title={<span style={{ whiteSpace: 'pre-line'}}>{regularityLabel}</span>}
                                 >
                                   <span
                                     style={{
@@ -253,110 +204,64 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
           {feedbackExamples || t('common:empty')}
         </Typography>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        <Box sx={sectionHeaderSx}>
-        <Typography variant="h5">{t('qualitydocument:curriculumHeader')}</Typography>
-        </Box>
-        <Typography>{t('qualitydocument:curriculumDescription')}</Typography>
-        {(Array.isArray(curriculum) ? curriculum : []).length > 0 ? (
-          (curriculum as Array<Record<string, string>>).map((example, exampleIndex) => (
-            <Box key={`curriculum-${exampleIndex}`} >
-              <Typography variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentGoal')}</Typography>
-              <Typography color={example.name ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.name || t('common:empty')}
-              </Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:changes')}</Typography>
-              <Typography color={example.changes ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.changes || t('common:empty')}
-              </Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentBasis')}</Typography>
-              <Typography color={example.feedbackSource ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.feedbackSource || t('common:empty')}
-              </Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:communication')}</Typography>
-              <Typography color={example.communication ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.communication || t('common:empty')}
-              </Typography>
+      {fields.map((field, index) => {
+        const examples = examplesByField[field]
+        const isLearning = field === 'learning'
+
+        return (
+          <div
+            key={field}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: index === 2 ? '1rem' : '2rem',
+            }}
+          >
+            <Box sx={sectionHeaderSx}>
+              <Typography variant={isLearning ? 'h4' : 'h5'}>{t(`qualitydocument:${field}Header`)}</Typography>
             </Box>
-          ))
-        ) : (
-          <Typography color="secondary">{t('common:empty')}</Typography>
-        )}
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        <Box sx={sectionHeaderSx}>
-        <Typography variant="h5">{t('qualitydocument:guidanceHeader')}</Typography>
-        </Box>
-        <Typography>{t('qualitydocument:guidanceDescription')}</Typography>
-        {(Array.isArray(guidance) ? guidance : []).length > 0 ? (
-          (guidance as Array<Record<string, string>>).map((example, exampleIndex) => (
-            <Box key={`guidance-policy-${exampleIndex}`}>
-              <Typography variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentGoal')}</Typography>
-              <Typography color={example.name ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.name || t('common:empty')}
-              </Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:changes')}</Typography>
-              <Typography color={example.changes ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.changes || t('common:empty')}
-              </Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentBasis')}</Typography>
-              <Typography color={example.feedbackSource ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.feedbackSource || t('common:empty')}
-              </Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:communication')}</Typography>
-              <Typography color={example.communication ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.communication || t('common:empty')}
-              </Typography>
-            </Box>
-          ))
-        ) : (
-          <Typography color="secondary">{t('common:empty')}</Typography>
-        )}
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <Box sx={sectionHeaderSx}>
-          <Typography variant="h4">{t('qualitydocument:learningHeader')}</Typography>
-        </Box>
-        <Typography>{t('qualitydocument:learning')}</Typography>
-        <Typography color={doc.data.learning ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-          {doc.data.learning || t('common:empty')}
-        </Typography>
-        <Typography>
-          {t(`qualitydocument:learningRegularity`)} 
-        </Typography>
-        <Typography color={doc.data.learningRegularity  ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-          {t(`qualitydocument:${doc.data.learningRegularity}`) || t('common:empty')}
-        </Typography>
-        <Typography>{t('qualitydocument:learningExamples')}</Typography>
-        {(Array.isArray(learningExamples) ? learningExamples : []).length >
-        0 ? (
-          (learningExamples as Array<Record<string, string>>).map((example, exampleIndex) => (
-            <Box key={`learning-objective-${exampleIndex}`} >
-              <Typography variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentGoal')}</Typography>
-              <Typography color={example.name ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.name || t('common:empty')}
-              </Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:changes')}</Typography>
-              <Typography color={example.changes ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.changes || t('common:empty')}
-              </Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:developmentBasis')}</Typography>
-              <Typography color={example.feedbackSource ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.feedbackSource || t('common:empty')}
-              </Typography>
-              <Typography sx={{ ml: 1 }}>{t('qualitydocument:communication')}</Typography>
-              <Typography color={example.communication ? 'default' : 'secondary'} sx={{ ml: 2 }}>
-                {example.communication || t('common:empty')}
-              </Typography>
-            </Box>
-          ))
-        ) : (
-          <Typography color="secondary">{t('common:empty')}</Typography>
-        )}
-      </div>
+            {isLearning ? (
+              <>
+                <Typography>{t('qualitydocument:learning')}</Typography>
+                <Typography color={doc.data.learning ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+                  {doc.data.learning || t('common:empty')}
+                </Typography>
+                <Typography>{t('qualitydocument:learningRegularity')}</Typography>
+                <Typography color={doc.data.learningRegularity ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+                  {t(`qualitydocument:${doc.data.learningRegularity}`) || t('common:empty')}
+                </Typography>
+                <br />
+              </>
+            ) : null}
+            <Typography>{t(`qualitydocument:${field}Examples`)}</Typography>
+            {examples.length > 0 ? (
+              examples.map((example, exampleIndex) => (
+                <Box key={`${field}-${exampleIndex}`}>
+                  <Typography sx={{ ml: 1 }} variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
+                  <Typography sx={{ ml: 2 }}>{t('qualitydocument:developmentGoal')}</Typography>
+                  <Typography color={example.name ? 'default' : 'secondary'} sx={{ ml: 3 }}>
+                    {example.name || t('common:empty')}
+                  </Typography>
+                  <Typography sx={{ ml: 2 }}>{t('qualitydocument:changes')}</Typography>
+                  <Typography color={example.changes ? 'default' : 'secondary'} sx={{ ml: 3 }}>
+                    {example.changes || t('common:empty')}
+                  </Typography>
+                  <Typography sx={{ ml: 2 }}>{t('qualitydocument:developmentBasis')}</Typography>
+                  <Typography color={example.feedbackSource ? 'default' : 'secondary'} sx={{ ml: 3 }}>
+                    {example.feedbackSource || t('common:empty')}
+                  </Typography>
+                  <Typography sx={{ ml: 2 }}>{t('qualitydocument:communication')}</Typography>
+                  <Typography color={example.communication ? 'default' : 'secondary'} sx={{ ml: 3 }}>
+                    {example.communication || t('common:empty')}
+                  </Typography>
+                </Box>
+              ))
+            ) : (
+              <Typography color="secondary" sx={{ ml: 2 }}>{t('common:empty')}</Typography>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }

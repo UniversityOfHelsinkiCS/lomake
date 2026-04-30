@@ -20,11 +20,11 @@ import {
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import FeedbackUtilization from './FeedbackUtilizationComponent'
-import FeedbackActionForm from './FeedbackActionComponent'
 import { FeedbackSource, FormDataState, FeedbackRegularity, FeedbackSourceState } from '@/shared/lib/types'
 import CharacterCounter from './Charactercounter'
 import { customColors } from '@/theme'
 import { TFunction } from 'i18next'
+import Examples from './ExamplesComponent'
 
 const sectionCardSx = {
   border: `1px solid ${customColors.grayLight}`,
@@ -107,18 +107,6 @@ const QualityForm = ({
   formData,
   setFeedbackSourceOptions,
   setFormData,
-  secondCurriculumExample,
-  setSecondCurriculumExample,
-  thirdCurriculumExample,
-  setThirdCurriculumExample,
-  secondGuidanceExample,
-  setSecondGuidanceExample,
-  thirdGuidanceExample,
-  setThirdGuidanceExample,
-  secondLearningExample,
-  setSecondLearningExample,
-  thirdLearningExample,
-  setThirdLearningExample,
 }: {
   errors: Record<string, string>
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
@@ -126,18 +114,6 @@ const QualityForm = ({
   formData: FormDataState
   setFeedbackSourceOptions: React.Dispatch<React.SetStateAction<FeedbackSource[]>>
   setFormData: React.Dispatch<React.SetStateAction<FormDataState>>
-  secondCurriculumExample: boolean
-  setSecondCurriculumExample: React.Dispatch<React.SetStateAction<boolean>>
-  thirdCurriculumExample: boolean
-  setThirdCurriculumExample: React.Dispatch<React.SetStateAction<boolean>>
-  secondGuidanceExample: boolean
-  setSecondGuidanceExample: React.Dispatch<React.SetStateAction<boolean>>
-  thirdGuidanceExample: boolean
-  setThirdGuidanceExample: React.Dispatch<React.SetStateAction<boolean>>
-  secondLearningExample: boolean
-  setSecondLearningExample: React.Dispatch<React.SetStateAction<boolean>>
-  thirdLearningExample: boolean
-  setThirdLearningExample: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const { t } = useTranslation()
 
@@ -232,30 +208,6 @@ const QualityForm = ({
     })
   }
 
-  const handleAddCurriculumExampleClick = () => {
-    if (!secondCurriculumExample) {
-      setSecondCurriculumExample(true)
-    } else if (!thirdCurriculumExample) {
-      setThirdCurriculumExample(true)
-    }
-  }
-
-  const handleAddGuidanceExampleClick = () => {
-    if (!secondGuidanceExample) {
-      setSecondGuidanceExample(true)
-    } else if (!thirdGuidanceExample) {
-      setThirdGuidanceExample(true)
-    }
-  }
-
-  const handleAddLearningExampleClick = () => {
-    if (!secondLearningExample) {
-      setSecondLearningExample(true)
-    } else if (!thirdLearningExample) {
-      setThirdLearningExample(true)
-    }
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <Typography style={{ color: 'red' }} variant="regular">
@@ -284,9 +236,7 @@ const QualityForm = ({
                                 <Tooltip
                                   arrow
                                   placement="top"
-                                  title={
-                                    <span style={{ whiteSpace: 'pre-line', fontSize: '15px' }}>{regularityLabel}</span>
-                                  }
+                                  title={<span style={{ whiteSpace: 'pre-line' }}>{regularityLabel}</span>}
                                 >
                                   <span
                                     style={{
@@ -319,11 +269,7 @@ const QualityForm = ({
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, whiteSpace: 'nowrap' }}>
                                   {getFeedbackSourceLabel(t, source)}
                                   {!isDefaultFeedbackSource(source) ? (
-                                    <Tooltip
-                                      arrow
-                                      placement="right"
-                                      title={<div style={{ fontSize: '15px' }}>{t('qualitydocument:remove')}</div>}
-                                    >
+                                    <Tooltip arrow placement="right" title={<div>{t('qualitydocument:remove')}</div>}>
                                       <IconButton
                                         aria-label={t('qualitydocument:remove')}
                                         onClick={() => removeFeedbackSource(source)}
@@ -436,45 +382,15 @@ const QualityForm = ({
                 <Box sx={sectionHeaderSx}>
                   <Typography variant="h3">{t('qualitydocument:curriculumHeader')}</Typography>
                 </Box>
+
                 <Box sx={sectionContentSx}>
-                  <Typography variant="light">{t('qualitydocument:curriculumDescription')}</Typography>
-                  <FeedbackActionForm
+                  <Examples
                     errors={errors}
-                    example="1"
                     field={field}
                     formData={formData}
-                    handleChange={handleChange}
-                    setExample={setSecondCurriculumExample}
+                    handelChange={handleChange}
                     setFormData={setFormData}
                   />
-                  {secondCurriculumExample ? (
-                    <FeedbackActionForm
-                      errors={errors}
-                      example="2"
-                      field={field}
-                      formData={formData}
-                      handleChange={handleChange}
-                      setExample={setSecondCurriculumExample}
-                      setFormData={setFormData}
-                    />
-                  ) : null}
-
-                  {thirdCurriculumExample ? (
-                    <FeedbackActionForm
-                      errors={errors}
-                      example="3"
-                      field={field}
-                      formData={formData}
-                      handleChange={handleChange}
-                      setExample={setThirdCurriculumExample}
-                      setFormData={setFormData}
-                    />
-                  ) : null}
-                  {!thirdCurriculumExample || !secondCurriculumExample ? (
-                    <Button onClick={handleAddCurriculumExampleClick} type="button" variant="outlined">
-                      {t('qualitydocument:addNewExample')}
-                    </Button>
-                  ) : null}
                 </Box>
               </Paper>
             )
@@ -485,44 +401,13 @@ const QualityForm = ({
                   <Typography variant="h3">{t('qualitydocument:guidanceHeader')}</Typography>
                 </Box>
                 <Box sx={sectionContentSx}>
-                  <Typography variant="light">{t('qualitydocument:guidanceDescription')}</Typography>
-                  <FeedbackActionForm
+                  <Examples
                     errors={errors}
-                    example="1"
                     field={field}
                     formData={formData}
-                    handleChange={handleChange}
-                    setExample={setSecondGuidanceExample}
+                    handelChange={handleChange}
                     setFormData={setFormData}
                   />
-                  {secondGuidanceExample ? (
-                    <FeedbackActionForm
-                      errors={errors}
-                      example="2"
-                      field={field}
-                      formData={formData}
-                      handleChange={handleChange}
-                      setExample={setSecondGuidanceExample}
-                      setFormData={setFormData}
-                    />
-                  ) : null}
-
-                  {thirdGuidanceExample ? (
-                    <FeedbackActionForm
-                      errors={errors}
-                      example="3"
-                      field={field}
-                      formData={formData}
-                      handleChange={handleChange}
-                      setExample={setThirdGuidanceExample}
-                      setFormData={setFormData}
-                    />
-                  ) : null}
-                  {!thirdGuidanceExample || !secondGuidanceExample ? (
-                    <Button onClick={handleAddGuidanceExampleClick} type="button" variant="outlined">
-                      {t('qualitydocument:addNewExample')}
-                    </Button>
-                  ) : null}
                 </Box>
               </Paper>
             )
@@ -589,43 +474,13 @@ const QualityForm = ({
                       {errors.learningRegularity}
                     </Typography>
                   ) : null}
-                  <Typography variant="light">{t('qualitydocument:learningExamples')}</Typography>
-                  <FeedbackActionForm
+                  <Examples
                     errors={errors}
-                    example="1"
                     field={field}
                     formData={formData}
-                    handleChange={handleChange}
-                    setExample={setSecondLearningExample}
+                    handelChange={handleChange}
                     setFormData={setFormData}
                   />
-                  {secondLearningExample ? (
-                    <FeedbackActionForm
-                      errors={errors}
-                      example="2"
-                      field={field}
-                      formData={formData}
-                      handleChange={handleChange}
-                      setExample={setSecondLearningExample}
-                      setFormData={setFormData}
-                    />
-                  ) : null}
-                  {thirdLearningExample ? (
-                    <FeedbackActionForm
-                      errors={errors}
-                      example="3"
-                      field={field}
-                      formData={formData}
-                      handleChange={handleChange}
-                      setExample={setThirdLearningExample}
-                      setFormData={setFormData}
-                    />
-                  ) : null}
-                  {!thirdLearningExample || !secondLearningExample ? (
-                    <Button onClick={handleAddLearningExampleClick} type="button" variant="outlined">
-                      {t('qualitydocument:addNewExample')}
-                    </Button>
-                  ) : null}
                 </Box>
               </Paper>
             )

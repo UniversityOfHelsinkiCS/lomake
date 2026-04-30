@@ -14,6 +14,13 @@ import { FeedbackSource, FormDataState, FeedbackRegularity } from '@/shared/lib/
 import QualityForm, { defaultFeedbackSourceOptions, initFormData, initErrors } from './QualityForm'
 import { validateQualityDocument } from '@/client/util/v1'
 
+const buildFeedbackSourceOptions = (feedbackSources: FormDataState['feedbackSources']) =>
+  defaultFeedbackSourceOptions.concat(
+    feedbackSources
+      ?.map((option: { name: FeedbackSource }) => option.name)
+      .filter((name: FeedbackSource) => !defaultFeedbackSourceOptions.includes(name)) ?? []
+  )
+
 const EditQualityDocument = ({
   programmeKey,
   id,
@@ -56,15 +63,6 @@ const EditQualityDocument = ({
     [t]
   )
 
-  const hasExample = (sourceData: Record<string, any>, field: string, exampleNum: number): boolean => {
-    return !!(
-      sourceData?.[`${field}NameExample${exampleNum}`] ||
-      sourceData?.[`${field}ChangesExample${exampleNum}`] ||
-      sourceData?.[`${field}FeedbackSourceExample${exampleNum}`] ||
-      sourceData?.[`${field}CommunicationExample${exampleNum}`]
-    )
-  }
-
   const data = document.data ? normalizeFormData(document.data) : initFormData(t)
 
   const [updateDocument] = useUpdateQualityDocumentMutation()
@@ -79,18 +77,8 @@ const EditQualityDocument = ({
   const isInitializedFromBackendRef = useRef(false)
 
   const [feedbackSourceOptions, setFeedbackSourceOptions] = useState<FeedbackSource[]>(
-    defaultFeedbackSourceOptions.concat(
-      data.feedbackSources
-        ?.map((option: { name: FeedbackSource }) => option.name)
-        .filter((name: FeedbackSource) => !defaultFeedbackSourceOptions.includes(name)) ?? []
-    )
+    buildFeedbackSourceOptions(data.feedbackSources)
   )
-  const [secondGuidanceExample, setSecondGuidanceExample] = useState(hasExample(data, 'guidance', 2))
-  const [thirdGuidanceExample, setThirdGuidanceExample] = useState(hasExample(data, 'guidance', 3))
-  const [secondCurriculumExample, setSecondCurriculumExample] = useState(hasExample(data, 'curriculum', 2))
-  const [thirdCurriculumExample, setThirdCurriculumExample] = useState(hasExample(data, 'curriculum', 3))
-  const [secondLearningExample, setSecondLearningExample] = useState(hasExample(data, 'learning', 2))
-  const [thirdLearningExample, setThirdLearningExample] = useState(hasExample(data, 'learning', 3))
 
   useEffect(() => {
     latestFormDataRef.current = formData
@@ -112,31 +100,14 @@ const EditQualityDocument = ({
   }, [lastAutosaveAt, i18n.language])
 
   useEffect(() => {
-    if (!document.data) return
-    if (isInitializedFromBackendRef.current) {
-      return
-    }
+    if (!document.data || isInitializedFromBackendRef.current) return
 
-    const backendData = normalizeFormData(document.data)
-    const nextData = backendData
+    const nextData = normalizeFormData(document.data)
     latestFormDataRef.current = nextData
     setFormData(nextData)
-    setFeedbackSourceOptions(
-      defaultFeedbackSourceOptions.concat(
-        nextData.feedbackSources
-          ?.map((option: { name: FeedbackSource }) => option.name)
-          .filter((name: FeedbackSource) => !defaultFeedbackSourceOptions.includes(name)) ?? []
-      )
-    )
-    setSecondGuidanceExample(hasExample(nextData, 'guidance', 2))
-    setThirdGuidanceExample(hasExample(nextData, 'guidance', 3))
-    setSecondCurriculumExample(hasExample(nextData, 'curriculum', 2))
-    setThirdCurriculumExample(hasExample(nextData, 'curriculum', 3))
-    setSecondLearningExample(hasExample(nextData, 'learning', 2))
-    setThirdLearningExample(hasExample(nextData, 'learning', 3))
+    setFeedbackSourceOptions(buildFeedbackSourceOptions(nextData.feedbackSources))
     isInitializedFromBackendRef.current = true
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, normalizeFormData, t])
+  }, [document.data, id, normalizeFormData])
 
   const validateForm = useCallback(
     (payload: Record<string, any>) => {
@@ -234,20 +205,8 @@ const EditQualityDocument = ({
         feedbackSourceOptions={feedbackSourceOptions}
         formData={formData}
         handleSubmit={handleSubmit}
-        secondCurriculumExample={secondCurriculumExample}
-        secondGuidanceExample={secondGuidanceExample}
-        secondLearningExample={secondLearningExample}
         setFeedbackSourceOptions={setFeedbackSourceOptions}
         setFormData={setFormData}
-        setSecondCurriculumExample={setSecondCurriculumExample}
-        setSecondGuidanceExample={setSecondGuidanceExample}
-        setSecondLearningExample={setSecondLearningExample}
-        setThirdCurriculumExample={setThirdCurriculumExample}
-        setThirdGuidanceExample={setThirdGuidanceExample}
-        setThirdLearningExample={setThirdLearningExample}
-        thirdCurriculumExample={thirdCurriculumExample}
-        thirdGuidanceExample={thirdGuidanceExample}
-        thirdLearningExample={thirdLearningExample}
       />
     </Box>
   )

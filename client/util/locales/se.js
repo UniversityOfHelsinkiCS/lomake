@@ -776,7 +776,7 @@ export default {
     lessFrequently: 'Sällan,\n mindre än vart fjärde år',
     notUsed: 'Inte i bruk',
     curriculumHeader: '2. Utveckling av läroplaner',
-    curriculumDescription:
+    curriculumExamples:
       'Ge 1–3 exempel på utvecklingsområden för läroplanen som har identifierats utifrån den feedback som utbildningsprogrammet har fått.',
     example1: 'Exempel 1:',
     example2: 'Exempel 2:',
@@ -788,7 +788,7 @@ export default {
     communication: 'Hur informerades de som lämnat feedback om ändringarna?',
     learning: 'Hur utvärderas uppnåendet av kompetensmålen i utbildningsprogrammets ledningsgrupp?',
     guidanceHeader: '3. Utveckling av vägledningsrutinerna',
-    guidanceDescription:
+    guidanceExamples:
       'Ange 1–3 exempel på områden för utveckling av vägledningsrutinerna som har identifierats utifrån den feedback som utbildningsprogrammet har fått.',
     learningHeader: '4. Uppföljning och utveckling av kompetensmålen för utbildningsprogrammet',
     learningExamples: 'Ge exempel (1–3 stycken) på ändringar av kompetensmålen',

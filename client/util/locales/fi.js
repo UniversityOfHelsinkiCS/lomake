@@ -739,7 +739,7 @@ export default {
     lessFrequently: 'Harvemmin kuin \n4 vuoden välein',
     notUsed: 'Ei käytössä',
     curriculumHeader: '2. Opetussuunnitelmien kehittäminen',
-    curriculumDescription:
+    curriculumExamples:
       'Kertokaa esimerkkejä (1-3 kpl) opetussuunnitelman kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',
     example1: 'Esimerkki 1:',
     example2: 'Esimerkki 2:',
@@ -751,7 +751,7 @@ export default {
     communication: 'Miten muutoksista tiedotettiin palautetta antaneille tahoille?',
     learning: 'Miten osaamistavoitteiden saavuttamista arvioidaan koulutusohjelman johtoryhmässä?',
     guidanceHeader: '3. Ohjauskäytäntöjen kehittäminen',
-    guidanceDescription:
+    guidanceExamples:
       'Kertokaa esimerkkejä (1-3 kpl) ohjauskäytöntöjen kehittämiskohteista, jotka on tunnistettu koulutusohjelman saamien palautteiden perusteella.',
     learningHeader: '4. Koulutusohjelman osaamistavoitteiden toteutumisen seuranta ja kehittäminen',
     learningExamples: 'Kertokaa esimerkkejä (1-3 kpl) osaamistavoitteiden muuttamisesta',
