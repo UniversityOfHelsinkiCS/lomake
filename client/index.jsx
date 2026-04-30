@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from '../theme'
 import ErrorBoundary from './components/ErrorBoundary'
 import UserFaker from './components/UserFaker'
+import ScrollToTop from './components/ScrollToTop'
 import App from './components/App'
 import { cypressUids, setHeaders, possibleUsers } from '../config/mockHeaders'
 import './assets/custom.scss'
@@ -26,6 +27,7 @@ const refresh = () => {
   root.render(
     <Provider store={store}>
       <BrowserRouter basename={basePath}>
+        <ScrollToTop />
         <ErrorBoundary>
           {process.env.NODE_ENV === 'development' && <UserFaker />}
           <ThemeProvider theme={theme}>
