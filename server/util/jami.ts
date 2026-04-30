@@ -54,7 +54,10 @@ export const getIamAccess = async (iamGroups: string[], attempt = 1): Promise<Ac
     // eslint-disable-next-line prefer-const
     let lomakeAccess: Record<string, OrganisationAccess> = {}
 
-    if (iamGroups.some(group => lomakeKatselmus.includes(group))) {
+    if (
+      iamGroups.some(group => lomakeKatselmus.includes(group)) ||
+      iamGroups.find(iam => /hy-ypa-kopa-[a-z]+-(1|2|3)/.test(iam))
+    ) {
       const organisation = await getOrganisationData()
 
       organisation.forEach((faculty: Faculty) => {
