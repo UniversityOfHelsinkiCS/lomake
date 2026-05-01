@@ -163,12 +163,12 @@ router.get('/interventionprocedures', requireRead, async (req, res) => {
   await interventionProcedures.getActiveInterventionProcedures(req, res)
 })
 
-router.get('/organisation-data', async (_, res) => {
+router.get('/organisation-data', requireEmployee, async (_, res) => {
   const data = await getOrganisationData()
   res.send(data)
 })
 
-router.get('/jory-map', async (_, res) => {
+router.get('/jory-map', requireEmployee, async (_, res) => {
   const joryMap = await getJoryMapFromJami()
   res.send(joryMap)
 })
