@@ -1,11 +1,9 @@
-/* eslint-disable no-alert */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-import { useNavigate, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import { Box, IconButton, Typography, CircularProgress } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack } from '@mui/icons-material'
-import { hasProgrammeWriteAccess } from '@/config/common'
+import { basePath, hasProgrammeWriteAccess } from '@/config/common'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
 import AddQualityDocument from './AddQualityDocument'
@@ -15,7 +13,7 @@ import { Loader } from 'semantic-ui-react'
 import { useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import type { QualityDocumentType } from '@/client/lib/types'
 import EditQualityDocument from './EditQualityDocument'
-import { useTranslation } from 'react-i18next'
+import { Link } from '../../Link'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -40,8 +38,6 @@ export const calculateInterventionAreas = ({
 const QualityManagement = () => {
   const { programme: programmeKey = '', id } = useParams<{ programme: string; id: string }>()
   const { isLoading, programme } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
-  const navigate = useNavigate()
-  const { t } = useTranslation()
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const user = useAppSelector(state => state.currentUser.data)
   const { data: documents = [], isFetching } = useGetQualityDocumentsQuery({ studyprogrammeKey: programmeKey })
@@ -56,15 +52,6 @@ const QualityManagement = () => {
     (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey
   )
 
-  const handleBack = () => {
-    const shouldRelease = window.confirm(t('qualitydocument:unsavedChangesWarning1'))
-    if (shouldRelease) {
-      navigate(`/v1/programmes/10/${programmeKey}`)
-    } else {
-      return
-    }
-  }
-
   if (!programme || !programmeData || !hasWriteRights) return null
 
   if (isFetching && id) return <CircularProgress />
@@ -72,7 +59,7 @@ const QualityManagement = () => {
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '1rem' }}>
-        <IconButton onClick={handleBack} onMouseDown={event => event.stopPropagation()} sx={{ marginRight: 2 }}>
+        <IconButton component={Link} sx={{ marginRight: 2 }} to={`${basePath}v1/programmes/10/${programmeKey}`}>
           <ArrowBack />
         </IconButton>
         <Typography variant="h2">{programmeData?.koulutusohjelma[lang]}</Typography>

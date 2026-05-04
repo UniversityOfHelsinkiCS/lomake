@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchLockQuery, useSetLockMutation, useDeleteLockMutation } from '@/client/redux/lock'
 
@@ -11,7 +10,6 @@ type UseLockDocumentProps = {
 }
 
 export function useLockDocument({ room, field, onRelease }: UseLockDocumentProps) {
-  const { t } = useTranslation()
   const [hasLock, setHasLock] = useState(false)
   const [gettingLock, setGettingLock] = useState(false)
   const componentRef = useRef<HTMLDivElement>(null)
@@ -81,36 +79,6 @@ export function useLockDocument({ room, field, onRelease }: UseLockDocumentProps
     await deleteLock({ room, field: fieldStr })
     onRelease?.()
   }, [deleteLock, room, field, onRelease])
-
-  useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      if (hasLock) {
-        e.preventDefault()
-        e.returnValue = ''
-      }
-    }
-
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        hasLock &&
-        componentRef.current &&
-        !componentRef.current.contains(e.target as Node) &&
-        document.body.contains(e.target as Node)
-      ) {
-        // eslint-disable-next-line no-alert
-        window.alert(t('qualitydocument:unsavedChangesWarning2'))
-        return
-      }
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload)
-    document.addEventListener('mousedown', handleClickOutside)
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [hasLock, t, handleReleaseLock])
 
   return {
     hasLock,
