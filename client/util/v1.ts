@@ -184,26 +184,11 @@ export const validateQualityDocument = (payload: Record<string, any>, t: TFuncti
     nextErrors[key] = t(`error:${messageKey}`)
   }
 
-  if (Array.isArray(payload.feedbackSources) && payload.feedbackSources.length === 0) {
-    setErrorOnce('feedback', 'feedbackSourcesRequired')
-    setErrorOnce('feedbackFeedbackSources', 'feedbackSourcesRequired')
-  }
-
-  if (payload.learningRegularity === '') {
-    setErrorOnce('learningRegularity', 'regularityRequired')
-  }
-
   if (!res.success) {
     res.error.issues.forEach(issue => {
       const [root, second] = issue.path
 
       if (root === 'feedbackSources') {
-        if (issue.path.length === 1) {
-          setErrorOnce('feedback', 'feedbackSourcesRequired')
-          setErrorOnce('feedbackFeedbackSources', 'feedbackSourcesRequired')
-          return
-        }
-
         if (typeof second === 'number') {
           const sourceName = payload.feedbackSources?.[second]?.name
           if (!sourceName || typeof sourceName !== 'string') return
@@ -215,26 +200,10 @@ export const validateQualityDocument = (payload: Record<string, any>, t: TFuncti
         return
       }
 
-      if (root === 'learningRegularity') {
-        setErrorOnce('learningRegularity', 'regularityRequired')
-        return
-      }
-
       if (typeof root === 'string' && issue.path.length === 1) {
         setErrorOnce(root, issue.message)
       }
     })
-  }
-
-  const hasSelectedFeedbackSource = Array.isArray(payload.feedbackSources)
-    ? payload.feedbackSources.some(
-        (source: { regularity?: string }) => typeof source?.regularity === 'string' && source.regularity.length > 0
-      )
-    : false
-
-  if (!hasSelectedFeedbackSource) {
-    setErrorOnce('feedback', 'feedbackSourcesRequired')
-    setErrorOnce('feedbacFeedbackSources', 'feedbackSourcesRequired')
   }
 
   if (Object.values(nextErrors).every(error => !error)) return null

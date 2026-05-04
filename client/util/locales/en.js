@@ -776,6 +776,10 @@ export default {
     documentLockedFor:
       'Document is locked by user {{user}}. Wait until the user is finished, or contact the system administrator if the lock seems to be invalid.',
     documentUnsavedRelease: 'Release the form for others to edit by saving your changes',
+    requiredFields: 'Please answer at least the following questions:',
+    feedbackSourcesRequired: 'Section 1: Select or add at least one feedback system or source of feedback',
+    regularityRequired:
+      'Section 4: How often is the achievement of learning outcomes discussed by the programme steering group?',
   },
 
   error: {
@@ -784,8 +788,6 @@ export default {
     participants: 'The Participants field must contain more than 3 characters',
     matters: 'The Agreed Matters field must contain a minimum of 100 characters',
     schedule: 'The Schedule field must be at least 3 characters long',
-    feedbackSourcesRequired: 'Select at least one feedback system or feedback source',
-    regularityRequired: 'Select the regularity of feedback handling',
     maxLength: `Character limit {{maxLength}} reached`,
   },
 }

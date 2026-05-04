@@ -778,6 +778,10 @@ export default {
     documentLockedFor:
       'Lomake lukittu käyttäjän {{user}} toimesta. Odota, että käyttäjä on valmis, tai ota yhteyttä järjestelmän ylläpitäjään, jos lukko vaikuttaa olevan virheellinen.',
     documentUnsavedRelease: 'Vapauta lomake muiden muokattavaksi tallentamalla muutokset',
+    requiredFields: 'Vastaa ainakin seuraaviin kysymyksiin:',
+    feedbackSourcesRequired: 'Osio 1: Valitse tai lisää vähintään yksi palautejärjestelmä tai palautteen lähde',
+    regularityRequired:
+      'Osio 4: Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',
@@ -785,8 +789,6 @@ export default {
     participants: 'Osallistujat-kentän merkkien määrä täytyy olla yli 3 merkkiä',
     matters: 'Sovitut asiat-kentän minimi merkkimäärä on 100 merkkiä',
     schedule: 'Aikataulu-kentän minimi pituus on 3 merkkiä',
-    feedbackSourcesRequired: 'Valitse vähintään yksi palautejärjestelmä tai palautteen lähde',
-    regularityRequired: 'Valitse käsittelyn säännöllisyys',
     maxLength: `Merkkiraja {{maxLength}} täynnä`,
   },
 }

@@ -815,6 +815,10 @@ export default {
     documentLockedFor:
       'Formuläret är låst av användare {{user}}. Vänta tills användaren är klar, eller kontakta systemadministratören om låsningen verkar vara ogiltig.',
     documentUnsavedRelease: 'Frigör formuläret för andra att redigera genom att spara dina ändringar',
+    requiredFields: 'Besvara åtminstone följande frågor:',
+    feedbackSourcesRequired: 'Sektion 1: Välj eller lägg till minst ett feedbacksystem eller en feedbackkälla',
+    regularityRequired:
+      'Sektion 4: Hur ofta behandlas uppnåendet av kompetensmålen i utbildningsprogrammets ledningsgrupp?',
   },
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',
@@ -822,8 +826,6 @@ export default {
     participants: 'Antalet tecken i fältet Deltagare måste vara mer än 3 tecken',
     matters: 'Fältet Överenskomna ärenden måste innehålla minst 100 tecken',
     schedule: 'Fältet Tidsschema måste vara minst 3 tecken långt',
-    feedbackSourcesRequired: 'Välj minst en källa för studentrespons',
-    regularityRequired: 'Välj en regelbundenhet för hanteringen av studentrespons',
     maxLength: 'Teckengränsen {{maxLength}} är nådd',
   },
 }

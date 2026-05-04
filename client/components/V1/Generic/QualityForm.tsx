@@ -208,6 +208,20 @@ const QualityForm = ({
     })
   }
 
+  const noSelectedFeedbackSources =
+    formData.feedbackSources.length === 0 ||
+    formData.feedbackSources.every(source => source.regularity === 'notUsed' || source.regularity === '')
+
+  const isEmptyForm = () => {
+    const { title: _title, ...formDataWithoutTitle } = formData
+
+    const areAllStringFieldsEmpty = Object.values(formDataWithoutTitle).every(
+      value => typeof value !== 'string' || value.trim() === ''
+    )
+
+    return areAllStringFieldsEmpty && noSelectedFeedbackSources
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <Typography style={{ color: 'red' }} variant="regular">
@@ -302,11 +316,6 @@ const QualityForm = ({
                       </TableBody>
                     </Table>
                   </TableContainer>
-                  {errors.feedbackFeedbackSources ? (
-                    <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
-                      {errors.feedbackFeedbackSources}
-                    </Typography>
-                  ) : null}
 
                   <Box sx={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
                     <TextField
@@ -469,11 +478,6 @@ const QualityForm = ({
                       value="moreFrequently"
                     />
                   </RadioGroup>
-                  {errors.learningRegularity ? (
-                    <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
-                      {errors.learningRegularity}
-                    </Typography>
-                  ) : null}
                   <Examples
                     errors={errors}
                     field={field}
@@ -486,11 +490,31 @@ const QualityForm = ({
             )
           }
         })}
-        <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'right' }}>
+        {formData.learningRegularity === '' || noSelectedFeedbackSources ? (
+          <Typography sx={{ fontSize: '1.1rem' }} variant="h6">
+            {t('qualitydocument:requiredFields')}
+          </Typography>
+        ) : null}
+        {noSelectedFeedbackSources ? (
+          <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
+            <li style={{ color: 'black', marginLeft: '2.5rem' }}>
+              <span style={{ color: 'red' }}>{t('qualitydocument:feedbackSourcesRequired')}</span>
+            </li>
+          </Typography>
+        ) : null}
+        {formData.learningRegularity === '' ? (
+          <Typography sx={{ color: 'error.main', fontSize: '1.1rem' }} variant="body2">
+            <li style={{ color: 'black', marginLeft: '2.5rem' }}>
+              <span style={{ color: 'red' }}>{t('qualitydocument:regularityRequired')}</span>
+            </li>
+          </Typography>
+        ) : null}
+        <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'left' }}>
           <Box sx={{ mt: '1rem' }}>
             <Button
               color="primary"
               data-cy="save-document"
+              disabled={isEmptyForm()}
               key="submit"
               sx={{ alignSelf: 'flex-end' }}
               type="submit"
@@ -499,9 +523,9 @@ const QualityForm = ({
               {t('document:submit')}
             </Button>
             <br />
-            <Typography style={{ color: 'red' }} variant="regular">
-              {t('qualitydocument:documentUnsavedRelease')}
-            </Typography>
+            {!isEmptyForm() ? (
+              <Typography variant="regular">{t('qualitydocument:documentUnsavedRelease')}</Typography>
+            ) : null}
           </Box>
         </div>
       </div>
