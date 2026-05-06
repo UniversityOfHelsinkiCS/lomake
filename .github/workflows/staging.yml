@@ -39,6 +39,7 @@ jobs:
             textfield,
             overview,
             intervention,
+            qualityManagement,
           ]
     name: Run tests
     runs-on: ubuntu-latest
