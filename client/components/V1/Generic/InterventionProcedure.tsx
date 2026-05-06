@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable react/jsx-props-no-spreading */
-import { useParams } from 'react-router'
+import { useParams, useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -54,6 +55,7 @@ export const calculateInterventionAreas = ({
 const InterventionProcedure = () => {
   const { programme: programmeKey, id } = useParams<{ programme: string; id: string }>()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const { isLoading, programme, metadata } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey ?? '' })
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
@@ -83,7 +85,7 @@ const InterventionProcedure = () => {
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '1rem' }}>
-        <IconButton component={Link} sx={{ marginRight: 2 }} to={`${basePath}v1/programmes/10/${programmeKey}`}>
+        <IconButton onClick={() => navigate(`/v1/programmes/10/${programmeKey}`)} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
         <Typography variant="h2">{programmeData.koulutusohjelma[lang]}</Typography>

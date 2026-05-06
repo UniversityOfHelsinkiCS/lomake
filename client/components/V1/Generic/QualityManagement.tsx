@@ -1,9 +1,10 @@
-import { useParams } from 'react-router'
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { useNavigate, useParams } from 'react-router'
 import { Box, IconButton, Typography, CircularProgress } from '@mui/material'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { ProgrammeLevel } from '@/client/lib/enums'
 import { ArrowBack } from '@mui/icons-material'
-import { basePath, hasProgrammeWriteAccess } from '@/config/common'
+import { hasProgrammeWriteAccess } from '@/config/common'
 import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
 import { TFunction } from 'i18next'
 import AddQualityDocument from './AddQualityDocument'
@@ -13,7 +14,6 @@ import { Loader } from 'semantic-ui-react'
 import { useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import type { QualityDocumentType } from '@/client/lib/types'
 import EditQualityDocument from './EditQualityDocument'
-import { Link } from '../../Link'
 
 export const calculateInterventionAreas = ({
   metadata,
@@ -44,6 +44,7 @@ const QualityManagement = () => {
   const document =
     documents.length > 0 || !isFetching ? documents.find((doc: QualityDocumentType) => doc.id.toString() === id) : null
   const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
+  const navigate = useNavigate()
 
   if (isLoading) return <Loader active />
   // For this function the year variable is not needed cuz
@@ -59,7 +60,7 @@ const QualityManagement = () => {
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '1rem' }}>
-        <IconButton component={Link} sx={{ marginRight: 2 }} to={`${basePath}v1/programmes/10/${programmeKey}`}>
+        <IconButton onClick={() => navigate(`/v1/programmes/10/${programmeKey}`)} sx={{ marginRight: 2 }}>
           <ArrowBack data-cy="back-button" />
         </IconButton>
         <Typography variant="h2">{programmeData?.koulutusohjelma[lang]}</Typography>
