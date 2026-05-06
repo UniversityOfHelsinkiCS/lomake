@@ -69,6 +69,7 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
             variant="outlined"
           >
             <CardContent
+              data-cy={`quality-document-card-${programmeData.koulutusohjelmakoodi}`}
               sx={{
                 minWidth: 0,
                 overflowWrap: 'break-word',

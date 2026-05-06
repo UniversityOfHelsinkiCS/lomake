@@ -50,7 +50,7 @@ const FeedbackActionForm = ({
     >
       <Typography variant="h4">{t(`qualitydocument:example${example}`)}</Typography>
       <TextField
-        data-cy={`editor-${field}-example${example}-name`}
+        data-cy={`${field}-example${example}-name`}
         label={t(`qualitydocument:developmentGoalName`)}
         margin="normal"
         name={`${field}NameExample${example}`}
@@ -59,7 +59,7 @@ const FeedbackActionForm = ({
         variant="outlined"
       />
       <TextField
-        data-cy={`editor-${field}-example${example}-changes`}
+        data-cy={`${field}-example${example}-changes`}
         error={!!errors[`${field}ChangesExample${example}`]}
         helperText={
           <CharacterCounter count={formData[`${field}ChangesExample${example}`]?.length || 0} maxLength={1500} />
@@ -75,7 +75,7 @@ const FeedbackActionForm = ({
         variant="outlined"
       />
       <TextField
-        data-cy={`editor-${field}-example${example}-feedbackSource`}
+        data-cy={`${field}-example${example}-feedbackSource`}
         error={!!errors[`${field}FeedbackSourceExample${example}`]}
         helperText={
           <CharacterCounter count={formData[`${field}FeedbackSourceExample${example}`]?.length || 0} maxLength={1500} />
@@ -91,7 +91,7 @@ const FeedbackActionForm = ({
         variant="outlined"
       />
       <TextField
-        data-cy={`editor-${field}-example${example}-communication`}
+        data-cy={`${field}-example${example}-communication`}
         error={!!errors[`${field}CommunicationExample${example}`]}
         helperText={
           <CharacterCounter count={formData[`${field}CommunicationExample${example}`]?.length || 0} maxLength={1500} />
@@ -108,6 +108,7 @@ const FeedbackActionForm = ({
       />
       {example !== '1' && (
         <Button
+          data-cy={`remove-example${example}-${field}`}
           onClick={handleCancelClick}
           style={{ alignSelf: 'flex-start', marginTop: '1rem' }}
           type="button"

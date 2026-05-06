@@ -191,7 +191,7 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                         <Typography>
                           {source.name}:
                         </Typography>
-                        <Typography color={source.description ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+                        <Typography color={source.description ? 'default' : 'secondary'} data-cy={`${source.name}-description`} sx={{ ml: 2 }}>
                           {source.description || t('common:empty')}
                         </Typography>
                       </Box>
@@ -200,7 +200,7 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                   ) : null}
         <Typography variant="h6">{t('qualitydocument:feedbackUtilizationHeader')}</Typography>
         <Typography>{t('qualitydocument:feedbackExamples')}</Typography>
-        <Typography color={feedbackExamples ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+        <Typography color={feedbackExamples ? 'default' : 'secondary'} data-cy='feedback-examples' sx={{ ml: 2 }}>
           {feedbackExamples || t('common:empty')}
         </Typography>
       </div>
@@ -223,11 +223,11 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
             {isLearning ? (
               <>
                 <Typography>{t('qualitydocument:learning')}</Typography>
-                <Typography color={doc.data.learning ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+                <Typography color={doc.data.learning ? 'default' : 'secondary'} data-cy='learning' sx={{ ml: 2 }}>
                   {doc.data.learning || t('common:empty')}
                 </Typography>
                 <Typography>{t('qualitydocument:learningRegularity')}</Typography>
-                <Typography color={doc.data.learningRegularity ? 'default' : 'secondary'} sx={{ ml: 2 }}>
+                <Typography color={doc.data.learningRegularity ? 'default' : 'secondary'} data-cy="learning-regularity" sx={{ ml: 2 }}>
                   {t(`qualitydocument:${doc.data.learningRegularity}`) || t('common:empty')}
                 </Typography>
                 <br />
@@ -239,25 +239,25 @@ const QualityDocumentInfo = ({ doc }: { doc: any }) => {
                 <Box key={`${field}-${exampleIndex}`}>
                   <Typography sx={{ ml: 1 }} variant="h6">{t(`qualitydocument:example${exampleIndex + 1}`)}</Typography>
                   <Typography sx={{ ml: 2 }}>{t('qualitydocument:developmentGoal')}</Typography>
-                  <Typography color={example.name ? 'default' : 'secondary'} sx={{ ml: 3 }}>
+                  <Typography color={example.name ? 'default' : 'secondary'} data-cy={`${field}-${exampleIndex + 1}-name`} sx={{ ml: 3 }}>
                     {example.name || t('common:empty')}
                   </Typography>
                   <Typography sx={{ ml: 2 }}>{t('qualitydocument:changes')}</Typography>
-                  <Typography color={example.changes ? 'default' : 'secondary'} sx={{ ml: 3 }}>
+                  <Typography color={example.changes ? 'default' : 'secondary'} data-cy={`${field}-${exampleIndex + 1}-changes`} sx={{ ml: 3 }}>
                     {example.changes || t('common:empty')}
                   </Typography>
                   <Typography sx={{ ml: 2 }}>{t('qualitydocument:developmentBasis')}</Typography>
-                  <Typography color={example.feedbackSource ? 'default' : 'secondary'} sx={{ ml: 3 }}>
+                  <Typography color={example.feedbackSource ? 'default' : 'secondary'} data-cy={`${field}-${exampleIndex + 1}-feedback`} sx={{ ml: 3 }}>
                     {example.feedbackSource || t('common:empty')}
                   </Typography>
                   <Typography sx={{ ml: 2 }}>{t('qualitydocument:communication')}</Typography>
-                  <Typography color={example.communication ? 'default' : 'secondary'} sx={{ ml: 3 }}>
+                  <Typography color={example.communication ? 'default' : 'secondary'} data-cy={`${field}-${exampleIndex + 1}-name`}sx={{ ml: 3 }}>
                     {example.communication || t('common:empty')}
                   </Typography>
                 </Box>
               ))
             ) : (
-              <Typography color="secondary" sx={{ ml: 2 }}>{t('common:empty')}</Typography>
+              <Typography color="secondary" data-cy={`${field}-empty-examples`} sx={{ ml: 2 }}>{t('common:empty')}</Typography>
             )}
           </div>
         )

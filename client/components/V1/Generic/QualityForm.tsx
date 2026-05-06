@@ -286,6 +286,7 @@ const QualityForm = ({
                                     <Tooltip arrow placement="right" title={<div>{t('qualitydocument:remove')}</div>}>
                                       <IconButton
                                         aria-label={t('qualitydocument:remove')}
+                                        data-cy={`remove-${source}`}
                                         onClick={() => removeFeedbackSource(source)}
                                         size="small"
                                         type="button"
@@ -304,6 +305,7 @@ const QualityForm = ({
                                         ? sourceState?.regularity === option
                                         : option === 'notUsed'
                                     }
+                                    data-cy={`radio-${source}-${option}`}
                                     onChange={() => setSourceRegularity(source, option)}
                                     size="small"
                                     slotProps={{ input: { 'aria-label': `${source}-${option}` } }}
@@ -319,7 +321,7 @@ const QualityForm = ({
 
                   <Box sx={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
                     <TextField
-                      data-cy={`editor-otherFeedbackSource`}
+                      data-cy={`otherFeedbackSource`}
                       label={t(`qualitydocument:otherFeedbackSource`)}
                       name={'otherFeedbackSource'}
                       onChange={handleChange}
@@ -328,7 +330,12 @@ const QualityForm = ({
                       value={formData.otherFeedbackSource ?? ''}
                       variant="outlined"
                     />
-                    <Button onClick={addNewFeedbackSource} type="button" variant="outlined">
+                    <Button
+                      data-cy="add-new-feedbackSource"
+                      onClick={addNewFeedbackSource}
+                      type="button"
+                      variant="outlined"
+                    >
                       {t('qualitydocument:addNew')}
                     </Button>
                   </Box>
@@ -428,7 +435,7 @@ const QualityForm = ({
                 </Box>
                 <Box sx={sectionContentSx}>
                   <TextField
-                    data-cy={`editor-${field}`}
+                    data-cy={`${field}`}
                     error={!!errors[`${field}`]}
                     helperText={errors[`${field}`]}
                     label={t(`qualitydocument:learning`)}

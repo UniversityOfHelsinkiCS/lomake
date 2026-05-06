@@ -60,7 +60,7 @@ const QualityManagement = () => {
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', mb: '1rem' }}>
         <IconButton component={Link} sx={{ marginRight: 2 }} to={`${basePath}v1/programmes/10/${programmeKey}`}>
-          <ArrowBack />
+          <ArrowBack data-cy="back-button" />
         </IconButton>
         <Typography variant="h2">{programmeData?.koulutusohjelma[lang]}</Typography>
       </Box>

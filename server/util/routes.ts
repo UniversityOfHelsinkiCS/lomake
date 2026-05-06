@@ -180,5 +180,6 @@ router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.creat
 router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
 router.get('/cypress/initReports', notInProduction, cypress.initReports)
 router.get('/cypress/resetDocuments', notInProduction, cypress.resetDocuments)
+router.get('/cypress/resetQualityDocuments', notInProduction, cypress.resetQualityDocuments)
 
 export default router

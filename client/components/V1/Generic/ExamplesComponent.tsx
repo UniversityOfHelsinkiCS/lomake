@@ -75,7 +75,7 @@ const Examples = ({
         />
       ) : null}
       {!thirdExample || !secondExample ? (
-        <Button onClick={handleAddExampleClick} type="button" variant="outlined">
+        <Button data-cy={`add-new-example-${field}`} onClick={handleAddExampleClick} type="button" variant="outlined">
           {t('qualitydocument:addNewExample')}
         </Button>
       ) : null}
