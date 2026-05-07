@@ -1190,7 +1190,33 @@ const initKeyData = async (_req, res) => {
       metadata: initData.metadata,
     }
 
+    const changedRawData = {
+      kandiohjelmat: initData.Kandiohjelmat.map(prog => {
+        if (prog['Koulutusohjelman koodi'] === 'KH50_006' && prog.Vuosi === 2025) {
+          return {
+            ...prog,
+            'Ensisijaiset hakijat': 260,
+            'Opintonsa aloittaneet': 53,
+            'Aloituspaikkojen täyttö': 0.97,
+            Hakupaine: 9.0,
+          }
+        }
+        return prog
+      }),
+      maisteriohjelmat: initData.Maisteriohjelmat,
+      metadata: initData.metadata.map(meta => {
+        if (meta['Avainluvun nimi_en'] === 'Primary applicants') {
+          return {
+            ...meta,
+            Kynnysarvot: '0;100;200;300',
+          }
+        }
+        return meta
+      }),
+    }
+
     const formattedData = formatKeyData(rawData, programmeData)
+    const changedData = formatKeyData(changedRawData, programmeData)
 
     await KeyData.create({
       data: formattedData,
@@ -1205,7 +1231,7 @@ const initKeyData = async (_req, res) => {
     })
 
     await KeyData.create({
-      data: formattedData,
+      data: changedData,
       active: true,
       year: 2026,
     })
