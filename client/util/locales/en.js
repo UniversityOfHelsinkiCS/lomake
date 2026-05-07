@@ -621,7 +621,8 @@ export default {
     Comment: 'Opinion of the programme',
     noComment: 'No answer',
     missingComment: 'The opinion of the programme is missing!',
-    missingQualityDocument: 'Quality management document is missing!',
+    missingQualityDocument: 'Quality management document is missing',
+    moveToQualityDocument: 'Move to quality management document',
     editMeasure: 'Edit the development plan',
     saveMeasure: 'Save the development plan',
     Measure: 'Development plan of the programme',
@@ -780,6 +781,8 @@ export default {
     feedbackSourcesRequired: 'Section 1: Select or add at least one feedback system or source of feedback',
     regularityRequired:
       'Section 4: How often is the achievement of learning outcomes discussed by the programme steering group?',
+    newDocument: 'Create new quality management document',
+    info: 'Quality Management – This section contains questions for the degree programme steering group regarding the use of feedback to improve the degree programme. The quality management document is compiled from the entries made on the degree programme’s page.',
   },
 
   error: {

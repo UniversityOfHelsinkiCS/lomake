@@ -664,7 +664,8 @@ export default {
     Quality: 'Kvalitetsstyrningsdokument för utbildningsprogrammet',
     noQuality: 'Inget svar',
     missingMeasure: 'Ingen utvecklingsplan!',
-    missingQualityDocument: 'Ingen kvalitetsstyrningsdokumentet!',
+    missingQualityDocument: 'Ingen kvalitetsstyrningsdokumentet',
+    moveToQualityDocument: 'Gå till att redigera kvalitetsstyrningsdokumentet',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',
     noHistory: 'Inga tidigare historia',
@@ -819,6 +820,8 @@ export default {
     feedbackSourcesRequired: 'Sektion 1: Välj eller lägg till minst ett feedbacksystem eller en feedbackkälla',
     regularityRequired:
       'Sektion 4: Hur ofta behandlas uppnåendet av kompetensmålen i utbildningsprogrammets ledningsgrupp?',
+    newDocument: 'Skapa ett nytt dokument för kvalitetsstyrning',
+    info: 'Kvalitetsstyrning – detta avsnitt innehåller frågor till utbildningsprogrammets ledningsgrupp om hur återkopplingsinformationen används för att utveckla utbildningsprogrammet. Dokumentet för kvalitetsstyrning består av de anteckningar som görs på utbildningsprogrammets sida.',
   },
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',

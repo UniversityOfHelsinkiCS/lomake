@@ -5,12 +5,14 @@ import { KeyDataProgramme } from '@/shared/lib/types'
 import { setViewOnly } from '@/client/redux/formReducer'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import Modal from '../Generic/ModalTemplateComponent'
-import { Box, Card, CardContent, Typography, Button } from '@mui/material'
+import { Box, Card, CardContent, Typography, Button, Link } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
 import { useGetAllQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import QualityDocumentInfo from './QualityDocumentComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { colors } from '@/client/util/common'
+import { ArrowForward } from '@mui/icons-material'
+import { basePath } from '@/config/common'
 
 const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const { t } = useTranslation()
@@ -18,6 +20,7 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
   const year = `${programmeData.year + 1}`
   const [open, setOpen] = useState(false)
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
+  const [openNoDoc, setOpenNoDoc] = useState(false)
 
   const dispatch = useAppDispatch()
 
@@ -33,11 +36,18 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
   if (!doc && !programmeData.additionalInfo.fi?.includes('Lakkautettu')) {
     return (
       <TableCell>
-        <NotificationBadge
-          data-cy={`qualityCellBadge-${programmeData.koulutusohjelmakoodi}`}
-          tooltip={t('keyData:missingQualityDocument')}
-          variant="medium"
-        />
+        <Button onClick={() => setOpenNoDoc(true)}>
+          <NotificationBadge variant="medium" />
+        </Button>
+        <Modal contentSx={{ width: '800px' }} data-cy="no-quality-doc-modal" open={openNoDoc} setOpen={setOpenNoDoc}>
+          <Typography variant="h4">{t('keyData:missingQualityDocument')}</Typography>
+          <Typography sx={{ mt: 2 }}>{t('qualitydocument:info')}</Typography>
+          <Link href={`${basePath}v1/programmes/10/${programmeData.koulutusohjelmakoodi}`}>
+            <Button startIcon={<ArrowForward />} sx={{ marginTop: 5, float: 'right' }} variant="outlined">
+              {t('keyData:moveToQualityDocument')}
+            </Button>
+          </Link>
+        </Modal>
       </TableCell>
     )
   }
@@ -50,11 +60,11 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
       <Button onClick={handleOpen}>
         {doc ? <ChatBubbleOutlineIcon color="secondary" sx={{ fontSize: '28px' }} /> : null}
       </Button>
-      <Modal open={open} setOpen={setOpen}>
+      <Modal contentSx={{ width: '50%' }} open={open} setOpen={setOpen}>
         <Typography variant="h3">
           {programmeData.koulutusohjelma[lang]} {year}
         </Typography>
-        <Box data-cy="textfield-viewonly" sx={{ mt: '1rem' }}>
+        <Box data-cy="textfield-viewonly" sx={{ mt: '1rem', width: '90%' }}>
           <Typography color="textSecondary" sx={{ mb: '1.5rem' }} variant="h5">
             {t(`keyData:Quality`)}
           </Typography>
@@ -88,6 +98,16 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
               )}
             </CardContent>
           </Card>
+          <Link href={`${basePath}v1/programmes/10/${programmeData.koulutusohjelmakoodi}`}>
+            <Button
+              startIcon={<ArrowForward />}
+              sx={{ marginTop: 5, marginBottom: 5, float: 'left' }}
+              variant="outlined"
+            >
+              {t('keyData:moveToQualityDocument')}
+            </Button>
+          </Link>
+          <Box sx={{ clear: 'both', height: '1rem' }} />
         </Box>
       </Modal>
     </TableCell>

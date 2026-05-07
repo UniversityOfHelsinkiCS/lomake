@@ -214,7 +214,7 @@ const QualityManagementComponent = ({ programmeData }) => {
                     startIcon={<Add />}
                     variant="outlined"
                   >
-                    {t('document:newDocument')}
+                    {t('qualitydocument:newDocument')}
                   </Button>
                   <br />
                   {someoneElseEditingDraft && (

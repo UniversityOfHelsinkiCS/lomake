@@ -3,6 +3,7 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import Clear from '@mui/icons-material/Clear'
+import type { SxProps, Theme } from '@mui/material/styles'
 
 const style = {
   position: 'absolute',
@@ -10,7 +11,6 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   backgroundColor: 'white',
-  minWidth: 800,
   minHeight: 300,
   width: '65vw',
   maxWidth: '65vw',
@@ -24,11 +24,13 @@ export default function ModalTemplateComponent({
   children,
   open,
   setOpen,
+  contentSx,
   ...rest
 }: {
   children?: React.ReactNode
   open: boolean
   setOpen: (open: boolean) => void
+  contentSx?: SxProps<Theme>
   rest?: any
 }) {
   // const handleOpen = () => setOpen(true)
@@ -37,7 +39,7 @@ export default function ModalTemplateComponent({
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Modal onClose={handleClose} open={open} {...rest}>
-      <Box sx={style}>
+      <Box sx={contentSx ? ([style, contentSx] as SxProps<Theme>) : style}>
         <Clear onClick={handleClose} style={{ position: 'absolute', top: '2rem', right: '2rem', cursor: 'pointer' }} />
         {children}
       </Box>

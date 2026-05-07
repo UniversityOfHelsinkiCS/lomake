@@ -628,7 +628,7 @@ export default {
     noQuality: 'Ei vastausta',
     noData: 'Ei dataa',
     missingMeasure: 'Kehittämisuunnitelma puuttuu!',
-    missingQualityDocument: 'Laadunhallinnan dokumentti puuttuu!',
+    missingQualityDocument: 'Laadunhallinnan dokumentti puuttuu',
     colormeterError: 'Virhe liikennevalojen liukuvan mittarin arviossa',
     colormeterNoDisplay: 'Tälle avainluvulle ei näytetä liikennevaloarviota.',
     noHistory: 'Ei aiempia arvioita',
@@ -657,6 +657,7 @@ export default {
     qualitydocumentingHeader: 'Laadunhallinnan dokumentointi',
     moveToOpinion: 'Siirry muokkaamaan näkemystä',
     moveToAction: 'Siirry muokkaamaan kehittämissuunnitelmaa',
+    moveToQualityDocument: 'Siirry muokkaamaan laadunhallinnan dokumenttia',
     homeDescription:
       'Tähän näkymään kootaan koulutusohjelman avainluvut, avainlukuihin liittyvät kirjatut näkemykset sekä kehittämissuunnitelmat eri vuosilta. ',
     interventionOn: 'Käynnissä',
@@ -782,6 +783,8 @@ export default {
     feedbackSourcesRequired: 'Osio 1: Valitse tai lisää vähintään yksi palautejärjestelmä tai palautteen lähde',
     regularityRequired:
       'Osio 4: Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
+    newDocument: 'Luo uusi laadunhallinnan dokumentti',
+    info: 'Laadunhallinta – osio sisältää kysymyksiä koulutusohjelman johtoryhmälle palautetiedon hyödyntämisestä koulutusohjelman kehittämisessä. Laadunhallinnan dokumentti muodostuu koulutusohjelman tekemistä kirjauksista koulutusohjelman sivulla.',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',
