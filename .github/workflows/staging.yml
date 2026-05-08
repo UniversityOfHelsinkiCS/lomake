@@ -40,7 +40,6 @@ jobs:
             overview,
             intervention,
             qualityManagement,
-            keyData,
           ]
     name: Run tests
     runs-on: ubuntu-latest
