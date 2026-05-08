@@ -8,6 +8,7 @@ import KeyData from '../models/keyData.js'
 import Report from '../models/reports.js'
 import Document from '../models/document.js'
 import QualityDocument from '../models/qualityDocument.js'
+import InterventionProcedure from '../models/interventionProcedure.js'
 import logger from '../util/logger.js'
 import { testProgrammeCode, defaultYears } from '../util/common.js'
 import { createDraftAnswers } from '../scripts/draftAndFinalAnswers.js'
@@ -200,6 +201,7 @@ const seed = async (_, res) => {
     await resetDeadlines()
     await resetKeyData()
     await resetReports()
+    await resetInterventionProcedures()
 
     return res.status(200).send('OK')
   } catch (error) {
@@ -1168,6 +1170,15 @@ const resetQualityDocuments = async (req, res) => {
   }
 }
 
+const resetInterventionProcedures = async () => {
+  try {
+    logger.info('Cypress::resetInterventionProcedures')
+    await InterventionProcedure.destroy({ where: {} })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+  }
+}
+
 const initKeyData = async (_req, res) => {
   try {
     try {
@@ -1242,6 +1253,25 @@ const initKeyData = async (_req, res) => {
   }
 }
 
+const initInterventionProcedures = async (_req, res) => {
+  try {
+    await InterventionProcedure.create({
+      studyprogrammeKey: 'KH50_006',
+      active: true,
+      startYear: 2024,
+    })
+
+    await InterventionProcedure.create({
+      studyprogrammeKey: 'KH50_005',
+      active: true,
+      startYear: 2024,
+    })
+    return res.status(200).json({ message: 'Interventionprocedures initialized' })
+  } catch (error) {
+    return res.status(500).json({ error: `Datatbase error: ${error.error}` })
+  }
+}
+
 const initReports = async (_req, res) => {
   try {
     logger.info('Cypress::initReports')
@@ -1282,4 +1312,5 @@ export default {
   resetDocuments,
   resetQualityDocuments,
   initReports,
+  initInterventionProcedures,
 }

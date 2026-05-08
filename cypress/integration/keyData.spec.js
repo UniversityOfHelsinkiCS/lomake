@@ -2,6 +2,7 @@ describe('KeyData', () => {
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
     cy.request(`/api/cypress/initKeyData`)
+    cy.request(`/api/cypress/initInterventionProcedures`)
     cy.visit('/v1/overview')
     cy.get('[data-cy="year-filter"] > .MuiSelect-select').click()
     cy.contains('2024').click()
