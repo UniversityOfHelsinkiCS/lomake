@@ -170,7 +170,8 @@ Cypress.Commands.add('typeInTextField', (id, textToBeTyped) => {
   const attempt = Cypress.currentRetry + 1
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(100)
-  cy.get(`[data-cy="edit-${id}"]`)
+  cy.get(`[data-cy="edit-${id}"]`, { timeout: 10000 })
+    .should('be.enabled')
     .click()
     .wait(500 * attempt)
 
