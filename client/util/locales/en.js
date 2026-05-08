@@ -757,7 +757,7 @@ export default {
     learningRegularity: 'How often is the achievement of learning outcomes discussed by the programme steering group?',
     undefined: 'Not defined',
     documentingDescription:
-      'This section of the annual follow-up includes questions on the development of the degree programme’s curriculum, guidance practices, learning outcomes and feedback practices.',
+      'The steering group must complete this section of the annual follow-up regardless of the color coding of the key figures. The quality management section includes questions regarding the development of the degree programme’s curriculum, academic guidance, learning outcomes, and feedback practices.',
     addNew: 'Add',
     remove: 'Remove',
     addNewExample: 'Add new example',

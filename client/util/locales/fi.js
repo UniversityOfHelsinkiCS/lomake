@@ -759,7 +759,7 @@ export default {
     learningRegularity: 'Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
     undefined: 'Ei määritelty',
     documentingDescription:
-      'Tämä vuosiseurannan osio sisältää kysymyksiä koulutusohjelman opetussuunnitelman, ohjauksen, osaamistavoitteiden ja palautekäytäntöjen kehittämisestä.',
+      'Koulutusohjelman johtoryhmä täyttää tämän vuosiseurannan osion riippumatta avainlukujen värimerkinnöistä. Laadunhallinta -osio sisältää kysymyksiä koulutusohjelman opetussuunnitelman, ohjauksen, osaamistavoitteiden ja palautekäytäntöjen kehittämisestä.',
     addNew: 'Lisää',
     remove: 'Poista',
     addNewExample: 'Lisää uusi esimerkki',
@@ -784,7 +784,7 @@ export default {
     regularityRequired:
       'Osio 4: Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
     newDocument: 'Luo uusi laadunhallinnan dokumentti',
-    info: 'Laadunhallinta – osio sisältää kysymyksiä koulutusohjelman johtoryhmälle palautetiedon hyödyntämisestä koulutusohjelman kehittämisessä. Laadunhallinnan dokumentti muodostuu koulutusohjelman tekemistä kirjauksista koulutusohjelman sivulla.',
+    info: 'Laadunhallinta –osio sisältää kysymyksiä koulutusohjelman johtoryhmälle palautetiedon hyödyntämisestä koulutusohjelman kehittämisessä. Laadunhallinnan dokumentti muodostuu koulutusohjelman tekemistä kirjauksista koulutusohjelman sivulla.',
     info2: 'Kysymykset avautuvat painikkeesta: + Luo uusi laadunhallinnan dokumentti.',
   },
   error: {

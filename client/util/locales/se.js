@@ -796,7 +796,7 @@ export default {
     learningRegularity: 'Hur ofta behandlas uppnåendet av kompetensmålen i utbildningsprogrammets ledningsgrupp?',
     undefined: 'Odefinierat',
     documentingDescription:
-      'Denna del av årsuppföljningen innehåller frågor om utvecklingen av utbildningsprogrammets läroplan, vägledning, kompetensmål och feedbackpraxis.',
+      'Utbildningsprogrammets ledningsgrupp fyller i detta avsnitt av den årliga uppföljningen oavsett vilken färg som angivits för nyckeltalen. Avsnittet om kvalitetsstyrning innehåller frågor om utvecklingen av utbildningsprogrammets läroplan, handledning, kompetensmål och rutiner för återkoppling.',
     addNew: 'Lägg till',
     remove: 'Ta bort',
     addNewExample: 'Lägg till ett nytt exempel',
