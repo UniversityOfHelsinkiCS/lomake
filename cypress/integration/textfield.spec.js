@@ -33,16 +33,16 @@ describe('Textfield tests', () => {
     const id = `Vetovoimaisuus-Comment`
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(100)
-    cy.get(`[data-cy=edit-${id}]`).click()
+    cy.get(`[data-cy=edit-${id}]`, { timeout: 10000 }).should('be.enabled').click()
     cy.contains('Press the button to release the field for others to edit!').should('exist')
-    cy.get(`[data-cy=save-${id}]`).click()
+    cy.get(`[data-cy=save-${id}]`, { timeout: 10000 }).should('be.enabled').click()
   })
 
   it('Should not allow user to write more than 1000 characters', () => {
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
     const id = `Vetovoimaisuus-Comment`
     cy.typeInTextField(id, 'a'.repeat(1001))
-    cy.get(`[data-cy=save-${id}]`).click()
+    cy.get(`[data-cy=save-${id}]`, { timeout: 10000 }).should('be.enabled').click()
     cy.get(`[data-cy=box-${id}]`).contains('a'.repeat(1000))
   })
 
@@ -63,7 +63,7 @@ describe('Textfield tests', () => {
     const id = `Vetovoimaisuus-Comment`
     cy.typeInTextField(id, 'Test comment')
     cy.contains('Unsaved changes!').should('exist')
-    cy.get(`[data-cy=save-${id}]`).click()
+    cy.get(`[data-cy=save-${id}]`, { timeout: 10000 }).should('be.enabled').click()
   })
 
   it('Textfield is locked for another user, if one user is typing and releasing lock should open the field for all users', () => {
@@ -77,7 +77,7 @@ describe('Textfield tests', () => {
     cy.login('cypressUser')
     cy.visit(`/v1/programmes/10/KH50_005/${year}`)
     cy.typeInTextField(id, 'Test comment second time mf')
-    cy.get(`[data-cy=save-${id}]`).click()
+    cy.get(`[data-cy=save-${id}]`, { timeout: 10000 }).should('be.enabled').click()
   })
 
   it('Textfield is viewonly for user without write rights', () => {
