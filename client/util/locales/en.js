@@ -783,6 +783,7 @@ export default {
       'Section 4: How often is the achievement of learning outcomes discussed by the programme steering group?',
     newDocument: 'Create new quality management document',
     info: 'Quality Management – This section contains questions for the degree programme steering group regarding the use of feedback to improve the degree programme. The quality management document is compiled from the entries made on the degree programme’s page.',
+    info2: 'The questions can be accessed by clicking the “+Create new quality management document” button.',
   },
 
   error: {

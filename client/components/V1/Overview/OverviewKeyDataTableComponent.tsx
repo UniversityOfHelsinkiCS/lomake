@@ -311,7 +311,29 @@ const KeyDataTableComponent = ({
                   </TableCell>
                 ) : (
                   <TableCell>
-                    <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
+                    <Typography variant="regularSmall">
+                      {t('keyData:qualityControl')}
+                      <Tooltip
+                        arrow
+                        placement="right"
+                        slotProps={{ popper: { sx: { '& .MuiTooltip-tooltip': { maxWidth: '700px' } } } }}
+                        title={
+                          <div>
+                            {t('qualitydocument:info')} <br /> {t('qualitydocument:info2')}
+                          </div>
+                        }
+                      >
+                        <span style={{ display: 'inline-flex', alignItems: 'flex-start', alignSelf: 'flex-start' }}>
+                          <InfoOutlinedIcon
+                            color="secondary"
+                            fontSize="small"
+                            sx={{
+                              verticalAlign: 'middle',
+                            }}
+                          />
+                        </span>
+                      </Tooltip>
+                    </Typography>
                   </TableCell>
                 )}
                 <TableCell isHeader>

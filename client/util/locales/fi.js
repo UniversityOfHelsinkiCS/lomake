@@ -785,6 +785,7 @@ export default {
       'Osio 4: Miten usein osaamistavoitteiden saavuttamista käsitellään koulutusohjelman johtoryhmässä?',
     newDocument: 'Luo uusi laadunhallinnan dokumentti',
     info: 'Laadunhallinta – osio sisältää kysymyksiä koulutusohjelman johtoryhmälle palautetiedon hyödyntämisestä koulutusohjelman kehittämisessä. Laadunhallinnan dokumentti muodostuu koulutusohjelman tekemistä kirjauksista koulutusohjelman sivulla.',
+    info2: 'Kysymykset avautuvat painikkeesta: + Luo uusi laadunhallinnan dokumentti.',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',

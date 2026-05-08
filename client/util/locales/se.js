@@ -822,6 +822,7 @@ export default {
       'Sektion 4: Hur ofta behandlas uppnåendet av kompetensmålen i utbildningsprogrammets ledningsgrupp?',
     newDocument: 'Skapa ett nytt dokument för kvalitetsstyrning',
     info: 'Kvalitetsstyrning – detta avsnitt innehåller frågor till utbildningsprogrammets ledningsgrupp om hur återkopplingsinformationen används för att utveckla utbildningsprogrammet. Dokumentet för kvalitetsstyrning består av de anteckningar som görs på utbildningsprogrammets sida.',
+    info2: 'Frågorna öppnas genom att klicka på knappen: +Skapa ett nytt dokument för kvalitetsstyrning.',
   },
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',
