@@ -4,17 +4,21 @@ import { calculateColor, calculateValue } from '@/client/util/v1'
 import { TrafficLight } from './TrafficLightComponent'
 import { ProgrammeLevel } from '@/shared/lib/enums'
 import { useAppSelector } from '@/client/util/hooks'
-import { useFetchKeyDataQuery } from '@/client/redux/keyData'
+import { useFetchAllKeyDataQuery } from '@/client/redux/keyData'
 
 const ColorHistoryComponent = (props: any) => {
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language)
+
+  const { data: allKeyData, isLoading } = useFetchAllKeyDataQuery()
+
   if (!props.programme || props.value == 'Ei dataa') {
     return null
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { data, isLoading } = useFetchKeyDataQuery()
+  const yearMatches = allKeyData?.filter(keyData => keyData.year === props.programme.year + 1) ?? []
+  const selectedKeyDataRow = yearMatches.find(keyData => keyData.active) ?? yearMatches[0]
+  const data = selectedKeyDataRow?.data
 
   if (isLoading || !data) {
     return null
