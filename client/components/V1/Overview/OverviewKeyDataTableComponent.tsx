@@ -103,7 +103,7 @@ const InterventionCell = ({
 
   if (!interventionData.interventionStatus || programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
     return (
-      <Typography color="secondary" variant="italic">
+      <Typography color="secondary" data-cy={`interventionText-${programmeData.koulutusohjelmakoodi}`} variant="italic">
         {t('keyData:interventionOff')}
       </Typography>
     )

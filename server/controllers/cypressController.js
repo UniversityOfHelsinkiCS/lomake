@@ -1031,6 +1031,31 @@ const initData = {
       // Muut
       Vuosi: 2023,
       Lisätietoja_fi: 'Lakkautettu ohjelma',
+      Lisätietoja_en: 'Discountinued programme',
+    },
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'MH30_006',
+      'Koulutusohjelman nimi': 'Terveydenhuollon kehittämisen maisteriohjelma',
+
+      // Maisteriohjelman avainluvut
+      Hakijat: 5,
+      Hakupaine: 0.5,
+      Aloituspaikat: 25,
+      'Opintonsa aloittaneet': 10,
+      Tutkinnot: 10,
+      'Tavoiteajassa valmistuminen': 0.1,
+      'Valmistuminen tavoiteajan jälkeen': 0.1,
+      'Läsnäolevien kasautuminen': 0,
+      'Opetuksen linjakkuus': 0.1,
+      'Oppimista edistävä palaute': 0.1,
+      'Opintojen kiinnostavuus': 0.1,
+      Työllistyminen: 0,
+
+      // Muut
+      Vuosi: 2023,
+      Lisätietoja_fi: 'Uusi ohjelma',
+      Lisätietoja_en: 'New programme',
     },
     {
       // Perustiedot
@@ -1076,6 +1101,31 @@ const initData = {
       // Muut
       Vuosi: 2024,
       Lisätietoja_fi: 'Lakkautettu ohjelma',
+      Lisätietoja_en: 'Discountinued programme',
+    },
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'MH30_006',
+      'Koulutusohjelman nimi': 'Terveydenhuollon kehittämisen maisteriohjelma',
+
+      // Maisteriohjelman avainluvut
+      Hakijat: 5,
+      Hakupaine: 0.5,
+      Aloituspaikat: 25,
+      'Opintonsa aloittaneet': 10,
+      Tutkinnot: 10,
+      'Tavoiteajassa valmistuminen': 0.1,
+      'Valmistuminen tavoiteajan jälkeen': 0.1,
+      'Läsnäolevien kasautuminen': 0,
+      'Opetuksen linjakkuus': 0.1,
+      'Oppimista edistävä palaute': 0.1,
+      'Opintojen kiinnostavuus': 0.1,
+      Työllistyminen: 0,
+
+      // Muut
+      Vuosi: 2024,
+      Lisätietoja_fi: 'Uusi ohjelma',
+      Lisätietoja_en: 'New programme',
     },
     {
       // Perustiedot
@@ -1122,6 +1172,31 @@ const initData = {
       // Muut
       Vuosi: 2025,
       Lisätietoja_fi: 'Lakkautettu ohjelma',
+      Lisätietoja_en: 'Discountinued programme',
+    },
+    {
+      // Perustiedot
+      'Koulutusohjelman koodi': 'MH30_006',
+      'Koulutusohjelman nimi': 'Terveydenhuollon kehittämisen maisteriohjelma',
+
+      // Maisteriohjelman avainluvut
+      Hakijat: 5,
+      Hakupaine: 0.5,
+      Aloituspaikat: 25,
+      'Opintonsa aloittaneet': 10,
+      Tutkinnot: 10,
+      'Tavoiteajassa valmistuminen': 0.1,
+      'Valmistuminen tavoiteajan jälkeen': 0.1,
+      'Läsnäolevien kasautuminen': 0,
+      'Opetuksen linjakkuus': 0.1,
+      'Oppimista edistävä palaute': 0.1,
+      'Opintojen kiinnostavuus': 0.1,
+      Työllistyminen: 0,
+
+      // Muut
+      Vuosi: 2025,
+      Lisätietoja_fi: 'Uusi ohjelma',
+      Lisätietoja_en: 'New programme',
     },
     {
       // Perustiedot
@@ -1203,7 +1278,7 @@ const initKeyData = async (_req, res) => {
 
     const changedRawData = {
       kandiohjelmat: initData.Kandiohjelmat.map(prog => {
-        if (prog['Koulutusohjelman koodi'] === 'KH50_006' && prog.Vuosi === 2025) {
+        if (prog['Koulutusohjelman koodi'] === 'KH50_006') {
           return {
             ...prog,
             'Ensisijaiset hakijat': 260,
@@ -1220,6 +1295,7 @@ const initKeyData = async (_req, res) => {
           return {
             ...meta,
             Kynnysarvot: '0;100;200;300',
+            Määritelmä_en: 'Primary applicants of the main application procedure - changed',
           }
         }
         return meta

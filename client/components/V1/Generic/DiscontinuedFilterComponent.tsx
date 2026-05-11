@@ -15,6 +15,7 @@ const DiscontinuedProgramFilter = () => {
       <Checkbox
         checked={showDiscontinued}
         color="primary"
+        data-cy="show-discontinued-checkbox"
         name="showDiscontinued"
         onChange={() => dispatch(setShowDiscontinued())}
         sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}

@@ -110,7 +110,9 @@ const CriteriaCard = (props: CriteriaCardProps) => {
         </div>
         {showDescription ? (
           <div style={{ padding: '15px' }}>
-            <Typography variant="lightSmall">{props.description}</Typography>
+            <Typography data-cy={`${props.title}-description`} variant="lightSmall">
+              {props.description}
+            </Typography>
             <ColorMeterComponent
               display={props.hasTrafficLight}
               limits={props.limits}

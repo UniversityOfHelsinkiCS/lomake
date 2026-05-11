@@ -281,4 +281,39 @@ describe('Overview page test', () => {
         .contains('No traffic light estimate is displayed for this key figure.')
     })
   })
+
+  describe('New and discountinued programmes', () => {
+    it('Discontinued and new programmes shows info icon', () => {
+      cy.get('[data-cy="keydatatable-programme-MH50_009"]')
+        .find('[data-testid="InfoOutlinedIcon"]')
+        .should('exist')
+        .trigger('mouseover', { force: true })
+      cy.get('[role="tooltip"]').should('contain', 'Discountinued programme')
+      cy.get('[data-cy="keydatatable-programme-MH30_006"]')
+        .find('[data-testid="InfoOutlinedIcon"]')
+        .should('exist')
+        .trigger('mouseover', { force: true })
+      cy.get('[role="tooltip"]').should('contain', 'New programme')
+    })
+
+    it('User can hide discontinued programmes', () => {
+      cy.get('[data-cy="keydatatable-programme-MH50_009"]').should('exist')
+      cy.get('[data-cy="show-discontinued-checkbox"]').click()
+      cy.get('[data-cy="keydatatable-programme-MH50_009"]').should('not.exist')
+    })
+
+    it('New and discontinued programmes with red lights has no active intervention procedure', () => {
+      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Vetovoimaisuus-2024"]').click()
+      cy.get('[data-cy="MH50_009-Vetovoimaisuus-Punainen"]').should('exist')
+
+      cy.get('body').click(0, 0)
+      cy.get('[data-cy="interventionText-MH50_009"]').should('contain.text', 'Inactive')
+
+      cy.get('[data-cy="trafficlight-table-cell-MH30_006-Vetovoimaisuus-2024"]').click()
+      cy.get('[data-cy="MH30_006-Vetovoimaisuus-Punainen"]').should('exist')
+
+      cy.get('body').click(0, 0)
+      cy.get('[data-cy="interventionText-MH30_006"]').should('contain.text', 'Inactive')
+    })
+  })
 })

@@ -229,18 +229,21 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
           }}
         >
           <Typography
+            data-cy={`threshold-1`}
             sx={{ position: 'absolute', left: `calc(100%/4)`, transform: 'translateX(-50%)' }}
             variant="lightSmall"
           >
             {thresholdValues[0]}
           </Typography>
           <Typography
+            data-cy={`threshold-2`}
             sx={{ position: 'absolute', left: `calc((100%/4)*2)`, transform: 'translateX(-50%)' }}
             variant="lightSmall"
           >
             {thresholdValues[1]}
           </Typography>
           <Typography
+            data-cy={`threshold-3`}
             sx={{ position: 'absolute', left: `calc((100%/4)*3)`, transform: 'translateX(-50%)' }}
             variant="lightSmall"
           >
