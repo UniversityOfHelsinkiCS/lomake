@@ -81,9 +81,10 @@ const EditDocument = ({
       setErrors(
         fields.reduce(
           (acc, field) => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
-            acc[field] = t(`error:${fieldErrors[field]?._errors?.[0]}`) || ''
+            const errorKey = fieldErrors[field]?._errors?.[0]
+            if (errorKey) {
+              acc[field] = t(`error:${errorKey}`) || ''
+            }
             return acc
           },
           {} as Record<string, string>

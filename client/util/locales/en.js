@@ -789,7 +789,7 @@ export default {
   error: {
     title: 'The title must be at least 3 characters long',
     date: 'The date is in the wrong format',
-    participants: 'The Participants field must contain more than 3 characters',
+    participants: 'The Participants field must contain at least 3 characters',
     matters: 'The Agreed Matters field must contain a minimum of 100 characters',
     schedule: 'The Schedule field must be at least 3 characters long',
     maxLength: `Character limit {{maxLength}} reached`,

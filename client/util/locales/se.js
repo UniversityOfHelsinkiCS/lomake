@@ -827,7 +827,7 @@ export default {
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',
     date: 'Datumet är i fel format',
-    participants: 'Antalet tecken i fältet Deltagare måste vara mer än 3 tecken',
+    participants: 'Antalet tecken i fältet Deltagare måste vara minst 3 tecken',
     matters: 'Fältet Överenskomna ärenden måste innehålla minst 100 tecken',
     schedule: 'Fältet Tidsschema måste vara minst 3 tecken långt',
     maxLength: 'Teckengränsen {{maxLength}} är nådd',

@@ -8,6 +8,7 @@ import { fiFI, svSE, enUS } from '@mui/x-date-pickers/locales'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useTranslation } from 'react-i18next'
 import { DocumentFormSchema } from '@/shared/validators'
+import type { DocumentForm } from '@/shared/lib/types'
 import { useCreateDocumentMutation } from '@/client/redux/documents'
 import { TFunction } from 'i18next'
 import { useNavigate } from 'react-router'
@@ -16,15 +17,11 @@ import { useAppSelector } from '@/client/util/hooks'
 const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followupDate']
 
 const initForm = (t: TFunction, error: boolean) => {
-  return fields.reduce(
-    (acc, field) => {
-      if (field === 'title' && !error)
-        acc[field] = `${t('document:header')} - ${new Date().toLocaleDateString('fi-FI')}`
-      else acc[field] = ''
-      return acc
-    },
-    {} as Record<string, string>
-  )
+  return fields.reduce((acc, field) => {
+    if (field === 'title' && !error) acc[field] = `${t('document:header')} - ${new Date().toLocaleDateString('fi-FI')}`
+    else acc[field] = ''
+    return acc
+  }, {} as DocumentForm)
 }
 
 const DocumentForm = ({ programmeKey }: { programmeKey: string }) => {
@@ -46,7 +43,7 @@ const DocumentForm = ({ programmeKey }: { programmeKey: string }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData((prevData: Record<string, string>) => ({
+    setFormData((prevData: DocumentForm) => ({
       ...prevData,
       [name]: value,
     }))
@@ -59,7 +56,7 @@ const DocumentForm = ({ programmeKey }: { programmeKey: string }) => {
     const day = String(date.date()).padStart(2, '0')
     const final = `${year}-${month}-${day}`
 
-    setFormData((prevData: Record<string, string>) => ({
+    setFormData((prevData: DocumentForm) => ({
       ...prevData,
       [field]: final,
     }))
@@ -70,15 +67,13 @@ const DocumentForm = ({ programmeKey }: { programmeKey: string }) => {
     if (!res.success) {
       const fieldErrors = res.error.format()
       setErrors(
-        fields.reduce(
-          (acc, field) => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
-            acc[field] = t(`error:${fieldErrors[field]?._errors?.[0]}`) || ''
-            return acc
-          },
-          {} as Record<string, string>
-        )
+        fields.reduce((acc, field) => {
+          const errorKey = fieldErrors[field]?._errors?.[0]
+          if (errorKey) {
+            acc[field] = t(`error:${errorKey}`) || ''
+          }
+          return acc
+        }, {} as DocumentForm)
       )
     }
     return res.success

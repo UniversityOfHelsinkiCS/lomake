@@ -790,7 +790,7 @@ export default {
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',
     date: 'Päivämäärä on väärässä muodossa',
-    participants: 'Osallistujat-kentän merkkien määrä täytyy olla yli 3 merkkiä',
+    participants: 'Osallistujat-kentän merkkien määrä täytyy olla ainakin 3 merkkiä',
     matters: 'Sovitut asiat-kentän minimi merkkimäärä on 100 merkkiä',
     schedule: 'Aikataulu-kentän minimi pituus on 3 merkkiä',
     maxLength: `Merkkiraja {{maxLength}} täynnä`,
