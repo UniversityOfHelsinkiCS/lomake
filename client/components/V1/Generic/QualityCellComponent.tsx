@@ -60,7 +60,7 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
       <Button onClick={handleOpen}>
         {doc ? <ChatBubbleOutlineIcon color="secondary" sx={{ fontSize: '28px' }} /> : null}
       </Button>
-      <Modal contentSx={{ width: '50%' }} open={open} setOpen={setOpen}>
+      <Modal contentSx={{ width: '1200px' }} open={open} setOpen={setOpen}>
         <Typography variant="h3">
           {programmeData.koulutusohjelma[lang]} {year}
         </Typography>

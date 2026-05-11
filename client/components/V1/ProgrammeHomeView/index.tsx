@@ -51,7 +51,7 @@ const ProgrammeHomeView = () => {
           <Typography variant="h2">{programmeData[0].koulutusohjelma[lang]}</Typography>
         </div>
       </div>
-      <Box sx={{ mb: 4 }}>
+      <Box sx={{ width: '85%', mb: 4 }}>
         <Typography sx={{ mb: 2 }} variant="h3">
           {t('keyData:homeHeader').toUpperCase()}
         </Typography>

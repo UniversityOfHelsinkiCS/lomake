@@ -102,7 +102,7 @@ const QualityManagementComponent = ({ programmeData }) => {
     : ''
 
   return (
-    <Box sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+    <Box sx={{ width: '85%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Typography sx={{ mb: '2rem' }} variant="h3">
           {t('keyData:qualityControl').toUpperCase()}
