@@ -14,6 +14,8 @@ import { ArrowForward } from '@mui/icons-material'
 import { isAdmin, hasSomeReadAccess, isDegreeStudentOrEmployee } from '@/config/common'
 import Filter from '../Generic/FilterComponent'
 
+import RiskManagementComponent from './RiskManagementComponent'
+
 const OverviewPage = () => {
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language)
@@ -29,6 +31,7 @@ const OverviewPage = () => {
   const showDiscontinued = useAppSelector(state => state.filters.showDiscontinued)
   const user = useAppSelector(state => state.currentUser.data)
   const [searchValue, setSearchValue] = useState<string>('')
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
 
   const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user)
   useEffect(() => {
@@ -62,6 +65,7 @@ const OverviewPage = () => {
 
   return (
     <>
+      <RiskManagementComponent modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Alert
         icon={false}
         severity="info"
@@ -100,6 +104,13 @@ const OverviewPage = () => {
 
           <Filter setSearchValue={setSearchValue} />
         </div>
+        {isAdmin(user) && (
+          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '97%', marginBottom: '1rem' }}>
+            <Button endIcon={<ArrowForward />} onClick={() => setModalOpen(true)} variant="text">
+              {t('riskManagement:header')}
+            </Button>
+          </div>
+        )}
 
         <KeyDataTableComponent
           facultyFilter={selectedFaculties}

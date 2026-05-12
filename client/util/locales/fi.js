@@ -797,10 +797,13 @@ export default {
   },
   riskManagement: {
     header: 'Tiedekuntien koulutusohjelmien riskienhallinta',
-    description:
-      'Varadekaani arvioi vuosiseurannan perusteella tiedekunnan vastuulla olevien koulutusohjelmien tilannetta.\nMikäli tiedekunnassa on koulutusohjelmia, joilla on värimerkinnältään keltaisia tai punaisia arviointialueita, varadekaani tekee niiden arviointialueiden riskiarvion Suunta-järjestelmässä riskit-välilehdelle. Suunta-järjestelmässä tehdään yhteenveto kustakin riskistä, kirjataan riskin käsittelytoimenpiteet, vastuuhenkilöt ja seuranta-aikataulu. Riskiarvio tehdään kandiohjelmista ja maisteriohjelmista erikseen.',
-    link: 'Linkki: https://suunta.it.helsinki.fi',
-    contact:
-      'Lisätietoa riskienhallinnasta ja Suunta-järjestelmästä: Hallintopäällikkö Nina Aremo, nina.aremo@helsinki.fi',
+    description1:
+      'Varadekaani arvioi vuosiseurannan perusteella tiedekunnan vastuulla olevien koulutusohjelmien tilannetta.',
+    description2:
+      'Mikäli tiedekunnassa on koulutusohjelmia, joilla on värimerkinnältään keltaisia tai punaisia arviointialueita, varadekaani tekee niiden arviointialueiden riskiarvion Suunta-järjestelmässä riskit-välilehdelle. Suunta-järjestelmässä tehdään yhteenveto kustakin riskistä, kirjataan riskin käsittelytoimenpiteet, vastuuhenkilöt ja seuranta-aikataulu. Riskiarvio tehdään kandiohjelmista ja maisteriohjelmista erikseen.',
+    link: 'Siirry Suunta-järjestelmään',
+    info: 'Lisätietoa riskienhallinnasta ja Suunta-järjestelmästä: ',
+    contactTitle: 'Hallintopäällikkö Nina Aremo',
+    contact: 'nina.aremo@helsinki.fi',
   },
 }
