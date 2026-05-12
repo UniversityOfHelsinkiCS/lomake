@@ -9,6 +9,7 @@ import { Loader } from 'semantic-ui-react'
 import { Box } from '@mui/material'
 import NavBar from './NavBar'
 import Router from './Router'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Banner } from './Banner'
 import { formKeys } from '../../config/data'
 
@@ -157,16 +158,7 @@ export default () => {
   return (
     <Box className="v1" sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', fontSize: 16 }}>
       {/* Uncomment/comment the banner to change its visibility */}
-      <Banner
-        message={
-          lang === 'fi'
-            ? 'Palvelussa on käyttökatko 12.5. klo 10-12. Pahoittelut häiriöstä.'
-            : lang === 'se'
-              ? 'Tjänsten är nere 12.5. kl 10-12. Ursäkta störningarna.'
-              : 'The service is down on May 12 from 10 to 12. Sorry for the inconvenience.'
-        }
-        severity="error"
-      />
+      {/*<Banner />*/}
 
       <NavBar />
 
