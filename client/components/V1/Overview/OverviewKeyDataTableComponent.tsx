@@ -11,7 +11,6 @@ import { KeyDataProgramme } from '@/shared/lib/types'
 import ActionsCell from '../Generic/ActionsCellComponent'
 import QualityCell from '../Generic/QualityCellComponent'
 import TrafficLightCell from '../Generic/TrafficLightCellComponent'
-import SearchInput from '../Generic/SearchInputComponent'
 import { Table, TableHead, TableBody, TableRow, TableCell } from '../Generic/TableComponent'
 import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
 import { orderBy } from 'lodash'
@@ -23,7 +22,6 @@ import { useGetReportsQuery } from '@/client/redux/reports'
 import { useFetchAllKeyDataQuery } from '@/client/redux/keyData'
 import { useGetActiveInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
 import { InterventionProcedureType } from '@/client/lib/types'
-import DiscontinuedProgramFilter from '../Generic/DiscontinuedFilterComponent'
 import { colors } from '@/client/util/common'
 
 interface KeyDataTableProps {
@@ -31,6 +29,7 @@ interface KeyDataTableProps {
   programmeLevelFilter: string
   yearFilter: string
   showDiscontinued: boolean
+  searchValue: string
 }
 
 const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
@@ -131,12 +130,13 @@ const KeyDataTableComponent = ({
   programmeLevelFilter = '',
   yearFilter,
   showDiscontinued = true,
+  searchValue = '',
 }: KeyDataTableProps) => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { t } = useTranslation()
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
 
-  const [searchValue, setSearchValue] = useState<string>('')
+  
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [modalOpen, setModalOpen] = useState<boolean>(false)
@@ -245,18 +245,6 @@ const KeyDataTableComponent = ({
 
   return (
     <div style={{ width: '100%' }}>
-      <div
-        style={{
-          margin: '3rem 1rem 1rem 1rem',
-          alignItems: 'center',
-          flexDirection: 'row',
-          display: 'flex',
-          gap: '2rem',
-        }}
-      >
-        <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
-        <DiscontinuedProgramFilter />
-      </div>
       <div style={{ width: '100%', overflowX: 'auto', padding: '1rem' }}>
         <div style={{ minWidth: 1750 }}>
           <Table variant="overview">

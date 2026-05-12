@@ -1,19 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useLocation, useNavigate } from 'react-router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../../util/hooks'
 import { useTranslation } from 'react-i18next'
 import { setFaculty, setKeyDataYear, setLevel } from '../../../redux/filterReducer'
 
 import KeyDataTableComponent from './OverviewKeyDataTableComponent'
-import YearFilter from '../Generic/YearFilterComponent'
-import FacultyFilter from '../Generic/FacultyFilterComponent'
-import LevelFilter from '../Generic/LevelFilterComponent'
+
 import NoPermissions from '../../Generic/NoPermissions'
 import { Alert, Button, Typography } from '@mui/material'
 import { ArrowForward } from '@mui/icons-material'
 import { isAdmin, hasSomeReadAccess, isDegreeStudentOrEmployee } from '@/config/common'
+import Filter from '../Generic/FilterComponent'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -29,6 +28,7 @@ const OverviewPage = () => {
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
   const showDiscontinued = useAppSelector(state => state.filters.showDiscontinued)
   const user = useAppSelector(state => state.currentUser.data)
+  const [searchValue, setSearchValue] = useState<string>('')
 
   const readAccess = hasSomeReadAccess(user) || isAdmin(user) || isDegreeStudentOrEmployee(user)
   useEffect(() => {
@@ -93,21 +93,18 @@ const OverviewPage = () => {
         </div>
       </Alert>
       <div style={{ padding: '2rem', width: '100%' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', width: '100%', marginBottom: '2.5rem' }}>
+        <div style={{ display: 'flex', gap: '2rem', width: '100%', marginBottom: '2.5rem', flexDirection: 'column' }}>
           <Typography style={{ margin: 0 }} variant="h1">
             {t('landingPage:yearlyAssessmentTitle').toUpperCase()}
           </Typography>
 
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <LevelFilter />
-            <FacultyFilter />
-            <YearFilter />
-          </div>
+          <Filter setSearchValue={setSearchValue} />
         </div>
 
         <KeyDataTableComponent
           facultyFilter={selectedFaculties}
           programmeLevelFilter={selectedLevel}
+          searchValue={searchValue}
           showDiscontinued={showDiscontinued}
           yearFilter={selectedYear}
         />
