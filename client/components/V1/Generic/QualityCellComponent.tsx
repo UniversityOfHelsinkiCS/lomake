@@ -20,7 +20,6 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
   const year = `${programmeData.year + 1}`
   const [open, setOpen] = useState(false)
   const selectedYear = useAppSelector(state => state.filters.keyDataYear)
-  const [openNoDoc, setOpenNoDoc] = useState(false)
 
   const dispatch = useAppDispatch()
 
@@ -36,10 +35,10 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
   if (!doc && !programmeData.additionalInfo.fi?.includes('Lakkautettu')) {
     return (
       <TableCell>
-        <Button onClick={() => setOpenNoDoc(true)}>
+        <Button onClick={() => setOpen(true)}>
           <NotificationBadge variant="medium" />
         </Button>
-        <Modal contentSx={{ width: '800px' }} data-cy="no-quality-doc-modal" open={openNoDoc} setOpen={setOpenNoDoc}>
+        <Modal contentSx={{ width: '800px' }} data-cy="no-quality-doc-modal" open={open} setOpen={setOpen}>
           <Typography variant="h4">{t('keyData:missingQualityDocument')}</Typography>
           <Typography sx={{ mt: 2 }}>{t('qualitydocument:info')}</Typography>
           <Link href={`${basePath}v1/programmes/10/${programmeData.koulutusohjelmakoodi}`}>
