@@ -136,7 +136,6 @@ const KeyDataTableComponent = ({
   const { t } = useTranslation()
   const activeYear = useAppSelector(state => state.filters.keyDataYear)
 
-  
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [modalOpen, setModalOpen] = useState<boolean>(false)
