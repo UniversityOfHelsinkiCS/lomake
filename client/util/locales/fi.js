@@ -795,4 +795,12 @@ export default {
     schedule: 'Aikataulu-kentän minimi pituus on 3 merkkiä',
     maxLength: `Merkkiraja {{maxLength}} täynnä`,
   },
+  riskManagement: {
+    header: 'Tiedekuntien koulutusohjelmien riskienhallinta',
+    description:
+      'Varadekaani arvioi vuosiseurannan perusteella tiedekunnan vastuulla olevien koulutusohjelmien tilannetta.\nMikäli tiedekunnassa on koulutusohjelmia, joilla on värimerkinnältään keltaisia tai punaisia arviointialueita, varadekaani tekee niiden arviointialueiden riskiarvion Suunta-järjestelmässä riskit-välilehdelle. Suunta-järjestelmässä tehdään yhteenveto kustakin riskistä, kirjataan riskin käsittelytoimenpiteet, vastuuhenkilöt ja seuranta-aikataulu. Riskiarvio tehdään kandiohjelmista ja maisteriohjelmista erikseen.',
+    link: 'Linkki: https://suunta.it.helsinki.fi',
+    contact:
+      'Lisätietoa riskienhallinnasta ja Suunta-järjestelmästä: Hallintopäällikkö Nina Aremo, nina.aremo@helsinki.fi',
+  },
 }

@@ -832,4 +832,7 @@ export default {
     schedule: 'Fältet Tidsschema måste vara minst 3 tecken långt',
     maxLength: 'Teckengränsen {{maxLength}} är nådd',
   },
+  riskManagement: {
+    header: 'Riskhantering av fakulteternas utbildningsprogram',
+  },
 }

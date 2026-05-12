@@ -794,4 +794,7 @@ export default {
     schedule: 'The Schedule field must be at least 3 characters long',
     maxLength: `Character limit {{maxLength}} reached`,
   },
+  riskManagement: {
+    header: 'Risk Management of the Faculties Degree Programmes',
+  },
 }
