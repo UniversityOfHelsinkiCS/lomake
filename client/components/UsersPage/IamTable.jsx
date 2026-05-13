@@ -1,30 +1,51 @@
-import { Table } from 'semantic-ui-react'
+import { Table, TableHead, TableBody, TableCell, TableRow } from '@mui/material'
 import uniq from 'lodash/uniq'
+import { colors } from '@/client/util/common'
 import { doctoralIams, doctoralWritingIams, superAdminGroups, adminGroups } from '../../../config/IAMConfig'
 
 const IamTable = () => {
-  const getTableRow = (iamGroup, accessGroup, workPosition) => {
+  const getTableRow = (iamGroup, accessGroup, workPosition, keyProp) => {
     return (
-      <Table.Row>
-        <Table.Cell>{iamGroup}</Table.Cell>
-        <Table.Cell>{accessGroup}</Table.Cell>
-        <Table.Cell>{workPosition}</Table.Cell>
-      </Table.Row>
+      <TableRow key={keyProp}>
+        <TableCell>{iamGroup}</TableCell>
+        <TableCell>{accessGroup}</TableCell>
+        <TableCell>{workPosition}</TableCell>
+      </TableRow>
     )
   }
 
   const getRowsForAccessGroup = (iamGroups, accessGroup, workPosition) => {
-    return <>{iamGroups.map(iamGroup => getTableRow(iamGroup, accessGroup, workPosition))}</>
+    return (
+      <>
+        {iamGroups.map((iamGroup, idx) =>
+          getTableRow(iamGroup, accessGroup, workPosition, `${accessGroup}-${iamGroup}-${idx}`)
+        )}
+      </>
+    )
   }
 
   return (
-    <Table compact>
-      <Table.Header>
-        <Table.HeaderCell>IAM-ryhmä</Table.HeaderCell>
-        <Table.HeaderCell>Mitä oikeuksia sillä saa?</Table.HeaderCell>
-        <Table.HeaderCell>Keitä ryhmään kuuluu?</Table.HeaderCell>
-      </Table.Header>
-      <Table.Body>
+    <Table
+      sx={{
+        tableLayout: 'fixed',
+        width: '100%',
+        '& .MuiTableCell-root': {
+          borderRight: 1,
+          borderColor: 'divider',
+        },
+        '& .MuiTableCell-root:last-of-type': {
+          borderRight: 0,
+        },
+      }}
+    >
+      <TableHead>
+        <TableCell sx={{ backgroundColor: colors.background_gray, fontWeight: 700 }}>IAM-ryhmä</TableCell>
+        <TableCell sx={{ backgroundColor: colors.background_gray, fontWeight: 700 }}>
+          Mitä oikeuksia sillä saa?
+        </TableCell>
+        <TableCell sx={{ backgroundColor: colors.background_gray, fontWeight: 700 }}>Keitä ryhmään kuuluu?</TableCell>
+      </TableHead>
+      <TableBody>
         {getRowsForAccessGroup(superAdminGroups, 'Super-admin-oikeudet', 'Toska-ryhmä')}
         {getRowsForAccessGroup(adminGroups, 'Admin-oikeudet', 'Ospa-ryhmä')}
         {getRowsForAccessGroup(
@@ -82,7 +103,7 @@ const IamTable = () => {
           'Kirjoitusoikeudet kyseiseen koulutusohjelmaan',
           'Koulutusohjelman johtoryhmän työsuhteessa olevat jäsenet'
         )}
-      </Table.Body>
+      </TableBody>
     </Table>
   )
 }

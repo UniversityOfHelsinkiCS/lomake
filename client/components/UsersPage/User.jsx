@@ -2,7 +2,8 @@
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import moment from 'moment'
-import { Table, Icon, Label, Popup } from 'semantic-ui-react'
+import { TableCell, TableRow, Box, Chip, Tooltip, IconButton } from '@mui/material'
+import LoginIcon from '@mui/icons-material/Login'
 import { useTranslation } from 'react-i18next'
 
 import { colors, getUserRole } from '../../util/common'
@@ -23,9 +24,14 @@ const getSpecialGroup = (user, group, lang, t, data) => {
   const special = specialGroups.find(s => s.group === group)
   if (!special) return null
   return (
-    <Label key={`${user}-${special.translationTag}`}>
-      {special.faculty ? special.translationTag[lang] : t('users:special:access', { context: special.translationTag })}
-    </Label>
+    <Chip
+      key={`${user}-${special.translationTag}`}
+      label={
+        special.faculty ? special.translationTag[lang] : t('users:special:access', { context: special.translationTag })
+      }
+      size="small"
+      sx={{ marginRight: 0.5, marginBottom: 0.5 }}
+    />
   )
 }
 
@@ -50,12 +56,12 @@ const mayHijack = (current, toMock) => {
 const FormattedAccess = ({ user, programmeCodesAndNames }) => {
   const { t } = useTranslation()
   const programmeKeys = user.access ? Object.keys(user.access) : []
-  if (!programmeKeys.length > 0 || programmeKeys.every(key => key === '')) {
-    return <div>None</div>
-  }
+  if (!programmeKeys.length > 0 || programmeKeys.every(key => key === '')) return <div>None</div>
   return (
-    <Popup
-      content={
+    <Tooltip
+      placement="bottom"
+      slotProps={{ popper: { sx: { '& .MuiTooltip-tooltip': { maxWidth: '700px' } } } }}
+      title={
         <div className="user-programme-list-popup">
           {programmeKeys.map(p => (
             <p key={p}>
@@ -64,18 +70,16 @@ const FormattedAccess = ({ user, programmeCodesAndNames }) => {
           ))}
         </div>
       }
-      position="bottom center"
-      trigger={
-        <div>
-          <div className="user-access-list">{programmeCodesAndNames.get(programmeKeys[0])}</div>
-          {programmeKeys.length > 1 && (
-            <div>
-              +{programmeKeys.length - 1} {t('users:moreProgrammes', { count: programmeKeys.length - 1 })}
-            </div>
-          )}
-        </div>
-      }
-    />
+    >
+      <span style={{ display: 'block', width: '100%' }}>
+        <div className="user-access-list">{programmeCodesAndNames.get(programmeKeys[0])}</div>
+        {programmeKeys.length > 1 && (
+          <div>
+            +{programmeKeys.length - 1} {t('users:moreProgrammes', { count: programmeKeys.length - 1 })}
+          </div>
+        )}
+      </span>
+    </Tooltip>
   )
 }
 
@@ -91,40 +95,46 @@ export default ({ user, lang, programmeCodesAndNames, data }) => {
   }
 
   return (
-    <Table.Row>
-      <Table.Cell width={2}>
+    <TableRow>
+      <TableCell sx={{ width: '16%' }}>
         {user.firstname} {user.lastname}
-      </Table.Cell>
-      <Table.Cell width={1}>{user.uid}</Table.Cell>
-      <Table.Cell data-cy={`${user.uid}-userAccess`} style={{ display: 'flex' }}>
-        <FormattedAccess programmeCodesAndNames={programmeCodesAndNames} user={user} />
-      </Table.Cell>
-      <Table.Cell data-cy={`${user.uid}-userGroup`}>{getUserType(user, t)}</Table.Cell>
-      <Table.Cell>
+      </TableCell>
+      <TableCell sx={{ width: '8%' }}>{user.uid}</TableCell>
+      <TableCell data-cy={`${user.uid}-userAccess`} sx={{ width: '45%', verticalAlign: 'top' }}>
+        <Box sx={{ width: '100%' }}>
+          <FormattedAccess programmeCodesAndNames={programmeCodesAndNames} user={user} />
+        </Box>
+      </TableCell>
+      <TableCell data-cy={`${user.uid}-userGroup`}>{getUserType(user, t)}</TableCell>
+      <TableCell>
         {user.lastLogin ? (
           moment(user.lastLogin).format('DD.MM.YYYY')
         ) : (
           <span style={{ color: colors.gray }}>Ei tallennettu</span>
         )}
-      </Table.Cell>
-      <Table.Cell data-cy="user-access-groups">
+      </TableCell>
+      <TableCell data-cy="user-access-groups">
         {user.specialGroup
           ? Object.keys(user.specialGroup).map(group => getSpecialGroup(user, group, lang, t, data))
           : null}
-      </Table.Cell>
-      <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
-      <Table.Cell data-cy="user-iam_groups">
+      </TableCell>
+      <TableCell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</TableCell>
+      <TableCell data-cy="user-iam_groups">
         {user.iamGroups
           ? user.iamGroups
               .filter(group => IAMsToTable.includes(group) || group.includes('student') || group.includes('jory'))
               .join('; ')
           : null}
-      </Table.Cell>
+      </TableCell>
       {isAdmin(currentUser) && (
-        <Table.Cell>
-          {mayHijack(currentUser, user) && <Icon name="sign-in" onClick={logInAs} size="large" />}
-        </Table.Cell>
+        <TableCell>
+          {mayHijack(currentUser, user) && (
+            <IconButton data-cy={`hijack-${user.uid}`} onClick={logInAs} size="large">
+              <LoginIcon />
+            </IconButton>
+          )}
+        </TableCell>
       )}
-    </Table.Row>
+    </TableRow>
   )
 }

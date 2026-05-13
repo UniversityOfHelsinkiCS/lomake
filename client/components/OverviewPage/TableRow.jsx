@@ -1,14 +1,19 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
-import { Button } from 'semantic-ui-react'
+import { Button } from '@mui/material'
 
 import { isAdmin } from '../../../config/common'
 import ColorTableCell from './ColorTableCell'
+import PersonIcon from '@mui/icons-material/Person'
 
 const ManageCell = ({ program, setProgramControlsToShow }) => (
   <div className="table-container-manage-cell">
-    <Button circular data-cy={`${program.key}-manage`} icon="user" onClick={() => setProgramControlsToShow(program)} />
+    <Button
+      data-cy={`${program.key}-manage`}
+      onClick={() => setProgramControlsToShow(program)}
+      startIcon={<PersonIcon />}
+    ></Button>
   </div>
 )
 

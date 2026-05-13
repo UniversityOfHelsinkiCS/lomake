@@ -1,6 +1,5 @@
-import { Box, Typography, TextField } from '@mui/material'
+import { Box, Button, Typography, TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Button } from 'semantic-ui-react'
 import CharacterCounter from './Charactercounter'
 import { FormDataState } from '@/shared/lib/types'
 
@@ -111,7 +110,6 @@ const FeedbackActionForm = ({
           data-cy={`remove-example${example}-${field}`}
           onClick={handleCancelClick}
           style={{ alignSelf: 'flex-start', marginTop: '1rem' }}
-          type="button"
           variant="outlined"
         >
           {t(`qualitydocument:example${example}Remove`)}

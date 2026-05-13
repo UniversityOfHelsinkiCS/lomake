@@ -10,7 +10,6 @@ import { TFunction } from 'i18next'
 import AddQualityDocument from './AddQualityDocument'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
-import { Loader } from 'semantic-ui-react'
 import { useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import type { QualityDocumentType } from '@/client/lib/types'
 import EditQualityDocument from './EditQualityDocument'
@@ -46,7 +45,7 @@ const QualityManagement = () => {
   const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
   const navigate = useNavigate()
 
-  if (isLoading) return <Loader active />
+  if (isLoading) return <CircularProgress />
   // For this function the year variable is not needed cuz
   // intervention procedure is independent from years.
   const programmeData = programme.find(

@@ -1,4 +1,4 @@
-import { Icon } from 'semantic-ui-react'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
 import { colors } from '../../util/common'
 import { formKeys } from '../../../config/data'
 
@@ -38,7 +38,7 @@ const MeasuresCell = ({
           {form === formKeys.EVALUATION_COMMTTEES && textAnswer}
         </span>
       ) : (
-        <Icon name="discussions" size="large" />
+        <ChatBubbleIcon />
       )}
     </div>
   )

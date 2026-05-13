@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-sort-props */
 import { Component } from 'react'
 import { Link } from 'react-router'
-import { Button } from 'semantic-ui-react'
+import { Button } from '@mui/material'
 import { Sentry } from '../util/sentry'
 
 export default class ErrorBoundary extends Component {

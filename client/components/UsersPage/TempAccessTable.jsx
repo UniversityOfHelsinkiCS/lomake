@@ -1,11 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Checkbox, Confirm, Divider, Header, Icon, Table } from 'semantic-ui-react'
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableCell,
+  TableRow,
+  Switch,
+  Typography,
+  Button,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Box,
+} from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import moment from 'moment'
-import { sortedItems } from '../../util/common'
+import { sortedItems, colors } from '../../util/common'
 import './UsersPage.scss'
+import SwapVertIcon from '@mui/icons-material/SwapVert'
+import EditDocumentIcon from '@mui/icons-material/EditDocument'
+import DeleteIcon from '@mui/icons-material/Delete'
+import CheckIcon from '@mui/icons-material/Check'
 
 const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
   const { t } = useTranslation()
@@ -14,9 +32,10 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
   const [reverse, setReverse] = useState(false)
   const [confirm, setConfirm] = useState(false)
   const [toDelete, setToDelete] = useState(null)
-  const users = useSelector(state => state.users.data.filter(u => u.tempAccess.length > 0))
+  const allUsers = useSelector(state => state.users.data)
+  const users = useMemo(() => allUsers.filter(u => u.tempAccess.length > 0), [allUsers])
 
-  const getCustomHeader = ({ name, width, field, sortable = true }) => {
+  const getCustomHeader = ({ name, pctWidth, field, sortable = true }) => {
     const sortHandler = sortable
       ? () => {
           if (sorter === field) {
@@ -29,9 +48,34 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
       : undefined
 
     return (
-      <Table.HeaderCell onClick={sortHandler} style={sortable ? { cursor: 'pointer' } : {}} width={width}>
-        {name} {sortable ? <Icon name="sort" /> : null}
-      </Table.HeaderCell>
+      <TableCell
+        sx={{
+          width: pctWidth,
+          backgroundColor: colors.background_gray,
+          fontWeight: 700,
+        }}
+      >
+        <span>{name}</span>
+        {sortable ? (
+          <Button
+            aria-label={`Sort by ${name}`}
+            onClick={sortHandler}
+            sx={{
+              color: 'inherit',
+              minWidth: 0,
+              marginLeft: 0.5,
+              padding: 0,
+              textTransform: 'none',
+              verticalAlign: 'middle',
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+            }}
+          >
+            <SwapVertIcon sx={{ color: 'black', fontSize: 20 }} />
+          </Button>
+        ) : null}
+      </TableCell>
     )
   }
 
@@ -82,55 +126,90 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
 
   return (
     <div className="temp-access-table-container">
-      <Divider />
-      <Header as="h3">{t('users:tempAccesses')} </Header>
-      <Checkbox checked={showAll} label={t('users:expired')} onChange={(e, data) => setShowAll(data.checked)} toggle />
-      <Table celled compact stackable>
-        <Table.Header className="sticky-header">
-          <Table.Row>
+      <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', my: 3 }} />
+      <Typography variant="h3">{t('users:tempAccesses')} </Typography>
+      <Switch checked={showAll} onChange={e => setShowAll(e.target.checked)} /> {t('users:expired')}
+      <Table
+        sx={{
+          tableLayout: 'fixed',
+          width: '100%',
+          '& .MuiTableCell-root': {
+            borderRight: 1,
+            borderColor: 'divider',
+          },
+          '& .MuiTableCell-root:last-of-type': {
+            borderRight: 0,
+          },
+        }}
+      >
+        <TableHead className="sticky-header">
+          <TableRow>
             {getCustomHeader({ name: t('users:name'), width: 2, field: 'lastname' })}
             {getCustomHeader({ name: t('users:userId'), width: 1, field: 'uid' })}
             {getCustomHeader({ name: t('programmeHeader'), width: 6, field: 'progName' })}
             {getCustomHeader({ name: t('users:writingRight'), width: 1, field: 'writingRights', sortable: false })}
             {getCustomHeader({ name: t('users:endsIn'), width: 2, field: 'endDate', sortable: true })}
-            <Table.HeaderCell width={1}>{t('edit')}</Table.HeaderCell>
-            <Table.HeaderCell width={1}>{t('delete')}</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
+            <TableCell
+              sx={{
+                backgroundColor: colors.background_gray,
+                fontWeight: 700,
+              }}
+            >
+              {t('edit')}
+            </TableCell>
+            <TableCell
+              sx={{
+                backgroundColor: colors.background_gray,
+                fontWeight: 700,
+              }}
+            >
+              {t('delete')}
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {sortedUsersToShow.map(row => (
-            <Table.Row key={`${row.uid}-${row.programme}-row`}>
-              <Table.Cell>
+            <TableRow key={`${row.uid}-${row.programme}-row`}>
+              <TableCell>
                 {row.firstname} {row.lastname}
-              </Table.Cell>
-              <Table.Cell>{row.uid}</Table.Cell>
-              <Table.Cell data-cy={`${row.uid}-${row.programme}-programme`} style={{ display: 'flex' }}>
-                {row.progName}
-              </Table.Cell>
-              <Table.Cell data-cy={`${row.uid}-${row.programme}-writing-right`} textAlign="center">
-                {row.writingRights ? <Icon color="green" name="check" /> : null}
-              </Table.Cell>
-              <Table.Cell>{moment(row.endDate).format('DD.MM.YYYY')}</Table.Cell>
-              <Table.Cell data-cy="edit-access" textAlign="center">
-                <Icon name="edit" onClick={() => handleEdit(row)} />
-              </Table.Cell>
-              <Table.Cell data-cy="delete-access" textAlign="center">
-                <Icon color="red" name="delete" onClick={() => handleConfirmOpen(row)} />
-              </Table.Cell>
-            </Table.Row>
+              </TableCell>
+              <TableCell>{row.uid}</TableCell>
+              <TableCell data-cy={`${row.uid}-${row.programme}-programme`}>{row.progName}</TableCell>
+              <TableCell data-cy={`${row.uid}-${row.programme}-writing-right`}>
+                {row.writingRights ? <CheckIcon color="success" /> : null}
+              </TableCell>
+              <TableCell>{moment(row.endDate).format('DD.MM.YYYY')}</TableCell>
+              <TableCell data-cy="edit-access">
+                <Button onClick={() => handleEdit(row)}>
+                  <EditDocumentIcon name="edit" />
+                </Button>
+              </TableCell>
+              <TableCell data-cy="delete-access">
+                <Button onClick={() => handleConfirmOpen(row)}>
+                  <DeleteIcon name="delete" />
+                </Button>
+              </TableCell>
+            </TableRow>
           ))}
-        </Table.Body>
+        </TableBody>
       </Table>
-      <Confirm
-        content={t('users:confirm', {
-          firstname: toDelete?.firstname,
-          lastname: toDelete?.lastname,
-          progName: toDelete?.progName,
-        })}
-        onCancel={() => setConfirm(false)}
-        onConfirm={handleConfirm}
-        open={confirm}
-      />
+      <Dialog onClose={() => setConfirm(false)} open={confirm}>
+        <DialogContent>
+          <DialogContentText>
+            {t('users:confirm', {
+              firstname: toDelete?.firstname,
+              lastname: toDelete?.lastname,
+              progName: toDelete?.progName,
+            })}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirm(false)}>{t('cancel')}</Button>
+          <Button color="primary" onClick={handleConfirm}>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   )
 }

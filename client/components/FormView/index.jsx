@@ -3,7 +3,8 @@
 import { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router'
-import { Button, Loader } from 'semantic-ui-react'
+import { Button, CircularProgress } from '@mui/material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useTranslation } from 'react-i18next'
 import rypsiImage from '../../assets/rypsi.jpg'
 import NoPermissions from '../Generic/NoPermissions'
@@ -100,7 +101,7 @@ const FormView = () => {
   if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('form')} t={t} />
 
   return singleProgramPending || !programme ? (
-    <Loader active />
+    <CircularProgress />
   ) : (
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
@@ -110,7 +111,12 @@ const FormView = () => {
           <div className="hide-in-print-mode">
             <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
-              <Button icon="arrow left" onClick={() => navigate('/yearly')} />
+              <Button
+                aria-label="back"
+                onClick={() => navigate('/yearly')}
+                size="large"
+                startIcon={<ArrowBackIcon />}
+              />
             </div>
             <img alt="form-header-rypsi" className="img-responsive" src={rypsiImage} />
           </div>

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Checkbox, Container, Dropdown, Header, Input, Segment } from 'semantic-ui-react'
+import { Button, TextField, Typography, Checkbox, Autocomplete, Box, FormControlLabel } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 import DatePicker, { registerLocale } from 'react-datepicker'
@@ -75,43 +75,56 @@ const TempAccess = () => {
   registerLocale('se', sv)
 
   return (
-    <Segment>
-      <div>
-        <Header as="h3"> {t('users:tempAccessMangement')} </Header>
-        <Container className="temp-access-info" fluid>
-          {t('users:tempAccessInfo1')} <br />
-          {t('users:tempAccessInfo2')}
-        </Container>
-        <Container className="temp-access-info" fluid>
+    <Box>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 4 }}>
+        <Typography variant="h3"> {t('users:tempAccessMangement')} </Typography>
+        <Typography>{t('users:tempAccessInfo1')}</Typography>
+        <Typography>{t('users:tempAccessInfo2')}</Typography>
+        <Typography>
           <i>{t('users:tempAccessNote')}</i>
-        </Container>
+        </Typography>
         <br />
       </div>
       <div className="temp-access-details">
         <div>
-          <Header as="h5"> {t('users:receiverEmail')}</Header>
-          <Input
+          <Typography variant="h5"> {t('users:receiverEmail')}</Typography>
+          <TextField
             className="email-input"
+            label={t('email')}
             name="email"
-            onChange={(e, { value }) => setEmail(value)}
-            placeholder={t('email')}
+            onChange={e => setEmail(e.target.value)}
             value={email}
           />
         </div>
         <div>
-          <Header as="h5">{t('users:accessProgramme')}</Header>
-          <Dropdown
+          <Typography variant="h5"> {t('users:accessProgramme')}</Typography>
+          <Autocomplete
             data-cy="programme-filter"
-            onChange={(e, { value }) => setProgramme(value)}
-            options={options}
-            placeholder={t('programmeHeader')}
-            search
-            selection
-            value={programme}
+            freeSolo={false}
+            fullWidth
+            onChange={(_, newValue) => setProgramme(newValue || '')}
+            options={options.map(o => o.value)}
+            renderInput={params => (
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              <TextField {...params} label={t('programmeHeader')} placeholder={t('programmeHeader')} />
+            )}
+            value={programme || null}
           />
         </div>
         <div>
-          <Header as="h5">{t('users:endOfAccess')}</Header>
+          <Typography variant="h5">{t('users:kojoEmail')}</Typography>
+          <TextField
+            className="kojoEmail-input"
+            label={t('email')}
+            name="kojoEmail"
+            onChange={e => setKojoEmail(e.target.value)}
+            value={kojoEmail}
+          />
+        </div>
+      </div>
+      <div className="temp-access-input">
+        <div>
+          <Typography variant="h5">{t('users:endOfAccess')}</Typography>
           <DatePicker
             dateFormat="dd.MM.yyyy"
             locale={lang}
@@ -123,39 +136,26 @@ const TempAccess = () => {
         </div>
       </div>
       <div className="temp-access-input">
-        <Header as="h5">{t('users:kojoEmail')}</Header>
-        <Input
-          className="kojoEmail-input"
-          name="kojoEmail"
-          onChange={(e, { value }) => setKojoEmail(value)}
-          placeholder={t('email')}
-          value={kojoEmail}
-        />
-      </div>
-      <div className="temp-access-input">
-        <Checkbox
-          checked={writing}
+        <FormControlLabel
+          control={<Checkbox checked={writing} onChange={e => setWriting(e.target.checked)} />}
           label={t('users:giveWritingRights')}
-          onChange={(e, data) => setWriting(data.checked)}
         />
       </div>
-      <div>
+      <div style={{ display: 'flex', gap: 3 }}>
         <Button
-          compact
           data-cy="saveTempAcces"
           disabled={!endDate || !email || !kojoEmail || !programme}
           onClick={handleSave}
-          primary
-          size="mini"
+          variant="contained"
         >
           {t('users:saveRight')}
         </Button>
-        <Button compact data-cy="cancelTempAcces" negative onClick={handleCancel} size="mini">
+        <Button data-cy="cancelTempAcces" onClick={handleCancel} sx={{ backgroundColor: 'red' }} variant="contained">
           {t('cancel')}
         </Button>
       </div>
       <TempAccessTable handleDelete={handleDelete} handleEdit={handleEdit} lang={lang} programmes={programmes} />
-    </Segment>
+    </Box>
   )
 }
 

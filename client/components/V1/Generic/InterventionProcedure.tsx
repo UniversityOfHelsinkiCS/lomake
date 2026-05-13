@@ -25,7 +25,6 @@ import DocumentForm from './DocumentForm'
 import { useGetDocumentsQuery } from '@/client/redux/documents'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
-import { Loader } from 'semantic-ui-react'
 import EditDocument from './EditDocument'
 import { Link } from '../../Link'
 
@@ -66,7 +65,7 @@ const InterventionProcedure = () => {
 
   const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
 
-  if (isLoading) return <Loader active />
+  if (isLoading) return <CircularProgress />
   // For this function the year variable is not needed cuz
   // intervention procedure is independent from years.
   const programmeData = programme.find(

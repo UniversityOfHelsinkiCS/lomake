@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Message, Segment } from 'semantic-ui-react'
+import { Button, Alert, Paper } from '@mui/material'
 
 import { updateStudyprogrammes } from '../../redux/studyProgrammesReducer'
 
@@ -13,8 +13,8 @@ export default () => {
 
   return (
     <>
-      {status ? <Message color="blue">{status}</Message> : null}
-      <Segment padded>
+      {status ? <Alert severity="info">{status}</Alert> : null}
+      <Paper sx={{ padding: 2, marginTop: 2 }}>
         <h3>Päivitä koulutusohjelmat</h3>
         <div style={{ paddingBottom: '10px' }}>
           Nappulan painaminen päivittää tietokannasta kaikki koulutusohjelmat, tiedekunnat sekä yhteistyötiedekunnat
@@ -30,10 +30,10 @@ export default () => {
           yhteistyötiedekunta), ne voi päivittää täältä. Päivittämisellä ei ole vaikutusta jo annettuihin vastauksiin
           tai käyttäjien oikeuksiin. Poistuneita koulutusohjelmia ei poisteta tietokannasta.
         </div>
-        <Button color="blue" onClick={() => handleClick()}>
+        <Button onClick={() => handleClick()} variant="outlined">
           Päivitä
         </Button>
-      </Segment>
+      </Paper>
     </>
   )
 }

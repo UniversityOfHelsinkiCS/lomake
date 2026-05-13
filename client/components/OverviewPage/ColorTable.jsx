@@ -2,9 +2,9 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader, Input, Radio } from 'semantic-ui-react'
+import { CircularProgress, TextField, Switch } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-
+import ManageSearchIcon from '@mui/icons-material/ManageSearch'
 import { isAdmin } from '../../../config/common'
 import { answersByYear, sortedItems, reversedPointsInDegreeReform } from '../../util/common'
 import { getProgrammeOwners } from '../../redux/studyProgrammesReducer'
@@ -146,6 +146,7 @@ const ColorTable = React.memo(
 
     const sortedAllProgrammes = sortedItems(filteredProgrammes, sorter, lang)
     const sortedFacultyProgrammes = sortedItems(facultyProgrammes, sorter, lang)
+
     if (reverse) sortedAllProgrammes.reverse()
 
     const sort = sortValue => {
@@ -222,7 +223,7 @@ const ColorTable = React.memo(
     }, [facultyProgrammes, selectedAnswers, individualAnswers, isBeingFiltered, draftYear])
 
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
-      return <Loader active inline="centered" />
+      return <CircularProgress />
 
     const isUniFacultyView = facultyView && facultyView === 'UNI'
     const isUniFacultyViewFiltered = isUniFacultyView && dropdownFilter.length > 0
@@ -256,15 +257,17 @@ const ColorTable = React.memo(
     return (
       <>
         {!isUniFacultyView || !isAdmin(currentUser) ? (
-          <div className="table-container-degree-reform-button" style={{ paddingTop: 20 }}>
-            <Radio
+          <div
+            className="table-container-degree-reform-button"
+            style={{ paddingTop: 20, flexDirection: 'row', display: 'flex', alignItems: 'center', gap: '0.5em' }}
+          >
+            <Switch
+              aria-label={selectorLabel}
               checked={showAllProgrammes}
               data-cy="overviewpage-filter-button"
-              label={selectorLabel}
               onChange={handleShowProgrammes}
-              style={{ marginRight: 'auto', marginBottom: '2em' }}
-              toggle
             />
+            {selectorLabel}
           </div>
         ) : null}
         <div className={`overview-color-grid${tableClassName}`}>
@@ -310,15 +313,17 @@ const ColorTable = React.memo(
           ) : (
             <div className="table-container">
               {!facultyView && (
-                <Input
-                  data-cy="overviewpage-filter"
-                  icon="search"
-                  onChange={handleFilterChange}
-                  placeholder={t('programmeFilter')}
-                  size="small"
-                  style={{ marginBottom: '0.5em' }}
-                  value={filterValue}
-                />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+                  <TextField
+                    data-cy="overviewpage-filter"
+                    onChange={handleFilterChange}
+                    placeholder={t('programmeFilter')}
+                    size="small"
+                    style={{ marginBottom: '0.5em' }}
+                    value={filterValue}
+                  />
+                  <ManageSearchIcon fontSize="small" sx={{ display: 'block', flexShrink: 0, pointerEvents: 'none' }} />
+                </div>
               )}
             </div>
           )}

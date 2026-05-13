@@ -1,10 +1,12 @@
 import { useSelector } from 'react-redux'
-import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { colors, getMeasuresAnswer } from '../../util/common'
 import { formKeys } from '../../../config/data'
 import DegreeReformCell from './DegreeReformCell'
 import Square from '../EvaluationView/CommitteeOverview/Square'
+import { Tooltip, Icon } from '@mui/material'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import {
   yearlyQuestions,
   evaluationQuestions,
@@ -225,8 +227,8 @@ const ColorTableCell = ({
 
     const difference = colorScoreMap[colorAnswer.single] - colorScoreMap[oldColorAnswer]
 
-    if (difference > 0) return 'angle up'
-    if (difference < 0) return 'angle down'
+    if (difference > 0) return <KeyboardArrowUpIcon />
+    if (difference < 0) return <KeyboardArrowDownIcon />
 
     return [null, colorAnswer]
   }
@@ -245,7 +247,7 @@ const ColorTableCell = ({
             }}
           >
             {colorBlindMode ? t(value) : null}
-            {icon ? <Icon name={icon} size="large" style={{ margin: '0 auto' }} /> : null}
+            {icon ? <Icon style={{ margin: '0 auto' }}>{icon}</Icon> : null}
           </div>
         )
       })}
@@ -254,10 +256,11 @@ const ColorTableCell = ({
 
   if (!icon) return IconElement
   return (
-    <Popup trigger={IconElement}>
-      <Icon name={icon} size="large" style={{ margin: '0 auto' }} />{' '}
-      {icon === 'angle up' ? t('overview:betterThanLastYear') : t('overview:worseThanLastYear')}
-    </Popup>
+    <Tooltip
+      title={icon.type === KeyboardArrowUpIcon ? t('overview:betterThanLastYear') : t('overview:worseThanLastYear')}
+    >
+      {IconElement}
+    </Tooltip>
   )
 }
 

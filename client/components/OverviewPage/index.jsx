@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { Dropdown, Button, Menu, MenuItem } from 'semantic-ui-react'
+import { Button, Menu, MenuItem } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown'
 import { filterFromUrl } from '../../util/common'
@@ -27,7 +27,7 @@ export default () => {
   const [modalData, setModalData] = useState(null)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
-  const [showCsv, setShowCsv] = useState(false)
+  const [csvMenuAnchorEl, setCsvMenuAnchorEl] = useState(null)
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
 
   const lang = useSelector(state => state.language)
@@ -104,46 +104,53 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <Menu className="filter-row" secondary size="large">
-            <MenuItem>
+          <div className="filter-row" style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <div>
               <h2>{t('yearlyAssessment').toUpperCase()}</h2>
-            </MenuItem>
-            <MenuItem>
-              <Button as={Link} data-cy="nav-report" secondary size="big" to={'/report'}>
+            </div>
+            <div>
+              <Button component={Link} data-cy="nav-report" size="large" to="/report" variant="outlined">
                 {t('overview:readAnswers')}
               </Button>
-            </MenuItem>
-            <MenuItem>
+            </div>
+            <div>
               {moreThanFiveProgrammes && (
-                <Button as={Link} data-cy="nav-comparison" size="big" to={'/comparison'}>
+                <Button component={Link} data-cy="nav-comparison" size="large" to="/comparison" variant="outlined">
                   {t('overview:compareAnswers')}
                 </Button>
               )}
-            </MenuItem>
-            <MenuItem>
+            </div>
+            <div>
               <YearSelector size="extra-small" />
-            </MenuItem>
-            <MenuItem position="right">
-              <Dropdown
-                className="button basic gray csv-download"
+            </div>
+            <div style={{ marginLeft: 'auto' }}>
+              <Button
+                aria-controls={csvMenuAnchorEl ? 'csv-download-menu' : undefined}
+                aria-haspopup="true"
                 data-cy="csv-download"
-                direction="left"
-                onClick={() => setShowCsv(true)}
-                text={t('overview:csvDownload')}
+                onClick={event => setCsvMenuAnchorEl(event.currentTarget)}
+                variant="outlined"
               >
-                {showCsv ? (
-                  <Dropdown.Menu>
-                    <Dropdown.Item>
-                      <CsvDownload form={form} view="overview" wantedData="written" />
-                    </Dropdown.Item>
-                    <Dropdown.Item>
-                      <CsvDownload form={form} view="overview" wantedData="colors" />
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                ) : null}
-              </Dropdown>
-            </MenuItem>
-          </Menu>
+                {t('overview:csvDownload')}
+              </Button>
+              <Menu
+                anchorEl={csvMenuAnchorEl}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                id="csv-download-menu"
+                keepMounted
+                onClose={() => setCsvMenuAnchorEl(null)}
+                open={Boolean(csvMenuAnchorEl)}
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+              >
+                <MenuItem onClick={() => setCsvMenuAnchorEl(null)}>
+                  <CsvDownload form={form} view="overview" wantedData="written" />
+                </MenuItem>
+                <MenuItem onClick={() => setCsvMenuAnchorEl(null)}>
+                  <CsvDownload form={form} view="overview" wantedData="colors" />
+                </MenuItem>
+              </Menu>
+            </div>
+          </div>
           <div>
             <ColorTable
               filterValue={filter}

@@ -1,13 +1,26 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Input, Icon, Loader, Table } from 'semantic-ui-react'
+
+import {
+  CircularProgress,
+  Button,
+  TextField,
+  Table,
+  TableContainer,
+  TableHead,
+  TableBody,
+  TableCell,
+  Paper,
+  TableRow,
+} from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
+import SwapVertIcon from '@mui/icons-material/SwapVert'
 
 import User from './User'
 import useDebounce from '../../util/useDebounce'
-import { sortedItems } from '../../util/common'
+import { sortedItems, colors } from '../../util/common'
 import { isAdmin } from '../../../config/common'
 import './UsersPage.scss'
 import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
@@ -32,7 +45,7 @@ export default () => {
     navigate('/')
   }
 
-  if (users.pending || !users.data || !usersProgrammes || isFetching) return <Loader active inline="centered" />
+  if (users.pending || !users.data || !usersProgrammes || isFetching) return <CircularProgress />
 
   if (!users) return null
 
@@ -71,76 +84,112 @@ export default () => {
   }
 
   const getCustomHeader = ({ name, width, field, sortable = true }) => {
-    const sortHandler = sortable
-      ? () => {
-          if (sorter === field) {
-            setReverse(!reverse)
-          } else {
-            setReverse(false)
-            setSorter(field)
-          }
-        }
-      : undefined
+    const active = sorter === field
+    const handleSort = () => {
+      if (!sortable) return
+      if (active) setReverse(!reverse)
+      else {
+        setReverse(false)
+        setSorter(field)
+      }
+    }
+    const pctWidth = typeof width === 'number' ? `${(width / 16) * 100}%` : width
 
     return (
-      <Table.HeaderCell onClick={sortHandler} style={sortable ? { cursor: 'pointer' } : {}} width={width}>
-        {name} {sortable ? <Icon name="sort" /> : null}
-      </Table.HeaderCell>
+      <TableCell
+        sx={{
+          width: pctWidth,
+          backgroundColor: colors.background_gray,
+          fontWeight: 700,
+        }}
+      >
+        <span>{name}</span>
+        {sortable ? (
+          <Button
+            aria-label={`Sort by ${name}`}
+            onClick={handleSort}
+            sx={{
+              color: 'inherit',
+              minWidth: 0,
+              marginLeft: 0.5,
+              padding: 0,
+              textTransform: 'none',
+              verticalAlign: 'middle',
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+            }}
+          >
+            <SwapVertIcon sx={{ color: 'black', fontSize: 20 }} />
+          </Button>
+        ) : null}
+      </TableCell>
     )
   }
 
   return (
     <div style={{ overflowX: 'scroll' }}>
       <div className="user-filter-container">
-        <Input
+        <TextField
           className="user-filter"
-          icon="search"
-          iconPosition="left"
-          onChange={(e, { value }) => setNameFilter(value)}
-          placeholder={t('users:searchByName')}
+          label={t('users:searchByName')}
+          onChange={e => setNameFilter(e.target.value)}
           value={nameFilter}
         />
-        <Input
+        <TextField
           className="user-filter"
-          icon="users"
-          iconPosition="left"
-          onChange={(e, { value }) => setAccessFilter(value)}
-          placeholder={t('users:filterByAccess')}
+          label={t('users:filterByAccess')}
+          onChange={e => setAccessFilter(e.target.value)}
           value={accessFilter}
         />
       </div>
-      <Table celled compact stackable>
-        <Table.Header className="sticky-header">
-          <Table.Row>
-            {getCustomHeader({ name: t('users:name'), width: 2, field: 'lastname' })}
-            {getCustomHeader({ name: t('users:userId'), width: 1, field: 'uid' })}
-            {getCustomHeader({ name: t('users:access'), width: 6, field: 'access', sortable: true })}
-            {getCustomHeader({ name: t('users:userGroup'), width: 2, field: 'userGroup' })}
-            {getCustomHeader({ name: t('users:lastLogin'), width: 2, field: 'lastLogin', sortable: true })}
-            {getCustomHeader({
-              name: t('users:specialGroup'),
-              width: 2,
-              field: 'specialGroup',
-              sortable: true,
-            })}
-            {getCustomHeader({ name: t('users:role'), width: 2, field: 'role', sortable: false })}
-            {getCustomHeader({ name: 'IAM access', width: 5, field: 'IAMs', sortable: false })}
-            {isAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'hijackUser', sortable: false })}
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {filteredUsers().map(u => (
-            <User
-              data={data}
-              data-cy={`user-${u.uid}`}
-              key={u.id}
-              lang={lang}
-              programmeCodesAndNames={programmeCodesAndNames}
-              user={u}
-            />
-          ))}
-        </Table.Body>
-      </Table>
+      <TableContainer component={Paper}>
+        <Table
+          stickyHeader
+          sx={{
+            tableLayout: 'fixed',
+            width: '100%',
+            '& .MuiTableCell-root': {
+              borderRight: 1,
+              borderColor: 'divider',
+            },
+            '& .MuiTableCell-root:last-of-type': {
+              borderRight: 0,
+            },
+          }}
+        >
+          <TableHead>
+            <TableRow>
+              {getCustomHeader({ name: t('users:name'), width: 2, field: 'lastname' })}
+              {getCustomHeader({ name: t('users:userId'), width: 3, field: 'uid' })}
+              {getCustomHeader({ name: t('users:access'), width: 5, field: 'access', sortable: true })}
+              {getCustomHeader({ name: t('users:userGroup'), width: 3, field: 'userGroup' })}
+              {getCustomHeader({ name: t('users:lastLogin'), width: 2, field: 'lastLogin', sortable: true })}
+              {getCustomHeader({
+                name: t('users:specialGroup'),
+                width: 3,
+                field: 'specialGroup',
+                sortable: true,
+              })}
+              {getCustomHeader({ name: t('users:role'), width: 2.5, field: 'role', sortable: false })}
+              {getCustomHeader({ name: 'IAM access', width: 4, field: 'IAMs', sortable: false })}
+              {isAdmin(user) && getCustomHeader({ name: 'Hijack', width: 2, field: 'hijackUser', sortable: false })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredUsers().map(u => (
+              <User
+                data={data}
+                data-cy={`user-${u.uid}`}
+                key={u.id}
+                lang={lang}
+                programmeCodesAndNames={programmeCodesAndNames}
+                user={u}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   )
 }

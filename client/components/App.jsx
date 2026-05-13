@@ -4,9 +4,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
-import { Loader } from 'semantic-ui-react'
 
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import NavBar from './NavBar'
 import Router from './Router'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -162,7 +161,7 @@ export default () => {
 
       <NavBar />
 
-      {showRouter ? <Router /> : <Loader active />}
+      {showRouter ? <Router /> : <CircularProgress />}
       <Footer />
     </Box>
   )
