@@ -795,6 +795,14 @@ export default {
     maxLength: `Character limit {{maxLength}} reached`,
   },
   riskManagement: {
-    header: 'Risk Management of the Faculties Degree Programmes',
+    header: 'Risk Management for the Faculty’s Degree Programmes',
+    description1:
+      'Based on the annual follow-up, the Vice Dean assesses the status of the bachelor’s and master’s programmes under the faculty’s responsibility, reviews the risks, and determines what measures the faculty needs to take.',
+    description2:
+      'If the faculty has degree programmes with yellow or red evaluation areas in the annual follow-up, the Vice Dean updates the risk assessments in the Suunta system under the “Risks” tab. The Suunta system records the faculty’s risks in education, risk management measures, responsible persons, and a monitoring schedule.',
+    link: 'Link to the Suunta system',
+    info: 'For more information on risk management and the Suunta system: ',
+    contactTitle: 'Head of Faculty Administration Nina Aremo',
+    contact: 'nina.aremo@helsinki.fi',
   },
 }

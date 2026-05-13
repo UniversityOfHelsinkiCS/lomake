@@ -104,13 +104,12 @@ const OverviewPage = () => {
 
           <Filter setSearchValue={setSearchValue} />
         </div>
-        {isAdmin(user) && (
-          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '97%', marginBottom: '1rem' }}>
-            <Button endIcon={<ArrowForward />} onClick={() => setModalOpen(true)} variant="text">
-              {t('riskManagement:header')}
-            </Button>
-          </div>
-        )}
+
+        <div style={{ display: 'flex', justifyContent: 'flex-end', width: '97%', marginBottom: '1rem' }}>
+          <Button endIcon={<ArrowForward />} onClick={() => setModalOpen(true)} variant="text">
+            {t('riskManagement:header')}
+          </Button>
+        </div>
 
         <KeyDataTableComponent
           facultyFilter={selectedFaculties}

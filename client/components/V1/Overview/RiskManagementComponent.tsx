@@ -30,7 +30,7 @@ const RiskManagementComponent = ({
         {t('riskManagement:info')}
       </Typography>
       <a
-        href="mailto:{t('riskManagement:contact')}"
+        href="mailto:nina.aremo@helsinki.fi"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 4, marginTop: 8 }}
       >
         <MailOutlined />

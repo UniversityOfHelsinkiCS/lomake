@@ -833,6 +833,14 @@ export default {
     maxLength: 'Teckengränsen {{maxLength}} är nådd',
   },
   riskManagement: {
-    header: 'Riskhantering av fakulteternas utbildningsprogram',
+    header: 'Riskhantering för fakultetens utbildningsprogram',
+    description1:
+      'Vicedekanen utvärderar, på grundval av den årliga uppföljningen, läget för de kandidat- och masterprogram som fakulteten ansvarar för, går igenom riskerna och bedömer vilka åtgärder som behöver vidtas inom fakulteten.',
+    description2:
+      'Om fakulteten har utbildningsprogram som i den årliga uppföljningen har fått gul eller röd markering i utvärderingsområdena, redigerar vicedekanen riskbedömningarna i Suunta-systemet under fliken Risker. I Suunta-systemet registreras fakultetens utbildningsrisker, åtgärder för att hantera riskerna, ansvariga personer och uppföljningsschema.',
+    link: 'Länk till Suunta-systemet',
+    info: 'Mer information om riskhantering och Suunta-systemet: ',
+    contactTitle: 'Förvaltningschef Nina Aremo',
+    contact: 'nina.aremo@helsinki.fi',
   },
 }
