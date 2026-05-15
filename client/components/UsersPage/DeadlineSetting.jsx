@@ -2,7 +2,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
-import { Button, Divider, Header, Select, Segment } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDeadlineAndDraftYear, deleteDeadlineAndDraftYear } from '../../redux/deadlineReducer'
@@ -11,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { colors } from '../../util/common'
 import { isSuperAdmin, LOMAKE_SINCE_YEAR } from '../../../config/common'
 import { forms } from '../../../config/data'
+import { Typography, Button, Box, Select, MenuItem, FormControl } from '@mui/material'
 
 const DeadlineSetting = () => {
   const { t } = useTranslation()
@@ -111,27 +111,42 @@ const DeadlineSetting = () => {
   }
 
   return (
-    <Segment>
-      <div style={{ margin: '1em 0em 3em 0em' }}>
-        <Header as="h4">{t('users:selectDraftYear')}</Header>
-        <Select
-          data-cy="draft-year-selector"
-          onChange={(e, { value }) => setNewDraftYear(value)}
-          options={yearOptions}
-          placeholder="Select year"
-          value={newDraftYear}
-        />
-        <Header as="h4">{t('users:selectForm')}</Header>
-        <Select
-          data-cy="form-selector"
-          disabled={!newDraftYear}
-          fluid
-          onChange={(e, { value }) => setForm(value)}
-          options={formOptions}
-          placeholder="Select form"
-          value={form}
-        />
-        <Header as="h4">{t('users:selectNewDeadline')}</Header>
+    <Box sx={{ width: '100%', border: '1px solid', borderColor: 'divider', borderRadius: 2, p: 3, mt: 3 }}>
+      <div style={{ margin: '1em 0em 3em 0em', flexDirection: 'column', display: 'flex', gap: 20 }}>
+        <Typography variant="h4">{t('users:selectDraftYear')}</Typography>
+        <FormControl size="small" sx={{ minWidth: 140, ml: 1 }}>
+          <Select
+            data-cy="draft-year-selector"
+            id="draft-year-selector"
+            labelId="draft-year-label"
+            onChange={e => setNewDraftYear(e.target.value)}
+            value={newDraftYear ?? ''}
+          >
+            {yearOptions.map(y => (
+              <MenuItem key={y.key} value={y.value}>
+                {y.text}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Typography variant="h4">{t('users:selectForm')}</Typography>
+        <FormControl fullWidth size="small" sx={{ mt: 1 }}>
+          <Select
+            data-cy="form-selector"
+            disabled={!newDraftYear}
+            id="form-selector"
+            labelId="form-select-label"
+            onChange={e => setForm(e.target.value)}
+            value={form ?? ''}
+          >
+            {formOptions.map(f => (
+              <MenuItem key={f.key} value={f.value}>
+                {f.text}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Typography variant="h4">{t('users:selectNewDeadline')}</Typography>
         <DatePicker
           dateFormat="dd.MM.yyyy"
           disabled={!form}
@@ -152,17 +167,23 @@ const DeadlineSetting = () => {
         </p>
       )}
       <Button
-        compact
         data-cy="updateDeadline"
         disabled={warning || !newDate || !newDraftYear || !form}
         onClick={handleDeadlineSave}
-        primary
-        size="mini"
+        size="small"
+        variant="outlined"
       >
         {formDeadline ? t('users:updateDeadline') : `${t('users:updateDeadline')} and draft year`}
       </Button>
       {formDeadline && form && (
-        <Button compact data-cy="deleteDeadline" negative onClick={handleDelete} size="mini">
+        <Button
+          color="error"
+          data-cy="deleteDeadline"
+          onClick={handleDelete}
+          size="small"
+          sx={{ ml: 2 }}
+          variant="outlined"
+        >
           {t('users:deleteThisDeadline')}
         </Button>
       )}
@@ -177,16 +198,16 @@ const DeadlineSetting = () => {
           </b>
         </p>
         <div>
-          <h3>
+          <Typography variant="h3">
             {t('users:answersSavedForYear')}
             <span data-cy="draftYear" style={{ color: draftYear ? colors.blue : colors.red }}>
               {draftYear ? draftYear.year : t('users:noDraftYear')}
             </span>
-          </h3>
+          </Typography>
         </div>
       </div>
-      <Divider />
-      <Header as="h3">{t('users:openForms')}</Header>
+      <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', my: 3 }} />
+      <Typography variant="h3">{t('users:openForms')}</Typography>
       <div style={{ margin: '1em 0em' }}>
         {allDeadlines ? (
           sortedDeadlines.map(d => {
@@ -200,7 +221,7 @@ const DeadlineSetting = () => {
           <p data-cy="no-form-deadlines">{t('users:noDeadlineSet')}</p>
         )}
       </div>
-    </Segment>
+    </Box>
   )
 }
 

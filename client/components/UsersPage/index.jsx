@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Tab } from 'semantic-ui-react'
+import { Tabs, Tab, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { getAllUsersAction } from '../../redux/usersReducer'
 import { isSuperAdmin } from '../../../config/common'
@@ -30,87 +30,50 @@ export default () => {
   }, [])
 
   let panes = [
-    {
-      menuItem: t('users:users'),
-      render: () => (
-        <Tab.Pane>
-          <UserTable />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: t('users:iams'),
-      render: () => (
-        <Tab.Pane>
-          <IamTable />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: t('users:deadline'),
-      render: () => (
-        <Tab.Pane>
-          <DeadlineInfo />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: t('users:tempAccess'),
-      render: () => (
-        <Tab.Pane>
-          <TempAccess />
-        </Tab.Pane>
-      ),
-    },
+    { menuItem: t('users:users'), render: () => <UserTable /> },
+    { menuItem: t('users:iams'), render: () => <IamTable /> },
+    { menuItem: t('users:deadline'), render: () => <DeadlineInfo /> },
+    { menuItem: t('users:tempAccess'), render: () => <TempAccess /> },
   ]
 
   if (isSuperAdmin(user)) {
     panes = [
       ...panes,
-      {
-        menuItem: t('users:updateStudyprogrammes'),
-        render: () => (
-          <Tab.Pane>
-            <UpdateStudyprogrammes />
-          </Tab.Pane>
-        ),
-      },
-      {
-        menuItem: t('users:deadlineSettings'),
-        render: () => (
-          <Tab.Pane>
-            <DeadlineSetting />
-          </Tab.Pane>
-        ),
-      },
-      {
-        menuItem: 'Debug',
-        render: () => (
-          <Tab.Pane>
-            <Debug />
-          </Tab.Pane>
-        ),
-      },
-      {
-        menuItem: t('users:uploadKeydata'),
-        render: () => (
-          <Tab.Pane>
-            <KeyData />
-          </Tab.Pane>
-        ),
-      },
+      { menuItem: t('users:updateStudyprogrammes'), render: () => <UpdateStudyprogrammes /> },
+      { menuItem: t('users:deadlineSettings'), render: () => <DeadlineSetting /> },
+      { menuItem: 'Debug', render: () => <Debug /> },
+      { menuItem: t('users:uploadKeydata'), render: () => <KeyData /> },
     ]
   }
 
+  const [value, setValue] = useState(0)
+
   return (
-    <Tab
-      menu={{
-        className: 'attached',
-        tabular: true,
-        style: { display: 'flex', flexWrap: 'wrap', flexDirection: 'row' },
-      }}
-      panes={panes}
-      style={{ maxWidth: '90%' }}
-    />
+    <Box sx={{ maxWidth: '90%' }}>
+      <Tabs
+        aria-label={t('users:adminPage')}
+        onChange={(e, v) => setValue(v)}
+        scrollButtons="auto"
+        sx={{ '& .MuiTab-root': { fontSize: '0.8rem', minWidth: 80, px: 3 } }}
+        value={value}
+        variant="scrollable"
+      >
+        {panes.map((p, i) => (
+          <Tab aria-controls={`users-tabpanel-${i}`} id={`users-tab-${i}`} key={`${p.menuItem}`} label={p.menuItem} />
+        ))}
+      </Tabs>
+
+      {panes.map((p, i) => (
+        <div
+          aria-labelledby={`users-tab-${i}`}
+          hidden={value !== i}
+          id={`users-tabpanel-${i}`}
+          key={`${p.menuItem}`}
+          role="tabpanel"
+        >
+          {value === i && <Box sx={{ p: 2 }}>{p.render()}</Box>}
+        </div>
+      ))}
+    </Box>
   )
 }

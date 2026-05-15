@@ -1,8 +1,8 @@
-import { Header, Message } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { forms } from '../../../config/data'
+import { Alert, Typography } from '@mui/material'
 
 const DeadlineInfo = () => {
   const { t } = useTranslation()
@@ -20,7 +20,7 @@ const DeadlineInfo = () => {
           {nextDeadline.map(deadline => {
             return (
               <>
-                <Header as="h3">{forms.find(f => f.key === deadline.form)?.name}</Header>
+                <Typography variant="h3">{forms.find(f => f.key === deadline.form)?.name}</Typography>
                 <p>
                   {t('users:nextDeadline')} {formatDate(deadline.date)}
                 </p>
@@ -43,11 +43,11 @@ const DeadlineInfo = () => {
   }
 
   return (
-    <Message>
-      <Header as="h4" style={{ textAlign: 'center' }}>
+    <Alert icon={false} severity="info" sx={{ width: '100%', marginTop: 2, justifyContent: 'center' }}>
+      <Typography sx={{ textAlign: 'center' }} variant="h4">
         {getDeadlineText()}
-      </Header>
-    </Message>
+      </Typography>
+    </Alert>
   )
 }
 

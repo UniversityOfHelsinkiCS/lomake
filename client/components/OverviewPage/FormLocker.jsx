@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Icon, Popup } from 'semantic-ui-react'
+import Popover from '@mui/material/Popover'
+import { Button } from '@mui/material'
+import LockOpenIcon from '@mui/icons-material/LockOpen'
+import LockIcon from '@mui/icons-material/Lock'
 import { useTranslation } from 'react-i18next'
 import { toggleLock, getProgramme } from '../../redux/studyProgrammesReducer'
 import { isFormLocked } from '../../util/common'
@@ -19,6 +22,16 @@ export default function FormLocker({ programme, form = 1 }) {
     loading: false,
     loaded: false,
   })
+
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const handleToggleClick = e => {
+    setAnchorEl(e.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
 
   useEffect(() => {
     dispatch(getProgramme(programme)) // Refresh if old is stale
@@ -44,32 +57,42 @@ export default function FormLocker({ programme, form = 1 }) {
   if (!formDeadline || !programmeDetails) return null
   const locked = isFormLocked(form, programmeDetails.lockedForms)
 
+  const open = Boolean(anchorEl)
+
   return (
     <div style={{ margin: '2em 3em 0em 3em', display: 'flex' }}>
-      <Popup
-        content={
+      <Button
+        data-cy={`formLocker-button-${locked ? 'open' : 'close'}`}
+        disabled={!loadObj.loaded || programmeDetailsPending}
+        onClick={handleToggleClick}
+        startIcon={locked ? <LockIcon style={{ color: 'black' }} /> : <LockOpenIcon style={{ color: 'black' }} />}
+        variant="outlined"
+      >
+        {locked ? t('overview:formLocked') : t('overview:formUnlocked')}
+      </Button>
+
+      <Popover
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        id={open ? 'form-locker-popover' : undefined}
+        onClose={handlePopoverClose}
+        open={open}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <div style={{ padding: '0.5em' }}>
           <Button
-            color="red"
-            content={locked ? t('overview:unlockForm') : t('overview:lockForm')}
+            color="error"
             data-cy={`formLocker-verify-${locked ? 'open' : 'close'}-button`}
-            onClick={handleLock}
-            secondary
-          />
-        }
-        on="click"
-        position="top center"
-        trigger={
-          <Button
-            data-cy={`formLocker-button-${locked ? 'open' : 'close'}`}
-            disabled={!loadObj.loaded || programmeDetailsPending}
-            icon
-            labelPosition="left"
+            onClick={() => {
+              handleLock()
+              handlePopoverClose()
+            }}
+            variant="contained"
           >
-            <Icon name={locked ? 'lock' : 'lock open'} />
-            {locked ? t('overview:formLocked') : t('overview:formUnlocked')}
+            {locked ? t('overview:unlockForm') : t('overview:lockForm')}
           </Button>
-        }
-      />
+        </div>
+      </Popover>
     </div>
   )
 }
