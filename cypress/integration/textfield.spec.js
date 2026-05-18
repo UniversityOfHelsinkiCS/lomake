@@ -10,13 +10,13 @@ describe('Textfield tests', () => {
     cy.request(`/api/cypress/initKeyData`)
     cy.visit(`/admin`)
     cy.contains('Deadline settings').click()
-    cy.closeDeadline(year, 'Vuosiseuranta')
+    cy.closeDeadline(year, '1')
 
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(year).click()
+    cy.get(`[data-cy=draft-year-${year}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get('.item').contains('Vuosiseuranta - UUSI').click()
+    cy.get(`[data-cy=form-10]`).click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation--next').click() // Go to next month
