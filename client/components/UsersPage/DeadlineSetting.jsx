@@ -123,7 +123,7 @@ const DeadlineSetting = () => {
             value={newDraftYear ?? ''}
           >
             {yearOptions.map(y => (
-              <MenuItem key={y.key} value={y.value}>
+              <MenuItem data-cy={`draft-year-${y.value}`} key={y.key} value={y.value}>
                 {y.text}
               </MenuItem>
             ))}
@@ -140,7 +140,7 @@ const DeadlineSetting = () => {
             value={form ?? ''}
           >
             {formOptions.map(f => (
-              <MenuItem key={f.key} value={f.value}>
+              <MenuItem data-cy={`form-${f.value}`} key={f.key} value={f.value}>
                 {f.text}
               </MenuItem>
             ))}

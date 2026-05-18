@@ -19,13 +19,13 @@ describe('SuperAdmin user tests', () => {
 
     // Try adding deadline for another draft year
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[2]).click()
+    cy.get(`[data-cy=draft-year-${defaultYears[2]}]`).click()
 
     cy.get('[data-cy=updateDeadline]').should('be.disabled')
     cy.get('[data-cy=previousDeadline-warning]')
 
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[0]).click()
+    cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
 
     cy.get('[data-cy=previousDeadline-warning]').should('not.exist')
   })
@@ -41,11 +41,11 @@ describe('SuperAdmin user tests', () => {
 
     // select draft year
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[0]).click()
+    cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
 
     // select form
     cy.get('[data-cy=form-selector]').click()
-    cy.get('.item').contains('Vuosiseuranta').click()
+    cy.get(`[data-cy=form-1]`).click()
 
     // Delete pre-generated deadline
     cy.get('[data-cy=deleteDeadline]').click()
@@ -63,10 +63,10 @@ describe('SuperAdmin user tests', () => {
     cy.contains('Deadline settings').click()
 
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[0]).click()
+    cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get('.item').contains('Vuosiseuranta').click()
+    cy.get(`[data-cy=form-1]`).click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation--next').click() // Go to next month
@@ -88,20 +88,20 @@ describe('SuperAdmin user tests', () => {
     cy.contains('Deadline settings').click()
 
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[0]).click()
+    cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get('.item').contains('Vuosiseuranta').click()
+    cy.get(`[data-cy=form-1]`).click()
 
     cy.get('[data-cy=deleteDeadline]').click()
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     // Create new deadline for the past year
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[1]).click()
+    cy.get(`[data-cy=draft-year-${defaultYears[1]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get('.item').contains('Vuosiseuranta').click()
+    cy.get(`[data-cy=form-1]`).click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation--next').click() // Go to next month
@@ -132,10 +132,10 @@ describe('SuperAdmin user tests', () => {
     cy.contains('Deadline settings').click()
 
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[1]).click()
+    cy.get(`[data-cy=draft-year-${defaultYears[1]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get('.item').contains('Vuosiseuranta').click()
+    cy.get(`[data-cy=form-1]`).click()
 
     cy.get('[data-cy=deleteDeadline]').click()
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
@@ -160,10 +160,10 @@ describe('SuperAdmin user tests', () => {
     cy.contains('Deadline settings').click()
 
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[0]).click()
+    cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get('.item').contains('Vuosiseuranta').click()
+    cy.get(`[data-cy=form-1]`).click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation--next').click() // Go to next month
@@ -190,18 +190,18 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.closeDeadline(defaultYears[0], 'Vuosiseuranta')
+    cy.closeDeadline(defaultYears[0], '1')
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Vuosiseuranta')
+    cy.createDeadline(defaultYears[0], '1')
     cy.get('[data-cy=form-1-deadline]').contains('14.')
 
     // Create other deadline
-    cy.createDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+    cy.createDeadline(defaultYears[0], '4')
     cy.get('[data-cy=form-4-deadline]').contains('14.')
 
     // Check that forms are open as they should be
@@ -217,17 +217,17 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Vuosiseuranta')
+    cy.createDeadline(defaultYears[0], '1')
     cy.get('[data-cy=form-1-deadline]').contains('14.')
 
-    cy.createDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+    cy.createDeadline(defaultYears[0], '4')
     cy.get('[data-cy=form-4-deadline]').contains('14.')
 
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
     // Close one deadline
-    cy.closeDeadline(defaultYears[0], 'Vuosiseuranta')
+    cy.closeDeadline(defaultYears[0], '1')
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     cy.visit('/yearly')
