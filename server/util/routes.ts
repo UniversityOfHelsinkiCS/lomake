@@ -111,7 +111,7 @@ router.get('/keydata/all', requireRead, async (req, res) => {
 router.post('/keydata', checkAdmin, async (req, res) => {
   await keyData.uploadKeyData(req, res)
 })
-router.get('/keymetadata', requireRead, async (req, res) => {
+router.get('/keydata/meta', requireRead, async (req, res) => {
   await keyData.getKeyDataMeta(req, res)
 })
 router.delete('/keydata/:id', checkAdmin, async (req, res) => {
@@ -119,6 +119,9 @@ router.delete('/keydata/:id', checkAdmin, async (req, res) => {
 })
 router.put('/keydata/:id', checkAdmin, async (req, res) => {
   await keyData.updateKeyData(req, res)
+})
+router.put('/keydata/:id/lock', checkAdmin, async (req, res) => {
+  await keyData.lockKeyData(req, res)
 })
 
 router.get('/documents/all/:activeYear', requireRead, async (req, res) => {

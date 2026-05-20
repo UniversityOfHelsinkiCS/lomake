@@ -26,7 +26,7 @@ export const keyDataApi = RTKApi.injectEndpoints({
       invalidatesTags: ['KeyData', 'KeyDataMeta'],
     }),
     getKeyDataMeta: builder.query({
-      query: () => '/keyMetaData',
+      query: () => '/keydata/meta',
       providesTags: ['KeyDataMeta'],
     }),
     deleteKeyData: builder.mutation<void, number>({
@@ -43,6 +43,14 @@ export const keyDataApi = RTKApi.injectEndpoints({
       }),
       invalidatesTags: ['KeyData', 'KeyDataMeta'],
     }),
+    lockKeyData: builder.mutation<void, { id: number; year: number }>({
+      query: ({ id, year }) => ({
+        url: `/keydata/${id}/lock`,
+        method: 'PUT',
+        body: { year },
+      }),
+      invalidatesTags: ['KeyData', 'KeyDataMeta'],
+    }),
   }),
 })
 
@@ -53,6 +61,7 @@ export const {
   useGetKeyDataMetaQuery,
   useDeleteKeyDataMutation,
   useSetActiveKeyDataMutation,
+  useLockKeyDataMutation,
 } = keyDataApi
 
 export const useFetchSingleKeyDataQuery = ({ studyprogrammeKey }: { studyprogrammeKey: string }) => {

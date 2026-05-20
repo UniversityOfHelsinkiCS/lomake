@@ -172,6 +172,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
           },
           active: true,
           year: getYear(data),
+          locked: false,
         })
         // close the existing active interventionProcedudes and documents
         await InterventionProcedure.update(
@@ -220,7 +221,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
 const getKeyDataMeta = async (_req: Request, res: Response) => {
   try {
     const keyData = await KeyData.findAll({
-      attributes: ['id', 'active', 'createdAt'],
+      attributes: ['id', 'active', 'createdAt', 'year', 'locked'],
     })
 
     if (!keyData.length) {
@@ -298,6 +299,38 @@ const updateKeyData = async (req: Request, res: Response) => {
   }
 }
 
+const lockKeyData = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+
+    const keyData = await KeyData.findByPk(id as string)
+
+    if (!keyData) {
+      return res.status(404).json({ error: 'Key data not found' })
+    }
+
+    const { year } = keyData
+    const existingLocked = await KeyData.findOne({
+      where: {
+        locked: true,
+        year,
+      },
+    })
+
+    if (existingLocked) {
+      return res.status(400).json({ error: `Key data for year ${year} is already locked` })
+    }
+
+    await keyData.update({
+      locked: true,
+    })
+
+    return res.status(200).json(keyData)
+  } catch (error) {
+    return res.status(500).json({ error: (error as Error).message })
+  }
+}
+
 export default {
   getKeyData,
   uploadKeyData,
@@ -305,4 +338,5 @@ export default {
   getAllKeyData,
   deleteKeyData,
   updateKeyData,
+  lockKeyData,
 }

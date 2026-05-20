@@ -7,17 +7,29 @@ import {
   useGetKeyDataMetaQuery,
   useDeleteKeyDataMutation,
   useSetActiveKeyDataMutation,
+  useLockKeyDataMutation,
 } from '../../redux/keyData'
+import { Box, Typography } from '@mui/material'
+
+const tableStyle: React.CSSProperties = { borderCollapse: 'collapse', width: '100%' }
+const cellStyle: React.CSSProperties = { border: '1px solid #ccc', padding: '8px' }
+const headerCellStyle: React.CSSProperties = { ...cellStyle, textAlign: 'left' }
 
 export const KeyData = () => {
   const [uploadKeyData] = useUploadKeyDataMutation()
   const [setActiveKeyData] = useSetActiveKeyDataMutation()
   const [deleteKeyData] = useDeleteKeyDataMutation()
-  const { data: meta } = useGetKeyDataMetaQuery()
+  const { data: meta } = useGetKeyDataMetaQuery({})
+  const [lockKeyData] = useLockKeyDataMutation()
 
   const handleDelete = (id: number) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
-      deleteKeyData(id)
+      try {
+        deleteKeyData(id)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(`Error deleting key data: ${(error as Error).message}`)
+      }
     }
   }
 
@@ -25,8 +37,14 @@ export const KeyData = () => {
     setActiveKeyData(id)
   }
 
+  const handleLock = (id: number, year: number) => {
+    if (window.confirm(`Are you sure you want to lock this key data for year ${year}?`)) {
+      lockKeyData({ id, year })
+    }
+  }
+
   return (
-    <div>
+    <Box sx={{ border: '1px solid #ccc', display: 'flex', flexDirection: 'column', gap: 2, margin: 2, padding: 2 }}>
       <form
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault()
@@ -39,25 +57,25 @@ export const KeyData = () => {
         <button type="submit">Upload</button>
       </form>
       {meta && meta.length > 0 ? (
-        <div>
-          <table>
+        <Box>
+          <table style={tableStyle}>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Time when uploaded</th>
-                <th>Active</th>
-                <th>Actions</th>
+                <th style={headerCellStyle}>ID</th>
+                <th style={headerCellStyle}>Time when uploaded</th>
+                <th style={headerCellStyle}>Active</th>
+                <th style={headerCellStyle}>Actions</th>
               </tr>
             </thead>
             <tbody>
               {meta
                 .slice()
                 .sort((a: any, b: any) => a.id - b.id)
-                .map((item: { id: number; createdAt: string; active: boolean }) => (
+                .map((item: { id: number; createdAt: string; active: boolean; year: number; locked: boolean }) => (
                   <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{new Date(item.createdAt).toLocaleString()}</td>
-                    <td>
+                    <td style={cellStyle}>{item.id}</td>
+                    <td style={cellStyle}>{new Date(item.createdAt).toLocaleString()}</td>
+                    <td style={cellStyle}>
                       <input
                         checked={item.active}
                         name="activeKeyData"
@@ -65,20 +83,39 @@ export const KeyData = () => {
                         type="radio"
                       />
                     </td>
-                    <td>
-                      <button onClick={() => handleDelete(item.id)} type="button">
-                        Delete
-                      </button>
-                    </td>
+                    {!item.locked ? (
+                      <td style={{ ...cellStyle, display: 'flex', gap: 8 }}>
+                        <button onClick={() => handleDelete(item.id)} type="button">
+                          Delete
+                        </button>
+
+                        <form
+                          onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
+                            e.preventDefault()
+                            handleLock(item.id, item.year)
+                          }}
+                        >
+                          <button type="submit">Lock for year {item.year}</button>
+                        </form>
+                      </td>
+                    ) : (
+                      <td style={cellStyle}>Locked for year {item.year}</td>
+                    )}
                   </tr>
                 ))}
             </tbody>
           </table>
-        </div>
+          <br />
+          <Typography>
+            When a dataset is locked, the active intervention procedures are saved to the database and the dataset can
+            no longer be deleted through the UI. Only one dataset may be locked per year. This ensures that historical
+            data for previous years remains unchanged.
+          </Typography>
+        </Box>
       ) : (
-        <p>No data available</p>
+        <Typography>No data available</Typography>
       )}
-    </div>
+    </Box>
   )
 }
 
