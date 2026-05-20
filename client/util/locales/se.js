@@ -664,7 +664,7 @@ export default {
     Quality: 'Kvalitetsstyrningsdokument för utbildningsprogrammet',
     noQuality: 'Inget svar',
     missingMeasure: 'Ingen utvecklingsplan!',
-    missingQualityDocument: 'Ingen kvalitetsstyrningsdokumentet',
+    missingQualityDocument: 'Kvalitetsstyrningsdokumentet saknas',
     moveToQualityDocument: 'Gå till att redigera kvalitetsstyrningsdokumentet',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',
@@ -754,7 +754,7 @@ export default {
     terminated: 'Det tidigare förfarandet har avslutats med motiveringen:',
   },
   qualitydocument: {
-    header: 'Formulär för kvalitetshantering',
+    header: 'Kvalitetsstyrningsdokumentet',
     feedbackHeader: '1. Användning av feedback vid utvecklingen av utbildningsprogrammet',
     feedbackSource: 'Välj eller lägg till minst ett feedbacksystem eller en feedbackkälla',
     norppa: 'Norppa',

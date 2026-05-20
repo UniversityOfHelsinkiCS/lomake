@@ -109,7 +109,7 @@ const EditDocument = ({
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <Typography sx={{ mb: '4rem' }} variant="h3">
-        {`${document.data.title}`}
+        {t('document:header')} {`${document.data.title.split('-')[1] || ''}`.trim()}
       </Typography>
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

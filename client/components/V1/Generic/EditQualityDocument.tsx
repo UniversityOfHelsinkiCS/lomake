@@ -192,7 +192,9 @@ const EditQualityDocument = ({
 
   return (
     <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Typography sx={{ mb: '4rem' }} variant="h3">{`${formData.title}`}</Typography>
+      <Typography sx={{ mb: '4rem' }} variant="h3">
+        {t('qualitydocument:header')} {`${formData.title.split('-')[1] || ''}`.trim()}
+      </Typography>
       <Box sx={{ alignSelf: 'flex-end', position: 'sticky', top: 16, zIndex: 1, mb: '1.5rem', minHeight: '3.5rem' }}>
         {isAutosaving ? <Alert severity="info">{t('generic:saving')}</Alert> : null}
         {!isAutosaving && Boolean(autosaveError) ? <Alert severity="warning">{autosaveError}</Alert> : null}

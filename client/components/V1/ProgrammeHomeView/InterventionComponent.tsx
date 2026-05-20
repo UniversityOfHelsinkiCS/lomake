@@ -151,7 +151,7 @@ const InterventionComponent = () => {
             <Accordion key={doc.id} sx={{ padding: '2rem' }}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography data-cy={`accordion-${index}`} variant="h4">
-                  {doc.data.title}
+                  {t('document:header')} {`${doc.data.title.split('-')[1] || ''}`.trim()}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>

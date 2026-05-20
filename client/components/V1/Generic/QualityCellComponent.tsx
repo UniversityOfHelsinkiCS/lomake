@@ -88,7 +88,9 @@ const QualityCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
               {doc ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                    <Typography variant="h3">{doc.data.title}</Typography>
+                    <Typography variant="h3">
+                      {t('qualitydocument:header')} {`${doc.data.title.split('-')[1] || ''}`.trim()}
+                    </Typography>
                     <QualityDocumentInfo doc={doc} />
                   </div>
                 </div>

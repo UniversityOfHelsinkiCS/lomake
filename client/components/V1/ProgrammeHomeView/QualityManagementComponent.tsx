@@ -138,7 +138,7 @@ const QualityManagementComponent = ({ programmeData }) => {
                   <Accordion disabled={isAccordionLocked} sx={{ padding: '2rem' }}>
                     <AccordionSummary expandIcon={<ExpandMore />}>
                       <Typography data-cy={`accordion-${index}-quality-document`} variant="h4">
-                        {doc.data.title}
+                        {t('qualitydocument:header')} {`${doc.data.title.split('-')[1] || ''}`.trim()}
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
