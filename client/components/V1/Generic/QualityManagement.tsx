@@ -46,8 +46,6 @@ const QualityManagement = () => {
   const navigate = useNavigate()
 
   if (isLoading) return <CircularProgress />
-  // For this function the year variable is not needed cuz
-  // intervention procedure is independent from years.
   const programmeData = programme.find(
     (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey
   )

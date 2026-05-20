@@ -66,10 +66,18 @@ const InterventionProcedure = () => {
   const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
 
   if (isFetching || isLoading) return <CircularProgress />
-  // For this function the year variable is not needed cuz
-  // intervention procedure is independent from years.
+
+  let keyDataYear: string | number
+
+  if (document) {
+    keyDataYear = document.activeYear - 1
+  } else {
+    keyDataYear = new Date().getFullYear() - 1
+  }
+
   const programmeData = programme.find(
-    (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey
+    (programmeData: KeyDataProgramme) =>
+      programmeData.koulutusohjelmakoodi === programmeKey && programmeData.year === keyDataYear
   )
   if (!programmeData) return null
 
