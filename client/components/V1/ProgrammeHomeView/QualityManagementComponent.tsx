@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-no-leaked-render */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable no-alert */
-import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { hasProgrammeWriteAccess, isAdmin } from '@/config/common'
 import { useTranslation } from 'react-i18next'
@@ -77,10 +75,6 @@ const QualityManagementComponent = ({ programmeData }) => {
 
   const [deleteDocument] = useDeleteQualityDocumentMutation()
   const [deleteLock] = useDeleteLockMutation()
-
-  useEffect(() => {
-    document.title = `${t('form')} - ${programmeKey}`
-  }, [programmeKey])
 
   if (isLoading) {
     return <CircularProgress />

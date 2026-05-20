@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import {
@@ -54,10 +53,6 @@ const InterventionComponent = () => {
   const { data: interventionProcedures = [] } = useGetProgrammesInterventionProceduresQuery({
     studyprogrammeKey: programmeKey ?? '',
   })
-
-  useEffect(() => {
-    document.title = `${t('form')} - ${programmeKey}`
-  }, [programmeKey])
 
   if (isLoading) {
     return <CircularProgress />
