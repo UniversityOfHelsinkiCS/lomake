@@ -16,6 +16,7 @@ class KeyData extends Model<InferAttributes<KeyData>, InferCreationAttributes<Ke
   declare data: KeyDataType
   declare year: number | null
   declare active: boolean
+  declare locked: boolean
   declare createdAt: CreationOptional<Date>
   declare updatedAt: CreationOptional<Date>
 }
@@ -36,6 +37,7 @@ KeyData.init(
       allowNull: true,
     },
     active: BOOLEAN,
+    locked: BOOLEAN,
     createdAt: DATE,
     updatedAt: DATE,
   },
