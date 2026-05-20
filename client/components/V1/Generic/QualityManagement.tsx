@@ -1,38 +1,15 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useNavigate, useParams } from 'react-router'
 import { Box, IconButton, Typography, CircularProgress } from '@mui/material'
-import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
-import { ProgrammeLevel } from '@/client/lib/enums'
+import type { KeyDataProgramme } from '@/shared/lib/types'
 import { ArrowBack } from '@mui/icons-material'
 import { hasProgrammeWriteAccess } from '@/config/common'
-import { calculateKeyDataColor, getKeyDataPoints } from '@/client/util/v1'
-import { TFunction } from 'i18next'
 import AddQualityDocument from './AddQualityDocument'
 import { useAppSelector } from '@/client/util/hooks'
 import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
 import { useGetQualityDocumentsQuery } from '@/client/redux/qualityDocuments'
 import type { QualityDocumentType } from '@/client/lib/types'
 import EditQualityDocument from './EditQualityDocument'
-
-export const calculateInterventionAreas = ({
-  metadata,
-  programme,
-  t,
-}: {
-  metadata: KeyDataMetadata[]
-  programme: KeyDataProgramme
-  t: TFunction
-}) => {
-  const res: string[] = []
-  if (!metadata || !programme) return res
-  const keyDataPoints = getKeyDataPoints(t)
-  Object.values(keyDataPoints).map((point: any) => {
-    const color = calculateKeyDataColor(metadata, programme, point.groupKey, programme.level as ProgrammeLevel)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-    if (color === 'Punainen') res.push(point.groupKey)
-  })
-  return res
-}
 
 const QualityManagement = () => {
   const { programme: programmeKey = '', id } = useParams<{ programme: string; id: string }>()
