@@ -65,7 +65,7 @@ const InterventionProcedure = () => {
 
   const hasWriteRights = hasProgrammeWriteAccess(user, programmeKey)
 
-  if (isLoading) return <CircularProgress />
+  if (isFetching || isLoading) return <CircularProgress />
   // For this function the year variable is not needed cuz
   // intervention procedure is independent from years.
   const programmeData = programme.find(
@@ -78,8 +78,6 @@ const InterventionProcedure = () => {
   const areas = calculateInterventionAreas({ metadata, programme: programmeData, t, selectedYear })
 
   if (!programme || !hasWriteRights || !programmeKey) return null
-
-  if (isFetching) return <CircularProgress />
 
   return (
     <Box sx={{ width: '75%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
