@@ -269,6 +269,13 @@ const deleteKeyData = async (req: Request, res: Response) => {
     if (!keyData) {
       return res.status(404).json({ error: 'Key data not found' })
     }
+    if (keyData.locked) {
+      return res.status(400).json({ error: 'Cannot delete locked key data' })
+    }
+    const yearCount = await KeyData.count({ where: { year: keyData.year } })
+    if (yearCount <= 1) {
+      return res.status(400).json({ error: `Cannot delete the last key data sample for year ${keyData.year}` })
+    }
 
     await keyData.destroy()
     return res.status(204).json({ message: 'Key data deleted' })
