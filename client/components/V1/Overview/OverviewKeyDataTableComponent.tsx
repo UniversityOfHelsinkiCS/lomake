@@ -20,7 +20,7 @@ import { useAppSelector } from '@/client/util/hooks'
 import { useGetAllDocumentsQuery } from '@/client/redux/documents'
 import { useGetReportsQuery } from '@/client/redux/reports'
 import { useFetchAllKeyDataQuery } from '@/client/redux/keyData'
-import { useGetActiveInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
+import { useGetInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
 import { InterventionProcedureType } from '@/client/lib/types'
 import { colors } from '@/client/util/common'
 
@@ -141,7 +141,7 @@ const KeyDataTableComponent = ({
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
   const { data: reports = {} } = useGetReportsQuery({ year: activeYear })
-  const { data: interventionProcedures = [] } = useGetActiveInterventionProceduresQuery()
+  const { data: interventionProcedures = [] } = useGetInterventionProceduresQuery()
 
   const { data: allKeyData } = useFetchAllKeyDataQuery()
   const selectedYear = Number.parseInt(yearFilter, 10)

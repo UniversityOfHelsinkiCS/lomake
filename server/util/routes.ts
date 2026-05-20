@@ -163,7 +163,7 @@ router.get('/interventionprocedures/:programme', requireRead, async (req, res) =
   await interventionProcedures.getProgrammesInterventionProcedures(req, res)
 })
 router.get('/interventionprocedures', requireRead, async (req, res) => {
-  await interventionProcedures.getActiveInterventionProcedures(req, res)
+  await interventionProcedures.getInterventionProcedures(req, res)
 })
 
 router.get('/organisation-data', requireEmployee, async (_, res) => {

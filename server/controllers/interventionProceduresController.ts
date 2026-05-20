@@ -69,7 +69,7 @@ const getProgrammesInterventionProcedures = async (req: Request, res: Response) 
   }
 }
 
-const getActiveInterventionProcedures = async (req: Request, res: Response) => {
+const getInterventionProcedures = async (req: Request, res: Response) => {
   try {
     const interventionProcedures = await InterventionProcedure.findAll({})
 
@@ -80,4 +80,4 @@ const getActiveInterventionProcedures = async (req: Request, res: Response) => {
   }
 }
 
-export default { getProgrammesInterventionProcedures, getActiveInterventionProcedures }
+export default { getProgrammesInterventionProcedures, getInterventionProcedures }
