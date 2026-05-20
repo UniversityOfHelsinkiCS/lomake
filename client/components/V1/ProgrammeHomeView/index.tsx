@@ -19,7 +19,7 @@ const ProgrammeHomeView = () => {
   const form = 10
   const startYear = 2024 // The base year of data from which annual follow-up tracking begins
 
-  const { isLoading, programme } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey })
+  const { isLoading, programme } = useFetchSingleKeyDataQuery({ studyprogrammeKey: programmeKey ?? '' })
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
