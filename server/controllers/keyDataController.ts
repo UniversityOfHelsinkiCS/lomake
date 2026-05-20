@@ -101,7 +101,17 @@ const getKeyData = async (_req: Request, res: Response) => {
     })
 
     if (!keyData) {
-      return res.status(404).json({ error: 'No key data found' })
+      const allKeyData = await KeyData.findAll({ order: [['createdAt', 'DESC']] })
+
+      if (!allKeyData.length) {
+        return res.status(404).json({ error: 'No key data found' })
+      }
+
+      const { data } = allKeyData[0]
+
+      await validateKeyData(data)
+
+      return res.status(200).json(data)
     }
 
     const { data } = keyData
