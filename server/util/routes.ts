@@ -165,6 +165,12 @@ router.get('/interventionprocedures/:programme', requireRead, async (req, res) =
 router.get('/interventionprocedures', requireRead, async (req, res) => {
   await interventionProcedures.getInterventionProcedures(req, res)
 })
+router.post('/interventionprocedures', checkAdmin, async (req, res) => {
+  await interventionProcedures.createInterventionProcedure(req, res)
+})
+router.put('/interventionprocedures/:id', checkAdmin, async (req, res) => {
+  await interventionProcedures.updateInterventionProcedure(req, res)
+})
 
 router.get('/organisation-data', requireEmployee, async (_, res) => {
   const data = await getOrganisationData()
