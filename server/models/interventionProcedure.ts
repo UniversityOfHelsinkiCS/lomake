@@ -18,7 +18,7 @@ class InterventionProcedure extends Model<
   declare id: CreationOptional<number>
   declare studyprogrammeKey: string
   declare active: boolean
-  declare reason: object
+  declare reason: object | null
   declare startYear: number
   declare endYear: number | null
   declare createdAt: CreationOptional<Date>
