@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable no-alert */
@@ -8,8 +9,17 @@ import {
   useDeleteKeyDataMutation,
   useSetActiveKeyDataMutation,
   useLockKeyDataMutation,
+  useFetchAllKeyDataQuery,
 } from '../../redux/keyData'
 import { Box, Typography } from '@mui/material'
+import { calculateInterventionAreas } from '../V1/Generic/InterventionProcedure'
+import { useTranslation } from 'react-i18next'
+import {
+  useGetInterventionProceduresQuery,
+  useCreateInterventionProcedureMutation,
+  useUpdateInterventionProcedureMutation,
+} from '../../redux/interventionProcedures'
+import { useState, useEffect } from 'react'
 
 const tableStyle: React.CSSProperties = { borderCollapse: 'collapse', width: '100%' }
 const cellStyle: React.CSSProperties = { border: '1px solid #ccc', padding: '8px' }
@@ -21,6 +31,54 @@ export const KeyData = () => {
   const [deleteKeyData] = useDeleteKeyDataMutation()
   const { data: meta } = useGetKeyDataMetaQuery({})
   const [lockKeyData] = useLockKeyDataMutation()
+  const { data } = useFetchAllKeyDataQuery()
+  const { t } = useTranslation()
+  const { data: interventionProceduresData } = useGetInterventionProceduresQuery()
+  const [interventionProcedures, setInterventionProcedures] = useState<any[]>(interventionProceduresData ?? [])
+  useEffect(() => {
+    if (interventionProceduresData) setInterventionProcedures(interventionProceduresData)
+  }, [interventionProceduresData])
+
+  const [createInterventionProcedure] = useCreateInterventionProcedureMutation()
+  const [updateInterventionProcedure] = useUpdateInterventionProcedureMutation()
+
+  const getActiveInterventionProcedures = (id: number): any[] => {
+    const keyData = data?.find((d: any) => d.id === id) || data?.find((d: any) => d.data?.id === id)
+
+    if (!keyData) {
+      // eslint-disable-next-line no-console
+      console.error('No entry found for key data id', id)
+      return []
+    }
+
+    const payload = keyData.data ?? keyData
+
+    const { kandiohjelmat = [], maisteriohjelmat = [], metadata = [] } = payload ?? {}
+    const programmes = [...kandiohjelmat, ...maisteriohjelmat]
+
+    const year = Number(keyData.year)
+
+    const programmesWithIntervention: any[] = programmes
+      .filter((programmeData: any) => {
+        const redLights = calculateInterventionAreas({ metadata, programme: programmeData, t, selectedYear: year })
+        return (
+          redLights.length > 0 &&
+          Number(programmeData?.year) === year - 1 &&
+          !programmeData.additionalInfo.fi?.includes('Lakkautettu') &&
+          !programmeData.additionalInfo?.fi?.includes('Uusi ohjelma')
+        )
+      })
+      .map((programmeData: any) => {
+        const redLights = calculateInterventionAreas({ metadata, programme: programmeData, t, selectedYear: year })
+        return {
+          koulutusohjelmakoodi: programmeData.koulutusohjelmakoodi,
+          year: programmeData.year,
+          redLights,
+        }
+      })
+
+    return programmesWithIntervention
+  }
 
   const handleDelete = (id: number) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
@@ -37,9 +95,98 @@ export const KeyData = () => {
     setActiveKeyData(id)
   }
 
-  const handleLock = (id: number, year: number) => {
+  const saveNewInterventionProcedures = async (programmesWithIntervention: any[], year: number) => {
+    for (const p of programmesWithIntervention) {
+      const studyprogrammeKey = p.koulutusohjelmakoodi
+
+      const existing = interventionProcedures.find((ip: any) => ip.studyprogrammeKey === studyprogrammeKey) || null
+
+      if (!existing) {
+        try {
+          const result = await createInterventionProcedure({ studyprogrammeKey, year }).unwrap()
+          setInterventionProcedures(prev => prev.concat(result))
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Error creating intervention procedure', error)
+        }
+
+        continue
+      }
+
+      if (existing && existing.active === true) {
+        const startYear = Number(existing.startYear)
+
+        if (!isNaN(startYear) && startYear > year) {
+          try {
+            const result = await updateInterventionProcedure({ id: existing.id, startYear: year }).unwrap()
+            setInterventionProcedures(prev => prev.map((ip: any) => (ip.id === result.id ? result : ip)))
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.error('Error updating intervention procedure', error)
+          }
+
+          continue
+        }
+      }
+
+      if (existing && existing.active === false) {
+        const startYear = Number(existing.startYear)
+        const endYear = Number(existing.endYear)
+
+        if (!isNaN(endYear) && endYear > year) {
+          continue
+        }
+
+        if (!isNaN(startYear) && startYear >= year) {
+          continue
+        }
+
+        if (!isNaN(startYear) && startYear < year && !isNaN(endYear) && endYear === year) {
+          const ok = window.confirm(
+            `Ohjelmalla ${studyprogrammeKey} on alkanut toimenpidemenettely vuonna ${startYear} ja se on merkitty päättyneeksi vuonna ${endYear}. 
+            Jos ohjelmalla on alkanut edellisen menettelyn sulkemisen jälkeen vielä samana vuonna uusi toimenpidemenettely, 
+            vie aktiivinen menettely tietokantaan valitsemalla ok.`
+          )
+          if (ok) {
+            try {
+              const result = await createInterventionProcedure({ studyprogrammeKey, year }).unwrap()
+              setInterventionProcedures(prev => prev.concat(result))
+            } catch (error) {
+              // eslint-disable-next-line no-console
+              console.error('Error creating intervention procedure', error)
+            }
+          }
+
+          continue
+        }
+
+        if (!isNaN(startYear) && !isNaN(endYear) && startYear < year && endYear < year) {
+          try {
+            const result = await createInterventionProcedure({ studyprogrammeKey, year }).unwrap()
+            setInterventionProcedures(prev => prev.concat(result))
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.error('Error creating intervention procedure', error)
+          }
+
+          continue
+        }
+
+        continue
+      }
+    }
+  }
+
+  const handleLock = async (id: number, year: number) => {
     if (window.confirm(`Are you sure you want to lock this key data for year ${year}?`)) {
-      lockKeyData({ id, year })
+      try {
+        await lockKeyData({ id, year })
+        const programmesWithIntervention = getActiveInterventionProcedures(id)
+        await saveNewInterventionProcedures(programmesWithIntervention, year)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(`Error locking key data: ${(error as Error).message}`)
+      }
     }
   }
 
@@ -107,9 +254,9 @@ export const KeyData = () => {
           </table>
           <br />
           <Typography>
-            When a dataset is locked, the active intervention procedures are saved to the database and the dataset can
-            no longer be deleted through the UI. Only one dataset may be locked per year. This ensures that historical
-            data for previous years remains unchanged.
+            When a dataset is locked, the active intervention procedures for that year are saved to the database, and
+            the dataset can no longer be deleted through the UI. Only one dataset may be locked per year. This ensures
+            that historical data for previous years remains unchanged.
           </Typography>
         </Box>
       ) : (
