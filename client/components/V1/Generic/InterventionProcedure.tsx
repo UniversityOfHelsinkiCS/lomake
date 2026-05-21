@@ -70,7 +70,7 @@ const InterventionProcedure = () => {
   let keyDataYear: string | number
 
   if (document) {
-    keyDataYear = document.activeYear - 1
+    keyDataYear = Number(/\b(\d{4})\b/.exec(document.data.title)?.[1]) - 1 || new Date().getFullYear() - 1
   } else {
     keyDataYear = new Date().getFullYear() - 1
   }
