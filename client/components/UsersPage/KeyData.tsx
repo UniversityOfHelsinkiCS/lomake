@@ -143,9 +143,9 @@ export const KeyData = () => {
 
         if (!isNaN(startYear) && startYear < year && !isNaN(endYear) && endYear === year) {
           const ok = window.confirm(
-            `Ohjelmalla ${studyprogrammeKey} on alkanut toimenpidemenettely vuonna ${startYear} ja se on merkitty päättyneeksi vuonna ${endYear}. 
-            Jos ohjelmalla on alkanut edellisen menettelyn sulkemisen jälkeen vielä samana vuonna uusi toimenpidemenettely, 
-            vie aktiivinen menettely tietokantaan valitsemalla ok.`
+            `The intervention procedure for ${studyprogrammeKey} started in ${startYear} and is recorded as ended in ${endYear}. 
+            If a new intervention procedure for the programme has started later the same year after the previous one was closed, 
+            save the active procedure to the database by selecting OK.`
           )
           if (ok) {
             try {
