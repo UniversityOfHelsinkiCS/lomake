@@ -72,7 +72,11 @@ const InterventionProcedure = () => {
   if (document) {
     keyDataYear = Number(/\b(\d{4})\b/.exec(document.data.title)?.[1]) - 1 || new Date().getFullYear() - 1
   } else {
-    keyDataYear = new Date().getFullYear() - 1
+    const programmeYears = programme
+      .filter((programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey)
+      .map((programmeData: KeyDataProgramme) => programmeData.year)
+
+    keyDataYear = Math.max(...programmeYears)
   }
 
   const programmeData = programme.find(
