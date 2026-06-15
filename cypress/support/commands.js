@@ -140,12 +140,12 @@ Cypress.Commands.add('typeInEditor', (questionId, textToBeTyped, flakyness = 24)
   cy.get(`[data-cy=save-button-${questionId}]`).click()
 })
 
-Cypress.Commands.add('createDeadline', (draftYear, form) => {
+Cypress.Commands.add('createDeadline', (draftYear, form, key) => {
   cy.get('[data-cy=draft-year-selector]').click()
   cy.get(`[data-cy=draft-year-${draftYear}]`).click()
 
   cy.get('[data-cy=form-selector]').click()
-  cy.get(`[data-cy=form-${form}]`).click()
+  cy.get(`[data-cy=form-${form}-${key}]`).click()
 
   cy.get('.react-datepicker__input-container > input').click() // Open datepicked
   cy.get('.react-datepicker__navigation--next').click() // Go to next month

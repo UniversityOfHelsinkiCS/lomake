@@ -190,26 +190,20 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.closeDeadline(defaultYears[0], '1')
+    cy.closeDeadline(defaultYears[0], 'yearlyAssessment', 1)
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], '1')
+    cy.createDeadline(defaultYears[0], 'yearlyAssessment', 1)
     cy.get('[data-cy=form-1-deadline]').contains('14.')
 
     // Create other deadline
-    cy.createDeadline(defaultYears[0], '4')
+    cy.createDeadline(defaultYears[0], 'evaluation', 4)
     cy.get('[data-cy=form-4-deadline]').contains('14.')
 
-    // Check that forms are open as they should be
-    // cy.visit('/yearly')
-    // cy.visit('/yearly/form/1/KH50_004')
-    // cy.contains(`Answers for the year ${defaultYears[0]} can be modified.`).should('exist')
-    // cy.visit('/evaluation/form/4/KH50_005')
-    // cy.contains('.editor-class')
   })
 
   it('Closing one deadline closes only one form', () => {
@@ -217,17 +211,17 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], '1')
+    cy.createDeadline(defaultYears[0], 'yearlyAssessment', 1)
     cy.get('[data-cy=form-1-deadline]').contains('14.')
 
-    cy.createDeadline(defaultYears[0], '4')
+    cy.createDeadline(defaultYears[0], 'evaluation', 4)
     cy.get('[data-cy=form-4-deadline]').contains('14.')
 
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
     // Close one deadline
-    cy.closeDeadline(defaultYears[0], '1')
+    cy.closeDeadline(defaultYears[0], 'yearlyAssessment', 1)
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     cy.visit('/yearly')

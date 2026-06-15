@@ -74,7 +74,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
 
-      cy.createDeadline(defaultYears[0], 'Katselmus - toimeenpano')
+      cy.createDeadline(defaultYears[0], 'evaluation', 7)
       cy.get('[data-cy=form-7-deadline]').contains('14.')
 
       cy.login(cypressOspa)
@@ -127,7 +127,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
 
-      cy.createDeadline(defaultYears[0], 'Katselmus - toimeenpano')
+      cy.createDeadline(defaultYears[0], 'evaluation', 7)
       cy.get('[data-cy=form-7-deadline]').contains('14.')
 
       cy.login(cypressOspa)

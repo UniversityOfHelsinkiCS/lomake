@@ -48,7 +48,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - koulutusohjelmat')
+    cy.createDeadline(defaultYears[0], 'degree-reform', 2)
     cy.get('[data-cy=form-2-deadline]').contains('14.')
     cy.visit(`/degree-reform/form/${testProgrammeCode}`)
 
@@ -65,7 +65,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
+    cy.createDeadline(defaultYears[0], 'degree-reform', 3)
     cy.get('[data-cy=form-3-deadline]').contains('14.')
     cy.visit('/individual')
     cy.get('[data-cy=form-section-0]')
@@ -81,7 +81,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - koulutusohjelmat')
+    cy.createDeadline(defaultYears[0], 'degree-reform', 2)
     cy.get('[data-cy=form-2-deadline]').contains('14.')
 
     cy.login(cypressReadingRightsUser)
@@ -204,7 +204,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - koulutusohjelmat')
+    cy.createDeadline(defaultYears[0], 'degree-reform', 2)
     cy.get('[data-cy=form-2-deadline]').contains('14.')
     // Start filling in the form
     cy.login(cypressUser)
@@ -278,7 +278,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
+    cy.createDeadline(defaultYears[0], 'degree-reform', 3)
     cy.get('[data-cy=form-3-deadline]').contains('14.')
 
     cy.login(cypressUser)
@@ -342,7 +342,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
+    cy.createDeadline(defaultYears[0], 'degree-reform', 3)
     cy.get('[data-cy=form-3-deadline]').contains('14.')
 
     cy.login(cypressUser)
@@ -433,7 +433,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
+    cy.createDeadline(defaultYears[0], 'degree-reform', 3)
     cy.get('[data-cy=form-3-deadline]').contains('14.')
     cy.login(cypressUser)
 
@@ -478,23 +478,5 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=choose-checkbox-view_is_based_on]').find('input[value="bachelor"]').should('be.checked')
 
     cy.get('[data-cy=individual-form-ready-button]').click()
-
-    /* Deprecated since there's no function to send form
-    cy.get('[data-cy=individual-form-send-modal-button]').click()
-    cy.get('[data-cy=individual-form-send-form-button]').click().wait(1000)
-
-    // Check form was sent succesfully and form is empty
-
-    cy.get('[data-cy=advanced-radio-background_unit]').find('input[type="radio"]').should('not.be.checked')
-
-    cy.get('[data-cy=advanced-radio-primary_role]').find('input[type="radio"]').should('not.be.checked')
-
-    cy.get('[data-cy=advanced-radio-background_unit]').find('input[value="Other"]').should('not.be.checked')
-
-    cy.get('[data-cy=choose-basic-radio-how_many_years]').find('input[type="radio"]').should('not.be.checked')
-    */
   })
-
-  // individual: check that correct data shown
-  //    login as someone else and make sure that they don't get admin's answers
 })

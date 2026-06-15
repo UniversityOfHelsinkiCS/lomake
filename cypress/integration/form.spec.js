@@ -80,7 +80,7 @@ describe('Yearly assessment form tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+    cy.createDeadline(defaultYears[0], 'evaluation', 4)
     cy.get('[data-cy=form-4-deadline]').contains('14.')
 
     cy.login('cypressUser')
@@ -102,7 +102,7 @@ describe('Yearly assessment form tests', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
-    cy.closeDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+    cy.closeDeadline(defaultYears[0], 'evaluation', 4)
     cy.get('[data-cy=form-4-deadline]').should('not.exist')
 
     cy.login('cypressUser')

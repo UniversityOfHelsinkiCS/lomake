@@ -83,6 +83,7 @@ const DeadlineSetting = () => {
       key: f.key,
       value: f.key,
       text: f.name,
+      type: f.type,
     }
   })
 
@@ -140,7 +141,7 @@ const DeadlineSetting = () => {
             value={form ?? ''}
           >
             {formOptions.map(f => (
-              <MenuItem data-cy={`form-${f.value}`} key={f.key} value={f.value}>
+              <MenuItem data-cy={`form-${f.type}-${f.key}`} key={f.key} value={f.value}>
                 {f.text}
               </MenuItem>
             ))}
