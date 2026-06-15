@@ -5,14 +5,14 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { Box, Typography, CircularProgress, Alert } from '@mui/material'
 
 import { useTranslation } from 'react-i18next'
-import { useUpdateQualityDocumentMutation } from '@/client/redux/qualityDocuments'
-import { useLockDocument } from '@/client/hooks/useLockDocument'
+import { useUpdateQualityDocumentMutation } from '../../../redux/qualityDocuments'
+import { useLockDocument } from '../../../hooks/useLockDocument'
 import { useNavigate } from 'react-router'
 
-import { FeedbackSource, FormDataState, FeedbackRegularity } from '@/shared/lib/types'
+import { FeedbackSource, FormDataState, FeedbackRegularity } from '../../../../shared/lib/types'
 
 import QualityForm, { defaultFeedbackSourceOptions, initFormData, initErrors } from './QualityForm'
-import { validateQualityDocument } from '@/client/util/v1'
+import { validateQualityDocument } from '../../../util/v1'
 
 const buildFeedbackSourceOptions = (feedbackSources: FormDataState['feedbackSources']) =>
   defaultFeedbackSourceOptions.concat(

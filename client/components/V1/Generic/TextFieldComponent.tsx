@@ -8,11 +8,11 @@ import ReactMarkdown from 'react-markdown'
 import CurrentEditor from '../../Generic/CurrentEditor'
 import { useGetReportQuery } from '../../../redux/reports'
 import { useParams } from 'react-router'
-import { useAppSelector } from '@/client/util/hooks'
-import { useFetchLockQuery } from '@/client/redux/lock'
+import { useAppSelector } from '../../../util/hooks'
+import { useFetchLockQuery } from '../../../redux/lock'
 import { TextFieldCard } from './TextFieldCard'
-import { useLockSync } from '@/client/hooks/useLockSync'
-import { ReportDataKey } from '@/client/lib/types'
+import { useLockSync } from '../../../hooks/useLockSync'
+import { ReportDataKey } from '../../../lib/types'
 
 type TextFieldComponentProps = {
   id: ReportDataKey

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Loader, Table } from 'semantic-ui-react'
-import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
+import { useGetOrganisationDataQuery } from '../../redux/organisation'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)

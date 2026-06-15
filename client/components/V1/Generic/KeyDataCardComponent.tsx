@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react'
 import { Box, Card, CardActionArea, Tooltip, Typography } from '@mui/material'
-import { calculateColor, calculateValue, calculateKeyDataColor, extractKeyDataValue } from '@/client/util/v1'
+import { calculateColor, calculateValue, calculateKeyDataColor, extractKeyDataValue } from '../../../util/v1'
 
 import { TrafficLight } from './TrafficLightComponent'
 import ColorMeterComponent from './ColorMeterComponent'
 import ColorHistoryComponent from './ColorHistoryComponent'
 
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { GroupKey, ProgrammeLevel } from '../../../lib/enums'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
 import { useTranslation } from 'react-i18next'
-import { useAppSelector } from '@/client/util/hooks'
+import { useAppSelector } from '../../../util/hooks'
 
 interface KeyDataCardProps extends KeyDataCardData {
   level: ProgrammeLevel

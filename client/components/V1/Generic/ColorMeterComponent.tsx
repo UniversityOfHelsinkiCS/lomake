@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { customColors } from '@/theme'
+import { customColors } from '../../../../theme'
 import { useTranslation } from 'react-i18next'
 import { Tooltip, Typography } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'

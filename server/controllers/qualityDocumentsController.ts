@@ -4,7 +4,7 @@ import QualityDocument from '../models/qualityDocument.js'
 import { Request, Response } from 'express'
 import { QualityDocumentFormSchema } from '../../shared/validators/index.js'
 import Studyprogramme from '../models/studyprogramme.js'
-import { ErrorObject } from '@/shared/lib/types.js'
+import { ErrorObject } from '../../shared/lib/types.js'
 
 interface ValidateOperationResponse {
   success: boolean

@@ -5,7 +5,7 @@ import { getProgrammesUsersAction } from '../../redux/programmesUsersReducer'
 import ProgramControlsUsers from './ProgramControlsUsers'
 import FormLocker from './FormLocker'
 import { useGetJoryMapQuery } from '../../redux/organisation'
-import { organisationCodeToIam } from '@/config/common'
+import { organisationCodeToIam } from '../../../config/common'
 
 const OwnerAccordionContent = ({ programKey, form }) => {
   const dispatch = useDispatch()

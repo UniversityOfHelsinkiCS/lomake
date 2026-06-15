@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
-import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
+import { GroupKey, LightColors, ProgrammeLevel } from '../lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
-import { QualityDocumentFormSchema } from '@/shared/validators'
+import { QualityDocumentFormSchema } from '../../shared/validators'
 import { fields } from '../components/V1/Generic/QualityForm'
 
 export const calculateColor = (value: number, threshold: string, liikennevalo: boolean, unit?: string) => {

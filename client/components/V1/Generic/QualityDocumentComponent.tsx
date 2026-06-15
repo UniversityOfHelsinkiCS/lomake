@@ -13,7 +13,7 @@ import {
   TableRow,
 } from '@mui/material'
 import { defaultFeedbackSourceOptions, feedbackRegularityOptions } from './QualityForm'
-import { customColors } from '@/theme'
+import { customColors } from '../../../../theme'
 
 export const sectionHeaderSx = {
   display: 'flex',

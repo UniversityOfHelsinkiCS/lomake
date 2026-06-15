@@ -1,7 +1,7 @@
 import { Box, Button, Typography, TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import CharacterCounter from './Charactercounter'
-import { FormDataState } from '@/shared/lib/types'
+import { FormDataState } from '../../../../shared/lib/types'
 
 const FeedbackActionForm = ({
   example,

@@ -3,8 +3,8 @@ import { setKeyDataYear, clearLevelSpecificFilters } from '../../../redux/filter
 import { MenuItem, FormControl } from '@mui/material'
 
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { inProduction } from '@/config/common'
-import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { inProduction } from '../../../../config/common'
+import { useAppDispatch, useAppSelector } from '../../../util/hooks'
 
 const YearFilterComponent = () => {
   const dispatch = useAppDispatch()

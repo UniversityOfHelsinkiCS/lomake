@@ -1,10 +1,10 @@
 import { Typography, Table, TableBody, TableHead, TableCell, TableRow, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { calculateColor, calculateValue } from '@/client/util/v1'
+import { calculateColor, calculateValue } from '../../../util/v1'
 import { TrafficLight } from './TrafficLightComponent'
-import { ProgrammeLevel } from '@/shared/lib/enums'
-import { useAppSelector } from '@/client/util/hooks'
-import { useFetchAllKeyDataQuery } from '@/client/redux/keyData'
+import { ProgrammeLevel } from '../../../../shared/lib/enums'
+import { useAppSelector } from '../../../util/hooks'
+import { useFetchAllKeyDataQuery } from '../../../redux/keyData'
 
 const ColorHistoryComponent = (props: any) => {
   const { t } = useTranslation()

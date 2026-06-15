@@ -1,5 +1,5 @@
 import { RTKApi } from '../util/apiConnection'
-import { KeyDataProgramme, KeyData, KeyDataRow, KeyDataByCodeWithYearAndActive } from '@/shared/lib/types'
+import { KeyDataProgramme, KeyData, KeyDataRow, KeyDataByCodeWithYearAndActive } from '../../shared/lib/types'
 
 const normalizeProgrammeCode = (value: unknown) => (typeof value === 'string' ? value.trim() : '')
 

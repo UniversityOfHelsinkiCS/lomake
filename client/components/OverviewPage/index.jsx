@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown'
 import { filterFromUrl } from '../../util/common'
 import { useVisibleOverviewProgrammes } from '../../util/overview'
-import { isAdmin } from '../../../config/common'
 import CsvDownload from '../Generic/CsvDownload'
 import CustomModal from '../Generic/CustomModal'
 import NoPermissions from '../Generic/NoPermissions'
@@ -69,11 +68,6 @@ export default () => {
     })
   }, [usersProgrammes, lang, debouncedFilter])
 
-  const moreThanFiveProgrammes = useMemo(() => {
-    if (isAdmin(currentUser.data)) return true
-    if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
-    return false
-  }, [currentUser])
   return (
     <>
       {modalData && (
@@ -112,13 +106,6 @@ export default () => {
               <Button component={Link} data-cy="nav-report" size="large" to="/report" variant="outlined">
                 {t('overview:readAnswers')}
               </Button>
-            </div>
-            <div>
-              {moreThanFiveProgrammes && (
-                <Button component={Link} data-cy="nav-comparison" size="large" to="/comparison" variant="outlined">
-                  {t('overview:compareAnswers')}
-                </Button>
-              )}
             </div>
             <div>
               <YearSelector size="extra-small" />

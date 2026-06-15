@@ -11,8 +11,6 @@ const FormFilter = ({ version = null, comparison = false }) => {
   const { t } = useTranslation()
   const [options, setOptions] = useState([
     { text: t('yearlyAssessment'), value: 1 },
-    //  { text: t('degree-reform-group'), value: 2 },
-    // { text: t('degree-reform-individual'), value: 3 },
     { text: t('common:formFilter:evaluation'), value: 4 },
     { text: t('evaluationFaculty'), value: 5 },
     { text: t('metaevaluation'), value: 7 },

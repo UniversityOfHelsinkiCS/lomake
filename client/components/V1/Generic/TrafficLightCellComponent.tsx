@@ -1,12 +1,12 @@
 import { TableCell } from '../Generic/TableComponent'
 import { useTranslation } from 'react-i18next'
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataMetadata, KeyDataProgramme, ReportData } from '@/shared/lib/types'
-import { calculateKeyDataColor } from '@/client/util/v1'
-import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
+import { GroupKey, ProgrammeLevel } from '../../../lib/enums'
+import { KeyDataMetadata, KeyDataProgramme, ReportData } from '../../../../shared/lib/types'
+import { calculateKeyDataColor } from '../../../util/v1'
+import { useNotificationBadge } from '../../../hooks/useNotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
-import { colors } from '@/client/util/common'
+import { colors } from '../../../util/common'
 
 const TrafficLightCell = ({
   metadata,

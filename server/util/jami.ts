@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as Sentry from '@sentry/node'
 import { JAMI_URL, API_TOKEN, inProduction } from './common.js'
-import { ProgrammeLevel } from '@/shared/lib/enums.js'
+import { ProgrammeLevel } from '../../shared/lib/enums.js'
 import logger from './logger.js'
 import { lomakeKatselmus, universityWideWritingGroups } from '../../config/IAMConfig'
 import { dekanaattiIamGroup, studentIams } from '../../config/common.js'

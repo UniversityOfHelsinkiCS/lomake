@@ -2,12 +2,12 @@
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { Faculty } from '@/shared/lib/types'
-import { clearLevelSpecificFilters, setFaculty } from '@/client/redux/filterReducer'
+import { clearLevelSpecificFilters, setFaculty } from '../../../redux/filterReducer'
 
 import { MenuItem, FormControl, Checkbox, ListItemText } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import _ from 'lodash'
-import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
+import { useAppSelector, useAppDispatch } from '../../../util/hooks'
 
 /*
 This is a purpose built component for filtering faculties.

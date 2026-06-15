@@ -1,6 +1,6 @@
-import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
+import { GroupKey, LightColors, ProgrammeLevel } from '../lib/enums'
 import type { KeyDataMetadata, KeyDataProgramme, ReportData } from '@/shared/lib/types'
-import { calculateKeyDataColor } from '@/client/util/v1'
+import { calculateKeyDataColor } from '../util/v1'
 import { calculateInterventionAreas } from '../components/V1/Generic/InterventionProcedure'
 import { useTranslation } from 'react-i18next'
 import { DocumentType, InterventionProcedureType } from '../lib/types'

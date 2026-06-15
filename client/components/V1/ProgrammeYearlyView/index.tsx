@@ -16,18 +16,24 @@ import KeyDataCard from '../Generic/KeyDataCardComponent'
 import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
-import { KeyDataCardData } from '@/client/lib/types'
-import { basePath, isAdmin, hasSomeReadAccess, inProduction, isDegreeStudentOrEmployee } from '@/config/common'
-import { calculateKeyDataColor, formatURLFragment, getKeyDataPoints } from '@/client/util/v1'
-import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
+import { GroupKey, ProgrammeLevel } from '../../../lib/enums'
+import { KeyDataMetadata, KeyDataProgramme } from '../../../../shared/lib/types'
+import { KeyDataCardData } from '../../../lib/types'
+import {
+  basePath,
+  isAdmin,
+  hasSomeReadAccess,
+  inProduction,
+  isDegreeStudentOrEmployee,
+} from '../../../../config/common'
+import { calculateKeyDataColor, formatURLFragment, getKeyDataPoints } from '../../../util/v1'
+import { useNotificationBadge } from '../../../hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import BreadcrumbComponent from '../Generic/BreadcrumbComponent'
-import { useAppSelector, useAppDispatch } from '@/client/util/hooks'
-import { useGetReportsQuery } from '@/client/redux/reports'
-import { useFetchAllKeyData } from '@/client/redux/keyData'
+import { useAppSelector, useAppDispatch } from '../../../util/hooks'
+import { useGetReportsQuery } from '../../../redux/reports'
+import { useFetchAllKeyData } from '../../../redux/keyData'
 
 const ActionsBadge = ({
   programmeData,

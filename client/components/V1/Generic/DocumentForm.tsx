@@ -7,12 +7,12 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { fiFI, svSE, enUS } from '@mui/x-date-pickers/locales'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useTranslation } from 'react-i18next'
-import { DocumentFormSchema } from '@/shared/validators'
+import { DocumentFormSchema } from '../../../../shared/validators'
 import type { DocumentForm } from '@/shared/lib/types'
-import { useCreateDocumentMutation } from '@/client/redux/documents'
+import { useCreateDocumentMutation } from '../../../redux/documents'
 import { TFunction } from 'i18next'
 import { useNavigate } from 'react-router'
-import { useAppSelector } from '@/client/util/hooks'
+import { useAppSelector } from '../../../util/hooks'
 
 const fields = ['title', 'date', 'participants', 'matters', 'schedule', 'followupDate']
 

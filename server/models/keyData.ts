@@ -8,7 +8,7 @@ import {
   DATE,
   BOOLEAN,
 } from 'sequelize'
-import { KeyData as KeyDataType } from '@/shared/lib/types.js'
+import { KeyData as KeyDataType } from '../../shared/lib/types.js'
 import { sequelize } from '../database/connection.js'
 
 class KeyData extends Model<InferAttributes<KeyData>, InferCreationAttributes<KeyData>> {

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { setShowDiscontinued } from '../../../redux/filterReducer'
 
-import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { useAppDispatch, useAppSelector } from '../../../util/hooks'
 import { Checkbox, Tooltip } from '@mui/material'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 

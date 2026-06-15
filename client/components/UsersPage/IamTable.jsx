@@ -1,6 +1,6 @@
 import { Table, TableHead, TableBody, TableCell, TableRow } from '@mui/material'
 import uniq from 'lodash/uniq'
-import { colors } from '@/client/util/common'
+import { colors } from '../../util/common'
 import { doctoralIams, doctoralWritingIams, superAdminGroups, adminGroups } from '../../../config/IAMConfig'
 
 const IamTable = () => {

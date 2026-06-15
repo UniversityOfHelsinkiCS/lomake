@@ -2,7 +2,7 @@
 import { Tooltip } from '@mui/material'
 import { customColors } from '../../../../theme'
 import { useTranslation } from 'react-i18next'
-import { LightColors } from '@/client/lib/enums'
+import { LightColors } from '../../../lib/enums'
 
 interface TrafficLightProps {
   color: string

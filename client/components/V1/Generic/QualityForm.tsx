@@ -20,9 +20,9 @@ import {
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import FeedbackUtilization from './FeedbackUtilizationComponent'
-import { FeedbackSource, FormDataState, FeedbackRegularity, FeedbackSourceState } from '@/shared/lib/types'
+import { FeedbackSource, FormDataState, FeedbackRegularity, FeedbackSourceState } from '../../../../shared/lib/types'
 import CharacterCounter from './Charactercounter'
-import { customColors } from '@/theme'
+import { customColors } from '../../../../theme'
 import { TFunction } from 'i18next'
 import Examples from './ExamplesComponent'
 

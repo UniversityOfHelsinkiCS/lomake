@@ -1,4 +1,4 @@
-import { GroupKey, ProgrammeLevel } from '@/shared/lib/enums'
+import { GroupKey, ProgrammeLevel } from '../../shared/lib/enums'
 
 export enum StudyLevel {
   // levels in studyProgrammes / keyDataProgrammes

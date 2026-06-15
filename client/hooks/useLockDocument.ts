@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { useAppSelector } from '@/client/util/hooks'
-import { useFetchLockQuery, useSetLockMutation, useDeleteLockMutation } from '@/client/redux/lock'
+import { useAppSelector } from '../util/hooks'
+import { useFetchLockQuery, useSetLockMutation, useDeleteLockMutation } from '../redux/lock'
 
 type UseLockDocumentProps = {
   room: string

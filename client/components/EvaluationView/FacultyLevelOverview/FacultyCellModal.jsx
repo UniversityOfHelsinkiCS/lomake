@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Accordion, Icon, Loader } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
-import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
+import { useGetOrganisationDataQuery } from '../../../redux/organisation'
 
 const FacultyCellModal = ({ modalData, setAccordionsOpen, accordionsOpen, t }) => {
   const lang = useSelector(state => state.language)

@@ -20,7 +20,9 @@ const DeadlineInfo = () => {
           {nextDeadline.map(deadline => {
             return (
               <>
-                <Typography variant="h3">{forms.find(f => f.key === deadline.form)?.name}</Typography>
+                <Typography data-cy="" variant="h3">
+                  {forms.find(f => f.key === deadline.form)?.name}
+                </Typography>
                 <p>
                   {t('users:nextDeadline')} {formatDate(deadline.date)}
                 </p>

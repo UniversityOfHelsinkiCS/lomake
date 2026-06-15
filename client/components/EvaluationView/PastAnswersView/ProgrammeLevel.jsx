@@ -50,7 +50,6 @@ const PastAnswersView = () => {
       dispatch(getProgrammeOldAnswersAction(programmeKey))
     }
   }, [programmeKey])
-
   const allAnswers = useMemo(() => {
     if (pending || !forProgramme || forProgramme.length === 0) {
       return []

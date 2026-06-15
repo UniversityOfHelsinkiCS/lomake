@@ -20,18 +20,18 @@ import {
   TextField,
 } from '@mui/material'
 import { ExpandMore, Add, Edit, Delete } from '@mui/icons-material'
-import { basePath, dekanaattiIamGroup, hasProgrammeWriteAccess, isAdmin, isKopaAdmin } from '@/config/common'
-import { KeyDataProgramme } from '@/shared/lib/types'
+import { basePath, dekanaattiIamGroup, hasProgrammeWriteAccess, isAdmin, isKopaAdmin } from '../../../../config/common'
+import { KeyDataProgramme } from '../../../../shared/lib/types'
 import { calculateInterventionAreas } from '../Generic/InterventionProcedure'
-import { useGetProgrammesInterventionProceduresQuery } from '@/client/redux/interventionProcedures'
+import { useGetProgrammesInterventionProceduresQuery } from '../../../redux/interventionProcedures'
 import {
   useGetDocumentsQuery,
   useCloseInterventionProcedureMutation,
   useDeleteDocumentMutation,
-} from '@/client/redux/documents'
-import { useAppSelector } from '@/client/util/hooks'
-import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
-import { InterventionProcedureType } from '@/client/lib/types'
+} from '../../../redux/documents'
+import { useAppSelector } from '../../../util/hooks'
+import { useFetchSingleKeyDataQuery } from '../../../redux/keyData'
+import { InterventionProcedureType } from '../../../lib/types'
 
 const InterventionComponent = () => {
   const { t } = useTranslation()

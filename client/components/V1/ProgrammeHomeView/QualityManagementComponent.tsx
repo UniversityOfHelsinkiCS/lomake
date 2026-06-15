@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable no-alert */
 import { useNavigate, useParams } from 'react-router'
-import { hasProgrammeWriteAccess, isAdmin } from '@/config/common'
+import { hasProgrammeWriteAccess, isAdmin } from '../../../../config/common'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -16,12 +16,12 @@ import {
   Tooltip,
 } from '@mui/material'
 import { ExpandMore, Add, Delete, Edit } from '@mui/icons-material'
-import { useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '@/client/redux/qualityDocuments'
-import { useAppSelector } from '@/client/util/hooks'
-import { useFetchSingleKeyDataQuery } from '@/client/redux/keyData'
-import { useFetchLockQuery, useDeleteLockMutation } from '@/client/redux/lock'
+import { useGetQualityDocumentsQuery, useDeleteQualityDocumentMutation } from '../../../redux/qualityDocuments'
+import { useAppSelector } from '../../../util/hooks'
+import { useFetchSingleKeyDataQuery } from '../../../redux/keyData'
+import { useFetchLockQuery, useDeleteLockMutation } from '../../../redux/lock'
 import QualityDocumentInfo from '../Generic/QualityDocumentComponent'
-import { QualityDocumentType } from '@/client/lib/types'
+import { QualityDocumentType } from '../../../lib/types'
 
 const QualityManagementComponent = ({ programmeData }) => {
   const { t } = useTranslation()

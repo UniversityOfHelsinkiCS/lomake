@@ -13,15 +13,15 @@ import {
   useCreateQualityDocumentMutation,
   useGetQualityDocumentsQuery,
   useUpdateQualityDocumentMutation,
-} from '@/client/redux/qualityDocuments'
+} from '../../../redux/qualityDocuments'
 
-import { useLockDocument } from '@/client/hooks/useLockDocument'
+import { useLockDocument } from '../../../hooks/useLockDocument'
 
-import { FeedbackSource, FormDataState } from '@/shared/lib/types'
+import { FeedbackSource, FormDataState } from '../../../../shared/lib/types'
 
 import QualityForm, { defaultFeedbackSourceOptions, initFormData, initErrors } from './QualityForm'
-import { validateQualityDocument } from '@/client/util/v1'
-import { QualityDocumentType } from '@/client/lib/types'
+import { validateQualityDocument } from '../../../util/v1'
+import { QualityDocumentType } from '../../../lib/types'
 
 const AddQualityDocument = ({ programmeKey }: { programmeKey: string }) => {
   const { t } = useTranslation()

@@ -23,7 +23,7 @@ import useDebounce from '../../util/useDebounce'
 import { sortedItems, colors } from '../../util/common'
 import { isAdmin } from '../../../config/common'
 import './UsersPage.scss'
-import { useGetOrganisationDataQuery } from '@/client/redux/organisation'
+import { useGetOrganisationDataQuery } from '../../redux/organisation'
 
 export default () => {
   const [sorter, setSorter] = useState('')

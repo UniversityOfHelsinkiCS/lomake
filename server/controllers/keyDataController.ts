@@ -15,7 +15,7 @@ import {
   logZodError,
   ZodError,
 } from '../../shared/validators/index.js'
-import { CanonicalSheetName, KeyData as KeyDataType } from '@/shared/lib/types.js'
+import { CanonicalSheetName, KeyData as KeyDataType } from '../../shared/lib/types.js'
 import Studyprogramme from '../models/studyprogramme.js'
 import logger from '../util/logger.js'
 import InterventionProcedure from '../models/interventionProcedure.js'

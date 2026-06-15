@@ -2,7 +2,7 @@ import { Button, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import FeedbackActionForm from './FeedbackActionComponent'
 import { useState } from 'react'
-import { FormDataState } from '@/shared/lib/types'
+import { FormDataState } from '../../../../shared/lib/types'
 
 const Examples = ({
   errors,

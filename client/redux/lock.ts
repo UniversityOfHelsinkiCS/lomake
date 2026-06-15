@@ -1,4 +1,4 @@
-import { Lock } from '@/shared/lib/types'
+import { Lock } from '../../shared/lib/types'
 import { RTKApi } from '../util/apiConnection'
 
 export type SetLockRequest = { room: string; field: string }

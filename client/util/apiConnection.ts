@@ -11,7 +11,6 @@ import { Sentry } from './sentry'
 
 const getAxios = axios.create({ baseURL: `${basePath}api` })
 
-// @ts-expect-error
 export const callApi = async (url, method = 'get', data) => {
   const defaultHeaders = !inProduction ? getHeaders() : {}
   const headers = { ...defaultHeaders }
@@ -26,8 +25,6 @@ export const callApi = async (url, method = 'get', data) => {
     headers,
   })
 }
-
-// @ts-expect-error
 
 export default (route, prefix, method = 'get', data, query) => ({
   type: `${prefix}_ATTEMPT`,
@@ -44,7 +41,6 @@ export default (route, prefix, method = 'get', data, query) => ({
  * This is a redux middleware used for tracking api calls
  */
 
-// @ts-expect-error
 export const handleRequest = store => next => async action => {
   next(action)
   const { requestSettings } = action

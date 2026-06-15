@@ -1,5 +1,5 @@
 import { GroupKey, StudyLevel } from './enums'
-import { DocumentForm, QualityDocumentForm } from '@/shared/lib/types'
+import { DocumentForm, QualityDocumentForm } from '../../shared/lib/types'
 
 export interface KeyDataCardData {
   title: string

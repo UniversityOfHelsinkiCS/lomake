@@ -2,22 +2,19 @@
 /* eslint-disable react/function-component-definition */
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { wsLeaveRoom } from '@/client/redux/websocketReducer.js'
-import { setViewOnly } from '@/client/redux/formReducer'
-
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { wsLeaveRoom } from '../../../redux/websocketReducer.js'
+import { setViewOnly } from '../../../redux/formReducer'
+import { GroupKey, ProgrammeLevel } from '../../../lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
-
+import { ArrowForward } from '@mui/icons-material'
 import { Box, Button, CircularProgress, Link, Typography } from '@mui/material'
 import { TextFieldCard } from '../Generic/TextFieldCard'
 import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
-import { getKeyDataPoints, formatURLFragment } from '@/client/util/v1'
-import { ArrowForward } from '@mui/icons-material'
-import { basePath } from '@/config/common'
-import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
+import { getKeyDataPoints, formatURLFragment } from '../../../util/v1'
+import { basePath } from '../../../../config/common'
+import { useAppDispatch, useAppSelector } from '../../../util/hooks'
 
 export interface selectedKeyFigureData {
   programme: KeyDataProgramme

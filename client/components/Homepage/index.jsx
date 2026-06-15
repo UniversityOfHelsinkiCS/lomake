@@ -17,7 +17,7 @@ import { ArrowForward, MailOutlined } from '@mui/icons-material'
 import NoPermissions from '../Generic/NoPermissions'
 import WritingImage from '../../assets/writing.jpg'
 import ArchiveImage from '../../assets/archive.jpg'
-import { basePath, isDegreeStudentOrEmployee } from '@/config/common'
+import { basePath, isDegreeStudentOrEmployee } from '../../../config/common'
 
 const Homepage = () => {
   const { t } = useTranslation()

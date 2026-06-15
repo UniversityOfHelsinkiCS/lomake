@@ -4,19 +4,19 @@ import { TableCell } from '../Generic/TableComponent'
 import { useTranslation } from 'react-i18next'
 import { Typography, Button } from '@mui/material'
 
-import { KeyDataMetadata, KeyDataProgramme, ReportData } from '@/shared/lib/types'
+import { KeyDataMetadata, KeyDataProgramme, ReportData } from '../../../../shared/lib/types'
 
-import { setViewOnly } from '@/client/redux/formReducer'
+import { setViewOnly } from '../../../redux/formReducer'
 
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
-import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
+import { useNotificationBadge } from '../../../hooks/useNotificationBadge'
 
 import Modal from '../Generic/ModalTemplateComponent'
 import { TextFieldCard } from '../Generic/TextFieldCard'
 import NotificationBadge from '../Generic/NotificationBadge'
-import { useAppDispatch, useAppSelector } from '@/client/util/hooks'
-import { colors } from '@/client/util/common'
+import { useAppDispatch, useAppSelector } from '../../../util/hooks'
+import { colors } from '../../../util/common'
 
 const ActionsCell = ({
   programmeData,

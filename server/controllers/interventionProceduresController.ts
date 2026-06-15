@@ -2,7 +2,7 @@ import logger from '../util/logger.js'
 import InterventionProcedure from '../models/interventionProcedure.js'
 import { Request, Response } from 'express'
 import Studyprogramme from '../models/studyprogramme.js'
-import { ErrorObject } from '@/shared/lib/types.js'
+import { ErrorObject } from '../../shared/lib/types.js'
 
 interface ValidateOperationResponse {
   success: boolean

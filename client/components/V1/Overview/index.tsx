@@ -11,7 +11,7 @@ import KeyDataTableComponent from './OverviewKeyDataTableComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Alert, Button, Typography } from '@mui/material'
 import { ArrowForward } from '@mui/icons-material'
-import { isAdmin, hasSomeReadAccess, isDegreeStudentOrEmployee } from '@/config/common'
+import { isAdmin, hasSomeReadAccess, isDegreeStudentOrEmployee } from '../../../../config/common'
 import Filter from '../Generic/FilterComponent'
 
 import RiskManagementComponent from './RiskManagementComponent'
