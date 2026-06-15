@@ -2,7 +2,7 @@ name: Test feature branch
 
 on:
   push:
-    branches: []
+    branches: [test-branch]
 
 jobs:
   lint:
