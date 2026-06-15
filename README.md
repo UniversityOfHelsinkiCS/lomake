@@ -13,7 +13,7 @@ The project is split into 2 parts: client and server while index.js in root work
 1. git clone
 2. run `npm install`
 3. To build image the first time run `npm run dev:build` and when image exists use `npm run dev`
-4. run `docker exec -it lomake_dev bash -c "npm run seed"` OR obtain a database dump by running `./script/get_prod.sh` (Access needed)
+4. run `docker exec -it lomake_dev sh -c "npm run seed"` OR obtain a database dump by running `./script/get_prod.sh` (Access needed)
 5. go to http://localhost:8000
 
 
@@ -25,7 +25,7 @@ The project is split into 2 parts: client and server while index.js in root work
 
 When deploying Lomake to a production server for the first time, the database should be seeded.
 
-The seeding should be performed only **once** by executing `docker exec -it lomake bash -c "npm run seed"`
+The seeding should be performed only **once** by executing `docker exec -it lomake sh -c "npm run seed"`
 
 ### Seeding the key data
 
