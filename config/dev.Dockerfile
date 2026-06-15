@@ -1,14 +1,14 @@
-FROM node:22
+FROM node:22-alpine
 
-# Set timezone to Europe/Helsinki
-RUN echo "Europe/Helsinki" > /etc/timezone
-RUN dpkg-reconfigure -f noninteractive tzdata
-
-# The commands above dont seem to do the trick, this works locally atleast:
-ENV TZ=Europe/Helsinki 
-
+ENV TZ=Europe/Helsinki
 # Setup
 WORKDIR /usr/src/app
+
+COPY package* .
+COPY .npmrc .
+
+RUN npm ci
+
 COPY . .
 
 EXPOSE 8000
