@@ -156,12 +156,12 @@ Cypress.Commands.add('createDeadline', (draftYear, form, key) => {
   cy.get('[data-cy=updateDeadline]').click()
 })
 
-Cypress.Commands.add('closeDeadline', (draftYear, form) => {
+Cypress.Commands.add('closeDeadline', (draftYear, form, key) => {
   cy.get('[data-cy=draft-year-selector]').click()
   cy.get(`[data-cy=draft-year-${draftYear}]`).click()
 
   cy.get('[data-cy=form-selector]').click()
-  cy.get(`[data-cy=form-${form}]`).click()
+  cy.get(`[data-cy=form-${form}-${key}]`).click()
 
   cy.get('[data-cy=deleteDeadline]').click()
 })

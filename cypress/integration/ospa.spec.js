@@ -203,7 +203,6 @@ describe('SuperAdmin user tests', () => {
     // Create other deadline
     cy.createDeadline(defaultYears[0], 'evaluation', 4)
     cy.get('[data-cy=form-4-deadline]').contains('14.')
-
   })
 
   it('Closing one deadline closes only one form', () => {

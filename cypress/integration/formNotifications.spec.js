@@ -39,9 +39,9 @@ describe('Form Notification tests', () => {
     cy.contains('Deadline settings').click()
 
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[0]).click()
+    cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
     cy.get('[data-cy=form-selector]').click()
-    cy.get('.item').contains('Vuosiseuranta').click()
+    cy.get(`[data-cy=form-yearlyassesment-1]`).click()
     cy.get('[data-cy=deleteDeadline]').click()
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
