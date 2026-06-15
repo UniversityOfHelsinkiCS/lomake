@@ -45,7 +45,7 @@ describe('SuperAdmin user tests', () => {
 
     // select form
     cy.get('[data-cy=form-selector]').click()
-    cy.get(`[data-cy=form-1]`).click()
+    cy.get(`[data-cy=form-yearlyAssessment-1]`).click()
 
     // Delete pre-generated deadline
     cy.get('[data-cy=deleteDeadline]').click()
@@ -66,7 +66,7 @@ describe('SuperAdmin user tests', () => {
     cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get(`[data-cy=form-1]`).click()
+    cy.get(`[data-cy=form-yearlyAssessment-1]`).click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation--next').click() // Go to next month
@@ -91,7 +91,7 @@ describe('SuperAdmin user tests', () => {
     cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get(`[data-cy=form-1]`).click()
+    cy.get(`[data-cy=form-yearlyAssessment-1]`).click()
 
     cy.get('[data-cy=deleteDeadline]').click()
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
@@ -101,7 +101,7 @@ describe('SuperAdmin user tests', () => {
     cy.get(`[data-cy=draft-year-${defaultYears[1]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get(`[data-cy=form-1]`).click()
+    cy.get(`[data-cy=form-yearlyAssessment-1]`).click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation--next').click() // Go to next month
@@ -135,7 +135,7 @@ describe('SuperAdmin user tests', () => {
     cy.get(`[data-cy=draft-year-${defaultYears[1]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get(`[data-cy=form-1]`).click()
+    cy.get(`[data-cy=form-yearlyAssessment-1]`).click()
 
     cy.get('[data-cy=deleteDeadline]').click()
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
@@ -163,7 +163,7 @@ describe('SuperAdmin user tests', () => {
     cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get(`[data-cy=form-1]`).click()
+    cy.get(`[data-cy=form-yearlyAssessment-1]`).click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation--next').click() // Go to next month

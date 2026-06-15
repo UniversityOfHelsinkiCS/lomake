@@ -63,7 +63,7 @@ Cypress.Commands.add('selectYear', year => {
   cy.get('[data-cy=yearSelector]').then(newEl => {
     expect(newEl.find('.item')).to.have.length(ARCHIVE_LAST_YEAR - 2018)
   })
-  cy.get('[data-cy=yearSelector]').contains(year).click({ force: true })
+  cy.get('[data-cy=yearSelector]').click().contains(year).click({ force: true })
 })
 
 Cypress.Commands.add('hasAccess', (uid, programCode, access) => {

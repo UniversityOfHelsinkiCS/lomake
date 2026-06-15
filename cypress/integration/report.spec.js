@@ -12,21 +12,6 @@ const form = 1 // yearly assessment
 describe('ReportPage tests', () => {
   // Cypress.stop()
   // return
-  /* it('Piecharts are not shown if there are no answers', () => {
-    cy.login(adminUser)
-    cy.visit('/yearly')
-    cy.get('[data-cy=nav-report]').click()
-
-    // the year changes to year with answers by default, if form not open for current year
-    cy.selectYear(defaultYears[0])
-
-    cy.get('[data-cy=report-select-all]').click()
-    cy.get('div').contains('lights').should('contain', 'Traffic lights')
-    cy.get('div').contains('lights').click()
-    cy.get('div').contains('lights')
-    cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text')
-    cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(230, 230, 230)')
-  }) */
 
   it('User should be able to see the just written answers in the report', () => {
     cy.login(user)

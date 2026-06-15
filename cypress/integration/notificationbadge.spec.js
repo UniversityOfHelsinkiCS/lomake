@@ -7,13 +7,13 @@ describe('Notification badge tests', () => {
     cy.request(`/api/cypress/initReports`)
     cy.visit(`/admin`)
     cy.contains('Deadline settings').click()
-    cy.closeDeadline(year, 'Vuosiseuranta')
+    cy.closeDeadline(year, 'yearlyAssessment', 1)
 
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(year).click()
+    cy.get(`[data-cy=draft-year-${year}]`).click()
 
     cy.get('[data-cy=form-selector]').click()
-    cy.get('.item').contains('Vuosiseuranta - UUSI').click()
+    cy.get(`[data-cy=form-yearlyAssessment-10]`).click()
 
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation--next').click() // Go to next month
