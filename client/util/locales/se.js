@@ -175,32 +175,10 @@ export default {
   },
 
   comparison: {
-    compare: 'Jämför svar',
-    reportHeader: {
-      byFaculty: 'Jämför program med fakultet',
-      byYear: 'Jämför enligt år',
-    },
     selectYears: 'Jämför åren du vill granska',
     filterFaculties: 'Filtrera enligt fakultet',
-    selectQuestions: 'Frågor att jämföra',
-    writtenAnswers: 'Skriftliga svar enligt år',
-    chosenProgrammes: 'Valt program',
-    chooseProgramme: 'Välj ett program att jämföra',
-    compareFaculties: 'Jämför enligt fakultet',
     emptyAnswers: 'Räkna in program utan svar på frågan',
     emptyFacultyAnswers: 'Räkna in fakulteter utan svar på frågan',
-    university: 'Hela universitetet',
-    noAccessToAll: 'Observera att du bara kan se jämförelser med de programmen som du har läsrättigheter till',
-    labelOptions: 'Enhet i grafen',
-    percentage: 'Procentandelar',
-    programmeAmount: 'Antal program',
-    facultyAmount: 'Antal fakultet',
-    programmes: 'Program',
-    fullscreen: 'Helskärm',
-    downloadPNG: 'Ladda ner som PNG-bild',
-    downloadSVG: 'Ladda ner som SVG-bild',
-    downloadPDF: 'Ladda ner som PDF',
-    chartExport: 'Jämförelse_av_självbedömningssvar',
   },
 
   formView: {

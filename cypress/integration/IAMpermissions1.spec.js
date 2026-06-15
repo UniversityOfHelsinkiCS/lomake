@@ -26,6 +26,10 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressJoryUser', 'KH10_001', { read: true, write: true })
   })
 
+  it('Jory && student iams grant read and write access to organisation', () => {
+    cy.login('cypressJoryStudentUser')
+  })
+
   it('Jory and corresponding kojo give admin access to programme and read access to all', () => {
     cy.login('cypressKojoUser')
     cy.visit('/yearly')

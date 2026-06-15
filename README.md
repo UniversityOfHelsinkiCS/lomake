@@ -44,7 +44,6 @@ To run test on command line
 Test for archived features are removed from staging.yaml and feature_branches.yml files
 The removed test specs are:
 
-comparison,  
 degreeReform,  
 form,  
 formNotifications,  

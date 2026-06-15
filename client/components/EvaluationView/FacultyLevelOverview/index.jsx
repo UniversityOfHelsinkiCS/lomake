@@ -63,12 +63,6 @@ export default () => {
     })
   }, [usersProgrammes, faculties, lang, debouncedFilter])
 
-  const moreThanFiveProgrammes = useMemo(() => {
-    if (isAdmin(currentUser)) return true
-    if (currentUser.access && Object.keys(currentUser.access).length > 5) return true
-    return false
-  }, [currentUser])
-
   return (
     <>
       {modalData ? (
@@ -100,13 +94,6 @@ export default () => {
               <Button as={Link} data-cy="nav-report" secondary to="/report?form=5">
                 {t('overview:readAnswers')}
               </Button>
-            </MenuItem>
-            <MenuItem>
-              {moreThanFiveProgrammes ? (
-                <Button as={Link} data-cy="nav-comparison" to="/comparison?form=5">
-                  {t('overview:compareAnswers')}
-                </Button>
-              ) : null}
             </MenuItem>
             <MenuItem>
               <YearSelector size="extra-small" />

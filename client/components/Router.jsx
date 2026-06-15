@@ -5,7 +5,6 @@ import FormView from './FormView'
 import AdminPage from './UsersPage'
 import OverviewPage from './OverviewPage'
 import ReportPage from './ReportPage'
-import ComparisonPage from './ComparisonPage'
 import Page404 from './Generic/Page404'
 
 import ProgrammeLevelOverview from './EvaluationView/ProgrammeLevelOverview'
@@ -44,7 +43,6 @@ export default () => (
         <Route element={<OverviewPage />} exact path="/yearly" />
         <Route element={<AdminPage />} exact path="/admin" />
         <Route element={<ReportPage />} exact path="/report" />
-        <Route element={<ComparisonPage />} exact path="/comparison" />
         <Route element={<AboutPage />} exact path="/about" />
         <Route element={<FormView />} exact path="/yearly/form/:form/:room" />
 

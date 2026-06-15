@@ -27,12 +27,6 @@ describe('Permission tests', () => {
     cy.get('[data-cy=no-permissions-message]')
   })
 
-  it("Can't access comparison page without permissions", () => {
-    cy.login(noRightsUser)
-    cy.visit(`/comparison`)
-    cy.get('[data-cy=no-permissions-message]')
-  })
-
   it("Can't WRITE with READ permissions and cant go to edit mode", () => {
     cy.login(readingRightsUser)
     cy.visit(`/yearly/form/1/${testProgrammeCode}`)

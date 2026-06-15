@@ -88,17 +88,6 @@ describe('IAM permission tests', () => {
     cy.contains(`Hello from ${defaultYears[1]}`)
   })
 
-  it('Comparison works', () => {
-    cy.login('cypressOspaUser')
-    cy.request(`/api/cypress/createAnswers/${form}`)
-    cy.visit('/yearly')
-    cy.get('[data-cy=nav-comparison]').click({ force: true })
-    cy.selectYear(defaultYears[1])
-    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
-      helpers.getTotalProgrammeCount()
-    )
-  })
-
   it('HY employee with no other IAMs sees nothing', () => {
     const user = 'cypressHyEmployeeUser'
     cy.login(user)

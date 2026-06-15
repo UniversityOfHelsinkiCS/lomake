@@ -6,6 +6,7 @@ services:
     image: lomake_dev
     volumes:
       - ./:/usr/src/app
+      - /usr/src/app/node_modules
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
       - AUTOMATIC_IAM_PERMISSIONS_ENABLED=true
@@ -30,7 +31,7 @@ services:
     volumes:
       - pg_data:/data
   adminer:
-    container_name: adminer
+    container_name: lomake_adminer
     environment:
       - ADMINER_DESIGN=pepa-linha
       - ADMINER_DEFAULT_SERVER=lomake_db
@@ -45,13 +46,13 @@ services:
       - DATABASE_URL=postgres://postgres:postgres@jami-db:5432/postgres
     ports:
       - 3003:3003
-    container_name: jami
+    container_name: lomake_jami
     depends_on:
       jami-db:
         condition: service_started
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3003/ping"]
-      interval: 2m
+      interval: 15m
       retries: 5
       start_period: 30s
       start_interval: 10s
@@ -61,11 +62,11 @@ services:
     environment:
       - PGDATA=/data
       - POSTGRES_PASSWORD=postgres
-    container_name: jami-db
+    container_name: lomake_jami-db
     ports:
       - 5433:5432
     volumes:
-      - jami_data:/data
+      - lomake_jami_data:/data
 volumes:
   pg_data:
-  jami_data:
+  lomake_jami_data:

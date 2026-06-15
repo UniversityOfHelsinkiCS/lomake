@@ -179,32 +179,10 @@ export default {
   },
 
   comparison: {
-    compare: 'Vastausten vertailu',
-    reportHeader: {
-      byFaculty: 'Vertaile ohjelmaa tiedekuntaan',
-      byYear: 'Vertaile vastauksia vuosittain',
-    },
     selectYears: 'Valitse vuodet, joita haluat tarkastella',
     filterFaculties: 'Vastaukset tiedekunnittain',
-    selectQuestions: 'Vertailun kysymykset',
-    writtenAnswers: 'Kirjalliset vastaukset vuosittain',
-    chosenProgrammes: 'Valittu ohjelma',
-    chooseProgramme: 'Valitse vertailtava ohjelma',
-    compareFaculties: 'Vertaile tiedekunnittain',
     emptyAnswers: 'Ota mukaan koulutusohjelmat, jotka eivät ole vastanneet kysymykseen',
     emptyFacultyAnswers: 'Ota mukaan tiedekunnat, jotka eivät ole vastanneet kysymykseen',
-    university: 'Koko yliopisto',
-    noAccessToAll: 'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
-    labelOptions: 'Graafin yksikkö',
-    percentage: 'Prosenttiosuudet',
-    programmeAmount: 'Ohjelmien lukumäärä',
-    facultyAmount: 'Tiedekuntien lukumäärä',
-    programmes: 'Ohjelmaa',
-    fullscreen: 'Koko näyttö',
-    downloadPNG: 'Lataa PNG-kuvana',
-    downloadSVG: 'Lataa SVG-kuvana',
-    downloadPDF: 'Lataa PDF-tiedostona',
-    chartExport: 'Tilannekuvalomakkeen_vuosivertailu',
   },
 
   formView: {

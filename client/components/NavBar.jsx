@@ -30,7 +30,6 @@ const NavBarItems = {
       '/individual',
       '/reform-answers',
       '/report',
-      '/comparison',
     ],
     items: [
       { key: 'yearly', label: 'yearlyAssessment', path: '/yearly', access: ['programme', 'special'] },

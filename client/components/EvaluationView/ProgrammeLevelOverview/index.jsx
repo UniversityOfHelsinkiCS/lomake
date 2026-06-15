@@ -9,7 +9,6 @@ import CsvDownload from '../../Generic/CsvDownload'
 import { filterFromUrl } from '../../../util/common'
 import { useVisibleOverviewProgrammes } from '../../../util/overview'
 import YearSelector from '../../Generic/YearSelector'
-import { isAdmin } from '../../../../config/common'
 import useDebounce from '../../../util/useDebounce'
 import CustomModal from '../../Generic/CustomModal'
 import NoPermissions from '../../Generic/NoPermissions'
@@ -67,12 +66,6 @@ export default () => {
     })
   }, [usersProgrammes, lang, debouncedFilter])
 
-  const moreThanFiveProgrammes = useMemo(() => {
-    if (isAdmin(currentUser.data)) return true
-    if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
-    return false
-  }, [currentUser])
-
   return (
     <>
       {modalData ? (
@@ -111,13 +104,6 @@ export default () => {
               <Button as={Link} data-cy="nav-report" secondary size="big" to="/report?form=4">
                 {t('overview:readAnswers')}
               </Button>
-            </MenuItem>
-            <MenuItem>
-              {moreThanFiveProgrammes ? (
-                <Button as={Link} data-cy="nav-comparison" size="big" to="/comparison?form=4">
-                  {t('overview:compareAnswers')}
-                </Button>
-              ) : null}
             </MenuItem>
             <MenuItem>
               <YearSelector size="extra-small" />
