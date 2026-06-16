@@ -154,6 +154,7 @@ const updateQualityDocument = async (req: Request, res: Response<QualityDocument
 
     const updated: QualityDocument = await qualityDocument.save()
 
+    logger.info(`updated qualityD: ${JSON.stringify(updated)}`)
     return res.status(204).json([...qualityDocuments, updated])
   } catch (error) {
     logger.error(`Database error: ${error}`)
