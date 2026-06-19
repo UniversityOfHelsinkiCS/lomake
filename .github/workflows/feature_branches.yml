@@ -2,9 +2,9 @@ name: Test feature branch
 
 on:
   push:
-    branches: [test-branch]
-
+    branches-ignore: ['master']
 jobs:
+  if: ${{ github.event.pull_request.user.login != 'renovate' }}
   lint:
     runs-on: ubuntu-latest
 
@@ -45,7 +45,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
