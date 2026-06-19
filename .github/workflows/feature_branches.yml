@@ -4,7 +4,7 @@ on:
   push:
     branches-ignore: ['master']
 jobs:
-  if: ${{ github.event.pull_request.user.login != 'renovate' }}
+  if: ${{ github.event.pusher.username != 'renovate' }}
   lint:
     runs-on: ubuntu-latest
 
