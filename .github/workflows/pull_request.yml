@@ -4,8 +4,8 @@ on:
   pull_request:
     branches: ['master']
 jobs:
-  if: ${{ github.event.pull_request.user.login != 'renovate' }}
   lint:
+    if: github.event.pull_request.user.login != 'renovate[bot]'
     runs-on: ubuntu-latest
 
     steps:
@@ -16,6 +16,7 @@ jobs:
         run: npm run lint
 
   translations:
+    if: github.event.pull_request.user.login != 'renovate[bot]'
     runs-on: ubuntu-latest
 
     steps:
@@ -26,6 +27,7 @@ jobs:
         run: npm run translations -- --lang fi,en
 
   tests:
+    if: github.event.pull_request.user.login != 'renovate[bot]'
     strategy:
       fail-fast: false
       matrix:
