@@ -4,8 +4,8 @@ on:
   push:
     branches-ignore: ['master']
 jobs:
-  if: ${{ github.event.pusher.username != 'renovate' }}
   lint:
+    if: ${{ github.event.pusher.username != 'renovate[bot]' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -16,8 +16,8 @@ jobs:
         run: npm run lint
 
   translations:
+    if: ${{ github.event.pusher.username != 'renovate[bot]' }}
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v6
       - name: Build project for translations
@@ -26,6 +26,7 @@ jobs:
         run: npm run translations -- --lang fi,en
 
   tests:
+    if: ${{ github.event.pusher.username != 'renovate[bot]' }}
     strategy:
       fail-fast: false
       matrix:
