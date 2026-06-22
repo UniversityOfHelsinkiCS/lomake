@@ -27,7 +27,7 @@ const YearFilterComponent = () => {
 
   return (
     <div>
-      <FormControl sx={{ width: 350 }}>
+      <FormControl sx={{ width: 200 }}>
         <Select
           data-cy="year-filter"
           displayEmpty

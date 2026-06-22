@@ -18,14 +18,13 @@ const DiscontinuedProgramFilter = () => {
         data-cy="show-discontinued-checkbox"
         name="showDiscontinued"
         onChange={() => dispatch(setShowDiscontinued())}
-        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
       />
       {t('common:showDiscontinued')}
       <Tooltip
         arrow
         placement="right"
         slotProps={{ popper: { sx: { '& .MuiTooltip-tooltip': { maxWidth: '700px' } } } }}
-        title={<div>{t('keyData:discontinuedProgrammeInfoIcon')}</div>}
+        title={t('keyData:discontinuedProgrammeInfoIcon')}
       >
         <span style={{ display: 'inline-flex', alignItems: 'center' }}>
           <InfoOutlinedIcon

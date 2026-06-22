@@ -97,7 +97,7 @@ const OverviewPage = () => {
         </div>
       </Alert>
       <div style={{ padding: '2rem', width: '100%' }}>
-        <div style={{ display: 'flex', gap: '2rem', width: '100%', marginBottom: '2.5rem', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', gap: '1rem', width: '100%', marginBottom: '2.5rem', flexDirection: 'column' }}>
           <Typography style={{ margin: 0 }} variant="h1">
             {t('landingPage:yearlyAssessmentTitle').toUpperCase()}
           </Typography>

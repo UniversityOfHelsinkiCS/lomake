@@ -28,7 +28,7 @@ export default function SearchInput({ placeholder, setSearchValue }: SearchAutoc
           ),
         },
       }}
-      style={{ width: 600 }}
+      style={{ width: 350 }}
     />
   )
 }

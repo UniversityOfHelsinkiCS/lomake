@@ -52,7 +52,7 @@ const LevelFilterComponent = () => {
               value={option.value}
             >
               {option.tooltip ? (
-                <Tooltip arrow placement="bottom" title={<div>{option.tooltip}</div>}>
+                <Tooltip arrow placement="bottom" title={option.tooltip}>
                   <span>{option.text}</span>
                 </Tooltip>
               ) : (

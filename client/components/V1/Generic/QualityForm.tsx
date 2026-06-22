@@ -283,7 +283,7 @@ const QualityForm = ({
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, whiteSpace: 'nowrap' }}>
                                   {getFeedbackSourceLabel(t, source)}
                                   {!isDefaultFeedbackSource(source) ? (
-                                    <Tooltip arrow placement="right" title={<div>{t('qualitydocument:remove')}</div>}>
+                                    <Tooltip arrow placement="right" title={t('qualitydocument:remove')}>
                                       <IconButton
                                         aria-label={t('qualitydocument:remove')}
                                         data-cy={`remove-${source}`}
