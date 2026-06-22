@@ -10,11 +10,11 @@ import {
   TableBody,
   Table,
   Header,
-  Loader,
   Icon,
   Radio,
   Button,
 } from 'semantic-ui-react'
+import CircularProgress from '@mui/material/CircularProgress'
 import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router'
 import './FacultyMonitoringOverview.scss'
@@ -56,7 +56,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
     dispatch(getTempAnswersByForm(formKeys.FACULTY_MONITORING))
   }, [selectedLevel])
 
-  if (!answers || !faculties) return <Loader active />
+  if (!answers || !faculties) return <CircularProgress />
 
   const getAnswer = (part, faculty) => {
     const answer = answers.find(a => a.programme === faculty)
@@ -210,7 +210,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
     else setAccordion(sectionIndex)
   }
 
-  if (!answers) return <Loader active />
+  if (!answers) return <CircularProgress />
 
   return (
     <div className="monitoring-overview">

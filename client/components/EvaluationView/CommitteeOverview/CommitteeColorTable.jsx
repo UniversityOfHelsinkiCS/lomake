@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader, Header } from 'semantic-ui-react'
-
+import { Header } from 'semantic-ui-react'
+import CircularProgress from '@mui/material/CircularProgress'
 import { answersByYear, getYearToShow } from '../../../util/common'
 import { getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
 import { getAnswersActionAll } from '../../../redux/oldAnswersReducer'
@@ -57,7 +57,7 @@ const CommitteeColorTable = React.memo(({ setModalData, form, selectedLevels }) 
   }
 
   if (answers.pending || !answers.data || !oldAnswers.data || !finnishFormForTrafficLights) {
-    return <Loader active inline="centered" />
+    return <CircularProgress />
   }
   let tableIds = [
     { title: 'university', levels: ['master', 'doctoral'] },

@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '../../../../config/data'
-import { Loader } from 'semantic-ui-react'
 import { isAdmin } from '../../../../config/common'
 import NoPermissions from '../../Generic/NoPermissions'
 import MonitoringOverview from './MonitoringOverview'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const FacultyMonitoringOverview = () => {
   const { t } = useTranslation()
@@ -29,7 +29,7 @@ const FacultyMonitoringOverview = () => {
     return <NoPermissions requestedForm={t('facultymonitoring')} t={t} />
   }
 
-  if (faculties.pending) return <Loader active />
+  if (faculties.pending) return <CircularProgress />
 
   return <MonitoringOverview faculties={faculties} form={form} formType={formType} lang={lang} t={t} />
 }

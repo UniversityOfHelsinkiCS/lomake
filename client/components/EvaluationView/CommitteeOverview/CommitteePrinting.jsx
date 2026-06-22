@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { formKeys } from '../../../../config/data'
-import { Loader } from 'semantic-ui-react'
+import CircularProgress from '@mui/material/CircularProgress'
 import { answersByYear, getYearToShow, isAdmin } from '../../../util/common'
 import { useTranslation } from 'react-i18next'
 import { getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
@@ -197,7 +197,7 @@ const CommitteePrinting = ({ type = null }) => {
   }, [])
 
   if (answers.pending || !answers.data || !oldAnswers.data) {
-    return <Loader active inline="centered" />
+    return <CircularProgress />
   }
 
   let answerLevel = []

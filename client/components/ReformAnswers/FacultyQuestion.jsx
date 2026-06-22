@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
-import { Loader, Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 import { useGetOrganisationDataQuery } from '../../redux/organisation'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)
@@ -21,7 +22,7 @@ const Question = ({ question, answers }) => {
     }
   }
 
-  if (isFetching) return <Loader active />
+  if (isFetching) return <CircularProgress />
 
   return (
     <div style={{ marginTop: 20, marginLeft: 20 }}>

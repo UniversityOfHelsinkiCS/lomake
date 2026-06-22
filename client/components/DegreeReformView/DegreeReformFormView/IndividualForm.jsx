@@ -95,7 +95,6 @@ const DegreeReformIndividual = () => {
               {t('degree-reform')}
             </h3>
             <StatusMessage />
-
           </div>
           <DegreeReformForm formType={formType} questionData={questionData} />
           <Button
