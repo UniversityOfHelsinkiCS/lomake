@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Checkbox, Divider } from 'semantic-ui-react'
+import { Checkbox } from 'semantic-ui-react'
+import Divider from '@mui/material/Divider'
 import { useTranslation } from 'react-i18next'
 import { colors } from '../../util/common'
 import { updateFormField } from '../../redux/formReducer'

@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useState, useEffect } from 'react'
-import { Divider, Form } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
+import Divider from '@mui/material/Divider'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from '../../redux/formReducer'
 import { colors, getForm } from '../../util/common'

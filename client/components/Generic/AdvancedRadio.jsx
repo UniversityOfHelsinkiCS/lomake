@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { useState, useEffect } from 'react'
-import { Divider, Radio, Form, Input } from 'semantic-ui-react'
+import { Radio, Form, Input } from 'semantic-ui-react'
+import Divider from '@mui/material/Divider'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from '../../redux/formReducer'
 import { getForm } from '../../util/common'

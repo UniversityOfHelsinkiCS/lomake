@@ -1,4 +1,4 @@
-import { Divider } from 'semantic-ui-react'
+import Divider from '@mui/material/Divider'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 import { colors } from '../../util/common'

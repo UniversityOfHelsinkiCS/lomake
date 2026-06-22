@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-import { Divider } from 'semantic-ui-react'
+import Divider from '@mui/material/Divider'
 import { formKeys } from '../../../config/data'
 import { useSelector, useDispatch } from 'react-redux'
 import {

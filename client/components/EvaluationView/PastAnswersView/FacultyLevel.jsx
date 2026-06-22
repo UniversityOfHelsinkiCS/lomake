@@ -3,7 +3,8 @@ import { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Navigate, useParams } from 'react-router'
-import { Accordion, Divider } from 'semantic-ui-react'
+import { Accordion } from 'semantic-ui-react'
+import Divider from '@mui/material/Divider'
 import sortBy from 'lodash/sortBy'
 
 import { isAdmin } from '../../../../config/common'
@@ -97,7 +98,7 @@ const PastAnswersViewFaculty = () => {
       <Accordion className="comparison-container" fluid>
         {titleList.map(title => (
           <div key={`${title}`}>
-            <Divider section />
+            <Divider variant="middle" />
 
             <h2>{title}</h2>
             {questionsList.map(question => {

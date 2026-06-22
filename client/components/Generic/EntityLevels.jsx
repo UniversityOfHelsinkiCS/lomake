@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Divider, Grid, Icon, Button } from 'semantic-ui-react'
+import Divider from '@mui/material/Divider'
+import { Grid, Icon, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'

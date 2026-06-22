@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Divider, Radio } from 'semantic-ui-react'
+import { Radio } from 'semantic-ui-react'
+import Divider from '@mui/material/Divider'
 import { getReformAnswers } from '../../redux/reformAnswerReducer'
 import { degreeReformIndividualQuestions as questionData } from '../../questionData'
 import CircularProgress from '@mui/material/CircularProgress'
