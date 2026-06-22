@@ -34,12 +34,25 @@ jobs:
           [
             IAMpermissions1,
             IAMpermissions2,
+            qualityManagement,
+            notificationBadge,
+            keyData,
             management,
             ospa,
             permissions,
             textfield,
             overview,
             intervention,
+            degreeReform,
+            evaluation,
+            metaevaluation,
+            misc,
+            yearselector,
+            happypath,
+            programmeHomeView,
+            trackingpage,
+            report,
+            intervention
           ]
     name: Run tests
     runs-on: ubuntu-latest

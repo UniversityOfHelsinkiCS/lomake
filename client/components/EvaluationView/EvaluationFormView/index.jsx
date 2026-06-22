@@ -2,7 +2,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Loader, Icon } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
+import CircularProgress from '@mui/material/CircularProgress'
 import { useTranslation, Trans } from 'react-i18next'
 import { Navigate, useNavigate, useParams, Link } from 'react-router'
 import Downloads from '../../FormView/Downloads'
@@ -17,7 +18,6 @@ import NoPermissions from '../../Generic/NoPermissions'
 import NavigationSidebar from '../../FormView/NavigationSidebar'
 import calendarImage from '../../../assets/calendar.jpg'
 import StatusMessage from '../../FormView/StatusMessage'
-import SaveIndicator from '../../FormView/SaveIndicator'
 import { setYear } from '../../../redux/filterReducer'
 import EvaluationForm from './EvaluationForm'
 
@@ -165,14 +165,13 @@ const EvaluationFormView = () => {
   if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('evaluation')} t={t} />
 
   return singleProgramPending ? (
-    <Loader active />
+    <CircularProgress />
   ) : (
     <div className="form-container">
       <NavigationSidebar formNumber={form} formType="evaluation" programmeKey={room} />
       <div className="the-form" ref={componentRef}>
         <div className="form-instructions">
           <div className="hide-in-print-mode">
-            <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
               <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation')} />
             </div>
@@ -184,7 +183,7 @@ const EvaluationFormView = () => {
           </h3>
 
           <div className="hide-in-print-mode">
-            <StatusMessage form={form} writeAccess={writeAccess} />
+            <StatusMessage />
             <div
               style={{
                 lineHeight: 2,

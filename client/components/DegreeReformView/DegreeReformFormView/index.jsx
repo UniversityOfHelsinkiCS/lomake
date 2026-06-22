@@ -6,7 +6,6 @@ import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Link, Navigate, useNavigate, useParams } from 'react-router'
 import StatusMessage from '../../FormView/StatusMessage'
-import SaveIndicator from '../../FormView/SaveIndicator'
 
 import { hasSomeReadAccess, isAdmin } from '../../../../config/common'
 import { colors, getFormViewRights, getYearToShow } from '../../../util/common'
@@ -106,8 +105,7 @@ const DegreeReformFormView = () => {
           <h3 data-cy="formview-title" style={{ marginTop: '0' }}>
             {t('degree-reform')}
           </h3>
-          <StatusMessage form={form} writeAccess={writeAccess} />
-          <SaveIndicator />
+          <StatusMessage />
         </div>
         <DegreeReformForm formType={formType} programmeKey={programme.key} questionData={questionDataFiltered} />
         <div style={{ height: '10em' }} />

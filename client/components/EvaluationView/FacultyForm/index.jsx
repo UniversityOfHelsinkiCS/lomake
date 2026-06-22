@@ -3,16 +3,14 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Navigate, useNavigate, useParams, Link } from 'react-router'
-import { Button, Icon, Loader } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import Downloads from '../..//FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
 import { getFacultyProgrammeAnswersAction } from '../../../redux/summaryReducer'
-import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
 import NavigationSidebar from '../..//FormView/NavigationSidebar'
 import StatusMessage from '../..//FormView/StatusMessage'
-import SaveIndicator from '../..//FormView/SaveIndicator'
 
 import postItImage from '../../../assets/post_it.jpg'
 import './EvaluationFacultyForm.scss'
@@ -22,15 +20,7 @@ import { setYear } from '../../../redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
-
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
-  // This is used since faculty doesn't have stuyprogramme
-  const isDraftYearInvalid = !draftYear || (draftYear && draftYear.year !== year)
-  const isFormDeadlineInvalid = formDeadline?.form !== form
-  const isWriteAccessInvalid = !writeAccess
-
-  return isDraftYearInvalid || isFormDeadlineInvalid || isWriteAccessInvalid
-}
+import { CircularProgress } from '@mui/material'
 
 const findEntityLevelAnswers = (programmes, allAnswers, question) => {
   const result = {
@@ -125,7 +115,6 @@ const FacultyFormView = () => {
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const currentRoom = useSelector(state => state.room)
 
   const faculties = useSelector(state => state.faculties.data)
   const faculty = faculties ? faculties.find(f => f.code === room) : null
@@ -134,8 +123,6 @@ const FacultyFormView = () => {
 
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
-  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
-
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
   const hasReadRights =
@@ -143,8 +130,6 @@ const FacultyFormView = () => {
     isAdmin(user) ||
     user.specialGroup.evaluationFaculty ||
     Object.keys(user.access).length > 0
-
-  const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
@@ -158,32 +143,8 @@ const FacultyFormView = () => {
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getFacultyProgrammeAnswersAction(room, lang))
-    if (
-      formShouldBeViewOnly({
-        draftYear,
-        year,
-        formDeadline,
-        form,
-        writeAccess: hasWriteRights,
-      })
-    ) {
-      dispatch(setViewOnly(true))
-      if (currentRoom) dispatch(wsLeaveRoom(room))
-    } else {
-      dispatch(wsJoinRoom(room, form))
-      dispatch(setViewOnly(false))
-    }
-  }, [
-    faculty,
-    singleFacultyPending,
-    // writeAccess,
-    // viewingOldAnswers,
-    draftYear,
-    // accessToTempAnswers,
-    // readAccess,
-    room,
-    user,
-  ])
+    dispatch(setViewOnly(true))
+  }, [faculty, singleFacultyPending, draftYear, room, user])
 
   const facultyProgrammeAnswers = useMemo(() => {
     if (
@@ -224,14 +185,13 @@ const FacultyFormView = () => {
   return (
     <div>
       {singleFacultyPending ? (
-        <Loader active />
+        <CircularProgress />
       ) : (
         <div className="form-container">
           <NavigationSidebar formNumber={form} formType="evaluation" programmeKey={room} />
           <div className="the-form" ref={componentRef}>
             <div className="form-instructions">
               <div className="hide-in-print-mode">
-                <SaveIndicator />
                 <div style={{ marginBottom: '2em' }}>
                   <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation-faculty')} />
                 </div>
@@ -243,7 +203,7 @@ const FacultyFormView = () => {
               </h3>
 
               <div className="hide-in-print-mode">
-                <StatusMessage form={form} writeAccess={hasWriteRights} />
+                <StatusMessage />
                 <div className="info-container">
                   <p>
                     <Trans i18nKey="formView:facultyInfo" />

@@ -18,7 +18,6 @@ import { hasSomeReadAccess, isAdmin } from '../../../config/common'
 import { formKeys } from '../../../config/data'
 import StatusMessage from './StatusMessage'
 
-import SaveIndicator from './SaveIndicator'
 import NavigationSidebar from './NavigationSidebar'
 import Form from './Form'
 import { yearlyQuestions as questions } from '../../questionData'
@@ -109,7 +108,6 @@ const FormView = () => {
         <FormStatusMessage form={form} programme={room} />
         <div className="form-instructions">
           <div className="hide-in-print-mode">
-            <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
               <Button
                 aria-label="back"
@@ -128,7 +126,7 @@ const FormView = () => {
 
           <div className="hide-in-print-mode">
             <YearSelector size="small" />
-            <StatusMessage form={form} writeAccess={writeAccess} />
+            <StatusMessage />
 
             <p>{t('formView:info1')}</p>
             <p style={{ marginBottom: '10px' }}>{t('formView:info2')}</p>

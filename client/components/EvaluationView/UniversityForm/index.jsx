@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Navigate, useNavigate, useParams, Link } from 'react-router'
-import { Button, Icon, Loader } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import Downloads from '../../FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
 import { setViewOnly, getSingleProgrammesAnswers, getCommitteeAnswers } from '../../../redux/formReducer'
@@ -11,7 +11,6 @@ import { getCommitteeFacultyAnswersAction } from '../../../redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
 import NavigationSidebar from '../../FormView/NavigationSidebar'
 import StatusMessage from '../../FormView/StatusMessage'
-import SaveIndicator from '../../FormView/SaveIndicator'
 
 import postItImage from '../../../assets/post_it.jpg'
 import './index.scss'
@@ -22,6 +21,7 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
+import { CircularProgress } from '@mui/material'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
   if (!draftYear) return true
@@ -219,14 +219,13 @@ const CommitteeFormView = () => {
   return (
     <div>
       {singleFacultyPending ? (
-        <Loader active />
+        <CircularProgress />
       ) : (
         <div className="form-container">
           <NavigationSidebar formNumber={form} formType="evaluation" programmeKey={room} />
           <div className="the-form" ref={componentRef}>
             <div className="form-instructions">
               <div className="hide-in-print-mode">
-                <SaveIndicator />
                 <div style={{ marginBottom: '2em' }}>
                   <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation-university')} />
                 </div>
@@ -246,7 +245,7 @@ const CommitteeFormView = () => {
               </div>
 
               <div className="hide-in-print-mode">
-                <StatusMessage form={form} writeAccess={hasRights} />
+                <StatusMessage />
                 <h4>
                   <Trans i18nKey="formView:evaluationInfoUni" />
                 </h4>

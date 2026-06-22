@@ -4,20 +4,19 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Navigate, useParams, Link } from 'react-router'
 import { getProgramme } from '../../../redux/studyProgrammesReducer'
 import { useTranslation } from 'react-i18next'
-import { Loader, Button, Icon } from 'semantic-ui-react'
-import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
+import { Button, Icon } from 'semantic-ui-react'
 import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
 import { getFormViewRights, colors } from '../../../util/common'
 import { isAdmin } from '../../../../config/common'
 import StatusMessage from '../../FormView/StatusMessage'
 import powerlineImage from '../../../assets/APowerlineTower.jpg'
-import SaveIndicator from '../../FormView/SaveIndicator'
 import NavigationSidebar from '../../FormView/NavigationSidebar'
 
 import { formKeys } from '../../../../config/data'
 import MetaEvaluationForm from './MetaEvaluationForm'
 
 import { metareviewQuestions as questions } from '../../../questionData'
+import { CircularProgress } from '@mui/material'
 // tämä on samanlainen kuin Evaluationiew/EvaluationFormView/index.js
 
 const ProgrammeLevelForm = () => {
@@ -27,14 +26,13 @@ const ProgrammeLevelForm = () => {
   const { t } = useTranslation()
   const form = formKeys.META_EVALUATION
   const user = useSelector(state => state.currentUser.data)
-  const currentRoom = useSelector(state => state.room)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const year = useSelector(({ filters }) => filters.year)
-  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
+  const draftYear = null
+  const formDeadline = null
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
 
-  const writeAccess = user.access[room]?.write || isAdmin(user)
+  const writeAccess = isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const answers = useSelector(state => state.tempAnswers)
 
@@ -59,15 +57,11 @@ const ProgrammeLevelForm = () => {
       })
     ) {
       dispatch(setViewOnly(true))
-      if (currentRoom) dispatch(wsLeaveRoom(room))
-    } else {
-      dispatch(wsJoinRoom(room, form))
-      dispatch(setViewOnly(false))
     }
-  }, [programme, writeAccess, viewingOldAnswers, year, draftYear, accessToTempAnswers, room, user])
+  }, [programme, viewingOldAnswers, year, draftYear, accessToTempAnswers, room, user])
 
   if (!user || !room) return <Navigate to="/" />
-  if (!programme || !answers) return <Loader active inline="centered" />
+  if (!programme || !answers) return <CircularProgress />
 
   const level = room.startsWith('T') ? 'doctoral' : 'kandimaisteri'
   const questionData = questions.filter(q => q.level === level)
@@ -77,7 +71,6 @@ const ProgrammeLevelForm = () => {
       <NavigationSidebar formNumber={form} formType="meta-evaluation" programmeKey={room} questionData={questionData} />
       <div className="the-form">
         <div className="hide-in-print-mode">
-          <SaveIndicator />
           <div style={{ marginBottom: '2em' }}>
             <Button as={Link} icon="arrow left" to="/meta-evaluation" />
           </div>
@@ -91,7 +84,7 @@ const ProgrammeLevelForm = () => {
           {t('formView:metaSubtitle')}
         </h5>
         <div className="hide-in-print-mode">
-          <StatusMessage form={form} writeAccess={writeAccess} />
+          <StatusMessage />
           <p>{t('formView:infoMeta1')}</p>
           <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta2')}</p>
           <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta3')}</p>

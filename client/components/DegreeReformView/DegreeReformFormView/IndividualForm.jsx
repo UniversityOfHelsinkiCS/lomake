@@ -10,7 +10,6 @@ import bigWheel from '../../../assets/big_wheel.jpg'
 import StatusMessage from '../../FormView/StatusMessage'
 
 import { setViewOnly, updateIndividualReady, getSingleUsersAnswers } from '../../../redux/formReducer'
-import SaveIndicator from '../../FormView/SaveIndicator'
 import { getYearToShow } from '../../../util/common'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './ProgramForm'
@@ -95,8 +94,8 @@ const DegreeReformIndividual = () => {
             <h3 data-cy="formview-title" style={{ marginTop: 10, fontSize: 32, marginBottom: 30 }}>
               {t('degree-reform')}
             </h3>
-            <StatusMessage form={formNumber} />
-            <SaveIndicator />
+            <StatusMessage />
+
           </div>
           <DegreeReformForm formType={formType} questionData={questionData} />
           <Button
