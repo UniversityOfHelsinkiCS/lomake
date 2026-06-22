@@ -54,6 +54,9 @@ jobs:
       - name: npm ci
         run: npm ci --no-audit --no-fund
 
+      - name: Install cypress
+        run: npx cypress install
+
       - name: docker compose up -d
         run: docker compose up -d
 
