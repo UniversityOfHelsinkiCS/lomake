@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Menu } from 'semantic-ui-react'
+import { Menu } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import YearSelector from '../Generic/YearSelector'
@@ -7,7 +7,6 @@ import CompanionFilter from '../Generic/CompanionFilter'
 import DoctoralSchoolFilter from '../Generic/DoctoralSchoolFilter'
 import FacultyFilter from '../Generic/FacultyFilter'
 import ProgrammeFilter from '../Generic/ProgrammeFilter'
-import LevelFilter from '../Generic/LevelFilter'
 import FormFilter from '../Generic/FormFilter'
 import { formKeys } from '../../../config/data'
 
@@ -20,19 +19,6 @@ const getCompanionFilter = ({ faculty, level }) => {
 const getDoctoralSchoolFilter = ({ faculty, level }) => {
   if (faculty[0] === 'allFaculties' && level === 'doctoral') return <DoctoralSchoolFilter />
   return null
-}
-
-const getLevelFilter = ({ form }) => {
-  const url = window.location.href
-  const facStart = url.indexOf('/comparison')
-  if (form === formKeys.EVALUATION_FACULTIES) {
-    if (facStart !== -1) {
-      return <LevelFilter comparison />
-    }
-    return null
-  }
-
-  return <LevelFilter />
 }
 
 const getFacultyFilter = ({ form, t }) => {
@@ -78,7 +64,6 @@ const FilterTray = ({ filter, setFilter }) => {
       {usersProgrammes ? (
         <div style={{ paddingLeft: '1em' }}>
           {getFacultyFilter({ form, t })}
-          {getLevelFilter({ form })}
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}
           {getProgrammeFilter({ form, filter, t, handleSearch, setFilter })}

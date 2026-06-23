@@ -1,10 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { Accordion, Button, Icon, Grid, Tab, Menu } from 'semantic-ui-react'
+import { Accordion, Icon, Grid, Tab, Menu } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { ArrowBack } from '@mui/icons-material'
+import { IconButton } from '@mui/material'
 
 import { getAllTempAnswersAction } from '../../redux/tempAnswersReducer'
 import NoPermissions from '../Generic/NoPermissions'
@@ -166,7 +168,9 @@ export default () => {
       <div className="no-print">
         <Menu secondary>
           <Menu.Item>
-            <Button icon="arrow left" onClick={() => navigate(-1)} size="small" />
+            <IconButton onClick={() => navigate(-1)} size="small" sx={{ marginRight: 2 }}>
+              <ArrowBack data-cy="back-button" />
+            </IconButton>
           </Menu.Item>
           <Menu.Item>
             <h1>{t('report:reportPage')}</h1>

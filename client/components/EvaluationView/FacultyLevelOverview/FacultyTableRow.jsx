@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
-import { Button } from 'semantic-ui-react'
+import { IconButton } from '@mui/material'
+import PersonIcon from '@mui/icons-material/Person'
 import { useTranslation } from 'react-i18next'
 import ColorTableCell from '../../OverviewPage/ColorTableCell'
 import { isAdmin } from '../../../../config/common'
@@ -9,7 +10,9 @@ import PieForFaculty from './PieForFaculty'
 
 const ManageCell = ({ faculty, setProgramControlsToShow }) => (
   <div className="table-container-manage-cell">
-    <Button circular data-cy={`${faculty.code}-manage`} icon="user" onClick={() => setProgramControlsToShow(faculty)} />
+    <IconButton data-cy={`${faculty.code}-manage`} onClick={() => setProgramControlsToShow(faculty)}>
+      <PersonIcon color="blue" fontSize="small" />
+    </IconButton>
   </div>
 )
 

@@ -2,9 +2,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button } from 'semantic-ui-react'
+import { IconButton } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
-import { Link, Navigate, useNavigate, useParams } from 'react-router'
+import { Navigate, useNavigate, useParams } from 'react-router'
 import StatusMessage from '../../FormView/StatusMessage'
 
 import { hasSomeReadAccess, isAdmin } from '../../../../config/common'
@@ -97,7 +98,9 @@ const DegreeReformFormView = () => {
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <div style={{ marginBottom: '2em' }}>
-              <Button as={Link} icon="arrow left" onClick={() => navigate('/degree-reform')} />
+              <IconButton onClick={() => navigate(`/degree-reform'}`)} sx={{ marginRight: 2 }}>
+                <ArrowBack data-cy="back-button" />
+              </IconButton>
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>

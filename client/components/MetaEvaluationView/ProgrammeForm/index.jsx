@@ -1,22 +1,22 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Navigate, useParams, Link } from 'react-router'
+import { Navigate, useParams, useNavigate } from 'react-router'
 import { getProgramme } from '../../../redux/studyProgrammesReducer'
 import { useTranslation } from 'react-i18next'
-import { Button, Icon } from 'semantic-ui-react'
+import DownloadIcon from '@mui/icons-material/Download'
+import { CircularProgress, IconButton } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
 import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
-import { getFormViewRights, colors } from '../../../util/common'
-import { isAdmin } from '../../../../config/common'
+import { colors } from '../../../util/common'
 import StatusMessage from '../../FormView/StatusMessage'
 import powerlineImage from '../../../assets/APowerlineTower.jpg'
 import NavigationSidebar from '../../FormView/NavigationSidebar'
-
 import { formKeys } from '../../../../config/data'
 import MetaEvaluationForm from './MetaEvaluationForm'
-
 import { metareviewQuestions as questions } from '../../../questionData'
-import { CircularProgress } from '@mui/material'
+
 // tämä on samanlainen kuin Evaluationiew/EvaluationFormView/index.js
 
 const ProgrammeLevelForm = () => {
@@ -24,15 +24,13 @@ const ProgrammeLevelForm = () => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const form = formKeys.META_EVALUATION
   const user = useSelector(state => state.currentUser.data)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const year = useSelector(({ filters }) => filters.year)
   const draftYear = null
-  const formDeadline = null
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
-
-  const writeAccess = isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const answers = useSelector(state => state.tempAnswers)
 
@@ -44,20 +42,7 @@ const ProgrammeLevelForm = () => {
   useEffect(() => {
     if (!programme) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
-    if (
-      getFormViewRights({
-        accessToTempAnswers,
-        programme,
-        writeAccess,
-        viewingOldAnswers,
-        draftYear,
-        year,
-        formDeadline,
-        form,
-      })
-    ) {
-      dispatch(setViewOnly(true))
-    }
+    dispatch(setViewOnly(true))
   }, [programme, viewingOldAnswers, year, draftYear, accessToTempAnswers, room, user])
 
   if (!user || !room) return <Navigate to="/" />
@@ -72,7 +57,9 @@ const ProgrammeLevelForm = () => {
       <div className="the-form">
         <div className="hide-in-print-mode">
           <div style={{ marginBottom: '2em' }}>
-            <Button as={Link} icon="arrow left" to="/meta-evaluation" />
+            <IconButton onClick={() => navigate(`/meta-evaluation}`)} sx={{ marginRight: 2 }}>
+              <ArrowBack data-cy="back-button" />
+            </IconButton>
           </div>
           <img alt="form-header-calendar" className="img-responsive" src={powerlineImage} />
         </div>{' '}
@@ -108,7 +95,7 @@ const ProgrammeLevelForm = () => {
         <div className="info-container">
           <a href={t('formView:metaPdfUrl')} rel="noreferrer" target="_blank">
             <h4>
-              {t('formView:metaPdfName')} <Icon name="external" />{' '}
+              {t('formView:metaPdfName')} <DownloadIcon fontSize="small" />{' '}
             </h4>
           </a>
         </div>

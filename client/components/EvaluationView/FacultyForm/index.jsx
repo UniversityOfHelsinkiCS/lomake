@@ -3,15 +3,15 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Navigate, useNavigate, useParams, Link } from 'react-router'
-import { Button, Icon } from 'semantic-ui-react'
+import { IconButton, CircularProgress } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
+import DownloadIcon from '@mui/icons-material/Download'
 import Downloads from '../..//FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
-
 import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
 import { getFacultyProgrammeAnswersAction } from '../../../redux/summaryReducer'
 import NavigationSidebar from '../..//FormView/NavigationSidebar'
 import StatusMessage from '../..//FormView/StatusMessage'
-
 import postItImage from '../../../assets/post_it.jpg'
 import './EvaluationFacultyForm.scss'
 import { colors, getYearToShow, isAdmin } from '../../../util/common'
@@ -20,7 +20,6 @@ import { setYear } from '../../../redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
-import { CircularProgress } from '@mui/material'
 
 const findEntityLevelAnswers = (programmes, allAnswers, question) => {
   const result = {
@@ -193,7 +192,9 @@ const FacultyFormView = () => {
             <div className="form-instructions">
               <div className="hide-in-print-mode">
                 <div style={{ marginBottom: '2em' }}>
-                  <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation-faculty')} />
+                  <IconButton onClick={() => navigate(`/evaluation-faculty}`)} sx={{ marginRight: 2 }}>
+                    <ArrowBack data-cy="back-button" />
+                  </IconButton>
                 </div>
                 <img alt="form-header-calendar" className="img-responsive" src={postItImage} />
               </div>
@@ -234,7 +235,7 @@ const FacultyFormView = () => {
               <div className="info-container">
                 <Link data-cy="link-to-old-answers" target="_blank" to={degreeReformUrl}>
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
-                    {t('formView:evaluationSummaryByProgramme')} <Icon name="external" />{' '}
+                    {t('formView:evaluationSummaryByProgramme')} <DownloadIcon fontSize="small" />{' '}
                   </h4>
                 </Link>
               </div>

@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useMemo } from 'react'
 import { Menu, MenuItem, Button, Header, Accordion, Icon } from 'semantic-ui-react'
-import { Link, Navigate, useParams } from 'react-router'
+import { IconButton } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
+import { Navigate, useNavigate, useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '../../../../config/common'
@@ -27,6 +30,7 @@ const FacultyTrackingView = () => {
   const user = useSelector(state => state.currentUser.data)
   const form = formKeys.FACULTY_MONITORING
   const currentRoom = useSelector(state => state.room)
+  const navigate = useNavigate()
   const fieldName = `selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] ?? [])
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
@@ -107,7 +111,9 @@ const FacultyTrackingView = () => {
     <>
       <Menu className="filter-row" secondary size="large">
         <MenuItem>
-          <Button as={Link} icon="arrow left" to="/faculty-monitoring" />
+          <IconButton onClick={() => navigate(-1)} sx={{ marginRight: 2 }}>
+            <ArrowBack data-cy="back-button" />
+          </IconButton>
         </MenuItem>
         <MenuItem className="menu-item-header" header>
           <h2>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Card } from 'semantic-ui-react'
+import Card from '@mui/material/Card'
 
 const squareStyles = {
   boxShadow: '0px 0px 1px 1px rgba(0, 0, 0, 0.1)',
@@ -43,7 +43,7 @@ const Square = ({ color, setQuestionModal, answerObject, chevron = null, t }) =>
         onClick={() => setQuestionModal(answerObject)}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={{
+        sx={{
           ...squareStyles,
           backgroundColor,
         }}

@@ -2,9 +2,9 @@
 /* eslint-disable import-x/no-named-as-default-member */
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Input } from 'semantic-ui-react'
+import { CircularProgress, Input, InputAdornment } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 import { useTranslation } from 'react-i18next'
-
 import { sortedItems, answersByYear } from '../../../util/common'
 import { getTempAnswersAfterDeadline, getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
 import { setYear } from '../../../redux/filterReducer'
@@ -13,7 +13,6 @@ import TableRow from './FacultyTableRow'
 import SummaryRowFaculty from './SummaryRowFaculty'
 import './OverviewPage.scss'
 import { facultyEvaluationQuestions as questions } from '../../../questionData'
-import { CircularProgress } from '@mui/material'
 
 const FacultyColorTable = React.memo(
   ({
@@ -116,10 +115,14 @@ const FacultyColorTable = React.memo(
         <div className="table-container">
           <Input
             data-cy="overviewpage-filter"
-            icon="search"
             onChange={handleFilterChange}
             placeholder={t('facultyFilter')}
             size="small"
+            startAdornment={
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            }
             value={filterValue}
           />
         </div>

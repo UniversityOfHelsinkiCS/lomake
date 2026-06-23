@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { Radio } from 'semantic-ui-react'
+import { CheckBox } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -95,7 +95,7 @@ export default () => {
           <div className="wide-header-committee">
             <h2>{t('evaluation').toUpperCase()}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', height: '8em', justifyContent: 'space-evenly' }}>
-              <Radio label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} toggle />
+              <CheckBox label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {isAdmin(currentUser) ? (

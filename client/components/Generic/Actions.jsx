@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Divider, Icon, Grid, Card } from 'semantic-ui-react'
+import { Button, Grid, Card } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { Divider } from '@mui/material'
 import { updateFormField } from '../../redux/formReducer'
 import { colors } from '../../util/common'
 import { formKeys } from '../../../config/data'
 import ActionElement from './ActionElement'
 import './Generic.scss'
 import ProgrammeAnswerSummaryList from './ProgrammeAnswerSummaryList'
+import { Add } from '@mui/icons-material'
 
 const Actions = ({
   id,
@@ -300,7 +302,7 @@ const Actions = ({
             labelPosition="left"
             onClick={handleAdd}
           >
-            <Icon name="add" />
+            <Add />
             {t('formView:addDevelopmentArea')}
           </Button>
         )}

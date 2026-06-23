@@ -1,4 +1,5 @@
-import { Accordion, Grid, Label } from 'semantic-ui-react'
+import { Accordion, Grid } from 'semantic-ui-react'
+import { Chip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { formKeys } from '../../../config/data'
@@ -35,9 +36,7 @@ const SingleProgramQuestion = ({ answers, question }) => {
             <p className="question-description">{question.description}</p>
           </Grid.Column>
           <Grid.Column floated="right" width={4}>
-            <Label className="question-answered-label" size="large">
-              1 / 1
-            </Label>
+            <Chip className="question-answered-label" label="1 / 1" size="medium" />
           </Grid.Column>
         </Grid>
       </Accordion.Title>

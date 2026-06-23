@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Header } from 'semantic-ui-react'
+import { Typography } from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress'
 import { answersByYear, getYearToShow } from '../../../util/common'
 import { getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
@@ -97,16 +97,16 @@ const CommitteeColorTable = React.memo(({ setModalData, form, selectedLevels }) 
           return (
             <Fragment key={`${part.id}-${t(theme.title)}`}>
               {index === 0 && (
-                <Header
-                  as="h2"
+                <Typography
                   className={`committee-table-theme-title-${gridColumnSize}`}
                   key={`${t(theme.title)}`}
-                  style={{
+                  sx={{
                     gridRow: index,
                   }}
+                  variant="h2"
                 >
                   {indexTopLevel + 1}) {theme.title[lang]}
-                </Header>
+                </Typography>
               )}
               <TableRow
                 committee={committee}

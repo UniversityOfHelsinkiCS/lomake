@@ -1,30 +1,29 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Accordion, Grid, Icon, Popup } from 'semantic-ui-react'
+import { Accordion, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { romanize } from '../../util/common'
 import QuestionTitle from '../ReportPage/QuestionTitle'
+import { ChevronRight, ExpandMore } from '@mui/icons-material'
+import { Tooltip } from '@mui/material'
 
 const generateRandomKey = value => `${value}-${Math.random()}`
 
 const ButtonPopup = ({ color, index, yearsIndex, buttons, filterColor }) => {
   const { t } = useTranslation()
   return (
-    <Popup
-      content={`${`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}`}
-      trigger={
-        <button
-          aria-label="Choose color"
-          className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
-          key={color}
-          name={color}
-          onClick={() => filterColor(yearsIndex, color, index)}
-          type="button"
-        >
-          <span className={`answer-circle-big-${color}`} />
-        </button>
-      }
-    />
+    <Tooltip title={`${`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}`}>
+      <button
+        aria-label="Choose color"
+        className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
+        key={color}
+        name={color}
+        onClick={() => filterColor(yearsIndex, color, index)}
+        type="button"
+      >
+        <span className={`answer-circle-big-${color}`} />
+      </button>
+    </Tooltip>
   )
 }
 
@@ -65,7 +64,7 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
       >
         <Grid>
           <Grid.Column className="question-caret" width={1}>
-            <Icon name={`caret ${showing ? 'down' : 'right'}`} />
+            {showing ? <ExpandMore fontSize="small" /> : <ChevronRight fontSize="small" />}
           </Grid.Column>
           <Grid.Column width={15}>
             <span>

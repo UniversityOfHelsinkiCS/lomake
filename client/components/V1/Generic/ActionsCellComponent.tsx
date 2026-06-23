@@ -3,15 +3,10 @@ import { useState } from 'react'
 import { TableCell } from '../Generic/TableComponent'
 import { useTranslation } from 'react-i18next'
 import { Typography, Button } from '@mui/material'
-
 import { KeyDataMetadata, KeyDataProgramme, ReportData } from '../../../../shared/lib/types'
-
 import { setViewOnly } from '../../../redux/formReducer'
-
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-
 import { useNotificationBadge } from '../../../hooks/useNotificationBadge'
-
 import Modal from '../Generic/ModalTemplateComponent'
 import { TextFieldCard } from '../Generic/TextFieldCard'
 import NotificationBadge from '../Generic/NotificationBadge'

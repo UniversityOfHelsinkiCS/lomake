@@ -3,9 +3,11 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Navigate, useNavigate, useParams, Link } from 'react-router'
-import { Button, Icon } from 'semantic-ui-react'
 import Downloads from '../../FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
+import { CircularProgress, IconButton } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
+import DownloadIcon from '@mui/icons-material/Download'
 import { setViewOnly, getSingleProgrammesAnswers, getCommitteeAnswers } from '../../../redux/formReducer'
 import { getCommitteeFacultyAnswersAction } from '../../../redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
@@ -21,7 +23,6 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
-import { CircularProgress } from '@mui/material'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
   if (!draftYear) return true
@@ -227,7 +228,9 @@ const CommitteeFormView = () => {
             <div className="form-instructions">
               <div className="hide-in-print-mode">
                 <div style={{ marginBottom: '2em' }}>
-                  <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation-university')} />
+                  <IconButton onClick={() => navigate(`/evaluation-university}`)} sx={{ marginRight: 2 }}>
+                    <ArrowBack data-cy="back-button" />
+                  </IconButton>
                 </div>
                 <img alt="form-header-calendar" className="img-responsive" src={postItImage} />
               </div>
@@ -274,7 +277,7 @@ const CommitteeFormView = () => {
               <div className="info-container">
                 <Link data-cy="link-to-old-answers" target="_blank" to={degreeReformUrl}>
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
-                    {t('formView:evaluationSummaryUniversity')} <Icon name="external" />{' '}
+                    {t('formView:evaluationSummaryUniversity')} <DownloadIcon fontSize="small" />{' '}
                   </h4>
                 </Link>
               </div>

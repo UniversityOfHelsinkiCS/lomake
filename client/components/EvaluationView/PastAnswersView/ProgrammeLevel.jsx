@@ -3,7 +3,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Navigate, useParams } from 'react-router'
-import { Accordion } from 'semantic-ui-react'
+import Accordion from '@mui/material/Accordion'
 import sortBy from 'lodash/sortBy'
 
 import { isAdmin } from '../../../../config/common'

@@ -1,7 +1,7 @@
 import { InView } from 'react-intersection-observer'
-import { List, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { basePath, colors } from '../../../util/common'
+import { Chip, List, ListItem } from '@mui/material'
 
 const Section = ({ id, title, number, children, programmeKey, formType }) => {
   const { t } = useTranslation('formView')
@@ -47,13 +47,13 @@ const Section = ({ id, title, number, children, programmeKey, formType }) => {
           {id !== 10 && id !== 0 ? (
             <List style={{ display: 'flex', flexDirection: 'column' }}>
               {scaleNames.map(scaleName => (
-                <List.Item
+                <ListItem
                   key={scaleName.id}
-                  style={{ marginRight: '1em', padding: '!important 0.21428571em 0', fontSize: '1.1em' }}
+                  sx={{ marginRight: '1em', padding: '!important 0.21428571em 0', fontSize: '1.1em' }}
                 >
-                  <Label horizontal>{scaleName.number}</Label>
-                  <span> {t(scaleName.text)} </span>
-                </List.Item>
+                  <Chip label={scaleName.number} />
+                  {t(scaleName.text)}
+                </ListItem>
               ))}
             </List>
           ) : null}

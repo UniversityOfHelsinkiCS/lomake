@@ -2,8 +2,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Icon } from 'semantic-ui-react'
-import CircularProgress from '@mui/material/CircularProgress'
+import { IconButton, CircularProgress } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
+import DownloadIcon from '@mui/icons-material/Download'
 import { useTranslation, Trans } from 'react-i18next'
 import { Navigate, useNavigate, useParams, Link } from 'react-router'
 import Downloads from '../../FormView/Downloads'
@@ -173,7 +174,9 @@ const EvaluationFormView = () => {
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <div style={{ marginBottom: '2em' }}>
-              <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation')} />
+              <IconButton onClick={() => navigate(`/evaluation}`)} sx={{ marginRight: 2 }}>
+                <ArrowBack data-cy="back-button" />
+              </IconButton>
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={calendarImage} />
           </div>
@@ -234,14 +237,14 @@ const EvaluationFormView = () => {
           >
             <Link data-cy={`link-to-old-${room}-answers`} target="_blank" to={summaryURL}>
               <h4 style={{ marginBottom: '0.5em' }}>
-                {t('formView:summaryLinkProg')} <Icon name="external" />{' '}
+                {t('formView:summaryLinkProg')} <DownloadIcon fontSize="small" />{' '}
               </h4>
             </Link>
             {room.startsWith('T') && (
               <div style={{ marginTop: '1em' }}>
                 <a data-cy={`link-to-rapo-${room}`} href={rapoLink} rel="noreferrer" target="_blank">
                   <h4>
-                    {t('formView:rapo')} <Icon name="external" />{' '}
+                    {t('formView:rapo')} <DownloadIcon fontSize="small" />{' '}
                   </h4>
                 </a>
               </div>

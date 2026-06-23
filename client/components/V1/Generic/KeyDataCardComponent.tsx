@@ -60,13 +60,13 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
         return (
           <CriteriaCard
             color={color}
-            description={data.maaritelma[lang]}
+            description={data.maaritelma[lang] || ''}
             hasTrafficLight={data.liikennevalo}
             key={data.avainluvunNimi[lang]}
             limits={data.mittarinRajat}
             thresholds={data.kynnysarvot}
             title={data.avainluvunNimi[lang]}
-            unit={data.yksikko}
+            unit={data.yksikko || ''}
             value={valueText}
             {...props}
           />
