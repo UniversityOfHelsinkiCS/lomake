@@ -43,7 +43,7 @@ const Textarea = ({
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] ?? '')
 
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const viewOnly = true
 
   const hasSummaryData = Object.keys(summaryData ?? {}).length > 0 && id.includes('-bachelor')
 

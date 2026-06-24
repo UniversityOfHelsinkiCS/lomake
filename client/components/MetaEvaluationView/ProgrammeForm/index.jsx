@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import DownloadIcon from '@mui/icons-material/Download'
 import { CircularProgress, IconButton } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material'
-import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
+import { getSingleProgrammesAnswers } from '../../../redux/formReducer'
 import { colors } from '../../../util/common'
 import StatusMessage from '../../FormView/StatusMessage'
 import powerlineImage from '../../../assets/APowerlineTower.jpg'
@@ -42,7 +42,6 @@ const ProgrammeLevelForm = () => {
   useEffect(() => {
     if (!programme) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
-    dispatch(setViewOnly(true))
   }, [programme, viewingOldAnswers, year, draftYear, accessToTempAnswers, room, user])
 
   if (!user || !room) return <Navigate to="/" />

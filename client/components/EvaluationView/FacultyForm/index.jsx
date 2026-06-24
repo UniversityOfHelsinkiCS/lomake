@@ -8,7 +8,7 @@ import { ArrowBack } from '@mui/icons-material'
 import DownloadIcon from '@mui/icons-material/Download'
 import Downloads from '../..//FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
-import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
+import { getSingleProgrammesAnswers } from '../../../redux/formReducer'
 import { getFacultyProgrammeAnswersAction } from '../../../redux/summaryReducer'
 import NavigationSidebar from '../..//FormView/NavigationSidebar'
 import StatusMessage from '../..//FormView/StatusMessage'
@@ -142,7 +142,6 @@ const FacultyFormView = () => {
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getFacultyProgrammeAnswersAction(room, lang))
-    dispatch(setViewOnly(true))
   }, [faculty, singleFacultyPending, draftYear, room, user])
 
   const facultyProgrammeAnswers = useMemo(() => {

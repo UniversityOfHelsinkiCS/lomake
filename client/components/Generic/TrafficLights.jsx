@@ -11,7 +11,7 @@ const TrafficLights = ({ id, form }) => {
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
   const value = useSelector(({ form }) => form.data[fieldName])
   const finnishUniFormData = useSelector(({ form }) => form.finnishUniFormData.data)
-  const reduxViewOnly = useSelector(({ form }) => form.viewOnly)
+  const reduxViewOnly = true
 
   const isUniFormLanguageVersion = /((\/UNI_EN)|(\/UNI_SE))/.exec(window.location.href)
 

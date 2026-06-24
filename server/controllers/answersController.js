@@ -448,148 +448,6 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
   }
 }
 
-const updateAnswerReady = async (req, res) => {
-  const { programme, form, year } = req.params
-  const { ready } = req.body
-  if (!form || !year || !programme) return res.sendStatus(400)
-
-  try {
-    const tempAnswer = await db.tempAnswer.findOne({
-      where: {
-        programme,
-        form,
-        year,
-      },
-    })
-
-    tempAnswer.ready = Boolean(ready)
-    await tempAnswer.save()
-    return res.send(tempAnswer)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const updateIndividualReady = async (req, res) => {
-  const { uid } = req.params
-  const { ready } = req.body
-  if (!uid) return res.sendStatus(400)
-
-  try {
-    const tempAnswer = await db.tempAnswer.findOne({
-      where: {
-        programme: uid,
-        form: 3,
-      },
-    })
-
-    tempAnswer.ready = Boolean(ready)
-    await tempAnswer.save()
-    return res.send(tempAnswer)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const removeBackupForIndividual = async uid => {
-  try {
-    await db.backupAnswer.destroy({
-      where: {
-        [Op.and]: [{ programme: uid }, { form: formKeys.DEGREE_REFORM_INDIVIDUALS }],
-      },
-    })
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-  }
-}
-
-const clearTempForIndividual = async uid => {
-  try {
-    await db.tempAnswer.update(
-      { data: {} },
-      {
-        where: {
-          [Op.and]: [{ programme: uid }, { form: formKeys.DEGREE_REFORM_INDIVIDUALS }],
-        },
-      }
-    )
-    logger.info(`Cleared temp answer for current user`)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-  }
-}
-
-const postIndividualFormAnswer = async (req, res) => {
-  const { data } = req.body
-  const { uid } = req.user
-  let previousAnswers = []
-
-  const allAnswers = await db.answer.findAll({
-    where: {
-      programme: {
-        [Op.startsWith]: uid,
-      },
-      form: formKeys.DEGREE_REFORM_INDIVIDUALS,
-    },
-  })
-
-  previousAnswers = previousAnswers.concat(allAnswers)
-
-  try {
-    const answer = {
-      programme: `${uid}-${previousAnswers.length}`,
-      data,
-      year: new Date().getFullYear(),
-      form: 3,
-      submittedBy: uid,
-    }
-    const savedAnswer = await db.answer.create(answer)
-    if (savedAnswer) {
-      await removeBackupForIndividual(uid)
-      await clearTempForIndividual(uid)
-    }
-    return res.status(200).json(savedAnswer)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const postIndividualFormPartialAnswer = async (req, res) => {
-  const { data } = req.body
-  const { uid } = req.user
-
-  let answers = await db.tempAnswer.findOne({
-    where: {
-      programme: uid,
-      form: formKeys.DEGREE_REFORM_INDIVIDUALS,
-    },
-  })
-  try {
-    const previousData = answers.data
-
-    const updatedData = { ...previousData, [data.field]: data.value }
-
-    answers.data = updatedData
-
-    await answers.save()
-
-    answers = await db.tempAnswer.findOne({
-      where: {
-        programme: uid,
-        form: formKeys.DEGREE_REFORM_INDIVIDUALS,
-      },
-    })
-
-    return res.status(200).json(answers)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
 const getDataFromFinnishUniForm = async (req, res) => {
   try {
     const { year } = req.params
@@ -631,6 +489,7 @@ const getFacultyTempAnswersByForm = async (req, res) => {
         form,
       },
     })
+
     return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -645,15 +504,11 @@ export default {
   getIndividualFormAnswerForUser,
   getAllUserHasAccessTo,
   getSingleProgrammesAnswers,
-  postIndividualFormAnswer,
-  postIndividualFormPartialAnswer,
   getAllIndividualAnswersForUser,
   getFacultySummaryData,
   getProgrammeSummaryData,
   getOldFacultySummaryData,
   getEvaluationSummaryDataForFaculty,
-  updateAnswerReady,
-  updateIndividualReady,
   getCommitteeSummaryData,
   getFacultyTempAnswersAfterDeadline,
   getDataFromFinnishUniForm,

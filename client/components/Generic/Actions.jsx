@@ -26,7 +26,7 @@ const Actions = ({
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const formData = useSelector(state => state.form.data)
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const viewOnly = true
 
   const actionsList = Object.keys(formData).filter(questionId => questionId.includes(id)) || []
   const actionsCount = actionsList.length

@@ -11,7 +11,7 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
   const { t } = useTranslation()
   const fieldNameOptions = `${id}_selection`
   const fieldNameText = `${id}_text`
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const viewOnly = true
 
   const values = useSelector(({ form }) => form.data[fieldNameOptions])
   const selections = values ? JSON.parse(values) : null

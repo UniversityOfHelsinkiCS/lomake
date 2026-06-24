@@ -1,35 +1,17 @@
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useState, useEffect } from 'react'
 import { Form } from 'semantic-ui-react'
 import Divider from '@mui/material/Divider'
-import { useSelector, useDispatch } from 'react-redux'
-import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from '../../redux/formReducer'
-import { colors, getForm } from '../../util/common'
-import { formKeys } from '../../../config/data'
+import { useSelector } from 'react-redux'
+import { colors } from '../../util/common'
 import BasicRadio from './BasicRadio'
 import './Generic.scss'
 
 const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions, direction, formType, hidePopup }) => {
-  const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] ?? '')
   const lang = useSelector(state => state.language)
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const form = getForm(formType)
-  const choose = async (field, value) => {
-    if (form === formKeys.DEGREE_REFORM_INDIVIDUALS3) {
-      dispatch(updateFormFieldExp(field, value, form))
-      dispatch(postIndividualFormPartialAnswer({ field, value }))
-    } else {
-      dispatch(updateFormField(field, value, form))
-    }
-  }
+  const viewOnly = true
 
-  const handleClick = label => {
-    setState({ value: label })
-    choose(id, label)
-  }
   useEffect(() => {
     setState({ value: dataFromRedux })
   }, [dataFromRedux])
@@ -80,7 +62,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
         <BasicRadio
           checked={state.value}
           direction={direction}
-          handleClick={handleClick}
+          handleClick={() => null}
           hidePopup={hidePopupTrue}
           id={id}
           radioButtonLabels={radioButtonLabels}

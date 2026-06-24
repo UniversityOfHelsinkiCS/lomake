@@ -8,9 +8,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { CircularProgress, IconButton } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material'
 import DownloadIcon from '@mui/icons-material/Download'
-import { setViewOnly, getSingleProgrammesAnswers, getCommitteeAnswers } from '../../../redux/formReducer'
+import { getSingleProgrammesAnswers, getCommitteeAnswers } from '../../../redux/formReducer'
 import { getCommitteeFacultyAnswersAction } from '../../../redux/summaryReducer'
-import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
 import NavigationSidebar from '../../FormView/NavigationSidebar'
 import StatusMessage from '../../FormView/StatusMessage'
 
@@ -23,15 +22,6 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
-
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
-  if (!draftYear) return true
-  if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
-  if (!writeAccess) return true
-
-  return false
-}
 
 const hasRights = currentUser => {
   return isAdmin(currentUser)
@@ -127,9 +117,6 @@ const CommitteeFormView = () => {
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const currentRoom = useSelector(state => state.room)
-
-  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
@@ -144,14 +131,6 @@ const CommitteeFormView = () => {
     dispatch(setYear(year))
   }, [lang, room, year])
 
-  const viewOnly = formShouldBeViewOnly({
-    draftYear,
-    year,
-    formDeadline,
-    writeAccess: hasRights(user),
-    form,
-  })
-
   useEffect(() => {
     if (!committee || !form) return
     if (!hasRights(user)) {
@@ -159,13 +138,6 @@ const CommitteeFormView = () => {
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getCommitteeFacultyAnswersAction(room, lang))
-    if (viewOnly) {
-      dispatch(setViewOnly(true))
-      if (currentRoom) dispatch(wsLeaveRoom(room))
-    } else {
-      dispatch(wsJoinRoom(room, form))
-      dispatch(setViewOnly(false))
-    }
   }, [committee, singleFacultyPending, draftYear, room, user])
 
   useEffect(() => {

@@ -10,11 +10,10 @@ import { Navigate, useNavigate, useParams, Link } from 'react-router'
 import Downloads from '../../FormView/Downloads'
 
 import { hasSomeReadAccess, isAdmin } from '../../../../config/common'
-import { colors, getFormViewRights, getYearToShow } from '../../../util/common'
+import { colors, getYearToShow } from '../../../util/common'
 import { getProgramme } from '../../../redux/studyProgrammesReducer'
-import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
+import { getSingleProgrammesAnswers } from '../../../redux/formReducer'
 import { getProgrammeOldAnswersAction } from '../../../redux/summaryReducer'
-import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
 import NoPermissions from '../../Generic/NoPermissions'
 import NavigationSidebar from '../../FormView/NavigationSidebar'
 import calendarImage from '../../../assets/calendar.jpg'
@@ -35,7 +34,6 @@ const handleMeasures = (yearData, relatedQuestion) => {
     }
     i++
   }
-
   return { text, light: null, count }
 }
 
@@ -75,20 +73,15 @@ const EvaluationFormView = () => {
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const currentRoom = useSelector(state => state.room)
-  const viewingOldAnswers = false // no old asnwers to watch
-  const summaries = useSelector(state => state.summaries)
 
-  const formDeadline = nextDeadline && Array.isArray(nextDeadline) ? nextDeadline.find(dl => dl.form === form) : null
+  const summaries = useSelector(state => state.summaries)
 
   const year = getYearToShow({ draftYear, nextDeadline, form }) || new Date().getFullYear()
 
   const summaryURL = `/evaluation/previous-years/${room}`
   const rapoLink = `https://rapocloud.it.helsinki.fi/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FHelsingin%20yliopiston%20dashboardit%2F_portal%2FTohtorikoulutus&Page=Tohtoriohjelman%20vuosiseuranta%20%2F%20Annual%20review%20by%20doctoral%20programme`
 
-  const writeAccess = user.access[room]?.write || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
-  const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
@@ -100,40 +93,10 @@ const EvaluationFormView = () => {
     if (!programme || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getProgrammeOldAnswersAction(room))
-    if (
-      getFormViewRights({
-        accessToTempAnswers,
-        programme,
-        writeAccess,
-        viewingOldAnswers,
-        draftYear,
-        year,
-        formDeadline,
-        form,
-      })
-    ) {
-      dispatch(setViewOnly(true))
-      if (currentRoom) dispatch(wsLeaveRoom(room))
-    } else {
-      dispatch(wsJoinRoom(room, form))
-      dispatch(setViewOnly(false))
-    }
-  }, [
-    programme,
-    singleProgramPending,
-    writeAccess,
-    viewingOldAnswers,
-    year,
-    draftYear,
-    accessToTempAnswers,
-    readAccess,
-    room,
-    user,
-  ])
+  }, [programme, year, readAccess, room, form])
 
   useEffect(() => {
     return () => {
-      dispatch(wsLeaveRoom(room))
       dispatch({ type: 'RESET_STUDYPROGRAM_SUCCESS' })
     }
   }, [])
@@ -163,7 +126,7 @@ const EvaluationFormView = () => {
 
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
 
-  if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('evaluation')} t={t} />
+  if (!readAccess) return <NoPermissions requestedForm={t('evaluation')} t={t} />
 
   return singleProgramPending ? (
     <CircularProgress />

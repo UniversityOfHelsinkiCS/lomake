@@ -1,15 +1,11 @@
 /* eslint-disable camelcase */
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState, useMemo, useRef } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Segment } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '../../../../config/data'
 import CustomModal from '../../Generic/CustomModal'
 import { getTempAnswersByForm } from '../../../redux/tempAnswersReducer'
-import { getLockHttp, updateFormField } from '../../../redux/formReducer'
-import { deepCheck } from '../../Generic/Textarea'
-import { releaseFieldLocally } from '../../../redux/currentEditorsReducer'
+import { updateFormField } from '../../../redux/formReducer'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import '../../Generic/Generic.scss'
 
@@ -27,80 +23,17 @@ const Answer = ({ question, faculty }) => {
   const modalName = `${question.id}_modal`
   const dataFromRedux = useSelector(({ form }) => form.data)
   const lightsHistory = dataFromRedux[fieldName] ?? []
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const isEditable = !viewOnly
+
   const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
-  const lastSaveSuccess = useSelector(state => state.form.lastSaveSuccess)
-  const date = new Date(lastSaveSuccess)
-
-  // check if current user is the editor
-  const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
-  const currentUser = useSelector(({ currentUser }) => currentUser.data)
-  const [hasLock, setHasLock] = useState(true)
-  const [gettingLock, setGettingLock] = useState(false)
-  const lockRef = useRef(gettingLock)
-  lockRef.current = gettingLock
-
-  const someoneElseHasTheLock =
-    currentEditors && currentUser && currentEditors[modalName] && currentEditors[modalName].uid !== currentUser.uid
 
   useEffect(() => {
-    const gotTheLock = currentEditors?.[modalName] && currentEditors[modalName].uid === currentUser.uid
-
-    setHasLock(gotTheLock)
-
-    if (gettingLock && currentEditors[fieldName]) {
-      setGettingLock(false)
-    }
-  }, [currentEditors])
-
-  const askForLock = () => {
-    setGettingLock(true)
-    dispatch(getLockHttp(modalName, faculty))
-  }
-
-  useEffect(() => {
-    if (!hasLock) {
-      dispatch(getTempAnswersByForm(form))
-    }
-  }, [dispatch, dataFromRedux, form, hasLock])
-
-  const openFormModal = question => {
-    askForLock()
-    setFormModalData(question)
-  }
+    dispatch(getTempAnswersByForm(form))
+  }, [dispatch, dataFromRedux, form])
 
   const closeFormModal = () => {
-    dispatch(releaseFieldLocally(modalName))
     setFormModalData(null)
     dispatch(updateFormField(modalName, '', form))
   }
-
-  useEffect(() => {
-    let timer
-
-    const resetTimer = () => {
-      clearTimeout(timer)
-      timer = setTimeout(closeFormModal, 2 * 60 * 1000) // timer is 2 minutes
-    }
-
-    window.addEventListener('mousemove', resetTimer)
-    window.addEventListener('keypress', resetTimer)
-    window.addEventListener('click', resetTimer)
-    window.addEventListener('scroll', resetTimer)
-
-    // Start the timer on mount
-    resetTimer()
-
-    // Cleanup function to remove event listeners and clear timer
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener('mousemove', resetTimer)
-      window.removeEventListener('keypress', resetTimer)
-      window.removeEventListener('click', resetTimer)
-      window.removeEventListener('scroll', resetTimer)
-    }
-  }, [])
 
   const formatDate = date => {
     return new Date(date)
@@ -196,21 +129,6 @@ const Answer = ({ question, faculty }) => {
             )
           })}
         </div>
-        {isEditable ? (
-          <div className="button-container">
-            {someoneElseHasTheLock ? (
-              <i
-                style={{ color: 'gray', padding: '8px' }}
-              >{`${currentEditors[modalName].firstname} ${currentEditors[modalName].lastname} ${t('generic:isWriting')}`}</i>
-            ) : null}
-            <Button
-              content={t('formView:modifyPlan')}
-              data-cy={`modify-plan-${question.id}`}
-              disabled={someoneElseHasTheLock}
-              onClick={() => openFormModal(question)}
-            />
-          </div>
-        ) : null}
       </div>
       {formModalData ? (
         <CustomModal
@@ -218,11 +136,6 @@ const Answer = ({ question, faculty }) => {
           title={`${formModalData.id?.startsWith('T') ? formModalData.id.slice(1) : formModalData.id}. ${formModalData.label[lang]}`}
         >
           <MonitoringQuestionForm faculty={faculty} question={formModalData} />
-          <Segment color="green" inverted>
-            <b>
-              {t('lastSaved')} {date.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
-            </b>
-          </Segment>
         </CustomModal>
       ) : null}
     </>

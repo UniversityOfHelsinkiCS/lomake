@@ -11,7 +11,7 @@ import './Generic.scss'
 const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo, form }) => {
   const { t } = useTranslation()
   const formData = useSelector(state => state.form.data)
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const viewOnly = true
 
   const [amountOfMeasures, setAmountOfMeasures] = useState(1)
 

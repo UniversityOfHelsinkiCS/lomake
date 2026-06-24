@@ -14,7 +14,7 @@ const TrackingTrafficLight = ({ id, form }) => {
   const fieldName = `${id}_lights_history`
   const lightsHistory = useSelector(({ form }) => form.data[fieldName]) ?? []
   const displayedHistory = lightsHistory
-  const reduxViewOnly = useSelector(({ form }) => form.viewOnly)
+  const reduxViewOnly = true
   const value = useSelector(({ form }) => form.data[fieldName])
   const [modify, setModify] = useState(false)
 

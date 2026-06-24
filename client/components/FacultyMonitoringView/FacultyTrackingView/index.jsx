@@ -1,22 +1,16 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState, useMemo } from 'react'
-import { Menu, MenuItem, Button, Header, Accordion, Icon } from 'semantic-ui-react'
-import { IconButton } from '@mui/material'
+import { useEffect } from 'react'
+import { IconButton, Typography, MenuItem, MenuList } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material'
 import { Navigate, useNavigate, useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '../../../../config/common'
 import NoPermissions from '../../Generic/NoPermissions'
-import CustomModal from '../../Generic/CustomModal'
-import { facultyMonitoringQuestions as questions } from '../../../questionData/index'
 import { formKeys } from '../../../../config/data'
-import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
-import { clearFormState, setViewOnly } from '../../../redux/formReducer'
 import { getTempAnswersByForm } from '../../../redux/tempAnswersReducer'
-import Answer from './Answer'
-import QuestionPicker from './QuestionPicker'
+
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 import './FacultyTrackingView.scss'
 
@@ -29,65 +23,16 @@ const FacultyTrackingView = () => {
   const facultyName = faculties?.find(f => f.code === faculty)?.name[lang]
   const user = useSelector(state => state.currentUser.data)
   const form = formKeys.FACULTY_MONITORING
-  const currentRoom = useSelector(state => state.room)
+
   const navigate = useNavigate()
-  const fieldName = `selectedQuestionIds`
-  const selectedQuestions = useSelector(({ form }) => form.data[fieldName] ?? [])
-  const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
-  const [activeAccordions, setActiveAccordions] = useState({})
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const selectedLevel = useSelector(({ filters }) => filters.level)
-  const { nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
 
   const hasReadRights = user.access[faculty]?.read || user.specialGroup?.evaluationFaculty || isAdmin(user)
-  const hasWriteRights = (user.access[faculty]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
-
-  const questionLevel = selectedLevel === 'doctoral' ? 'doctoral' : 'kandimaisteri'
-  const questionData = questions.filter(q => q.level === questionLevel)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
-
     if (!faculty || !form || !hasReadRights) return
     dispatch(getTempAnswersByForm(form))
-
-    if (!hasWriteRights || !formDeadline) {
-      dispatch(wsJoinRoom(faculty, form))
-      dispatch(setViewOnly(true))
-      if (currentRoom) {
-        dispatch(wsLeaveRoom(faculty))
-        dispatch(clearFormState())
-      }
-    } else {
-      dispatch(wsJoinRoom(faculty, form))
-      dispatch(setViewOnly(false))
-    }
   }, [faculty, lang])
-
-  useEffect(() => {
-    return () => {
-      dispatch(wsLeaveRoom(faculty))
-      dispatch({ type: 'RESET_STUDYPROGRAM_SUCCESS' })
-      dispatch(clearFormState())
-    }
-  }, [])
-
-  useEffect(() => {
-    setActiveAccordions({})
-  }, [lang, selectedLevel])
-
-  const filteredQuestions = useMemo(
-    () =>
-      questionData
-        .map((object, index) => ({
-          ...object,
-          groupId: `group-${index}`,
-          parts: object.parts.filter(part => selectedQuestions.includes(part.id)),
-        }))
-        .filter(object => object.parts.length > 0),
-    [questionData, selectedQuestions]
-  )
 
   if (!user || !faculty) return <Navigate to="/" />
 
@@ -99,66 +44,19 @@ const FacultyTrackingView = () => {
     return null
   }
 
-  const handleAccordionClick = (e, title) => {
-    const { index } = title
-    setActiveAccordions(prevState => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }))
-  }
-
   return (
     <>
-      <Menu className="filter-row" secondary size="large">
+      <MenuList className="filter-row" secondary size="large">
         <MenuItem>
           <IconButton onClick={() => navigate(-1)} sx={{ marginRight: 2 }}>
             <ArrowBack data-cy="back-button" />
           </IconButton>
-        </MenuItem>
-        <MenuItem className="menu-item-header" header>
-          <h2>
+          <Typography variant="h2">
             {t('common:tracking').toUpperCase()}: {facultyName?.toUpperCase()}
-          </h2>
-        </MenuItem>
-        <MenuItem>
-          {!viewOnly && (
-            <Button
-              className="select-questions-button"
-              content={t('formView:selectQuestions')}
-              data-cy={`question-picker-${faculty}`}
-              onClick={() => setQuestionPickerModalData(questionData)}
-              secondary
-            />
-          )}
-        </MenuItem>
-        <MenuItem>
+          </Typography>
           <FacultyDegreeDropdown />
         </MenuItem>
-      </Menu>
-
-      {questionPickerModalData ? (
-        <CustomModal
-          closeModal={() => setQuestionPickerModalData(null)}
-          data-cy="question-picker-modal"
-          title={`${t('formView:selectQuestions')} – ${facultyName}`}
-        >
-          <div className="question-picker-container">
-            {questionData.map((group, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <div className="question-group" key={`group-${index}`}>
-                <QuestionPicker form={form} index={index} label={group.title[lang]} questionsList={group.parts} />
-              </div>
-            ))}
-            <Button
-              className="send-selection-button"
-              content={t('formView:sendSelection')}
-              data-cy="send-selection-button"
-              onClick={() => setQuestionPickerModalData(null)}
-              secondary
-            />
-          </div>
-        </CustomModal>
-      ) : null}
+      </MenuList>
 
       <div className="answers-list-container">
         <div className="info-container">
@@ -167,35 +65,11 @@ const FacultyTrackingView = () => {
           <p>{t('facultyTracking:facultyInfo2')}</p>
           <p>{t('facultyTracking:facultyInfo3')}</p>
         </div>
-
-        {filteredQuestions.length > 0 ? (
-          filteredQuestions.map(group => (
-            <div className="accordion-container" key={group.groupId}>
-              <Accordion>
-                <Accordion.Title
-                  active={activeAccordions[group.groupId]}
-                  data-cy={`accordion-${group.groupId}`}
-                  index={group.groupId}
-                  onClick={handleAccordionClick}
-                >
-                  <h3>
-                    <Icon name="dropdown" />
-                    {group.title[lang]}
-                  </h3>
-                </Accordion.Title>
-                {activeAccordions[group.groupId]
-                  ? group.parts.map(part => <Answer faculty={faculty} key={part.id} question={part} />)
-                  : null}
-              </Accordion>
-            </div>
-          ))
-        ) : (
-          <div className="no-selection-container">
-            <Header as="h3" disabled>
-              {t('formView:noQuestionsSelected')}
-            </Header>
-          </div>
-        )}
+        <div className="no-selection-container">
+          <Typography color="grey" variant="h3">
+            {`${t('formView:noQuestionsSelected')} - Ei käytössä`}
+          </Typography>
+        </div>
       </div>
     </>
   )

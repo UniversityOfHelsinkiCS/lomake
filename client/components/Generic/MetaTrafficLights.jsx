@@ -9,9 +9,8 @@ const MetaTrafficLights = ({ id, form }) => {
   const fieldName = `${id}_light`
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
   const value = useSelector(({ form }) => form.data[fieldName])
-  const reduxViewOnly = useSelector(({ form }) => form.viewOnly)
 
-  const viewOnly = reduxViewOnly
+  const viewOnly = true
 
   const getClassName = color => {
     const tempValue = value
