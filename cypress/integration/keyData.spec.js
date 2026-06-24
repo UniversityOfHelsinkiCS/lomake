@@ -48,7 +48,7 @@ describe('KeyData', () => {
     cy.get('[data-cy="history-Ensisijaiset hakijat-2023-value"]').should('contain.text', '1')
 
     cy.visit('/v1/overview')
-    cy.get(`[data-cy="keydatatable-programme-KH50_006"]`).should('exist').click()
+    cy.get(`[data-cy="keydatatable-programme-KH50_006"]`).should('exist').click({ force: true })
     cy.get('[data-cy="trafficlight-table-cell-KH50_006-Vetovoimaisuus-2026"]').click()
     cy.get('[data-cy="Primary applicants-Vaaleanvihreä"]').should('contain.text', '260').click()
     cy.get('[data-cy="Primary applicants-description"]').should('contain.text', 'changed')

@@ -28,7 +28,7 @@ describe("Previous year's answers", () => {
     cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[1]}`)
 
-    cy.get('.customModal-content').find('.close').click()
+    cy.get(`[data-cy=close-modal]`).click()
     cy.selectYear(defaultYears[2])
 
     cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).click()

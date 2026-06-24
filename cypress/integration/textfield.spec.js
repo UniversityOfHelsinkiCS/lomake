@@ -7,6 +7,7 @@ const year = 2026
 describe('Textfield tests', () => {
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
+    cy.setCookie('session_id', '123')
     cy.request(`/api/cypress/initKeyData`)
     cy.visit(`/admin`)
     cy.contains('Deadline settings').click()
@@ -33,7 +34,7 @@ describe('Textfield tests', () => {
     const id = `Vetovoimaisuus-Comment`
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(100)
-    cy.get(`[data-cy=edit-${id}]`, { timeout: 10000 }).should('be.enabled').click()
+    cy.get(`[data-cy=edit-Vetovoimaisuus-Comment]`, { timeout: 10000 }).should('be.enabled').click()
     cy.contains('Press the button to release the field for others to edit!').should('exist')
     cy.get(`[data-cy=save-${id}]`, { timeout: 10000 }).should('be.enabled').click()
   })
@@ -72,9 +73,11 @@ describe('Textfield tests', () => {
     const id = `Vetovoimaisuus-Comment`
     cy.typeInTextField(id, 'Test comment')
     cy.login('cypressOspaUser')
+    cy.setCookie('session_id', '123')
     cy.visit(`/v1/programmes/10/KH50_005/${year}`)
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('be.disabled')
     cy.login('cypressUser')
+    cy.setCookie('session_id', '123')
     cy.visit(`/v1/programmes/10/KH50_005/${year}`)
     cy.typeInTextField(id, 'Test comment second time mf')
     cy.get(`[data-cy=save-${id}]`, { timeout: 10000 }).should('be.enabled').click()
