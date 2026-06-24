@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Icon } from 'semantic-ui-react'
+import CloseIcon from '@mui/icons-material/Close'
 
 import useOnClickOutside from '../../util/useOnClickOutside'
 import './Generic.scss'
@@ -16,7 +16,7 @@ const CustomModal = ({ children, title, closeModal, borderColor }) => {
       >
         <div className="title-and-close">
           <span style={{ maxWidth: '95%' }}>{title}</span>
-          <Icon data-cy="close-modal" name="close" onClick={closeModal} style={{ cursor: 'pointer' }} />
+          <CloseIcon color="error" data-cy="close-modal" onClick={closeModal} sx={{ cursor: 'pointer' }} />
         </div>
         {children}
       </div>
