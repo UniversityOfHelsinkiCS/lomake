@@ -28,7 +28,6 @@ const checkTemporaryAccesses = (access, tempAccess) => {
 }
 
 const IAMmiddleware = async (req, _, next) => {
-  if (req.path.includes('socket.io')) return next()
   if (req.path.includes('/cypress/')) return next()
 
   const { user } = req

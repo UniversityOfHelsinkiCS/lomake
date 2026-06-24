@@ -4,15 +4,12 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
-
 import { Box, CircularProgress } from '@mui/material'
 import NavBar from './NavBar'
 import Router from './Router'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Banner } from './Banner'
 import { formKeys } from '../../config/data'
-
-import { wsConnect } from '../redux/websocketReducer'
 import { loginAction } from '../redux/currentUserReducer'
 import { getStudyProgrammes, getUsersProgrammes } from '../redux/studyProgrammesReducer'
 import { getDeadlineAndDraftYear } from '../redux/deadlineReducer'
@@ -39,7 +36,6 @@ const languageFromUrl = () => {
   if (['fi', 'se', 'en'].includes(linkLang)) {
     return linkLang
   }
-
   return undefined
 }
 
@@ -84,9 +80,6 @@ const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, for
 
 export default () => {
   const isNotIndividualForm = !window.location.href.includes('/individual')
-  const isDegreeReformSummary =
-    window.location.href.includes('/degree-reform') && window.location.search.startsWith('?faculty=')
-  const isNotDegreeReformSummary = !isDegreeReformSummary
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser)
   const studyProgrammes = useSelector(state => state.studyProgrammes)
@@ -112,9 +105,6 @@ export default () => {
 
   useEffect(() => {
     dispatch(loginAction())
-    if (isNotIndividualForm && isNotDegreeReformSummary && !window.location.pathname.includes('/previous-years')) {
-      dispatch(wsConnect())
-    }
 
     initShibbolethPinger(60000, null, false) // Errors are handled in lomake
   }, [])

@@ -3,7 +3,6 @@ import type { Request, Response } from 'express'
 import type { Lock } from '../../shared/lib/types.js'
 import getUserByUid from '../services/userService.js'
 import logger from '../util/logger.js'
-import { getLockForHttp } from '../websocket.js'
 import {
   hasProgrammeWriteAccess,
   inProduction,
@@ -73,26 +72,6 @@ const getCurrentUser = async (req: Request & { user: User }) => {
   }
 
   return user
-}
-
-const getLock = async (req: Request & { user: User }, res: Response) => {
-  try {
-    const { field } = req.body
-    const { room } = req.params
-    const currentUser = await getCurrentUser(req)
-    if (!isDegreeStudentOrEmployee(currentUser) && !isAdmin(currentUser)) {
-      return res.status(401).json({ error: 'Unauthorized' })
-    }
-    const data = getLockForHttp(req.user, { field, room })
-    if (!data) {
-      return res.status(401).json({ error: 'Field locked....' })
-    }
-
-    return res.json(data)
-  } catch (e) {
-    logger.error(e)
-    return res.status(500).json({ error: 'Error' })
-  }
 }
 
 const setLock = async (req: Request & { user: User }, res: Response) => {
@@ -183,4 +162,4 @@ const deleteLock = async (req: Request & { user: User }, res: Response) => {
   }
 }
 
-export default { getLock, setLock, fetchLocks, deleteLock }
+export default { setLock, fetchLocks, deleteLock }
