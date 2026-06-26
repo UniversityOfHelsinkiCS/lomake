@@ -41,7 +41,7 @@ jobs:
             intervention,
             qualityManagement,
             keyData,
-            notificationBadge,
+            notificationbadge,
           ]
     name: Run tests
     runs-on: ubuntu-latest
