@@ -3,15 +3,15 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Navigate, useNavigate, useParams, Link } from 'react-router'
-import { Button, Icon, Loader } from 'semantic-ui-react'
 import Downloads from '../../FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
-import { setViewOnly, getSingleProgrammesAnswers, getCommitteeAnswers } from '../../../redux/formReducer'
+import { CircularProgress, IconButton } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
+import DownloadIcon from '@mui/icons-material/Download'
+import { getSingleProgrammesAnswers, getCommitteeAnswers } from '../../../redux/formReducer'
 import { getCommitteeFacultyAnswersAction } from '../../../redux/summaryReducer'
-import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
 import NavigationSidebar from '../../FormView/NavigationSidebar'
 import StatusMessage from '../../FormView/StatusMessage'
-import SaveIndicator from '../../FormView/SaveIndicator'
 
 import postItImage from '../../../assets/post_it.jpg'
 import './index.scss'
@@ -22,15 +22,6 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
-
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
-  if (!draftYear) return true
-  if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
-  if (!writeAccess) return true
-
-  return false
-}
 
 const hasRights = currentUser => {
   return isAdmin(currentUser)
@@ -126,9 +117,6 @@ const CommitteeFormView = () => {
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const currentRoom = useSelector(state => state.room)
-
-  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
@@ -143,14 +131,6 @@ const CommitteeFormView = () => {
     dispatch(setYear(year))
   }, [lang, room, year])
 
-  const viewOnly = formShouldBeViewOnly({
-    draftYear,
-    year,
-    formDeadline,
-    writeAccess: hasRights(user),
-    form,
-  })
-
   useEffect(() => {
     if (!committee || !form) return
     if (!hasRights(user)) {
@@ -158,13 +138,6 @@ const CommitteeFormView = () => {
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getCommitteeFacultyAnswersAction(room, lang))
-    if (viewOnly) {
-      dispatch(setViewOnly(true))
-      if (currentRoom) dispatch(wsLeaveRoom(room))
-    } else {
-      dispatch(wsJoinRoom(room, form))
-      dispatch(setViewOnly(false))
-    }
   }, [committee, singleFacultyPending, draftYear, room, user])
 
   useEffect(() => {
@@ -219,16 +192,17 @@ const CommitteeFormView = () => {
   return (
     <div>
       {singleFacultyPending ? (
-        <Loader active />
+        <CircularProgress />
       ) : (
         <div className="form-container">
           <NavigationSidebar formNumber={form} formType="evaluation" programmeKey={room} />
           <div className="the-form" ref={componentRef}>
             <div className="form-instructions">
               <div className="hide-in-print-mode">
-                <SaveIndicator />
                 <div style={{ marginBottom: '2em' }}>
-                  <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation-university')} />
+                  <IconButton onClick={() => navigate(`/evaluation-university}`)} sx={{ marginRight: 2 }}>
+                    <ArrowBack data-cy="back-button" />
+                  </IconButton>
                 </div>
                 <img alt="form-header-calendar" className="img-responsive" src={postItImage} />
               </div>
@@ -246,7 +220,7 @@ const CommitteeFormView = () => {
               </div>
 
               <div className="hide-in-print-mode">
-                <StatusMessage form={form} writeAccess={hasRights} />
+                <StatusMessage />
                 <h4>
                   <Trans i18nKey="formView:evaluationInfoUni" />
                 </h4>
@@ -275,7 +249,7 @@ const CommitteeFormView = () => {
               <div className="info-container">
                 <Link data-cy="link-to-old-answers" target="_blank" to={degreeReformUrl}>
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
-                    {t('formView:evaluationSummaryUniversity')} <Icon name="external" />{' '}
+                    {t('formView:evaluationSummaryUniversity')} <DownloadIcon fontSize="small" />{' '}
                   </h4>
                 </Link>
               </div>

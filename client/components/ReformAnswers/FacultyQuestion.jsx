@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
-import { Loader, Table } from 'semantic-ui-react'
+import { Table, TableBody, TableCell, TableRow } from '@mui/material'
 import { useGetOrganisationDataQuery } from '../../redux/organisation'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)
@@ -21,20 +22,20 @@ const Question = ({ question, answers }) => {
     }
   }
 
-  if (isFetching) return <Loader active />
+  if (isFetching) return <CircularProgress />
 
   return (
     <div style={{ marginTop: 20, marginLeft: 20 }}>
       <h4>Answers peer faculty</h4>
       <Table celled>
-        <Table.Body>
+        <TableBody>
           {data.map(object => (
-            <Table.Row key={object.code}>
-              <Table.Cell>{object.name[lang]}</Table.Cell>
-              <Table.Cell>{faculties[object.code] || 0}</Table.Cell>
-            </Table.Row>
+            <TableRow key={object.code}>
+              <TableCell>{object.name[lang]}</TableCell>
+              <TableCell>{faculties[object.code] || 0}</TableCell>
+            </TableRow>
           ))}
-        </Table.Body>
+        </TableBody>
       </Table>
     </div>
   )

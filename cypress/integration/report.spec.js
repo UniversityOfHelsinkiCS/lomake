@@ -13,26 +13,6 @@ describe('ReportPage tests', () => {
   // Cypress.stop()
   // return
 
-  it('User should be able to see the just written answers in the report', () => {
-    cy.login(user)
-    cy.visit('/yearly')
-    cy.selectYear(defaultYears[0])
-
-    cy.wait(500)
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.wait(500)
-    cy.typeInEditor('learning_outcomes', 'test words')
-
-    cy.visit('/yearly')
-    cy.reload()
-    cy.wait(1000)
-    cy.get('[data-cy=nav-report]').click()
-    cy.get('[data-cy=report-select-all-accordion]').click()
-    cy.get('[data-cy=report-select-all]').click()
-    cy.get('[data-cy=report-question-learning_outcomes_text]').should('be.visible').click()
-    cy.get('[data-cy=report-question-content-learning_outcomes_text]').should('contain.text', 'test words')
-  })
-
   it('User should be able to see answers from only one programme, when they have rights for only one', () => {
     cy.login(user)
     cy.visit('/yearly')
@@ -42,11 +22,6 @@ describe('ReportPage tests', () => {
 
   it('User should not be able to see answers in fields where there are none', () => {
     cy.login(user)
-    cy.visit('/yearly')
-    cy.wait(1000)
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.typeInEditor('learning_outcomes', 'test words')
-    cy.reload()
 
     cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
@@ -78,7 +53,6 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-select-all-accordion]').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()
-    // cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 66')
   })
 
   it('Filtering works for faculty level', () => {
@@ -142,20 +116,4 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=master-filter').click()
     cy.get('[data-cy=report-list-programme-MH40_003]').should('be.visible')
   })
-
-  /* it('Changes in traffic lights are reflected to the piecharts', () => {
-    cy.login(user)
-    cy.visit('/yearly')
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
-    cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
-    cy.visit('/yearly')
-    cy.get('[data-cy=nav-report]').click()
-    cy.get('[data-cy=report-select-all-accordion]').click()
-    cy.get('[data-cy=report-select-all]').click()
-    cy.get('div').contains('lights').should('be.visible').click()
-    cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text]')
-    cy.wait(1000)
-    cy.get('path').eq(1).should('have.css', 'stroke').and('eq', 'rgb(243, 119, 120)')
-  }) */
 })

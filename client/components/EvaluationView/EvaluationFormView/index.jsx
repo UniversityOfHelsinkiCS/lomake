@@ -2,22 +2,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Loader, Icon } from 'semantic-ui-react'
+import { IconButton, CircularProgress } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
+import DownloadIcon from '@mui/icons-material/Download'
 import { useTranslation, Trans } from 'react-i18next'
 import { Navigate, useNavigate, useParams, Link } from 'react-router'
 import Downloads from '../../FormView/Downloads'
 
 import { hasSomeReadAccess, isAdmin } from '../../../../config/common'
-import { colors, getFormViewRights, getYearToShow } from '../../../util/common'
+import { colors, getYearToShow } from '../../../util/common'
 import { getProgramme } from '../../../redux/studyProgrammesReducer'
-import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
+import { getSingleProgrammesAnswers } from '../../../redux/formReducer'
 import { getProgrammeOldAnswersAction } from '../../../redux/summaryReducer'
-import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
 import NoPermissions from '../../Generic/NoPermissions'
 import NavigationSidebar from '../../FormView/NavigationSidebar'
 import calendarImage from '../../../assets/calendar.jpg'
 import StatusMessage from '../../FormView/StatusMessage'
-import SaveIndicator from '../../FormView/SaveIndicator'
 import { setYear } from '../../../redux/filterReducer'
 import EvaluationForm from './EvaluationForm'
 
@@ -34,7 +34,6 @@ const handleMeasures = (yearData, relatedQuestion) => {
     }
     i++
   }
-
   return { text, light: null, count }
 }
 
@@ -74,20 +73,15 @@ const EvaluationFormView = () => {
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const currentRoom = useSelector(state => state.room)
-  const viewingOldAnswers = false // no old asnwers to watch
-  const summaries = useSelector(state => state.summaries)
 
-  const formDeadline = nextDeadline && Array.isArray(nextDeadline) ? nextDeadline.find(dl => dl.form === form) : null
+  const summaries = useSelector(state => state.summaries)
 
   const year = getYearToShow({ draftYear, nextDeadline, form }) || new Date().getFullYear()
 
   const summaryURL = `/evaluation/previous-years/${room}`
   const rapoLink = `https://rapocloud.it.helsinki.fi/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FHelsingin%20yliopiston%20dashboardit%2F_portal%2FTohtorikoulutus&Page=Tohtoriohjelman%20vuosiseuranta%20%2F%20Annual%20review%20by%20doctoral%20programme`
 
-  const writeAccess = user.access[room]?.write || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
-  const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
@@ -99,40 +93,10 @@ const EvaluationFormView = () => {
     if (!programme || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getProgrammeOldAnswersAction(room))
-    if (
-      getFormViewRights({
-        accessToTempAnswers,
-        programme,
-        writeAccess,
-        viewingOldAnswers,
-        draftYear,
-        year,
-        formDeadline,
-        form,
-      })
-    ) {
-      dispatch(setViewOnly(true))
-      if (currentRoom) dispatch(wsLeaveRoom(room))
-    } else {
-      dispatch(wsJoinRoom(room, form))
-      dispatch(setViewOnly(false))
-    }
-  }, [
-    programme,
-    singleProgramPending,
-    writeAccess,
-    viewingOldAnswers,
-    year,
-    draftYear,
-    accessToTempAnswers,
-    readAccess,
-    room,
-    user,
-  ])
+  }, [programme, year, readAccess, room, form])
 
   useEffect(() => {
     return () => {
-      dispatch(wsLeaveRoom(room))
       dispatch({ type: 'RESET_STUDYPROGRAM_SUCCESS' })
     }
   }, [])
@@ -162,19 +126,20 @@ const EvaluationFormView = () => {
 
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
 
-  if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('evaluation')} t={t} />
+  if (!readAccess) return <NoPermissions requestedForm={t('evaluation')} t={t} />
 
   return singleProgramPending ? (
-    <Loader active />
+    <CircularProgress />
   ) : (
     <div className="form-container">
       <NavigationSidebar formNumber={form} formType="evaluation" programmeKey={room} />
       <div className="the-form" ref={componentRef}>
         <div className="form-instructions">
           <div className="hide-in-print-mode">
-            <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
-              <Button as={Link} icon="arrow left" onClick={() => navigate('/evaluation')} />
+              <IconButton onClick={() => navigate(`/evaluation}`)} sx={{ marginRight: 2 }}>
+                <ArrowBack data-cy="back-button" />
+              </IconButton>
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={calendarImage} />
           </div>
@@ -184,7 +149,7 @@ const EvaluationFormView = () => {
           </h3>
 
           <div className="hide-in-print-mode">
-            <StatusMessage form={form} writeAccess={writeAccess} />
+            <StatusMessage />
             <div
               style={{
                 lineHeight: 2,
@@ -235,14 +200,14 @@ const EvaluationFormView = () => {
           >
             <Link data-cy={`link-to-old-${room}-answers`} target="_blank" to={summaryURL}>
               <h4 style={{ marginBottom: '0.5em' }}>
-                {t('formView:summaryLinkProg')} <Icon name="external" />{' '}
+                {t('formView:summaryLinkProg')} <DownloadIcon fontSize="small" />{' '}
               </h4>
             </Link>
             {room.startsWith('T') && (
               <div style={{ marginTop: '1em' }}>
                 <a data-cy={`link-to-rapo-${room}`} href={rapoLink} rel="noreferrer" target="_blank">
                   <h4>
-                    {t('formView:rapo')} <Icon name="external" />{' '}
+                    {t('formView:rapo')} <DownloadIcon fontSize="small" />{' '}
                   </h4>
                 </a>
               </div>

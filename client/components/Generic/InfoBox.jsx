@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Divider, Button } from 'semantic-ui-react'
+import Button from '@mui/material/Button'
+import Divider from '@mui/material/Divider'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -74,12 +75,9 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
         {image ? <img alt="three-step" src={getImageFor(lang)} style={{ maxWidth: '100%', height: 'auto' }} /> : null}
       </div>
       {accordion.fetched && accordion.lines > 4 ? (
-        <Button
-          className="infobox-button"
-          content={accordion.open ? t('read-less') : t('read-more')}
-          onClick={() => setAccordion({ ...accordion, open: !accordion.open })}
-          style={accordion.fetched && accordion.open ? null : { top: '-40px' }}
-        />
+        <Button onClick={() => setAccordion({ ...accordion, open: !accordion.open })} size="small" variant="contained">
+          {accordion.open ? t('read-less') : t('read-more')}
+        </Button>
       ) : null}
     </div>
   )

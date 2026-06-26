@@ -1,31 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-import { Divider } from 'semantic-ui-react'
-import { formKeys } from '../../../config/data'
+import Divider from '@mui/material/Divider'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  setAnswerLevels,
-  updateFormField,
-  updateFormFieldExp,
-  postIndividualFormPartialAnswer,
-} from '../../redux/formReducer'
-import { getFilters, getForm } from '../../util/common'
+import { setAnswerLevels } from '../../redux/formReducer'
+import { getFilters } from '../../util/common'
 import './Generic.scss'
 
-const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOptions, formType }) => {
+const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOptions }) => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const formData = useSelector(({ form }) => form.data ?? 'pending')
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const form = getForm(formType)
-  const choose = (name, id) => {
-    if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
-      dispatch(updateFormFieldExp(name, id, form))
-      dispatch(postIndividualFormPartialAnswer({ field: name, value: id }))
-    } else {
-      dispatch(updateFormField(name, id, form))
-    }
-  }
+  const viewOnly = true
 
   const options = radioOptions ? radioOptions[lang] : null
 
@@ -55,24 +40,6 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
     }
   }, [dataFromRedux])
 
-  const handleClick = eventValue => {
-    let newValues = []
-
-    newValues = values.map(v => {
-      if (v.id === eventValue) {
-        v.value = !v.value
-        return v
-      }
-      return v
-    })
-
-    setValue(newValues)
-    choose(id, newValues)
-    if (id === 'view_is_based_on') {
-      const filters = getFilters(newValues)
-      dispatch(setAnswerLevels(filters))
-    }
-  }
   return (
     <div className="form-checkbox-area">
       <Divider />
@@ -106,7 +73,7 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
                 data-cy={`choose-checkbox-${o.id}`}
                 disabled={viewOnly}
                 id={o.id}
-                onChange={() => handleClick(o.id)}
+                onChange={() => null}
                 type="checkbox"
                 value={o.id}
               />

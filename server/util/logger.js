@@ -1,7 +1,5 @@
 /* eslint-disable import-x/no-named-as-default-member */
-import os from 'os'
 import winston from 'winston'
-import { WinstonGelfTransporter } from 'winston-gelf-transporter'
 import LokiTransport from 'winston-loki'
 import { inProduction } from '../../config/common.js'
 
@@ -43,20 +41,6 @@ if (inProduction) {
     new LokiTransport({
       host: 'http://loki-svc.toska-lokki.svc.cluster.local:3100',
       labels: { app: 'lomake', environment: process.env.NODE_ENV ?? 'production' },
-    })
-  )
-
-  transports.push(
-    new WinstonGelfTransporter({
-      handleExceptions: true,
-      host: 'svm-116.cs.helsinki.fi',
-      port: 9503,
-      protocol: 'udp',
-      hostName: os.hostname(),
-      additional: {
-        app: 'lomake',
-        environment: 'production',
-      },
     })
   )
 }

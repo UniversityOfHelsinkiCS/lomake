@@ -7,37 +7,12 @@ import '../support/commands'
 const form = 1 // yearly assessment
 
 describe('IAM permission tests', () => {
-  // this is cursed test and for now it is skipped
-  it.skip('Doctoral kosu who is also a regular kosu gets writing rights to all programmes', () => {
-    cy.login('cypressDoctoralKosuAndRegularKosuUser')
-    cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 55)
-
-    cy.hasAccess('cypressDoctoralKosuAndRegularKosuUser', 'T920103', { read: true, write: true, admin: false })
-    cy.hasAccess('cypressDoctoralKosuAndRegularKosuUser', 'KH50_004', { read: true, write: true, admin: false })
-
-    cy.hasSpecialGroups('cypressDoctoralKosuAndRegularKosuUser', 'All doctoral programmes')
-    cy.hasSpecialGroups('cypressDoctoralKosuAndRegularKosuUser', 'All programmes')
-  })
-
-  it('User who has random IAM-groups and one jory group and is an employee can write to one programme', () => {
+  it('User who has random IAM-groups and one jory group and is an employee can access to one programme', () => {
     cy.login('cypressRandomRightsUser')
     cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
     cy.get(`[data-cy=colortable-link-to-KH50_006]`).click()
 
-    cy.typeInEditor('review_of_last_years_situation_report', 'random')
-
-    cy.visit('/yearly')
-    cy.reload()
-    cy.get('[data-cy=nav-report]').click()
-    cy.get('[data-cy=report-select-all-accordion]').click()
-    cy.get('[data-cy=report-select-all]').click()
-    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
-    cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
-      'contain.text',
-      'random'
-    )
     cy.hasAccess('cypressRandomRightsUser', 'KH50_006', { read: true, write: true, admin: false })
   })
 
@@ -55,7 +30,6 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
     cy.hasAccessEvaluation('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
     cy.hasAccessDegreeReform('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
-    // cy.hasSpecialGroups('cypressDeanKatselmusUser', 'All programmes')
   })
 
   it('Jory group read rights faculty Evaluation works', () => {

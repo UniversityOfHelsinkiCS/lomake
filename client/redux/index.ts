@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { configureStore } from '@reduxjs/toolkit'
 import { handleRequest, RTKApi } from '../util/apiConnection'
-import webSocketMiddleware from '../util/webSocket'
 
 import form from './formReducer'
 import room from './roomReducer'
@@ -46,7 +45,6 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(RTKApi.middleware)
-      .concat(webSocketMiddleware)
       .concat(handleRequest),
   devTools: process.env.NODE_ENV !== 'production',
 })

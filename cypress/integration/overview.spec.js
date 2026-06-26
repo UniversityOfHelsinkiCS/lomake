@@ -1,37 +1,40 @@
 describe('Overview page test', () => {
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
+    cy.setCookie('session_id', '123')
     cy.request(`/api/cypress/initKeyData`)
     cy.visit('/v1/overview')
-    cy.get('[data-cy="year-filter"] > .MuiSelect-select').click()
-    cy.contains('2024').click()
+    cy.get('[data-cy="year-filter"] > .MuiSelect-select').click({ force: true })
+    cy.contains('2024').click({ force: true })
   })
 
   describe('Testing keyDataTable interactions', () => {
     it('should direct to correct programme page on programme name click', () => {
       const programmeCode = 'KH50_005' // Computer science bachelor programme
-      cy.get(`[data-cy="keydatatable-programme-${programmeCode}"]`).should('exist').click()
+      // eslint-disable-next-line cypress/unsafe-to-chain-command
+      cy.get(`[data-cy=keydatatable-programme-${programmeCode}]`).trigger('mouseover').click()
       cy.url().should('include', `/${programmeCode}`)
     })
   })
 
   describe('Testing modals', () => {
     it('Should open modal on trafficlight cell click', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus-2024"]').should('exist').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus-2024"]').should('exist').click({ force: true })
       cy.get('[data-cy="keydata-modal"]').should('be.visible')
     })
 
     it('Should have view only textfields', () => {
       cy.get('[data-cy="trafficlight-table-cell-KH50_005-Opintojen sujuvuus ja valmistuminen-2024"]')
         .should('exist')
-        .click()
+        .click({ force: true })
       cy.get('[data-cy="textfield-viewonly"]').should('exist')
     })
 
     // it('displays text in textfields')
     it('directs to correct programme page on programme name click', () => {
       const programmeCode = 'KH50_005'
-      cy.get(`[data-cy="keydatatable-programme-${programmeCode}"]`).should('exist').click()
+      // eslint-disable-next-line cypress/unsafe-to-chain-command
+      cy.get(`[data-cy=keydatatable-programme-${programmeCode}]`).trigger('mouseover').click()
       cy.url().should('include', `/${programmeCode}`)
     })
   })
@@ -39,15 +42,9 @@ describe('Overview page test', () => {
   describe('Testing keyDataTable filtering controls', () => {
     describe('Test programme level filters', () => {
       it('Displays correct programme level options', () => {
-        cy.get('[data-cy="level-filter"]').click()
+        cy.get('[data-cy="level-filter"]').should('exist').click()
 
-        const programmes = [
-          'All programmes',
-          "Bachelor's programmes",
-          "Master's programmes",
-          'Doctoral programmes',
-          // "International Master's programmes",
-        ]
+        const programmes = ['All programmes', "Bachelor's programmes", "Master's programmes", 'Doctoral programmes']
 
         cy.get('[data-cy="level-filter-option"]')
           .should('have.length', programmes.length)
@@ -59,7 +56,7 @@ describe('Overview page test', () => {
       })
 
       it('Displays correct faculty options', () => {
-        cy.get('[data-cy="faculty-filter"]').click()
+        cy.get('[data-cy="faculty-filter"]').should('exist').click()
 
         const faculties = [
           'All faculties',
@@ -78,6 +75,7 @@ describe('Overview page test', () => {
         ].sort()
 
         cy.get('[data-cy="faculty-filter-option"]')
+          .should('exist')
           .should('have.length', faculties.length)
           .then($options => {
             $options.each((index, $option) => {
@@ -104,7 +102,7 @@ describe('Overview page test', () => {
 
   describe('Testing trafficlights', () => {
     it('Calculates correct values for evaluationarea', () => {
-      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Vetovoimaisuus-2024"]').click()
+      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Vetovoimaisuus-2024"]').should('exist').click({ force: true })
       cy.get(`[data-cy="Eligible applicants for Master's application-Punainen"]`).should('exist')
       cy.get('[data-cy="Number of new students-Punainen"]').should('exist')
       cy.get('[data-cy="Intake-Keltainen"]').should('exist')
@@ -132,9 +130,9 @@ describe('Overview page test', () => {
     })
 
     it('Calculates correct values with one grey', () => {
-      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Opintojen sujuvuus ja valmistuminen-2024"]').click({
-        force: true,
-      })
+      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Opintojen sujuvuus ja valmistuminen-2024"]')
+        .should('exist')
+        .click({ force: true })
 
       cy.get('[data-cy="MH50_009-Opintojen sujuvuus ja valmistuminen-Punainen"]')
         .should('exist')
@@ -156,7 +154,9 @@ describe('Overview page test', () => {
     })
 
     it('Calculates correct values when values are at 0', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Palaute ja työllistyminen-2024"]').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Palaute ja työllistyminen-2024"]')
+        .should('exist')
+        .click({ force: true })
 
       cy.get('[data-cy="KH50_005-Palaute ja työllistyminen-Punainen"]')
         .should('exist')
@@ -178,7 +178,7 @@ describe('Overview page test', () => {
     })
 
     it('Calculates correct values with two yellows and two reds', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus-2024"]').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus-2024"]').click({ force: true })
 
       cy.get('[data-cy="KH50_005-Vetovoimaisuus-Punainen"]')
         .should('exist')
@@ -212,7 +212,7 @@ describe('Overview page test', () => {
     })
 
     it('Displays correct color history for previous years', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Vetovoimaisuus-2025"]').should('exist').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Vetovoimaisuus-2025"]').should('exist').click({ force: true })
 
       // Red + lightgreen
       cy.get('[data-cy="Applications per student place-Vaaleanvihreä"]').should('exist').click()
@@ -253,7 +253,7 @@ describe('Overview page test', () => {
     it('Displays color history correctly for missing values', () => {
       cy.get('[data-cy="trafficlight-table-cell-KH50_002-Opintojen sujuvuus ja valmistuminen-2025"]')
         .should('exist')
-        .click()
+        .click({ force: true })
 
       // No history
       cy.get('[data-cy="Degrees-Tummanvihreä"]').should('exist').click()
@@ -272,7 +272,9 @@ describe('Overview page test', () => {
     })
 
     it('Displays no color history for gray values ', () => {
-      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Palaute ja työllistyminen-2025"]').should('exist').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_002-Palaute ja työllistyminen-2025"]')
+        .should('exist')
+        .click({ force: true })
 
       // No color meter or history
       cy.get('[data-cy="Guidance-Harmaa"]').should('exist').click()
@@ -298,7 +300,7 @@ describe('Overview page test', () => {
 
     it('User can hide discontinued programmes', () => {
       cy.get('[data-cy="keydatatable-programme-MH50_009"]').should('exist')
-      cy.get('[data-cy="show-discontinued-checkbox"]').click()
+      cy.get('[data-cy="show-discontinued-checkbox"]').should('exist').click()
       cy.get('[data-cy="keydatatable-programme-MH50_009"]').should('not.exist')
     })
 

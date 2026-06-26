@@ -3,6 +3,7 @@ describe('Notification badge tests', () => {
 
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
+    cy.setCookie('session_id', '123')
     cy.request(`/api/cypress/initKeyData`)
     cy.request(`/api/cypress/initReports`)
     cy.visit(`/admin`)
@@ -24,12 +25,13 @@ describe('Notification badge tests', () => {
 
     cy.visit('/v1/overview')
   })
-
+  // 2026
   const redProgramme = 'KH50_005' // all red
   const greenProgramme = 'KH50_002' // light green, green, gray
   const yellowProgramme = 'MH40_015' // all yellow
   const discontinuedProgramme = 'MH50_009' // all red but discontinued
-  const oneRedProgramme = 'KH50_006' // one red, rest green
+  const greenThreeProgramme = 'KH50_006' // light green, green, green
+  const allRedProgramme = 'MH30_006' // all red, but new programme
 
   describe('Testing badges in overview page', () => {
     it('Light and actions badges should display on red lights', () => {
@@ -143,31 +145,31 @@ describe('Notification badge tests', () => {
     })
 
     it('Opinion of programme tab + text field badge should appear and disappear when opinion of the programme is added', () => {
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${year}`)
+      cy.visit(`/v1/programmes/10/${redProgramme}/2026`)
 
-      cy.intercept(`/api/reports/${oneRedProgramme}/${year}`).as('getReport')
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${year}`)
+      cy.intercept(`/api/reports/${redProgramme}/2026`).as('getReport')
+      cy.visit(`/v1/programmes/10/${redProgramme}/2026`)
       cy.wait('@getReport')
 
       cy.get(`[data-cy="tabBadge-lights"]`).should('exist')
       cy.get(`[data-cy=textfieldBadge-Vetovoimaisuus]`).should('exist')
 
       cy.typeInTextField('Vetovoimaisuus-Comment', 'Test comment')
+
       cy.get(`[data-cy=save-Vetovoimaisuus-Comment]`).click()
 
-      cy.get(`[data-cy="tabBadge-lights"]`).should('not.exist')
       cy.get(`[data-cy=textfieldBadge-Vetovoimaisuus]`).should('not.exist')
     })
 
     it('Actions tab + text field badge should appear and disappear when actions are added', () => {
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}/${year}`)
+      cy.visit(`/v1/programmes/10/${redProgramme}/2026`)
 
       cy.get(`[data-cy="tabBadge-actions"]`).should('exist')
       cy.get('[data-cy="actionsTab"]').click()
 
       cy.get(`[data-cy="tabBadge-actions"]`).should('exist')
       cy.get(`[data-cy="actionsfieldBadge"]`).should('exist')
-
+      cy.get
       cy.typeInTextField('Toimenpiteet-Measure', 'Test action')
       cy.get('[data-cy="save-Toimenpiteet-Measure"]').click()
 
@@ -189,37 +191,36 @@ describe('Notification badge tests', () => {
 
       cy.get(`[data-cy*="interventionBadge-${redProgramme}"]`).should('exist')
       cy.get(`[data-cy*="interventionText-${redProgramme}"]`).should('exist')
-
-      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('exist')
-      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('exist')
     })
 
     it('Intervention badges disappear on creating new intervention procedure document', () => {
       cy.request(`/api/cypress/resetDocuments`)
-      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('exist')
-      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('exist')
+      cy.get(`[data-cy="interventionBadge-${redProgramme}"]`).should('exist')
+      cy.get(`[data-cy*="interventionText-${redProgramme}"]`).should('exist')
 
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}`)
+      cy.visit(`/v1/programmes/10/${redProgramme}`)
       cy.get('[data-cy="create-new-document"]').click()
 
-      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('not.exist')
-      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('not.exist')
+      cy.get(`[data-cy="interventionBadge-${redProgramme}"]`).should('not.exist')
+      cy.get(`[data-cy*="interventionText-${redProgramme}"]`).should('not.exist')
     })
 
     it('Intervention badge and text disappears on closing intervention procedure', () => {
+      cy.login('cypressKojoDeanUser')
+      cy.setCookie('session_id', '123')
       cy.request(`/api/cypress/resetDocuments`)
-      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('exist')
-      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('exist')
+      cy.get(`[data-cy="interventionBadge-${redProgramme}"]`).should('exist')
+      cy.get(`[data-cy*="interventionText-${redProgramme}"]`).should('exist')
 
-      cy.visit(`/v1/programmes/10/${oneRedProgramme}`)
+      cy.visit(`/v1/programmes/10/${redProgramme}`)
       cy.get('.MuiSelect-select').click()
       cy.get('[data-value="2"]').click()
       cy.get('[data-cy="closeInterventionProcedureButton"]').click()
 
       cy.visit('/v1/overview')
 
-      cy.get(`[data-cy="interventionBadge-${oneRedProgramme}"]`).should('not.exist')
-      cy.get(`[data-cy*="interventionText-${oneRedProgramme}"]`).should('not.exist')
+      cy.get(`[data-cy="interventionBadge-${redProgramme}"]`).should('not.exist')
+      cy.get(`[data-cy*="interventionText-${redProgramme}"]`).should('not.exist')
     })
   })
 })

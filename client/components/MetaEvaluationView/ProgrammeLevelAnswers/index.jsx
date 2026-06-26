@@ -3,7 +3,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Loader, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
+import { Button, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
 import {
   modifiedQuestions,
@@ -16,9 +16,9 @@ import { setQuestions } from '../../../redux/filterReducer'
 import WrittenAnswers from '../../ReportPage/WrittenAnswers'
 import { formKeys } from '../../../../config/data'
 import useDebounce from '../../../util/useDebounce'
-import { basePath } from '../../../../config/common'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 import DegreeDropdown from '../ProgrammeLevelOverview/DegreeDropdown'
+import { CircularProgress } from '@mui/material'
 
 const doctoralBasedFilter = (doctoral, items, attribute) => {
   return doctoral
@@ -45,7 +45,7 @@ const ProgrammeLevelAnswers = () => {
   const filteredQuestions = doctoralBasedFilter(isDoctoral, questionsList, 'id')
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
-  const baseUrl = `${basePath}meta-evaluation/answers`
+  const baseUrl = `/meta-evaluation/answers`
   const questionLabels = filteredQuestions.map(q => getLabel(q))
 
   const filterState = useMemo(() => {
@@ -65,7 +65,7 @@ const ProgrammeLevelAnswers = () => {
     dispatch(getAllTempAnswersAction())
   }, [lang, t, dispatch, isDoctoral])
 
-  if (!answers.data || !usersProgrammes || usersProgrammes.length === 0) return <Loader active />
+  if (!answers.data || !usersProgrammes || usersProgrammes.length === 0) return <CircularProgress />
 
   const filteredProgrammes = filterUserProgrammes(usersProgrammes.filter(filterState), lang, debouncedFilter)
 

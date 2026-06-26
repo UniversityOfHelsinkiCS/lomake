@@ -6,6 +6,7 @@ describe('QualityForm tests', () => {
   beforeEach(() => {
     cy.request(`/api/cypress/initKeyData`)
     cy.login('klemstro')
+    cy.setCookie('session_id', '123')
     cy.visit(`/v1/programmes/10/KH50_005`)
   })
 
@@ -176,6 +177,7 @@ describe('QualityForm tests', () => {
     cy.get('[data-cy="accordion-0-edit-qualitydocument-button"]').click()
 
     cy.login('cypressReadingRightsUser')
+    cy.setCookie('session_id', '123')
     cy.visit(`/v1/programmes/10/KH50_005`)
     cy.get('[data-cy="accordion-0-quality-document"]')
       .closest('.MuiAccordion-root')
@@ -188,6 +190,7 @@ describe('QualityForm tests', () => {
     )
 
     cy.login('klemstro')
+    cy.setCookie('session_id', '123')
     cy.visit(`/v1/programmes/10/KH50_005`)
     cy.get('[data-cy="accordion-0-quality-document"]').click()
     cy.get('[data-cy="accordion-0-edit-qualitydocument-button"]').click()
@@ -197,6 +200,7 @@ describe('QualityForm tests', () => {
     cy.wait('@deleteLock', { timeout: 10000 })
 
     cy.login('cypressUser')
+    cy.setCookie('session_id', '123')
     cy.visit(`/v1/programmes/10/KH50_005`)
     cy.get('[data-cy="accordion-0-quality-document"]')
       .closest('.MuiAccordion-root')

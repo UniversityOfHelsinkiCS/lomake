@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 import { formKeys } from '../../../../config/data'
-
 import Textarea from '../../Generic/Textarea'
 import Entity from '../../Generic/Entity'
 import EntityLevels from '../../Generic/EntityLevels'

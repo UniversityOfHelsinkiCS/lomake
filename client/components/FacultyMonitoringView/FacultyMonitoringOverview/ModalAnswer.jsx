@@ -73,7 +73,7 @@ const ModalAnswer = ({ question, faculty }) => {
             <div className="single-row" key={fieldName}>
               <div>
                 <i>{t(`formView:${labels[fieldName]}`)}</i>
-                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] ?? t('formView:noAnswer')}</p>
+                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
               </div>
             </div>
           )
@@ -87,7 +87,7 @@ const ModalAnswer = ({ question, faculty }) => {
             return (
               <div className="flex-item" key={fieldName}>
                 <i>{t(`formView:${labels[fieldName]}`)}</i>
-                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] ?? t('formView:noAnswer')}</p>
+                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
               </div>
             )
           })}

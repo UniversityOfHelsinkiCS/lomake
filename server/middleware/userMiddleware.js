@@ -3,7 +3,6 @@ import getUserByUid from '../services/userService.js'
 import User from '../models/user.js'
 
 const userMiddleware = async (req, res, next) => {
-  if (req.path.includes('socket.io')) return next()
   if (req.path.includes('/cypress/')) return next()
   if (!req.headers.uid) {
     logger.error('missing uid')

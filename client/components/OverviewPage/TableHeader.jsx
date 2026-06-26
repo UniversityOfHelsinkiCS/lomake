@@ -1,5 +1,6 @@
-import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import SwapVertIcon from '@mui/icons-material/SwapVert'
+import { Tooltip } from '@mui/material'
 
 const StudyLevelHeader = () => {
   // If overview shows study level (bachelor, master, doctoral) then this is needed
@@ -9,7 +10,6 @@ const StudyLevelHeader = () => {
     </div>
   )
 }
-
 const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) => {
   const { t } = useTranslation()
 
@@ -18,13 +18,13 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) =>
       <div className="sticky-header">
         <div className="sorter" onClick={() => sort('name')}>
           {title ?? t('programmeHeader')}
-          <Icon name="sort" />
+          <SwapVertIcon fontSize="small" />
         </div>
       </div>
       <div className="sticky-header">
         <div className="sorter" onClick={() => sort('key')}>
           {t('code')}
-          <Icon name="sort" />
+          <SwapVertIcon fontSize="small" />
         </div>
       </div>
       {showStudyLevel ? <StudyLevelHeader showStudyLevel={showStudyLevel} /> : null}
@@ -36,12 +36,11 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) =>
           if (shortLabel.startsWith('T')) shortLabel = shortLabel.substring(1)
           if (label.startsWith('T')) label = label.substring(1)
         }
-
         return (
           <div className={meta ? 'sticky-header-meta' : 'sticky-header-categories'} key={idObject.id}>
-            <Popup position="top center" trigger={<span className="vertical-text">{shortLabel}</span>}>
-              {label}
-            </Popup>
+            <Tooltip position="top center" title={label}>
+              <span className="vertical-text">{shortLabel}</span>
+            </Tooltip>
           </div>
         )
       })}

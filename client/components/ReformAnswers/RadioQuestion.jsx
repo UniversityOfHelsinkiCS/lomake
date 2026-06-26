@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Table } from 'semantic-ui-react'
+import { Table, TableHead, TableCell, TableRow, TableBody } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { degreeReformBackgroundColor, reversedPointsInDegreeReform } from '../../util/common'
 
@@ -107,23 +107,23 @@ const Question = ({ question, answers }) => {
     <div style={{ marginTop: 20, marginLeft: 20 }}>
       <h4>{label[lang]}</h4>
       <Table celled>
-        <Table.Header>
-          <Table.Row>
+        <TableHead>
+          <TableRow>
             {headerLables.map(label => (
-              <Table.HeaderCell key={label}>{label}</Table.HeaderCell>
+              <TableCell key={label}>{label}</TableCell>
             ))}
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          <Table.Row>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
             {headerLables.map((_, i) => (
               // eslint-disable-next-line react/no-array-index-key
-              <Table.Cell key={i} style={cellColor(i, values[keys[i]], question)}>
+              <TableCell key={i} style={cellColor(i, values[keys[i]], question)}>
                 {values[keys[i]]}
-              </Table.Cell>
+              </TableCell>
             ))}
-          </Table.Row>
-        </Table.Body>
+          </TableRow>
+        </TableBody>
       </Table>
     </div>
   )

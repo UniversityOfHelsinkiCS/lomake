@@ -2,7 +2,6 @@
 /* eslint-disable react/function-component-definition */
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { wsLeaveRoom } from '../../../redux/websocketReducer.js'
 import { setViewOnly } from '../../../redux/formReducer'
 import { GroupKey, ProgrammeLevel } from '../../../lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
@@ -29,14 +28,11 @@ interface DataModalProps {
 }
 
 export default function KeyDataModalComponent({ data, open, setOpen }: DataModalProps) {
-  const form = 10
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const lang = useAppSelector(state => state.language) as 'fi' | 'se' | 'en'
 
   const year = `${data?.programme.year + 1}`
-  const currentRoom = useAppSelector(state => state.room)
-
   const [programme, setProgramme] = useState<KeyDataProgramme | null>(null)
   const [metadata, setMetadata] = useState<KeyDataMetadata[] | null>(null)
   const [content, setContent] = useState<KeyDataCardData | null>(null)
@@ -51,9 +47,6 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
 
     // Make sure the modal is always view only
     dispatch(setViewOnly(true))
-    if (currentRoom) {
-      dispatch(wsLeaveRoom(form))
-    }
 
     const { programme, metadata } = data
 

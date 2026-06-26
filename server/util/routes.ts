@@ -12,7 +12,6 @@ import keyData from '../controllers/keyDataController.js'
 import documents from '../controllers/documentsController.js'
 import qualityDocuments from '../controllers/qualityDocumentsController.js'
 import interventionProcedures from '../controllers/interventionProceduresController.js'
-
 import {
   checkAdmin,
   requireProgrammeRead,
@@ -32,9 +31,6 @@ const router = Router()
 router.get('/login', users.getCurrentUser) // IAM-middleware checks this path
 router.post('/logout', users.getLogoutUrl)
 
-router.post('/lock/:room', async (req, res) => {
-  await locks.getLock(req, res)
-})
 router.get('/lock/:room', async (req, res) => {
   await locks.fetchLocks(req, res)
 })
@@ -51,13 +47,11 @@ router.get('/reform/university/:dropdownFilter', requireUniFormRight, degreeRefo
 
 router.get('/answers', requireProgrammeRead || requireFacultyRead || requireEmployee, answers.getAll)
 router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
-router.get('/answers/temp/:form/:year', requireEmployee, answers.getFacultyTempAnswersAfterDeadline)
 router.get('/answers/temp/:form', requireEmployee, answers.getFacultyTempAnswersByForm)
+router.get('/answers/temp/:form/:year', requireEmployee, answers.getFacultyTempAnswersAfterDeadline)
 router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answers.getSingleProgrammesAnswers)
 router.get('/answers/degreeReform/currentAnswer', requireEmployee, answers.getIndividualFormAnswerForUser)
 router.get('/answers/degreeReform/getAllAnswersForUser', requireEmployee, answers.getAllIndividualAnswersForUser)
-router.put('/answers/:form/:programme/:year/updateAnswersReady', requireProgrammeWrite, answers.updateAnswerReady)
-router.put('/answers/individual/:uid/updateReady', requireProgrammeWrite, answers.updateIndividualReady)
 router.get('/answers/foruser', requireEmployee, answers.getAllUserHasAccessTo)
 router.get('/answers/foruser/all', requireEmployee, answers.getAllUserHasAccessTo)
 router.get('/answers/committeeSummary/:code/:lang', requireEmployee, answers.getCommitteeSummaryData)
@@ -70,8 +64,6 @@ router.get(
   answers.getEvaluationSummaryDataForFaculty
 )
 router.get('/answers/:form/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
-router.post('/answers/degreeReform/individualAnswer', requireProgrammeWrite, answers.postIndividualFormAnswer)
-router.post('/answers/degreeReform/individualAnswer/partial', requireEmployee, answers.postIndividualFormPartialAnswer)
 router.get('/answers/committee/FIN/:year', requireEmployee, answers.getDataFromFinnishUniForm)
 
 router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)

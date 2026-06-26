@@ -23,7 +23,7 @@ import getUserList from './scripts/getUserList.js'
 import createTempAnswers from './scripts/createTempAnswers.js'
 import routes from './util/routes.js'
 import initializeSentry from './util/sentry.js'
-import createWebsocketServer from './websocket.js'
+
 import { initializeDatabaseConnection } from './database/connection.js'
 import { testJami } from './util/jami.js'
 import { checkEmployeeOrStudent } from './middleware/accessControlMiddleware.js'
@@ -38,7 +38,6 @@ const app = express()
 
 const server = new http.Server(app)
 
-createWebsocketServer(server)
 initializeSentry()
 
 // eslint-disable-next-line import-x/no-named-as-default-member

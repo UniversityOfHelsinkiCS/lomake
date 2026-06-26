@@ -6,45 +6,8 @@ import '../support/commands'
 describe('Form Notification tests', () => {
   // Cypress.stop()
   // return
-  it('Save message is shown by default', () => {
-    cy.login('cypressUser')
-    cy.visit('/yearly')
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=saving-answers-notice]')
-  })
 
-  it('After being locked by admin, message matches the state', () => {
-    cy.login('cypressUser')
-    cy.visit('/yearly')
-    // check page ready
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
-    cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
-    cy.get(`[data-cy=formLocker-button-close]`).click()
-    cy.get(`[data-cy=formLocker-verify-close-button]`).click({ waitForAnimations: false })
-
-    cy.login('cypressUser')
-    cy.visit('/yearly')
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=locked-form-notice]')
-  })
-
-  it('After Toska locks all forms, message matches the state', () => {
-    cy.login('cypressToskaUser')
-    cy.visit('/yearly')
-    // check page ready
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
-
-    // Delete pre-set deadline
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
-
-    cy.get('[data-cy=draft-year-selector]').click()
-    cy.get(`[data-cy=draft-year-${defaultYears[0]}]`).click()
-    cy.get('[data-cy=form-selector]').click()
-    cy.get(`[data-cy=form-yearlyAssessment-1]`).click()
-    cy.get('[data-cy=deleteDeadline]').click()
-    cy.get('[data-cy=form-1-deadline]').should('not.exist')
-
+  it('After deadline is locked, correct message is sent', () => {
     cy.login('cypressUser')
     cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()

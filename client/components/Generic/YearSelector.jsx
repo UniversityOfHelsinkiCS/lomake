@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { formKeys } from '../../../config/data'
 
 import { setYear, setMultipleYears } from '../../redux/filterReducer'
-import { setViewOnly, setViewingOldAnswers } from '../../redux/formReducer'
+import { setViewingOldAnswers } from '../../redux/formReducer'
 import { getYearsUserHasAccessToAction } from '../../redux/currentUserReducer'
 import './Generic.scss'
 
@@ -18,18 +18,11 @@ export default function YearSelector({ multiple, size, label }) {
   const currentUser = useSelector(state => state.currentUser.data)
   const year = useSelector(({ filters }) => filters.year)
   const form = useSelector(({ filters }) => filters.form)
-  const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
   const [yearOptions, setYearOptions] = useState([])
 
   const handleYearChange = (_, { value }) => {
-    if (!draftYear || (draftYear && draftYear.year !== value)) {
-      dispatch(setViewOnly(true))
-      dispatch(setViewingOldAnswers(true))
-    } else {
-      dispatch(setViewOnly(false))
-      dispatch(setViewingOldAnswers(false))
-    }
+    dispatch(setViewingOldAnswers(true))
     dispatch(setYear(value))
   }
 

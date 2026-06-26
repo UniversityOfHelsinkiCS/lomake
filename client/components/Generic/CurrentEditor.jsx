@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Icon } from 'semantic-ui-react'
+import EditIcon from '@mui/icons-material/Edit'
 import { useTranslation } from 'react-i18next'
 import { Typography } from '@mui/material'
 
@@ -17,7 +17,7 @@ export default ({ fieldName }) => {
   return (
     <Typography style={{ color: colors.blue, marginLeft: '1em' }} variant="italic">
       {`${currentEditors[fieldName].lastname}, ${currentEditors[fieldName].firstname} ${t('generic:isWriting')}`}
-      <Icon name="pencil" style={{ marginLeft: '5px' }} />
+      <EditIcon sx={{ marginLeft: '5px' }} />
     </Typography>
   )
 }

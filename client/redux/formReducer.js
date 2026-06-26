@@ -17,18 +17,6 @@ export const updateFormFieldExp = (field, value, form) => ({
   form,
 })
 
-// not used anymore
-export const getLock = field => ({
-  type: 'GET_LOCK',
-  field,
-})
-
-export const getLockHttp = (field, room) => {
-  const route = `/lock/${room}`
-  const prefix = 'POST_GET_LOCK'
-  return callBuilder(route, prefix, 'POST', { field })
-}
-
 export const setViewOnly = value => ({
   type: 'SET_VIEW_ONLY',
   value,
@@ -51,18 +39,6 @@ export const getSingleUsersAnswers = () => {
   return callBuilder(route, prefix)
 }
 
-export const postIndividualFormAnswer = data => {
-  const route = '/answers/degreeReform/individualAnswer'
-  const prefix = 'POST_USER_ANSWER'
-  return callBuilder(route, prefix, 'POST', { data })
-}
-
-export const postIndividualFormPartialAnswer = data => {
-  const route = '/answers/degreeReform/individualAnswer/partial'
-  const prefix = 'POST_USER_PARTIAL_ANSWER'
-  return callBuilder(route, prefix, 'POST', { data })
-}
-
 export const getAllIndividualAnswersForUser = () => {
   const route = '/answers/degreeReform/getAllAnswersForUser'
   const prefix = 'GET_ALL_INDIVIDUAL_ANSWERS_FOR_USER'
@@ -78,18 +54,6 @@ export const clearFormState = () => ({
   type: 'CLEAR_FORM_STATE',
 })
 
-export const updateAnswersReady = ({ room, year, form, ready }) => {
-  const route = `/answers/${form}/${room}/${year}/updateAnswersReady`
-  const prefix = 'UPDATE_ANSWERS_READY'
-  return callBuilder(route, prefix, 'put', { ready })
-}
-
-export const updateIndividualReady = ({ uid, ready }) => {
-  const route = `/answers/individual/${uid}/updateReady`
-  const prefix = 'UPDATE_INDIVIDUAL_READY'
-  return callBuilder(route, prefix, 'put', { ready })
-}
-
 export const getCommitteeAnswers = ({ year }) => {
   const route = `/answers/committee/FIN/${year}`
   const prefix = 'GET_COMMITTEE_ANSWERS'
@@ -99,7 +63,7 @@ export const getCommitteeAnswers = ({ year }) => {
 const initialState = {
   data: {},
   viewOnly: false,
-  viewingOldAnswers: false,
+  viewingOldAnswers: true,
   lastSaveAttempt: new Date().toISOString(),
   lastSaveSuccess: new Date().toISOString(),
   oldIndividualAnswers: [],
@@ -110,7 +74,6 @@ const initialState = {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
-
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_FORM_FIELD':
@@ -132,13 +95,6 @@ export default (state = initialState, action) => {
           [action.field]: action.value,
         },
         form: action.form,
-      }
-    case 'SAVE_FORM_SUCCESS':
-      return {
-        ...state,
-        data: action.response,
-        pending: false,
-        error: false,
       }
     case 'GET_FORM_SUCCESS':
       // eslint-disable-next-line no-case-declarations
@@ -176,12 +132,6 @@ export default (state = initialState, action) => {
         ...state,
         viewingOldAnswers: action.value,
       }
-    case 'UPDATE_CURRENT_EDITORS': {
-      return {
-        ...state,
-        lastSaveSuccess: new Date().toISOString(),
-      }
-    }
     case 'SET_ANSWER_LEVELS': {
       return {
         ...state,
@@ -199,44 +149,6 @@ export default (state = initialState, action) => {
         ...initialState,
         pending: state.pending,
         error: state.error,
-      }
-    }
-    case 'POST_USER_ANSWER_ATTEMPT': {
-      return {
-        ...state,
-        pending: true,
-      }
-    }
-    case 'POST_USER_ANSWER_SUCCESS': {
-      return {
-        ...initialState,
-        pending: false,
-        error: false,
-      }
-    }
-    case 'POST_USER_PARTIAL_ANSWER_FAILURE': {
-      return {
-        ...state,
-        pending: state.pending,
-        error: true,
-      }
-    }
-    case 'POST_USER_PARTIAL_ANSWER_SUCCESS': {
-      return {
-        ...state,
-        lastSaveSuccess: new Date().toISOString(),
-      }
-    }
-    case 'UPDATE_ANSWERS_READY_SUCCESS': {
-      return {
-        ...state,
-        ready: Boolean(action.response.ready),
-      }
-    }
-    case 'UPDATE_INDIVIDUAL_READY_SUCCESS': {
-      return {
-        ...state,
-        ready: Boolean(action.response.ready),
       }
     }
     case 'GET_COMMITTEE_ANSWERS_ATTEMPT': {

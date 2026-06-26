@@ -154,10 +154,6 @@ const ProgrammeYearlyView = () => {
   useEffect(() => {
     const tabParam = searchParams.get('tab')
     setActiveTab(parseInt(tabParam ?? '0') || 0)
-
-    return () => {
-      //dispatch(wsLeaveRoom(form))
-    }
   }, [])
 
   useEffect(() => {

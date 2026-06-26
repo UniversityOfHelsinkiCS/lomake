@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router'
-import { Button, Dropdown, Menu, MenuItem, Loader } from 'semantic-ui-react'
+import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
+import CircularProgress from '@mui/material/CircularProgress'
 import { filterFromUrl, filterUserProgrammes } from '../../../util/common'
 import useDebounce from '../../../util/useDebounce'
 
@@ -85,7 +86,7 @@ const MetaOverview = ({
     return null
   }
 
-  if (programmes.length < 1) <Loader active />
+  if (programmes.length < 1) <CircularProgress />
 
   return (
     <>
@@ -100,7 +101,7 @@ const MetaOverview = ({
             data-cy="nav-report"
             secondary
             size="big"
-            to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
+            to={filter ? `/meta-evaluation/answers?filter=${filter}` : '/meta-evaluation/answers'}
           >
             {t('overview:readAnswers')}
           </Button>

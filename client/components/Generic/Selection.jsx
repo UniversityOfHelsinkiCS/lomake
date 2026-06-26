@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Checkbox, Divider } from 'semantic-ui-react'
+import { Checkbox } from 'semantic-ui-react'
+import Divider from '@mui/material/Divider'
 import { useTranslation } from 'react-i18next'
 import { colors } from '../../util/common'
 import { updateFormField } from '../../redux/formReducer'
@@ -10,7 +11,7 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
   const { t } = useTranslation()
   const fieldNameOptions = `${id}_selection`
   const fieldNameText = `${id}_text`
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const viewOnly = true
 
   const values = useSelector(({ form }) => form.data[fieldNameOptions])
   const selections = values ? JSON.parse(values) : null

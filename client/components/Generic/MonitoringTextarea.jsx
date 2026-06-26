@@ -9,7 +9,7 @@ const MonitoringTextarea = ({ label, id, form, className = 'input', maxLength })
   const fieldName = `${id}_text`
   const handleChange = ({ target }) => dispatch(updateFormField(target.id, target.value, form))
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] ?? '')
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const viewOnly = true
   const [editorState, setEditorState] = useState(dataFromRedux)
 
   useEffect(() => {

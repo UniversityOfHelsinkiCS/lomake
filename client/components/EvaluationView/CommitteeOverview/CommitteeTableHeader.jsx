@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { Header } from 'semantic-ui-react'
+import { Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 const CommitteeTableHeader = ({ tableIds }) => {
@@ -9,17 +9,17 @@ const CommitteeTableHeader = ({ tableIds }) => {
     <>
       <div className={`committee-table-header-${gridColumnSize}-left-padding`} />
       <div className={`committee-table-header-${gridColumnSize}-university`}>
-        <Header block style={{ minHeight: '5em', height: 'max-content' }}>
+        <Typography block style={{ minHeight: '5em', height: 'max-content' }}>
           {' '}
           {t('overview:uniTableHeaderHY')}
-        </Header>
+        </Typography>
       </div>
       <div className={`committee-table-header-${gridColumnSize}-gap`} />
       <div className={`committee-table-header-${gridColumnSize}-committee`}>
-        <Header block style={{ minHeight: '5em', height: 'max-content' }}>
+        <Typography sx={{ minHeight: '5em', height: 'max-content' }}>
           {' '}
           {t('overview:uniTableHeaderCommittee')}
-        </Header>
+        </Typography>
       </div>
       <div className="sticky-header" />
       {tableIds.map((upperLevel, index) => (

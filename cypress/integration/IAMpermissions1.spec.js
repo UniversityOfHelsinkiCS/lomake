@@ -48,16 +48,6 @@ describe('IAM permission tests', () => {
     cy.hasSpecialGroups('cypressDoctoralUser', 'All doctoral programmes')
   })
 
-  it('Doctoral writing user has writing rights to all doctoral programmes', () => {
-    cy.login('cypressDoctoralWritingUser')
-    cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
-
-    cy.hasAccess('cypressDoctoralWritingUser', 'T920103', { read: true, write: true, admin: false })
-
-    cy.hasSpecialGroups('cypressDoctoralWritingUser', 'All doctoral programmes')
-  })
-
   it('Psyk and logo groups grant access to two programmes', () => {
     ;['cypressPsykoUser', 'cypressLogoUser'].forEach(user => {
       cy.login(user)
@@ -82,15 +72,6 @@ describe('IAM permission tests', () => {
     cy.hasSpecialGroups('cypressTheologyFacultyUser', 'All programmes')
   })
 
-  it('Kosu user gets wide writing access', () => {
-    cy.login('cypressKosuUser')
-    cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 148)
-
-    cy.hasAccess('cypressKosuUser', 'KH57_001', { read: true, write: true, admin: false })
-    cy.hasAccess('cypressKosuUser', 'MH80_003', { read: true, write: true, admin: false })
-  })
-
   /* Special cases with multiple rights groups */
   it('Dean who is also a kojo gets reading rights to all programmes and admin rights to one programme', () => {
     cy.login('cypressKojoDeanUser')
@@ -99,13 +80,5 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKojoDeanUser', 'MH50_001', { read: true, write: true, admin: true })
     cy.hasAccess('cypressKojoDeanUser', 'KH50_001', { read: true, write: false, admin: false })
-  })
-
-  it('Kosu who is also a jory-member gets writing rights to all programmes', () => {
-    cy.login('cypressKosuJoryUser')
-    cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 148)
-    cy.hasAccess('cypressKosuJoryUser', 'MH50_002', { read: true, write: true, admin: false })
-    cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: true, admin: false })
   })
 })

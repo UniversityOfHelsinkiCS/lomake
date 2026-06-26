@@ -2,20 +2,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button } from 'semantic-ui-react'
+import { IconButton } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
-import { Link, Navigate, useNavigate, useParams } from 'react-router'
+import { Navigate, useNavigate, useParams } from 'react-router'
 import StatusMessage from '../../FormView/StatusMessage'
-import SaveIndicator from '../../FormView/SaveIndicator'
-
 import { hasSomeReadAccess, isAdmin } from '../../../../config/common'
-import { colors, getFormViewRights, getYearToShow } from '../../../util/common'
+import { colors, getYearToShow } from '../../../util/common'
 import { getProgramme } from '../../../redux/studyProgrammesReducer'
 import NoPermissions from '../../Generic/NoPermissions'
 import NavigationSidebar from '../../FormView/NavigationSidebar'
 import bigWheel from '../../../assets/big_wheel.jpg'
-import { wsJoinRoom, wsLeaveRoom } from '../../../redux/websocketReducer'
-import { setViewOnly, getSingleProgrammesAnswers } from '../../../redux/formReducer'
+import { getSingleProgrammesAnswers } from '../../../redux/formReducer'
 import DegreeReformForm from './ProgramForm'
 
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
@@ -27,25 +25,12 @@ const DegreeReformFormView = () => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
-
   const form = 2
-
   const allProgrammes = useSelector(state => state.studyProgrammes.data)
   const programme = Object.values(allProgrammes).find(p => p.key === room)
-  const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
-
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const currentRoom = useSelector(state => state.room)
-
-  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
-
   const year = getYearToShow({ draftYear, nextDeadline, form })
-
-  const writeAccess = user.access[room]?.write || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
-  const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
-  const viewingOldAnswers = false
-
   const questionDataFiltered = questionData.filter(q => q.id !== 0)
 
   useEffect(() => {
@@ -56,39 +41,11 @@ const DegreeReformFormView = () => {
   useEffect(() => {
     if (!programme || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
-    const hasRights = getFormViewRights({
-      accessToTempAnswers,
-      programme,
-      writeAccess,
-      viewingOldAnswers,
-      draftYear,
-      year,
-      formDeadline,
-      form,
-    })
-    if (hasRights) {
-      dispatch(setViewOnly(true))
-      if (currentRoom) dispatch(wsLeaveRoom(room))
-    } else {
-      dispatch(wsJoinRoom(room, form))
-      dispatch(setViewOnly(false))
-    }
-  }, [
-    programme,
-    singleProgramPending,
-    writeAccess,
-    viewingOldAnswers,
-    year,
-    draftYear,
-    accessToTempAnswers,
-    readAccess,
-    room,
-    user,
-  ])
+  }, [programme, form, year, readAccess, room, user])
 
   if (!room) return <Navigate to="/" />
 
-  if (!readAccess && !writeAccess) return <NoPermissions requestedForm={t('degree-reform')} t={t} />
+  if (!readAccess) return <NoPermissions requestedForm={t('degree-reform')} t={t} />
 
   const formType = 'degree-reform'
   return (
@@ -98,7 +55,9 @@ const DegreeReformFormView = () => {
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <div style={{ marginBottom: '2em' }}>
-              <Button as={Link} icon="arrow left" onClick={() => navigate('/degree-reform')} />
+              <IconButton onClick={() => navigate('/degree-reform')} sx={{ marginRight: 2 }}>
+                <ArrowBack data-cy="back-button" />
+              </IconButton>
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>
@@ -106,8 +65,7 @@ const DegreeReformFormView = () => {
           <h3 data-cy="formview-title" style={{ marginTop: '0' }}>
             {t('degree-reform')}
           </h3>
-          <StatusMessage form={form} writeAccess={writeAccess} />
-          <SaveIndicator />
+          <StatusMessage />
         </div>
         <DegreeReformForm formType={formType} programmeKey={programme.key} questionData={questionDataFiltered} />
         <div style={{ height: '10em' }} />

@@ -1,4 +1,4 @@
-import { Menu } from 'semantic-ui-react'
+import { MenuList, MenuItem } from '@mui/material'
 import { useSelector } from 'react-redux'
 import CompanionFilter from '../Generic/CompanionFilter'
 import DoctoralSchoolFilter from '../Generic/DoctoralSchoolFilter'
@@ -56,14 +56,14 @@ const FilterTray = ({ filter, setFilter }) => {
       {form !== formKeys.EVALUATION_FACULTIES && form !== formKeys.FACULTY_MONITORING && (
         <FacultyFilter label={t('report:facultyFilter')} size="large" />
       )}
-      <Menu secondary>
-        <Menu.Item>{getLevelFilter({ filters })}</Menu.Item>
-      </Menu>
-      <Menu secondary>
-        <Menu.Item>{getProgrammeFilter({ form, filter, t, handleSearch, setFilter })}</Menu.Item>
-        <Menu.Item>{getDoctoralSchoolFilter({ faculty, level })}</Menu.Item>
-        <Menu.Item>{getCompanionFilter({ faculty, level })}</Menu.Item>
-      </Menu>
+      <MenuList>
+        <MenuItem>{getLevelFilter({ filters })}</MenuItem>
+      </MenuList>
+      <MenuList>
+        <MenuItem>{getProgrammeFilter({ form, filter, t, handleSearch, setFilter })}</MenuItem>
+        <MenuItem>{getDoctoralSchoolFilter({ faculty, level })}</MenuItem>
+        <MenuItem>{getCompanionFilter({ faculty, level })}</MenuItem>
+      </MenuList>
     </>
   )
 }

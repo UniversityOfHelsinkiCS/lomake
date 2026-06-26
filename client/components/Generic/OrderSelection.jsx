@@ -8,7 +8,7 @@ import { updateFormField } from '../../redux/formReducer'
 const OrderSelection = ({ id, label, description, extrainfo, lang, options, form }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const viewOnly = true
   const values = useSelector(({ form }) => form.data.used_systems_selection)
   const selections = values ? JSON.parse(values) : null
   const otherText = useSelector(({ form }) => form.data.used_systems_text) ?? ''
