@@ -16,7 +16,6 @@ import { setQuestions } from '../../../redux/filterReducer'
 import WrittenAnswers from '../../ReportPage/WrittenAnswers'
 import { formKeys } from '../../../../config/data'
 import useDebounce from '../../../util/useDebounce'
-import { basePath } from '../../../../config/common'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 import DegreeDropdown from '../ProgrammeLevelOverview/DegreeDropdown'
 import { CircularProgress } from '@mui/material'
@@ -46,7 +45,7 @@ const ProgrammeLevelAnswers = () => {
   const filteredQuestions = doctoralBasedFilter(isDoctoral, questionsList, 'id')
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
-  const baseUrl = `${basePath}meta-evaluation/answers`
+  const baseUrl = `/meta-evaluation/answers`
   const questionLabels = filteredQuestions.map(q => getLabel(q))
 
   const filterState = useMemo(() => {

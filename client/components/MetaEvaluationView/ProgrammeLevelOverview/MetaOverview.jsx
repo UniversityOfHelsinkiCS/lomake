@@ -101,7 +101,7 @@ const MetaOverview = ({
             data-cy="nav-report"
             secondary
             size="big"
-            to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
+            to={filter ? `/meta-evaluation/answers?filter=${filter}` : '/meta-evaluation/answers'}
           >
             {t('overview:readAnswers')}
           </Button>

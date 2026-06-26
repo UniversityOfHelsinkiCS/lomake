@@ -191,7 +191,7 @@ const FacultyFormView = () => {
             <div className="form-instructions">
               <div className="hide-in-print-mode">
                 <div style={{ marginBottom: '2em' }}>
-                  <IconButton onClick={() => navigate(`/evaluation-faculty}`)} sx={{ marginRight: 2 }}>
+                  <IconButton onClick={() => navigate(`/evaluation-faculty`)} sx={{ marginRight: 2 }}>
                     <ArrowBack data-cy="back-button" />
                   </IconButton>
                 </div>

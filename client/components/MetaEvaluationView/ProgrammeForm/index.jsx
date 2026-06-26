@@ -56,7 +56,7 @@ const ProgrammeLevelForm = () => {
       <div className="the-form">
         <div className="hide-in-print-mode">
           <div style={{ marginBottom: '2em' }}>
-            <IconButton onClick={() => navigate(`/meta-evaluation}`)} sx={{ marginRight: 2 }}>
+            <IconButton onClick={() => navigate(`/meta-evaluation`)} sx={{ marginRight: 2 }}>
               <ArrowBack data-cy="back-button" />
             </IconButton>
           </div>
