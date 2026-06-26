@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import Alert from '@mui/material/Alert'
 import { useTranslation } from 'react-i18next'
 
@@ -8,7 +9,7 @@ const StatusMessage = () => {
   if (!deadlineObj)
     return (
       <Alert data-cy="deadline-passed-notice" severity="info">
-        {`${t('formView:status:deadlinePassed')}`}
+        <Typography variant="h3">{t('formView:status:deadlinePassed')}</Typography>
       </Alert>
     )
 
