@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next'
 import rypsiImage from '../../assets/rypsi.jpg'
 import NoPermissions from '../Generic/NoPermissions'
 import YearSelector from '../Generic/YearSelector'
-import FormStatusMessage from '../Generic/FormStatusMessage'
 import { getProgramme } from '../../redux/studyProgrammesReducer'
 import { getSingleProgrammesAnswers } from '../../redux/formReducer'
 import { colors } from '../../util/common'
@@ -62,7 +61,6 @@ const FormView = () => {
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
       <div className="the-form" ref={componentRef}>
-        <FormStatusMessage form={form} programme={room} />
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <div style={{ marginBottom: '2em' }}>
