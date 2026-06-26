@@ -32,6 +32,7 @@ const Accordion = ({ previousYearsAnswers, previousAnswerColor, previousAnswerTe
 const Textarea = ({
   id,
   previousYearsAnswers,
+  label,
   previousAnswerText,
   previousAnswerColor,
   summaryData,
@@ -80,6 +81,20 @@ const Textarea = ({
           alignItems: 'flex-end',
         }}
       >
+        {label ? (
+          <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth: '50%' }}>
+            <label
+              style={{
+                fontStyle: 'bolder',
+                minWidth: '50%',
+                height: 'auto',
+                paddingRight: '3em',
+              }}
+            >
+              {label}
+            </label>
+          </div>
+        ) : null}
         <Accordion
           id={id}
           previousAnswerColor={previousAnswerColor}
