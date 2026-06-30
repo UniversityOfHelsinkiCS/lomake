@@ -58,12 +58,12 @@ if [ ! -f "${BACKUPS}${FILE_NAME}" ]; then
 fi
 
 echo "Removing database and related volume"
-docker-compose -f $DOCKER_COMPOSE down -v
+docker compose -f $DOCKER_COMPOSE down -v
 
 echo "Starting postgres in the background"
-docker-compose -f $DOCKER_COMPOSE up -d $SERVICE_NAME
+docker compose -f $DOCKER_COMPOSE up -d $SERVICE_NAME
 
-retry docker-compose -f $DOCKER_COMPOSE exec $SERVICE_NAME pg_isready --dbname=$DB_NAME
+retry docker compose -f $DOCKER_COMPOSE exec $SERVICE_NAME pg_isready --dbname=$DB_NAME
 
 echo "Populating ${FOLDER_NAME}"
 docker exec -i $CONTAINER /bin/bash -c "gunzip | psql -U postgres" < ${BACKUPS}${FILE_NAME}
