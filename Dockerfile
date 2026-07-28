@@ -13,7 +13,7 @@ ENV SENTRY_ENVIRONMENT=$SENTRY_ENVIRONMENT
 COPY package* ./
 COPY .npmrc ./
 
-RUN npm ci -f --omit-dev --ignore-scripts --no-audit --no-fund
+RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund
 COPY . .
 
 RUN npm run build
