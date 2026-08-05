@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build project for linting
         run: npm ci
       - name: Run eslint and ts checks
@@ -19,7 +19,7 @@ jobs:
     if: ${{ github.actor != 'renovate[bot]' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build project for translations
         run: npm ci
       - name: Analyse translations
@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with:
           node-version: 24
