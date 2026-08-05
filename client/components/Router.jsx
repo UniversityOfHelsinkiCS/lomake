@@ -16,7 +16,7 @@ import DegreeReformOverview from './DegreeReformView/DegreeReformOverview'
 import PastAnswersView from './EvaluationView/PastAnswersView/ProgrammeLevel'
 import PastAnswersViewFaculty from './EvaluationView/PastAnswersView/FacultyLevel'
 import ViewEvaluationAnswersForFaculty from './EvaluationView/PastAnswersView/EvaluationProgrammeSummary'
-import CommitteeLevelOverview from './EvaluationView/CommitteeOverview'
+import { CommitteeLevelOverview } from './EvaluationView/CommitteeOverview'
 import CommitteePrinting from './EvaluationView/CommitteeOverview/CommitteePrinting'
 
 import FacultyFormView from './EvaluationView/FacultyForm'

@@ -14,7 +14,7 @@ import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
 import CommitteePrinting from './CommitteePrinting'
 
-export default () => {
+export const CommitteeLevelOverview = () => {
   const { t } = useTranslation()
   const printingRefHyBachelorMaster = useRef()
   const printingRefHyDoctoral = useRef()
@@ -34,7 +34,9 @@ export default () => {
   }, [lang])
 
   // all have rights!
-  const hasRights = currentUser => isBasicUser(currentUser) && isEmployee(currentUser)
+  const hasRights = currentUser => {
+    return (isBasicUser(currentUser) && isEmployee(currentUser)) || isAdmin(currentUser)
+  }
   // show faculty overview to those that have access to some programmes in tilannekuvalomake
 
   const usersProgrammes = useMemo(() => {
