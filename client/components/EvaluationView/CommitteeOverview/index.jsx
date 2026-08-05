@@ -13,6 +13,7 @@ import { committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
 import CommitteePrinting from './CommitteePrinting'
+import { FormControlLabel } from '@mui/material'
 
 export const CommitteeLevelOverview = () => {
   const { t } = useTranslation()
@@ -25,7 +26,6 @@ export const CommitteeLevelOverview = () => {
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
-  const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   const form = 6
 
@@ -42,7 +42,7 @@ export const CommitteeLevelOverview = () => {
   const usersProgrammes = useMemo(() => {
     if (!hasRights(currentUser)) return []
     return ['UNI']
-  }, [programmes, currentUser])
+  }, [currentUser])
 
   // This is used for margin on printing
   const pageStyle = `
@@ -97,7 +97,10 @@ export const CommitteeLevelOverview = () => {
           <div className="wide-header-committee">
             <h2>{t('evaluation').toUpperCase()}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', height: '8em', justifyContent: 'space-evenly' }}>
-              <CheckBox label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} />
+              <FormControlLabel
+                control={<CheckBox onClick={() => dispatch(setColorBlindMode())} />}
+                label={t(`overview:colorBlindMode`)}
+              />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {isAdmin(currentUser) ? (

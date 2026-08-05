@@ -16,7 +16,7 @@ import FacultyColorTable from './FacultyColorTable'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import FacultyCellModal from './FacultyCellModal'
 
-export default () => {
+export const FacultyLevelOverview = () => {
   const { t } = useTranslation()
   const [modalData, setModalData] = useState(null)
   const [filter, setFilter] = useState('')
@@ -27,7 +27,7 @@ export default () => {
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
   const faculties = useSelector(({ faculties }) => faculties.data)
-  const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const programmes = useSelector(state => state.studyProgrammes.data)
   const form = formKeys.EVALUATION_FACULTIES
   const formType = 'evaluation'
 

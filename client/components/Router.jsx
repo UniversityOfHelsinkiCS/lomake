@@ -9,7 +9,7 @@ import Page404 from './Generic/Page404'
 
 import ProgrammeLevelOverview from './EvaluationView/ProgrammeLevelOverview'
 import EvaluationFormView from './EvaluationView/EvaluationFormView'
-import FacultyLevelOverview from './EvaluationView/FacultyLevelOverview/index'
+import { FacultyLevelOverview } from './EvaluationView/FacultyLevelOverview/index'
 import DegreeReformFormView from './DegreeReformView/DegreeReformFormView'
 import DegreeReformIndividualForm from './DegreeReformView/DegreeReformFormView/IndividualForm'
 import DegreeReformOverview from './DegreeReformView/DegreeReformOverview'

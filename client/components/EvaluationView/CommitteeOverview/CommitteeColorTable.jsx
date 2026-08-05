@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Typography } from '@mui/material'
@@ -25,12 +24,12 @@ const CommitteeColorTable = React.memo(({ setModalData, form, selectedLevels }) 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
   useEffect(() => {
-    if (nextDeadline) {
+    if (nextDeadline && nextDeadline[0].form !== 10) {
       dispatch(getAllTempAnswersAction())
     } else {
       dispatch(getAnswersActionAll())
     }
-  }, [])
+  }, [nextDeadline, dispatch])
 
   const selectedAnswers = answersByYear({
     year,
