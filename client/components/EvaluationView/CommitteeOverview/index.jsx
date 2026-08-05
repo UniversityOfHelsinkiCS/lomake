@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { CheckBox } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -13,7 +12,7 @@ import { committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
 import CommitteePrinting from './CommitteePrinting'
-import { FormControlLabel } from '@mui/material'
+import { FormControlLabel, Checkbox } from '@mui/material'
 
 export const CommitteeLevelOverview = () => {
   const { t } = useTranslation()
@@ -98,7 +97,7 @@ export const CommitteeLevelOverview = () => {
             <h2>{t('evaluation').toUpperCase()}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', height: '8em', justifyContent: 'space-evenly' }}>
               <FormControlLabel
-                control={<CheckBox onClick={() => dispatch(setColorBlindMode())} />}
+                control={<Checkbox onChange={() => dispatch(setColorBlindMode())} />}
                 label={t(`overview:colorBlindMode`)}
               />
             </div>

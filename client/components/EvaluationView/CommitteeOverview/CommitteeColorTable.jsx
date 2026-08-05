@@ -2,8 +2,7 @@ import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Typography } from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress'
-import { answersByYear, getYearToShow } from '../../../util/common'
-import { getAllTempAnswersAction } from '../../../redux/tempAnswersReducer'
+import { answersByYear } from '../../../util/common'
 import { getAnswersActionAll } from '../../../redux/oldAnswersReducer'
 import TableHeader from './CommitteeTableHeader'
 import TableRow from './CommitteeTableRow'
@@ -16,27 +15,21 @@ import { useTranslation } from 'react-i18next'
 const CommitteeColorTable = React.memo(({ setModalData, form, selectedLevels }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-  const answers = useSelector(state => state.tempAnswers)
   const oldAnswers = useSelector(state => state.oldAnswers)
   const lang = useSelector(state => state.language)
   const committee = committeeList[0]
-  const year = getYearToShow({ draftYear, nextDeadline, form })
+  const year = 2023 // this is intended, as that was the last one
 
   useEffect(() => {
-    if (nextDeadline && nextDeadline[0].form !== 10) {
-      dispatch(getAllTempAnswersAction())
-    } else {
-      dispatch(getAnswersActionAll())
-    }
-  }, [nextDeadline, dispatch])
+    dispatch(getAnswersActionAll())
+  }, [dispatch])
 
   const selectedAnswers = answersByYear({
     year,
-    tempAnswers: answers,
+    tempAnswers: null,
     oldAnswers,
-    draftYear: draftYear?.year,
-    deadline: nextDeadline?.find(d => d.form === form),
+    draftYear: null,
+    deadline: null,
     form,
   })
 
@@ -55,7 +48,7 @@ const CommitteeColorTable = React.memo(({ setModalData, form, selectedLevels }) 
     filteredAnswers = filteredAnswers.data
   }
 
-  if (answers.pending || !answers.data || !oldAnswers.data || !finnishFormForTrafficLights) {
+  if (!oldAnswers.data || !finnishFormForTrafficLights) {
     return <CircularProgress />
   }
   let tableIds = [
