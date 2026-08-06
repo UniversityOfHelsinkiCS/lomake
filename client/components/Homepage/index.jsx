@@ -62,7 +62,8 @@ const Homepage = () => {
             </Button>
           </CardActions>
         </Card>
-        {usersProgrammes.length + Object.keys(currentUser.data.access).length > 0 && (
+        {usersProgrammes.length + Object.keys(currentUser.data.access).length > 0 ||
+        currentUser.data.iamGroups?.includes('hy-employees') ? (
           <Card sx={{ width: 400, marginTop: 5 }}>
             <CardMedia alt="library" component="img" height="120" image={ArchiveImage} />
             <CardContent sx={{ height: 200 }}>
@@ -85,7 +86,7 @@ const Homepage = () => {
               </Button>
             </CardActions>
           </Card>
-        )}
+        ) : null}
       </Box>
       <Box marginTop={10}>
         <Typography alignItems="center" sx={{ textAlign: 'center' }}>

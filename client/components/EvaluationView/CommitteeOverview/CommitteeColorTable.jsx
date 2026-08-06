@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react'
+import { useEffect, Fragment, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Typography } from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -11,8 +11,7 @@ import { universityEvaluationQuestions as questions } from '../../../questionDat
 import { committeeList } from '../../../../config/data'
 import { useTranslation } from 'react-i18next'
 
-// eslint-disable-next-line import-x/no-named-as-default-member
-const CommitteeColorTable = React.memo(({ setModalData, form, selectedLevels }) => {
+const CommitteeColorTable = memo(({ setModalData, form, selectedLevels }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const oldAnswers = useSelector(state => state.oldAnswers)

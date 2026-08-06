@@ -32,7 +32,7 @@ const NavBarItems = {
       '/report',
     ],
     items: [
-      { key: 'yearly', label: 'yearlyAssessment', path: '/yearly', access: ['programme', 'special'] },
+      { key: 'yearly', label: 'yearlyAssessment', path: '/yearly', access: ['programme', 'special', 'admin'] },
       {
         key: 'evaluation',
         label: 'evaluation',
@@ -59,13 +59,13 @@ const NavBarItems = {
             key: 'university-overview',
             label: 'overview:universityOverview',
             path: '/evaluation-university',
-            access: ['admin', 'special', 'programme'],
+            access: ['admin', 'special', 'programme', 'employee'],
           },
           {
             key: 'meta-evaluation',
             label: 'metaevaluation',
             path: '/meta-evaluation',
-            access: ['programme', 'special'],
+            access: ['programme', 'special', 'admin'],
           },
           {
             key: 'faculty-monitoring',
@@ -74,7 +74,7 @@ const NavBarItems = {
             access: ['admin'],
           },
         ],
-        access: ['admin', 'special', 'programme'],
+        access: ['admin', 'special', 'programme', 'employee'],
       },
       {
         key: 'degreeReform',
@@ -97,7 +97,7 @@ const NavBarItems = {
         access: ['programme'],
       },
     ],
-    access: ['admin', 'special', 'programme'],
+    access: ['admin', 'special', 'programme', 'employee'],
   },
   admin: { key: 'admin', label: 'adminPage', path: '/admin', access: ['admin'] },
 }
