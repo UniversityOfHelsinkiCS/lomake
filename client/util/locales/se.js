@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-
 export default {
   common: {
     adminPage: 'Admin',
@@ -234,13 +233,9 @@ export default {
     },
     savingAnswers: 'Svaren sparas automatiskt utom för textfält. Sista dagen för att svara på blanketten:',
     noSystemsSelected: 'Inget responssystem har valts',
-    // selectSystems: '',
-    // mostUseful: '',
     developmentArea: 'Utvecklingsobjekt',
     actions: 'Åtgärdsförslag',
-    // requiredActions: '',
     addDevelopmentArea: 'Lägg till utvecklingsobjekt', // Not from translation (FIX?)
-    // removeDevelopmentArea: '',
     allYearlyAnswerYears: 'Alla år i årsuppföljningen',
     evaluationUniTopInfo:
       '<strong>OBS!</strong> Ansvaret för att sammanställa uppgifter på universitetsnivå ligger utbildningsrådet (ONE) för kandidat- och magisterprogram, och hos styrgruppen för forskarskolan och det vetenskapliga rådet (TINE) för doktorandprogram.<br /><br />Utbildningsrådet, vetenskapliga rådet och styrgruppen för forskarskolan gör sina noteringar på samma formulär som utvärderingsgruppen kommer att använda.',
@@ -253,7 +248,6 @@ export default {
     selectApplicable: 'Välj alla lämpliga alternativ',
     addMissing: 'Lägg till ett alternativ',
     progSummaryTitle: 'Svaren på årsuppföljningens frågor om temat under observationsperioden',
-    // facultySummaryTitle: '',
     materials: 'Bakgrundsmaterial',
     materialsProg:
       'Via länken nedan kan ni läsa alla svar som antecknats i samband med årsuppföljningen.<br/>På detta formulär har det dessutom till flera av frågorna bifogats en sammanfattning av de senaste tre årens svar på årsuppföljningens frågor om respektive tema.<br/>Till stöd för översynen har det skapats en vy i Oodikone. I vyn har det sammanställts central statistik om studenterna vid ert utbildningsprogram och er fakultet samt om studenternas studieframsteg. Nedan finns en länk till vyn på både program- och fakultetsnivå. ',
@@ -261,11 +255,7 @@ export default {
     oodikoneProg: 'Granska utbildningsprogrammets uppgifter i Oodikone',
     oodikoneFaculty: 'Granska fakultetens uppgifter i Oodikone',
     oodikoneUniversity: 'Granska uppgifter i Oodikone',
-    // rapo: '',
-    // facultyInfo: '',
-    // yearlyAnswers: '',
     formReady: 'Svaren har sparats',
-    // sendNewForm: '',
     modifyForm: 'Redigera svaren',
     modifyPlan: 'Redigera planen',
     sendForm: 'Spara svaren',
@@ -274,8 +264,6 @@ export default {
     selectQuestions: 'Välj åtgärder',
     noQuestionsSelected: 'Inga valda åtgärder. Välj åtgärder från knappen ovan.',
     fillAllRequiredFields: 'Åtminstone de tre första frågorna måste besvaras om du vill spara',
-    // sendFormModalHeader: '',
-    // sendFormModalDescription: '',
     stronglyDisagree: 'Helt av annan åsikt',
     partiallyDisagree: 'Delvis av annan åsikt',
     neitherNor: 'Varken av samma eller av annan åsikt',
@@ -324,7 +312,6 @@ export default {
     noData: 'svar på enskilda frågor som ännu inte är tillgängliga',
     facultyAvg: 'Genomsnitt av fakultetens program',
     chosenFacultyAvg: 'genomsnitt för vald fakultet',
-    //   chosenFaculties: '',
     universityAvg: 'Genomsnitt för alla program',
     individualAvg: 'Genomsnitt av individuella svar från fakulteten',
     individualTxt: 'Öppna svar från enskilda respondenter vid fakulteten',
@@ -417,7 +404,6 @@ export default {
     noUsers: 'Inga användare',
     userListJory: 'Ledningsgruppmedlemmar som har fått tillgång till blanketten',
     userListOthers: 'Övriga användare med programåtkomsträttigheter, som har fått tillgång till blanketten',
-    // facultySummary: '',
     pcs: 'st',
     chooseFaculty: 'Avgränsa de valda fakulteterna',
     developmentTarget: 'UTVECKLINGSOMRÅDE OCH KORRIGERANDE ÅTGÄRDER',
@@ -473,8 +459,6 @@ export default {
     filterBy: 'Begränsa svaren',
     improvementAreas: 'Utvecklingsmål',
     improvementActions: 'Åtgärdsförslag',
-    //  improvementAreas: '',
-    //  improvementActions: '',
   },
 
   users: {
@@ -538,25 +522,9 @@ export default {
     expired: 'Visa har löpt ut',
     endsIn: 'Slut',
     confirm: 'Ta bort användaren {{firstname}} {{lastname}}s tillfälliga åtkomst till programmet {{progName}}?',
-
-    // tempAccess: '',
-    // tempAccessMangement,
-    // tempAccessInfo:,
-    // tempAccessNote:,
-    // receiverEmail: 'Oikeuden saajan helsinki.fi-sähköpostiosoite',
-    // accessProgramme: 'Koulutusohjelma, johon oikeudet annetaan',
-    // endOfAccess: 'Käyttöoikeuden viimeinen voimassaolopäivä',
-    // kojoEmail: 'Koulutusohjelman johtajan sähköpostiosoite',
-    // giveWritingRights: 'Anna kirjoitusoikeudet',
-    // saveRight: 'Tallenna oikeus',
-    // tempAccesses: 'Annetut väliaikaiset oikeudet',
-    // expired: 'Näytä vanhentuneet',
-    // writingRight: 'Kirjoitusoikeus',
-    // endsIn: 'Päättyy',
-    // confirm: '',
   },
-  tracking: 'Planering och uppföljning',
 
+  tracking: 'Planering och uppföljning',
   facultyTracking: {
     facultyInfoHeader: 'Val och planering av åtgärder i fakulteten',
     facultyInfo1:
