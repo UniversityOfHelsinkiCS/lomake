@@ -113,7 +113,7 @@ export const KeyData = () => {
         continue
       }
 
-      if (existing && existing.active === true) {
+      if (existing?.active === true) {
         const startYear = Number(existing.startYear)
 
         if (!isNaN(startYear) && startYear > year) {
@@ -129,7 +129,7 @@ export const KeyData = () => {
         }
       }
 
-      if (existing && existing.active === false) {
+      if (existing?.active === false) {
         const startYear = Number(existing.startYear)
         const endYear = Number(existing.endYear)
 
@@ -195,7 +195,7 @@ export const KeyData = () => {
       <form
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault()
-          const form = e.currentTarget as HTMLFormElement
+          const form = e.currentTarget
           const file = form.elements.namedItem('file') as HTMLInputElement
           uploadKeyData(file.files?.[0])
         }}

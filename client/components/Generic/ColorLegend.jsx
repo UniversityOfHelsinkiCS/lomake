@@ -39,9 +39,9 @@ const ColorLegend = () => {
 
   return (
     <Segment compact={form !== formKeys.FACULTY_MONITORING && form !== formKeys.META_EVALUATION} textAlign="left">
-      {selectedLegends.map(({ colorClass, text }) => (
-        // eslint-disable-next-line react/jsx-key
-        <LegendItem colorClass={colorClass} text={text} />
+      {selectedLegends.map(({ colorClass, text }, index) => (
+        // oxlint-disable-next-line react/no-array-index-key
+        <LegendItem key={index} colorClass={colorClass} text={text} />
       ))}
       {form === undefined && <p className="report-side-note">{t('noColors')}</p>}
     </Segment>

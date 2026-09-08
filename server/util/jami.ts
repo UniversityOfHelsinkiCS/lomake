@@ -25,8 +25,8 @@ interface Access {
   access?: Record<string, OrganisationAccess>
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 type SpecialGroup = {
+  // oxlint-disable-next-line typescript/consistent-indexed-object-style
   [key: string]: boolean
 }
 

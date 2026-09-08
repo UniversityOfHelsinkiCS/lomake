@@ -18,21 +18,20 @@ const getImageFor = lang => {
 const InfoBox = ({ id, label, description, extrainfo, image }) => {
   const { t } = useTranslation()
   const [accordion, setAccordion] = useState({ open: false, fetched: null, lines: 0 })
-  let lines = 0
+  let lines = description.split(/\r\n|\r|\n/).length
+  lines += label ? label.split(/\r\n|\r|\n/).length : 0
+  lines += extrainfo ? extrainfo.split(/\r\n|\r|\n/).length : 0
+  if (image) lines += 10
+
   const lang = useSelector(state => state.language)
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    lines = description.split(/\r\n|\r|\n/).length
-    lines += label ? label.split(/\r\n|\r|\n/).length : 0
-    lines += extrainfo ? extrainfo.split(/\r\n|\r|\n/).length : 0
-    if (image) lines += 10
     if (lines < 4) {
       setAccordion({ open: true, fetched: true, lines })
     } else {
       setAccordion({ open: false, fetched: true, lines })
     }
-  }, [])
+  }, [setAccordion, lines])
 
   return (
     <div className="form-description-area">

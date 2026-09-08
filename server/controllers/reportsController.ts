@@ -26,7 +26,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     report: null,
     studyprogrammeId: null,
     year: null,
-    data: {} as ReportData,
+    data: {},
   }
 
   if (!programme) {
@@ -53,7 +53,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     return resultObject
   }
 
-  const report: Report = await Report.findOne({
+  const report: Report | null = await Report.findOne({
     where: {
       studyprogrammeId: studyprogramme.id,
       year,
@@ -89,7 +89,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   resultObject.success = true
   resultObject.report = report
   resultObject.studyprogrammeId = Number(studyprogramme.id)
-  resultObject.year = parseInt(year)
+  resultObject.year = parseInt(year as string)
   resultObject.status = 200
   resultObject.data = data
 
@@ -101,7 +101,7 @@ const getReport = async (req: Request, res: Response) => {
     const result = await validateOperation(req)
 
     if (!result.success) return res.status(result.status).json({ error: result.error })
-
+    if (!result.report) return res.status(404).json({ error: 'Result report not found' })
     return res.status(200).json(result.report.data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -139,7 +139,7 @@ const updateReport = async (req: Request, res: Response) => {
     if (!result.success) return res.status(result.status).json({ error: result.error })
 
     const { report, studyprogrammeId, year, data } = result
-
+    if (!report || !studyprogrammeId || !year) return res.status(404).json({ error: 'Result report is invalid' })
     const [_, updatedReport] = await Report.update(
       { data: { ...report.data, ...data } },
       {

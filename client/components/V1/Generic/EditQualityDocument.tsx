@@ -9,7 +9,7 @@ import { useUpdateQualityDocumentMutation } from '../../../redux/qualityDocument
 import { useLockDocument } from '../../../hooks/useLockDocument'
 import { useNavigate } from 'react-router'
 
-import { FeedbackSource, FormDataState, FeedbackRegularity } from '../../../../shared/lib/types'
+import { FeedbackSource, FormDataState } from '../../../../shared/lib/types'
 
 import QualityForm, { defaultFeedbackSourceOptions, initFormData, initErrors } from './QualityForm'
 import { validateQualityDocument } from '../../../util/v1'
@@ -55,7 +55,7 @@ const EditQualityDocument = ({
       }
       if (!normalized.title) normalized.title = initFormData(t).title
       if (!normalized.feedbackExamples) normalized.feedbackExamples = ''
-      if (!normalized.learningRegularity) normalized.learningRegularity = '' as FeedbackRegularity
+      if (!normalized.learningRegularity) normalized.learningRegularity = ''
       if (!normalized.otherFeedbackSource) normalized.otherFeedbackSource = ''
 
       return normalized

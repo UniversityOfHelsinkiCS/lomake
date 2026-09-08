@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable import-x/no-named-as-default-member */
+// oxlint-disable typescript/no-misused-promises
 import type { Request, Response } from 'express'
 import multer from 'multer'
-import xlsx from 'xlsx'
+import { read, utils } from 'xlsx'
 import KeyData from '../models/keyData.js'
 import { formatKeyData } from '../services/keyDataService.js'
 
@@ -141,7 +140,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
       }
 
       try {
-        const workbook = xlsx.read(file.buffer, { type: 'buffer' })
+        const workbook = read(file.buffer, { type: 'buffer' })
 
         if (!workbook?.SheetNames?.length) {
           logger.error('Workbook is invalid or has no sheets')
@@ -165,7 +164,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
             throw new Error(`Worksheet at index ${idx} (${rawName}) is missing`)
           }
 
-          const sheetAsJson = xlsx.utils.sheet_to_json(ws)
+          const sheetAsJson = utils.sheet_to_json(ws)
           data[canonicalName] = Array.isArray(sheetAsJson) ? sheetAsJson : []
         })
 

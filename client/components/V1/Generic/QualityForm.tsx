@@ -86,7 +86,7 @@ export const initFormData = (t: TFunction): FormDataState => {
     otherFeedbackSource: '',
     feedbackExamples: '',
     feedbackSources: [] as FeedbackSourceState,
-    learningRegularity: '' as FeedbackRegularity,
+    learningRegularity: '',
   }
 }
 
@@ -119,13 +119,10 @@ const QualityForm = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData(
-      prevData =>
-        ({
-          ...prevData,
-          [name]: value,
-        }) as FormDataState
-    )
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value,
+    }))
   }
 
   const addNewFeedbackSource = () => {
@@ -142,28 +139,25 @@ const QualityForm = ({
         return {
           ...prevData,
           otherFeedbackSource: '',
-        } as FormDataState
+        }
       }
 
       return {
         ...prevData,
         feedbackSources: [...prevData.feedbackSources, { name: newSource, regularity: '', description: '' }],
         otherFeedbackSource: '',
-      } as FormDataState
+      }
     })
   }
 
   const removeFeedbackSource = (source: FeedbackSource) => {
     setFeedbackSourceOptions(prev => prev.filter(s => s.toLowerCase() !== source.toLowerCase()))
 
-    setFormData(
-      prevData =>
-        ({
-          ...prevData,
-          feedbackSources: prevData.feedbackSources.filter(f => f.name.toLowerCase() !== source.toLowerCase()),
-          otherFeedbackSource: '',
-        }) as FormDataState
-    )
+    setFormData(prevData => ({
+      ...prevData,
+      feedbackSources: prevData.feedbackSources.filter(f => f.name.toLowerCase() !== source.toLowerCase()),
+      otherFeedbackSource: '',
+    }))
   }
 
   const setSourceRegularity = (feedbacksource: FeedbackSource, regularity: FeedbackRegularity) => {
@@ -175,7 +169,7 @@ const QualityForm = ({
         return {
           ...prevData,
           feedbackSources: [...feedbackSources, { name: feedbacksource, regularity, description: '' }],
-        } as FormDataState
+        }
       }
 
       const updated = [...feedbackSources]
@@ -183,7 +177,7 @@ const QualityForm = ({
       return {
         ...prevData,
         feedbackSources: updated,
-      } as FormDataState
+      }
     })
   }
 
@@ -196,7 +190,7 @@ const QualityForm = ({
         return {
           ...prevData,
           feedbackSources: [...feedbackSources, { name: feedbacksource, regularity: '', description }],
-        } as FormDataState
+        }
       }
 
       const updated = [...feedbackSources]
@@ -204,7 +198,7 @@ const QualityForm = ({
       return {
         ...prevData,
         feedbackSources: updated,
-      } as FormDataState
+      }
     })
   }
 
@@ -453,13 +447,10 @@ const QualityForm = ({
                     data-cy="regularity-learning"
                     name="learningRegularity"
                     onChange={e =>
-                      setFormData(
-                        prevData =>
-                          ({
-                            ...prevData,
-                            learningRegularity: e.target.value as FeedbackRegularity,
-                          }) as FormDataState
-                      )
+                      setFormData(prevData => ({
+                        ...prevData,
+                        learningRegularity: e.target.value as FeedbackRegularity,
+                      }))
                     }
                     value={formData.learningRegularity}
                   >

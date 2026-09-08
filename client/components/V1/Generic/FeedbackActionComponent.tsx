@@ -24,16 +24,13 @@ const FeedbackActionForm = ({
 
   const handleCancelClick = () => {
     setExample(false)
-    setFormData(
-      prevData =>
-        ({
-          ...prevData,
-          [`${field}NameExample${example}`]: '',
-          [`${field}ChangesExample${example}`]: '',
-          [`${field}FeedbackSourceExample${example}`]: '',
-          [`${field}CommunicationExample${example}`]: '',
-        }) as FormDataState
-    )
+    setFormData(prevData => ({
+      ...prevData,
+      [`${field}NameExample${example}`]: '',
+      [`${field}ChangesExample${example}`]: '',
+      [`${field}FeedbackSourceExample${example}`]: '',
+      [`${field}CommunicationExample${example}`]: '',
+    }))
   }
 
   return (
