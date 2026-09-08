@@ -164,8 +164,8 @@ const studentIams = [
 ]
 
 const isDegreeStudentOrEmployee = user => {
-  const iamContainsGroup = user.iamGroups.filter(group => ['hy-employees', ...studentIams].includes(group))
-  if (iamContainsGroup.length > 0) return true
+  const iamContainsGroup = user.iamGroups.some(group => ['hy-employees', ...studentIams].includes(group))
+  if (iamContainsGroup) return true
   return false
 }
 

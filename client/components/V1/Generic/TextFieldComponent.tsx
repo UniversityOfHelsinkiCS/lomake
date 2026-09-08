@@ -21,9 +21,8 @@ type TextFieldComponentProps = {
 }
 
 const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => {
-  const { programme: studyprogrammeKey } = useParams<{ programme: string }>()
+  const { programme: studyprogrammeKey, year } = useParams<{ programme: string; year: string }>()
   const { t } = useTranslation()
-  const { year } = useParams<{ year: string }>()
   const currentUser = useAppSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
   const viewOnly = useAppSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
 
