@@ -196,8 +196,8 @@ const possibleUsers = [
     givenName: 'kojoDeanUser',
     mail: 'cypress-kojo-dean-user@helsinki.fi',
     schacDateOfBirth: 19990109,
-    hyGroupCn: 'hy-mltdk-mast-jory;hy-mltdk-maisteri-kojot;hy-mltdk-dekanaatti;hy-employees',
-    sn: 'nah',
+    hyGroupCn: 'hy-mltdk-dekanaatti;hy-employees;hy-mltdk-mast-jory;hy-mltdk-maisteri-kojot',
+    sn: 'cypressKojoDeanUser',
   },
   {
     uid: 'cypressKosuJoryUser',
