@@ -15,8 +15,7 @@ const requireProgrammeRead = (req, res, next) => {
 }
 
 const requireRead = (req, res, next) => {
-  if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
-  else if (isDegreeStudentOrEmployee(req.user)) next()
+  if (isAdmin(req.user) || isSuperAdmin(req.user) || isDegreeStudentOrEmployee(req.user)) next()
   else res.status(401).json({ error: 'Unauthorized access.' }).end()
 }
 
