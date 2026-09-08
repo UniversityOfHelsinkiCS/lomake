@@ -82,6 +82,8 @@ export const RTKApi = createApi({
     prepareHeaders: headers => {
       //@ts-expect-error
       Object.entries(getHeaders()).forEach(([key, value]) => headers.set(key, value))
+      const adminLoggedInAs = localStorage.getItem('adminLoggedInAs') // uid
+      if (adminLoggedInAs) headers.set('x-admin-logged-in-as', adminLoggedInAs)
       return headers
     },
   }),

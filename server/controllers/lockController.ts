@@ -47,24 +47,10 @@ const serializeLockMap = (room: string) => {
   }
 }
 
-const parseCookies = (cookieString: string | undefined) => {
-  return cookieString
-    .split(';')
-    .map((cookie: string) => cookie.trim().split('='))
-    .reduce(
-      (acc, [key, value]) => {
-        acc[key] = value === undefined || value === '' || value === 'null' ? undefined : value
-        return acc
-      },
-      {} as Record<string, string | undefined>
-    )
-}
-
 const getCurrentUser = async (req: Request & { user: User }) => {
   const { user } = req
-  const parsedCookies = parseCookies(req.headers.cookie)
 
-  const loggedInAs = parsedCookies['x-admin-logged-in-as']
+  const loggedInAs = req.headers['x-admin-logged-in-as']
 
   if (!inProduction && loggedInAs && isDevSuperAdminUid(user.uid)) {
     const user = await getUserByUid(loggedInAs)
