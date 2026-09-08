@@ -205,7 +205,9 @@ describe('Notification badge tests', () => {
     })
 
     it('Intervention badge and text disappears on closing intervention procedure', () => {
+      cy.request(`/api/cypress/resetDocuments`)
       cy.login('cypressKojoDeanUser')
+      cy.visit('/v1/overview')
       cy.get(`[data-cy="interventionBadge-${redProgramme}"]`).should('exist')
       cy.get(`[data-cy*="interventionText-${redProgramme}"]`).should('exist')
 
