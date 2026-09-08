@@ -4,10 +4,8 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '../theme'
 import ErrorBoundary from './components/ErrorBoundary'
-import UserFaker from './components/UserFaker'
 import ScrollToTop from './components/ScrollToTop'
 import App from './components/App'
-import { cypressUids, setHeaders, possibleUsers } from '../config/mockHeaders'
 import './assets/custom.scss'
 import './assets/fonts/fonts.scss'
 
@@ -29,7 +27,6 @@ const refresh = () => {
       <BrowserRouter basename={basePath}>
         <ScrollToTop />
         <ErrorBoundary>
-          {process.env.NODE_ENV === 'development' && <UserFaker />}
           <ThemeProvider theme={theme}>
             <App />
           </ThemeProvider>
@@ -37,24 +34,6 @@ const refresh = () => {
       </BrowserRouter>
     </Provider>
   )
-}
-
-if (process.env.NODE_ENV === 'development') {
-  const newUser = 'superAdmin'
-  const currentFakeUser = window.localStorage.getItem('fakeUser')
-
-  if (!currentFakeUser || !cypressUids.includes(JSON.parse(currentFakeUser).uid)) {
-    setHeaders(newUser)
-  }
-
-  // if you want to pick the user 'nicely' set the following key in local storage
-  if (window.localStorage.getItem('pickUser')) {
-    // eslint-disable-next-line no-alert
-    const user = window.prompt(
-      `select user (two first only in prod db):\n\n${possibleUsers.map(u => u.uid).join('\n')}`
-    )
-    setHeaders(user)
-  }
 }
 
 refresh()
