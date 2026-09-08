@@ -164,17 +164,14 @@ const studentIams = [
 ]
 
 const isDegreeStudentOrEmployee = user => {
-  if (user.iamGroups.map(group => ['hy-employees', ...studentIams].includes(group))) return true
+  const iamContainsGroup = user.iamGroups.filter(group => ['hy-employees', ...studentIams].includes(group))
+  if (iamContainsGroup.length > 0) return true
   return false
 }
 
 const isEmployee = user => {
-  if (user.iamGroups.map(group => ['hy-employees'].includes(group))) return true
-  return false
-}
-
-const isEmployeeOnly = user => {
-  if (user.iamGroups.length === 1 && user.iamGroups.map(group => ['hy-employees'].includes(group))) return true
+  const iamGroup = user.iamGroups.includes('hy-employees')
+  if (iamGroup) return true
   return false
 }
 
@@ -267,7 +264,6 @@ export {
   isInternationalUser,
   isDegreeStudentOrEmployee,
   isEmployee,
-  isEmployeeOnly,
   organisationCodeToIam,
   hasSomeReadAccess,
   hasProgrammeWriteAccess,
