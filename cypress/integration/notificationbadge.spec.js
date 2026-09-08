@@ -3,7 +3,6 @@ describe('Notification badge tests', () => {
 
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
-    cy.setCookie('session_id', '123')
     cy.request(`/api/cypress/initKeyData`)
     cy.request(`/api/cypress/initReports`)
     cy.visit(`/admin`)
@@ -207,7 +206,6 @@ describe('Notification badge tests', () => {
 
     it('Intervention badge and text disappears on closing intervention procedure', () => {
       cy.login('cypressKojoDeanUser')
-      cy.setCookie('session_id', '123')
       cy.request(`/api/cypress/resetDocuments`)
       cy.get(`[data-cy="interventionBadge-${redProgramme}"]`).should('exist')
       cy.get(`[data-cy*="interventionText-${redProgramme}"]`).should('exist')
