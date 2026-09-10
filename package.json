@@ -89,7 +89,7 @@
   "devDependencies": {
     "@types/compression": "1.8.1",
     "@types/lodash": "4.17.14",
-    "@types/multer": "1.4.12",
+    "@types/multer": "2.2.0",
     "@types/node": "24.10.1",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
