@@ -71,7 +71,7 @@ jobs:
     needs: report_success
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Pull image and create a container
         run: docker create --name lomake_sentry quay.io/toska/lomake:production
