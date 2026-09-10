@@ -24,7 +24,7 @@ const refresh = () => {
   const root = createRoot(container)
   root.render(
     <Provider store={store}>
-      <BrowserRouter basename={basePath}>
+      <BrowserRouter basename={basePath.replace(/\/$/, '') || '/'}>
         <ScrollToTop />
         <ErrorBoundary>
           <ThemeProvider theme={theme}>
