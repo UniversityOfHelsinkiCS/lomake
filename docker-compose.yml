@@ -35,11 +35,11 @@ services:
     environment:
       - ADMINER_DESIGN=pepa-linha
       - ADMINER_DEFAULT_SERVER=lomake_db
-    image: adminer:5.2.1
+    image: adminer:6
     ports:
       - 8080:8080 # localhost:8080/?pgsql=db&username=postgres&db=postgres&ns=public
   jami:
-    image: quay.io/toska/jami:production
+    image: registry.version.helsinki.fi/toska/openshift/kontit/jami:production
     environment:
       - PORT=3003
       - NODE_ENV=dev
