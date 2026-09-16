@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 import { z } from 'zod'
 import {
+  TohtoriohjelmatValuesSchema,
   MaisteriohjelmatValuesSchema,
   KandiohjelmatValuesSchema,
   KeyDataProgrammeSchema,
@@ -13,6 +14,7 @@ import {
 export type KeyDataProgramme = z.infer<typeof KeyDataProgrammeSchema>
 export type KandiohjelmatValues = z.infer<typeof KandiohjelmatValuesSchema>
 export type MaisteriohjelmatValues = z.infer<typeof MaisteriohjelmatValuesSchema>
+export type TohtoriohjelmatValues = z.infer<typeof TohtoriohjelmatValuesSchema>
 export type KeyDataMetadata = z.infer<typeof MetadataSchema>
 export type KeyDataMetadataRaw = z.infer<typeof MetadataRawSchema>
 export type DocumentForm = z.infer<typeof DocumentFormSchema>
@@ -22,6 +24,7 @@ export interface KeyData {
   programmesEnding?: string[]
   kandiohjelmat: KeyDataProgramme[]
   maisteriohjelmat: KeyDataProgramme[]
+  tohtoriohjelmat: KeyDataProgramme[]
   metadata: KeyDataMetadata[]
 }
 

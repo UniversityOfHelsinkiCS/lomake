@@ -8,7 +8,6 @@ export const KandiohjelmatValuesSchema = z
     'Koulutusohjelman koodi': z.string(),
     'Koulutusohjelman nimi': z.string(),
 
-    // Kandiohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL, but data.xlsx is still not ready
     Hakupaine: z.number().optional(),
     'Ensisijaiset hakijat': z.number().optional(),
     'Aloituspaikkojen täyttö': z.number().optional(),
@@ -43,7 +42,6 @@ export const MaisteriohjelmatValuesSchema = z
     'Koulutusohjelman koodi': z.string(),
     'Koulutusohjelman nimi': z.string(),
 
-    // Maisteriohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL, but data.xlsx is still not ready
     Hakijat: z.number().optional(),
     Hakupaine: z.number().optional(),
     Aloituspaikat: z.number().optional(),
@@ -61,6 +59,35 @@ export const MaisteriohjelmatValuesSchema = z
     'Tilojen käyttö': z.number().optional(),
     'Jatkuvan oppimisen tulos': z.number().optional(),
 
+    // Muut
+    Vuosi: z.number().int(),
+    Lisätietoja_fi: z.string().optional(),
+    Lisätietoja_en: z.string().optional(),
+    Lisätietoja_se: z.string().optional(),
+    Lisätietoja_2_fi: z.string().optional(),
+    Lisätietoja_2_en: z.string().optional(),
+    Lisätietoja_2_se: z.string().optional(),
+  })
+  .strict() // to disallow extra keys,
+
+export const TohtoriohjelmatValuesSchema = z
+  .object({
+    // Perustiedot
+    'Koulutusohjelman koodi': z.string(),
+    'Koulutusohjelman nimi': z.string(),
+
+    Hakupaine: z.number().optional(),
+    'Hakukelpoiset hakijat': z.number().optional(),
+    'Kansainväliset hakijat': z.number().optional(),
+    'Uudet väitöskirjatutkijat': z.number().optional(),
+    Tutkinnot: z.number().optional(),
+    'Tavoiteajassa valmistuminen': z.number().optional(),
+    'Väitöskirjatyön eteneminen': z.number().optional(),
+    'Läsnäolevien kasautuminen': z.number().optional(),
+    'Väitöskirjatutkijoiden hyvinvointi': z.number().optional(),
+    'Väitöskirjatyön ohjaus': z.number().optional(),
+    'Opetuksen laatu': z.number().optional(),
+    Työllistyminen: z.number().optional(),
     // Muut
     Vuosi: z.number().int(),
     Lisätietoja_fi: z.string().optional(),
