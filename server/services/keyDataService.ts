@@ -1,4 +1,9 @@
-import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } from '@/shared/lib/types'
+import type {
+  KandiohjelmatValues,
+  MaisteriohjelmatValues,
+  KeyDataMetadataRaw,
+  TohtoriohjelmatValues,
+} from '@/shared/lib/types'
 import { ProgrammeLevel } from '../../shared/lib/enums'
 
 const transformProgramme = (programme: any) => ({
@@ -15,7 +20,7 @@ const extractMultilingualField = (obj: any, fieldPrefix: string) => ({
   en: obj[`${fieldPrefix}_en`] || '',
 })
 
-const restructureProgramme = <T extends KandiohjelmatValues | MaisteriohjelmatValues>(
+const restructureProgramme = <T extends KandiohjelmatValues | MaisteriohjelmatValues | TohtoriohjelmatValues>(
   programme: T,
   programmes: ReturnType<typeof transformProgramme>[]
 ) => {
@@ -52,12 +57,13 @@ const restructureMetadata = (m: KeyDataMetadataRaw) => ({
 })
 
 export const formatKeyData = (data: any, programmeData: any) => {
-  const { kandiohjelmat, maisteriohjelmat, metadata } = data
+  const { kandiohjelmat, maisteriohjelmat, tohtoriohjelmat, metadata } = data
 
   const programmes = programmeData.map(transformProgramme)
-
+  console.log(programmes.filter(prog => prog.level === 'doctoral'))
   const bachelorProgrammes = kandiohjelmat.map((k: KandiohjelmatValues) => restructureProgramme(k, programmes))
   const masterProgrammes = maisteriohjelmat.map((m: MaisteriohjelmatValues) => restructureProgramme(m, programmes))
+  const doctoralProgrammes = tohtoriohjelmat.map((m: TohtoriohjelmatValues) => restructureProgramme(m, programmes))
 
   const programmesEndingMaster = masterProgrammes
     .filter(prog => prog.additionalInfo.fi !== undefined && prog.additionalInfo.fi.includes('Lakkautettu ohjelma'))
@@ -69,6 +75,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
   return {
     kandiohjelmat: bachelorProgrammes,
     maisteriohjelmat: masterProgrammes,
+    tohtoriohjelmat: doctoralProgrammes,
     metadata: metadata.map(restructureMetadata),
     programmesEnding: [...programmesEndingMaster, ...programmesEndingBachelor],
   }

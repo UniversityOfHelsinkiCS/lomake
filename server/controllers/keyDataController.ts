@@ -150,12 +150,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
 
         const { SheetNames, Sheets } = workbook
 
-        const order: CanonicalSheetName[] = [
-          'kandiohjelmat',
-          'maisteriohjelmat',
-          // 'tohtoriohjelmat', commented out cuz not in pilotti
-          'metadata',
-        ]
+        const order: CanonicalSheetName[] = ['kandiohjelmat', 'maisteriohjelmat', 'tohtoriohjelmat', 'metadata']
 
         order.forEach((canonicalName, idx) => {
           const rawName = SheetNames[idx]
@@ -177,6 +172,7 @@ const uploadKeyData = async (req: Request, res: Response) => {
           data: {
             kandiohjelmat: formattedData.kandiohjelmat,
             maisteriohjelmat: formattedData.maisteriohjelmat,
+            tohtoriohjelmat: formattedData.tohtoriohjelmat,
             metadata: formattedData.metadata,
           },
           active: true,
