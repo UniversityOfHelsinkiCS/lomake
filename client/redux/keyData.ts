@@ -66,8 +66,8 @@ export const {
 
 export const useFetchSingleKeyDataQuery = ({ studyprogrammeKey }: { studyprogrammeKey: string }) => {
   const { data, isLoading, error } = useFetchKeyDataQuery()
-  const { kandiohjelmat = [], maisteriohjelmat = [], metadata = [] } = data ?? {}
-  const programmes = [...kandiohjelmat, ...maisteriohjelmat]
+  const { kandiohjelmat = [], maisteriohjelmat = [], tohtoriohjelmat = [], metadata = [] } = data ?? {}
+  const programmes = [...kandiohjelmat, ...maisteriohjelmat, ...tohtoriohjelmat]
   const normalizedStudyProgrammeKey = normalizeProgrammeCode(studyprogrammeKey)
   const programme: KeyDataProgramme[] = programmes.filter(
     p => normalizeProgrammeCode(p.koulutusohjelmakoodi) === normalizedStudyProgrammeKey
@@ -81,8 +81,8 @@ export const useFetchAllKeyData = ({ studyprogrammeKey }: { studyprogrammeKey: s
 
   const keyData =
     data?.map(({ data: keyDataRow, active, year }) => {
-      const { kandiohjelmat = [], maisteriohjelmat = [], metadata = [] } = keyDataRow ?? {}
-      const programmes = [...kandiohjelmat, ...maisteriohjelmat]
+      const { kandiohjelmat = [], maisteriohjelmat = [], tohtoriohjelmat = [], metadata = [] } = keyDataRow ?? {}
+      const programmes = [...kandiohjelmat, ...maisteriohjelmat, ...tohtoriohjelmat]
       const programme: KeyDataProgramme[] = programmes.filter(
         p => normalizeProgrammeCode(p.koulutusohjelmakoodi) === normalizedStudyProgrammeKey
       )

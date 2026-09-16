@@ -53,8 +53,8 @@ export const KeyData = () => {
 
     const payload = keyData.data ?? keyData
 
-    const { kandiohjelmat = [], maisteriohjelmat = [], metadata = [] } = payload ?? {}
-    const programmes = [...kandiohjelmat, ...maisteriohjelmat]
+    const { kandiohjelmat = [], maisteriohjelmat = [], tohtoriohjelmat = [], metadata = [] } = payload ?? {}
+    const programmes = [...kandiohjelmat, ...maisteriohjelmat, ...tohtoriohjelmat]
 
     const year = Number(keyData.year)
 

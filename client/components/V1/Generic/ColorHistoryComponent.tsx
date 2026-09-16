@@ -6,6 +6,12 @@ import { ProgrammeLevel } from '../../../../shared/lib/enums'
 import { useAppSelector } from '../../../util/hooks'
 import { useFetchAllKeyDataQuery } from '../../../redux/keyData'
 
+const getProgrammeList = (level, data) => {
+  if (level === ProgrammeLevel.Bachelor) return data.kandiohjelmat
+  if (level === ProgrammeLevel.Master) return data.maisteriohjelmat
+  return data.tohtoriohjelmat
+}
+
 const ColorHistoryComponent = (props: any) => {
   const { t } = useTranslation()
   const lang = useAppSelector(state => state.language)
@@ -29,7 +35,7 @@ const ColorHistoryComponent = (props: any) => {
   )
 
   const dataKey = metadataItem ? metadataItem.avainluvunArvo : null
-  const programList = props.level === ProgrammeLevel.Bachelor ? data.kandiohjelmat : data.maisteriohjelmat
+  const programList = getProgrammeList(props.level, data)
 
   const history = programList
     .filter((programme: any) => {

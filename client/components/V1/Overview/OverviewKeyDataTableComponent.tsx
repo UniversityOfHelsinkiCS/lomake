@@ -32,6 +32,23 @@ interface KeyDataTableProps {
   searchValue: string
 }
 
+const doctoralProgFacultyMapper = {
+  DP001: 'H30',
+  DP002: 'H57',
+  DP003: 'H57',
+  DP004: 'H40',
+  DP005: 'H60',
+  DP006: 'H30',
+  DP007: 'H55',
+  DP008: 'H50',
+  DP009: 'H20',
+  DP010: 'H10',
+  DP011: 'H80',
+  DP012: 'H30',
+  DP013: 'H30',
+  DP014: 'H70',
+}
+
 const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
@@ -155,11 +172,16 @@ const KeyDataTableComponent = ({
 
   const programmeData = useMemo(() => {
     if (keyData) {
-      const { kandiohjelmat, maisteriohjelmat } = keyData
-      return [...kandiohjelmat, ...maisteriohjelmat]
+      if (selectedYear >= 2026) {
+        const { kandiohjelmat, maisteriohjelmat, tohtoriohjelmat } = keyData
+        return [...kandiohjelmat, ...maisteriohjelmat, ...tohtoriohjelmat]
+      } else {
+        const { kandiohjelmat, maisteriohjelmat } = keyData
+        return [...kandiohjelmat, ...maisteriohjelmat]
+      }
     }
     return []
-  }, [keyData])
+  }, [keyData, selectedYear])
 
   const keyFigureData = useMemo(() => {
     // Convert to set for faster lookup
@@ -167,15 +189,16 @@ const KeyDataTableComponent = ({
 
     // Filter by faculty, year and program level
     const filteredData = programmeData.filter((programmeData: KeyDataProgramme) => {
-      // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
-      // example: KH10_001, where K is the level, H10 is the faculty code
-
-      const facultyCode = programmeData.koulutusohjelmakoodi.substring(1, 4)
+      const doctoralProgrammeLevel = programmeData.koulutusohjelmakoodi.startsWith('D')
+      const facultyCode = doctoralProgrammeLevel
+        ? doctoralProgFacultyMapper[programmeData.koulutusohjelmakoodi]
+        : programmeData.koulutusohjelmakoodi.substring(1, 4)
 
       const yearMatches = programmeData.year === parseInt(yearFilter) - 1 // Always fetch previous year results
       const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
       const levelMatches = programmeData.level === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
       const isDiscontinued = programmeData.additionalInfo.fi?.includes('Lakkautettu')
+      console.log(yearMatches && facultyMatches && levelMatches && (showDiscontinued ? true : !isDiscontinued))
       return yearMatches && facultyMatches && levelMatches && (showDiscontinued ? true : !isDiscontinued)
     })
 
