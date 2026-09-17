@@ -98,7 +98,7 @@
     "cypress": "15.17.0",
     "eslint-config-prettier": "10.1.5",
     "eslint-import-resolver-typescript": "^4.4.3",
-    "eslint-plugin-cypress": "5.1.1",
+    "eslint-plugin-cypress": "7.0.2",
     "eslint-plugin-import-x": "4.16.1",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-prettier": "5.4.1",
