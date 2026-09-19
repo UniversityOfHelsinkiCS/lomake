@@ -44,13 +44,7 @@ const LevelFilterComponent = () => {
       <FormControl sx={{ width: 350 }}>
         <Select data-cy="level-filter" onChange={handleChange} value={selectedLevel}>
           {allowedLevels.map(option => (
-            <MenuItem
-              data-cy="level-filter-option"
-              disabled={option.value === 'doctoral'}
-              key={option.key}
-              style={option.value === 'doctoral' ? { pointerEvents: 'auto' } : {}}
-              value={option.value}
-            >
+            <MenuItem data-cy="level-filter-option" key={option.key} value={option.value}>
               {option.tooltip ? (
                 <Tooltip arrow placement="bottom" title={option.tooltip}>
                   <span>{option.text}</span>
