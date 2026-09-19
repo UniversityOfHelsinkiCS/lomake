@@ -8,6 +8,12 @@ import { TrafficLight } from '../Generic/TrafficLightComponent'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { colors } from '../../../util/common'
 
+const getLevel = (level: string) => {
+  if (level === 'doctoral') return ProgrammeLevel.Doctor
+  if (level === 'master') return ProgrammeLevel.Master
+  return ProgrammeLevel.Bachelor
+}
+
 const TrafficLightCell = ({
   metadata,
   programmeData,
@@ -25,7 +31,7 @@ const TrafficLightCell = ({
 }) => {
   const { renderTrafficLightBadge } = useNotificationBadge()
   const { t } = useTranslation()
-  const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
+  const level = getLevel(programmeData.level)
   const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
   const shouldRenderBadge = renderTrafficLightBadge(programmeData, groupKey, color, reports)
   const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? colors.background_gray : ''

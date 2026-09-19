@@ -112,7 +112,7 @@ export const KeyDataProgrammeSchema = z
     values: z.record(z.string(), z.any()),
     year: z.number().int(),
     international: z.boolean().optional(),
-    level: z.string().optional(),
+    level: z.string(),
     additionalInfo: z
       .object({
         fi: z.string().optional(),

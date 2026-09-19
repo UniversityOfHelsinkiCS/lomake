@@ -189,7 +189,7 @@ const KeyDataTableComponent = ({
 
     // Filter by faculty, year and program level
     const filteredData = programmeData.filter((programmeData: KeyDataProgramme) => {
-      const doctoralProgrammeLevel = programmeData.koulutusohjelmakoodi.startsWith('D')
+      const doctoralProgrammeLevel = programmeData.level === 'doctoral'
       const facultyCode = doctoralProgrammeLevel
         ? doctoralProgFacultyMapper[programmeData.koulutusohjelmakoodi]
         : programmeData.koulutusohjelmakoodi.substring(1, 4)
@@ -198,7 +198,7 @@ const KeyDataTableComponent = ({
       const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
       const levelMatches = programmeData.level === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
       const isDiscontinued = programmeData.additionalInfo.fi?.includes('Lakkautettu')
-      console.log(yearMatches && facultyMatches && levelMatches && (showDiscontinued ? true : !isDiscontinued))
+
       return yearMatches && facultyMatches && levelMatches && (showDiscontinued ? true : !isDiscontinued)
     })
 
@@ -382,7 +382,7 @@ const KeyDataTableComponent = ({
                       programmeData={programmeData}
                       reports={reports}
                     />
-                    {activeYear < 2026 ? (
+                    {activeYear < 2026 || programmeData.level === 'doctoral' ? (
                       <TableCell disabled></TableCell>
                     ) : (
                       <TrafficLightCell
