@@ -60,7 +60,6 @@ export const formatKeyData = (data: any, programmeData: any) => {
   const { kandiohjelmat, maisteriohjelmat, tohtoriohjelmat, metadata } = data
 
   const programmes = programmeData.map(transformProgramme)
-  console.log(programmes.filter(prog => prog.level === 'doctoral'))
   const bachelorProgrammes = kandiohjelmat.map((k: KandiohjelmatValues) => restructureProgramme(k, programmes))
   const masterProgrammes = maisteriohjelmat.map((m: MaisteriohjelmatValues) => restructureProgramme(m, programmes))
   const doctoralProgrammes = tohtoriohjelmat.map((m: TohtoriohjelmatValues) => restructureProgramme(m, programmes))
