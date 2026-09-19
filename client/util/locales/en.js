@@ -643,6 +643,8 @@ export default {
     interventionOn: 'Active',
     interventionOff: 'Inactive',
     interventionMissing: 'Intervention procedure documentation missing!',
+    doctoralDataNotReady:
+      'Please note! The added 2026 data for doctoral programmes may not yet fully correspond to the actual figures.',
   },
   document: {
     homeDescription:

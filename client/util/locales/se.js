@@ -645,6 +645,8 @@ export default {
     interventionOn: 'Aktiv',
     interventionOff: 'Inaktiv',
     interventionMissing: 'Dokumentation av interventionsförfarandet saknas!',
+    doctoralDataNotReady:
+      'Observera! De tillagda information för 2026 för doktorandprogrammen motsvarar eventuellt ännu inte helt de faktiska siffrorna.',
   },
   document: {
     title: 'Dokumentets titel',

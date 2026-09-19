@@ -96,6 +96,18 @@ const OverviewPage = () => {
           </Button>
         </div>
       </Alert>
+      <Alert
+        icon={false}
+        severity="warning"
+        sx={{
+          width: '97%',
+          margin: 0,
+          justifyContent: 'center',
+        }}
+        variant="standard"
+      >
+        <Typography variant="h6">{t('keyData:doctoralDataNotReady')}</Typography>
+      </Alert>
       <div style={{ padding: '2rem', width: '100%' }}>
         <div style={{ display: 'flex', gap: '1rem', width: '100%', marginBottom: '2.5rem', flexDirection: 'column' }}>
           <Typography style={{ margin: 0 }} variant="h1">

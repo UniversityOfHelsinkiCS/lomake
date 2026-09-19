@@ -641,6 +641,8 @@ export default {
     interventionOn: 'Käynnissä',
     interventionOff: 'Ei käynnissä',
     interventionMissing: 'Toimenpidemenettelyn dokumentointi puuttuu!',
+    doctoralDataNotReady:
+      'Huomaa! Tohtoriohjelmien vuodelle 2026 lisätyt tiedot eivät välttämättä vielä täysin vastaa todellisia lukuja.',
   },
   document: {
     title: 'Dokumentin otsikko',
