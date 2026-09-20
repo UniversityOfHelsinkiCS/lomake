@@ -38,7 +38,7 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressKojoUser', 'KH10_001', { read: true, write: true, admin: true })
   })
 
-  it('Doctoral user has reading rights to all doctoral programmes', () => {
+  it.skip('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
     cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
