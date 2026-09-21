@@ -107,6 +107,12 @@ const TabBadge = ({
   )
 }
 
+const getProgrammeLevel = (studyprogrammeKey: string) => {
+  if (studyprogrammeKey.startsWith('K')) return ProgrammeLevel.Bachelor
+  if (studyprogrammeKey.startsWith('M')) return ProgrammeLevel.Master
+  return ProgrammeLevel.Doctor
+}
+
 const ProgrammeYearlyView = () => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
   const dispatch = useAppDispatch()
@@ -128,7 +134,7 @@ const ProgrammeYearlyView = () => {
   const { data: reports = {} } = useGetReportsQuery({ year: activeYear })
 
   const studyprogrammeKey = programmeCode ?? ''
-  const level = studyprogrammeKey.startsWith('K') ? ProgrammeLevel.Bachelor : ProgrammeLevel.Master
+  const level = getProgrammeLevel(studyprogrammeKey)
 
   const { nextDeadline } = useAppSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null

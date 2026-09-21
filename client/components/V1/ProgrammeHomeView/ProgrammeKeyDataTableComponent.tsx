@@ -77,7 +77,7 @@ const ProgrammeKeyDataTableComponent = ({
           <TableBody>
             {programmeData.map((programmeRow: KeyDataProgramme, index) => {
               const matchingKeyData = keyData.filter(item => item.year === annualFollowUpYear(programmeRow.year))
-              const selectedKeyData = matchingKeyData.find(item => item.active) ?? matchingKeyData[0]
+              const selectedKeyData = matchingKeyData.find(item => item.active) || matchingKeyData[0]
               const selectedProgrammeData =
                 selectedKeyData?.programme.find(programme => programme.year === programmeRow.year) ?? programmeRow
               const selectedMetadata = selectedKeyData?.metadata ?? []
