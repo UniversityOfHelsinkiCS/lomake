@@ -126,6 +126,7 @@ export default {
     confirmRemoveLight: 'Haluatko varmasti poistaa',
     facultymonitoringText: 'Vastaukset ovat luettavissa / Lomakkeen täyttäminen päättyi 30.10.2024',
     archive: 'Arkisto',
+    all: 'Kaikki',
   },
 
   aboutPage: {
