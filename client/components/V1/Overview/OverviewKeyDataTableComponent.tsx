@@ -172,16 +172,11 @@ const KeyDataTableComponent = ({
 
   const programmeData = useMemo(() => {
     if (keyData) {
-      if (selectedYear >= 2026) {
-        const { kandiohjelmat, maisteriohjelmat, tohtoriohjelmat } = keyData
-        return [...kandiohjelmat, ...maisteriohjelmat, ...tohtoriohjelmat]
-      } else {
-        const { kandiohjelmat, maisteriohjelmat } = keyData
-        return [...kandiohjelmat, ...maisteriohjelmat]
-      }
+      const { kandiohjelmat = [], maisteriohjelmat = [], tohtoriohjelmat = [] } = keyData
+      return [...kandiohjelmat, ...maisteriohjelmat, ...tohtoriohjelmat]
     }
     return []
-  }, [keyData, selectedYear])
+  }, [keyData])
 
   const keyFigureData = useMemo(() => {
     // Convert to set for faster lookup
@@ -396,7 +391,7 @@ const KeyDataTableComponent = ({
                     )}
 
                     <ActionsCell metadata={metadata} programmeData={programmeData} reports={reports} />
-                    {activeYear < 2026 ? (
+                    {activeYear < 2026 || programmeData.level === 'doctoral' ? (
                       <TableCell disabled></TableCell>
                     ) : (
                       <QualityCell programmeData={programmeData} />
