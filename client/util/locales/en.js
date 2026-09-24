@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-
 export default {
   common: {
     adminPage: 'Admin',
@@ -50,6 +49,7 @@ export default {
     responses: 'Responses:',
     writtenAnswers: 'Writte"all": "All" monitoring',
     trafficLights: 'Traffic lights',
+    tracking: 'Planning and tracking',
     chooseTrafficLight: 'Select a traffic light evaluation',
     noTrafficLight: 'No evaluations. Press the button to add a new traffic light evaluation.',
 
@@ -58,6 +58,7 @@ export default {
     colors_green: 'only green',
     colors_yellow: 'only yellow',
     colors_red: 'only red',
+    colors_gray: 'Only gray',
     answers: 'answers',
 
     email: 'Email',
@@ -67,7 +68,7 @@ export default {
     delete: 'Delete',
     filled: 'filled',
     confirmDeselect: 'Are you sure you want to deselect the question?',
-
+    modifyLights: 'Modify lights',
     yearlyAssessment: 'Annual follow-up',
     evaluation: 'Review',
     evaluationFaculty: 'Review - Faculty',
@@ -111,12 +112,11 @@ export default {
     clock: 'Clock',
     toFrontpage: 'To frontpage',
     noSelections: 'No selected measures',
-    tracking: 'Planning and tracking',
 
     doctoralToggle: 'Doctoral Programmes',
     bachelorMasterToggle: `Bachelor's & Master's Programmes`,
     all: 'All',
-    colors_gray: 'Only gray',
+
     formFilter: {
       evaluation: 'View of education programmes by facultyd',
     },
@@ -128,7 +128,6 @@ export default {
     answer: 'Answer',
     overview: 'Overview',
     startDateEndDateError: 'The start time cannot be later than the estimated end time',
-    modifyLights: 'Modify lights',
     confirmRemoveLight: 'Are you sure you want to delete?',
     facultymonitoringText: 'The answers are available/ The deadline for filling in the form was October 30, 2024',
     archive: 'Archive',
@@ -765,8 +764,8 @@ export default {
     newDocument: 'Create new quality management document',
     info: 'Quality Management – This section contains questions for the degree programme steering group regarding the use of feedback to improve the degree programme. The quality management document is compiled from the entries made on the degree programme’s page.',
     info2: 'The questions can be accessed by clicking the “+Create new quality management document” button.',
+    doctoralInfo: 'Quality management form is not yet available for doctoral programmes.',
   },
-
   error: {
     title: 'The title must be at least 3 characters long',
     date: 'The date is in the wrong format',

@@ -1,13 +1,9 @@
 /* eslint-disable camelcase */
-
 export default {
-  // default namespace, can be used without prefix, ie. t('logOut')
   common: {
-    // all use Finnish fallback for following
     adminPage: 'Admin',
     about: 'About',
     admin: 'Admin',
-    // end
     logOut: 'Kirjaudu ulos',
     backToFrontPage: 'Takaisin etusivulle',
     chosenLanguage: 'Suomi',
@@ -22,7 +18,6 @@ export default {
     yellow: 'Keltainen',
     red: 'Punainen',
     gray: 'Harmaa',
-    all: 'Kaikki',
     EMPTY: 'Ei vastausta',
     empty: 'Ei vastausta',
     OK: 'Vastattu',
@@ -57,7 +52,6 @@ export default {
     tracking: 'Suunnittelu ja seuranta',
     chooseTrafficLight: 'Lisää uusi arvio',
     noTrafficLight: 'Ei arvioita. Lisää uusi liikennevaloarvio painamalla nappia.',
-
     choose: 'Valitse',
     colors_all: 'Kaikki',
     colors_green: 'Vain vihreät',
@@ -65,7 +59,6 @@ export default {
     colors_red: 'Vain punaiset',
     colors_gray: 'Vain harmaat',
     answers: 'vastaukset',
-
     email: 'Sähköpostiosoite',
     cancel: 'Peruuta',
     edit: 'Muokkaa',
@@ -73,9 +66,7 @@ export default {
     delete: 'Poista',
     filled: 'täytetty',
     confirmDeselect: 'Haluatko varmasti poistaa valinnan?',
-
     modifyLights: 'Muokkaa valoja',
-
     yearlyAssessment: 'Vuosiseuranta 2019-2023',
     evaluation: 'Katselmus',
     evaluationFaculty: 'Tiedekunnan katselmus',
@@ -766,6 +757,7 @@ export default {
     newDocument: 'Luo uusi laadunhallinnan dokumentti',
     info: 'Laadunhallinta –osio sisältää kysymyksiä koulutusohjelman johtoryhmälle palautetiedon hyödyntämisestä koulutusohjelman kehittämisessä. Laadunhallinnan dokumentti muodostuu koulutusohjelman tekemistä kirjauksista koulutusohjelman sivulla.',
     info2: 'Kysymykset avautuvat painikkeesta: + Luo uusi laadunhallinnan dokumentti.',
+    doctoralInfo: 'Laadunhallintalomake ei ole vielä tohtoriohjelmien käytettävissä.',
   },
   error: {
     title: 'Otsikon täytyy olla vähintään 3 merkkiä pitkä',

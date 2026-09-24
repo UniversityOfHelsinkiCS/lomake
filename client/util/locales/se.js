@@ -40,7 +40,6 @@ export default {
     programmeFilter: 'Sök utbildningsprogram',
     facultyFilter: 'Hitta fakulteter',
     find: 'Sök',
-    facultymonitoringText: 'Svar finns tillgängliga / Sista dagen för att fylla i formuläret var 30.10.2024',
     showDiscontinued: 'Visa avvecklade program',
 
     noData: 'Inga program eller svar hittades. Försök att ändra din sökning.',
@@ -53,22 +52,21 @@ export default {
     tracking: 'Planering och uppföljning',
     chooseTrafficLight: 'Välj en utvärdering av trafikljus',
     noTrafficLight: 'Inga utvärderingar. Tryck på knappen för att lägga till en ny utvärdering av trafikljuset.',
-
-    modifyLights: 'Redigera ljus',
     choose: 'Välj',
     colors_all: 'alla',
     colors_green: 'endast gröna',
     colors_yellow: 'endast gula',
     colors_red: 'endast röda',
+    colors_gray: 'Bara grått',
     answers: 'svar',
-
     email: 'E-post',
     cancel: 'Avbryt',
     edit: 'Redigera',
+    stopEditing: 'Sluta redigera',
     delete: 'Ta bort',
     filled: 'ifylld',
     confirmDeselect: 'Vill du ta bort svaret?',
-
+    modifyLights: 'Redigera ljus',
     yearlyAssessment: 'Årlig uppföljning',
     evaluation: 'Översynen',
     evaluationFaculty: 'Översynen - fakultet',
@@ -114,7 +112,6 @@ export default {
     toFrontpage: 'Till startsidan',
     noSelections: 'Inga valda åtgärder',
     all: 'Alla',
-    colors_gray: 'Bara grått',
     formFilter: {
       evaluation: 'Syn på utbildningsprogram per fakultet',
     },
@@ -130,7 +127,6 @@ export default {
     confirmRemoveLight: 'Är du säker på att du vill ta bort?',
     archive: 'Arkiv',
   },
-
   aboutPage: {
     title: 'Information om blanketten',
     whatIsIt: 'Vad är självbedömningsblanketten?',
@@ -147,7 +143,6 @@ export default {
     contactInfo: 'Frågor? Kontakta paivi.aronen@helsinki.fi',
     broughtBy: 'Förverkligad av',
   },
-
   landingPage: {
     title: 'Status Report Form',
     subTitle:
@@ -172,14 +167,12 @@ export default {
     archiveList3: 'Utvärdering av utbildningsreformen Stora hjulet 2023 (= Utbildningens nuvarande tillstånd)',
     feedback: 'Återkoppling om tilannekuvalomake?',
   },
-
   comparison: {
     selectYears: 'Jämför åren du vill granska',
     filterFaculties: 'Filtrera enligt fakultet',
     emptyAnswers: 'Räkna in program utan svar på frågan',
     emptyFacultyAnswers: 'Räkna in fakulteter utan svar på frågan',
   },
-
   formView: {
     formError: 'Fel vid anslutning av sidan',
     formErrorButton: 'Klicka här för att ladda om sidan!',
@@ -307,7 +300,6 @@ export default {
       'Vill du skicka ett annat formulär? Uppgifterna för alla inskickade formulär kommer att bevaras',
     sendFormModalHeader: 'Skickar den nya utbildningsstatusblanketten',
   },
-
   generic: {
     noData: 'svar på enskilda frågor som ännu inte är tillgängliga',
     facultyAvg: 'Genomsnitt av fakultetens program',
@@ -399,7 +391,7 @@ export default {
     name: 'Namn',
     view: 'Läs',
     edit: 'Redigera',
-    stopEditing: 'Sluta redigera',
+
     owner: 'Ägare',
     noUsers: 'Inga användare',
     userListJory: 'Ledningsgruppmedlemmar som har fått tillgång till blanketten',
@@ -771,6 +763,7 @@ export default {
     newDocument: 'Skapa ett nytt dokument för kvalitetsstyrning',
     info: 'Kvalitetsstyrning – detta avsnitt innehåller frågor till utbildningsprogrammets ledningsgrupp om hur återkopplingsinformationen används för att utveckla utbildningsprogrammet. Dokumentet för kvalitetsstyrning består av de anteckningar som görs på utbildningsprogrammets sida.',
     info2: 'Frågorna öppnas genom att klicka på knappen: +Skapa ett nytt dokument för kvalitetsstyrning.',
+    doctoralInfo: 'Kvalitetsstyrningsdokumentet är ännu inte tillgänglig för doktorandprogrammen.',
   },
   error: {
     title: 'Titeln måste vara minst 3 tecken lång',
