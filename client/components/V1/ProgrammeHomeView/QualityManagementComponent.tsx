@@ -80,13 +80,13 @@ const QualityManagementComponent = ({ programmeData }) => {
     return <CircularProgress />
   }
 
-  const handleDelete = (id: number | string) => {
+  const handleDelete = async (id: number | string) => {
     const isConfirmed = window.confirm(t('document:confirmDelete'))
     if (isConfirmed) {
       const idStr = String(id)
       const lockField = getEditLockField(id)
-      deleteDocument({ studyprogrammeKey: programmeKey, id: idStr })
-      deleteLock({ room: programmeKey, field: lockField })
+      await deleteDocument({ studyprogrammeKey: programmeKey, id: idStr })
+      await deleteLock({ room: programmeKey, field: lockField })
     }
   }
 
@@ -107,6 +107,11 @@ const QualityManagementComponent = ({ programmeData }) => {
         <Alert severity="info" sx={{ gap: 1, mb: 2 }}>
           <Typography variant="light">{t('qualitydocument:documentingDescription')}</Typography>
         </Alert>
+        {programmeData.level === 'doctoral' && (
+          <Alert severity="warning" sx={{ gap: 1, mb: 2 }}>
+            <Typography variant="light">{t('qualitydocument:doctoralInfo')}</Typography>
+          </Alert>
+        )}
         {currentUserEditingDraft ? (
           <Typography style={{ color: 'red' }} variant="regular">
             {t('qualitydocument:documentLockedWarning')}
@@ -192,6 +197,7 @@ const QualityManagementComponent = ({ programmeData }) => {
         {hasWriteRights &&
         !hasDocumentForYear &&
         activeYear > 2025 &&
+        programmeData.level !== 'doctoral' &&
         !programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? (
           <Box>
             {(() => {

@@ -78,7 +78,7 @@ const ProgrammeHomeView = () => {
           </Alert>
         ) : null}
         <Typography variant="light">{t('keyData:homeDescription')}</Typography>
-        {programmeKey ? <ProgrammeKeyDataTable programmeData={programmeData} programmeKey={programmeKey} /> : null}
+        {programmeKey && <ProgrammeKeyDataTable programmeData={programmeData} programmeKey={programmeKey} />}
       </Box>
       <QualityManagementComponent programmeData={programmeData[programmeData.length - 1]} />
       <InterventionComponent />
