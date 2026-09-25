@@ -31,7 +31,6 @@ import { checkEmployeeOrStudent } from './middleware/accessControlMiddleware.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// eslint-disable-next-line import-x/no-named-as-default-member
 dotenv.config()
 
 const app = express()
@@ -40,7 +39,6 @@ const server = new http.Server(app)
 
 initializeSentry()
 
-// eslint-disable-next-line import-x/no-named-as-default-member
 app.use(express.json({ limit: '50mb' }))
 app.use(compression())
 app.use(accessLogger)
@@ -59,7 +57,6 @@ app.use('/api', routes)
 if (inProduction || inStaging) {
   const DIST_PATH = path.resolve(__dirname, '../build')
   const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
-  // eslint-disable-next-line import-x/no-named-as-default-member
   app.use(express.static(DIST_PATH))
   app.get('*', (_req, res) => res.sendFile(INDEX_PATH))
 }
@@ -89,7 +86,7 @@ initializeDatabaseConnection().then(async () => {
     logger.info(`Server started on port ${PORT}`)
     await testJami()
     startBackupJob()
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    // oxlint-disable-next-line typescript/no-floating-promises
     startDeadlineWatcher()
   })
 })

@@ -17,7 +17,7 @@ interface ValidateOperationResponse {
 
 const validationOperation = async (req: Request): Promise<ValidateOperationResponse> => {
   const { programme, id } = req.params
-  const { data } = req.body
+  const data = req.body?.data ? req.body.data : null
 
   const resultData: ValidateOperationResponse = {
     success: false,

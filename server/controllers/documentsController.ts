@@ -25,7 +25,7 @@ const calculateActiveYear = (documents: Document[]) => {
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
   const { programme, id } = req.params
-  const { data } = req.body
+  const data = req.body?.data ? req.body.data : null
 
   const resultObject: ValidateOperationResponse = {
     success: false,
