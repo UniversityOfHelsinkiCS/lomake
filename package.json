@@ -93,7 +93,7 @@
     "@types/node": "24.10.1",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
-    "concurrently": "9.0.0",
+    "concurrently": "10.0.5",
     "cross-env": "7.0.3",
     "cypress": "15.17.0",
     "eslint-config-prettier": "10.1.5",
