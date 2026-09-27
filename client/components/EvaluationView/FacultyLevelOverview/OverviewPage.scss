@@ -1,6 +1,6 @@
 $QUESTION_COUNT: 14;
 
-@import '../../../assets/colors.scss';
+@use '../../../assets/colors.scss';
 
 .csv-download {
   max-width: 200px;
@@ -33,21 +33,21 @@ $QUESTION_COUNT: 14;
 
   &-red {
     @include square-basics;
-    background-color: $light-red;
+    background-color: colors.$light-red;
     &:hover {
       filter: brightness(0.8);
     }
   }
   &-yellow {
     @include square-basics;
-    background-color: $light-yellow;
+    background-color: colors.$light-yellow;
     &:hover {
       filter: brightness(0.8);
     }
   }
   &-green {
     @include square-basics();
-    background-color: $light-green;
+    background-color: colors.$light-green;
     &:hover {
       filter: brightness(0.8);
     }
@@ -64,8 +64,8 @@ $QUESTION_COUNT: 14;
 @mixin sticky-header-basics {
   position: sticky;
   top: 0;
-  background-color: $background-white;
-  box-shadow: 0px 0px 2px 2px $background-white; //little white shadow to cover the shadow of the .square
+  background-color: colors.$background-white;
+  box-shadow: 0px 0px 2px 2px colors.$background-white; //little white shadow to cover the shadow of the .square
   padding-top: 10px;
   z-index: 4;
 }
@@ -121,15 +121,15 @@ $QUESTION_COUNT: 14;
 .traffic-light {
   &-green {
     @include traffic-light-basics;
-    background: $background-green;
+    background: colors.$background-green;
   }
   &-yellow {
     @include traffic-light-basics;
-    background: $background-yellow;
+    background: colors.$background-yellow;
   }
   &-red {
     @include traffic-light-basics;
-    background: $background-red;
+    background: colors.$background-red;
   }
 }
 
@@ -143,21 +143,21 @@ $QUESTION_COUNT: 14;
     h2 {
       @include accordion-title-basics;
     }
-    background: $light-green;
+    background: colors.$light-green;
   }
   &-yellow {
     border-radius: 10px 100px / 120px;
     h2 {
       @include accordion-title-basics;
     }
-    background: $light-yellow;
+    background: colors.$light-yellow;
   }
   &-red {
     border-radius: 10px 100px / 120px;
     h2 {
       @include accordion-title-basics;
     }
-    background: $light-red;
+    background: colors.$light-red;
   }
 }
 

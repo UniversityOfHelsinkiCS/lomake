@@ -1,4 +1,4 @@
-@import '../../assets/colors.scss';
+@use '../../assets/colors.scss';
 
 
 @mixin question-caret-basics {
@@ -19,7 +19,7 @@
   position: absolute;
   top: 20px;
   right: 15px;
-  color: $white !important;
+  color: colors.$white !important;
 }
 
 .question {
@@ -28,7 +28,7 @@
   }
   &-caret-disabled {
     @include question-caret-basics;
-    color: $gray !important;
+    color: colors.$gray !important;
     cursor: default;
   }
   &-header {
@@ -38,28 +38,28 @@
   }
   &-label {
     @include question-label-basics;
-    color: $black;
+    color: colors.$black;
   }
   &-label-disabled {
     @include question-label-basics;
-    color: $gray;
+    color: colors.$gray;
     cursor: default;
     &:hover {
-      color: $gray !important;
+      color: colors.$gray !important;
     }
   }
   &-description {
     font-style: italic;
-    color: $dark-gray;
+    color: colors.$dark-gray;
     font-weight: 300;
     margin-top: 1em;
   }
   &-description-disabled {
-    color: $gray;
+    color: colors.$gray;
     cursor: default;
   }
   &-title-disabled {
-    color: $gray !important;
+    color: colors.$gray !important;
     cursor: default;
   }
   &-content {
@@ -68,14 +68,14 @@
   }
   &-answered-label {
     @include answered-label-basics;
-    background-color: $blue !important;
+    background-color: colors.$blue !important;
     &-disabled {
       @include answered-label-basics;
-      background-color: $gray !important;
+      background-color: colors.$gray !important;
     }
   }
   &-extrainfo {
-    color: $gray;
+    color:colors.$gray;
     font-weight: 300;
     font-style: italic;
   }
@@ -114,15 +114,15 @@
   }
   &-circle-green {
     @include answer-circle-basics;
-    background: $background-green;
+    background: colors.$background-green;
   }
   &-circle-yellow {
     @include answer-circle-basics;
-    background: $background-yellow;
+    background: colors.$background-yellow;
   }
   &-circle-red {
     @include answer-circle-basics;
-    background: $background-red;
+    background: colors.$background-red;
   }
   &-circle-blue {
     @include answer-circle-basics;
@@ -130,28 +130,28 @@
   }
   &-circle-gray {
     @include answer-circle-basics;
-    background: $gray;
+    background: colors.$gray;
   }
   &-circle-big-green {
     @include answer-circle-big-basics;
-    background: $background-green;
+    background: colors.$background-green;
   }
   &-circle-big-yellow {
     @include answer-circle-big-basics;
-    background: $background-yellow;
+    background: colors.$background-yellow;
   }
   &-circle-big-red {
     @include answer-circle-big-basics;
-    background: $background-red;
+    background: colors.$background-red;
   }
   &-circle-big-gray {
     @include answer-circle-big-basics;
-    background: $gray;
+    background: colors.$gray;
   }
   &-circle-big-all {
     border-radius: 50%;
     box-sizing: border-box;
-    border: 2px solid $black;
+    border: 2px solid colors.$black;
     display: inline-block;
     height: 26px;
     width: 26px;
@@ -216,8 +216,8 @@
     z-index: 5;
     padding: 6px 10px;
     border-radius: 2px;
-    background: $white;
-    color: $black;
+    background: colors.$white;
+    color: colors.$black;
     font-size: 12px;
     text-shadow: 0 1px 0 #fff;
     line-height: 1.1;

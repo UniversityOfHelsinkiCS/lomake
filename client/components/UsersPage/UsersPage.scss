@@ -1,7 +1,7 @@
-@import '../../assets/colors.scss';
+@use '../../assets/colors.scss';
 
 .users-red {
-  color: $red;
+  color: colors.$red;
   filter: brightness(0.9);
 }
 
@@ -10,7 +10,7 @@
 }
 
 .users-green {
-  color: $green;
+  color: colors.$green;
   filter: brightness(0.9)
 }
 
@@ -35,8 +35,8 @@
 }
 
 .user-programme-list-item {
-  background-color: $light-gray !important;
-  color: $black !important;
+  background-color: colors.$light-gray !important;
+  color: colors.$black !important;
   margin: 0.2em !important;
   min-width: 200px;
 }
@@ -73,7 +73,7 @@
 }
 
 .deadline-warning {
-  color: $red
+  color: colors.$red
 }
 
 .temp-access-details {

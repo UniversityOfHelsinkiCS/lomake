@@ -1,8 +1,8 @@
-@import '../../assets/colors.scss';
+@use '../../assets/colors.scss';
 
 .footer {
-  background-color: $toska-black;
-  color: $white;
+  background-color: colors.$toska-black;
+  color: colors.$white;
   width: 100%;
   position: relative;
   bottom: 0;
@@ -11,7 +11,7 @@
     position: absolute;
     top: 30px;
     > p, .logo {
-      color: $toska-orange;
+      color: colors.$toska-orange;
       font-weight: 200;
       text-align: center;
       font-size: 1.2em;

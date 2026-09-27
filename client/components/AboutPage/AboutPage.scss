@@ -1,12 +1,12 @@
-@import '../../assets/colors.scss';
+@use '../../assets/colors.scss';
 
 .about-header-line {
   background: linear-gradient(
     to bottom,
-    $toska-red,
-    $toska-red 50%,
-    $toska-orange 50%,
-    $toska-orange,
+    colors.$toska-red,
+    colors.$toska-red 50%,
+    colors.$toska-orange 50%,
+    colors.$toska-orange,
   );
   width: 100%;
   height: 4px;

@@ -1,4 +1,4 @@
-@import '../assets/colors.scss';
+@use '../assets/colors.scss';
 
 html {
   font-family:
@@ -14,7 +14,7 @@ html {
 
 .navbar {
   height: 5em;
-  background-color: $background-gray;
+  background-color: colors.$background-gray;
 }
 
 .content {
@@ -101,7 +101,7 @@ blockquote {
 
 .footer {
   height: 5em;
-  background-color: $background-gray;
+  background-color: colors.$background-gray;
 }
 
 label {
@@ -119,13 +119,13 @@ label {
   margin: 1em 0em;
 
   &.error {
-    color: $red;
-    border: 3px solid $red;
+    color: colors.$red;
+    border: 3px solid colors.$red;
   }
 
   &.valid {
-    color: $green;
-    border: 3px solid $green;
+    color: colors.$green;
+    border: 3px solid colors.$green;
   }
 }
 
@@ -146,7 +146,7 @@ label {
     padding: 0 !important;
     margin: 1.5em 0em 1em 0em !important;
     background: transparent !important;
-    color: $black !important;
+    color: colors.$black !important;
   }
 
   .form-entity-area {

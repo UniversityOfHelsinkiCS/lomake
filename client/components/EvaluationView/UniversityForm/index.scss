@@ -1,4 +1,4 @@
-@import '../../../assets/colors.scss';
+@use '../../../assets/colors.scss';
 
 .summary-container {
   padding: 1em;
@@ -14,19 +14,19 @@
 .answer {
   &-circle-green {
     @include answer-circle-basics;
-    background: $background-green;
+    background: colors.$background-green;
   }
   &-circle-yellow {
     @include answer-circle-basics;
-    background: $background-yellow;
+    background: colors.$background-yellow;
   }
   &-circle-red {
     @include answer-circle-basics;
-    background: $background-red;
+    background: colors.$background-red;
   }
   &-circle-gray {
     @include answer-circle-basics;
-    background: $gray;
+    background: colors.$gray;
   }
 }
 
@@ -48,15 +48,15 @@
 .big-circle {
   &-green {
     @include big-circle-basics;
-    background: $background-green;
+    background: colors.$background-green;
   }
   &-yellow {
     @include big-circle-basics;
-    background: $background-yellow;
+    background: colors.$background-yellow;
   }
   &-red {
     @include big-circle-basics;
-    background: $background-red;
+    background: colors.$background-red;
   }
 }
 
@@ -65,7 +65,7 @@
   align-items: center;
   border-radius: 20%;
   padding: 5px;
-  background: $background-blue;
+  background: colors.$background-blue;
 }
 
 .old-answer-text {
@@ -74,7 +74,7 @@
 
 .info-container {
   line-height: 2;
-  background: $background_blue;
+  background: colors.$background_blue;
   padding: 1.5em 1em;
   border-radius: 5px;
   margin: 2em 0em 1em 0em;

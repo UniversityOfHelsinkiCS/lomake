@@ -1,4 +1,4 @@
-@import '../../assets/colors.scss';
+@use '../../assets/colors.scss';
 
 .form-status-message {
   margin: 1em;
@@ -27,7 +27,7 @@
     }
   }
   &-excluded {
-    color: $gray;
+    color: colors.$gray;
     &:hover {
       font-weight: bold;
       cursor: pointer;
@@ -37,7 +37,7 @@
     margin-left: 6px;
   }
   &-header-alert {
-    color: $red;
+    color: colors.$red;
     font-weight: bold;
   }
 }
@@ -56,7 +56,7 @@
     &-bolded {
       margin-top: 2em !important;
       font-size: 1.05em;
-      color: $red;
+      color: colors.$red;
     }
   }
   &-selector {
@@ -65,7 +65,7 @@
     &-bolded {
       margin-top: 0.5em !important;
       max-width: 90%;
-      border: 2px solid $black;
+      border: 2px solid colors.$black;
       font-weight: bold;
     }
   }
@@ -78,7 +78,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: $dimmer-dark;
+  background-color: colors.$dimmer-dark;
 }
 
 .customModal-content {
@@ -89,7 +89,7 @@
   width: 80%;
   max-height: 100%;
   max-width: 1100px;
-  background: $background-white;
+  background: colors.$background-white;
 }
 
 .title-and-close {
@@ -190,14 +190,14 @@
   width: 560px !important;
   &-title {
     &-active {
-      background-color: $light-gray !important;
+      background-color: colors.$light-gray !important;
     }
   }
 }
 
 .year-filter {
   &-label-alert {
-    color: $red;
+    color: colors.$red;
   }
   &-extra-small {
     > label {
@@ -232,7 +232,7 @@
   height: 56px;
   width: 56px;
   margin: 5px;
-  box-shadow: 5px 2px 2px $gray;
+  box-shadow: 5px 2px 2px colors.$gray;
 }
 
 .unselected-animated {
@@ -256,15 +256,15 @@
 
 .circle-big-green {
   @include answer-circle-big-basics;
-  background: $background-green;
+  background: colors.$background-green;
 }
 .circle-big-yellow {
   @include answer-circle-big-basics;
-  background: $background-yellow;
+  background: colors.$background-yellow;
 }
 .circle-big-red {
   @include answer-circle-big-basics;
-  background: $background-red;
+  background: colors.$background-red;
 }
 .circle-big-gray {
   @include answer-circle-big-basics;
@@ -273,15 +273,15 @@
 
 .circle-big-green-selected {
   @include selected-answer-circle-big-basics;
-  background: $background-green;
+  background: colors.$background-green;
 }
 .circle-big-yellow-selected {
   @include selected-answer-circle-big-basics;
-  background: $background-yellow;
+  background: colors.$background-yellow;
 }
 .circle-big-red-selected {
   @include selected-answer-circle-big-basics;
-  background: $background-red;
+  background: colors.$background-red;
 }
 .circle-big-gray-selected {
   @include selected-answer-circle-big-basics;
@@ -289,7 +289,7 @@
 }
 
 .editor-class {
-  background-color: $background-light-gray;
+  background-color: colors.$background-light-gray;
   padding: 1em;
   width: 100%;
   min-height: 230px;
@@ -312,11 +312,11 @@
   min-width: 10px;
   min-height: 220px;
   border: 0;
-  background-color: $background-light-gray;
+  background-color: colors.$background-light-gray;
   margin: 0;
 
   &.disabled {
-    background-color: $background-blue;
+    background-color: colors.$background-blue;
 
     div {
       // Hides the actual buttons (like bold,underline and so on)
@@ -337,7 +337,7 @@
 .checkbox-description,
 .choose-radio-description {
   line-height: 2;
-  background-color: $background_beige;
+  background-color: colors.$background_beige;
   padding: 1em;
   border-radius: 5px;
   margin: 1em 0;
@@ -365,7 +365,7 @@
 }
 
 .no-selections {
-  background-color: $background-light-gray;
+  background-color: colors.$background-light-gray;
   padding: 1em;
 }
 
@@ -385,7 +385,7 @@
 }
 
 .question-required {
-  color: $red;
+  color: colors.$red;
   margin-left: '0.2em';
   font-weight: '600';
 }
