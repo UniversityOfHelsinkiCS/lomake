@@ -550,6 +550,7 @@ export default {
     selectDegree: 'What is the degree of impact',
   },
   keyData: {
+    doctoralDemoInfo: 'Data for 2026 is testdata for demonstration purposes.',
     title: 'The vitality of degree programmes at the University of Helsinki',
     info1: `<strong>Evaluation areas</strong> describing the programme's vitality include: <i>a) traction, b) study progress and graduation, c) feedback and employment, and d) use of resources.</i> The evaluation areas are the same for bachelor's, master's and doctoral programmes.`,
     info2:

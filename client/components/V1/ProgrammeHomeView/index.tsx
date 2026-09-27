@@ -77,6 +77,13 @@ const ProgrammeHomeView = () => {
             </Typography>
           </Alert>
         ) : null}
+        {programmeKey?.includes('DP') ? (
+          <Alert severity="warning" sx={{ mb: 4 }}>
+            <Typography variant="light">
+              <Trans i18nKey={'keyData:doctoralDemoInfo'} />{' '}
+            </Typography>
+          </Alert>
+        ) : null}
         <Typography variant="light">{t('keyData:homeDescription')}</Typography>
         {programmeKey && <ProgrammeKeyDataTable programmeData={programmeData} programmeKey={programmeKey} />}
       </Box>

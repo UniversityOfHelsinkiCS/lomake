@@ -34,7 +34,10 @@ const TrafficLightCell = ({
   const level = getLevel(programmeData.level)
   const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
   const shouldRenderBadge = renderTrafficLightBadge(programmeData, groupKey, color, reports)
-  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? colors.background_gray : ''
+  const backRoundColor =
+    programmeData?.additionalInfo?.fi?.includes('Lakkautettu') || programmeData?.koulutusohjelmakoodi.startsWith('DP')
+      ? colors.background_gray
+      : ''
   return (
     <TableCell
       data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}-${activeYear}`}

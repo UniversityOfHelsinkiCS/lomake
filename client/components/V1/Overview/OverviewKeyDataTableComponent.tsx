@@ -51,10 +51,14 @@ const doctoralProgFacultyMapper = {
 
 const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const lang = useAppSelector(state => state.language) as 'fi' | 'en' | 'se'
+  const { t } = useTranslation()
   const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
   const color = additionalInfo.fi === 'Lakkautettu ohjelma' ? 'secondary' : ''
   const hasAdditionalInfo = Boolean(additionalInfo[lang])
-  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? colors.background_gray : ''
+  const backRoundColor =
+    programmeData?.additionalInfo?.fi?.includes('Lakkautettu') || koulutusohjelmakoodi.startsWith('DP')
+      ? colors.background_gray
+      : ''
 
   return (
     <TableCell
@@ -68,8 +72,12 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <Typography color={color} variant="regular">
               {koulutusohjelma[lang]}{' '}
-              {hasAdditionalInfo ? (
-                <Tooltip arrow placement="top" title={additionalInfo[lang]}>
+              {hasAdditionalInfo || koulutusohjelmakoodi.startsWith('DP') ? (
+                <Tooltip
+                  arrow
+                  placement="top"
+                  title={koulutusohjelmakoodi.startsWith('DP') ? t('keyData:doctoralDemoInfo') : additionalInfo[lang]}
+                >
                   <span style={{ display: 'inline-flex', alignItems: 'center' }}>
                     <InfoOutlinedIcon
                       color="secondary"
@@ -398,9 +406,11 @@ const KeyDataTableComponent = ({
                     )}
                     <TableCell
                       style={{
-                        backgroundColor: programmeData?.additionalInfo?.fi?.includes('Lakkautettu')
-                          ? colors.background_gray
-                          : '',
+                        backgroundColor:
+                          programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ||
+                          programmeData?.koulutusohjelmakoodi.startsWith('DP')
+                            ? colors.background_gray
+                            : '',
                       }}
                     >
                       <InterventionCell

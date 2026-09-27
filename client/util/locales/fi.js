@@ -539,6 +539,7 @@ export default {
   },
 
   keyData: {
+    doctoralDemoInfo: 'Data vuodelle 2026 on testidataa demoa varten.',
     title: 'Koulutusohjelmien elinvoimaisuus Helsingin yliopistossa',
     info1:
       'Koulutusohjelman elinvoimaisuutta kuvaavat <strong>arviointialueet</strong> ovat: <i>a) vetovoimaisuus, b) opintojen sujuvuus ja valmistuminen, c) palaute ja työllistyminen sekä d) resurssien käyttö.</i> Arviointialueet ovat samat kandi-, maisteri- ja tohtoriohjelmille.',

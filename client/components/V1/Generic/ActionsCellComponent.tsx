@@ -31,7 +31,10 @@ const ActionsCell = ({
   const dispatch = useAppDispatch()
 
   const actionsBadgeData = renderActionsBadge(programmeData, metadata, true, reports)
-  const backRoundColor = programmeData?.additionalInfo?.fi?.includes('Lakkautettu') ? colors.background_gray : ''
+  const backRoundColor =
+    programmeData?.additionalInfo?.fi?.includes('Lakkautettu') || programmeData?.koulutusohjelmakoodi.startsWith('DP')
+      ? colors.background_gray
+      : ''
 
   const handleOpen = () => {
     dispatch(setViewOnly(true))

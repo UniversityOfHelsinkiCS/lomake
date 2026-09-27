@@ -296,6 +296,13 @@ const ProgrammeYearlyView = () => {
             </Typography>
           </Alert>
         ) : null}
+        {programmeData.koulutusohjelmakoodi.startsWith('DP') ? (
+          <Alert severity="warning" sx={{ mb: 4 }}>
+            <Typography variant="light">
+              <Trans i18nKey={'keyData:doctoralDemoInfo'} />{' '}
+            </Typography>
+          </Alert>
+        ) : null}
       </Box>
       {activeTab === 0 && (
         <Box>

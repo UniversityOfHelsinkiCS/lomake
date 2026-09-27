@@ -542,6 +542,7 @@ export default {
   },
 
   keyData: {
+    doctoralDemoInfo: 'Data för 2026 är testdata för en demonstration.',
     title: 'Utbildnigsprogrammens vitalitet vid Helsingfors universitet',
     info1:
       '<strong>Utvärderingsområden</strong> som beskriver programmets vitalitet är: <i>a) attraktivitet, b) smidiga studier och graduering, c) feedback och sysselsättning, d) resursanvändning.</i> Utvärderingsområdena är desamma för kandidat-, magister- och doktorandprogram.',
