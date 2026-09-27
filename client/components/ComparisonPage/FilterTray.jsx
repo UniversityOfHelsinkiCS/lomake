@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { Menu } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-import YearSelector from '../Generic/YearSelector'
+import { YearSelector } from '../Generic/YearSelector'
 import CompanionFilter from '../Generic/CompanionFilter'
 import DoctoralSchoolFilter from '../Generic/DoctoralSchoolFilter'
 import FacultyFilter from '../Generic/FacultyFilter'

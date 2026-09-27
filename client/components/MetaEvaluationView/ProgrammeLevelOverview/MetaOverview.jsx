@@ -14,7 +14,7 @@ import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import FacultyDropdown from './FacultyDropdown'
 import DegreeDropdown from './DegreeDropdown'
-import YearSelector from '../../Generic/YearSelector'
+import { YearSelector } from '../../Generic/YearSelector'
 
 const MetaOverview = ({
   t,

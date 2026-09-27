@@ -1,11 +1,10 @@
 import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import ReactToPrint from 'react-to-print'
-
-import { colors } from '../../util/common'
+import { useReactToPrint } from 'react-to-print'
 import { setQuestions } from '../../redux/filterReducer'
 import './Generic.scss'
+import { Button } from 'semantic-ui-react'
 
 const PDFDownload = ({ componentRef, linkName = null }) => {
   const { t } = useTranslation()
@@ -35,8 +34,6 @@ const PDFDownload = ({ componentRef, linkName = null }) => {
   }, [isPrinting])
 
   const handleReady = () => {
-    promiseResolveRef.current = null
-    setIsPrinting(false)
     dispatch(setQuestions({ selected: questions.selected, open: [] }))
   }
 
@@ -44,26 +41,30 @@ const PDFDownload = ({ componentRef, linkName = null }) => {
     dispatch(setQuestions({ selected: questions.selected, open: questions.selected }))
   }
 
+  const handlePrint = useReactToPrint({
+    content: () => {
+      return componentRef.current
+    },
+    documentTitle: title,
+    copyStyles: true,
+    onBeforeGetContent: async () => {
+      handlePrepare()
+      setExportTitle()
+      return Promise.resolve()
+    },
+    onBeforePrint: () => {
+      setIsPrinting(true)
+    },
+    onAfterPrint: () => {
+      handleReady()
+      setIsPrinting(false)
+    },
+  })
   return (
-    <ReactToPrint
-      content={() => componentRef.current}
-      documentTitle={title}
-      onAfterPrint={handleReady}
-      onBeforeGetContent={() =>
-        new Promise(resolve => {
-          promiseResolveRef.current = resolve
-          handlePrepare()
-          setExportTitle()
-          setIsPrinting(true)
-        })
-      }
-      // eslint-disable-next-line react/no-unstable-nested-components
-      trigger={() => (
-        <span style={{ cursor: 'pointer', color: colors.blue, fontSize: '0.9em' }}>
-          {linkName ? t(`overview:printingPDF:${linkName}`) : t('generic:downloadPDF')}
-        </span>
-      )}
-    />
+    <Button onClick={handlePrint}>
+      {' '}
+      {linkName ? t(`overview:printingPDF:${linkName}`) : t('generic:downloadPDF')}
+    </Button>
   )
 }
 

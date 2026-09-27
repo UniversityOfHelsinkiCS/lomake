@@ -83,7 +83,7 @@ const FormattedAccess = ({ user, programmeCodesAndNames }) => {
   )
 }
 
-export default ({ user, lang, programmeCodesAndNames, data }) => {
+const User = ({ user, lang, programmeCodesAndNames, data }) => {
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const navigate = useNavigate()
@@ -138,3 +138,5 @@ export default ({ user, lang, programmeCodesAndNames, data }) => {
     </TableRow>
   )
 }
+
+export default User

@@ -6,7 +6,7 @@ import { formKeys } from '../../../config/data'
 import CustomModal from '../Generic/CustomModal'
 import { Link } from '../Link'
 
-export default ({
+const PieChart = ({
   question,
   answers,
   showEmpty,
@@ -203,3 +203,5 @@ export default ({
     </div>
   )
 }
+
+export default PieChart

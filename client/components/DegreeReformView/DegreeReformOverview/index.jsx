@@ -13,7 +13,7 @@ import CustomModal from '../../Generic/CustomModal'
 import NoPermissions from '../../Generic/NoPermissions'
 import { getForm, filterFromUrl } from '../../../util/common'
 import { getFacultyReformAnswers, getUniversityReformAnswers } from '../../../redux/reformAnswerReducer'
-import YearSelector from '../../Generic/YearSelector'
+import { YearSelector } from '../../Generic/YearSelector'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -53,7 +53,7 @@ const getFacultyFromUrl = () => {
   return faculty
 }
 
-export default () => {
+const DegreeReformOverview = () => {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
@@ -278,3 +278,5 @@ export default () => {
     </>
   )
 }
+
+export default DegreeReformOverview

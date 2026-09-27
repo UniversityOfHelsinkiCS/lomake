@@ -48,7 +48,7 @@ export const TextQuestionGroup = ({ questionGroup, answers }) => {
   )
 }
 
-export default () => {
+const Reform = () => {
   const [form, setForm] = useState('number')
   const [filters, setFilters] = useState([])
   const dispatch = useDispatch()
@@ -133,3 +133,5 @@ export default () => {
     </div>
   )
 }
+
+export default Reform

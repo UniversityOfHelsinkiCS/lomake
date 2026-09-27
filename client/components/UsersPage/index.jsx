@@ -5,17 +5,16 @@ import { Tabs, Tab, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { getAllUsersAction } from '../../redux/usersReducer'
 import { isSuperAdmin } from '../../../config/common'
-import UserTable from './UserTable'
+import { UserTable } from './UserTable'
 import IamTable from './IamTable'
 import DeadlineInfo from './DeadlineInfo'
 import DeadlineSetting from './DeadlineSetting'
 import UpdateStudyprogrammes from './UpdateStudyprogrammes'
 import TempAccess from './TempAccess'
 import Debug from './Debug'
-// eslint-disable-next-line import-x/no-named-as-default
 import KeyData from './KeyData'
 
-export default () => {
+const UsersPage = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
@@ -77,3 +76,5 @@ export default () => {
     </Box>
   )
 }
+
+export default UsersPage

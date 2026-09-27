@@ -12,7 +12,7 @@ import PieChart from './PieChart'
 const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setActiveTab, setShowing }) => {
   const { t } = useTranslation()
   const [showEmpty, setShowEmpty] = useState(true)
-  const componentRef = useRef()
+  const componentRef = useRef(null)
   const questions = useSelector(({ filters }) => filters.questions)
   const form = useSelector(({ filters }) => filters.form)
   if (chosenProgrammes.length < 1 || allAnswers.size < 1) {

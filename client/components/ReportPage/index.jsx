@@ -15,7 +15,7 @@ import { setForm } from '../../redux/filterReducer'
 
 import { answersByYear, filteredProgrammes, modifiedQuestions, answersByQuestions } from '../../util/common'
 import useDebounce from '../../util/useDebounce'
-import YearSelector from '../Generic/YearSelector'
+import { YearSelector } from '../Generic/YearSelector'
 import ProgrammeList from '../Generic/ProgrammeList'
 import FormFilter from '../Generic/FormFilter'
 import QuestionList from '../Generic/QuestionList'
@@ -25,7 +25,7 @@ import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
 import './ReportPage.scss'
 
-export default () => {
+const ReportPage = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -211,3 +211,5 @@ export default () => {
     </div>
   )
 }
+
+export default ReportPage

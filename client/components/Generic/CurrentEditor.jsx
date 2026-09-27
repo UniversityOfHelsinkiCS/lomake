@@ -6,7 +6,7 @@ import { Typography } from '@mui/material'
 import { colors } from '../../util/common'
 import './Generic.scss'
 
-export default ({ fieldName }) => {
+const CurrentEditor = ({ fieldName }) => {
   const { t } = useTranslation()
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data)
   const currentUserUid = useSelector(state => state.currentUser.data.uid)
@@ -21,3 +21,5 @@ export default ({ fieldName }) => {
     </Typography>
   )
 }
+
+export default CurrentEditor

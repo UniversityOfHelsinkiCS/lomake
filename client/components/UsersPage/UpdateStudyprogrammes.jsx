@@ -3,7 +3,7 @@ import { Button, Alert, Paper } from '@mui/material'
 
 import { updateStudyprogrammes } from '../../redux/studyProgrammesReducer'
 
-export default () => {
+const UpdateStudyprogrammes = () => {
   const dispatch = useDispatch()
   const status = useSelector(state => state.studyProgrammes.updateStatus)
 
@@ -37,3 +37,5 @@ export default () => {
     </>
   )
 }
+
+export default UpdateStudyprogrammes

@@ -77,7 +77,7 @@ const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, for
   }, [oldAnswers, deadlines])
 }
 
-export default () => {
+const App = () => {
   const isNotIndividualForm = !window.location.href.includes('/individual')
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser)
@@ -155,3 +155,5 @@ export default () => {
     </Box>
   )
 }
+
+export default App

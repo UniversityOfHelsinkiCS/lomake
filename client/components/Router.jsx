@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router' //  Navigate
 
-import AboutPage from './AboutPage'
+import { AboutPage } from './AboutPage'
 import FormView from './FormView'
 import AdminPage from './UsersPage'
 import OverviewPage from './OverviewPage'
@@ -35,7 +35,7 @@ import ProgrammeYearlyView from './V1/ProgrammeYearlyView'
 import InterventionProcedure from './V1/Generic/InterventionProcedure'
 import QualityManagement from './V1/Generic/QualityManagement'
 
-export default () => (
+const Router = () => (
   <div className="content">
     <ErrorBoundary>
       <Routes>
@@ -88,3 +88,5 @@ export default () => (
     </ErrorBoundary>
   </div>
 )
+
+export default Router

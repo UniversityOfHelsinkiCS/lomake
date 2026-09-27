@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import './AboutPage.scss'
 
-export default () => {
+export const AboutPage = () => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
 

@@ -8,7 +8,7 @@ import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
 import CsvDownload from '../../Generic/CsvDownload'
 import { filterFromUrl } from '../../../util/common'
 import { useVisibleOverviewProgrammes } from '../../../util/overview'
-import YearSelector from '../../Generic/YearSelector'
+import { YearSelector } from '../../Generic/YearSelector'
 import useDebounce from '../../../util/useDebounce'
 import CustomModal from '../../Generic/CustomModal'
 import NoPermissions from '../../Generic/NoPermissions'
@@ -17,7 +17,7 @@ import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 
-export default () => {
+const ProgrammeLevelOverview = () => {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
@@ -152,3 +152,5 @@ export default () => {
     </>
   )
 }
+
+export default ProgrammeLevelOverview

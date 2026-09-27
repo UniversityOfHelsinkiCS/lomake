@@ -8,7 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useTranslation } from 'react-i18next'
 import rypsiImage from '../../assets/rypsi.jpg'
 import NoPermissions from '../Generic/NoPermissions'
-import YearSelector from '../Generic/YearSelector'
+import { YearSelector } from '../Generic/YearSelector'
 import { getProgramme } from '../../redux/studyProgrammesReducer'
 import { getSingleProgrammesAnswers } from '../../redux/formReducer'
 import { colors } from '../../util/common'
@@ -26,7 +26,7 @@ const FormView = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const componentRef = useRef()
+  const componentRef = useRef(null)
   const form = formKeys.YEARLY_ASSESSMENT
   const lang = useSelector(state => state.language)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)

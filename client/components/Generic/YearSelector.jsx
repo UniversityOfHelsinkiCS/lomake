@@ -10,8 +10,7 @@ import { setViewingOldAnswers } from '../../redux/formReducer'
 import { getYearsUserHasAccessToAction } from '../../redux/currentUserReducer'
 import './Generic.scss'
 
-// eslint-disable-next-line react/function-component-definition
-export default function YearSelector({ multiple, size, label }) {
+export const YearSelector = ({ multiple, size, label }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const previousYearsWithAnswers = useSelector(state => state.oldAnswers.years)

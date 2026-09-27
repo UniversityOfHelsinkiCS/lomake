@@ -113,7 +113,7 @@ const CommitteeFormView = () => {
   const form = parseInt(formString, 10) || null
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const componentRef = useRef()
+  const componentRef = useRef(null)
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
@@ -196,11 +196,11 @@ const CommitteeFormView = () => {
       ) : (
         <div className="form-container">
           <NavigationSidebar formNumber={form} formType="evaluation" programmeKey={room} />
-          <div className="the-form" ref={componentRef}>
+          <div className="the-form" ref={componentRef} id="university-form">
             <div className="form-instructions">
               <div className="hide-in-print-mode">
                 <div style={{ marginBottom: '2em' }}>
-                  <IconButton onClick={() => navigate(`/evaluation-university}`)} sx={{ marginRight: 2 }}>
+                  <IconButton onClick={() => navigate(`/evaluation-university`)} sx={{ marginRight: 2 }}>
                     <ArrowBack data-cy="back-button" />
                   </IconButton>
                 </div>

@@ -10,7 +10,7 @@ import { useVisibleOverviewProgrammes } from '../../util/overview'
 import CsvDownload from '../Generic/CsvDownload'
 import CustomModal from '../Generic/CustomModal'
 import NoPermissions from '../Generic/NoPermissions'
-import YearSelector from '../Generic/YearSelector'
+import { YearSelector } from '../Generic/YearSelector'
 import useDebounce from '../../util/useDebounce'
 import { formKeys } from '../../../config/data'
 import StatsContent from './StatsContent'
@@ -19,7 +19,7 @@ import ProgramControlsContent from './ProgramControlsContent'
 import './OverviewPage.scss'
 import { Link } from '../Link'
 
-export default () => {
+const Overview = () => {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
@@ -167,3 +167,5 @@ export default () => {
     </>
   )
 }
+
+export default Overview

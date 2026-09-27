@@ -25,7 +25,7 @@ import { isAdmin } from '../../../config/common'
 import './UsersPage.scss'
 import { useGetOrganisationDataQuery } from '../../redux/organisation'
 
-export default () => {
+export const UserTable = () => {
   const [sorter, setSorter] = useState('')
   const [reverse, setReverse] = useState(false)
   const [nameFilter, setNameFilter] = useState('')

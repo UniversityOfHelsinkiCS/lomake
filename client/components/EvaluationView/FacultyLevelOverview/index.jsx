@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
 import { isAdmin } from '../../../../config/common'
 import useDebounce from '../../../util/useDebounce'
-import YearSelector from '../../Generic/YearSelector'
+import { YearSelector } from '../../Generic/YearSelector'
 
 import CustomModal from '../../Generic/CustomModal'
 import NoPermissions from '../../Generic/NoPermissions'

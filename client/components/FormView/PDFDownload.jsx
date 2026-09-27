@@ -1,45 +1,44 @@
 import { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import ReactToPrint from 'react-to-print'
-import { colors } from '../../util/common'
+import { useReactToPrint } from 'react-to-print'
 import { isAdmin } from '../../../config/common'
+import { Button } from '@mui/material'
 
 const PDFDownload = ({ componentRef }) => {
   const { t } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
-
   const [isPrinting, setIsPrinting] = useState(false)
   // Store the resolve Promise being used in `onBeforeGetContent` here
   const promiseResolveRef = useRef(null)
-
   // watch for the state to change here, and for the Promise resolve to be available
   useEffect(() => {
     if (isPrinting && promiseResolveRef.current) {
-      // Resolves the Promise, letting `react-to-print` know that the DOM updates are completed
       promiseResolveRef.current()
     }
   }, [isPrinting])
 
-  const handleReady = () => {
-    promiseResolveRef.current = null
-    setIsPrinting(false)
-  }
+  const handlePrint = useReactToPrint({
+    content: () => {
+      return componentRef.current
+    },
+    copyStyles: true,
+    onBeforeGetContent: async () => {
+      return Promise.resolve()
+    },
+    onBeforePrint: () => {
+      setIsPrinting(true)
+    },
+    onAfterPrint: () => {
+      promiseResolveRef.current = null
+      setIsPrinting(false)
+    },
+  })
 
   return isAdmin(user) ? (
-    <ReactToPrint
-      onAfterPrint={handleReady}
-      onBeforeGetContent={() =>
-        new Promise(resolve => {
-          promiseResolveRef.current = resolve
-          setIsPrinting(true)
-        })
-      }
-      // eslint-disable-next-line react/jsx-sort-props
-      content={() => componentRef.current}
-      // eslint-disable-next-line react/no-unstable-nested-components
-      trigger={() => <span style={{ cursor: 'pointer', color: colors.blue }}>{t('formView:downloadPDF')}</span>}
-    />
+    <div>
+      <Button onClick={handlePrint}>{t('formView:downloadPDF')}</Button>
+    </div>
   ) : null
 }
 
