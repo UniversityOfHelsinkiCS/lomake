@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useReactToPrint } from 'react-to-print'
 import { setQuestions } from '../../redux/filterReducer'
 import './Generic.scss'
-import { Button } from 'semantic-ui-react'
+import { Button } from '@mui/material'
 
 const PDFDownload = ({ componentRef, linkName = null }) => {
   const { t } = useTranslation()
