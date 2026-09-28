@@ -31,11 +31,15 @@ const linScale = (value: number, a1: number, a2: number, b1: number, b2: number)
  *
  * @returns number between 0-100, a position in the color meter
  */
-const interpolateToMeter = (value: number, thresholds: number[], order: 'asc' | 'desc'): number => {
+const interpolateToMeter = (
+  value: number,
+  percentageUnit: boolean,
+  thresholds: number[],
+  order: 'asc' | 'desc'
+): number => {
   let meterValue = 0
   const min = thresholds[0]
-  const max = thresholds[thresholds.length - 1]
-
+  const max = percentageUnit && thresholds[thresholds.length - 1] > 100 ? 100 : thresholds[thresholds.length - 1]
   if (value <= (order === 'asc' ? min : max)) {
     meterValue = 0
   } else if (value >= (order === 'asc' ? max : min)) {
@@ -94,7 +98,6 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
 
   useEffect(() => {
     if (!display || value == 'Ei dataa') return
-
     const thresholdSplit = thresholds.split(';').map((t: string) => parseFloat(t.replace(',', '.')))
     const order = checkOrdering(thresholdSplit)
 
@@ -130,7 +133,8 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
     }
 
     const parsedValue = parseFloat(value.replace(',', '.'))
-    const meterValue = interpolateToMeter(parsedValue, thresholdsArr, order)
+    const percentageUnit = unit === '%'
+    const meterValue = interpolateToMeter(parsedValue, percentageUnit, thresholdsArr, order)
 
     setThresholdValues([
       yellowThres.toString() + (unit === '%' ? '%' : ''),
