@@ -1,5 +1,5 @@
 import cron from 'node-cron'
-import lodash from 'lodash'
+import isEqual from 'lodash/isEqual.js'
 import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { whereDraftYear } from '../util/common.js'
@@ -34,7 +34,7 @@ const createBackups = async () => {
 
     const newestBackupData = newestBackup.length === 0 ? {} : newestBackup[0].data
 
-    if (lodash.isEqual(data, newestBackupData)) return
+    if (isEqual(data, newestBackupData)) return
 
     await db.backupAnswer.create({
       programme,

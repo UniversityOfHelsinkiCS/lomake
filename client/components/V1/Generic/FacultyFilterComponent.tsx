@@ -6,7 +6,7 @@ import { clearLevelSpecificFilters, setFaculty } from '../../../redux/filterRedu
 
 import { MenuItem, FormControl, Checkbox, ListItemText } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import _ from 'lodash'
+import { orderBy } from 'lodash'
 import { useAppSelector, useAppDispatch } from '../../../util/hooks'
 
 /*
@@ -30,7 +30,7 @@ const FacultyFilterComponent = () => {
       value: f.code,
       text: f.name[lang as 'en' | 'fi' | 'se'],
     }))
-    const sortedFaculties = _.orderBy(mappedFaculties, ['text'], ['asc'])
+    const sortedFaculties = orderBy(mappedFaculties, ['text'], ['asc'])
 
     return [...defaultOption, ...sortedFaculties]
   }, [lang, allowedFaculties, faculties])
