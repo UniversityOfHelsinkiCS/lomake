@@ -7,7 +7,7 @@ import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
 import { Box, CircularProgress } from '@mui/material'
 import NavBar from './NavBar'
 import Router from './Router'
-// import { Banner } from './Banner'
+import { Banner } from './Banner'
 import { formKeys } from '../../config/data'
 import { loginAction } from '../redux/currentUserReducer'
 import { getStudyProgrammes, getUsersProgrammes } from '../redux/studyProgrammesReducer'
@@ -160,7 +160,7 @@ const App = () => {
   return (
     <Box className="v1" sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', fontSize: 16 }}>
       {/* Uncomment/comment the banner to change its visibility */}
-      {/*<Banner />*/}
+      <Banner />
 
       <NavBar />
 

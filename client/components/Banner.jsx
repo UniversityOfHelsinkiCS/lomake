@@ -5,10 +5,10 @@ export const Banner = () => {
   const lang = useSelector(state => state.language)
   const message =
     lang === 'fi'
-      ? 'Palvelussa on käyttökatko 12.5. klo 10-12. Pahoittelut häiriöstä.'
+      ? 'Palvelussa voi olla tilapäisiä käyttökatkoja 13.10. Pahoittelut häiriöstä.'
       : lang === 'se'
-        ? 'Tjänsten är nere 12.5. kl 10-12. Ursäkta störningarna.'
-        : 'The service is down on May 12 from 10 to 12. Sorry for the inconvenience.'
+        ? 'Tjänsten kan vara tillfälligt otillgänglig 13.10. Ursäkta störningarna.'
+        : 'The service may be temporarily unavailable on October 13. Sorry for the inconvenience.'
   return (
     <div style={{ width: '100%', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
       <Alert severity="error">{message}</Alert>
