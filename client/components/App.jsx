@@ -17,7 +17,8 @@ import { getAnswersAction } from '../redux/oldAnswersReducer'
 import { setYear, setMultipleYears, setKeyDataYear } from '../redux/filterReducer'
 import { setLanguage } from '../redux/languageReducer'
 import { Footer } from './Footer'
-import { ARCHIVE_LAST_YEAR, isDegreeStudentOrEmployee } from '../../config/common'
+import { ARCHIVE_LAST_YEAR, isDegreeStudentOrEmployee, isEmployee } from '../../config/common'
+import NoPermissions from './Generic/NoPermissions'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -81,12 +82,12 @@ const App = () => {
   const isNotIndividualForm = !window.location.href.includes('/individual')
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser)
-  const studyProgrammes = useSelector(state => state.studyProgrammes)
   const faculties = useSelector(state => state.faculties)
   const deadlines = useSelector(state => state.deadlines)
-  const oldAnswers = useSelector(state => state.oldAnswers) // (({ oldAnswers }) => oldAnswers.data)
   const lang = useSelector(state => state.language)
-
+  const { t } = useTranslation()
+  const studyProgrammes = useSelector(state => state.studyProgrammes)
+  const oldAnswers = useSelector(state => state.oldAnswers) // (({ oldAnswers }) => oldAnswers.data)
   const { i18n } = useTranslation()
 
   useEffect(() => {
@@ -112,11 +113,13 @@ const App = () => {
   // Because of accessControlMiddleware
   useEffect(() => {
     const user = currentUser.data
-    if (user) {
+    if (user && isEmployee(user)) {
       dispatch(getDeadlineAndDraftYear())
-      dispatch(getFaculties())
-      dispatch(getStudyProgrammes())
-      if (isNotIndividualForm) {
+      if (isEmployee(user)) {
+        dispatch(getFaculties())
+        dispatch(getStudyProgrammes())
+      }
+      if (isEmployee(user) && isNotIndividualForm) {
         dispatch(getUsersProgrammes())
         dispatch(getAnswersAction())
       }
@@ -133,14 +136,22 @@ const App = () => {
     setMultipleYears,
   })
 
-  if (!currentUser) return null
+  if (!currentUser.data) {
+    return <div data-cy="no-permissions-message" />
+  }
 
   const isCommonDataReady = studyProgrammes?.data && oldAnswers?.data
   const isIndividualDataReady = studyProgrammes?.data && faculties?.data
-  const showRouter = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
+  const showRouterForOldProgrammes = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
   const isStudentOrEmployee = currentUser.data && isDegreeStudentOrEmployee(currentUser.data)
   if (!isStudentOrEmployee) {
-    return <div data-cy="no-permissions-message" />
+    return (
+      <>
+        <NavBar />
+        <NoPermissions requestedForm={t('landingPage:yearlyAssessmentTitle')} t={t} />
+        <div data-cy="no-permissions-message" />
+      </>
+    )
   }
 
   return (
@@ -150,7 +161,7 @@ const App = () => {
 
       <NavBar />
 
-      {showRouter ? <Router /> : <CircularProgress />}
+      {showRouterForOldProgrammes || isStudentOrEmployee ? <Router /> : <CircularProgress />}
       <Footer />
     </Box>
   )

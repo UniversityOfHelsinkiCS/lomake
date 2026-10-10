@@ -22,14 +22,12 @@ import { basePath, isDegreeStudentOrEmployee } from '../../../config/common'
 const Homepage = () => {
   const { t } = useTranslation()
   const currentUser = useSelector(state => state.currentUser)
-  const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
+  const usersProgrammes = useSelector(state => state.studyProgrammes?.usersProgrammes)
 
   useEffect(() => {
     document.title = t('landingPage:title')
   }, [])
-
-  if (!usersProgrammes) return <CircularProgress />
-
+  if (!usersProgrammes && !isDegreeStudentOrEmployee(currentUser.data)) return <CircularProgress />
   if (!isDegreeStudentOrEmployee(currentUser.data)) {
     return <NoPermissions requestedForm={t('landingPage:title')} t={t} />
   }
@@ -62,7 +60,7 @@ const Homepage = () => {
             </Button>
           </CardActions>
         </Card>
-        {usersProgrammes.length + Object.keys(currentUser.data.access).length > 0 ||
+        {usersProgrammes?.length + Object.keys(currentUser.data.access).length > 0 ||
         currentUser.data.iamGroups?.includes('hy-employees') ? (
           <Card sx={{ width: 400, marginTop: 5 }}>
             <CardMedia alt="library" component="img" height="120" image={ArchiveImage} />
