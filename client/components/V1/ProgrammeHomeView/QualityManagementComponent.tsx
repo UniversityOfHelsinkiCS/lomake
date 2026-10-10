@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-no-leaked-render */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable no-alert */
+// oxlint-disable typescript/no-floating-promises
 import { useNavigate, useParams } from 'react-router'
 import { hasProgrammeWriteAccess, isAdmin } from '../../../../config/common'
 import { useTranslation } from 'react-i18next'
@@ -81,6 +79,7 @@ const QualityManagementComponent = ({ programmeData }) => {
   }
 
   const handleDelete = async (id: number | string) => {
+    // oxlint-disable-next-line no-alert
     const isConfirmed = window.confirm(t('document:confirmDelete'))
     if (isConfirmed) {
       const idStr = String(id)
