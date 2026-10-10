@@ -14,6 +14,7 @@ import { basePath } from '../config/common'
 
 import './util/i18n'
 import { initSentry } from './util/sentry'
+import { setHeaders } from '@/config/mockHeaders'
 
 if (process.env.NODE_ENV === 'production') {
   initSentry()
@@ -34,6 +35,10 @@ const refresh = () => {
       </BrowserRouter>
     </Provider>
   )
+}
+if (process.env.NODE_ENV === 'development') {
+  const newUser = 'superAdmin'
+  setHeaders(newUser)
 }
 
 refresh()
