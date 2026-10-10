@@ -115,10 +115,8 @@ const App = () => {
     const user = currentUser.data
     if (user && isEmployee(user)) {
       dispatch(getDeadlineAndDraftYear())
-      if (isEmployee(user)) {
-        dispatch(getFaculties())
-        dispatch(getStudyProgrammes())
-      }
+      dispatch(getFaculties())
+      dispatch(getStudyProgrammes())
       if (isEmployee(user) && isNotIndividualForm) {
         dispatch(getUsersProgrammes())
         dispatch(getAnswersAction())
