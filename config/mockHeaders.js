@@ -205,7 +205,7 @@ const possibleUsers = [
     givenName: 'kosuJoryUser',
     mail: 'cypress-kosu-jory-user@helsinki.fi',
     schacDateOfBirth: 19990110,
-    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-kopa-koulutusasiantuntijat;hy-employees',
+    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-kopa-koulutusasiantuntijat',
     sn: 'nah',
   },
   {

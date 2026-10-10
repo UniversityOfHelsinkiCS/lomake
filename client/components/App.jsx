@@ -17,7 +17,12 @@ import { getAnswersAction } from '../redux/oldAnswersReducer'
 import { setYear, setMultipleYears, setKeyDataYear } from '../redux/filterReducer'
 import { setLanguage } from '../redux/languageReducer'
 import { Footer } from './Footer'
-import { ARCHIVE_LAST_YEAR, isDegreeStudentOrEmployee, isEmployee } from '../../config/common'
+import {
+  ARCHIVE_LAST_YEAR,
+  isDegreeStudentNotEmployee,
+  isDegreeStudentOrEmployee,
+  isEmployee,
+} from '../../config/common'
 import NoPermissions from './Generic/NoPermissions'
 
 const languageFromUrl = () => {
@@ -159,7 +164,7 @@ const App = () => {
 
       <NavBar />
 
-      {showRouterForOldProgrammes || isStudentOrEmployee ? <Router /> : <CircularProgress />}
+      {showRouterForOldProgrammes || isDegreeStudentNotEmployee(currentUser.data) ? <Router /> : <CircularProgress />}
       <Footer />
     </Box>
   )

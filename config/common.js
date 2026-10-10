@@ -169,6 +169,12 @@ const isDegreeStudentOrEmployee = user => {
   return iamContainsGroup
 }
 
+const isDegreeStudentNotEmployee = user => {
+  const iamContainsGroup =
+    !user.iamGroups.includes('hy-employees') && user.iamGroups.some(group => studentIams.includes(group))
+  return iamContainsGroup
+}
+
 const isEmployee = user => {
   const iamGroup = user.iamGroups.includes('hy-employees')
   if (iamGroup) return true
@@ -263,6 +269,7 @@ export {
   isSpecialGroupUser,
   isInternationalUser,
   isDegreeStudentOrEmployee,
+  isDegreeStudentNotEmployee,
   isEmployee,
   organisationCodeToIam,
   hasSomeReadAccess,
