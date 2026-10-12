@@ -273,37 +273,16 @@ const possibleUsers = [
     hyGroupCn: 'hy-tine;hy-employees',
     sn: 'nah',
   },
-  {
-    uid: 'vesuvesu',
-    employeeNumber: undefined,
-    givenName: 'Acual student',
-    mail: 'vesuvesu@helsinki.fi',
-    schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-sivari',
-    sn: 'AcualStudent',
-  },
 ]
 
 const cypressUids = possibleUsers.map(user => user.uid).filter(uid => uid.startsWith('cypress'))
 
 const setHeaders = uid => {
-  const user = possibleUsers.find(u => u.uid === uid)
-
-  if (!user) return
-
-  localStorage.setItem(ITEM_NAME, JSON.stringify(user))
-}
-
-const removeLoggedInUsersGroups = () => {
-  const user = JSON.parse(localStorage.getItem(ITEM_NAME))
-
-  localStorage.setItem(
-    ITEM_NAME,
-    JSON.stringify({
-      ...user,
-      hyGroupCn: '',
-    })
-  )
+  if (process.env.NODE_ENV === 'development') {
+    const user = possibleUsers.find(u => u.uid === uid)
+    if (!user) return
+    localStorage.setItem(ITEM_NAME, JSON.stringify(user))
+  }
 }
 
 const getHeaders = () => {
@@ -311,8 +290,4 @@ const getHeaders = () => {
   return user
 }
 
-const clearHeaders = () => {
-  localStorage.removeItem(ITEM_NAME)
-}
-
-export { possibleUsers, cypressUids, setHeaders, removeLoggedInUsersGroups, getHeaders, clearHeaders }
+export { cypressUids, possibleUsers, setHeaders, getHeaders }

@@ -49,11 +49,13 @@ describe('IAM permission tests', () => {
   })
 
   it('Psyk and logo groups grant access to two programmes', () => {
-    ;['cypressPsykoUser', 'cypressLogoUser'].forEach(user => {
-      cy.login(user)
-      cy.visit('/yearly')
-      cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 2)
-    })
+    cy.login('cypressLogoUser')
+    cy.visit('/yearly')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 2)
+
+    cy.login('cypressPsykoUser')
+    cy.visit('/yearly')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 2)
   })
 
   it('Rehtoraatti gets university wide read access', () => {
