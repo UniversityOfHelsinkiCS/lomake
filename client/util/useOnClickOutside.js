@@ -7,7 +7,7 @@ export default function useOnClickOutside(ref, handler) {
     () => {
       const listener = event => {
         // Only close when dimmer is clicked.
-        if (!event.target.className.includes('customModal-dimmer')) return
+        if (!event?.target?.className?.includes('customModal-dimmer')) return
         handler(event)
       }
 
