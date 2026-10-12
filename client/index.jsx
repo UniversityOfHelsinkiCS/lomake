@@ -14,7 +14,7 @@ import { basePath } from '../config/common'
 
 import './util/i18n'
 import { initSentry } from './util/sentry'
-import { setHeaders } from '@/config/mockHeaders'
+import { cypressUids, setHeaders } from '@/config/mockHeaders'
 
 if (process.env.NODE_ENV === 'production') {
   initSentry()
@@ -38,7 +38,11 @@ const refresh = () => {
 }
 if (process.env.NODE_ENV === 'development') {
   const newUser = 'superAdmin'
-  setHeaders(newUser)
+  const currentFakeUser = window.localStorage.getItem('fakeUser')
+
+  if (!currentFakeUser || !cypressUids.includes(JSON.parse(currentFakeUser).uid)) {
+    setHeaders(newUser)
+  }
 }
 
 refresh()
