@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { create } from 'axios'
 import * as Sentry from '@sentry/node'
 import { JAMI_URL, API_TOKEN, inProduction } from './common.js'
 import { ProgrammeLevel } from '../../shared/lib/enums.js'
@@ -36,7 +36,7 @@ type OrganisationAccess = {
   admin?: boolean
 }
 
-const jamiClient = axios.create({
+const jamiClient = create({
   baseURL: JAMI_URL,
   params: {
     token: API_TOKEN,
