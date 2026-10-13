@@ -47,7 +47,7 @@ export default {
     selectAll: 'Select all',
     clearSelection: 'Clear selection',
     responses: 'Responses:',
-    writtenAnswers: 'Writte"all": "All" monitoring',
+    writtenAnswers: 'Written answers',
     trafficLights: 'Traffic lights',
     tracking: 'Planning and tracking',
     chooseTrafficLight: 'Select a traffic light evaluation',
