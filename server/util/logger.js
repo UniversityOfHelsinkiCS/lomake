@@ -29,13 +29,19 @@ if (inProduction) {
     silly: 6,
   }
 
-  const prodFormat = winston.format.printf(({ level, ...rest }) =>
-    JSON.stringify({
-      level: levels[level],
-      ...rest,
+  const prodFormat = printf(({ level, message, timestamp, ...meta }) => {
+    let logMessage = `${timestamp} ${levels[level]}: ${message}`
+    if (Object.keys(meta ?? {}).length > 0) {
+      logMessage = `${logMessage} ${JSON.stringify(meta)}`
+    }
+    return logMessage
+  })
+
+  transports.push(
+    new winston.transports.Console({
+      format: combine(timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), prodFormat),
     })
   )
-  transports.push(new winston.transports.Console({ format: prodFormat }))
 
   transports.push(
     new LokiTransport({
