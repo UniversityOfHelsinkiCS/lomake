@@ -12,9 +12,9 @@ const iamsInUse = true
 const basePath = process.env.BASE_PATH ?? '/'
 
 const LOMAKE_SINCE_YEAR = 2019
-const ARCHIVE_LAST_YEAR = 2023 // There's no data for 2024
+const ARCHIVE_LAST_YEAR = 2024 // on
 
-const getYearsArray = (since, to = 2023) => {
+const getYearsArray = (since, to = 2024) => {
   const years = []
   for (let i = to; i >= since; i--) {
     const year = i

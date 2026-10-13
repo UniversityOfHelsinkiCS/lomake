@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Navigate, useParams, useNavigate } from 'react-router'
@@ -18,7 +17,6 @@ import MetaEvaluationForm from './MetaEvaluationForm'
 import { metareviewQuestions as questions } from '../../../questionData'
 
 // tämä on samanlainen kuin Evaluationiew/EvaluationFormView/index.js
-
 const ProgrammeLevelForm = () => {
   const { room } = useParams()
   const lang = useSelector(state => state.language)
@@ -29,20 +27,17 @@ const ProgrammeLevelForm = () => {
   const user = useSelector(state => state.currentUser.data)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const year = useSelector(({ filters }) => filters.year)
-  const draftYear = null
-  const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
-  const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const answers = useSelector(state => state.tempAnswers)
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
     dispatch(getProgramme(room))
-  }, [lang, room])
+  }, [lang, room, dispatch, t])
 
   useEffect(() => {
     if (!programme) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
-  }, [programme, viewingOldAnswers, year, draftYear, accessToTempAnswers, room, user])
+  }, [programme, year, room, user, form, dispatch])
 
   if (!user || !room) return <Navigate to="/" />
   if (!programme || !answers) return <CircularProgress />

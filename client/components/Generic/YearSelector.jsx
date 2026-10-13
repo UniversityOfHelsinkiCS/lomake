@@ -7,7 +7,6 @@ import { formKeys } from '../../../config/data'
 
 import { setYear, setMultipleYears } from '../../redux/filterReducer'
 import { setViewingOldAnswers } from '../../redux/formReducer'
-import { getYearsUserHasAccessToAction } from '../../redux/currentUserReducer'
 import './Generic.scss'
 
 export const YearSelector = ({ multiple, size, label }) => {
@@ -24,10 +23,11 @@ export const YearSelector = ({ multiple, size, label }) => {
     dispatch(setViewingOldAnswers(true))
     dispatch(setYear(value))
   }
-
+  // TODO: Fix this to work so, that filters form actually gives correct form
+  // AND based on that correct years are shown
   useEffect(() => {
     if (!previousYearsWithAnswers || !currentUser) return
-    let years = getYearsUserHasAccessToAction(currentUser)
+    let years = [2024, 2023, 2022, 2021, 2020, 2019]
     if (form === formKeys.EVALUATION_PROGRAMMES || form === formKeys.EVALUATION_FACULTIES) {
       years = [2023]
       handleYearChange(null, { value: 2023 })
@@ -49,7 +49,7 @@ export const YearSelector = ({ multiple, size, label }) => {
   }
 
   if (!currentUser) return null
-  if (yearOptions.length === formKeys.YEARLY_ASSESSMENT) return <div />
+  if (yearOptions.length === 0) return <div />
 
   return (
     <div className={`year-filter-${size}`}>

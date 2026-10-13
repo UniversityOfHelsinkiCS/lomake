@@ -39,7 +39,7 @@ const FacultyColorTable = React.memo(
 
     const filterYear = useSelector(({ filters }) => filters.year)
 
-    const year = filterYear || new Date().getFullYear()
+    const year = filterYear
 
     useEffect(() => {
       dispatch(setYear(year))
@@ -84,9 +84,9 @@ const FacultyColorTable = React.memo(
         })
         return statObject
       }, {})
-    }, [sortedFaculties, selectedAnswers, answers, draftYear])
+    }, [sortedFaculties, selectedAnswers, answers])
 
-    if (answers.pending || !answers.data || !oldAnswers.data) {
+    if (!oldAnswers.data) {
       return <CircularProgress />
     }
 

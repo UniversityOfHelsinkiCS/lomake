@@ -61,7 +61,7 @@ const initialState = {
   faculty: ['allFaculties'],
   level: 'allProgrammes',
   showDiscontinued: true,
-  year: '',
+  year: 2023,
   multipleYears: [],
   keyDataYear: '',
   questions: { selected: [], open: [] },

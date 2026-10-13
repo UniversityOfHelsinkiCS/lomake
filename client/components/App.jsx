@@ -8,21 +8,15 @@ import { Box, CircularProgress } from '@mui/material'
 import NavBar from './NavBar'
 import Router from './Router'
 import { Banner } from './Banner'
-import { formKeys } from '../../config/data'
 import { loginAction } from '../redux/currentUserReducer'
 import { getStudyProgrammes, getUsersProgrammes } from '../redux/studyProgrammesReducer'
 import { getDeadlineAndDraftYear } from '../redux/deadlineReducer'
 import { getFaculties } from '../redux/facultyReducer'
-import { getAnswersAction } from '../redux/oldAnswersReducer'
-import { setYear, setMultipleYears, setKeyDataYear } from '../redux/filterReducer'
+import { getAnswersActionAll } from '../redux/oldAnswersReducer'
+import { setKeyDataYear } from '../redux/filterReducer'
 import { setLanguage } from '../redux/languageReducer'
 import { Footer } from './Footer'
-import {
-  ARCHIVE_LAST_YEAR,
-  isDegreeStudentNotEmployee,
-  isDegreeStudentOrEmployee,
-  isEmployee,
-} from '../../config/common'
+import { isDegreeStudentNotEmployee, isDegreeStudentOrEmployee, isEmployee } from '../../config/common'
 import NoPermissions from './Generic/NoPermissions'
 
 const languageFromUrl = () => {
@@ -44,51 +38,11 @@ const languageFromUrl = () => {
   return undefined
 }
 
-const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, formKeys, setYear, setMultipleYears }) => {
-  // TODO: deprecate this and set the year by form
-  // When oldAnswers are ready, set default year based on deadline or most recent answers
-  useEffect(() => {
-    if (!oldAnswers.data) return
-
-    let year = 2019
-
-    // Check if there's an upcoming deadline for the yearly assessment
-    const hasUpcomingDeadline =
-      deadlines.draftYear &&
-      deadlines.nextDeadline?.length > 0 &&
-      new Date(deadlines.nextDeadline.find(d => d.form === formKeys.YEARLY_ASSESSMENT)?.date) >= new Date()
-
-    if (hasUpcomingDeadline && currentUser?.data.yearsUserHasAccessTo.includes(deadlines.draftYear.year)) {
-      year = deadlines.draftYear.year
-    } else {
-      // Find the most recent year with data but the max is 2024
-      year = oldAnswers.data.reduce((latestYear, answer) => {
-        const isRelevantForm = answer.form === formKeys.YEARLY_ASSESSMENT || answer.form === formKeys.META_EVALUATION
-        if (
-          Object.entries(answer.data).length > 0 &&
-          answer.year > latestYear &&
-          answer.year <= ARCHIVE_LAST_YEAR &&
-          isRelevantForm
-        ) {
-          return answer.year
-        }
-        return latestYear
-      }, 2019)
-    }
-
-    if (currentUser?.data.yearsUserHasAccessTo.includes(year)) {
-      dispatch(setYear(year))
-      dispatch(setMultipleYears([year]))
-    }
-  }, [oldAnswers, deadlines])
-}
-
 const App = () => {
   const isNotIndividualForm = !window.location.href.includes('/individual')
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser)
   const faculties = useSelector(state => state.faculties)
-  const deadlines = useSelector(state => state.deadlines)
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
   const studyProgrammes = useSelector(state => state.studyProgrammes)
@@ -116,6 +70,8 @@ const App = () => {
 
   // Do this after user.data is ready, so that there wont be dupe users in db.
   // Because of accessControlMiddleware
+  // TODO: check which routes should work with jory
+  // without employee and fix accordingly
   useEffect(() => {
     const user = currentUser.data
     if (user && isEmployee(user)) {
@@ -124,20 +80,10 @@ const App = () => {
       dispatch(getStudyProgrammes())
       if (isEmployee(user) && isNotIndividualForm) {
         dispatch(getUsersProgrammes())
-        dispatch(getAnswersAction())
+        dispatch(getAnswersActionAll())
       }
     }
   }, [currentUser])
-
-  useSetupCurrentYear({
-    oldAnswers,
-    deadlines,
-    currentUser,
-    dispatch,
-    formKeys,
-    setYear,
-    setMultipleYears,
-  })
 
   if (!currentUser.data) {
     return <div data-cy="no-permissions-message" />
@@ -156,14 +102,12 @@ const App = () => {
       </>
     )
   }
-
+  const showBanner = false
   return (
     <Box className="v1" sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', fontSize: 16 }}>
       {/* Uncomment/comment the banner to change its visibility */}
-      <Banner />
-
+      {showBanner && <Banner />}
       <NavBar />
-
       {showRouterForOldProgrammes || isDegreeStudentNotEmployee(currentUser.data) ? <Router /> : <CircularProgress />}
       <Footer />
     </Box>
