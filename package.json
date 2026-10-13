@@ -82,7 +82,7 @@
     "vite": "8.3.0",
     "winston": "3.19.0",
     "winston-loki": "6.1.7",
-    "xlsx": "0.18.5",
+    "@e965/xlsx": "0.20.3",
     "zod": "3.24.4"
   },
   "devDependencies": {
