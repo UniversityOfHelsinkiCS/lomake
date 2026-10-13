@@ -42,22 +42,20 @@ const PDFDownload = ({ componentRef, linkName = null }) => {
   }
 
   const handlePrint = useReactToPrint({
-    content: () => {
-      return componentRef.current
-    },
+    contentRef: componentRef,
     documentTitle: title,
-    copyStyles: true,
-    onBeforeGetContent: async () => {
-      handlePrepare()
-      setExportTitle()
-      return Promise.resolve()
-    },
     onBeforePrint: () => {
-      setIsPrinting(true)
+      return new Promise(resolve => {
+        handlePrepare()
+        setExportTitle()
+        promiseResolveRef.current = resolve
+        setIsPrinting(true)
+      })
     },
     onAfterPrint: () => {
       handleReady()
       setIsPrinting(false)
+      promiseResolveRef.current = null
     },
   })
   return (

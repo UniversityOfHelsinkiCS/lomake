@@ -19,19 +19,17 @@ const PDFDownload = ({ componentRef }) => {
   }, [isPrinting])
 
   const handlePrint = useReactToPrint({
-    content: () => {
-      return componentRef.current
-    },
-    copyStyles: true,
-    onBeforeGetContent: async () => {
-      return Promise.resolve()
-    },
+    contentRef: componentRef,
+    documentTitle: 'Formview',
     onBeforePrint: () => {
-      setIsPrinting(true)
+      return new Promise(resolve => {
+        promiseResolveRef.current = resolve
+        setIsPrinting(true)
+      })
     },
     onAfterPrint: () => {
-      promiseResolveRef.current = null
       setIsPrinting(false)
+      promiseResolveRef.current = null
     },
   })
 
