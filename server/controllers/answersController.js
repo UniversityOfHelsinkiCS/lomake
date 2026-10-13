@@ -1,7 +1,7 @@
 import { Op } from 'sequelize'
 import db from '../models/index.js'
 import logger from '../util/logger.js'
-import { whereDraftYear, isAdmin, isSuperAdmin } from '../util/common.js'
+import { isAdmin, isSuperAdmin } from '../util/common.js'
 import { formKeys } from '../../config/data.js'
 import { ARCHIVE_LAST_YEAR } from '../../config/common.js'
 import Faculty from '../models/faculty.js'
@@ -14,7 +14,12 @@ const hasAnyAccess = user => {
   const accessibleProgrammes = Object.keys(access)
   return accessibleProgrammes.length > 0
 }
+const whereDraftYear = async () => {
+  const draftYears = await db.draftYear.findAll({})
+  const draftYear = draftYears.length ? draftYears[0].year : new Date().getFullYear()
 
+  return draftYear || { [Op.is]: null }
+}
 const getAll = async (_req, res) => {
   try {
     const data = await db.answer.findAll({})
@@ -199,11 +204,7 @@ const getAllIndividualAnswersForUser = async (req, res) => {
 
 const getAllUserHasAccessTo = async (req, res) => {
   try {
-    let years = [2019, 2020, 2021, 2022, 2023, 2024, 2025]
-    if (!req.path.endsWith('/all')) {
-      years = [new Date().getFullYear()]
-    }
-
+    const years = [2019, 2020, 2021, 2022, 2023, 2024]
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.answer.findAll({ where: { year: years } })
       return res.send(data)
@@ -212,7 +213,6 @@ const getAllUserHasAccessTo = async (req, res) => {
     const anyAccess = hasAnyAccess(req.user)
 
     // Access to answers where user has programme access & access to all yearly assessment form answers if user has any access. Wider access might be applied to other forms later
-
     const finalCommitee = ['UNI', 'UNI_EN', 'UNI_SE']
 
     const data = await db.answer.findAll({

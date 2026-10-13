@@ -1,5 +1,3 @@
-import { Op } from 'sequelize'
-import db from '../models/index.js'
 import {
   iamsInUse,
   inProduction,
@@ -31,18 +29,12 @@ import {
 import { formKeys } from '../../config/data.js'
 
 const DATABASE_URL = process.env.DATABASE_URL ?? ''
+
 const PORT = process.env.PORT ?? 8001
 const AUTOMATIC_IAM_PERMISSIONS_ENABLED = process.env.AUTOMATIC_IAM_PERMISSIONS_ENABLED === 'true'
 
 const { JAMI_URL } = process.env
 const API_TOKEN = process.env.API_TOKEN ?? ''
-
-const whereDraftYear = async () => {
-  const draftYears = await db.draftYear.findAll({})
-  const draftYear = draftYears.length ? draftYears[0].year : new Date().getFullYear()
-
-  return draftYear || { [Op.is]: null }
-}
 
 const getFormType = form => {
   if (form === formKeys.YEARLY_ASSESSMENT) {
@@ -72,7 +64,6 @@ export {
   API_TOKEN,
   PORT,
   AUTOMATIC_IAM_PERMISSIONS_ENABLED,
-  whereDraftYear,
   getFormType,
   iamsInUse,
   inProduction,
