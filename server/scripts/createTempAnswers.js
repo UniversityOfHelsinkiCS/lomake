@@ -3,7 +3,7 @@
 import { Op } from 'sequelize'
 import db from '../models/index.js'
 import logger from '../util/logger.js'
-import { getYearsArray, LOMAKE_SINCE_YEAR } from '../../config/common.js'
+import { defaultYears } from '../../config/common.js'
 import Studyprogramme from '../models/studyprogramme.js'
 
 const createTempAnswers = async () => {
@@ -11,7 +11,8 @@ const createTempAnswers = async () => {
 
   try {
     const programmes = await Studyprogramme.findAll({})
-    const years = getYearsArray(LOMAKE_SINCE_YEAR)
+    // TODO: archive side, investigate, if functionality needed in tests
+    const years = defaultYears
 
     years.forEach(async currentYear => {
       programmes.forEach(async programme => {

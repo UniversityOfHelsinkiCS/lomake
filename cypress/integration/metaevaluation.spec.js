@@ -23,6 +23,7 @@ describe('Meta evaluation form & overview tests', () => {
     cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.get('[data-cy=nav-meta-evaluation]').click()
+    cy.selectYear(defaultYears[0])
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
     cy.contains(testProgrammeName)
@@ -33,6 +34,7 @@ describe('Meta evaluation form & overview tests', () => {
     cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.get('[data-cy=nav-meta-evaluation]').click()
+    cy.selectYear(defaultYears[0])
     cy.get('[data-cy=degreeDropdown]').click()
     cy.get('[data-cy=doctoralOptionText]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCodeDoctor}]`).click()

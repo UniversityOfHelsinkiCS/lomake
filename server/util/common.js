@@ -22,7 +22,6 @@ import {
   testProgrammeNameDoctor,
   testIAM,
   LOMAKE_SINCE_YEAR,
-  getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
 } from '../../config/common.js'
@@ -88,7 +87,6 @@ export {
   testProgrammeNameDoctor,
   testIAM,
   LOMAKE_SINCE_YEAR,
-  getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
 }

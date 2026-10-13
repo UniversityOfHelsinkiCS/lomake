@@ -12,16 +12,7 @@ const iamsInUse = true
 const basePath = process.env.BASE_PATH ?? '/'
 
 const LOMAKE_SINCE_YEAR = 2019
-const ARCHIVE_LAST_YEAR = 2024 // on
-
-const getYearsArray = (since, to = 2024) => {
-  const years = []
-  for (let i = to; i >= since; i--) {
-    const year = i
-    years.push(year)
-  }
-  return years
-}
+const ARCHIVE_LAST_YEAR = 2024 // One archive year needs this...
 
 const mapToDegreeCode = organisationCode => {
   if (!organisationCode) return ''
@@ -53,8 +44,8 @@ const organisationCodeToIam = (code, joryMap) => {
   return found ? found[0] : ''
 }
 
-// First one is the current year, after that all the years that have answers
-const defaultYears = getYearsArray(LOMAKE_SINCE_YEAR)
+// First one is the last archive year, after that all the years that have answers
+const defaultYears = [2024, 2023, 2022, 2021, 2020, 2019]
 
 const degreeLevels = ['Bachelor´s level (1. cycle)', 'Master´s level (2. cycle)', 'Doctoral level (3. cycle)']
 
@@ -283,7 +274,6 @@ export {
   testIAM,
   LOMAKE_SINCE_YEAR,
   ARCHIVE_LAST_YEAR,
-  getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
   dekanaattiIamGroup,

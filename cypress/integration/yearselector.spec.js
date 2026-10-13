@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { ARCHIVE_LAST_YEAR, defaultYears, testProgrammeCode } from '../../config/common'
+import { defaultYears, testProgrammeCode } from '../../config/common'
 import '../support/commands'
 
 const form = 1 // yearly assessment
