@@ -52,7 +52,6 @@ router.get('/answers/temp/:form/:year', requireEmployee, answers.getFacultyTempA
 router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answers.getSingleProgrammesAnswers)
 router.get('/answers/degreeReform/currentAnswer', requireEmployee, answers.getIndividualFormAnswerForUser)
 router.get('/answers/degreeReform/getAllAnswersForUser', requireEmployee, answers.getAllIndividualAnswersForUser)
-router.get('/answers/foruser', requireEmployee, answers.getAllUserHasAccessTo)
 router.get('/answers/foruser/all', requireEmployee, answers.getAllUserHasAccessTo)
 router.get('/answers/committeeSummary/:code/:lang', requireEmployee, answers.getCommitteeSummaryData)
 router.get('/answers/forSummary/:code/:lang', requireEmployee, answers.getFacultySummaryData)
