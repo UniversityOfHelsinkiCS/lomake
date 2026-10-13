@@ -7,7 +7,6 @@ import { fileURLToPath } from 'url'
 import http from 'http'
 import dotenv from 'dotenv'
 import compression from 'compression'
-import startBackupJob from './scripts/backupAnswers.js'
 import IAMmiddleware from './middleware/IAMmiddleware.js'
 import currentUserMiddleware from './middleware/currentUserMiddleware.js'
 import userMiddleware from './middleware/userMiddleware.js'
@@ -85,7 +84,6 @@ initializeDatabaseConnection().then(async () => {
   server.listen(PORT, async () => {
     logger.info(`Server started on port ${PORT}`)
     await testJami()
-    startBackupJob()
     // oxlint-disable-next-line typescript/no-floating-promises
     startDeadlineWatcher()
   })
