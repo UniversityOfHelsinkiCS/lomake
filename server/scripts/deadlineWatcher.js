@@ -1,18 +1,15 @@
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-import { Op } from 'sequelize'
-import cron from 'node-cron'
-import moment from 'moment'
+import { schedule } from 'node-cron'
 import db from '../models/index.js'
+import moment from 'moment'
+
 import logger from '../util/logger.js'
-import { formKeys } from '../../config/data.js'
-import Studyprogramme from '../models/studyprogramme.js'
 
 const loggerPrefix = 'Cronjob::deadlineWatcher | '
 
+// oxlint-disable-next-line typescript/require-await
 const startDeadlineWatcher = async () => {
   // 5 min before midnight: 55 23 * * *
-  cron.schedule('55 23 * * *', async () => {
+  schedule('55 23 * * *', async () => {
     logger.info(`${loggerPrefix} Checking if there's a deadline that closes today...`)
 
     const upcomingDeadlines = await db.deadline.findAll({
@@ -28,75 +25,8 @@ const startDeadlineWatcher = async () => {
     if (deadlinesToday && deadlinesToday.length > 0 && draftYear) {
       logger.info(`${loggerPrefix} Today is a deadline, taking backups...`)
 
-      const programmes = await Studyprogramme.findAll({})
-
       await deadlinesToday.forEach(async ({ form }) => {
-        logger.info(`${loggerPrefix} Processing backups for form ${form}...`)
-
-        if (
-          form === formKeys.DEGREE_REFORM_INDIVIDUALS ||
-          form === formKeys.EVALUATION_FACULTIES ||
-          form === formKeys.EVALUATION_COMMTTEES
-        ) {
-          // handle individual users and faculty forms
-          const allTempAnswers = await db.tempAnswer.findAll({ where: { form, year: draftYear } })
-
-          if (allTempAnswers) {
-            allTempAnswers.forEach(async temp => {
-              const answer = await db.answer.findOne({
-                where: {
-                  [Op.and]: [{ programme: temp.programme }, { year: temp.year }, { form: temp.form }],
-                },
-              })
-
-              const acualAnswers = temp.data ?? {}
-
-              if (answer) {
-                answer.data = acualAnswers
-                await answer.save()
-              } else {
-                await db.answer.create({
-                  data: acualAnswers,
-                  programme: temp.programme,
-                  year: draftYear,
-                  form,
-                  submittedBy: 'cronJob',
-                })
-              }
-            })
-          }
-        } else {
-          programmes.forEach(async programme => {
-            const { key } = programme
-
-            const tempAnswers = await db.tempAnswer.findOne({
-              where: {
-                [Op.and]: [{ programme: key, year: draftYear, form }],
-              },
-            })
-
-            const answer = await db.answer.findOne({
-              where: {
-                [Op.and]: [{ programme: key }, { year: draftYear }, { form }],
-              },
-            })
-
-            const acualAnswers = tempAnswers ? tempAnswers.data : {}
-
-            if (answer) {
-              answer.data = acualAnswers
-              await answer.save()
-            } else {
-              await db.answer.create({
-                data: acualAnswers,
-                programme: key,
-                year: draftYear,
-                form,
-                submittedBy: 'cronJob',
-              })
-            }
-          })
-        }
+        logger.info(`${loggerPrefix} Deleting deadlines for ${form}...`)
 
         await db.deadline.destroy({
           where: { form },
@@ -104,18 +34,13 @@ const startDeadlineWatcher = async () => {
       })
 
       // if no deadlines remain, lock programmes and destroy draftyear
+      // TODO: check if used anymore
       if (upcomingDeadlines.length === deadlinesToday?.length) {
         await db.draftYear.destroy({
           truncate: true,
         })
-
-        programmes.forEach(async programme => {
-          programme.lockedForms = { yearly: true, evaluation: true, 'evaluation-faculty': true, 'degree-reform': true }
-          // eslint-disable-next-line @typescript-eslint/no-floating-promises
-          programme.save()
-        })
       }
-      logger.info(`${loggerPrefix} Backups done`)
+      logger.info(`${loggerPrefix} deadline cron job finished.`)
     } else {
       logger.info(`${loggerPrefix} No deadlines today`)
     }
