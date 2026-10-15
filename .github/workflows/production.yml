@@ -26,7 +26,6 @@ jobs:
             GIT_SHA=${{ github.sha }}
           extra-args: |
             --ulimit nofile=4096:4096
-          squash: false
 
       - name: Push to version helsinki
         uses: redhat-actions/push-to-registry@v3
