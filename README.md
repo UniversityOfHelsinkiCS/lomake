@@ -12,7 +12,7 @@ The project is split into 2 parts: client and server while index.js in root work
 
 1. git clone
 2. run `npm install`
-3. Log to image registry with pull rights (see Toska documentation).
+3. Log to image registry with pull rights for Jami (see Toska documentation).
 4. To build image the first time run `npm run dev:build` and when image exists use `npm run dev`
 5. run `docker exec -it lomake_dev sh -c "npm run seed"` OR obtain a database dump by running `./script/get_prod.sh` (Access needed)
 6. go to http://localhost:8000
