@@ -18,8 +18,7 @@ services:
       db:
         condition: service_started
       jami:
-        condition: service_healthy
-        restart: true
+        condition: service_started
   db:
     image: postgres:13.20
     container_name: lomake_db
@@ -49,14 +48,6 @@ services:
     container_name: lomake_jami
     depends_on:
       jami-db:
-        condition: service_started
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3003/ping"]
-      interval: 15m
-      retries: 5
-      start_period: 30s
-      start_interval: 10s
-      timeout: 10s
   jami-db:
     image: postgres:15.8
     environment:
