@@ -6,7 +6,7 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v7
@@ -16,7 +16,7 @@ jobs:
         run: npm run lint
 
   translations:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v7
@@ -44,7 +44,7 @@ jobs:
             notificationbadge,
           ]
     name: Run tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -90,7 +90,7 @@ jobs:
     needs:
       - tests
       - lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v7
@@ -121,7 +121,7 @@ jobs:
 
   report_success:
     name: 'Report deployment success to Tilku-channel'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       - tests
       - lint
@@ -138,7 +138,7 @@ jobs:
 
   report_failure:
     name: 'Report test failure to Tilku-channel'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       - tests
       - lint
