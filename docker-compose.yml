@@ -48,6 +48,7 @@ services:
     container_name: lomake_jami
     depends_on:
       jami-db:
+        condition: service_started
   jami-db:
     image: postgres:15.8
     environment:
