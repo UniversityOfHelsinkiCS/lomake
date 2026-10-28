@@ -43,7 +43,6 @@
     "date-fns": "4.4.0",
     "dayjs": "1.11.20",
     "dotenv": "16.0.0",
-    "draft-js": "0.11.7",
     "esbuild-sass-plugin": "3.7.0",
     "esm": "3.2.25",
     "express": "5.2.1",
@@ -55,7 +54,7 @@
     "module-alias": "2.2.2",
     "moment": "2.31.0",
     "morgan": "1.12.1",
-    "multer": "2.4.0",
+    "multer": "2.5.0",
     "node-cron": "4.6.0",
     "pg": "8.22.0",
     "pg-hstore": "2.3.4",
@@ -83,7 +82,7 @@
     "winston": "3.19.0",
     "winston-loki": "6.1.7",
     "xlsx": "0.18.5",
-    "zod": "3.24.4"
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/compression": "1.8.1",
