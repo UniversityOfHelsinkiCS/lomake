@@ -45,7 +45,7 @@ jobs:
     if: success()
     steps:
       - name: 'Send notification to Slack'
-        uses: UniversityOfHelsinkiCS/slackbot-action@v1.6.1
+        uses: UniversityOfHelsinkiCS/slackbot-action@v1.6.2
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           message-type: deployment
@@ -60,7 +60,7 @@ jobs:
     if: failure()
     steps:
       - name: 'Send notification to Slack'
-        uses: UniversityOfHelsinkiCS/slackbot-action@v1.6.1
+        uses: UniversityOfHelsinkiCS/slackbot-action@v1.6.2
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           message-type: deployment-failure
