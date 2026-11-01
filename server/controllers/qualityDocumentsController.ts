@@ -51,7 +51,7 @@ const validationOperation = async (req: Request): Promise<ValidateOperationRespo
     const validationResult = QualityDocumentFormSchema.safeParse(data)
 
     if (!validationResult.success) {
-      const errors = validationResult.error.errors.map(e => e.message)
+      const errors = validationResult.error.issues.map(e => e.message)
       resultData.error = errors.join(', ')
       resultData.status = 400
       return resultData

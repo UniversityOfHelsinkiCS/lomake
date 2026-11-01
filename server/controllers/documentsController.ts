@@ -59,8 +59,8 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     const validationResult2 = InterventionProcedureCloseSchema.safeParse(data)
 
     if (!validationResult1.success && !validationResult2.success) {
-      const errors1 = validationResult1.success ? [] : validationResult1.error.errors.map(e => e.message)
-      const errors2 = validationResult2.success ? [] : validationResult2.error.errors.map(e => e.message)
+      const errors1 = validationResult1.success ? [] : validationResult1.error.issues.map(e => e.message)
+      const errors2 = validationResult2.success ? [] : validationResult2.error.issues.map(e => e.message)
 
       const allErrors = [...errors1, ...errors2]
 

@@ -267,7 +267,7 @@ export const logZodError = (error: ZodError) => {
   const parsedErrors: any[] = []
   const typesOfErrors: Record<string, number> = {}
 
-  error.errors.forEach(e => {
+  error.issues.forEach(e => {
     parsedErrors.push(e)
 
     if (e.code in typesOfErrors) {
@@ -282,7 +282,7 @@ export const logZodError = (error: ZodError) => {
   console.error(`
       ❌ Validation Error Report ❌
       --------------------------------
-      🔹 Total Errors: ${error.errors.length}
+      🔹 Total Errors: ${error.issues.length}
       
       🔹 Types of Errors:
       ${Object.entries(typesOfErrors)
