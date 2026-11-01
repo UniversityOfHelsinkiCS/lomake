@@ -26,13 +26,14 @@ transports.push(
     format: combine(timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), printFormat),
   })
 )
-
-transports.push(
-  new LokiTransport({
-    host: 'http://loki-svc.toska-lokki.svc.cluster.local:3100',
-    labels: { app: 'lomake', environment: process.env.NODE_ENV ?? 'production' },
-  })
-)
+if (inProduction) {
+  transports.push(
+    new LokiTransport({
+      host: 'http://loki-svc.toska-lokki.svc.cluster.local:3100',
+      labels: { app: 'lomake', environment: process.env.NODE_ENV ?? 'production' },
+    })
+  )
+}
 
 const logger = winston.createLogger({ transports })
 
