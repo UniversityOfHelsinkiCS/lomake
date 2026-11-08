@@ -2,7 +2,7 @@ import { sentryVitePlugin } from '@sentry/vite-plugin'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import { AliasOptions, defineConfig } from 'vite'
-const root = path.resolve(__dirname, './');
+const root = path.resolve(import.meta.dirname, './');
 
 // eslint-disable-next-line import-x/no-default-export
 export default defineConfig({
@@ -19,11 +19,6 @@ export default defineConfig({
         target: 'http://localhost:8001',
         changeOrigin: true,
       },
-      '/socket.io': {
-        target: 'http://localhost:8001',
-        changeOrigin: true,
-        ws: true,
-      },
     },
     watch: {
       usePolling: true,
@@ -37,7 +32,9 @@ export default defineConfig({
     sourcemap: true,
   },
   define: {
-    'process.env': process.env,
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    'process.env.SENTRY_ENVIRONMENT': JSON.stringify(process.env.SENTRY_ENVIRONMENT),
+    'process.env.GIT_SHA': JSON.stringify(process.env.GIT_SHA),
     global: {},
   },
 })
