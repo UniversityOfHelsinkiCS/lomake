@@ -1,8 +1,9 @@
+/* eslint-disable import-x/no-named-as-default-member */
 import winston from 'winston'
 import LokiTransport from 'winston-loki'
 import { inProduction } from '../../config/common.js'
 
-const { combine, timestamp, printf } = winston.format
+const { combine, timestamp, printf, splat, errors } = winston.format
 
 const transports = []
 
@@ -16,14 +17,16 @@ const levels = {
   silly: 6,
 }
 
-const printFormat = printf(({ level, message, timestamp }) => {
-  return `${timestamp} ${levels[level]}: ${message}`
+const printFormat = printf(({ level, message, timestamp, userAgent, userId }) => {
+  const logMessage = `${timestamp} ${levels[level]}: ${message}`
+  const userAgentString = `${JSON.stringify({ userAgent: userAgent ?? '', userId: userId ?? '', level })}`
+  return logMessage + ' ' + userAgentString
 })
 
 transports.push(
   new winston.transports.Console({
     level: inProduction ? 'info' : 'debug',
-    format: combine(timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), printFormat),
+    format: combine(splat(), errors({ stack: true }), timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), printFormat),
   })
 )
 if (inProduction) {
