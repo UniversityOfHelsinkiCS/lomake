@@ -35,6 +35,7 @@ export default defineConfig({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.SENTRY_ENVIRONMENT': JSON.stringify(process.env.SENTRY_ENVIRONMENT),
     'process.env.GIT_SHA': JSON.stringify(process.env.GIT_SHA),
+    'process.env.BASE_PATH': JSON.stringify(process.env.BASE_PATH),
     global: {},
   },
 })
