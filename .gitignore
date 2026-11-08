@@ -118,3 +118,5 @@ scripts/my_username
 !.env.template
 !.env.sample
 !.env.example
+
+.claude/settings.local.json
