@@ -14,6 +14,12 @@ gitignored/
 **/coverage/
 **/.eslintcache
 **/.DS_Store
+**/.claude
+**/.gemini
+**/.cursor
+**/.specstory
+
+**/MEMORY.md
 **/CLAUDE.md
 **/GEMINI.md
 **/AGENTS.md
@@ -86,7 +92,7 @@ gitignored/
 **/cypress.env.json
 cypress/
 **/*Dockerfile
-**/*docker-compose.yml
+**/*docker-compose*
 **/*.husky
 **/manifests
 
@@ -112,5 +118,10 @@ cypress/
 **/uploads
 
 # additional inclusions here
+cypress.config.cjs
+README.md
+.oxlint*
+.prettier*
+renovate.json
 
 # exclusions here
