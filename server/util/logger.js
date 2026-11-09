@@ -17,10 +17,11 @@ const levels = {
   silly: 6,
 }
 
-const printFormat = printf(({ level, message, timestamp, userAgent, userId }) => {
+const printFormat = printf(({ level, message, timestamp, userAgent, userId, mockingAs }) => {
   const logMessage = `${timestamp} ${levels[level]}: ${message}`
   const userAgentString = `${JSON.stringify({ userAgent: userAgent ?? '', userId: userId ?? '', level })}`
-  return logMessage + ' ' + userAgentString
+  const mocking = mockingAs ? JSON.stringify({ mockingAs }) : ''
+  return logMessage + ' ' + userAgentString + ' ' + mocking
 })
 
 transports.push(
