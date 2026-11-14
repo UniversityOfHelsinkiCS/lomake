@@ -42,7 +42,7 @@
     "cookie-parser": "1.4.7",
     "date-fns": "4.4.0",
     "dayjs": "1.11.20",
-    "dotenv": "16.0.0",
+    "dotenv": "18.0.9",
     "esbuild-sass-plugin": "3.7.0",
     "esm": "3.2.25",
     "express": "5.2.1",
